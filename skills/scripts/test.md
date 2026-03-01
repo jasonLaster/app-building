@@ -11,6 +11,9 @@ tests during development and debugging.
 - `package.json` entry: `"test": "tsx scripts/test.ts"`
 - Required argument: a test file path (e.g., `npm run test tests/clients-list-page.spec.ts`).
 - Example: `npm run test tests/auth.spec.ts`
+- **Always use `npm run test`**, never `npx tsx scripts/test.ts` directly. Direct `tsx` invocation
+  fails on module resolution for `@neondatabase/serverless` and other dependencies. The `npm run`
+  wrapper sets up the correct resolution context.
 
 ## Behavior
 

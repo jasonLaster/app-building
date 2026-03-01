@@ -157,6 +157,17 @@ If it does not exist, run `npx replayio install` before any test execution. Runn
 without the Replay browser means failures produce no recordings, making debugging impossible.
 Do not defer Replay installation to after failures are discovered.
 
+## Pre-Flight Checks
+
+Before running any tests, perform these checks from the app directory:
+
+1. **Verify `NEON_PROJECT_ID` is set**: `grep NEON_PROJECT_ID .env` — the test script requires
+   it for creating ephemeral Neon branches. If missing, check `deployment.txt` for the project ID.
+2. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+3. **Verify dependencies**: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`
+
+See `skills/scripts/env-setup.md` for full environment prerequisites.
+
 ## Running Tests
 
 Run tests via `npm run test <testFile>` from the app directory (see `skills/scripts/test.md`
@@ -338,3 +349,15 @@ When testing the app after deployment, use the Replay browser to record the app 
   assertions (e.g., `"500"` not `"500.00"`). These column types return decimal strings from
   PostgreSQL, so the app must format them before display. If tests fail on numeric values,
   check the column type and app formatting layer before modifying test expectations.
+- When navigation timeouts persist across retries for a specific app (e.g., all supplier-details
+  pages timing out), this is likely a Replay browser resource issue rather than an app bug.
+  Adding a retry-with-delay (e.g., 5s between retries) can help distinguish transient
+  infrastructure issues from persistent ones. If retries still fail, skip those tests and
+  note the infrastructure issue.
+- Seed data should use relative dates (e.g., "current month minus 1") rather than hardcoded
+  month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
+  fail when run in a different month. Either make seed data date-relative or make test
+  assertions date-aware.
+- When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
+  them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
+  once per task to confirm, then focus on new failures only.

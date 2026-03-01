@@ -19,6 +19,10 @@ Before running the deploy script, check whether the app has been deployed before
 the script reuses them. See `skills/scripts/deploy.md` § "Populating `.env` for
 Redeployments" for the exact steps.
 
+Ensure the locale workaround is in place — the deploy script must prefix Netlify CLI commands
+with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/deploy.md` §
+"Locale Workaround". Also verify dependencies are installed: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
+
 Then run `npm run deploy` from the app directory. See `skills/scripts/deploy.md` for the
 full script specification. The script handles database creation/sync, Netlify site
 creation/update, and writes the deployed URL to `deployment.txt`.

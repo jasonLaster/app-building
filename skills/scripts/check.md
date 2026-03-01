@@ -46,6 +46,21 @@ Before running lint, verify that the app has an ESLint configuration file (`.esl
 Do NOT retry `npx eslint` expecting different results when the underlying issue is a missing
 configuration file. The "no config found" error will not resolve on its own.
 
+## Faster Type-Only Checks
+
+During iterative development when you only need to verify types (not lint), you can run
+`npx tsc --noEmit` directly from the app directory for faster feedback. This skips the lint
+step and is useful when making rapid type-level changes. Always run the full `npm run check`
+before committing.
+
+## Common Issues
+
+- **`@neondatabase/serverless` resolution errors**: If `tsc` reports module resolution failures
+  for `@neondatabase/serverless`, verify the package is installed: `ls node_modules/@neondatabase/serverless`.
+  If missing, run `npm install` from the app directory. Note that `tsx`-based scripts (e.g.,
+  `npx tsx scripts/schema.ts`) may fail on this dependency even when it is installed — this is a
+  known `tsx` runtime resolution issue. Use `npm run` wrappers instead of direct `npx tsx` invocation.
+
 ## Implementation Tips
 
 - Use `child_process.execSync` for each step. Do NOT inherit stdio — pipe output to the log file.

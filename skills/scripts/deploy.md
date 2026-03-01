@@ -92,6 +92,20 @@ a new URL and an empty database. Always check `deployment.txt` first.
   - 0: Deployment succeeded.
   - Non-zero: A step failed.
 
+## Locale Workaround
+
+The Netlify CLI requires a valid locale. In containers that lack `en_US.UTF-8`, CLI commands
+(`netlify deploy`, `netlify sites:create`) fail with locale errors. Always prefix Netlify CLI
+commands with `LC_ALL=C` to avoid this:
+
+```bash
+LC_ALL=C npx netlify deploy --prod --dir dist --functions ./netlify/functions
+LC_ALL=C npx netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG
+```
+
+The deploy script should set `LC_ALL=C` in the environment before spawning Netlify CLI
+subprocesses.
+
 ## Implementation Tips
 
 - Reuse `initSchema` from `scripts/schema.ts` for schema sync.

@@ -37,6 +37,43 @@ sessions with 100% success rate). When the UI renders but shows wrong data or ti
 waiting for content, `NetworkRequest` as a second step confirms whether the backend
 returned the expected data.
 
+## Pre-Debugging Triage
+
+Before using Replay tools or making any code changes, determine whether failures are
+pre-existing or new:
+
+### Pre-existing failure triage
+When tests fail during a task, first verify whether failures are pre-existing by running
+the same tests on the unmodified code:
+
+1. `git stash` your changes (or check out the base commit).
+2. Run the failing tests on the unmodified code.
+3. If the tests fail identically, the failures are pre-existing and out of scope for the
+   current task. Note them and move on.
+4. `git stash pop` to restore your changes.
+
+This is the most effective first step — it avoids spending time debugging failures that
+are unrelated to the current work.
+
+### Infrastructure failure detection
+When multiple tests fail with identical navigation timeouts, socket errors
+(`ETIMEDOUT`, `ERR_SOCKET_NOT_CONNECTED`), or `net::ERR_CONNECTION_REFUSED`, classify
+these as infrastructure failures early and skip further debugging. Signs of infrastructure
+failures:
+
+- 5+ tests failing with the same timeout/socket error
+- No recordings generated (the browser couldn't connect)
+- Failures are across unrelated test files in the same app
+- A simple retry resolves transient cases; persistent failures indicate a deeper issue
+
+Do not use Replay tools for infrastructure failures — there are no usable recordings.
+
+### When recordings ARE available — use Replay
+When a failure is **not** pre-existing and a recording **is** available, always use Replay
+MCP tools before declaring the failure unresolvable. The recording contains the actual
+runtime state and is more reliable than guessing from error messages alone. Follow the
+tool sequence in the relevant debugging guide below.
+
 ## No-Replay Diagnostic Patterns
 
 Some failures can be diagnosed from Playwright error output alone without needing Replay:

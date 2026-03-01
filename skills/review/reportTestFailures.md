@@ -26,6 +26,7 @@ REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, explain why — e.g. "diagnosed from error output", "no recording available", "upload failed">
 RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failure, or no recording was created)
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
+DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
 DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). Omit if this failure has a unique root cause.>
 
@@ -40,6 +41,39 @@ FAILING_TEST: <test name from "FAILING TEST:" line in log, or "none">
 ```
 
 If a log has no test failures, just write the Summary section with TEST_FAILURES: 0.
+
+### Clustered Failures
+
+When 5+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
+single cluster entry instead of repeating the full template for each:
+
+```
+### Failure Cluster: <ROOT_CAUSE_CLUSTER> (<count> tests)
+FAILURE_CATEGORY: <category>
+PRE_EXISTING: yes/no
+REPLAY_USED: yes/no
+REPLAY_NOT_USED_REASON: <reason>
+RECORDING_AVAILABLE: yes/no
+DEBUGGING_ATTEMPTED: yes/no
+DEBUGGING_SKIPPED_REASON: <reason if not attempted>
+AFFECTED_TESTS: <comma-separated list of test names>
+```
+
+### Infrastructure Failures
+
+Infrastructure failures (socket timeouts, navigation timeouts with no page load, network
+errors that prevent recordings) are fundamentally different from application bugs. When a
+log contains only infrastructure failures, use this lightweight format instead of the full
+failure template:
+
+```
+## Infrastructure Failures
+INFRA_FAILURE_COUNT: <count>
+INFRA_CATEGORY: <socket-timeout | navigation-timeout | network-error | other>
+AFFECTED_TESTS: <comma-separated list or "all tests in <spec file>">
+RECORDING_AVAILABLE: no
+NOTES: <brief description of the infrastructure issue>
+```
 
 ## Report Synthesis
 
