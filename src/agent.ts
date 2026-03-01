@@ -270,6 +270,7 @@ async function main(): Promise<void> {
     .option("--branch <name>", "branch to clone")
     .option("--push-branch <name>", "branch to push to")
     .option("--remote", "run container on Fly.io instead of local Docker")
+    .option("--webhook <url>", "webhook URL for container event notifications")
     .allowUnknownOption(false)
     .allowExcessArguments(false)
     .parse();
@@ -288,6 +289,7 @@ async function main(): Promise<void> {
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
     flyToken: envVars.FLY_API_TOKEN,
     flyApp: envVars.FLY_APP_NAME,
+    webhookUrl: opts.webhook,
   };
 
   if (opts.interactive) {

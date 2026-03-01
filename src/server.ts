@@ -20,6 +20,7 @@ const CLONE_BRANCH = process.env.CLONE_BRANCH ?? "main";
 const PUSH_BRANCH = process.env.PUSH_BRANCH ?? CLONE_BRANCH;
 const CONTAINER_NAME = process.env.CONTAINER_NAME ?? "agent";
 const WEBHOOK_URL = process.env.WEBHOOK_URL ?? "";
+const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? "";
 const REPO_DIR = "/repo";
 const LOGS_DIR = resolve(REPO_DIR, "logs");
 
@@ -101,11 +102,19 @@ function postWebhook(type: string, data?: Record<string, unknown>): void {
     timestamp: new Date().toISOString(),
     ...(data !== undefined ? { data } : {}),
   });
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (WEBHOOK_SECRET) headers["Authorization"] = `Bearer ${WEBHOOK_SECRET}`;
   fetch(WEBHOOK_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: payload,
-  }).catch(() => {});
+  }).then((res) => {
+    if (!res.ok) {
+      console.error(`Webhook ${type} failed: ${res.status} ${res.statusText}`);
+    }
+  }).catch((err) => {
+    console.error(`Webhook ${type} error: ${err.message}`);
+  });
 }
 
 // --- Claude extra args ---
@@ -182,6 +191,30 @@ function getQuery(url: string, key: string): string | null {
 }
 
 // --- Processing loop ---
+//
+// Container lifecycle:
+//
+// The container runs a loop that processes messages (from HTTP POST /message)
+// and tasks (from the task queue file). Between work items, it idles and waits
+// for new work to arrive.
+//
+// Shutdown is controlled by two mechanisms:
+//
+// 1. **Detach** (POST /detach): Sets `detachRequested`. The container continues
+//    processing any in-flight or queued work, then exits immediately once the
+//    message queue and task queue are both empty. This is the normal shutdown
+//    path. In interactive mode, the agent CLI sends /detach automatically when
+//    the user disconnects (Ctrl+C/D). In detached mode, /detach is sent right
+//    after startup so the container exits as soon as its initial work is done.
+//
+// 2. **Stop** (POST /stop): Sets `stopRequested`. The container breaks out of
+//    the loop immediately (interrupting any running Claude process), commits
+//    any remaining work, and exits. This is the forced shutdown path.
+//
+// Without either signal, the container stays running and waits for new messages
+// or tasks indefinitely. This is intentional: in interactive mode, the user may
+// send follow-up messages at any time, so the container must stay alive until
+// the user explicitly disconnects.
 
 async function processLoop(): Promise<void> {
   const extraArgs = buildExtraArgs();
