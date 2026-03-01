@@ -1,0 +1,29 @@
+=== PLAYWRIGHT OUTPUT ===
+
+Running 11 tests using 2 workers
+
+  ✓   2 e2e/todolist.spec.ts:32:1 › Empty state message when no todos exist (41.0s)
+  ✓   1 e2e/todolist.spec.ts:38:1 › Todos displayed in a vertical list (1.1m)
+  ✓   3 e2e/todolist.spec.ts:54:1 › Each todo shows checkbox, text, and delete button on hover (1.2m)
+  ✓   4 e2e/todolist.spec.ts:69:1 › Delete button is hidden when not hovering (1.4m)
+  ✓   5 e2e/todolist.spec.ts:79:1 › Toggle todo completion via checkbox (1.1m)
+  ✓   6 e2e/todolist.spec.ts:91:1 › Untoggle completed todo via checkbox (1.2m)
+  ✓   7 e2e/todolist.spec.ts:106:1 › Toggle completion persists after page reload (1.5m)
+  ✓   8 e2e/todolist.spec.ts:121:1 › Delete a todo via delete button (1.5m)
+  ✓   9 e2e/todolist.spec.ts:137:1 › Deleted todo does not reappear after page reload (1.3m)
+  ✓  10 e2e/todolist.spec.ts:154:1 › Completed todo displays strikethrough styling (1.1m)
+  ✓  11 e2e/todolist.spec.ts:164:1 › Active todo displays normal styling (48.9s)
+[replay.io]: Finishing up. This should only take a moment ...
+
+
+  11 passed (7.6m)
+
+=== STDERR ===
+[2m[WebServer] [22m[33m⠋[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠙[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠹[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠸[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[32m√[39m framework dev server ready on port 5173
+[2m[WebServer] [22m(node:9687) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+

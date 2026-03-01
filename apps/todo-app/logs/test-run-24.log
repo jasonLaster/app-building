@@ -1,0 +1,3669 @@
+=== PLAYWRIGHT OUTPUT ===
+
+Running 11 tests using 2 workers
+
+  ✘   1 e2e/todolist.spec.ts:32:1 › Empty state message when no todos exist (36.7s)
+  ✓   2 e2e/todolist.spec.ts:38:1 › Todos displayed in a vertical list (1.1m)
+  ✓   4 e2e/todolist.spec.ts:54:1 › Each todo shows checkbox, text, and delete button on hover (52.4s)
+  ✓   3 e2e/todolist.spec.ts:69:1 › Delete button is hidden when not hovering (1.1m)
+  ✓   5 e2e/todolist.spec.ts:79:1 › Toggle todo completion via checkbox (1.3m)
+  ✓   6 e2e/todolist.spec.ts:91:1 › Untoggle completed todo via checkbox (1.4m)
+  ✓   7 e2e/todolist.spec.ts:106:1 › Toggle completion persists after page reload (1.3m)
+  ✓   8 e2e/todolist.spec.ts:121:1 › Delete a todo via delete button (1.2m)
+  ✓  10 e2e/todolist.spec.ts:154:1 › Completed todo displays strikethrough styling (1.3m)
+  ✓   9 e2e/todolist.spec.ts:137:1 › Deleted todo does not reappear after page reload (1.6m)
+  ✓  11 e2e/todolist.spec.ts:164:1 › Active todo displays normal styling (32.6s)
+[replay.io]: Finishing up. This should only take a moment ...
+
+
+
+  1) e2e/todolist.spec.ts:32:1 › Empty state message when no todos exist ───────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('empty-state')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('empty-state')[22m
+
+
+      32 | test('Empty state message when no todos exist', async ({ page }) => {
+      33 |   await page.reload();
+    > 34 |   await expect(page.getByTestId('empty-state')).toBeVisible({ timeout: 10000 });
+         |                                                 ^
+      35 |   await expect(page.getByTestId('empty-state')).toHaveText('No todos yet. Add one above!');
+      36 | });
+      37 |
+        at /repo/apps/todo-app/e2e/todolist.spec.ts:34:49
+
+    Error Context: test-results/todolist-Empty-state-message-when-no-todos-exist/error-context.md
+
+  1 failed
+    e2e/todolist.spec.ts:32:1 › Empty state message when no todos exist ────────────────────────────
+  10 passed (7.0m)
+
+=== STDERR ===
+[2m[WebServer] [22m[33m⠋[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠙[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠹[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠸[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[32m√[39m framework dev server ready on port 5173
+[2m[WebServer] [22m(node:7079) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"3079250b-f269-416b-b390-e9591e3e8c3d","testResult":"failed"}
+{"id":"1d4f6aa1-8266-45ad-b8a2-f11cda867429","testResult":"passed"}
+{"id":"ff290dd9-ae9a-4657-b80b-eb3bd70a0cbf","testResult":"passed"}
+{"id":"ded62d4c-cb3b-4216-be11-aecf36cde9d5","testResult":"passed"}
+{"id":"6114c41a-4130-4ec8-b212-15e16141f740","testResult":"passed"}
+{"id":"4db50fb4-9156-413c-8408-a92687d56050","testResult":"passed"}
+{"id":"1f189adf-c2a6-4d9f-8e29-97fff227d7ea","testResult":"passed"}
+{"id":"7100d1dd-a2b1-4cdd-a28f-8d2f9d1827fe","testResult":"passed"}
+{"id":"8b0708f7-3fe7-4b7f-a49c-7b5cdff09a6d","testResult":"passed"}
+{"id":"02ab5fa0-6200-451b-88cb-e35198056dcd","testResult":"passed"}
+{"id":"68f6cd31-b92f-41e2-9947-b90f8e663191","testResult":"passed"}
+=== END REPLAY RECORDINGS METADATA ===
+
+=== REPLAY LIST ===
+⠙ Initializing…
+[
+  {
+    "buildId": "linux-chromium-20260225-8992dfceaaa6-600bb3286213",
+    "date": "2026-03-01T08:31:01.394Z",
+    "driverVersion": "linker-linux-15794-600bb3286213",
+    "duration": 29279,
+    "id": "68f6cd31-b92f-41e2-9947-b90f8e663191",
+    "metadata": {
+      "host": "localhost:8888",
+      "processType": "root",
+      "sourceMaps": [
+        {
+          "id": "afd77fd4c7cad6fb530bbeb873cc0a2c0f53cf6a3dadc9016cec4c651903eee3",
+          "path": "/home/agent/.replay/sourcemap-afd77fd4c7cad6fb530bbeb873cc0a2c0f53cf6a3dadc9016cec4c651903eee3.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/lucide-react.js.map",
+          "targetContentHash": "sha256:afd77fd4c7cad6fb530bbeb873cc0a2c0f53cf6a3dadc9016cec4c651903eee3",
+          "targetURLHash": "sha256:4d955fb0aded8790c328fde4237103940025e9b37a8426f7040f3296b1f70561",
+          "targetMapURLHash": "sha256:fc8b46439b1425a09b66991d4ff29a1c70e07f7ca894413851e149f2d77ba6a6",
+          "originalSources": []
+        },
+        {
+          "id": "77c155a9e8c2a06ef3b4446b7bfd8afe1df5e416de7a1845f066fc3f427e25d8",
+          "path": "/home/agent/.replay/sourcemap-77c155a9e8c2a06ef3b4446b7bfd8afe1df5e416de7a1845f066fc3f427e25d8.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/react-redux.js.map",
+          "targetContentHash": "sha256:77c155a9e8c2a06ef3b4446b7bfd8afe1df5e416de7a1845f066fc3f427e25d8",
+          "targetURLHash": "sha256:9293cbf186a599c406e58161cbd1013ceac3510a6597fc4dbac9be3a9660add6",
+          "targetMapURLHash": "sha256:e65c692aa7b5f802018186ea8e13035e7b8fe8dd05fa44a30d702daa1dfce222",
+          "originalSources": []
+        },
+        {
+          "id": "3ff120306ca5d8f445a59ade10d3c6037ca3909bcb0b84ff056dfd31f9778812",
+          "path": "/home/agent/.replay/sourcemap-3ff120306ca5d8f445a59ade10d3c6037ca3909bcb0b84ff056dfd31f9778812.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/chunk-KDCVS43I.js.map",
+          "targetContentHash": "sha256:3ff120306ca5d8f445a59ade10d3c6037ca3909bcb0b84ff056dfd31f9778812",
+          "targetURLHash": "sha256:754e778c333590873be35f8c564ee674767cecb59af4a418dcff9d737be97737",
+          "targetMapURLHash": "sha256:475bae850717fbd028ea5b11d9eab7fd0c8cc764e1d31402ceba78e78f336de1",
+          "originalSources": []
+        },
+        {
+          "id": "a28a7702b6cd4bf940717980b00771870837ac83936a8976eada8bb9eca8ae0b",
+          "path": "/home/agent/.replay/sourcemap-a28a7702b6cd4bf940717980b00771870837ac83936a8976eada8bb9eca8ae0b.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/react-dom_client.js.map",
+          "targetContentHash": "sha256:a28a7702b6cd4bf940717980b00771870837ac83936a8976eada8bb9eca8ae0b",
+          "targetURLHash": "sha256:5706762e25d9b3dc8e0c362123976b27fcf31c9d7cc21739476fbe1c9f00f916",
+          "targetMapURLHash": "sha256:836b7832717d964d62749df571df5ddf22fbac68670ae8e913494e3397d6bb89",
+          "originalSources": []
+        },
+        {
+          "id": "fcea5045971c8a706c0f3b8d4525589ca7f2bd32e9b9a99cd286f753623c470b",
+          "path": "/home/agent/.replay/sourcemap-fcea5045971c8a706c0f3b8d4525589ca7f2bd32e9b9a99cd286f753623c470b.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/chunk-RLJ2RCJQ.js.map",
+          "targetContentHash": "sha256:fcea5045971c8a706c0f3b8d4525589ca7f2bd32e9b9a99cd286f753623c470b",
+          "targetURLHash": "sha256:72d19abe87ac59226ac0ebe9a34f91cd3523ce5884fbddafeebdaf70fc600b20",
+          "targetMapURLHash": "sha256:b75474bae415545f3b0ce27879e15b90dc54554a9d44ef99ed6461828d39a479",
+          "originalSources": []
+        },
+        {
+          "id": "7f2e7c1504835a9ad627245b3485ed5b221b662cbb3fde87d4ce55b8cc577762",
+          "path": "/home/agent/.replay/sourcemap-7f2e7c1504835a9ad627245b3485ed5b221b662cbb3fde87d4ce55b8cc577762.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/@reduxjs_toolkit.js.map",
+          "targetContentHash": "sha256:7f2e7c1504835a9ad627245b3485ed5b221b662cbb3fde87d4ce55b8cc577762",
+          "targetURLHash": "sha256:84752748b143f947065fb860d190ea30d0dae4c32135cb1f0e0e7a3661da10d8",
+          "targetMapURLHash": "sha256:af35cd4017a797eead87e17ae875d2c350507fd884b71e845a7651b1d36d13ec",
+          "originalSources": []
+        },
+        {
+          "id": "4661f88983cd4379c1f3da09886af8f727e36b47eccb2288e1a7c75f9c47fbb5",
+          "path": "/home/agent/.replay/sourcemap-4661f88983cd4379c1f3da09886af8f727e36b47eccb2288e1a7c75f9c47fbb5.map",
+          "baseURL": "http://localhost:8888/node_modules/.vite/deps/react_jsx-dev-runtime.js.map",
+          "targetContentHash": "sha256:4661f88983cd4379c1f3da09886af8f727e36b47eccb2288e1a7c75f9c47fbb5",
+          "targetURLHash": "sha256:f69e6b22f833750dff5f61fe187e53bc783dc6fd8fad75428766c476f50b4bb4",
+          "targetMapURLHash": "sha256:901f28aa2e680f369313a2665e2a6903b92eb853907a5d234ba4bee23a5acd17",
+          "originalSources": []
+        }
+      ],
+      "title": "Active todo displays normal styling",
+      "uri": "http://localhost:8888/",
+      "x-replay-playwright": {
+        "sources": {
+          "/repo/apps/todo-app/e2e/todolist.spec.ts": "import { test, expect } from './fixtures';\n\nconst API_URL = '/.netlify/functions/todos';\n\nasync function deleteAllTodos(page: import('@playwright/test').Page) {\n  const res = await page.request.get(API_URL);\n  const todos = await res.json();\n  for (const todo of todos) {\n    await page.request.delete(`${API_URL}/${todo.id}`);\n  }\n}\n\nasync function createTodo(page: import('@playwright/test').Page, text: string, completed = false) {\n  const res = await page.request.post(API_URL, {\n    data: { text },\n  });\n  const todo = await res.json();\n  if (completed) {\n    await page.request.put(`${API_URL}/${todo.id}`, {\n      data: { completed: true },\n    });\n  }\n  return todo;\n}\n\ntest.beforeEach(async ({ page }) => {\n  await page.goto('/');\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await deleteAllTodos(page);\n});\n\ntest('Empty state message when no todos exist', async ({ page }) => {\n  await page.reload();\n  await expect(page.getByTestId('empty-state')).toBeVisible({ timeout: 10000 });\n  await expect(page.getByTestId('empty-state')).toHaveText('No todos yet. Add one above!');\n});\n\ntest('Todos displayed in a vertical list', async ({ page }) => {\n  await createTodo(page, 'Task A');\n  await createTodo(page, 'Task B');\n  await createTodo(page, 'Task C');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n\n  const todoItems = page.getByTestId('todo-item');\n  await expect(todoItems).toHaveCount(3, { timeout: 10000 });\n\n  const todoTexts = page.getByTestId('todo-text');\n  await expect(todoTexts.nth(0)).toHaveText('Task C');\n  await expect(todoTexts.nth(1)).toHaveText('Task B');\n  await expect(todoTexts.nth(2)).toHaveText('Task A');\n});\n\ntest('Each todo shows checkbox, text, and delete button on hover', async ({ page }) => {\n  await createTodo(page, 'Review code');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n\n  const todoItem = page.getByTestId('todo-item');\n  await expect(todoItem).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-checkbox')).toBeVisible();\n  await expect(page.getByTestId('todo-text')).toHaveText('Review code');\n\n  await todoItem.hover();\n  await expect(page.getByTestId('delete-todo-button')).toBeVisible();\n});\n\ntest('Delete button is hidden when not hovering', async ({ page }) => {\n  await createTodo(page, 'Some task');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  const deleteBtn = page.getByTestId('delete-todo-button');\n  await expect(deleteBtn).toHaveCSS('opacity', '0');\n});\n\ntest('Toggle todo completion via checkbox', async ({ page }) => {\n  await createTodo(page, 'Clean house');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await page.getByTestId('todo-checkbox').click();\n\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Untoggle completed todo via checkbox', async ({ page }) => {\n  await createTodo(page, 'Clean house', true);\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through');\n\n  await page.getByTestId('todo-checkbox').click();\n\n  await expect(page.getByTestId('todo-text')).not.toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n  await expect(page.getByTestId('todo-checkbox')).not.toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Toggle completion persists after page reload', async ({ page }) => {\n  await createTodo(page, 'Finish report');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await page.getByTestId('todo-checkbox').click();\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Finish report' })).toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Delete a todo via delete button', async ({ page }) => {\n  await createTodo(page, 'Keep me');\n  await createTodo(page, 'Delete me');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toHaveCount(2, { timeout: 10000 });\n\n  const deleteTarget = page.getByTestId('todo-item').filter({ hasText: 'Delete me' });\n  await deleteTarget.hover();\n  await deleteTarget.getByTestId('delete-todo-button').click();\n\n  await expect(page.getByTestId('todo-item')).toHaveCount(1, { timeout: 10000 });\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Keep me' })).toBeVisible();\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Delete me' })).toHaveCount(0);\n});\n\ntest('Deleted todo does not reappear after page reload', async ({ page }) => {\n  await createTodo(page, 'Temporary task');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  const todoItem = page.getByTestId('todo-item').filter({ hasText: 'Temporary task' });\n  await todoItem.hover();\n  await todoItem.getByTestId('delete-todo-button').click();\n\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Temporary task' })).toHaveCount(0, { timeout: 10000 });\n\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Temporary task' })).toHaveCount(0, { timeout: 10000 });\n});\n\ntest('Completed todo displays strikethrough styling', async ({ page }) => {\n  await createTodo(page, 'Done task', true);\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through');\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Active todo displays normal styling', async ({ page }) => {\n  await createTodo(page, 'Active task');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-text')).not.toHaveCSS('text-decoration-line', 'line-through');\n  await expect(page.getByTestId('todo-checkbox')).not.toHaveClass(/todo-checkbox--checked/);\n});\n",
+          "e2e/fixtures.ts": "import { test as base, expect } from '@playwright/test';\n\n// eslint-disable-next-line @typescript-eslint/no-empty-object-type\nexport const test = base.extend<{}, { workerIndex: number }>({\n  workerIndex: [async ({}, use, workerInfo) => {\n    await use(workerInfo.workerIndex);\n  }, { scope: 'worker' }],\n\n  context: async ({ context, workerIndex }, use) => {\n    await context.addCookies([{\n      name: 'test-worker',\n      value: String(workerIndex),\n      domain: 'localhost',\n      path: '/',\n    }]);\n    await use(context);\n  },\n});\n\nexport { expect };\n",
+          "e2e/todolist.spec.ts": "import { test, expect } from './fixtures';\n\nconst API_URL = '/.netlify/functions/todos';\n\nasync function deleteAllTodos(page: import('@playwright/test').Page) {\n  const res = await page.request.get(API_URL);\n  const todos = await res.json();\n  for (const todo of todos) {\n    await page.request.delete(`${API_URL}/${todo.id}`);\n  }\n}\n\nasync function createTodo(page: import('@playwright/test').Page, text: string, completed = false) {\n  const res = await page.request.post(API_URL, {\n    data: { text },\n  });\n  const todo = await res.json();\n  if (completed) {\n    await page.request.put(`${API_URL}/${todo.id}`, {\n      data: { completed: true },\n    });\n  }\n  return todo;\n}\n\ntest.beforeEach(async ({ page }) => {\n  await page.goto('/');\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await deleteAllTodos(page);\n});\n\ntest('Empty state message when no todos exist', async ({ page }) => {\n  await page.reload();\n  await expect(page.getByTestId('empty-state')).toBeVisible({ timeout: 10000 });\n  await expect(page.getByTestId('empty-state')).toHaveText('No todos yet. Add one above!');\n});\n\ntest('Todos displayed in a vertical list', async ({ page }) => {\n  await createTodo(page, 'Task A');\n  await createTodo(page, 'Task B');\n  await createTodo(page, 'Task C');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n\n  const todoItems = page.getByTestId('todo-item');\n  await expect(todoItems).toHaveCount(3, { timeout: 10000 });\n\n  const todoTexts = page.getByTestId('todo-text');\n  await expect(todoTexts.nth(0)).toHaveText('Task C');\n  await expect(todoTexts.nth(1)).toHaveText('Task B');\n  await expect(todoTexts.nth(2)).toHaveText('Task A');\n});\n\ntest('Each todo shows checkbox, text, and delete button on hover', async ({ page }) => {\n  await createTodo(page, 'Review code');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n\n  const todoItem = page.getByTestId('todo-item');\n  await expect(todoItem).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-checkbox')).toBeVisible();\n  await expect(page.getByTestId('todo-text')).toHaveText('Review code');\n\n  await todoItem.hover();\n  await expect(page.getByTestId('delete-todo-button')).toBeVisible();\n});\n\ntest('Delete button is hidden when not hovering', async ({ page }) => {\n  await createTodo(page, 'Some task');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  const deleteBtn = page.getByTestId('delete-todo-button');\n  await expect(deleteBtn).toHaveCSS('opacity', '0');\n});\n\ntest('Toggle todo completion via checkbox', async ({ page }) => {\n  await createTodo(page, 'Clean house');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await page.getByTestId('todo-checkbox').click();\n\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Untoggle completed todo via checkbox', async ({ page }) => {\n  await createTodo(page, 'Clean house', true);\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through');\n\n  await page.getByTestId('todo-checkbox').click();\n\n  await expect(page.getByTestId('todo-text')).not.toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n  await expect(page.getByTestId('todo-checkbox')).not.toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Toggle completion persists after page reload', async ({ page }) => {\n  await createTodo(page, 'Finish report');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await page.getByTestId('todo-checkbox').click();\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Finish report' })).toHaveCSS('text-decoration-line', 'line-through', { timeout: 10000 });\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Delete a todo via delete button', async ({ page }) => {\n  await createTodo(page, 'Keep me');\n  await createTodo(page, 'Delete me');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toHaveCount(2, { timeout: 10000 });\n\n  const deleteTarget = page.getByTestId('todo-item').filter({ hasText: 'Delete me' });\n  await deleteTarget.hover();\n  await deleteTarget.getByTestId('delete-todo-button').click();\n\n  await expect(page.getByTestId('todo-item')).toHaveCount(1, { timeout: 10000 });\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Keep me' })).toBeVisible();\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Delete me' })).toHaveCount(0);\n});\n\ntest('Deleted todo does not reappear after page reload', async ({ page }) => {\n  await createTodo(page, 'Temporary task');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  const todoItem = page.getByTestId('todo-item').filter({ hasText: 'Temporary task' });\n  await todoItem.hover();\n  await todoItem.getByTestId('delete-todo-button').click();\n\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Temporary task' })).toHaveCount(0, { timeout: 10000 });\n\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-text').filter({ hasText: 'Temporary task' })).toHaveCount(0, { timeout: 10000 });\n});\n\ntest('Completed todo displays strikethrough styling', async ({ page }) => {\n  await createTodo(page, 'Done task', true);\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-text')).toHaveCSS('text-decoration-line', 'line-through');\n  await expect(page.getByTestId('todo-checkbox')).toHaveClass(/todo-checkbox--checked/);\n});\n\ntest('Active todo displays normal styling', async ({ page }) => {\n  await createTodo(page, 'Active task');\n  await page.reload();\n  await expect(page.getByTestId('header')).toBeVisible({ timeout: 30000 });\n  await expect(page.getByTestId('todo-item')).toBeVisible({ timeout: 10000 });\n\n  await expect(page.getByTestId('todo-text')).not.toHaveCSS('text-decoration-line', 'line-through');\n  await expect(page.getByTestId('todo-checkbox')).not.toHaveClass(/todo-checkbox--checked/);\n});\n",
+          "node_modules/@replayio/playwright/dist/fixture.js": "'use strict';\n\nvar test = require('@playwright/test');\nvar logger = require('./_bundled/@replay-cli/shared/logger.js');\nrequire('node-fetch');\nvar metadata = require('./_bundled/@replayio/test-utils/metadata.js');\nrequire('node:os');\nvar reporter = require('./_bundled/@replayio/test-utils/reporter.js');\nrequire('sha-1');\nvar assert = require('node:assert/strict');\nvar constants = require('./constants.js');\nvar error = require('./error.js');\nvar fs = require('node:fs');\nvar uuid = require('uuid');\nvar path = require('node:path');\nvar stackTrace = require('./stackTrace.js');\n\nfunction _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }\n\nvar assert__default = /*#__PURE__*/_interopDefault(assert);\n\nconst baseId = uuid.v4();\nconst workerIndex = +(process.env.TEST_WORKER_INDEX || 0);\nconst metadataFilePath = metadata.getMetadataFilePath(\"PLAYWRIGHT\", workerIndex);\nfunction getBaseMetadata() {\n  let baseMetadata = process.env.PLAYWRIGHT_REPLAY_METADATA || process.env.RECORD_REPLAY_METADATA;\n  if (baseMetadata && typeof baseMetadata === \"string\") {\n    try {\n      return JSON.parse(baseMetadata);\n    } catch (error) {\n      logger.logError(\"ReplayFixture:FailedParseBaseMetadata\", { error, baseMetadata });\n    }\n  }\n  return {};\n}\nfunction ReplayAddAnnotation([event, id, data]) {\n  window.__RECORD_REPLAY_ANNOTATION_HOOK__?.(\"replay-playwright\", {\n    event,\n    id,\n    data: data ? JSON.parse(data) : void 0\n  });\n}\nfunction isReplayAnnotation(params) {\n  return params?.expression?.includes(\"ReplayAddAnnotation\");\n}\nfunction parseLocation(stack) {\n  const pattern = /\\/([^\\/]+):(\\d+):(\\d+)$/;\n  const firstLine = stack?.split(\"\\n\").find((l) => pattern.test(l));\n  const match = firstLine?.match(pattern);\n  if (!match) {\n    return {\n      line: void 0,\n      column: void 0\n    };\n  }\n  return {\n    line: parseInt(match[2]),\n    column: parseInt(match[3])\n  };\n}\nfunction parseError(error) {\n  const location = parseLocation(error.stack);\n  return {\n    name: \"name\" in error ? error.name : \"Error\",\n    message: error.message ?? \"Unknown\",\n    line: location?.line,\n    column: location?.column\n  };\n}\nconst fixtureStates = /* @__PURE__ */ new WeakMap();\nfunction getFixtureState(testInfo) {\n  let state = fixtureStates.get(testInfo);\n  if (!state) {\n    const attempt = testInfo.retry + 1;\n    const testData = {\n      executionId: `${baseId}-${testInfo.testId}-${testInfo.repeatEachIndex}-${attempt}`,\n      filePath: testInfo.file,\n      projectName: testInfo.project.name,\n      repeatEachIndex: testInfo.repeatEachIndex,\n      attempt,\n      source: {\n        title: testInfo.title,\n        // this one only drops the filename (first segment) and the test title (last segment)\n        // it's different from the one in the reporter, since the \"root\" suites are just the file suites created here:\n        // https://github.com/microsoft/playwright/blob/73285245566bdce80bab736577e9bc278d5cf4bf/packages/playwright/src/common/testLoader.ts#L38\n        // in this context they are not attached to the root and project suites\n        scope: testInfo.titlePath.slice(1, -1)\n      }\n    };\n    state = {\n      expectSteps: /* @__PURE__ */ new Set(),\n      ignoredSteps: /* @__PURE__ */ new Set(),\n      testData\n    };\n    fixtureStates.set(testInfo, state);\n  }\n  return state;\n}\nconst patchedTestInfos = /* @__PURE__ */ new WeakSet();\nasync function replayFixture({ playwright, browser }, use, testInfo) {\n  const { expectSteps, ignoredSteps, testData } = getFixtureState(testInfo);\n  if (!patchedTestInfos.has(testInfo)) {\n    patchedTestInfos.add(testInfo);\n    const addStep = testInfo._addStep;\n    testInfo._addStep = function(data, ...rest) {\n      if (data.category === \"expect\") {\n        let frames = data.location ? [data.location] : void 0;\n        if (!frames) {\n          const filteredStack = stackTrace.filteredStackTrace(stackTrace.captureRawStack());\n          data.location = filteredStack[0];\n          frames = filteredStack;\n        }\n        const step = addStep.call(this, data, ...rest);\n        expectSteps.add(step.stepId);\n        handlePlaywrightEvent({\n          event: \"step:start\",\n          id: step.stepId,\n          params: step.params,\n          detail: {\n            apiName: \"expect\",\n            category: step.category,\n            title: step.title,\n            params: step.params || {},\n            frames,\n            hook: getCurrentHookType()\n          }\n        }).catch((err) => {\n          logger.logError(\"ReplayFixture:FailedToAddExpectStep\", { error: err });\n        });\n        return step;\n      }\n      return addStep.call(this, data, ...rest);\n    };\n    const onStepEnd = testInfo._onStepEnd;\n    testInfo._onStepEnd = function(...args) {\n      onStepEnd.call(this, ...args);\n      const [payload] = args;\n      if (expectSteps.has(payload.stepId)) {\n        handlePlaywrightEvent({\n          event: \"step:end\",\n          id: payload.stepId,\n          params: void 0,\n          detail: {\n            error: payload.error ? parseError(payload.error) : null\n          }\n        }).catch((err) => {\n          logger.logError(\"ReplayFixture:FailedToAddExpectStepEnd\", { error: err });\n        });\n      }\n    };\n  }\n  function getCurrentHookType() {\n    return testInfo._currentHookType();\n  }\n  logger.logInfo(\"ReplayFixture:SettingUp\");\n  async function addAnnotation(event, id, detail) {\n    if (!id) {\n      return;\n    }\n    return Promise.allSettled(\n      browser.contexts().flatMap((context) => {\n        return context.pages().flatMap(async (page) => {\n          try {\n            await page.evaluate(ReplayAddAnnotation, [\n              event,\n              id,\n              JSON.stringify({ ...detail, test: testData })\n            ]);\n          } catch (error) {\n            logger.logError(\"ReplayFixture:FailedToAddAnnotation\", { error });\n          }\n        });\n      })\n    );\n  }\n  async function handlePlaywrightEvent({\n    detail,\n    ...data\n  }) {\n    try {\n      assert__default.default(\n        data.id != null,\n        new reporter.ReporterError(error.Errors.MissingCurrentStep, \"No current step for API call end\")\n      );\n      testInfo.attach(`replay:${data.event}`, {\n        body: JSON.stringify({\n          ...detail,\n          ...data\n        }),\n        contentType: constants.REPLAY_CONTENT_TYPE\n      });\n      return addAnnotation(data.event, data.id, detail);\n    } catch (error$1) {\n      let reporterError;\n      if (error$1 instanceof reporter.ReporterError) {\n        reporterError = error$1;\n      } else if (error$1 instanceof Error) {\n        reporterError = new reporter.ReporterError(error.Errors.UnexpectedError, error$1.message, {\n          stack: error$1.stack\n        });\n      } else {\n        reporterError = new reporter.ReporterError(error.Errors.UnexpectedError, \"Unknown\", { error: error$1 });\n      }\n      testInfo.attach(\"replay:step:error\", {\n        body: JSON.stringify(reporterError.valueOf()),\n        contentType: constants.REPLAY_CONTENT_TYPE\n      });\n    }\n  }\n  const csiListener = {\n    onApiCallBegin: ({ userData, params, apiName, frames }) => {\n      const step = userData;\n      if (!step?.stepId) {\n        return;\n      }\n      if (isReplayAnnotation(params)) {\n        ignoredSteps.add(step.stepId);\n        return;\n      }\n      if (expectSteps.has(step.stepId)) {\n        return;\n      }\n      if (!frames.length) {\n        ignoredSteps.add(step.stepId);\n        return;\n      }\n      return handlePlaywrightEvent({\n        event: \"step:start\",\n        id: step.stepId,\n        params,\n        detail: {\n          apiName,\n          category: step.category,\n          frames,\n          params: params ?? {},\n          title: step.title,\n          hook: getCurrentHookType()\n        }\n      });\n    },\n    onApiCallEnd: ({ userData, error, params }) => {\n      const step = userData;\n      if (!step?.stepId || ignoredSteps.has(step.stepId)) {\n        return;\n      }\n      return handlePlaywrightEvent({\n        event: \"step:end\",\n        id: step.stepId,\n        params,\n        detail: {\n          error: error ? parseError(error) : null\n        }\n      });\n    }\n  };\n  const clientInstrumentation = playwright._instrumentation;\n  clientInstrumentation.addListener(csiListener);\n  try {\n    const metadata = {\n      ...getBaseMetadata(),\n      \"x-replay-test\": {\n        id: testData.executionId\n      }\n    };\n    logger.logInfo(\"ReplayFixture:WillWriteMetadata\", { metadataFilePath, metadata });\n    fs.mkdirSync(path.dirname(metadataFilePath), { recursive: true });\n    fs.writeFileSync(metadataFilePath, JSON.stringify(metadata, void 0, 2));\n  } catch (error) {\n    logger.logError(\"ReplayFixture:InitReplayMetadataFailed\", {\n      error\n    });\n  }\n  testInfo.attach(`replay:test:start`, {\n    body: JSON.stringify({\n      executionId: testData.executionId\n    }),\n    contentType: constants.REPLAY_CONTENT_TYPE\n  });\n  await use();\n  clientInstrumentation.removeListener(csiListener);\n}\nfunction addReplayFixture() {\n  const testTypeSymbol = Object.getOwnPropertySymbols(test.test).find((s) => s.description === \"testType\");\n  const fixtures = testTypeSymbol ? test.test[testTypeSymbol]?.fixtures : null;\n  if (!fixtures) {\n    logger.logError(\"ReplayFixture:FailedToInject\");\n    return;\n  }\n  fixtures.push({\n    fixtures: {\n      _replay: [\n        replayFixture,\n        {\n          // \"all-hooks-included\" is supported since Playwright 1.23.0\n          // https://github.com/microsoft/playwright/pull/14104\n          auto: \"all-hooks-included\",\n          _title: \"Replay.io fixture\",\n          // The main reason we specify a custom timeout here is to get our own \"slot\" for the timeout.\n          // By default, Playwright reuses the `afterHooksSlot` and if that already has a timeout then the teardown logic of our fixture wouldn't be able to run.\n          // Every code in a fixture after `await use()` is implicitly executed as teardown.\n          // https://github.com/microsoft/playwright/blob/d223cffe4bd2a3b85dee4831c29904f09c585836/packages/playwright/src/worker/workerMain.ts#L407-L409\n          //\n          // To make things worse, that default `afterHooksSlot`'s timeout can even be exhausted by the internal `testInfo._onDidFinishTestFunction` that is responsible, for example, for making screenshots at the end of the test.\n          // https://github.com/microsoft/playwright/blob/d223cffe4bd2a3b85dee4831c29904f09c585836/packages/playwright/src/worker/workerMain.ts#L390-L391\n          timeout: 5e3\n        }\n      ]\n    }\n  });\n}\n\nexports.addReplayFixture = addReplayFixture;\nexports.metadataFilePath = metadataFilePath;\nexports.replayFixture = replayFixture;\n"
+        },
+        "stacks": {
+          "pw:api@33": [
+            {
+              "line": 10,
+              "column": 19,
+              "functionName": "Object.context",
+              "file": "e2e/fixtures.ts"
+            }
+          ],
+          "pw:api@38": [
+            {
+              "line": 27,
+              "column": 14,
+              "file": "e2e/todolist.spec.ts"
+            }
+          ],
+          "pw:api@41": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 27,
+              "column": 3,
+              "file": "e2e/todolist.spec.ts"
+            }
+          ],
+          "expect@43": [
+            {
+              "line": 28,
+              "column": 44,
+              "file": "e2e/todolist.spec.ts"
+            }
+          ],
+          "pw:api@45": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 115,
+              "column": 9,
+              "functionName": "TestInfoImpl.testInfo._addStep",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 28,
+              "column": 44,
+              "file": "e2e/todolist.spec.ts"
+            }
+          ],
+          "pw:api@48": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@51": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@54": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@57": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@60": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@63": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@66": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@69": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@72": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@75": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@78": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@81": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@84": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@87": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@90": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@93": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@96": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@99": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@102": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@105": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@108": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@111": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@114": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@117": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@120": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@123": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@126": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@129": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@131": [
+            {
+              "line": 6,
+              "column": 34,
+              "functionName": "deleteAllTodos",
+              "file": "e2e/todolist.spec.ts"
+            },
+            {
+              "line": 29,
+              "column": 9,
+              "file": "e2e/todolist.spec.ts"
+            }
+          ],
+          "pw:api@134": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@137": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@140": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@143": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@146": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@149": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@152": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@155": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@158": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@161": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@164": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@167": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@170": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@173": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@176": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@179": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@182": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@185": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@188": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@191": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@194": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@197": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@200": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@203": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@206": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@209": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@212": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@215": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@218": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@221": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@224": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@227": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@230": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@233": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@236": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@239": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@242": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@245": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@248": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@251": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@254": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@257": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@260": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@263": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@266": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@269": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@272": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@275": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@278": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@281": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@284": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@287": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@290": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@293": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@296": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@299": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@302": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@305": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@308": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@311": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@314": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@317": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@320": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@323": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@326": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@329": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@332": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@335": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@338": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 161,
+              "column": 26,
+              "functionName": "addAnnotation",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 192,
+              "column": 14,
+              "functionName": "handlePlaywrightEvent",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 246,
+              "column": 14,
+              "functionName": "Object.onApiCallEnd",
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 164,
+              "column": 13,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            }
+          ],
+          "pw:api@341": [
+            {
+              "line": 164,
+              "column": 24,
+              "file": "node_modules/@replayio/playwright/dist/fixture.js"
+            },
+            {
+              "line": 162,
+              "column": 32,
+              "fi

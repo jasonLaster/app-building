@@ -10,7 +10,7 @@ import {
   type ClaudeResult,
   type EventCallback,
 } from "./worker";
-import { createBufferedLogger, archiveCurrentLog } from "./log";
+import { createBufferedLogger, archiveCurrentLog, redactSecrets } from "./log";
 
 // --- Configuration from env ---
 
@@ -134,7 +134,7 @@ function buildExtraArgs(): string[] {
 let log: ReturnType<typeof createBufferedLogger>;
 
 const onEvent: EventCallback = (rawLine) => {
-  eventBuffer.append(rawLine);
+  eventBuffer.append(redactSecrets(rawLine));
   lastActivityAt = new Date().toISOString();
 };
 

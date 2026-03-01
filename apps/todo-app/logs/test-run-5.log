@@ -1,0 +1,32 @@
+=== PLAYWRIGHT OUTPUT ===
+
+Running 11 tests using 2 workers
+
+  ✘   2 e2e/todolist.spec.ts:32:1 › Empty state message when no todos exist (52.4s)
+  ✘   1 e2e/todolist.spec.ts:38:1 › Todos displayed in a vertical list (1.0m)
+  ✘   3 e2e/todolist.spec.ts:54:1 › Each todo shows checkbox, text, and delete button on hover (1.1m)
+  ✘   4 e2e/todolist.spec.ts:69:1 › Delete button is hidden when not hovering (1.0m)
+  ✘   5 e2e/todolist.spec.ts:79:1 › Toggle todo completion via checkbox (1.0m)
+  ✘   6 e2e/todolist.spec.ts:91:1 › Untoggle completed todo via checkbox (1.1m)
+
+=== STDERR ===
+[2m[WebServer] [22m[33m⠋[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠙[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠹[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[33m⠸[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[32m√[39m framework dev server ready on port 5173
+[2m[WebServer] [22m(node:6008) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"0ecdc1b4-1486-4483-a5be-4abed721bcad","testResult":"timedOut"}
+{"id":"c36c2c2e-add8-4ce0-958a-2fe8c3fce1ea","testResult":"failed"}
+{"id":"012644c6-c5a3-4ec5-811a-78f6133b30a7","testResult":"timedOut"}
+{"id":"f587f26e-8b20-4864-acbe-315f2985b50a","testResult":"timedOut"}
+{"id":"31e58675-d4a9-4008-8dd7-e122cd1f8e17","testResult":"timedOut"}
+{"id":"61ca2e20-8fa8-47e4-a410-d3e0b3e3af48","testResult":"timedOut"}
+=== END REPLAY RECORDINGS METADATA ===
+
+=== REPLAY LIST ===
+

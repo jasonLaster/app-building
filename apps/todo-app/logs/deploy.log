@@ -1,0 +1,24 @@
+=== Schema sync ===
+Schema sync complete
+=== Build ===
+vite v6.4.1 building for production...
+transforming...
+✓ 1598 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.39 kB │ gzip:   0.27 kB
+dist/assets/index-DMgRI9Le.css      5.02 kB │ gzip:   1.30 kB
+dist/assets/index-DaAGYI2M.js   1,110.58 kB │ gzip: 190.27 kB │ map: 1,948.35 kB
+✓ built in 10.73s
+
+=== Deploy ===
+{
+  "site_id": "4e7539f0-5d7a-4b08-a756-616629d4d227",
+  "site_name": "sparkling-stroopwafel-c74d0e",
+  "deploy_id": "69a406a441393513c476b6ab",
+  "deploy_url": "https://69a406a441393513c476b6ab--sparkling-stroopwafel-c74d0e.netlify.app",
+  "logs": "https://app.netlify.com/projects/sparkling-stroopwafel-c74d0e/deploys/69a406a441393513c476b6ab",
+  "function_logs": "https://app.netlify.com/projects/sparkling-stroopwafel-c74d0e/logs/functions",
+  "edge_function_logs": "https://app.netlify.com/projects/sparkling-stroopwafel-c74d0e/logs/edge-functions",
+  "url": "https://sparkling-stroopwafel-c74d0e.netlify.app"
+}

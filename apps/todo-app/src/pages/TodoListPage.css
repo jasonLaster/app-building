@@ -1,0 +1,30 @@
+.todo-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 48px;
+}
+
+.todo-page.p-6 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (max-width: 640px) {
+  .todo-page.max-sm\:p-3 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+.todo-page-container {
+  width: 100%;
+  max-width: 640px;
+}
+
+.todo-page-loading {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}

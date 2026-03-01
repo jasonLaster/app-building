@@ -1,0 +1,26 @@
+=== PLAYWRIGHT OUTPUT ===
+
+Running 8 tests using 2 workers
+
+  ✓  1 e2e/header.spec.ts:21:1 › App title is displayed (3.2s)
+  ✓  2 e2e/header.spec.ts:25:1 › Add todo input field is visible with placeholder (3.2s)
+  ✓  3 e2e/header.spec.ts:31:1 › Submit button is visible (3.6s)
+  ✓  4 e2e/header.spec.ts:35:1 › Add todo via submit button (3.9s)
+  ✓  6 e2e/header.spec.ts:52:1 › Cannot add empty todo (3.6s)
+  ✓  5 e2e/header.spec.ts:43:1 › Add todo by pressing Enter (4.5s)
+  ✓  7 e2e/header.spec.ts:58:1 › Cannot add whitespace-only todo (4.0s)
+  ✓  8 e2e/header.spec.ts:64:1 › Added todo persists after page reload (4.7s)
+[replay.io]: Finishing up. This should only take a moment ...
+
+
+  8 passed (23.9s)
+
+=== STDERR ===
+[2m[WebServer] [22m[33m⠋[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠙[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠹[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠸[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[32m√[39m framework dev server ready on port 5173
+[2m[WebServer] [22m(node:7442) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+

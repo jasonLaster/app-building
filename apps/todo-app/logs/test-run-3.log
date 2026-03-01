@@ -1,0 +1,36 @@
+=== PLAYWRIGHT OUTPUT ===
+
+Running 19 tests using 2 workers
+
+  ✓   2 e2e/filters.spec.ts:32:1 › Filter buttons All Active Completed are displayed (3.7s)
+  ✓   1 e2e/filters.spec.ts:45:1 › All filter is active by default (4.6s)
+  ✘   3 e2e/filters.spec.ts:57:1 › Filter by Active shows only uncompleted todos (1.1m)
+  ✘   4 e2e/filters.spec.ts:74:1 › Filter by Completed shows only completed todos (1.1m)
+  ✘   5 e2e/filters.spec.ts:91:1 › Filter by All shows all todos (1.0m)
+  ✘   6 e2e/filters.spec.ts:108:1 › Active filter is visually highlighted (1.0m)
+  ✘   8 e2e/filters.spec.ts:145:1 › Singular item count displays 1 item left (1.0m)
+  ✘   7 e2e/filters.spec.ts:132:1 › Remaining active items count is displayed (1.1m)
+
+=== STDERR ===
+[2m[WebServer] [22m[33m⠋[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠙[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠹[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[33m⠸[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[32m√[39m framework dev server ready on port 5173
+[2m[WebServer] [22m(node:4360) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"8775d4c8-986d-4daf-a593-19bf00c06c2b","testResult":"passed"}
+{"id":"356e205c-55b3-43d5-a092-5e25b23307f7","testResult":"passed"}
+{"id":"a9198764-a803-45f9-a450-11683743d002","testResult":"timedOut"}
+{"id":"8315ea08-789c-4d13-bc4a-4daae350ba8d","testResult":"timedOut"}
+{"id":"ab4cbc7b-31c4-4ac5-9956-e0d538e4d646","testResult":"timedOut"}
+{"id":"6161ab30-e91f-4839-8a26-a604660ec4b7","testResult":"timedOut"}
+{"id":"b1cf9a82-a1ea-401f-8e9c-f43451d54916","testResult":"timedOut"}
+{"id":"4ed88161-bc6e-47df-9792-3988af9673f6","testResult":"timedOut"}
+=== END REPLAY RECORDINGS METADATA ===
+
+=== REPLAY LIST ===
+

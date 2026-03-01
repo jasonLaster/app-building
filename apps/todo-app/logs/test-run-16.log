@@ -1,0 +1,42 @@
+=== PLAYWRIGHT OUTPUT ===
+
+Running 19 tests using 2 workers
+
+  ✓   2 e2e/filters.spec.ts:32:1 › Filter buttons All Active Completed are displayed (1.0m)
+  ✓   1 e2e/filters.spec.ts:45:1 › All filter is active by default (1.4m)
+  ✓   3 e2e/filters.spec.ts:57:1 › Filter by Active shows only uncompleted todos (1.4m)
+  ✓   4 e2e/filters.spec.ts:74:1 › Filter by Completed shows only completed todos (1.5m)
+  ✓   5 e2e/filters.spec.ts:91:1 › Filter by All shows all todos (1.9m)
+  ✓   6 e2e/filters.spec.ts:108:1 › Active filter is visually highlighted (1.7m)
+  ✓   8 e2e/filters.spec.ts:145:1 › Singular item count displays 1 item left (50.5s)
+  ✓   7 e2e/filters.spec.ts:132:1 › Remaining active items count is displayed (1.9m)
+  ✓   9 e2e/filters.spec.ts:154:1 › Zero items count displays 0 items left (1.1m)
+  ✓  11 e2e/filters.spec.ts:179:1 › Active items count updates when todo is added (1.3m)
+  ✓  10 e2e/filters.spec.ts:163:1 › Active items count updates when todo is completed (2.0m)
+
+=== STDERR ===
+[2m[WebServer] [22m[33m⠋[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠙[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[1G[2m[WebServer] [22m[33m⠹[39m Waiting for framework dev server to be ready on port 5173
+[2m[WebServer] [22m[32m√[39m framework dev server ready on port 5173
+[2m[WebServer] [22m(node:26567) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[2m[WebServer] [22m(Use `node --trace-deprecation ...` to show where the warning was created)
+
+=== EXIT CODE: null SIGNAL: SIGTERM ERROR: Error: spawnSync npx ETIMEDOUT ===
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"cb7b452f-2627-47c9-90e6-79cdc0e6c863","testResult":"passed"}
+{"id":"743e9ffa-2b59-4143-879f-16f1003d4169","testResult":"passed"}
+{"id":"86fe00ac-f8f9-4a8e-9dac-458d8f022fd9","testResult":"passed"}
+{"id":"a63c6513-893d-4a77-b13f-3697b30a0ea6","testResult":"passed"}
+{"id":"827dd780-23f9-4afd-bf5b-649f85cd0e62","testResult":"passed"}
+{"id":"8ad91b85-ce79-4568-826d-c3531733d6ec","testResult":"passed"}
+{"id":"36562c68-07d8-466e-875f-a9b439789fa4","testResult":"passed"}
+{"id":"fb49a488-d16e-49bd-837a-76f76d22b752","testResult":"passed"}
+{"id":"649875be-201e-4b69-b549-13824ffce17d","testResult":"passed"}
+{"id":"d65cb95f-8e38-45e0-99d6-f3ee70f41b13","testResult":"passed"}
+{"id":"10a32d2e-8b3b-4e30-bb9a-17ad313854a3","testResult":"passed"}
+=== END REPLAY RECORDINGS METADATA ===
+
+=== REPLAY LIST ===
+
