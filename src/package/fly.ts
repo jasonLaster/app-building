@@ -79,6 +79,7 @@ export async function createMachine(
       config: {
         image,
         env,
+        auto_destroy: true,
         restart: { policy: "no" },
         guest: {
           cpu_kind: "shared",
