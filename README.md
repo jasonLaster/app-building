@@ -9,10 +9,9 @@ according to a spec without human involvement along the way. Example use cases:
 
 Core ideas:
 
-* The agent runs within a docker container that clones the target repo and exposes an HTTP server for control.
-* The host communicates with the container via HTTP — sending prompts, polling events/logs, and managing lifecycle.
+* The agent runs within a docker container that clones a repo and exposes an HTTP server for control.
 * The agent builds by following a set of skill documents with guides
-  for breaking its work down into jobs and directives for performing those tasks.
+  for breaking its work down into tasks and directives for performing those tasks.
 * The agent commits logs for it to review later and improve its skills.
 * All code changes are committed and pushed back to the remote from inside the container.
 
