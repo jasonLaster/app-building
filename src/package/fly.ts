@@ -82,9 +82,9 @@ export async function createMachine(
         auto_destroy: true,
         restart: { policy: "no" },
         guest: {
-          cpu_kind: "shared",
-          cpus: 4,
-          memory_mb: 4096,
+          cpu_kind: "performance",
+          cpus: 16,
+          memory_mb: 32768,
         },
         services: [
           {

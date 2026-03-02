@@ -142,6 +142,9 @@ Write tests with this in mind:
   being unmodified.
 - Never hardcode database IDs in tests. Query the UI or API to discover IDs for the records
   you need to interact with.
+- Each spec file must contain **20 or fewer** `test()` calls. When a page has more tests,
+  split them across multiple spec files grouped by feature area (e.g., `status-page-containers.spec.ts`,
+  `status-page-webhook.spec.ts`). Consolidate similar tests where possible before splitting.
 - The Playwright config must use `fullyParallel: true`. Do not set `workers: 1`.
 - The Playwright config must use `replayDevices['Replay Chromium']` from `@replayio/playwright`
   as the browser project, not standard `devices['Desktop Chrome']`. Tests must run under the
