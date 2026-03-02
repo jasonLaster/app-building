@@ -27,6 +27,9 @@ external services using instructions in the relevant skill files.
 Do NOT run git commands, search code, or take any other action until you have checked for a
 matching skill. This is the highest-priority rule when handling user messages.
 
+Do NOT modify this AGENTS.md file unless the user explicitly instructs you to.
+All domain-specific guidance belongs in skill files under `skills/`.
+
 ## Worker Execution
 
 The worker processes tasks from `tasks/tasks-<containerName>.json` sequentially. For each task,

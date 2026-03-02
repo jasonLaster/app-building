@@ -82,9 +82,8 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
 
 - For assertions that depend on backend round-trips (auth flows, database writes, API calls),
   use generous timeouts (e.g., `{ timeout: 30000 }`) rather than tight ones. Environments with
-  recording overhead (Replay browser) and cold database connections (Neon DB) add significant
-  latency beyond typical local development. A tight timeout that barely passes locally will flake
-  under load or recording.
+  recording overhead (Replay browser) add significant latency beyond typical local development.
+  A tight timeout that barely passes locally will flake under load or recording.
 
 - For tests that chain multiple user flows in a single test (e.g., signup → signout → signin →
   verify), add `test.slow()` at the top of the test to triple the default timeout. Multi-step
@@ -126,13 +125,72 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
   generation, storage, URL construction, and redemption. Other (non-auth-flow) tests may
   continue to use IS_TEST=true to bypass auth for convenience.
 
-## Parallel Test Design
+## Parallel Test Design and Database Isolation
 
-Tests run in parallel across multiple Playwright workers, each with its own isolated database branch.
-Write tests with this in mind:
+Tests run in parallel across multiple Playwright workers. Each worker gets its own isolated
+PGlite database instance — an embedded Postgres that runs in-process with no network or
+cloud dependency.
 
-- Tests within the same spec file share a worker and therefore a database branch. Tests across
-  different spec files may run in separate workers with separate databases.
+### Test infrastructure
+
+Do **not** use Playwright's `webServer` config to start the dev server. Instead, use a
+worker-scoped fixture that starts a dedicated `netlify dev` instance per worker, each with
+its own PGlite database:
+
+```typescript
+// tests/fixtures.ts
+import { test as base } from '@playwright/test'
+import { spawn, type ChildProcess } from 'child_process'
+import { mkdtempSync } from 'fs'
+import { join } from 'path'
+import { tmpdir } from 'os'
+
+export const test = base.extend<{}, { serverUrl: string }>({
+  serverUrl: [async ({}, use, workerInfo) => {
+    // Each worker gets its own PGlite data dir and port
+    const dataDir = mkdtempSync(join(tmpdir(), `pglite-worker-${workerInfo.workerIndex}-`))
+    const port = 8888 + workerInfo.workerIndex
+
+    const server = spawn('npx', ['netlify', 'dev', '--port', String(port), '--functions', './netlify/functions'], {
+      cwd: /* app directory */,
+      env: { ...process.env, PGLITE_DATA_DIR: dataDir },
+      stdio: 'pipe',
+    })
+
+    // Wait for server to be ready, then init schema + seed
+    await waitForServer(port)
+    await initSchema(dataDir)
+    await seedTestData(dataDir)
+
+    await use(`http://localhost:${port}`)
+
+    server.kill()
+  }, { scope: 'worker' }],
+})
+
+export { expect } from '@playwright/test'
+```
+
+Test files import `test` from `./fixtures` instead of `@playwright/test`, and use
+`serverUrl` instead of a hardcoded `baseURL`:
+
+```typescript
+import { test, expect } from './fixtures'
+
+test('my test', async ({ page, serverUrl }) => {
+  await page.goto(`${serverUrl}/some-page`)
+})
+```
+
+### Database access in functions
+
+All Netlify functions must use the shared `netlify/functions/db.ts` module (see AGENTS.md)
+rather than importing `@neondatabase/serverless` directly. This module uses PGlite when
+`PGLITE_DATA_DIR` is set (testing) and Neon when `DATABASE_URL` is set (production).
+
+### Test design rules
+
+- Each worker gets a fresh, isolated database. Tests within the same worker share that database.
 - Tests that create, modify, or delete records must not rely on a fixed total count of records
   in the database (e.g., "expect 5 clients"). Other tests in the same worker may have already
   created or deleted records. Instead, assert on specific records by name/ID, or use relative
@@ -146,12 +204,14 @@ Write tests with this in mind:
   split them across multiple spec files grouped by feature area (e.g., `status-page-containers.spec.ts`,
   `status-page-webhook.spec.ts`). Consolidate similar tests where possible before splitting.
 - The Playwright config must use `fullyParallel: true`. Do not set `workers: 1`.
+- The Playwright config must **not** include a `webServer` section — the worker fixture handles
+  server lifecycle.
 - The Playwright config must use `replayDevices['Replay Chromium']` from `@replayio/playwright`
   as the browser project, not standard `devices['Desktop Chrome']`. Tests must run under the
   Replay browser so that recordings are captured for debugging.
-- Set the Playwright config's global `timeout` and `webServer.timeout` to at least 60000ms.
+- Set the Playwright config's global `timeout` to at least 60000ms.
   The Replay browser has significant recording overhead, and with parallel workers all hitting
-  the dev server simultaneously, pages can take 25+ seconds to load. A 30s timeout that works
+  their dev servers simultaneously, pages can take 25+ seconds to load. A 30s timeout that works
   locally with standard Chrome will cause widespread flakes under recording.
 
 ## Tips

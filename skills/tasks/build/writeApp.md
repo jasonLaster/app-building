@@ -68,9 +68,33 @@ contexts (testing, deployment).
   explicitly. When curling endpoints manually, start the server the same way:
   `npx netlify dev --port 8888 --functions ./netlify/functions`.
 
-- When using the neon serverless driver (`@neondatabase/serverless`), ONLY use tagged template literal
+- Netlify functions must not import `@neondatabase/serverless` directly. Instead, each app must
+  have a shared `netlify/functions/db.ts` module that all functions import:
+
+  ```typescript
+  import { neon } from '@neondatabase/serverless'
+  import { PGlite } from '@electric-sql/pglite'
+
+  let pglite: PGlite | null = null
+
+  export function getSql() {
+    if (process.env.PGLITE_DATA_DIR) {
+      if (!pglite) pglite = new PGlite(process.env.PGLITE_DATA_DIR)
+      return pglite.sql.bind(pglite)
+    }
+    return neon(process.env.DATABASE_URL!)
+  }
+  ```
+
+  - **Production / deployment**: Uses Neon via `DATABASE_URL`.
+  - **Testing**: Uses PGlite via `PGLITE_DATA_DIR` — an embedded Postgres that runs in-process
+    with no network or cloud dependency. Each test worker gets its own PGlite instance for isolation.
+  - Both `@neondatabase/serverless` and `@electric-sql/pglite` must be listed in the app's
+    `package.json` dependencies.
+
+- When using the sql function from `db.ts`, ONLY use tagged template literal
   syntax for queries: `` sql`SELECT * FROM table WHERE id = ${id}` ``. NEVER use `sql(queryString, paramsArray)`.
-  For dynamic WHERE clausess, build composable query fragments and conditionally include them in the tagged template.
+  For dynamic WHERE clauses, build composable query fragments and conditionally include them in the tagged template.
 
 - For database columns with DATE, TIMESTAMP, or UUID types, always convert empty strings to null
   before inserting or updating. Use `value || null` instead of `value ?? null`, because the nullish
