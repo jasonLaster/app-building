@@ -64,3 +64,4 @@ Target these files with specific, actionable recommendations:
 - `skills/scripts/*.md` — New script design docs to create, or updates to existing ones
 - Task skills that could benefit from better shell command guidance
 - Common command patterns that should be documented as standard procedures
+- Dockerfile changes to setup software required by all apps
