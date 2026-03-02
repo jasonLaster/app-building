@@ -1,9 +1,7 @@
 import { readFileSync } from "fs";
 import { resolve } from "path";
 import { Command } from "commander";
-import { formatLogLine } from "./format";
-
-const MAX_OUTPUT_LINE = 300;
+import { formatLogLine, stripTimestamp } from "./format";
 
 const program = new Command();
 program
@@ -15,20 +13,6 @@ const content = readFileSync(logFile, "utf-8");
 
 for (const rawLine of content.split("\n")) {
   if (!rawLine.trim()) continue;
-
-  // Strip timestamp prefix: [2026-02-07T16:24:03.590Z]
-  const tsMatch = rawLine.match(/^\[(\d{4}-\d{2}-\d{2}T[\d:.]+Z)\]\s*(.*)/);
-  const line = tsMatch ? tsMatch[2] : rawLine;
-
-  const formatted = formatLogLine(line);
-  if (formatted) {
-    // Truncate each output line as a safety net
-    for (const outLine of formatted.split("\n")) {
-      if (outLine.length > MAX_OUTPUT_LINE) {
-        console.log(outLine.slice(0, MAX_OUTPUT_LINE) + "... (truncated)");
-      } else {
-        console.log(outLine);
-      }
-    }
-  }
+  const formatted = formatLogLine(stripTimestamp(rawLine));
+  if (formatted) console.log(formatted);
 }

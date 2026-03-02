@@ -3,12 +3,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import { httpGet, type HttpOptions, FileContainerRegistry, type RegistryEntry, httpOptsFor } from "./package";
-import { formatLogLine, RESET, DIM, BOLD, CYAN, GREEN, YELLOW, RED } from "./format";
-
-function stripTimestamp(rawLine: string): string {
-  const tsMatch = rawLine.match(/^\[\d{4}-\d{2}-\d{2}T[\d:.]+Z\]\s*(.*)/);
-  return tsMatch ? tsMatch[1] : rawLine;
-}
+import { formatLogLine, stripTimestamp, RESET, DIM, BOLD, CYAN, GREEN, YELLOW, RED } from "./format";
 
 function displayFormattedLines(rawLines: string[]): void {
   for (const rawLine of rawLines) {

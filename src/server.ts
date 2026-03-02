@@ -11,6 +11,7 @@ import {
   type EventCallback,
 } from "./worker";
 import { createBufferedLogger, archiveCurrentLog, redactSecrets } from "./log";
+import { formatLogLine, stripTimestamp } from "./format";
 
 // --- Configuration from env ---
 
@@ -496,7 +497,11 @@ async function main(): Promise<void> {
   // Now that /repo exists, initialize the logger
   log = createBufferedLogger(LOGS_DIR, CONTAINER_NAME, iteration, (line) => {
     logBuffer.append(line);
-    postWebhook("log", { line });
+    // Format log lines for webhook using the same logic as read-log
+    const formatted = formatLogLine(stripTimestamp(line));
+    if (formatted) {
+      postWebhook("log", { line: formatted });
+    }
   });
 
   // Checkout target branch if different from clone branch

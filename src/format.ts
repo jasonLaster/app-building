@@ -7,6 +7,12 @@ export const YELLOW = "";
 export const RED = "";
 const MAGENTA = "";
 
+/** Strip the [ISO timestamp] prefix from a log line. */
+export function stripTimestamp(rawLine: string): string {
+  const tsMatch = rawLine.match(/^\[\d{4}-\d{2}-\d{2}T[\d:.]+Z\]\s*(.*)/);
+  return tsMatch ? tsMatch[1] : rawLine;
+}
+
 /**
  * Format a single raw log line (timestamp already stripped) for display.
  * Returns null if the line should be hidden.
@@ -71,7 +77,7 @@ export function formatLogLine(line: string): string | null {
   }
 }
 
-const MAX_LINE_LEN = 300;
+const MAX_LINE_LEN = 1000;
 
 function truncLine(s: string): string {
   if (s.length <= MAX_LINE_LEN) return s;
@@ -123,11 +129,7 @@ export function formatEvent(event: any): string | null {
     const stderr = result.stderr ?? "";
     const parts: string[] = [];
     if (stdout) {
-      const lines = stdout.split("\n");
-      const display = lines.length > 20
-        ? [...lines.slice(0, 20), `${DIM}... (${lines.length - 20} more lines)${RESET}`]
-        : lines;
-      parts.push(`${DIM}${display.map(truncLine).join("\n")}${RESET}`);
+      parts.push(`${DIM}${truncLines(stdout)}${RESET}`);
     }
     if (stderr) {
       parts.push(`${RED}${truncLines(stderr)}${RESET}`);
