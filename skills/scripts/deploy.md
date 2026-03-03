@@ -27,19 +27,26 @@ resources.
 3. Run migrations (`migrate-db` logic) against the production database to handle `ALTER TABLE`
    changes that `initSchema` cannot detect.
 
+### Seed data (first deployment only)
+
+4. On the **first deployment** (i.e. the database was just created), insert seed data that
+   demonstrates the app's features. The seed data should be realistic and cover the main
+   entities and relationships so a user can immediately explore the app without needing to
+   create everything from scratch. Skip seeding on subsequent deployments.
+
 ### Netlify site setup (first run)
 
-4. Check `.env` for an existing `NETLIFY_SITE_ID`. If not present:
+5. Check `.env` for an existing `NETLIFY_SITE_ID`. If not present:
    a. Create a new Netlify site via `netlify sites:create`.
    b. Write `NETLIFY_SITE_ID` to `.env`.
 
 ### Build and deploy (every run)
 
-5. Build the app (`vite build`). Pipe build output to the log file.
-6. Deploy to Netlify (`netlify deploy --prod`). Pipe deploy output to the log file.
-7. Write the deployed URL, `site_id`, `neon_project_id`, and `database_url` to the top of `deployment.txt`
+6. Build the app (`vite build`). Pipe build output to the log file.
+7. Deploy to Netlify (`netlify deploy --prod`). Pipe deploy output to the log file.
+8. Write the deployed URL, `site_id`, `neon_project_id`, and `database_url` to the top of `deployment.txt`
    (overwriting the previous resource block but preserving any deployment history entries below).
-8. Print a one-line summary to stdout:
+9. Print a one-line summary to stdout:
    - Success: `Deployed to <url>`
    - Failure: `Deploy failed (build|netlify) — see logs/deploy.log`
 

@@ -41,6 +41,16 @@ deployment tests until API endpoints respond successfully.
 Only run deployment tests after confirming API endpoints are healthy. Deployment tests that
 hit broken endpoints will produce misleading failures.
 
+**Testing constraints:**
+
+- **No significant side effects**: Deployment tests must not perform actions with significant
+  side effects (e.g., sending emails, triggering external webhooks, deleting critical data).
+  Test read-heavy flows and minor CRUD operations only.
+- **Revert database changes**: Any database changes made during deployment tests (created rows,
+  updated records, etc.) must be reverted after the test finishes. The production database
+  should be left in the same state it was in before testing. Use API DELETE endpoints or direct
+  SQL cleanup to undo changes.
+
 ## Common Failures
 
 - **500 from API endpoints**: `DATABASE_URL` not set on Netlify. Set it per step 1.
