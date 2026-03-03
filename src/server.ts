@@ -3,7 +3,8 @@ import { resolve } from "path";
 import { cloneRepo, checkoutTargetBranch, commitAndPushTarget, getRevision, toTokenUrl } from "./git";
 import {
   processMessage,
-  processTasks,
+  processTask,
+  getNextTask,
   currentClaudeProcess,
   getPendingTaskCount,
   absorbForeignTaskFiles,
@@ -295,12 +296,12 @@ async function processLoop(): Promise<void> {
     }
 
     // Process pending tasks (after message handling above, or standalone)
-    const pendingTasks = getPendingTaskCount();
-    if (pendingTasks > 0) {
-      log(`Processing ${pendingTasks} pending task(s)...`);
+    const task = getNextTask();
+    if (task) {
       state = "processing";
-      postWebhook("task.started", { iteration, pendingTasks });
-      const jobResult = await processTasks(
+      postWebhook("task.started", { iteration, skill: task.skill, subtasks: task.subtasks });
+      const result = await processTask(
+        task,
         extraArgs,
         log,
         onEvent,
@@ -315,10 +316,12 @@ async function processLoop(): Promise<void> {
         },
         PUSH_BRANCH,
       );
-      tasksProcessed += jobResult.tasksProcessed;
-      totalCost += jobResult.totalCost;
-      log(`Task processing complete. ${jobResult.tasksProcessed} task(s) processed, cost: $${jobResult.totalCost.toFixed(4)}`);
-      postWebhook("task.done", { tasksProcessed: jobResult.tasksProcessed, totalCost: jobResult.totalCost });
+      totalCost += result.cost;
+      postWebhook("task.done", { skill: task.skill, cost: result.cost, totalCost, failed: !result.success });
+      if (!result.success) {
+        log(`Task failed. Stopping task processing. ${getPendingTaskCount()} task(s) remain in queue.`);
+        detachRequested = true;
+      }
       continue;
     }
 

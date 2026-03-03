@@ -267,6 +267,7 @@ export function getPendingTaskCount(): number {
   return readTasksFile().tasks.length;
 }
 
+
 // --- Exported API ---
 
 /**
@@ -286,37 +287,37 @@ export async function processMessage(
   return runClaude(claudeArgs, log, onEvent);
 }
 
+export function getNextTask(): Task | null {
+  const data = readTasksFile();
+  return data.tasks.length > 0 ? data.tasks[0] : null;
+}
+
+export interface TaskResult {
+  success: boolean;
+  cost: number;
+}
+
 /**
- * Process all pending tasks until the queue is empty.
- * Calls commitFn after each task completes.
- * Returns the number of tasks processed.
+ * Process a specific task. Retries up to MAX_TASK_RETRIES if it doesn't signal <DONE>.
  */
-export async function processTasks(
+export async function processTask(
+  task: Task,
   extraArgs: string[],
   log: Logger,
   onEvent?: EventCallback,
   shouldStop?: () => boolean,
   commitFn?: (label: string) => void,
   pushBranch?: string,
-): Promise<{ tasksProcessed: number; totalCost: number }> {
-  let tasksProcessed = 0;
-  let totalCost = 0;
-  let consecutiveRetries = 0;
+): Promise<TaskResult> {
+  let retries = 0;
+  let cost = 0;
 
   while (true) {
-    if (shouldStop?.()) break;
+    if (shouldStop?.()) return { success: false, cost };
 
-    const data = readTasksFile();
-    debug(`processTasks: task file has ${data.tasks.length} task(s)`);
-    if (data.tasks.length === 0) {
-      log("No tasks remaining.");
-      break;
-    }
-
-    const assignedTask = { ...data.tasks[0], subtasks: [...data.tasks[0].subtasks] };
-    const prompt = buildTaskPrompt(assignedTask);
-    log(`Running task: ${assignedTask.subtasks.length} subtask(s) (skill: ${assignedTask.skill})`);
-    for (const subtask of assignedTask.subtasks) {
+    const prompt = buildTaskPrompt(task);
+    log(`Running task: ${task.subtasks.length} subtask(s) (skill: ${task.skill})`);
+    for (const subtask of task.subtasks) {
       log(`  - ${subtask}`);
     }
 
@@ -329,7 +330,6 @@ export async function processTasks(
       continue;
     }
 
-    // Restore push branch in case the task switched branches (e.g. mergeMain)
     if (pushBranch) {
       try {
         ensureBranch(pushBranch, log);
@@ -339,38 +339,32 @@ export async function processTasks(
     }
 
     if (response.cost_usd != null) {
-      totalCost += response.cost_usd;
-      log(`Cost: $${response.cost_usd.toFixed(4)} (total: $${totalCost.toFixed(4)})`);
+      cost += response.cost_usd;
+      log(`Cost: $${response.cost_usd.toFixed(4)}`);
     }
     if (response.num_turns != null) {
       log(`Turns: ${response.num_turns}`);
     }
 
-    const done = response.doneSignaled;
-    debug(`processTasks: done=${done} assignedTask skill=${assignedTask.skill}`);
+    const subtaskSummary = task.subtasks[0].length > 60
+      ? task.subtasks[0].slice(0, 57) + "..."
+      : task.subtasks[0];
+    commitFn?.(task.subtasks.length === 1
+      ? subtaskSummary
+      : `${subtaskSummary} (+${task.subtasks.length - 1} more)`);
 
-    if (done) {
+    if (response.doneSignaled) {
       log(`Task signaled <DONE>. Completing task.`);
-      completeTask(assignedTask, log);
-      consecutiveRetries = 0;
-    } else {
-      consecutiveRetries++;
-      if (consecutiveRetries >= MAX_TASK_RETRIES) {
-        log(`Task failed ${MAX_TASK_RETRIES} times. Stopping.`);
-        break;
-      } else {
-        log(`Task did NOT signal <DONE>. Retry ${consecutiveRetries}/${MAX_TASK_RETRIES}.`);
-      }
+      completeTask(task, log);
+      return { success: true, cost };
     }
 
-    tasksProcessed++;
-    const subtaskSummary = assignedTask.subtasks[0].length > 60
-      ? assignedTask.subtasks[0].slice(0, 57) + "..."
-      : assignedTask.subtasks[0];
-    commitFn?.(assignedTask.subtasks.length === 1
-      ? subtaskSummary
-      : `${subtaskSummary} (+${assignedTask.subtasks.length - 1} more)`);
+    retries++;
+    if (retries >= MAX_TASK_RETRIES) {
+      log(`Task failed ${MAX_TASK_RETRIES} times. Aborting task queue.`);
+      completeTask(task, log);
+      return { success: false, cost };
+    }
+    log(`Task did NOT signal <DONE>. Retry ${retries}/${MAX_TASK_RETRIES}.`);
   }
-
-  return { tasksProcessed, totalCost };
 }
