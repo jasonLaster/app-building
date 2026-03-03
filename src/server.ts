@@ -22,6 +22,7 @@ const PUSH_BRANCH = process.env.PUSH_BRANCH ?? CLONE_BRANCH;
 const CONTAINER_NAME = process.env.CONTAINER_NAME ?? "agent";
 const WEBHOOK_URL = process.env.WEBHOOK_URL ?? "";
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? "";
+const INITIAL_PROMPT = process.env.INITIAL_PROMPT ?? "";
 const REPO_DIR = "/repo";
 const LOGS_DIR = resolve(REPO_DIR, "logs");
 
@@ -526,6 +527,17 @@ async function main(): Promise<void> {
     log(`HTTP server listening on port ${PORT}`);
     state = "idle";
     postWebhook("container.started", { pushBranch: PUSH_BRANCH, revision: getRevision(REPO_DIR) });
+
+    // Queue initial prompt if provided via env var (used in detached mode)
+    if (INITIAL_PROMPT) {
+      const id = String(nextMessageId++);
+      const entry: MessageEntry = { id, prompt: INITIAL_PROMPT, status: "queued" };
+      messages.set(id, entry);
+      messageQueue.push(id);
+      postWebhook("message.queued", { messageId: id, prompt: INITIAL_PROMPT });
+      wake();
+    }
+
     postWebhook("container.idle", { pendingTasks: getPendingTaskCount(), queueLength: messageQueue.length });
   });
 

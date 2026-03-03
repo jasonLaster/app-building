@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { Command } from "commander";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, startRemoteContainer, stopContainer, stopRemoteContainer, type AgentState, httpGet, httpPost, type HttpOptions, httpOptsFor } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, startRemoteContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor } from "./package";
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
 import { formatEvent } from "./format";
 
@@ -230,7 +230,6 @@ async function runDetached(config: ContainerConfig, opts: {
   repo: string;
   branch: string;
   pushBranch: string;
-  prompt?: string;
   remote?: boolean;
 }): Promise<void> {
   const repo = { repoUrl: opts.repo, cloneBranch: opts.branch, pushBranch: opts.pushBranch };
@@ -238,18 +237,8 @@ async function runDetached(config: ContainerConfig, opts: {
     ? await startRemoteContainer(config, repo)
     : await startContainer(config, repo);
 
-  const { containerName, baseUrl } = state;
-  const httpOpts = httpOptsFor(state);
-
-  console.log(`Container: ${containerName}`);
-  console.log(`Server: ${baseUrl}`);
-
-  // Optionally send an initial message
-  if (opts.prompt) {
-    const { id } = await httpPost(`${baseUrl}/message`, { prompt: opts.prompt }, httpOpts);
-    console.log(`Message queued: ${id}`);
-  }
-
+  console.log(`Container: ${state.containerName}`);
+  console.log(`Server: ${state.baseUrl}`);
   console.log("Detached. Container will exit when all work is complete.");
   console.log(`Monitor: npm run status`);
   console.log(`Stop: npm run stop`);
@@ -292,7 +281,8 @@ async function main(): Promise<void> {
     await runInteractive(config, { repo, branch, pushBranch, remote: opts.remote });
   } else {
     config.detached = true;
-    await runDetached(config, { repo, branch, pushBranch, prompt: opts.prompt, remote: opts.remote });
+    if (opts.prompt) config.initialPrompt = opts.prompt;
+    await runDetached(config, { repo, branch, pushBranch, remote: opts.remote });
   }
 }
 

@@ -26,6 +26,8 @@ export interface ContainerConfig {
   webhookUrl?: string;
   /** Start the container in detached mode. It will exit after processing all messages and tasks. */
   detached?: boolean;
+  /** Initial prompt to queue at container startup (before the HTTP server accepts external requests). */
+  initialPrompt?: string;
 }
 
 export interface RepoOptions {
@@ -138,6 +140,7 @@ export async function startContainer(
   };
   if (config.webhookUrl) extra.WEBHOOK_URL = config.webhookUrl;
   if (config.detached) extra.DETACHED = "1";
+  if (config.initialPrompt) extra.INITIAL_PROMPT = config.initialPrompt;
   const containerEnv = buildContainerEnv(repo, config.envVars, extra);
 
   // Build docker run args
@@ -232,6 +235,7 @@ export async function startRemoteContainer(
   };
   if (config.webhookUrl) remoteExtra.WEBHOOK_URL = config.webhookUrl;
   if (config.detached) remoteExtra.DETACHED = "1";
+  if (config.initialPrompt) remoteExtra.INITIAL_PROMPT = config.initialPrompt;
   const containerEnv = buildContainerEnv(repo, config.envVars, remoteExtra);
 
   // Log existing machines (but don't destroy — multiple containers may run concurrently)

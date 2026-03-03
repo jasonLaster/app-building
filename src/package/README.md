@@ -33,14 +33,11 @@ const config: ContainerConfig = {
   flyApp: envVars.FLY_APP_NAME,
 };
 
-// Start a remote container (detached — will exit after processing all work)
+// Start a detached container with an initial prompt — it will process and exit when done
 config.detached = true;
+config.initialPrompt = "Build the app";
 const repo: RepoOptions = { repoUrl: "https://github.com/...", cloneBranch: "main", pushBranch: "main" };
 const state = await startRemoteContainer(config, repo);
-
-// Send a prompt — the container will process it and exit when done
-const httpOpts = httpOptsFor(state);
-const { id } = await httpPost(`${state.baseUrl}/message`, { prompt: "Build the app" }, httpOpts);
 
 // Check status
 const status = await httpGet(`${state.baseUrl}/status`, httpOpts);
@@ -58,7 +55,7 @@ await stopRemoteContainer(config, state);
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars`, `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`detached`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
+| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars`, `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`detached`/`initialPrompt`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
 | `FileContainerRegistry` | Built-in file-backed implementation of `ContainerRegistry`, backed by a `.jsonl` file. |
@@ -144,9 +141,10 @@ Each container runs an HTTP server that accepts the following requests:
 A container stays running and accepts messages until it receives a **detach** or **stop** signal:
 
 - **Detached at startup** (`config.detached = true`): Set `detached` on `ContainerConfig` to start
-  the container in detached mode. The container processes its initial message and any queued tasks,
-  then exits cleanly. This is the preferred way to run fire-and-forget jobs — no race between
-  container startup and a subsequent `POST /detach`.
+  the container in detached mode. Use `config.initialPrompt` to provide a prompt that is queued
+  before the HTTP server starts accepting requests. The container processes the initial prompt
+  and any queued tasks, then exits cleanly. This is the preferred way to run fire-and-forget
+  jobs — no race between container startup and a subsequent `POST /message` or `POST /detach`.
 - **Detach** (`POST /detach`): Signal a running container to exit once all in-flight and queued
   work is done. In the CLI, interactive mode (`npm run agent -- -i`) sends `/detach` automatically
   when the user disconnects (Ctrl+C/D).
