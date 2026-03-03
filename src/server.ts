@@ -247,7 +247,7 @@ async function processLoop(): Promise<void> {
       const entry = messages.get(msgId)!;
       entry.status = "processing";
       iteration++;
-      postWebhook("container.processing", { iteration });
+      postWebhook("message.started", { iteration, prompt: entry.prompt });
 
       log(`=== Message ${msgId} (iteration ${iteration}) ===`);
       log(`Initial revision: ${getRevision(REPO_DIR)}`);
@@ -291,18 +291,15 @@ async function processLoop(): Promise<void> {
         log(`Final revision: ${getRevision(REPO_DIR)}`);
       }
 
-      state = "idle";
-      postWebhook("container.idle", { pendingTasks: getPendingTaskCount(), queueLength: messageQueue.length });
       continue;
     }
 
     // Process pending tasks (after message handling above, or standalone)
     const pendingTasks = getPendingTaskCount();
-    if (!stopRequested && pendingTasks > 0) {
+    if (pendingTasks > 0) {
       log(`Processing ${pendingTasks} pending task(s)...`);
       state = "processing";
-      postWebhook("container.processing", { iteration });
-      postWebhook("task.started", { pendingTasks });
+      postWebhook("task.started", { iteration, pendingTasks });
       const jobResult = await processTasks(
         extraArgs,
         log,
@@ -322,14 +319,12 @@ async function processLoop(): Promise<void> {
       totalCost += jobResult.totalCost;
       log(`Task processing complete. ${jobResult.tasksProcessed} task(s) processed, cost: $${jobResult.totalCost.toFixed(4)}`);
       postWebhook("task.done", { tasksProcessed: jobResult.tasksProcessed, totalCost: jobResult.totalCost });
-      state = "idle";
-      postWebhook("container.idle", { pendingTasks: getPendingTaskCount(), queueLength: messageQueue.length });
       continue;
     }
 
-    // Check for detach: exit when queue is empty and no pending tasks
-    if (detachRequested && messageQueue.length === 0 && getPendingTaskCount() === 0) {
-      log("Detach requested and all work complete. Shutting down.");
+    // Detach: exit immediately when queue is empty and no pending tasks
+    if (detachRequested) {
+      log("Detach requested and all work complete. Exiting.");
       break;
     }
 
@@ -340,25 +335,20 @@ async function processLoop(): Promise<void> {
     await waitForWake();
   }
 
-  state = "stopping";
+  // Only reachable via stopRequested — commit remaining work and exit
+  log("Stop requested. Shutting down.");
   postWebhook("container.stopping", {});
-  log("Server shutting down.");
 
-  // Commit and push any remaining work on stop
-  if (stopRequested) {
-    try {
-      iteration++;
-      archiveCurrentLog(LOGS_DIR, CONTAINER_NAME, iteration);
-      commitAndPushTarget(`Final work from ${CONTAINER_NAME}`, PUSH_BRANCH, log, () => true, REPO_DIR);
-    } catch (e: any) {
-      log(`Warning: failed to push final work: ${e.message}`);
-    }
+  try {
+    iteration++;
+    archiveCurrentLog(LOGS_DIR, CONTAINER_NAME, iteration);
+    commitAndPushTarget(`Final work from ${CONTAINER_NAME}`, PUSH_BRANCH, log, () => true, REPO_DIR);
+  } catch (e: any) {
+    log(`Warning: failed to push final work: ${e.message}`);
   }
 
-  state = "stopped";
   postWebhook("container.stopped", {});
 
-  // Wait briefly for final status polls before exiting
   setTimeout(() => process.exit(0), 5000);
 }
 

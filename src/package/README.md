@@ -183,14 +183,14 @@ Every POST body has this shape:
 | Type | When | `data` fields |
 |---|---|---|
 | `container.started` | HTTP server is listening | `pushBranch`, `revision` |
-| `container.idle` | State transitions to idle | `pendingTasks`, `queueLength` |
-| `container.processing` | State transitions to processing | `iteration` |
-| `container.stopping` | State transitions to stopping | _(empty)_ |
-| `container.stopped` | State transitions to stopped | _(empty)_ |
+| `container.idle` | Container is waiting for work | `pendingTasks`, `queueLength` |
+| `container.stopping` | Container is shutting down | _(empty)_ |
+| `container.stopped` | Container has stopped | _(empty)_ |
 | `message.queued` | `POST /message` received | `messageId`, `prompt` |
+| `message.started` | Message processing begins | `iteration`, `prompt` |
 | `message.done` | Message processing complete | `messageId`, `cost_usd`, `duration_ms`, `num_turns` |
 | `message.error` | Message processing failed | `messageId`, `error` |
-| `task.started` | Task processing begins | `pendingTasks` |
+| `task.started` | Task processing begins | `iteration`, `pendingTasks` |
 | `task.done` | Task processing complete | `tasksProcessed`, `totalCost` |
 | `log` | Each log line | `line` |
 
