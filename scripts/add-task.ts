@@ -1,10 +1,7 @@
 /**
- * add-task: Adds a task to the queue.
+ * add-task: Adds a task to the front of the queue (next to be processed).
  *
- * Usage: npx tsx /repo/scripts/add-task.ts --skill <path> --subtask "desc1" --subtask "desc2" [--app "<name>"] [--trailing]
- *
- * By default, adds to the FRONT of the queue (next to be processed).
- * With --trailing, adds to the END of the queue.
+ * Usage: npx tsx /repo/scripts/add-task.ts --skill <path> --subtask "desc1" --subtask "desc2" [--app "<name>"]
  *
  * All --subtask values become the subtasks array within the task. Subtasks execute in the
  * order listed.
@@ -27,10 +24,9 @@ interface TasksFile {
   tasks: Task[];
 }
 
-function parseArgs(): { skill: string; subtasks: string[]; trailing: boolean; app?: string } {
+function parseArgs(): { skill: string; subtasks: string[]; app?: string } {
   const args = process.argv.slice(2);
   let skill = "";
-  let trailing = false;
   let app: string | undefined;
   const subtasks: string[] = [];
   for (let i = 0; i < args.length; i++) {
@@ -43,15 +39,13 @@ function parseArgs(): { skill: string; subtasks: string[]; trailing: boolean; ap
     } else if (args[i] === "--app" && i + 1 < args.length) {
       app = args[i + 1];
       i++;
-    } else if (args[i] === "--trailing") {
-      trailing = true;
     }
   }
   if (!skill || subtasks.length === 0) {
-    console.error('Usage: add-task --skill "<path>" --subtask "desc1" [--subtask "desc2" ...] [--app "<name>"] [--trailing]');
+    console.error('Usage: add-task --skill "<path>" --subtask "desc1" [--subtask "desc2" ...] [--app "<name>"]');
     process.exit(1);
   }
-  return { skill, subtasks, trailing, app };
+  return { skill, subtasks, app };
 }
 
 function readTasksFile(): TasksFile {
@@ -67,19 +61,14 @@ function writeTasksFile(data: TasksFile): void {
 }
 
 function main() {
-  const { skill, subtasks, trailing, app } = parseArgs();
+  const { skill, subtasks, app } = parseArgs();
   const data = readTasksFile();
   const newTask: Task = { skill, subtasks, timestamp: new Date().toISOString(), ...(app && { app }) };
 
-  if (trailing) {
-    data.tasks.push(newTask);
-  } else {
-    data.tasks.unshift(newTask);
-  }
+  data.tasks.unshift(newTask);
 
   writeTasksFile(data);
-  const position = trailing ? "end" : "front";
-  console.log(`Added task at ${position}: ${subtasks.length} subtask(s) (skill: ${skill})`);
+  console.log(`Added task at front: ${subtasks.length} subtask(s) (skill: ${skill})`);
   for (const subtask of subtasks) {
     console.log(`  - ${subtask}`);
   }

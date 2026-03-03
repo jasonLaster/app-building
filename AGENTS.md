@@ -69,11 +69,10 @@ a `timestamp`, and an optional `app` name:
 
 The agent NEVER reads or writes task files directly. Instead, use:
 
-* **`npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2" [--app "<name>"] [--trailing]`**:
+* **`npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2" [--app "<name>"]`**:
   Adds a task to the FRONT of the queue (next to be processed). Each `--subtask` flag
   adds one subtask to the task. Subtasks execute in the order listed.
   Use `--app` to associate the task with a specific app (the directory name under `apps/`).
-  Add `--trailing` to append to the END of the queue instead.
 
 All subtasks in a task share the same skill. Group related subtasks together — for example,
 all checks for a single page go in one task. When a skill needs to "unpack" into

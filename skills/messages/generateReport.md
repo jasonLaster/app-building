@@ -27,23 +27,24 @@ If the user's request doesn't clearly match a report type, ask them to clarify.
    - `<branchName>` is the current git branch
    - `<TIMESTAMP>` is `YYYYMMDD-HHmmss` format
 
-4. Queue the pipeline tasks with `--trailing`:
+4. Queue the pipeline tasks in **reverse order** (last stage first), since
+   `add-task` always pushes to the front:
 
 ```bash
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/mergeFromMain.md" \
-  --subtask "MergeFromMain: Merge latest main into branch" --trailing
-
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/analyzeLogs.md" \
-  --subtask "Unpack: <report-name> <report-file>" --trailing
-
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/synthesizeReport.md" \
-  --subtask "Synthesize: <report-name> <report-file>" --trailing
+npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeMain.md" \
+  --subtask "MergeSkills: <report-name>"
 
 npx tsx /repo/scripts/add-task.ts --skill "skills/review/updateSkills.md" \
-  --subtask "UpdateSkills: <report-name>" --trailing
+  --subtask "UpdateSkills: <report-name>"
 
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeMain.md" \
-  --subtask "MergeSkills: <report-name>" --trailing
+npx tsx /repo/scripts/add-task.ts --skill "skills/review/synthesizeReport.md" \
+  --subtask "Synthesize: <report-name> <report-file>"
+
+npx tsx /repo/scripts/add-task.ts --skill "skills/review/analyzeLogs.md" \
+  --subtask "Unpack: <report-name> <report-file>"
+
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/mergeFromMain.md" \
+  --subtask "MergeFromMain: Merge latest main into branch"
 ```
 
 5. Confirm to the user that the report pipeline has been queued with the report name.

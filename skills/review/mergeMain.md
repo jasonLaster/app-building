@@ -72,21 +72,28 @@ git diff --name-status $MERGE_BASE $SOURCE_BRANCH -- skills/ scripts/
 
 Files with status `D` should be `git rm`'d.
 
-### 5. Verify no excluded content leaked
+### 5. Delete excluded paths
 
 ```bash
-git diff --cached --name-only | grep -E '^(apps/|logs/|docs/|report-data/)' && echo "ERROR: excluded content leaked" || echo "Clean"
+git rm -rf apps/ logs/ docs/ report-data/ 2>/dev/null || true
+git ls-files '*.txt' | grep -v '/' | xargs git rm -f 2>/dev/null || true
 ```
 
-If any excluded paths appear, unstage them with `git reset HEAD -- apps/ logs/ docs/ report-data/`.
+Skip any that don't exist. If none exist, move on.
 
-### 6. Commit
+### 6. Verify no excluded content remains
+
+```bash
+git ls-files | grep -E '^(apps/|logs/|docs/|report-data/)' && echo "ERROR: excluded content remains" || echo "Clean"
+```
+
+### 7. Commit
 
 ```bash
 git commit -m "Report: <report-name> — skill updates and report"
 ```
 
-### 7. Test the merge
+### 8. Test the merge
 
 Verify the branch merges cleanly into main:
 
@@ -101,7 +108,7 @@ git checkout <report-name>-merge
 If there are conflicts, resolve them on the merge branch, favoring the source
 branch's version.
 
-### 8. Final state
+### 9. Final state
 
 The `<report-name>-merge` branch is ready for PR. It contains skill/script
 updates and the report file, but no apps, logs, report data, or docs.

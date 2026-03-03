@@ -259,8 +259,7 @@ function buildTaskPrompt(task: Task): string {
     `output <DONE> to signal completion.\n` +
     `\n` +
     `When you need to add new tasks, use:\n` +
-    `- Add to front (default): npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2"\n` +
-    `- Add to end: npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2" --trailing`
+    `npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2"`
   );
 }
 

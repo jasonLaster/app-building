@@ -6,7 +6,7 @@ Skills are divided into two categories:
 
 These skills are triggered when a user sends a message (e.g. a bug report, a request to
 build or maintain an app, or a question about logs). They add tasks to the queue using
-`add-task --trailing`.
+`add-task`.
 
 - **addBugReport.md**: Record a user-reported bug in `docs/bugReports.md`.
 - **buildInitialApp.md**: Build a new app from an AppSpec. Adds build stage tasks to the queue.

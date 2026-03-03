@@ -19,7 +19,7 @@ design doc is written, the agent implements the script for the app.
 
 4. **Add the implementation task**: Add a task to the queue:
    ```
-   npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/writeScript.md" --app "<AppName>" --subtask "Implement <script-name> script" --trailing
+   npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/writeScript.md" --app "<AppName>" --subtask "Implement <script-name> script"
    ```
 
 5. The worker will pick up and process the task.

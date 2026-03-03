@@ -19,16 +19,17 @@ You will build the app in the following stages, with task skill files in `skills
 
 7. deployment.md: Deploy the app to production.
 
-Add tasks to the queue for each stage:
+Add tasks to the queue for each stage in **reverse order** (last stage first), since
+`add-task` always pushes to the front:
 
 ```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testSpec.md" --app "<AppName>" --subtask "Unpack: Write test specification" --trailing
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeShared.md" --app "<AppName>" --subtask "Unpack: Write app shared code" --trailing
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app "<AppName>" --subtask "Unpack: Write the app" --trailing
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/writeScript.md" --app "<AppName>" --subtask "Unpack: Implement package scripts" --trailing
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --app "<AppName>" --subtask "Unpack: Write Playwright tests" --trailing
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testing.md" --app "<AppName>" --subtask "Unpack: Get all tests passing" --trailing
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/deployment.md" --app "<AppName>" --subtask "Unpack: Deploy to production" --trailing
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/deployment.md" --app "<AppName>" --subtask "Unpack: Deploy to production"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testing.md" --app "<AppName>" --subtask "Unpack: Get all tests passing"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --app "<AppName>" --subtask "Unpack: Write Playwright tests"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/writeScript.md" --app "<AppName>" --subtask "Unpack: Implement package scripts"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app "<AppName>" --subtask "Unpack: Write the app"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeShared.md" --app "<AppName>" --subtask "Unpack: Write app shared code"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testSpec.md" --app "<AppName>" --subtask "Unpack: Write test specification"
 ```
 
-The worker will pick up and process each task in order.
+The worker will pick up and process each task in order (testSpec → writeShared → writeApp → writeScript → writeTests → testing → deployment).

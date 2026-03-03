@@ -65,12 +65,27 @@ async function showHttpStatus(entry: RegistryEntry, httpOpts: HttpOptions = {}):
 }
 
 async function showRecentLogs(baseUrl: string, httpOpts: HttpOptions = {}, count?: number): Promise<void> {
-  const n = count ?? 20;
+  const maxLines = count ?? 20;
   const data = await httpGet(`${baseUrl}/logs?offset=0`, httpOpts);
-  const lines: string[] = data.items;
-  const recent = n === Infinity ? lines : lines.slice(-n);
+  const rawLines: string[] = data.items;
+
+  // Format all entries into display lines, then take the last N display lines.
+  const displayLines: string[] = [];
+  for (const rawLine of rawLines) {
+    const line = stripTimestamp(rawLine);
+    const formatted = formatLogLine(line);
+    if (formatted) {
+      for (const dl of formatted.split("\n")) {
+        displayLines.push(dl);
+      }
+    }
+  }
+
+  const recent = maxLines === Infinity ? displayLines : displayLines.slice(-maxLines);
   console.log(`\n${BOLD}${CYAN}--- Recent output ---${RESET}`);
-  displayFormattedLines(recent);
+  for (const line of recent) {
+    console.log(line);
+  }
 }
 
 async function tailHttpLogs(baseUrl: string, httpOpts: HttpOptions = {}, contextCount?: number): Promise<void> {
