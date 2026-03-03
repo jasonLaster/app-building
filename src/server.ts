@@ -67,6 +67,17 @@ const eventBuffer = new OffsetBuffer<string>();
 const logBuffer = new OffsetBuffer<string>();
 
 let nextMessageId = 1;
+
+function queueMessage(prompt: string): string {
+  const id = String(nextMessageId++);
+  messages.set(id, { id, prompt, status: "queued" });
+  messageQueue.push(id);
+  return id;
+}
+
+if (INITIAL_PROMPT) {
+  queueMessage(INITIAL_PROMPT);
+}
 let totalCost = 0;
 let iteration = 0;
 let tasksProcessed = 0;
@@ -366,10 +377,7 @@ const server = createServer(async (req, res) => {
         json(res, 400, { error: "prompt is required" });
         return;
       }
-      const id = String(nextMessageId++);
-      const entry: MessageEntry = { id, prompt, status: "queued" };
-      messages.set(id, entry);
-      messageQueue.push(id);
+      const id = queueMessage(prompt);
       postWebhook("message.queued", { messageId: id, prompt });
       wake();
       json(res, 200, { id });
@@ -527,17 +535,6 @@ async function main(): Promise<void> {
     log(`HTTP server listening on port ${PORT}`);
     state = "idle";
     postWebhook("container.started", { pushBranch: PUSH_BRANCH, revision: getRevision(REPO_DIR) });
-
-    // Queue initial prompt if provided via env var (used in detached mode)
-    if (INITIAL_PROMPT) {
-      const id = String(nextMessageId++);
-      const entry: MessageEntry = { id, prompt: INITIAL_PROMPT, status: "queued" };
-      messages.set(id, entry);
-      messageQueue.push(id);
-      postWebhook("message.queued", { messageId: id, prompt: INITIAL_PROMPT });
-      wake();
-    }
-
     postWebhook("container.idle", { pendingTasks: getPendingTaskCount(), queueLength: messageQueue.length });
   });
 

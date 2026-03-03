@@ -7,6 +7,10 @@ import type { ContainerRegistry } from "./container-registry";
 
 const IMAGE_NAME = "app-building";
 
+function debugLog(...args: unknown[]): void {
+  if (process.env.DEBUG) console.log("[container]", ...args);
+}
+
 export interface AgentState {
   type: "local" | "remote";
   containerName: string;
@@ -128,6 +132,17 @@ export async function startContainer(
   config: ContainerConfig,
   repo: RepoOptions,
 ): Promise<AgentState> {
+  debugLog("startContainer config:", {
+    projectRoot: config.projectRoot,
+    flyApp: config.flyApp,
+    imageRef: config.imageRef,
+    webhookUrl: config.webhookUrl,
+    detached: config.detached,
+    initialPrompt: config.initialPrompt ? `${config.initialPrompt.slice(0, 100)}...` : undefined,
+    envVarKeys: Object.keys(config.envVars),
+  });
+  debugLog("startContainer repo:", repo);
+
   buildImage(config);
 
   const uniqueId = Math.random().toString(36).slice(2, 8);
@@ -220,6 +235,17 @@ export async function startRemoteContainer(
   config: ContainerConfig,
   repo: RepoOptions,
 ): Promise<AgentState> {
+  debugLog("startRemoteContainer config:", {
+    projectRoot: config.projectRoot,
+    flyApp: config.flyApp,
+    imageRef: config.imageRef,
+    webhookUrl: config.webhookUrl,
+    detached: config.detached,
+    initialPrompt: config.initialPrompt ? `${config.initialPrompt.slice(0, 100)}...` : undefined,
+    envVarKeys: Object.keys(config.envVars),
+  });
+  debugLog("startRemoteContainer repo:", repo);
+
   if (!config.flyToken) throw new Error("flyToken is required for remote containers");
   if (!config.flyApp) throw new Error("flyApp is required for remote containers");
 
