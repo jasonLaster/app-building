@@ -13,7 +13,7 @@ Synthesize per-log analysis files into a final report.
 2. Read the report file (e.g. `skills/review/reportTestFailures.md`) to get the
    synthesis instructions.
 
-3. List and read all analysis files from `reports/<report-name>-analysis/`.
+3. List and read all analysis files from `report-data/<report-name>-analysis/`.
 
 4. Following the report file's "Report Synthesis" section, compile the analysis files
    into a single report.

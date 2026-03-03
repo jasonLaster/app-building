@@ -8,7 +8,8 @@ Key directories:
 * `apps`: Has one subdirectory for each app that has been built or has been specified and still needs to be built.
 * `skills/messages`: Skills for responding to messages from the user (e.g. bug reports, log analysis).
 * `skills/tasks`: Skills for performing tasks. See `skills/AGENTS.md` for details.
-* `reports`: Generated reports from log analysis (see `skills/review/`).
+* `reports`: Final generated reports from log analysis (see `skills/review/`).
+* `report-data`: Intermediate analysis data used during report generation.
 * `tasks`: The task queue (`tasks-<containerName>.json`) managed by scripts in `scripts/`.
 * `logs`: Log files from work that has been performed. `worker-current.log` is the log for
   the work currently being done.

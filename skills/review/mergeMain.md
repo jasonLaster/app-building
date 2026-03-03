@@ -35,13 +35,13 @@ tsconfig.json
 README.md
 ```
 
-Exclude these paths:
+Delete these paths:
 
 ```
 apps/
 logs/
 docs/
-reports/*-analysis/
+report-data/
 *.txt (at root level)
 ```
 
@@ -75,10 +75,10 @@ Files with status `D` should be `git rm`'d.
 ### 5. Verify no excluded content leaked
 
 ```bash
-git diff --cached --name-only | grep -E '^(apps/|logs/|docs/|reports/.*-analysis/)' && echo "ERROR: excluded content leaked" || echo "Clean"
+git diff --cached --name-only | grep -E '^(apps/|logs/|docs/|report-data/)' && echo "ERROR: excluded content leaked" || echo "Clean"
 ```
 
-If any excluded paths appear, unstage them with `git reset HEAD -- apps/ logs/ docs/`.
+If any excluded paths appear, unstage them with `git reset HEAD -- apps/ logs/ docs/ report-data/`.
 
 ### 6. Commit
 
@@ -104,12 +104,12 @@ branch's version.
 ### 8. Final state
 
 The `<report-name>-merge` branch is ready for PR. It contains skill/script
-updates and the report file, but no apps, logs, analysis files, or docs.
+updates and the report file, but no apps, logs, report data, or docs.
 
 ## Notes
 
 - If `package-lock.json` has conflicts, regenerate it: delete it, run `npm install`,
   and commit the result.
 - The report file (`reports/<report-name>.md`) IS included — it documents what
-  changed and why. The analysis directory (`reports/<report-name>-analysis/`) is NOT
+  changed and why. The analysis directory (`report-data/<report-name>-analysis/`) is NOT
   included — it's working data.

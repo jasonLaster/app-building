@@ -20,7 +20,7 @@ for additional instructions. You will continue performing additional rounds of m
 Add tasks to the queue for each stage using `add-task --trailing`. For example:
 
 ```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/mergeFromMain.md" --app "<AppName>" --subtask "MergeFromMain: Merge latest main into branch" --trailing
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/mergeFromMain.md" --app "<AppName>" --subtask "MergeFromMain: Merge latest main into branch" --trailing
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/fixBugReport.md" --app "<AppName>" --subtask "Unpack: Fix open bug reports" --trailing
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/reviewBugReport.md" --app "<AppName>" --subtask "Unpack: Review fixed bug reports" --trailing
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" --subtask "Unpack: Check directive compliance" --trailing

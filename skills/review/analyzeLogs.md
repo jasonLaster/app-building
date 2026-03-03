@@ -21,7 +21,7 @@ Subtask format: `Unpack: <report-name> <report-file>`
 
 1. List all log files in `/repo/logs/`.
 
-2. Create the analysis directory: `reports/<report-name>-analysis/`
+2. Create the analysis directory: `report-data/<report-name>-analysis/`
 
 3. Break the log list into groups of ~10 logs each.
 
@@ -47,7 +47,7 @@ Subtask format: `AnalyzeGroup: <report-name> <report-file> <log1> <log2> ...`
 3. For each log file in the list:
    a. Run `npm run read-log <log-path>` from the repo root.
    b. Read the full output to understand what happened in the log.
-   c. Write an analysis file to `reports/<report-name>-analysis/<log-filename>.md`
+   c. Write an analysis file to `report-data/<report-name>-analysis/<log-filename>.md`
       following the report file's per-log analysis template.
    d. Use the log's base filename (without directory path) as the analysis filename.
       If multiple logs share a filename, prefix with the parent directory name.

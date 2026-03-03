@@ -330,7 +330,7 @@ export async function processTasks(
       continue;
     }
 
-    // Restore push branch in case the task switched branches (e.g. mergeSkills)
+    // Restore push branch in case the task switched branches (e.g. mergeMain)
     if (pushBranch) {
       try {
         ensureBranch(pushBranch, log);

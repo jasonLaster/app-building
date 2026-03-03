@@ -30,6 +30,9 @@ If the user's request doesn't clearly match a report type, ask them to clarify.
 4. Queue the pipeline tasks with `--trailing`:
 
 ```bash
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/mergeFromMain.md" \
+  --subtask "MergeFromMain: Merge latest main into branch" --trailing
+
 npx tsx /repo/scripts/add-task.ts --skill "skills/review/analyzeLogs.md" \
   --subtask "Unpack: <report-name> <report-file>" --trailing
 
@@ -39,7 +42,7 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/review/synthesizeReport.md" \
 npx tsx /repo/scripts/add-task.ts --skill "skills/review/updateSkills.md" \
   --subtask "UpdateSkills: <report-name>" --trailing
 
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeSkills.md" \
+npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeMain.md" \
   --subtask "MergeSkills: <report-name>" --trailing
 ```
 

@@ -60,6 +60,6 @@ Used when generating reports from worker logs (see `messages/generateReport.md` 
 - **analyzeLogs.md**: Analyze log files and produce per-log analysis files. Has Unpack (list logs, queue groups) and AnalyzeGroup (process ~10 logs) subtask types.
 - **synthesizeReport.md**: Read all analysis files and compile a final report.
 - **updateSkills.md**: Apply report recommendations to update skill files.
-- **mergeSkills.md**: Prepare a clean branch with skill changes and the report for PR to main.
+- **mergeMain.md**: Prepare a clean branch with skill changes and the report for PR to main.
 - **reportTestFailures.md**: Report definition for test failure analysis — per-log template and synthesis instructions.
 - **reportShellCommands.md**: Report definition for shell command usage — per-log template and synthesis instructions.
