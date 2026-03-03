@@ -33,11 +33,12 @@ const config: ContainerConfig = {
   flyApp: envVars.FLY_APP_NAME,
 };
 
-// Start a remote container
+// Start a remote container (detached — will exit after processing all work)
+config.detached = true;
 const repo: RepoOptions = { repoUrl: "https://github.com/...", cloneBranch: "main", pushBranch: "main" };
 const state = await startRemoteContainer(config, repo);
 
-// Send a prompt and wait for completion
+// Send a prompt — the container will process it and exit when done
 const httpOpts = httpOptsFor(state);
 const { id } = await httpPost(`${state.baseUrl}/message`, { prompt: "Build the app" }, httpOpts);
 
@@ -57,7 +58,7 @@ await stopRemoteContainer(config, state);
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars`, `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`. See [Webhooks](#webhooks) below. |
+| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars`, `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`detached`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
 | `FileContainerRegistry` | Built-in file-backed implementation of `ContainerRegistry`, backed by a `.jsonl` file. |
@@ -123,9 +124,41 @@ await stopRemoteContainer(config, state);
 |---|---|
 | `getImageRef()` | Returns `CONTAINER_IMAGE_REF` env var, or `ghcr.io/replayio/app-building:latest` by default. Used by `startRemoteContainer`. |
 
+## Container HTTP API
+
+Each container runs an HTTP server that accepts the following requests:
+
+| Method | Path | Description |
+|---|---|---|
+| `POST /message` | `{ prompt: string }` | Queue a message for processing. Returns `{ id }`. |
+| `GET /message/:id` | | Poll message status. Returns `{ id, status, result, error }`. |
+| `POST /detach` | | Signal the container to exit once all queued messages and tasks are done. |
+| `POST /stop` | | Force-stop the container immediately. Interrupts any running work, commits remaining changes, then exits. |
+| `POST /interrupt` | | Kill the currently running Claude process without stopping the container. |
+| `GET /status` | | Container state, queue depth, iteration count, cost, revision, etc. |
+| `GET /events?offset=N` | | Stream of Claude events (JSON lines) since offset. |
+| `GET /logs?offset=N` | | Stream of log lines since offset. |
+
+### Container lifecycle
+
+A container stays running and accepts messages until it receives a **detach** or **stop** signal:
+
+- **Detached at startup** (`config.detached = true`): Set `detached` on `ContainerConfig` to start
+  the container in detached mode. The container processes its initial message and any queued tasks,
+  then exits cleanly. This is the preferred way to run fire-and-forget jobs — no race between
+  container startup and a subsequent `POST /detach`.
+- **Detach** (`POST /detach`): Signal a running container to exit once all in-flight and queued
+  work is done. In the CLI, interactive mode (`npm run agent -- -i`) sends `/detach` automatically
+  when the user disconnects (Ctrl+C/D).
+- **Stop** (`POST /stop`): The container exits immediately, interrupting any running Claude
+  process. It commits any remaining work before shutting down. This is the forced shutdown path.
+
+Without either signal, the container waits indefinitely for new messages — this is intentional
+so that interactive users can send follow-up messages at any time.
+
 ## Webhooks
 
-Set `webhookUrl` on `ContainerConfig` to receive real-time notifications of container activity. The container POSTs fire-and-forget JSON to that URL on key events (no retries, failures are silently ignored).
+Set `webhookUrl` on `ContainerConfig` to receive real-time notifications of container activity. The container POSTs JSON to that URL on key events (no retries; failures are logged to stderr). If `WEBHOOK_SECRET` is set in the environment, the container sends it as a `Bearer` token in the `Authorization` header.
 
 ### Payload format
 

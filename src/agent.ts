@@ -252,8 +252,6 @@ async function runDetached(config: ContainerConfig, opts: {
     console.log(`Message queued: ${id}`);
   }
 
-  // Detach — container will process message + tasks, then exit
-  await httpPost(`${baseUrl}/detach`, undefined, httpOpts);
   console.log("Detached. Container will exit when all work is complete.");
   console.log(`Monitor: npm run status`);
   console.log(`Stop: npm run stop`);
@@ -295,6 +293,7 @@ async function main(): Promise<void> {
   if (opts.interactive) {
     await runInteractive(config, { repo, branch, pushBranch, remote: opts.remote });
   } else {
+    config.detached = true;
     await runDetached(config, { repo, branch, pushBranch, prompt: opts.prompt, remote: opts.remote });
   }
 }

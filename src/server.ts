@@ -75,7 +75,7 @@ let lastActivityAt = new Date().toISOString();
 
 type ContainerState = "starting" | "idle" | "processing" | "stopping" | "stopped";
 let state: ContainerState = "starting";
-let detachRequested = false;
+let detachRequested = process.env.DETACHED === "1";
 let stopRequested = false;
 // Wake signal for processing loop
 let wakeResolve: (() => void) | null = null;

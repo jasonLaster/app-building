@@ -24,6 +24,8 @@ export interface ContainerConfig {
   flyApp?: string;
   imageRef?: string;
   webhookUrl?: string;
+  /** Start the container in detached mode. It will exit after processing all messages and tasks. */
+  detached?: boolean;
 }
 
 export interface RepoOptions {
@@ -135,6 +137,7 @@ export async function startContainer(
     CONTAINER_NAME: containerName,
   };
   if (config.webhookUrl) extra.WEBHOOK_URL = config.webhookUrl;
+  if (config.detached) extra.DETACHED = "1";
   const containerEnv = buildContainerEnv(repo, config.envVars, extra);
 
   // Build docker run args
@@ -228,6 +231,7 @@ export async function startRemoteContainer(
     CONTAINER_NAME: machineName,
   };
   if (config.webhookUrl) remoteExtra.WEBHOOK_URL = config.webhookUrl;
+  if (config.detached) remoteExtra.DETACHED = "1";
   const containerEnv = buildContainerEnv(repo, config.envVars, remoteExtra);
 
   // Log existing machines (but don't destroy — multiple containers may run concurrently)
