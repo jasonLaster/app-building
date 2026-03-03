@@ -153,12 +153,10 @@ async function runInteractive(config: ContainerConfig, opts: {
   console.log(`Server: ${baseUrl}`);
 
   process.on("SIGINT", () => {
-    if (state.type === "remote") {
-      stopRemoteContainer(config, state).finally(() => process.exit(0));
-    } else {
-      stopContainer(config, containerName);
-      process.exit(0);
-    }
+    httpPost(`${baseUrl}/detach`, undefined, httpOpts)
+      .then(() => console.log("Detached from container. It will exit when work completes."))
+      .catch(() => console.log("Failed to detach, container may still be running."))
+      .finally(() => process.exit(0));
   });
 
   let eventOffset = 0;
