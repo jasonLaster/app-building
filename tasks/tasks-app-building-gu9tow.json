@@ -25,14 +25,6 @@
       "app": "todo-app"
     },
     {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
-        "Unpack: Write the app"
-      ],
-      "timestamp": "2026-03-04T19:19:58.634Z",
-      "app": "todo-app"
-    },
-    {
       "skill": "skills/tasks/writeScript.md",
       "subtasks": [
         "Unpack: Implement package scripts"
