@@ -115,7 +115,8 @@ export async function createMachine(
   name: string,
 ): Promise<CreateMachineResult> {
   // Create a volume for /repo storage
-  const volumeId = await createVolume(app, token, `repo-${name}`, 50);
+  const volumeName = `repo_${name.replace(/-/g, "_")}`.slice(0, 30);
+  const volumeId = await createVolume(app, token, volumeName, 50);
 
   try {
     const res = await flyFetch(`/apps/${app}/machines`, token, {
