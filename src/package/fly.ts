@@ -166,6 +166,7 @@ export async function waitForMachine(
   timeoutMs: number = 180000,
 ): Promise<void> {
   const start = Date.now();
+  let lastLogTime = 0;
   while (Date.now() - start < timeoutMs) {
     try {
       await flyFetch(
@@ -174,8 +175,15 @@ export async function waitForMachine(
       );
       return;
     } catch (e) {
-      const elapsed = Math.round((Date.now() - start) / 1000);
-      console.log(`Still waiting for machine to start (${elapsed}s elapsed): ${e instanceof Error ? e.message : e}`);
+      const now = Date.now();
+      const elapsed = Math.round((now - start) / 1000);
+      // Only log at most once every 10 seconds
+      if (now - lastLogTime >= 10000) {
+        console.log(`Still waiting for machine to start (${elapsed}s elapsed): ${e instanceof Error ? e.message : e}`);
+        lastLogTime = now;
+      }
+      // Wait before retrying
+      await new Promise((r) => setTimeout(r, 5000));
     }
   }
   throw new Error(`Machine ${machineId} did not reach started state within ${timeoutMs / 1000}s`);

@@ -1,4 +1,5 @@
 import { execFileSync } from "child_process";
+import { readdirSync, rmSync } from "fs";
 import type { Logger } from "./log";
 
 const REPO_DIR = "/repo";
@@ -87,6 +88,14 @@ export function ensureBranch(branch: string, log: Logger, dir: string = REPO_DIR
 }
 
 export function cloneRepo(url: string, branch: string, dir: string = REPO_DIR): void {
+  // Volume mounts may contain lost+found; clear the directory before cloning
+  try {
+    for (const entry of readdirSync(dir)) {
+      rmSync(`${dir}/${entry}`, { recursive: true, force: true });
+    }
+  } catch {
+    // Directory may not exist yet — that's fine
+  }
   const args = ["clone", "--branch", branch, "--single-branch", url, dir];
   execFileSync("git", args, { encoding: "utf-8", timeout: 120000, stdio: "pipe" });
 }
