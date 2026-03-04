@@ -33,8 +33,8 @@ If the user's request doesn't clearly match a report type, ask them to clarify.
 ```bash
 // When multiple reports are being generated this one must be done only for the first report
 // whose tasks are enqueued, so that only a single merge happens at the end.
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeMain.md" \
-  --subtask "MergeSkills: <report-name>"
+npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeToMain.md" \
+  --subtask "MergeToMain: <report-name>"
 
 npx tsx /repo/scripts/add-task.ts --skill "skills/review/updateSkills.md" \
   --subtask "UpdateSkills: <report-name>"

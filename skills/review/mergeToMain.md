@@ -1,20 +1,26 @@
 # Skill
 
-Prepare a clean branch with skill changes and the report for PR to main.
+Merge skill changes and the report into main via a squash-merge PR.
 
 ## Subtask Format
 
-`MergeSkills: <report-name>`
+`MergeToMain: <report-name>`
 
 ## Procedure
 
-### 1. Identify the merge base
+### 1. Save the current branch
+
+```bash
+SOURCE_BRANCH=$(git branch --show-current)
+```
+
+### 2. Identify the merge base
 
 ```bash
 MERGE_BASE=$(git merge-base origin/main HEAD)
 ```
 
-### 2. Determine which paths to include
+### 3. Determine which paths to include
 
 Include these paths:
 
@@ -45,18 +51,17 @@ report-data/
 *.txt (at root level)
 ```
 
-### 3. Create a clean merge branch from main
+### 4. Create a clean merge branch from main
 
 ```bash
 git checkout -b <report-name>-merge origin/main
 ```
 
-### 4. Apply changes from the source branch
+### 5. Apply changes from the source branch
 
 For each included path, check out the version from the source branch:
 
 ```bash
-SOURCE_BRANCH=<the branch you were on before step 3>
 git checkout $SOURCE_BRANCH -- skills/ scripts/ AGENTS.md CLAUDE.md \
   Dockerfile .dockerignore .gitignore .rgignore .env.example \
   package.json package-lock.json tsconfig.json README.md
@@ -72,7 +77,7 @@ git diff --name-status $MERGE_BASE $SOURCE_BRANCH -- skills/ scripts/
 
 Files with status `D` should be `git rm`'d.
 
-### 5. Delete excluded paths
+### 6. Delete excluded paths
 
 ```bash
 git rm -rf apps/ logs/ docs/ report-data/ 2>/dev/null || true
@@ -81,37 +86,54 @@ git ls-files '*.txt' | grep -v '/' | xargs git rm -f 2>/dev/null || true
 
 Skip any that don't exist. If none exist, move on.
 
-### 6. Verify no excluded content remains
+### 7. Verify no excluded content remains
 
 ```bash
 git ls-files | grep -E '^(apps/|logs/|docs/|report-data/)' && echo "ERROR: excluded content remains" || echo "Clean"
 ```
 
-### 7. Commit
+### 8. Commit and push
 
 ```bash
+git add -A
 git commit -m "Report: <report-name> — skill updates and report"
+git push -u origin <report-name>-merge
 ```
 
-### 8. Test the merge
-
-Verify the branch merges cleanly into main:
+### 9. Create PR and squash-merge
 
 ```bash
-git checkout main
-git merge --no-commit --no-ff <report-name>-merge
-git diff --stat
-git merge --abort
-git checkout <report-name>-merge
+gh pr create --base main --title "Report: <report-name>" \
+  --body "Skill updates and report from $SOURCE_BRANCH"
+gh pr merge --squash --auto
 ```
 
-If there are conflicts, resolve them on the merge branch, favoring the source
-branch's version.
+Wait for the merge to complete:
 
-### 9. Final state
+```bash
+gh pr view --json state -q '.state'
+```
 
-The `<report-name>-merge` branch is ready for PR. It contains skill/script
-updates and the report file, but no apps, logs, report data, or docs.
+If the state is not `MERGED` after a reasonable wait, check for merge conflicts
+and resolve them.
+
+### 10. Return to the source branch
+
+```bash
+git checkout $SOURCE_BRANCH
+```
+
+Pull the merged main so future merges are clean:
+
+```bash
+git fetch origin main
+```
+
+### 11. Clean up the merge branch
+
+```bash
+git branch -d <report-name>-merge
+```
 
 ## Notes
 

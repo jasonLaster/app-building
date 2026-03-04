@@ -157,16 +157,12 @@ ReadSource on the handler confirms which values are sent.
 *Example*: CreateDealModal sent `'on_track'` as status but DB only accepted
 `'open'`/`'won'`/`'lost'`. 10 Replay tools used to trace.
 
-### Stale dev server with deleted Neon branch
-When `reuseExistingServer` in Playwright config reuses a dev server whose `DATABASE_URL`
-points to a deleted ephemeral Neon branch, all API calls fail with auth or connection errors.
+### Stale dev server with wrong database configuration
+When `reuseExistingServer` in Playwright config reuses a dev server from a previous run,
+all API calls may fail with connection or database errors if the server's state is stale.
 
 **Diagnosis with Replay**: NetworkRequest shows no API calls or all returning errors.
-LocalStorage + GetStack traces the auth token lifecycle to find where it breaks. The
-recording shows the frontend working but all data requests failing.
 
-**Fix**: Kill the stale dev server and let Playwright start a fresh one with the correct
-`DATABASE_URL`. Set `reuseExistingServer: false` or add cleanup logic.
-
-*Example*: 8 Replay tools traced from "no API calls" → "auth token removed" → "JWT ok
-but DB query fails on deleted branch".
+**Fix**: Kill the stale dev server and let Playwright start a fresh one. Set
+`reuseExistingServer: false` or add cleanup logic. The test script kills stale processes
+before each run.
