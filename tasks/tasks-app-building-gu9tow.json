@@ -1,11 +1,27 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeShared.md",
+      "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "Unpack: Write app shared code"
+        "WriteComponentHeader: Write the Header component",
+        "WriteComponentAddTodo: Write the AddTodo component",
+        "WriteComponentTodoItem: Write the TodoItem component",
+        "WriteComponentTodoList: Write the TodoList component",
+        "WriteComponentFilterBar: Write the FilterBar component",
+        "WriteComponentSortDropdown: Write the SortDropdown component",
+        "WriteComponentEditTodoModal: Write the EditTodoModal component",
+        "WritePageMainTodoList: Write the page itself"
       ],
-      "timestamp": "2026-03-04T19:20:01.948Z",
+      "timestamp": "2026-03-04T20:06:42.419Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "SetupApp: Setup the app",
+        "DesignDatabase: Design the database"
+      ],
+      "timestamp": "2026-03-04T20:06:38.715Z",
       "app": "todo-app"
     },
     {
