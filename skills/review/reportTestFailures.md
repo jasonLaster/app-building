@@ -20,8 +20,9 @@ TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 i
 For each test failure:
 
 ### Failure: <test name>
+INITIAL_CHANGESET: <git SHA from "ANALYZING TEST FAILURE" line in the log>. If no log line was present look at the git history and iteration number in the log to find the last changeset before the test failure occurred.
+FAILING_TEST: <test name from "ANALYZING TEST FAILURE" line in log, or "none">
 FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, backend-bug, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other>
-PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, explain why — e.g. "diagnosed from error output", "no recording available", "upload failed">
 RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failure, or no recording was created)
@@ -36,8 +37,8 @@ DEBUGGING_STRATEGY: <how the agent approached debugging — e.g. "PlaywrightStep
 TOOLS_USED: <comma-separated list of mcp__replay__* tools called>
 
 #### Resolution
-CHANGESET_REVISION: <git SHA from "CHANGESET REVISION:" line in log, or "none". Note: this captures the commit that fixed the issue. If the fix was applied during the same test-fixing session and no separate "CHANGESET REVISION:" line was emitted, use "none".>
-FAILING_TEST: <test name from "FAILING TEST:" line in log, or "none">
+FINAL_CHANGESET: <git SHA from "TEST FAILURE FIXED" line in log>. If the log line is not present look at the git history and iteration number in the log to find the first changeset after the fix was applied.
+ASSESSMENT: Compute the diff between the initial and final changeset and use this in combination with the Replay analysis to describe why the patch fixed the test failure and the characteristics which a correct fix for the failure must possess.
 ```
 
 If a log has no test failures, just write the Summary section with TEST_FAILURES: 0.
@@ -50,7 +51,6 @@ single cluster entry instead of repeating the full template for each:
 ```
 ### Failure Cluster: <ROOT_CAUSE_CLUSTER> (<count> tests)
 FAILURE_CATEGORY: <category>
-PRE_EXISTING: yes/no
 REPLAY_USED: yes/no
 REPLAY_NOT_USED_REASON: <reason>
 RECORDING_AVAILABLE: yes/no
@@ -80,6 +80,7 @@ NOTES: <brief description of the infrastructure issue>
 Compile all analysis files into a single report with these sections:
 
 ### 1. Summary Statistics
+- Branch whose logs were analyzed
 - Total logs analyzed
 - Logs with test failures / logs without
 - Total distinct test failures across all logs
@@ -92,11 +93,21 @@ Compile all analysis files into a single report with these sections:
 
 ### 2. Failure Table
 A markdown table with columns:
-| Log | Test | Category | Pre-existing | Replay Used | Replay Not Used Reason | Recording Available | Strategy | Tools | Success | Changeset |
+| Log | Test | Category | Replay Used | Replay Not Used Reason | Recording Available | Strategy | Tools | Success |
 
 One row per test failure across all logs. The "Replay Not Used Reason" column should contain
 a brief reason when Replay was not used (e.g., "diagnosed from error output", "no recording
 available", "not attempted — discovery run"). Leave blank when Replay was used.
+
+### 3. Replay Fixes Table
+
+For each test failure where Replay was used and the test failure was successfully fixed,
+add an entry with the following details copied verbatim from the analysis file:
+
+INITIAL_CHANGESET
+FAILING_TEST
+FINAL_CHANGESET
+ASSESSMENT
 
 ### 3. Patterns
 - When was Replay most effective? (failure categories, tool sequences)

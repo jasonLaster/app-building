@@ -138,16 +138,15 @@ function buildExtraArgs(): string[] {
   args.push("--model", "claude-opus-4-6");
   args.push("--dangerously-skip-permissions");
 
-  // Build MCP config if replay key is available
+  // MCP servers
+  const mcpServers: Record<string, object> = {
+    playwright: { type: "http", url: "http://localhost:8931/sse" },
+  };
   const replayKey = process.env.RECORD_REPLAY_API_KEY;
   if (replayKey) {
-    const mcpConfig = JSON.stringify({
-      mcpServers: {
-        replay: { type: "http", url: "https://dispatch.replay.io/nut/mcp" },
-      },
-    });
-    args.push("--mcp-config", mcpConfig);
+    mcpServers.replay = { type: "http", url: "https://dispatch.replay.io/nut/mcp" };
   }
+  args.push("--mcp-config", JSON.stringify({ mcpServers }));
 
   return args;
 }

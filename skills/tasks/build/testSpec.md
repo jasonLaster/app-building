@@ -8,7 +8,9 @@ organized by topic section, and must also be followed.
 
 Unpack the initial test specification task into subtasks using `add-task`:
 
-First, add a task for planning pages:
+First, add a task (which will execute last) to review user journeys.
+
+Then, add a task for planning pages:
 ```
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testSpec.md" --app "<AppName>" \
   --subtask "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
@@ -35,6 +37,15 @@ The test spec must be written in docs/tests.md. This file is organized by page, 
 - Every interactive element (buttons etc) in the component must be tested. There must be a comment in the JSX next to every interactive element with the titles of the tests that exercise it.
 - The test must verify that the interactive element actually works and does what the user expects. For example, clicking a button must do something, and text added to forms must be reflected in the app state afterwards.
 - Adding extra necessary features beyond the app spec may be needed for a complete, functional app (e.g. create/delete buttons, navigation, form validation).
+
+## Reviewing User Journeys
+
+The `docs/userJourneys.md` file documents the key user personas and actions which those users will take while using the app.
+When you are reviewing user journeys go through each of these journeys and map out how they will work with the given test spec.
+
+Make sure the complete journey can be taken, and that it will be clear and intuitive to the user what steps they need to take
+to go through the complete journey. If test spec revisions are needed, update `docs/tests.md` and `AppRevisions.md` to reflect
+the needed changes.
 
 ## Directives
 
