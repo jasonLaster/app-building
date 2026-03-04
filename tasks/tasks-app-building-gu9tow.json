@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/filter-bar.spec.ts"
-      ],
-      "timestamp": "2026-03-04T20:43:15.484Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/header-add-todo.spec.ts"
       ],
       "timestamp": "2026-03-04T20:43:12.270Z",

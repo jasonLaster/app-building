@@ -60,20 +60,20 @@
   },
   "suites": [
     {
-      "title": "filter-bar.spec.ts",
-      "file": "filter-bar.spec.ts",
+      "title": "header-add-todo.spec.ts",
+      "file": "header-add-todo.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "FilterBar",
-          "file": "filter-bar.spec.ts",
-          "line": 3,
+          "title": "Header",
+          "file": "header-add-todo.spec.ts",
+          "line": 9,
           "column": 6,
           "specs": [
             {
-              "title": "Filter bar displays All, Active, and Completed buttons",
+              "title": "Header displays app title",
               "ok": true,
               "tags": [],
               "tests": [
@@ -88,12 +88,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 648,
+                      "duration": 548,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:20.684Z",
+                      "startTime": "2026-03-04T21:23:13.830Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -101,13 +101,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-4ea615189dc9dea90e12",
-              "file": "filter-bar.spec.ts",
-              "line": 4,
+              "id": "b54dfcc4a4b90df7fe20-3d57b92456da11d32af7",
+              "file": "header-add-todo.spec.ts",
+              "line": 10,
               "column": 3
             },
             {
-              "title": "\"All\" filter shows all todos",
+              "title": "Header shows count of incomplete todos when some are active",
               "ok": true,
               "tags": [],
               "tests": [
@@ -122,12 +122,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 581,
+                      "duration": 565,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:21.481Z",
+                      "startTime": "2026-03-04T21:23:14.419Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -135,13 +135,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-53f1128ba6d16d722517",
-              "file": "filter-bar.spec.ts",
-              "line": 20,
+              "id": "b54dfcc4a4b90df7fe20-622412b0fdad738da51e",
+              "file": "header-add-todo.spec.ts",
+              "line": 15,
               "column": 3
             },
             {
-              "title": "\"Active\" filter shows only incomplete todos",
+              "title": "Header shows zero count when all todos are completed",
               "ok": true,
               "tags": [],
               "tests": [
@@ -156,12 +156,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 595,
+                      "duration": 278,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:22.069Z",
+                      "startTime": "2026-03-04T21:23:14.990Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -169,13 +169,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-38ac193dc46c90403100",
-              "file": "filter-bar.spec.ts",
-              "line": 27,
+              "id": "b54dfcc4a4b90df7fe20-5cebce283513b5e82053",
+              "file": "header-add-todo.spec.ts",
+              "line": 21,
               "column": 3
             },
             {
-              "title": "\"Completed\" filter shows only completed todos",
+              "title": "Header shows correct count with singular item",
               "ok": true,
               "tags": [],
               "tests": [
@@ -190,12 +190,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 586,
+                      "duration": 620,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:22.670Z",
+                      "startTime": "2026-03-04T21:23:15.273Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -203,13 +203,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-4ac06977fa038d66f25e",
-              "file": "filter-bar.spec.ts",
-              "line": 42,
+              "id": "b54dfcc4a4b90df7fe20-44ca54b05abddf452ca5",
+              "file": "header-add-todo.spec.ts",
+              "line": 36,
               "column": 3
             },
             {
-              "title": "Selected filter button is visually highlighted",
+              "title": "Header count updates when a todo is toggled complete",
               "ok": true,
               "tags": [],
               "tests": [
@@ -224,12 +224,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 287,
+                      "duration": 1020,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:23.262Z",
+                      "startTime": "2026-03-04T21:23:15.900Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -237,13 +237,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-bd9e3894a1e3d39ab830",
-              "file": "filter-bar.spec.ts",
-              "line": 57,
+              "id": "b54dfcc4a4b90df7fe20-bdc9cc764d3fd3e8a1d8",
+              "file": "header-add-todo.spec.ts",
+              "line": 50,
               "column": 3
             },
             {
-              "title": "Switching from Active filter back to All shows all todos again",
+              "title": "Header count updates when a todo is toggled back to active",
               "ok": true,
               "tags": [],
               "tests": [
@@ -258,12 +258,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 603,
+                      "duration": 1173,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:23.554Z",
+                      "startTime": "2026-03-04T21:23:16.927Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -271,13 +271,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-28044bea4f9ca1476fa1",
-              "file": "filter-bar.spec.ts",
-              "line": 85,
+              "id": "b54dfcc4a4b90df7fe20-741270f0983903cd5353",
+              "file": "header-add-todo.spec.ts",
+              "line": 71,
               "column": 3
             },
             {
-              "title": "Clear Completed button removes all completed todos",
+              "title": "Header count updates when a new todo is added",
               "ok": true,
               "tags": [],
               "tests": [
@@ -292,12 +292,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 950,
+                      "duration": 1015,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:24.163Z",
+                      "startTime": "2026-03-04T21:23:18.108Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -305,13 +305,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-704898590257b9dd47b9",
-              "file": "filter-bar.spec.ts",
-              "line": 102,
+              "id": "b54dfcc4a4b90df7fe20-6344b9972da458bf5a88",
+              "file": "header-add-todo.spec.ts",
+              "line": 92,
               "column": 3
             },
             {
-              "title": "Clear Completed button is visible in the filter bar",
+              "title": "Header count updates when a todo is deleted",
               "ok": true,
               "tags": [],
               "tests": [
@@ -326,12 +326,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 568,
+                      "duration": 1088,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:25.120Z",
+                      "startTime": "2026-03-04T21:23:19.132Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -339,13 +339,55 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-fd82c41f22711f228760",
-              "file": "filter-bar.spec.ts",
-              "line": 122,
+              "id": "b54dfcc4a4b90df7fe20-5fda7196a2b8121f6a38",
+              "file": "header-add-todo.spec.ts",
+              "line": 113,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "AddTodo",
+          "file": "header-add-todo.spec.ts",
+          "line": 139,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add todo input displays placeholder text",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 201,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:23:20.230Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b54dfcc4a4b90df7fe20-689641c4512a53542712",
+              "file": "header-add-todo.spec.ts",
+              "line": 140,
               "column": 3
             },
             {
-              "title": "Filter persists when a todo is toggled",
+              "title": "Create a new todo by pressing Enter",
               "ok": true,
               "tags": [],
               "tests": [
@@ -360,12 +402,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 996,
+                      "duration": 1008,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:17:25.694Z",
+                      "startTime": "2026-03-04T21:23:20.437Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -373,43 +415,145 @@
                   "status": "expected"
                 }
               ],
-              "id": "600280bacad8569b7ac8-0a24bcbe1b7a9dc6cbe0",
-              "file": "filter-bar.spec.ts",
-              "line": 130,
-              "column": 3
-            },
-            {
-              "title": "Completing a todo while Completed filter is active shows it in the list",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1070,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:17:26.699Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "600280bacad8569b7ac8-17290e4f0cd206a47481",
-              "file": "filter-bar.spec.ts",
+              "id": "b54dfcc4a4b90df7fe20-fd49be8c67034e8d6645",
+              "file": "header-add-todo.spec.ts",
               "line": 147,
+              "column": 3
+            },
+            {
+              "title": "Pressing Enter with empty input does not create a todo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 652,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:23:21.451Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b54dfcc4a4b90df7fe20-c8e5a4fc25ab44ba4bc7",
+              "file": "header-add-todo.spec.ts",
+              "line": 180,
+              "column": 3
+            },
+            {
+              "title": "Pressing Enter with whitespace-only input does not create a todo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 623,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:23:22.109Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b54dfcc4a4b90df7fe20-8f376947e72e662e4d12",
+              "file": "header-add-todo.spec.ts",
+              "line": 204,
+              "column": 3
+            },
+            {
+              "title": "Input clears after successfully creating a todo",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 186,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:23:22.737Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b54dfcc4a4b90df7fe20-9c6e03857d3240fca4d2",
+              "file": "header-add-todo.spec.ts",
+              "line": 225,
+              "column": 3
+            },
+            {
+              "title": "New todo appears at the top of the list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 927,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:23:22.928Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b54dfcc4a4b90df7fe20-3889560f8476f41da992",
+              "file": "header-add-todo.spec.ts",
+              "line": 237,
               "column": 3
             }
           ]
@@ -419,9 +563,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-04T21:17:20.244Z",
-    "duration": 7560.652,
-    "expected": 10,
+    "startTime": "2026-03-04T21:23:13.384Z",
+    "duration": 10509.234,
+    "expected": 14,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

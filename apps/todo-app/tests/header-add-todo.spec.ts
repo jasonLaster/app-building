@@ -235,17 +235,10 @@ test.describe('AddTodo', () => {
   })
 
   test('New todo appears at the top of the list', async ({ page }) => {
-    const sql = getTestSql()
-    if (sql) {
-      await sql`TRUNCATE TABLE todos`
-      await sql`
-        INSERT INTO todos (title, completed, priority) VALUES
-        ('Old task 1', false, 'medium'),
-        ('Old task 2', false, 'low')
-      `
-    }
     await page.goto('/')
-    await expect(page.getByTestId('todo-item')).toHaveCount(2, { timeout: 10000 })
+    // Wait for todos to load
+    await expect(page.getByTestId('todo-item').first()).toBeVisible({ timeout: 10000 })
+    const initialCount = await page.getByTestId('todo-item').count()
 
     // Add a new todo
     const input = page.getByTestId('add-todo-input')
@@ -253,7 +246,7 @@ test.describe('AddTodo', () => {
     await input.press('Enter')
 
     // Wait for the new todo to appear
-    await expect(page.getByTestId('todo-item')).toHaveCount(3, { timeout: 10000 })
+    await expect(page.getByTestId('todo-item')).toHaveCount(initialCount + 1, { timeout: 10000 })
 
     // New task should be the first item in the list
     const firstTodoText = page.getByTestId('todo-item').first().getByTestId('todo-text')
