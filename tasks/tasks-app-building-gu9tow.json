@@ -3,23 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestFilterBarButtons: Write test for Filter bar displays All, Active, and Completed buttons",
-        "WriteTestAllFilter: Write test for All filter shows all todos",
-        "WriteTestActiveFilter: Write test for Active filter shows only incomplete todos",
-        "WriteTestCompletedFilter: Write test for Completed filter shows only completed todos",
-        "WriteTestSelectedFilterHighlight: Write test for Selected filter button is visually highlighted",
-        "WriteTestSwitchBackToAll: Write test for Switching from Active filter back to All shows all todos again",
-        "WriteTestClearCompleted: Write test for Clear Completed button removes all completed todos",
-        "WriteTestClearCompletedVisible: Write test for Clear Completed button is visible in the filter bar",
-        "WriteTestFilterPersistsToggle: Write test for Filter persists when a todo is toggled",
-        "WriteTestCompletingTodoCompletedFilter: Write test for Completing a todo while Completed filter is active shows it in the list"
-      ],
-      "timestamp": "2026-03-04T20:29:00.652Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestTodoItemDisplay: Write test for Todo item displays checkbox, text, priority badge, due date, and delete button",
         "WriteTestPriorityBadgeColors: Write test for Priority badge displays correct colors for each level",
         "WriteTestDueDateToday: Write test for Due date shows Today for todos due today",
