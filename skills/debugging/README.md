@@ -37,6 +37,19 @@ sessions with 100% success rate). When the UI renders but shows wrong data or ti
 waiting for content, `NetworkRequest` as a second step confirms whether the backend
 returned the expected data.
 
+## Cluster-Aware Debugging
+
+When 3+ failures share a spec file or show similar error patterns, check for a shared root
+cause before debugging individually. Common clusters:
+
+- Same API endpoint returning wrong data → single backend fix resolves all
+- Same date format mismatch across multiple components → single parsing fix
+- Same seed data assumption violated → single seed/test data fix
+
+**Approach**: Debug the first failure thoroughly, then check if the root cause explains the
+others. This saves significant time — in observed sessions, clusters of 6+ failures were
+resolved with a single fix.
+
 ## Pre-Debugging Triage
 
 Before using Replay tools or making any code changes, determine whether failures are

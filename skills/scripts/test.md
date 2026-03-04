@@ -18,7 +18,8 @@ tests during development and debugging.
 ## Behavior
 
 1. **Kill stale processes**: Kill any leftover `netlify` or `vite` dev server processes from
-   previous runs.
+   previous runs. Always suppress errors to avoid spurious failures when no process is running:
+   `pkill -f "netlify dev" 2>/dev/null || true; pkill -f "vite" 2>/dev/null || true`
 
 2. **Clean up stale Neon branches**: List existing Neon branches and delete any that match the
    test branch naming convention (e.g., `test-run-*`) from interrupted previous runs.

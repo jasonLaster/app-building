@@ -59,6 +59,36 @@ wrong action type.
 second auth call sent `action: "signup"` instead of `action: "signin"` — a state reset bug
 where `isSignUp` wasn't cleared on mode switch.
 
+## NetworkRequest-First Pattern
+
+For any test failure involving data assertions (wrong values, missing records, unexpected counts),
+**check the API response first** via `NetworkRequest` before any other debugging. This is the
+single most productive debugging step — it immediately narrows root cause to backend vs frontend:
+
+1. **`PlaywrightSteps`** — Identify the failing step.
+2. **`NetworkRequest`** — Inspect the API response for that step's data source.
+   - If the API returned wrong data → backend bug (fix the handler or query).
+   - If the API returned correct data → frontend bug (fix rendering or state management).
+
+This two-step sequence (`PlaywrightSteps → NetworkRequest`) resolved 10+ failures in observed
+debugging sessions.
+
+## Date Format Debugging
+
+ISO date string mismatches (timestamps vs `YYYY-MM-DD`) are a recurring backend-bug pattern.
+When date-related assertions fail, check this sequence:
+
+1. **`NetworkRequest`** — Inspect the API response. Does it return ISO timestamps
+   (e.g., `2026-01-15T00:00:00.000Z`) or date strings (`2026-01-15`)?
+2. **Check component parsing** — Does the frontend correctly parse the format returned by
+   the API? Common bug: component expects `YYYY-MM-DD` but API returns full ISO timestamp.
+3. **Check date inputs** — Forms with `<input type="date">` require `YYYY-MM-DD` format.
+   If the API returns timestamps, the component must strip the time portion before setting
+   the input value.
+
+*Example*: 6 failures in a single log shared the same ISO-date-parsing root cause — the API
+returned timestamps but components expected date strings.
+
 ## Common Root Causes (from observed failures)
 
 ### Auth request payload mismatch

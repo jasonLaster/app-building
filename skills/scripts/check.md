@@ -53,6 +53,24 @@ During iterative development when you only need to verify types (not lint), you 
 step and is useful when making rapid type-level changes. Always run the full `npm run check`
 before committing.
 
+## Interpreting Failures
+
+When `npm run check` fails, read `logs/check.log` to determine which step failed and why:
+
+- **Typecheck failures** (`tsc`): Look for `error TS` lines. Common categories:
+  - `TS2307` (Cannot find module): Missing dependency — run `npm install`.
+  - `TS2339` (Property does not exist): Typo in property name or missing type definition.
+  - `TS2345`/`TS2322` (Type mismatch): Wrong type passed to a function or assigned to a variable.
+  - Multiple errors in the same file: Fix the first error — later errors are often cascading.
+- **Lint failures** (`eslint`): Look for rule names in the output (e.g., `no-unused-vars`).
+  Many lint errors are auto-fixed by `--fix`. If errors persist after the run, they require
+  manual fixes.
+- **Both fail**: Fix typecheck errors first. Lint errors often disappear once types are correct.
+
+During iterative development, typecheck/lint failures are expected. They are part of the
+normal build-fix-check cycle. Focus on fixing the errors rather than treating each failure
+as a problem with the check script itself.
+
 ## Common Issues
 
 - **`@neondatabase/serverless` resolution errors**: If `tsc` reports module resolution failures

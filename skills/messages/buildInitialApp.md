@@ -5,21 +5,19 @@ If `AppRevisions.md` exists, it describes new functionality and spec changes org
 `AppSpec.md` must NEVER be modified. All spec changes go in `AppRevisions.md`.
 You will build the app in the following stages, with task skill files in `skills/tasks/build/` for additional instructions.
 
-1. userJourneys.md: Document the different user personas and the key actions they will be able to do using the app.
+1. testSpec.md: Create a detailed test specification for the tests the app must pass in order to match the app spec.
 
-2. testSpec.md: Create a detailed test specification for the tests the app must pass in order to match the app spec.
+2. writeShared.md: Write or refactor code which the app needs and that can be shared with other apps.
 
-3. writeShared.md: Write or refactor code which the app needs and that can be shared with other apps.
+3. writeApp.md: Write the app's code according to the two specs.
 
-4. writeApp.md: Write the app's code according to the two specs.
+4. writeScript.md: For each design doc in `skills/scripts/`, implement the script.
 
-5. writeScript.md: For each design doc in `skills/scripts/`, implement the script.
+5. writeTests.md: Write the tests according to the two specs.
 
-6. writeTests.md: Write the tests according to the two specs.
+6. testing.md: Get all tests to pass, debugging and fixing the app / tests as needed.
 
-7. testing.md: Get all tests to pass, debugging and fixing the app / tests as needed.
-
-8. deployment.md: Deploy the app to production.
+7. deployment.md: Deploy the app to production.
 
 Add tasks to the queue for each stage in **reverse order** (last stage first), since
 `add-task` always pushes to the front:

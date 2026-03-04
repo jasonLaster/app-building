@@ -165,7 +165,8 @@ Before running any tests, perform these checks from the app directory:
 
 1. **Verify `NEON_PROJECT_ID` is set**: `grep NEON_PROJECT_ID .env` — the test script requires
    it for creating ephemeral Neon branches. If missing, check `deployment.txt` for the project ID.
-2. **Verify dependencies**: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`
+2. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+3. **Verify dependencies**: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`
 
 See `skills/scripts/env-setup.md` for full environment prerequisites.
 
@@ -184,9 +185,8 @@ for the full script specification). Do NOT manually run playwright or start dev 
 When tests fail, you MUST follow this process for each distinct failure. Every step is
 mandatory — do NOT skip or reorder steps.
 
-1. Commit any changes you have made.
-2. Announce `ANALYZING TEST FAILURE: <git rev-parse HEAD> <test name>`.
-3. **Read the debugging guides** in `skills/debugging/` to find the category matching your
+1. Announce `ANALYZING TEST FAILURE: <test name>`.
+2. **Read the debugging guides** in `skills/debugging/` to find the category matching your
    failure. The guides describe which Replay MCP tools to use first and what to look for:
    - `skills/debugging/timeouts.md` — Test timeouts and stuck steps
    - `skills/debugging/race-conditions.md` — Flaky tests, parallel interference
@@ -195,22 +195,22 @@ mandatory — do NOT skip or reorder steps.
    - `skills/debugging/form-and-input.md` — Form validation, input interactions
    - `skills/debugging/seed-data.md` — Missing test data, count mismatches
    - `skills/debugging/README.md` — Quick reference table: symptom → starting tool
-4. Find the uploaded recording ID in the `npm run test` summary line (e.g.,
+3. Find the uploaded recording ID in the `npm run test` summary line (e.g.,
    `8 passed, 2 failed (recording: abc123) — see logs/test-run-3.log`). If the summary
    doesn't include a recording ID, read the log file and look for the
    `=== REPLAY RECORDINGS METADATA ===` block and `REPLAY UPLOADED: <recordingId>` lines.
    If the upload did not happen, use `npx replayio list --json` to find recordings and
    upload them manually: `npx replayio upload <id>`.
-5. Announce `TEST FAILURE UPLOADED: <recordingId>` before doing anything else.
-6. Use Replay MCP tools to analyze the failure, following the tool sequence from the relevant
+4. Announce `TEST FAILURE UPLOADED: <recordingId>` before doing anything else.
+5. Use Replay MCP tools to analyze the failure, following the tool sequence from the relevant
    debugging guide. Use as many tools as needed to understand what actually happened before
    making any changes.
-7. Write a bug writeup to `docs/testFailures/<TestName>.md` following the investigative template below.
+6. Write a bug writeup to `docs/bugs/<TestName>.md` following the investigative template below.
    You MUST fill in every section before making any code changes.
-8. Only after completing the Replay analysis AND the bug writeup, fix the test and/or app based
+7. Only after completing the Replay analysis AND the bug writeup, fix the test and/or app based
    on what you found.
-9. After fixing the failure, commit your changes and announce:
-   `TEST FAILURE FIXED: <git rev-parse HEAD>`
+8. After fixing the failure, commit your changes and announce:
+   CHANGESET REVISION: <git rev-parse HEAD> FAILING TEST: <test name>
    This line MUST appear in the log exactly as formatted — report tools search for it.
 
 ### Bug Writeup Template
@@ -248,10 +248,6 @@ The Replay recording contains the actual runtime state — use it.
 When testing the app after deployment, use the Replay browser to record the app and debug any problems.
 
 ## Directives
-
-- NEVER kill processes before running tests. The test script already kills stale `netlify` and
-  `vite` processes as its first step. Broad kills like `pkill -f "node"` or `pkill -9 -f "node"`
-  will kill the Claude worker process itself and crash the entire container.
 
 - Do NOT manually start `netlify dev` for testing. The test script manages the dev server
   automatically. Only use manual `netlify dev` for one-off curl checks.
@@ -361,3 +357,21 @@ When testing the app after deployment, use the Replay browser to record the app 
 - When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
   them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
   once per task to confirm, then focus on new failures only.
+- Before writing test assertions on data counts or relationships, verify expectations against
+  actual seed data. 30% of observed failures were seed-data-mismatch — tests assumed wrong
+  counts or relationships that didn't exist in the database.
+- When building forms with custom validation, always add `noValidate` to the `<form>` element
+  to prevent native browser validation from blocking custom logic. Without `noValidate`,
+  `<input type="number">` and `<input type="email">` have built-in validation that fires
+  before the form's `onSubmit` handler, causing custom validation tests to fail silently.
+- Establish a consistent date handling convention: components should always format dates from
+  ISO timestamps (what the API returns), and date inputs should always use `YYYY-MM-DD`
+  format. Mismatches between API response format and component expectations are a recurring
+  source of failures.
+- When filtering by status values like "Active"/"Inactive", use exact text matching
+  (e.g., `getByRole('option', { name: /^Active$/ })`) to avoid Playwright strict-mode
+  violations from substring collisions (e.g., "Active" matching both "Active" and "Inactive").
+- Ensure tests don't leak state between runs. Data-contamination failures occur when a prior
+  test's API calls complete after the next test has started, polluting the data state. Use
+  `test.describe.serial` for tests that share mutable state, or ensure API calls are fully
+  settled before test completion.

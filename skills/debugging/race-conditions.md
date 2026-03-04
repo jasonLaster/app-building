@@ -74,6 +74,23 @@ show unexpected counts or data values that don't match what the test created.
 *Example*: 5 failures (15% of all failures) were caused by cross-test contamination in
 `fullyParallel` mode where tests shared the same client IDs and task names.
 
+### Stale fetch race condition
+A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,
+search or filter). The first fetch's response arrives after the second and overwrites the UI
+with stale data.
+
+**Diagnosis with Replay**: `NetworkRequest` shows two requests to the same endpoint.
+`Logpoint` on the response handler confirms the first response arrived after the second.
+`Evaluate` at the assertion point shows stale data in the component state.
+
+**Tool sequence**: `NetworkRequest → Logpoint → Evaluate`
+
+**Fix**: Use abort controllers to cancel pending requests when a new one fires, or track
+request ordering and ignore out-of-order responses.
+
+*Example*: Search bar test failed because the initial page-load fetch response arrived after
+the search-filtered fetch, overwriting search results with the full list.
+
 ### Date.now() or shared identifiers across workers
 When parallel Playwright workers share a module-level `Date.now()` value for generating
 unique IDs (like test emails), all workers get the same value, causing collisions.

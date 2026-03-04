@@ -113,6 +113,23 @@ LC_ALL=C npx netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG
 The deploy script should set `LC_ALL=C` in the environment before spawning Netlify CLI
 subprocesses.
 
+## Netlify CLI Troubleshooting
+
+The Netlify CLI (`npx netlify`) can fail in container environments. Common issues:
+
+- **Locale errors**: Always prefix with `LC_ALL=C` (see Locale Workaround above).
+- **`npx netlify` not found or crashes**: Verify `netlify-cli` is installed:
+  `ls node_modules/.bin/netlify 2>/dev/null || npm install netlify-cli --save-dev`
+- **Direct invocation fails**: If `npx netlify` fails, try the full path:
+  `./node_modules/.bin/netlify deploy --prod ...`
+- **Both invocation methods fail**: The CLI may not be installed globally or locally. Install
+  it explicitly: `npm install netlify-cli --save-dev`, then use `npx netlify`.
+- **Authentication errors**: Verify `NETLIFY_AUTH_TOKEN` is set:
+  `echo $NETLIFY_AUTH_TOKEN | head -c 5`
+
+All Netlify CLI commands in the deploy script should use `LC_ALL=C` and pipe output to the
+log file rather than inheriting stdio.
+
 ## Implementation Tips
 
 - Reuse `initSchema` from `scripts/schema.ts` for schema sync.

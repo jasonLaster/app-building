@@ -24,7 +24,6 @@ RUN apt-get update && apt-get install -y \
 # Global npm packages
 RUN npm install -g \
     @anthropic-ai/claude-code \
-    @playwright/mcp \
     netlify-cli \
     @replayio/replay \
     @replayio/playwright \
@@ -34,6 +33,7 @@ RUN npm install -g \
 # Install Playwright Chromium and Replay browser (globally accessible)
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright
 RUN npx playwright install --with-deps chromium
+RUN npx replayio update
 
 # Replay browser needs OpenSSL 1.1 to load its recording driver.
 # Bookworm only has OpenSSL 3, so fetch the 1.1 libs from Ubuntu 18.04.
@@ -51,7 +51,6 @@ RUN git config --system user.name "App Builder" && \
 RUN useradd -m -s /bin/bash agent && \
     mkdir -p /repo && chown agent:agent /repo
 USER agent
-RUN npx replayio update
 
 # Copy app scripts and source
 WORKDIR /app-building
@@ -61,6 +60,4 @@ COPY --chown=agent:agent src/ ./src/
 COPY --chown=agent:agent scripts/ ./scripts/
 
 EXPOSE 3000
-COPY --chown=agent:agent entrypoint.sh ./
-RUN chmod +x entrypoint.sh
-CMD ["./entrypoint.sh"]
+CMD ["npx", "tsx", "/app-building/src/server.ts"]
