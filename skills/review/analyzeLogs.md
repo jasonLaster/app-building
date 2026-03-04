@@ -41,10 +41,13 @@ Subtask format: `AnalyzeGroup: <report-name> <report-file> <log1> <log2> ...`
 
 1. Parse the report name, report file path, and log file list from the subtask description.
 
-2. Read the report file (e.g. `skills/review/reportTestFailures.md`) to get the per-log
+2. Ensure npm dependencies are installed: check that `node_modules/` exists at the repo root.
+   If it does not, run `npm install` from the repo root before proceeding.
+
+3. Read the report file (e.g. `skills/review/reportTestFailures.md`) to get the per-log
    analysis template.
 
-3. For each log file in the list:
+4. For each log file in the list:
    a. Run `npm run read-log <log-path>` from the repo root.
    b. Read the full output to understand what happened in the log.
    c. Write an analysis file to `report-data/<report-name>-analysis/<log-filename>.md`
@@ -52,4 +55,4 @@ Subtask format: `AnalyzeGroup: <report-name> <report-file> <log1> <log2> ...`
    d. Use the log's base filename (without directory path) as the analysis filename.
       If multiple logs share a filename, prefix with the parent directory name.
 
-4. After processing all logs in the group, signal completion.
+5. After processing all logs in the group, signal completion.
