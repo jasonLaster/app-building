@@ -125,79 +125,24 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
   generation, storage, URL construction, and redemption. Other (non-auth-flow) tests may
   continue to use IS_TEST=true to bypass auth for convenience.
 
-## Parallel Test Design and Database Isolation
+## Test Design and Database Isolation
 
-Tests run in parallel across multiple Playwright workers. Each worker gets its own isolated
-PGlite database instance — an embedded Postgres that runs in-process with no network or
-cloud dependency.
+Tests run serially (`--workers 1`) against a single `netlify dev` server backed by an ephemeral
+Neon branch. The test script resets the database (truncate + re-seed) between each test.
 
 ### Test infrastructure
 
-Do **not** use Playwright's `webServer` config to start the dev server. Instead, use a
-worker-scoped fixture that starts a dedicated `netlify dev` instance per worker, each with
-its own PGlite database:
-
-```typescript
-// tests/fixtures.ts
-import { test as base } from '@playwright/test'
-import { spawn, type ChildProcess } from 'child_process'
-import { mkdtempSync } from 'fs'
-import { join } from 'path'
-import { tmpdir } from 'os'
-
-export const test = base.extend<{}, { serverUrl: string }>({
-  serverUrl: [async ({}, use, workerInfo) => {
-    // Each worker gets its own PGlite data dir and port
-    const dataDir = mkdtempSync(join(tmpdir(), `pglite-worker-${workerInfo.workerIndex}-`))
-    const port = 8888 + workerInfo.workerIndex
-
-    const server = spawn('npx', ['netlify', 'dev', '--port', String(port), '--functions', './netlify/functions'], {
-      cwd: /* app directory */,
-      env: { ...process.env, PGLITE_DATA_DIR: dataDir },
-      stdio: 'pipe',
-    })
-
-    // Wait for server to be ready, then init schema + seed
-    await waitForServer(port)
-    await initSchema(dataDir)
-    await seedTestData(dataDir)
-
-    await use(`http://localhost:${port}`)
-
-    server.kill()
-  }, { scope: 'worker' }],
-})
-
-export { expect } from '@playwright/test'
-```
-
-Test files import `test` from `./fixtures` instead of `@playwright/test`, and use
-`serverUrl` instead of a hardcoded `baseURL`:
-
-```typescript
-import { test, expect } from './fixtures'
-
-test('my test', async ({ page, serverUrl }) => {
-  await page.goto(`${serverUrl}/some-page`)
-})
-```
+Do **not** use Playwright's `webServer` config to start the dev server. The test script manages
+the `netlify dev` server lifecycle automatically.
 
 ### Database access in functions
 
-All Netlify functions must use the shared `netlify/functions/db.ts` module (see AGENTS.md)
-rather than importing `@neondatabase/serverless` directly. This module uses PGlite when
-`PGLITE_DATA_DIR` is set (testing) and Neon when `DATABASE_URL` is set (production).
+All Netlify functions must use the shared `netlify/functions/db.ts` module (see writeApp.md
+directives) rather than importing `@neondatabase/serverless` directly.
 
 ### Test design rules
 
-- Each worker gets a fresh, isolated database. Tests within the same worker share that database.
-- Tests that create, modify, or delete records must not rely on a fixed total count of records
-  in the database (e.g., "expect 5 clients"). Other tests in the same worker may have already
-  created or deleted records. Instead, assert on specific records by name/ID, or use relative
-  assertions ("at least N", "contains this item").
-- Tests that need a pristine dataset should create their own records in `beforeAll`/`beforeEach`
-  and clean them up in `afterAll`/`afterEach`, rather than depending on the global seed data
-  being unmodified.
+- The database is reset between each test, so each test starts with a clean seed.
 - Never hardcode database IDs in tests. Query the UI or API to discover IDs for the records
   you need to interact with.
 - Each spec file must contain **20 or fewer** `test()` calls. When a page has more tests,

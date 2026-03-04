@@ -69,7 +69,7 @@ show unexpected counts or data values that don't match what the test created.
 - Use unique test data per parallel worker (unique names, IDs, or prefixes)
 - Run stateful tests serially (`test.describe.serial`) when they must share state
 - Add per-test database cleanup in `beforeEach`/`afterEach`
-- Use per-worker database branches (already the default in this repo)
+- Use ephemeral Neon branches for test isolation (already the default in this repo)
 
 *Example*: 5 failures (15% of all failures) were caused by cross-test contamination in
 `fullyParallel` mode where tests shared the same client IDs and task names.

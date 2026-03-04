@@ -5,7 +5,8 @@ You will run all the tests in the app and get them to pass..
 ## Unpack Subtasks
 
 List all test files in the app's `tests/` directory. Add one task per test file, in reverse
-order (last file first) so they run in alphabetical order:
+order (last file first) so they run in alphabetical order. Make sure to call add-task separately
+for each spec file.
 
 ```
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testing.md" --app "<AppName>" \
@@ -162,8 +163,10 @@ Do not defer Replay installation to after failures are discovered.
 
 Before running any tests, perform these checks from the app directory:
 
-1. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
-2. **Verify dependencies**: `ls node_modules/@electric-sql/pglite 2>/dev/null || npm install`
+1. **Verify `NEON_PROJECT_ID` is set**: `grep NEON_PROJECT_ID .env` — the test script requires
+   it for creating ephemeral Neon branches. If missing, check `deployment.txt` for the project ID.
+2. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+3. **Verify dependencies**: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`
 
 See `skills/scripts/env-setup.md` for full environment prerequisites.
 
@@ -246,9 +249,8 @@ When testing the app after deployment, use the Replay browser to record the app 
 
 ## Directives
 
-- Do NOT manually start `netlify dev` for testing. Let Playwright's built-in `webServer` config
-  handle the dev server — it starts and stops the server automatically per test run, avoiding
-  zombie processes and port conflicts. Only use manual `netlify dev` for one-off curl checks.
+- Do NOT manually start `netlify dev` for testing. The test script manages the dev server
+  automatically. Only use manual `netlify dev` for one-off curl checks.
 
 - If you do manually start `netlify dev` for curl testing, you MUST pass `--functions ./netlify/functions`
   to avoid 404 errors on function endpoints. The `base` setting in `netlify.toml` causes the functions
@@ -266,12 +268,10 @@ When testing the app after deployment, use the Replay browser to record the app 
 - All browsers must run headless. Never use Xvfb, never set `DISPLAY`, never use the `replayio record`
   CLI (it launches a headed browser). Use `@replayio/playwright` for recordings.
 
-- The Playwright config MUST use `fullyParallel: true` and `workers` > 1 (or the default). Do NOT
-  set `workers: 1` — tests must be designed to run concurrently. If tests interfere with each other,
-  fix the isolation (database branches, unique test data), not the parallelism.
+- Tests run serially with `--workers 1`. The test script resets the database between each test.
 
-- Tests MUST NOT run against the production database. The test script creates isolated PGLite
-  databases per worker for test runs.
+- Tests MUST NOT run against the production database or the main Neon branch. The test script
+  creates ephemeral Neon branches for test runs and deletes them afterwards.
 
 - NEVER stop, cancel, or skip a Replay recording upload that is in progress. The upload is a
   prerequisite for Replay MCP analysis, which is mandatory for debugging failures. If the upload
@@ -299,9 +299,8 @@ When testing the app after deployment, use the Replay browser to record the app 
   the root cause may be that the SQL query is silently broken. Verify the API returns correctly
   filtered results by curling the endpoint directly with filter parameters.
 - Tests that pass individually but fail in the full suite usually indicate data contamination between
-  tests. With per-worker PGLite databases, cross-worker contamination is impossible. If tests within
-  the same worker interfere, make tests that create/modify/delete data operate on their own isolated
-  records or re-seed the worker's database in `beforeAll`.
+  tests. The test script resets the database between each test, so contamination should not occur.
+  If it does, check that the reset is working correctly.
 - When test IDs differ between spec files (cross-cutting vs page-specific), decide on ONE canonical
   set of IDs in the component and update whichever test file has fewer references.
 - When testing unauthenticated scenarios with `browser.newContext()`, always pass
@@ -322,15 +321,14 @@ When testing the app after deployment, use the Replay browser to record the app 
 - Before running deployment tests, verify that required environment variables (DATABASE_URL,
   etc.) are set on the deployment target (e.g., Netlify). Missing env vars cause infrastructure
   failures that waste a full test cycle. Use `netlify env:list` to check.
-- Before running tests, verify `@electric-sql/pglite` is installed. The test script uses PGLite
-  for per-worker database isolation. Run `npm install` if the dependency is missing.
+- Before running tests, verify `NEON_PROJECT_ID` is set in the environment. The test script
+  requires it for creating ephemeral Neon branches.
 - Running the full test suite at once (e.g., `npx playwright test` with no file argument) can
   OOM or crash with `ERR_STRING_TOO_LONG` on large suites. Always run tests one spec file at a
   time using `npm run test tests/<file>.spec.ts` (which uses the test script that manages
   database branches). When verifying broad changes, pick the most relevant 2-3 spec files.
-- Tests that run in `fullyParallel` mode must use unique test data per worker. Tests that share
-  mutable state (same client IDs, same task names) will cause cross-test data contamination.
-  Use unique identifiers (e.g., worker-specific prefixes) or run stateful tests serially.
+- The database is reset between each test, so tests do not need to worry about data from
+  previous tests. Each test starts with a fresh seed.
 - The Vite dev server cold start can cause the first test in a suite to timeout. Consider adding
   a warm-up navigation in `beforeAll` or increasing the first test's timeout to account for
   cold start latency.

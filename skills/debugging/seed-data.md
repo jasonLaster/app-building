@@ -54,15 +54,14 @@ data existing.
 *Example*: DDP-WRT-01 and DDP-ATT-01 failed because the first deal had no writeups or
 attachments. Fixed by making tests create data first.
 
-### PGLite schema missing new columns
+### Ephemeral branch inherits outdated schema
 `CREATE TABLE IF NOT EXISTS` doesn't add new columns to existing tables. When a new column
-is added to the schema definition, PGLite databases initialized with the old schema won't
-have the new column unless migrations are also run.
+is added to the schema definition, ephemeral Neon branches created from the parent won't
+have the new column.
 
 **Diagnosis with Replay**: NetworkRequest shows API calls failing with database column errors.
 
-**Fix**: Add `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` migration logic and ensure the test
-script runs migrations after `initSchema`.
+**Fix**: Add `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` migration logic.
 
 ### Numeric column type returns decimal strings
 PostgreSQL `NUMERIC(15,2)` and `DECIMAL` columns return string values like `"500.00"` instead

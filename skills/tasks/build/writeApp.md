@@ -73,24 +73,14 @@ contexts (testing, deployment).
 
   ```typescript
   import { neon } from '@neondatabase/serverless'
-  import { PGlite } from '@electric-sql/pglite'
-
-  let pglite: PGlite | null = null
 
   export function getSql() {
-    if (process.env.PGLITE_DATA_DIR) {
-      if (!pglite) pglite = new PGlite(process.env.PGLITE_DATA_DIR)
-      return pglite.sql.bind(pglite)
-    }
     return neon(process.env.DATABASE_URL!)
   }
   ```
 
-  - **Production / deployment**: Uses Neon via `DATABASE_URL`.
-  - **Testing**: Uses PGlite via `PGLITE_DATA_DIR` — an embedded Postgres that runs in-process
-    with no network or cloud dependency. Each test worker gets its own PGlite instance for isolation.
-  - Both `@neondatabase/serverless` and `@electric-sql/pglite` must be listed in the app's
-    `package.json` dependencies.
+  - `DATABASE_URL` points to the production Neon database in deployment, and to an ephemeral
+    Neon branch during testing. The test script manages branch creation and cleanup.
 
 - When using the sql function from `db.ts`, ONLY use tagged template literal
   syntax for queries: `` sql`SELECT * FROM table WHERE id = ${id}` ``. NEVER use `sql(queryString, paramsArray)`.

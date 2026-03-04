@@ -12,7 +12,7 @@ locale configuration — verify these before running scripts.
 
 | Variable | Used by |
 |---|---|
-| `NEON_API_KEY` | deploy (Neon project management) |
+| `NEON_API_KEY` | test, deploy (Neon branch/project management) |
 | `RECORD_REPLAY_API_KEY` | test (Replay recording uploads) |
 | `NETLIFY_AUTH_TOKEN` | deploy (Netlify CLI authentication) |
 | `NETLIFY_ACCOUNT_SLUG` | deploy (Netlify site creation) |
@@ -21,7 +21,7 @@ locale configuration — verify these before running scripts.
 
 | Variable | Used by | How to get |
 |---|---|---|
-| `NEON_PROJECT_ID` | deploy | From `deployment.txt` (`neon_project_id`) or created by deploy script |
+| `NEON_PROJECT_ID` | test, deploy | From `deployment.txt` (`neon_project_id`) or created by deploy script |
 | `DATABASE_URL` | test, deploy | From `deployment.txt` (`database_url`) or created by deploy script |
 | `NETLIFY_SITE_ID` | deploy | From `deployment.txt` (`site_id`) or created by deploy script |
 
@@ -35,6 +35,7 @@ echo $NEON_API_KEY | head -c 5       # should show first chars
 echo $NETLIFY_AUTH_TOKEN | head -c 5  # should show first chars
 
 # App-level (from app directory)
+grep NEON_PROJECT_ID .env
 grep DATABASE_URL .env
 ```
 
