@@ -60,20 +60,20 @@
   },
   "suites": [
     {
-      "title": "edit-todo-modal.spec.ts",
-      "file": "edit-todo-modal.spec.ts",
+      "title": "filter-bar.spec.ts",
+      "file": "filter-bar.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Edit Todo Modal",
-          "file": "edit-todo-modal.spec.ts",
-          "line": 13,
+          "title": "FilterBar",
+          "file": "filter-bar.spec.ts",
+          "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "Modal opens with all fields pre-filled from existing todo",
+              "title": "Filter bar displays All, Active, and Completed buttons",
               "ok": true,
               "tags": [],
               "tests": [
@@ -88,12 +88,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 789,
+                      "duration": 648,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:30.798Z",
+                      "startTime": "2026-03-04T21:17:20.684Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -101,13 +101,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-c6a1776d130d529c33a9",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 14,
+              "id": "600280bacad8569b7ac8-4ea615189dc9dea90e12",
+              "file": "filter-bar.spec.ts",
+              "line": 4,
               "column": 3
             },
             {
-              "title": "Modal opens with default values for a todo with minimal data",
+              "title": "\"All\" filter shows all todos",
               "ok": true,
               "tags": [],
               "tests": [
@@ -122,12 +122,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 403,
+                      "duration": 581,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:31.620Z",
+                      "startTime": "2026-03-04T21:17:21.481Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -135,13 +135,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-cda6b84e6f11492d12a6",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 26,
+              "id": "600280bacad8569b7ac8-53f1128ba6d16d722517",
+              "file": "filter-bar.spec.ts",
+              "line": 20,
               "column": 3
             },
             {
-              "title": "Title field is a required text input",
+              "title": "\"Active\" filter shows only incomplete todos",
               "ok": true,
               "tags": [],
               "tests": [
@@ -156,12 +156,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 449,
+                      "duration": 595,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:32.029Z",
+                      "startTime": "2026-03-04T21:17:22.069Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -169,13 +169,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-b0a977f6861601f4e6d8",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 38,
+              "id": "600280bacad8569b7ac8-38ac193dc46c90403100",
+              "file": "filter-bar.spec.ts",
+              "line": 27,
               "column": 3
             },
             {
-              "title": "Edit the title field and save",
+              "title": "\"Completed\" filter shows only completed todos",
               "ok": true,
               "tags": [],
               "tests": [
@@ -190,12 +190,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 822,
+                      "duration": 586,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:32.482Z",
+                      "startTime": "2026-03-04T21:17:22.670Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -203,13 +203,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-f1890d00e55b2aea1532",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 51,
+              "id": "600280bacad8569b7ac8-4ac06977fa038d66f25e",
+              "file": "filter-bar.spec.ts",
+              "line": 42,
               "column": 3
             },
             {
-              "title": "Priority dropdown shows Low, Medium, and High options",
+              "title": "Selected filter button is visually highlighted",
               "ok": true,
               "tags": [],
               "tests": [
@@ -224,12 +224,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 451,
+                      "duration": 287,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:33.311Z",
+                      "startTime": "2026-03-04T21:17:23.262Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -237,13 +237,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-c204ea7ec6601a6edaf0",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 65,
+              "id": "600280bacad8569b7ac8-bd9e3894a1e3d39ab830",
+              "file": "filter-bar.spec.ts",
+              "line": 57,
               "column": 3
             },
             {
-              "title": "Change priority and save",
+              "title": "Switching from Active filter back to All shows all todos again",
               "ok": true,
               "tags": [],
               "tests": [
@@ -258,12 +258,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 868,
+                      "duration": 603,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:33.768Z",
+                      "startTime": "2026-03-04T21:17:23.554Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -271,13 +271,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-fe7c082077f38c650787",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 77,
+              "id": "600280bacad8569b7ac8-28044bea4f9ca1476fa1",
+              "file": "filter-bar.spec.ts",
+              "line": 85,
               "column": 3
             },
             {
-              "title": "Set a due date via the date picker",
+              "title": "Clear Completed button removes all completed todos",
               "ok": true,
               "tags": [],
               "tests": [
@@ -292,12 +292,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 816,
+                      "duration": 950,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:34.645Z",
+                      "startTime": "2026-03-04T21:17:24.163Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -305,13 +305,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-2a566e1e51a64f546aab",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 95,
+              "id": "600280bacad8569b7ac8-704898590257b9dd47b9",
+              "file": "filter-bar.spec.ts",
+              "line": 102,
               "column": 3
             },
             {
-              "title": "Clear an existing due date",
+              "title": "Clear Completed button is visible in the filter bar",
               "ok": true,
               "tags": [],
               "tests": [
@@ -326,12 +326,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 852,
+                      "duration": 568,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:35.468Z",
+                      "startTime": "2026-03-04T21:17:25.120Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -339,13 +339,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-df95889c52cb746db64e",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 111,
+              "id": "600280bacad8569b7ac8-fd82c41f22711f228760",
+              "file": "filter-bar.spec.ts",
+              "line": 122,
               "column": 3
             },
             {
-              "title": "Add notes to a todo",
+              "title": "Filter persists when a todo is toggled",
               "ok": true,
               "tags": [],
               "tests": [
@@ -360,12 +360,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 847,
+                      "duration": 996,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:36.328Z",
+                      "startTime": "2026-03-04T21:17:25.694Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -373,13 +373,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-e728c4d2ba66c3684237",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 126,
+              "id": "600280bacad8569b7ac8-0a24bcbe1b7a9dc6cbe0",
+              "file": "filter-bar.spec.ts",
+              "line": 130,
               "column": 3
             },
             {
-              "title": "Edit existing notes",
+              "title": "Completing a todo while Completed filter is active shows it in the list",
               "ok": true,
               "tags": [],
               "tests": [
@@ -394,12 +394,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 834,
+                      "duration": 1070,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:14:37.184Z",
+                      "startTime": "2026-03-04T21:17:26.699Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -407,247 +407,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "1b0bc494250f9c4b96ab-9ce5f45aa548d0b2ec43",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 144,
-              "column": 3
-            },
-            {
-              "title": "Notes textarea supports multiline text",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 834,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:38.024Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-299cff8551ac74da7b1d",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 163,
-              "column": 3
-            },
-            {
-              "title": "Save button saves all changes and closes the modal",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 918,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:38.864Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-3201be7468ab805a1ec8",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 179,
-              "column": 3
-            },
-            {
-              "title": "Save button appearance",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 479,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:39.789Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-e7c9376038845dc1c29f",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 208,
-              "column": 3
-            },
-            {
-              "title": "Cancel button discards changes and closes the modal",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 506,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:40.273Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-6d522f967bc2b2afbd4e",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 218,
-              "column": 3
-            },
-            {
-              "title": "Cancel button appearance",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 418,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:40.784Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-668c94fe94878bcb63f9",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 241,
-              "column": 3
-            },
-            {
-              "title": "Clicking outside the modal discards changes and closes it",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 422,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:41.206Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-8e6548d02cb84ab32897",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 251,
-              "column": 3
-            },
-            {
-              "title": "Modal displays as a dialog overlay",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 414,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:14:41.633Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "1b0bc494250f9c4b96ab-4b1dabb7b7253b87fa72",
-              "file": "edit-todo-modal.spec.ts",
-              "line": 270,
+              "id": "600280bacad8569b7ac8-17290e4f0cd206a47481",
+              "file": "filter-bar.spec.ts",
+              "line": 147,
               "column": 3
             }
           ]
@@ -657,9 +419,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-04T21:14:30.390Z",
-    "duration": 11680.555,
-    "expected": 17,
+    "startTime": "2026-03-04T21:17:20.244Z",
+    "duration": 7560.652,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
