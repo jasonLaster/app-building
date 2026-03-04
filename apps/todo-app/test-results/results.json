@@ -60,20 +60,20 @@
   },
   "suites": [
     {
-      "title": "header-add-todo.spec.ts",
-      "file": "header-add-todo.spec.ts",
+      "title": "sort-dropdown.spec.ts",
+      "file": "sort-dropdown.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Header",
-          "file": "header-add-todo.spec.ts",
-          "line": 9,
+          "title": "SortDropdown",
+          "file": "sort-dropdown.spec.ts",
+          "line": 19,
           "column": 6,
           "specs": [
             {
-              "title": "Header displays app title",
+              "title": "Sort dropdown displays with default Newest First selected",
               "ok": true,
               "tags": [],
               "tests": [
@@ -88,12 +88,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 548,
+                      "duration": 553,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:13.830Z",
+                      "startTime": "2026-03-04T21:24:15.806Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -101,13 +101,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-3d57b92456da11d32af7",
-              "file": "header-add-todo.spec.ts",
-              "line": 10,
+              "id": "7709b2474f8755145dc0-a13f6a4b5b19a9a9c9cc",
+              "file": "sort-dropdown.spec.ts",
+              "line": 20,
               "column": 3
             },
             {
-              "title": "Header shows count of incomplete todos when some are active",
+              "title": "Sort dropdown shows all four sort options",
               "ok": true,
               "tags": [],
               "tests": [
@@ -122,12 +122,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 565,
+                      "duration": 236,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:14.419Z",
+                      "startTime": "2026-03-04T21:24:16.391Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -135,13 +135,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-622412b0fdad738da51e",
-              "file": "header-add-todo.spec.ts",
-              "line": 15,
+              "id": "7709b2474f8755145dc0-8880d56045232e2ee1b8",
+              "file": "sort-dropdown.spec.ts",
+              "line": 27,
               "column": 3
             },
             {
-              "title": "Header shows zero count when all todos are completed",
+              "title": "Sort by Newest First orders todos by creation date descending",
               "ok": true,
               "tags": [],
               "tests": [
@@ -156,12 +156,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 278,
+                      "duration": 633,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:14.990Z",
+                      "startTime": "2026-03-04T21:24:16.632Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -169,13 +169,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-5cebce283513b5e82053",
-              "file": "header-add-todo.spec.ts",
-              "line": 21,
+              "id": "7709b2474f8755145dc0-0bd428072380c398a03e",
+              "file": "sort-dropdown.spec.ts",
+              "line": 37,
               "column": 3
             },
             {
-              "title": "Header shows correct count with singular item",
+              "title": "Sort by Oldest First orders todos by creation date ascending",
               "ok": true,
               "tags": [],
               "tests": [
@@ -190,12 +190,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 620,
+                      "duration": 425,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:15.273Z",
+                      "startTime": "2026-03-04T21:24:17.270Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -203,13 +203,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-44ca54b05abddf452ca5",
-              "file": "header-add-todo.spec.ts",
-              "line": 36,
+              "id": "7709b2474f8755145dc0-f4f8d5a82d8b372138dc",
+              "file": "sort-dropdown.spec.ts",
+              "line": 57,
               "column": 3
             },
             {
-              "title": "Header count updates when a todo is toggled complete",
+              "title": "Sort by Priority orders todos by priority level",
               "ok": true,
               "tags": [],
               "tests": [
@@ -224,12 +224,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1020,
+                      "duration": 425,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:15.900Z",
+                      "startTime": "2026-03-04T21:24:17.700Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -237,13 +237,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-bdc9cc764d3fd3e8a1d8",
-              "file": "header-add-todo.spec.ts",
-              "line": 50,
+              "id": "7709b2474f8755145dc0-51d9febb39039bebb9ce",
+              "file": "sort-dropdown.spec.ts",
+              "line": 80,
               "column": 3
             },
             {
-              "title": "Header count updates when a todo is toggled back to active",
+              "title": "Sort by Due Date orders todos by due date",
               "ok": true,
               "tags": [],
               "tests": [
@@ -258,12 +258,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1173,
+                      "duration": 426,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:16.927Z",
+                      "startTime": "2026-03-04T21:24:18.130Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -271,13 +271,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-741270f0983903cd5353",
-              "file": "header-add-todo.spec.ts",
-              "line": 71,
+              "id": "7709b2474f8755145dc0-b3423d40dbf2525cc00b",
+              "file": "sort-dropdown.spec.ts",
+              "line": 102,
               "column": 3
             },
             {
-              "title": "Header count updates when a new todo is added",
+              "title": "Sorting works in combination with active filter",
               "ok": true,
               "tags": [],
               "tests": [
@@ -292,12 +292,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1015,
+                      "duration": 779,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:18.108Z",
+                      "startTime": "2026-03-04T21:24:18.562Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -305,13 +305,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-6344b9972da458bf5a88",
-              "file": "header-add-todo.spec.ts",
-              "line": 92,
+              "id": "7709b2474f8755145dc0-060f2b78ea685faff471",
+              "file": "sort-dropdown.spec.ts",
+              "line": 127,
               "column": 3
             },
             {
-              "title": "Header count updates when a todo is deleted",
+              "title": "Sort selection persists when adding a new todo",
               "ok": true,
               "tags": [],
               "tests": [
@@ -326,12 +326,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1088,
+                      "duration": 814,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:23:19.132Z",
+                      "startTime": "2026-03-04T21:24:19.346Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -339,221 +339,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "b54dfcc4a4b90df7fe20-5fda7196a2b8121f6a38",
-              "file": "header-add-todo.spec.ts",
-              "line": 113,
-              "column": 3
-            }
-          ]
-        },
-        {
-          "title": "AddTodo",
-          "file": "header-add-todo.spec.ts",
-          "line": 139,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Add todo input displays placeholder text",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 201,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:23:20.230Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b54dfcc4a4b90df7fe20-689641c4512a53542712",
-              "file": "header-add-todo.spec.ts",
-              "line": 140,
-              "column": 3
-            },
-            {
-              "title": "Create a new todo by pressing Enter",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1008,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:23:20.437Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b54dfcc4a4b90df7fe20-fd49be8c67034e8d6645",
-              "file": "header-add-todo.spec.ts",
-              "line": 147,
-              "column": 3
-            },
-            {
-              "title": "Pressing Enter with empty input does not create a todo",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 652,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:23:21.451Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b54dfcc4a4b90df7fe20-c8e5a4fc25ab44ba4bc7",
-              "file": "header-add-todo.spec.ts",
-              "line": 180,
-              "column": 3
-            },
-            {
-              "title": "Pressing Enter with whitespace-only input does not create a todo",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 623,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:23:22.109Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b54dfcc4a4b90df7fe20-8f376947e72e662e4d12",
-              "file": "header-add-todo.spec.ts",
-              "line": 204,
-              "column": 3
-            },
-            {
-              "title": "Input clears after successfully creating a todo",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 186,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:23:22.737Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b54dfcc4a4b90df7fe20-9c6e03857d3240fca4d2",
-              "file": "header-add-todo.spec.ts",
-              "line": 225,
-              "column": 3
-            },
-            {
-              "title": "New todo appears at the top of the list",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 927,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-04T21:23:22.928Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b54dfcc4a4b90df7fe20-3889560f8476f41da992",
-              "file": "header-add-todo.spec.ts",
-              "line": 237,
+              "id": "7709b2474f8755145dc0-8b3b0459598b502d71ae",
+              "file": "sort-dropdown.spec.ts",
+              "line": 156,
               "column": 3
             }
           ]
@@ -563,9 +351,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-04T21:23:13.384Z",
-    "duration": 10509.234,
-    "expected": 14,
+    "startTime": "2026-03-04T21:24:15.354Z",
+    "duration": 4840.0199999999995,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
