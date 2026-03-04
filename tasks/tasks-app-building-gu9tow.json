@@ -99,14 +99,6 @@
       "app": "todo-app"
     },
     {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
-        "Unpack: Write Playwright tests"
-      ],
-      "timestamp": "2026-03-04T19:19:52.226Z",
-      "app": "todo-app"
-    },
-    {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
         "Unpack: Get all tests passing"
