@@ -14,7 +14,8 @@ function formatDueDate(dueDateStr: string | null): { label: string; className: s
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
-  const dueDate = new Date(dueDateStr + 'T00:00:00')
+  const dateOnly = dueDateStr.split('T')[0]
+  const dueDate = new Date(dateOnly + 'T00:00:00')
   dueDate.setHours(0, 0, 0, 0)
 
   const diffTime = dueDate.getTime() - today.getTime()

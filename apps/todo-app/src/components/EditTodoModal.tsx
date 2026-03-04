@@ -12,7 +12,7 @@ interface EditTodoModalProps {
 export function EditTodoModal({ todo, onClose }: EditTodoModalProps) {
   const [title, setTitle] = useState(todo.title)
   const [priority, setPriority] = useState(todo.priority)
-  const [dueDate, setDueDate] = useState(todo.due_date ?? '')
+  const [dueDate, setDueDate] = useState(todo.due_date ? todo.due_date.split('T')[0] : '')
   const [notes, setNotes] = useState(todo.notes ?? '')
   const [titleError, setTitleError] = useState('')
   const [priorityOpen, setPriorityOpen] = useState(false)

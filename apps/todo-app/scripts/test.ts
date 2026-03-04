@@ -263,7 +263,8 @@ async function main(): Promise<void> {
     await seedDatabase(ephemeralDbUrl)
 
     // Step 5: Start netlify dev
-    const netlifyDev = spawn('netlify', ['dev', '--port', '8888'], {
+    const netlifyBin = join(appDir, 'node_modules', '.bin', 'netlify')
+    const netlifyDev = spawn(netlifyBin, ['dev', '--port', '8888', '--functions', './netlify/functions'], {
       cwd: appDir,
       env: { ...process.env, DATABASE_URL: ephemeralDbUrl },
       stdio: ['ignore', 'pipe', 'pipe'],

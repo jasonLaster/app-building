@@ -111,6 +111,3 @@ export default async function handler(req: Request) {
   }
 }
 
-export const config = {
-  path: ['/api/todos', '/api/todos/*', '/.netlify/functions/todos', '/.netlify/functions/todos/*'],
-}
