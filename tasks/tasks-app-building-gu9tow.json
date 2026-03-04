@@ -1,24 +1,43 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeTests.md",
+      "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "WriteTestHeaderDisplaysAppTitle: Write test for Header displays app title",
-        "WriteTestHeaderShowsCountIncomplete: Write test for Header shows count of incomplete todos when some are active",
-        "WriteTestHeaderShowsZeroCount: Write test for Header shows zero count when all todos are completed",
-        "WriteTestHeaderShowsSingularItem: Write test for Header shows correct count with singular item",
-        "WriteTestHeaderCountToggledComplete: Write test for Header count updates when a todo is toggled complete",
-        "WriteTestHeaderCountToggledActive: Write test for Header count updates when a todo is toggled back to active",
-        "WriteTestHeaderCountNewTodo: Write test for Header count updates when a new todo is added",
-        "WriteTestHeaderCountDeleted: Write test for Header count updates when a todo is deleted",
-        "WriteTestAddTodoPlaceholder: Write test for Add todo input displays placeholder text",
-        "WriteTestCreateTodoEnter: Write test for Create a new todo by pressing Enter",
-        "WriteTestEmptyInputNoCreate: Write test for Pressing Enter with empty input does not create a todo",
-        "WriteTestWhitespaceNoCreate: Write test for Pressing Enter with whitespace-only input does not create a todo",
-        "WriteTestInputClearsAfterCreate: Write test for Input clears after successfully creating a todo",
-        "WriteTestNewTodoAtTop: Write test for New todo appears at the top of the list"
+        "FixTests: tests/edit-todo-modal.spec.ts"
       ],
-      "timestamp": "2026-03-04T20:28:49.506Z",
+      "timestamp": "2026-03-04T20:43:19.737Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/filter-bar.spec.ts"
+      ],
+      "timestamp": "2026-03-04T20:43:15.484Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/header-add-todo.spec.ts"
+      ],
+      "timestamp": "2026-03-04T20:43:12.270Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/sort-dropdown.spec.ts"
+      ],
+      "timestamp": "2026-03-04T20:43:09.111Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/todo-list.spec.ts"
+      ],
+      "timestamp": "2026-03-04T20:43:05.721Z",
       "app": "todo-app"
     },
     {
