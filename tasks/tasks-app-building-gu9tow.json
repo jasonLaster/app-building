@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentEditTodoModal: Write the EditTodoModal component",
-        "WritePageEditTodoModal: Write the page itself"
-      ],
-      "timestamp": "2026-03-04T20:16:15.588Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentHeader: Write the Header component",
         "WriteComponentAddTodo: Write the AddTodo component",
         "WriteComponentTodoItem: Write the TodoItem component",

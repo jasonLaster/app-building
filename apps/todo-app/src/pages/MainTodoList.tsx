@@ -22,8 +22,10 @@ export function MainTodoList() {
       <div className="flex flex-col gap-5">
         <Header />
         <AddTodo />
-        <div className="flex items-center justify-between">
-          <FilterBar />
+        <div className="flex items-center gap-3">
+          <div className="flex-1">
+            <FilterBar />
+          </div>
           <SortDropdown />
         </div>
         <TodoList onEditTodo={setEditingTodo} />
