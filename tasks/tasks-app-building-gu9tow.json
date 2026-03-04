@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/writeScript.md",
       "subtasks": [
-        "WriteScriptTest: Implement the test script (scripts/test.ts) per skills/scripts/test.md"
-      ],
-      "timestamp": "2026-03-04T20:21:16.420Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/writeScript.md",
-      "subtasks": [
         "WriteScriptDeploy: Implement the deploy script (scripts/deploy.ts) per skills/scripts/deploy.md"
       ],
       "timestamp": "2026-03-04T20:21:11.634Z",
