@@ -294,4 +294,104 @@
 
 ### EditTodoModal
 
-<!-- Tests for EditTodoModal component will be added by PlanComponentEditTodoModal -->
+#### Test: Modal opens with all fields pre-filled from existing todo
+- **Component**: EditTodoModal
+- **Initial state**: Database has a todo with title "Write report", priority "high", due_date set to tomorrow, and notes "Include Q4 data".
+- **Action**: Click on the todo text "Write report" from the Main Todo List Page.
+- **Expected**: A modal dialog opens displaying four fields: a Title text input pre-filled with "Write report", a Priority dropdown set to "High", a Due Date picker set to tomorrow's date, and a Notes textarea containing "Include Q4 data".
+
+#### Test: Modal opens with default values for a todo with minimal data
+- **Component**: EditTodoModal
+- **Initial state**: Database has a todo with title "Quick task", priority "medium", no due_date, and no notes.
+- **Action**: Click on the todo text "Quick task".
+- **Expected**: The modal opens with Title set to "Quick task", Priority set to "Medium", Due Date empty/unset, and Notes empty.
+
+#### Test: Title field is a required text input
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for an existing todo with title "Some task".
+- **Action**: Clear the Title input field so it is empty, then click the "Save" button.
+- **Expected**: The save is prevented. A validation error is shown indicating the title is required. The modal remains open.
+
+#### Test: Edit the title field and save
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo with title "Old title".
+- **Action**: Clear the Title input and type "Updated title", then click the "Save" button.
+- **Expected**: The modal closes. The todo in the list now displays "Updated title" instead of "Old title". The change is persisted via PUT to `/.netlify/functions/todos/:id` with the updated title.
+
+#### Test: Priority dropdown shows Low, Medium, and High options
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for any todo.
+- **Action**: Click/open the Priority dropdown.
+- **Expected**: The dropdown displays three options: "Low", "Medium", and "High".
+
+#### Test: Change priority and save
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo with priority "medium". The todo shows a "Medium" priority badge in the list.
+- **Action**: Select "High" from the Priority dropdown, then click "Save".
+- **Expected**: The modal closes. The todo's priority badge in the list updates to "High" with the corresponding color. The change is persisted via PUT to `/.netlify/functions/todos/:id` with `priority: "high"`.
+
+#### Test: Set a due date via the date picker
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo with no due date set.
+- **Action**: Select tomorrow's date in the Due Date picker, then click "Save".
+- **Expected**: The modal closes. The todo in the list now shows "Tomorrow" as the due date label. The change is persisted via PUT to `/.netlify/functions/todos/:id` with the selected due_date.
+
+#### Test: Clear an existing due date
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo that has due_date set to today.
+- **Action**: Clear the Due Date picker (remove the date), then click "Save".
+- **Expected**: The modal closes. The todo in the list no longer shows a due date label. The change is persisted with `due_date: null`.
+
+#### Test: Add notes to a todo
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for a todo with empty notes.
+- **Action**: Type "Remember to check the figures" in the Notes textarea, then click "Save".
+- **Expected**: The modal closes. The change is persisted via PUT to `/.netlify/functions/todos/:id` with `notes: "Remember to check the figures"`.
+
+#### Test: Edit existing notes
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for a todo with notes "Old notes".
+- **Action**: Clear the Notes textarea and type "New notes content", then click "Save".
+- **Expected**: The modal closes. The change is persisted with `notes: "New notes content"`.
+
+#### Test: Notes textarea supports multiline text
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for a todo with empty notes.
+- **Action**: Type "Line 1\nLine 2\nLine 3" (multiline text with newlines) in the Notes textarea, then click "Save".
+- **Expected**: The modal closes. The notes are saved preserving newlines. Re-opening the modal shows the notes with the original line breaks intact.
+
+#### Test: Save button saves all changes and closes the modal
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo with title "Original", priority "low", no due date, and no notes.
+- **Action**: Change the Title to "Updated", set Priority to "High", set Due Date to today, type "Some notes" in Notes, then click the "Save" button.
+- **Expected**: The modal closes. The todo in the list reflects all changes: title is "Updated", priority badge shows "High", due date shows "Today". All changes are persisted in a single PUT request to `/.netlify/functions/todos/:id`. The `updated_at` timestamp is updated.
+
+#### Test: Save button appearance
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for any todo.
+- **Action**: None (observe on load).
+- **Expected**: A "Save" button is visible in the modal's action area with the text "Save".
+
+#### Test: Cancel button discards changes and closes the modal
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo with title "Original title" and priority "low".
+- **Action**: Change the Title to "Changed title", change Priority to "High", then click the "Cancel" button.
+- **Expected**: The modal closes. The todo in the list still displays "Original title" with a "Low" priority badge. No API call is made to update the todo.
+
+#### Test: Cancel button appearance
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for any todo.
+- **Action**: None (observe on load).
+- **Expected**: A "Cancel" button is visible in the modal's action area with the text "Cancel".
+
+#### Test: Clicking outside the modal discards changes and closes it
+- **Component**: EditTodoModal, TodoList
+- **Initial state**: Modal is open for a todo with title "Original title".
+- **Action**: Change the Title to "Changed title", then click on the overlay/backdrop area outside the modal.
+- **Expected**: The modal closes. The todo in the list still displays "Original title". No API call is made to update the todo.
+
+#### Test: Modal displays as a dialog overlay
+- **Component**: EditTodoModal
+- **Initial state**: Modal is open for any todo.
+- **Action**: None (observe on load).
+- **Expected**: The modal is displayed as a centered dialog with a backdrop/overlay dimming the background content. The main page content is visible but not interactive behind the overlay.
