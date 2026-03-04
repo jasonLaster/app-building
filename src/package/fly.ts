@@ -97,10 +97,15 @@ export async function deleteVolume(
   });
 }
 
+export interface CreateMachineResult {
+  machineId: string;
+  volumeId: string;
+}
+
 /**
  * Create a Fly Machine with the given image and env vars.
- * If volumeId is provided, it is mounted at /repo.
- * Returns the machine ID.
+ * Creates a volume mounted at /repo for storage.
+ * Returns the machine ID and volume ID.
  */
 export async function createMachine(
   app: string,
@@ -108,40 +113,46 @@ export async function createMachine(
   image: string,
   env: Record<string, string>,
   name: string,
-  volumeId?: string,
-): Promise<string> {
-  const config: Record<string, unknown> = {
-    image,
-    env,
-    auto_destroy: true,
-    restart: { policy: "no" },
-    guest: {
-      cpu_kind: "performance",
-      cpus: 16,
-      memory_mb: 32768,
-    },
-    services: [
-      {
-        ports: [{ port: 443, handlers: ["tls", "http"] }],
-        protocol: "tcp",
-        internal_port: 3000,
-        autostart: false,
-        autostop: "off",
-      },
-    ],
-  };
+): Promise<CreateMachineResult> {
+  // Create a volume for /repo storage
+  const volumeId = await createVolume(app, token, `repo-${name}`, 50);
 
-  if (volumeId) {
-    config.mounts = [{ volume: volumeId, path: "/repo" }];
+  try {
+    const res = await flyFetch(`/apps/${app}/machines`, token, {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        config: {
+          image,
+          env,
+          auto_destroy: true,
+          restart: { policy: "no" },
+          guest: {
+            cpu_kind: "performance",
+            cpus: 16,
+            memory_mb: 32768,
+          },
+          mounts: [{ volume: volumeId, path: "/repo" }],
+          services: [
+            {
+              ports: [{ port: 443, handlers: ["tls", "http"] }],
+              protocol: "tcp",
+              internal_port: 3000,
+              autostart: false,
+              autostop: "off",
+            },
+          ],
+        },
+      }),
+    });
+
+    const data = (await res.json()) as { id: string };
+    return { machineId: data.id, volumeId };
+  } catch (err) {
+    // Clean up volume if machine creation fails
+    await deleteVolume(app, token, volumeId).catch(() => {});
+    throw err;
   }
-
-  const res = await flyFetch(`/apps/${app}/machines`, token, {
-    method: "POST",
-    body: JSON.stringify({ name, config }),
-  });
-
-  const data = (await res.json()) as { id: string };
-  return data.id;
 }
 
 /**
@@ -170,16 +181,22 @@ export async function waitForMachine(
 }
 
 /**
- * Destroy a Fly Machine (force).
+ * Destroy a Fly Machine (force) and its attached volume.
  */
 export async function destroyMachine(
   app: string,
   token: string,
   machineId: string,
+  volumeId?: string,
 ): Promise<void> {
   await flyFetch(`/apps/${app}/machines/${machineId}?force=true`, token, {
     method: "DELETE",
   });
+  if (volumeId) {
+    await deleteVolume(app, token, volumeId).catch((err) => {
+      console.log(`Warning: failed to delete volume ${volumeId}: ${err instanceof Error ? err.message : err}`);
+    });
+  }
 }
 
 export interface FlyMachineInfo {

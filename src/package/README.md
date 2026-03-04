@@ -14,10 +14,10 @@ npm install @replayio/app-building
 import {
   loadDotEnv,
   FileContainerRegistry,
+  createMachine,
+  destroyMachine,
   type ContainerConfig,
   type RepoOptions,
-  startRemoteContainer,
-  stopRemoteContainer,
   httpGet,
   httpPost,
   httpOptsFor,
@@ -33,20 +33,19 @@ const config: ContainerConfig = {
   flyApp: envVars.FLY_APP_NAME,
 };
 
-// Start a detached container with an initial prompt — it will process and exit when done
-config.detached = true;
-config.initialPrompt = "Build the app";
-const repo: RepoOptions = { repoUrl: "https://github.com/...", cloneBranch: "main", pushBranch: "main" };
-const state = await startRemoteContainer(config, repo);
+// Create a Fly machine (automatically provisions a volume)
+const { machineId, volumeId } = await createMachine(
+  config.flyApp, config.flyToken, imageRef, containerEnv, machineName,
+);
 
 // Check status
-const status = await httpGet(`${state.baseUrl}/status`, httpOpts);
+const status = await httpGet(`https://${config.flyApp}.fly.dev/status`);
 
 // Query the registry
 const alive = await config.registry.findAlive();
 
-// Clean up
-await stopRemoteContainer(config, state);
+// Clean up (destroys machine and its volume)
+await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
 ```
 
 ## Exported API
@@ -65,9 +64,7 @@ await stopRemoteContainer(config, state);
 | Export | Description |
 |---|---|
 | `startContainer(config, repo)` | Build the Docker image locally and start a container with `--network host`. Returns `AgentState`. |
-| `startRemoteContainer(config, repo)` | Create a Fly.io machine using the GHCR image. Requires `config.flyToken` and `config.flyApp`. Returns `AgentState`. |
 | `stopContainer(config, containerName)` | Stop a local Docker container by name. |
-| `stopRemoteContainer(config, state)` | Destroy the Fly.io machine for a remote container. Requires `config.flyToken`. |
 | `buildImage(config)` | Build the Docker image locally (called automatically by `startContainer`). |
 | `spawnTestContainer(config)` | Start an interactive (`-it`) container with the repo mounted at `/repo`. |
 | `loadDotEnv(projectRoot)` | Parse a `.env` file and return key-value pairs. |
@@ -103,26 +100,25 @@ await stopRemoteContainer(config, state);
 | `httpOptsFor(state)` | Return `HttpOptions` for a container (adds `fly-force-instance-id` header for remote containers). |
 | `probeAlive(entry)` | Check if a container is responding to `/status`. |
 
-### Fly.io machines
+### Fly.io utilities
 
 | Export | Description |
 |---|---|
 | `createApp(token, name, org?)` | Create a Fly app and allocate IPs. |
-| `createMachine(app, token, image, env, name, volumeId?)` | Create a Fly machine. If `volumeId` is provided, mounts it at `/repo`. Returns machine ID. |
-| `waitForMachine(app, token, machineId, timeout?)` | Wait for a machine to reach `started` state. |
-| `destroyMachine(app, token, machineId)` | Force-destroy a machine. |
+| `createMachine(app, token, image, env, name)` | Create a Fly machine with a 50GB volume mounted at `/repo`. Returns `{ machineId, volumeId }`. |
+| `waitForMachine(app, token, machineId)` | Poll until a machine reaches `started` state. |
 | `listMachines(app, token)` | List all machines for an app. |
-| `createVolume(app, token, name, sizeGb?)` | Create a Fly volume (default 50 GB). Returns volume ID. |
-| `deleteVolume(app, token, volumeId)` | Delete a Fly volume. |
+| `destroyMachine(app, token, machineId, volumeId?)` | Force-destroy a machine and optionally its volume. |
 | `listVolumes(app, token)` | List all volumes for an app. |
+| `deleteVolume(app, token, volumeId)` | Delete a Fly volume. |
 
-**Types:** `FlyMachineInfo`, `FlyVolumeInfo`
+**Types:** `FlyMachineInfo`, `FlyVolumeInfo`, `CreateMachineResult`
 
 ### Image ref
 
 | Export | Description |
 |---|---|
-| `getImageRef()` | Returns `CONTAINER_IMAGE_REF` env var, or `ghcr.io/replayio/app-building:latest` by default. Used by `startRemoteContainer`. |
+| `getImageRef()` | Returns `CONTAINER_IMAGE_REF` env var, or `ghcr.io/replayio/app-building:latest` by default. |
 
 ## Container HTTP API
 

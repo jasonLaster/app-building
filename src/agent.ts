@@ -3,7 +3,8 @@ import { fileURLToPath } from "url";
 import { Command } from "commander";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, startRemoteContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor } from "./package";
+import { startRemoteContainer } from "./remote-container";
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
 import { formatEvent } from "./format";
 

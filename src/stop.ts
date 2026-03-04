@@ -2,7 +2,8 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, stopRemoteContainer, httpGet, httpPost, type RegistryEntry, httpOptsFor } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, httpGet, httpPost, type RegistryEntry, httpOptsFor } from "./package";
+import { stopRemoteContainer } from "./remote-container";
 import { RED, RESET } from "./format";
 
 async function waitForStopped(baseUrl: string, timeoutMs: number = 120000): Promise<void> {

@@ -6,7 +6,8 @@
  */
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, startRemoteContainer, stopRemoteContainer, httpGet, httpPost, type HttpOptions } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions } from "./package";
+import { startRemoteContainer, stopRemoteContainer } from "./remote-container";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
