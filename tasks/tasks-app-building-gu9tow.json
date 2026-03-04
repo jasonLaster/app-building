@@ -3,27 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestTodoItemDisplay: Write test for Todo item displays checkbox, text, priority badge, due date, and delete button",
-        "WriteTestPriorityBadgeColors: Write test for Priority badge displays correct colors for each level",
-        "WriteTestDueDateToday: Write test for Due date shows Today for todos due today",
-        "WriteTestDueDateTomorrow: Write test for Due date shows Tomorrow for todos due tomorrow",
-        "WriteTestDueDateOverdue: Write test for Due date shows Overdue for todos past their due date",
-        "WriteTestNoDueDate: Write test for Todo with no due date does not show a date label",
-        "WriteTestToggleCompletion: Write test for Toggle todo completion via checkbox",
-        "WriteTestUncheckCompleted: Write test for Uncheck a completed todo to mark it active again",
-        "WriteTestCompletedStyling: Write test for Completed todo has strikethrough text and reduced opacity",
-        "WriteTestDeleteButtonHover: Write test for Delete button appears on hover",
-        "WriteTestDeleteWithConfirmation: Write test for Delete a todo with confirmation",
-        "WriteTestCancelDeletion: Write test for Cancel todo deletion via confirmation prompt",
-        "WriteTestClickOpensEditModal: Write test for Clicking todo text opens the Edit Todo Modal",
-        "WriteTestEmptyState: Write test for Empty state when no todos exist"
-      ],
-      "timestamp": "2026-03-04T20:28:55.551Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestHeaderDisplaysAppTitle: Write test for Header displays app title",
         "WriteTestHeaderShowsCountIncomplete: Write test for Header shows count of incomplete todos when some are active",
         "WriteTestHeaderShowsZeroCount: Write test for Header shows zero count when all todos are completed",
