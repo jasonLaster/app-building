@@ -1,17 +1,19 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeApp.md",
+      "skill": "skills/tasks/writeScript.md",
       "subtasks": [
-        "WriteComponentHeader: Write the Header component",
-        "WriteComponentAddTodo: Write the AddTodo component",
-        "WriteComponentTodoItem: Write the TodoItem component",
-        "WriteComponentTodoList: Write the TodoList component",
-        "WriteComponentFilterBar: Write the FilterBar component",
-        "WriteComponentSortDropdown: Write the SortDropdown component",
-        "WritePageMainTodoList: Write the page itself"
+        "WriteScriptTest: Implement the test script (scripts/test.ts) per skills/scripts/test.md"
       ],
-      "timestamp": "2026-03-04T20:16:12.104Z",
+      "timestamp": "2026-03-04T20:21:16.420Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/writeScript.md",
+      "subtasks": [
+        "WriteScriptDeploy: Implement the deploy script (scripts/deploy.ts) per skills/scripts/deploy.md"
+      ],
+      "timestamp": "2026-03-04T20:21:11.634Z",
       "app": "todo-app"
     },
     {
