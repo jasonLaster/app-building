@@ -1,11 +1,12 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/testing.md",
+      "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "FixTests: tests/todo-list.spec.ts"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-04T20:43:05.721Z",
+      "timestamp": "2026-03-04T21:26:23.980Z",
       "app": "todo-app"
     },
     {
