@@ -2,7 +2,7 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, listMachines, destroyMachine } from "./package";
+import { loadDotEnv, listMachines, destroyMachine, listVolumes, deleteVolume } from "./package";
 
 const BOLD = "\x1b[1m";
 const DIM = "\x1b[2m";
@@ -54,11 +54,20 @@ async function destroyAll(): Promise<void> {
   }
 
   for (const m of machines) {
-    console.log(`Destroying ${m.id} (${m.name}, ${m.state})...`);
+    console.log(`Destroying machine ${m.id} (${m.name}, ${m.state})...`);
     await destroyMachine(app, token, m.id).catch((e) =>
       console.log(`  Failed: ${e instanceof Error ? e.message : e}`),
     );
   }
+
+  const volumes = await listVolumes(app, token);
+  for (const v of volumes) {
+    console.log(`Deleting volume ${v.id} (${v.name}, ${v.size_gb}GB)...`);
+    await deleteVolume(app, token, v.id).catch((e) =>
+      console.log(`  Failed: ${e instanceof Error ? e.message : e}`),
+    );
+  }
+
   console.log("Done.");
 }
 

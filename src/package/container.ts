@@ -1,7 +1,7 @@
 import { execFileSync, spawn } from "child_process";
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
-import { createMachine, waitForMachine, destroyMachine, listMachines } from "./fly";
+import { createMachine, waitForMachine, destroyMachine, listMachines, createVolume, deleteVolume } from "./fly";
 import { getImageRef } from "./image-ref";
 import type { ContainerRegistry } from "./container-registry";
 
@@ -18,6 +18,7 @@ export interface AgentState {
   baseUrl: string;
   flyApp?: string;
   flyMachineId?: string;
+  flyVolumeId?: string;
 }
 
 export interface ContainerConfig {
@@ -273,12 +274,17 @@ export async function startRemoteContainer(
     }
   }
 
+  // Create a volume for /repo storage
+  console.log("Creating Fly volume...");
+  const volumeId = await createVolume(config.flyApp, config.flyToken, `repo-${uniqueId}`);
+  console.log(`Volume created: ${volumeId}`);
+
   // Retry machine creation — the registry tag may take a moment to propagate
   console.log("Creating Fly machine...");
   let machineId = "";
   for (let attempt = 0; attempt < 5; attempt++) {
     try {
-      machineId = await createMachine(config.flyApp, config.flyToken, imageRef, containerEnv, machineName);
+      machineId = await createMachine(config.flyApp, config.flyToken, imageRef, containerEnv, machineName, volumeId);
       break;
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -287,6 +293,8 @@ export async function startRemoteContainer(
         await new Promise((r) => setTimeout(r, 5000));
         continue;
       }
+      // Clean up volume if machine creation fails
+      await deleteVolume(config.flyApp!, config.flyToken!, volumeId).catch(() => {});
       throw err;
     }
   }
@@ -301,6 +309,7 @@ export async function startRemoteContainer(
     baseUrl,
     flyApp: config.flyApp,
     flyMachineId: machineId,
+    flyVolumeId: volumeId,
   };
   config.registry.log(agentState);
 
@@ -330,9 +339,10 @@ export async function startRemoteContainer(
   }
 
   if (!ready) {
-    // Clean up machine if we can't reach it
+    // Clean up machine and volume if we can't reach it
     console.log("Timed out waiting for machine, destroying...");
     await destroyMachine(config.flyApp, config.flyToken, machineId).catch(() => {});
+    await deleteVolume(config.flyApp, config.flyToken, volumeId).catch(() => {});
     throw new Error("Remote container did not become ready within timeout");
   }
 
@@ -349,6 +359,15 @@ export async function stopRemoteContainer(config: ContainerConfig, state: AgentS
   console.log(`Destroying Fly machine ${state.flyMachineId}...`);
   await destroyMachine(state.flyApp, config.flyToken, state.flyMachineId);
   console.log("Machine destroyed.");
+
+  if (state.flyVolumeId) {
+    console.log(`Deleting Fly volume ${state.flyVolumeId}...`);
+    await deleteVolume(state.flyApp, config.flyToken, state.flyVolumeId).catch((err) => {
+      console.log(`Warning: failed to delete volume: ${err instanceof Error ? err.message : err}`);
+    });
+    console.log("Volume deleted.");
+  }
+
   config.registry.markStopped(state.containerName);
 }
 

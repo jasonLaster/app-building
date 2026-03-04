@@ -108,12 +108,15 @@ await stopRemoteContainer(config, state);
 | Export | Description |
 |---|---|
 | `createApp(token, name, org?)` | Create a Fly app and allocate IPs. |
-| `createMachine(app, token, image, env, name)` | Create a Fly machine. Returns machine ID. |
+| `createMachine(app, token, image, env, name, volumeId?)` | Create a Fly machine. If `volumeId` is provided, mounts it at `/repo`. Returns machine ID. |
 | `waitForMachine(app, token, machineId, timeout?)` | Wait for a machine to reach `started` state. |
 | `destroyMachine(app, token, machineId)` | Force-destroy a machine. |
 | `listMachines(app, token)` | List all machines for an app. |
+| `createVolume(app, token, name, sizeGb?)` | Create a Fly volume (default 50 GB). Returns volume ID. |
+| `deleteVolume(app, token, volumeId)` | Delete a Fly volume. |
+| `listVolumes(app, token)` | List all volumes for an app. |
 
-**Types:** `FlyMachineInfo`
+**Types:** `FlyMachineInfo`, `FlyVolumeInfo`
 
 ### Image ref
 

@@ -62,7 +62,44 @@ export async function createApp(token: string, name: string, org?: string): Prom
 }
 
 /**
+ * Create a Fly Volume in the app's primary region.
+ * Returns the volume ID.
+ */
+export async function createVolume(
+  app: string,
+  token: string,
+  name: string,
+  sizeGb: number = 50,
+): Promise<string> {
+  const res = await flyFetch(`/apps/${app}/volumes`, token, {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      size_gb: sizeGb,
+      encrypted: true,
+      require_unique_zone: false,
+    }),
+  });
+  const data = (await res.json()) as { id: string };
+  return data.id;
+}
+
+/**
+ * Delete a Fly Volume.
+ */
+export async function deleteVolume(
+  app: string,
+  token: string,
+  volumeId: string,
+): Promise<void> {
+  await flyFetch(`/apps/${app}/volumes/${volumeId}`, token, {
+    method: "DELETE",
+  });
+}
+
+/**
  * Create a Fly Machine with the given image and env vars.
+ * If volumeId is provided, it is mounted at /repo.
  * Returns the machine ID.
  */
 export async function createMachine(
@@ -71,32 +108,36 @@ export async function createMachine(
   image: string,
   env: Record<string, string>,
   name: string,
+  volumeId?: string,
 ): Promise<string> {
+  const config: Record<string, unknown> = {
+    image,
+    env,
+    auto_destroy: true,
+    restart: { policy: "no" },
+    guest: {
+      cpu_kind: "performance",
+      cpus: 16,
+      memory_mb: 32768,
+    },
+    services: [
+      {
+        ports: [{ port: 443, handlers: ["tls", "http"] }],
+        protocol: "tcp",
+        internal_port: 3000,
+        autostart: false,
+        autostop: "off",
+      },
+    ],
+  };
+
+  if (volumeId) {
+    config.mounts = [{ volume: volumeId, path: "/repo" }];
+  }
+
   const res = await flyFetch(`/apps/${app}/machines`, token, {
     method: "POST",
-    body: JSON.stringify({
-      name,
-      config: {
-        image,
-        env,
-        auto_destroy: true,
-        restart: { policy: "no" },
-        guest: {
-          cpu_kind: "performance",
-          cpus: 16,
-          memory_mb: 32768,
-        },
-        services: [
-          {
-            ports: [{ port: 443, handlers: ["tls", "http"] }],
-            protocol: "tcp",
-            internal_port: 3000,
-            autostart: false,
-            autostop: "off",
-          },
-        ],
-      },
-    }),
+    body: JSON.stringify({ name, config }),
   });
 
   const data = (await res.json()) as { id: string };
@@ -158,4 +199,25 @@ export async function listMachines(
 ): Promise<FlyMachineInfo[]> {
   const res = await flyFetch(`/apps/${app}/machines`, token);
   return (await res.json()) as FlyMachineInfo[];
+}
+
+export interface FlyVolumeInfo {
+  id: string;
+  name: string;
+  state: string;
+  size_gb: number;
+  region: string;
+  created_at: string;
+  attached_machine_id: string | null;
+}
+
+/**
+ * List all volumes for a Fly app.
+ */
+export async function listVolumes(
+  app: string,
+  token: string,
+): Promise<FlyVolumeInfo[]> {
+  const res = await flyFetch(`/apps/${app}/volumes`, token);
+  return (await res.json()) as FlyVolumeInfo[];
 }
