@@ -133,12 +133,19 @@ async function createNeonProject(apiKey: string): Promise<{ projectId: string; d
 // ── Netlify helpers ─────────────────────────────────────────────────────────
 
 function createNetlifySite(accountSlug: string): string {
+  const siteName = `todo-app-${Date.now()}`
   const output = execSync(
-    `LC_ALL=C npx netlify sites:create --account-slug ${accountSlug} --json`,
-    { cwd: appDir, encoding: 'utf-8', stdio: 'pipe' }
+    `LC_ALL=C npx netlify sites:create --account-slug ${accountSlug} --disable-linking -n ${siteName}`,
+    { cwd: appDir, encoding: 'utf-8', stdio: 'pipe', env: { ...process.env, LC_ALL: 'C' } }
   )
-  const parsed = JSON.parse(output)
-  return parsed.id || parsed.site_id
+  appendLog('Netlify sites:create output:\n' + output + '\n')
+  // Parse site ID from output like "Site ID:   xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  const siteIdMatch = output.match(/Site ID:\s+([a-f0-9-]+)/i)
+  if (siteIdMatch) return siteIdMatch[1]
+  // Fallback: look for site_id in the output
+  const fallbackMatch = output.match(/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/)
+  if (fallbackMatch) return fallbackMatch[1]
+  throw new Error('Could not parse site ID from netlify sites:create output')
 }
 
 function netlifyDeploy(): string {
@@ -277,6 +284,19 @@ async function main(): Promise<void> {
       console.log('Deploy failed (netlify) — see logs/deploy.log')
       process.exit(1)
     }
+  }
+
+  // ── Step 5b: Set DATABASE_URL on Netlify site ──────────────────────────
+  appendLog('=== Setting Netlify env vars ===\n')
+  try {
+    execSync(
+      `LC_ALL=C npx netlify env:set DATABASE_URL "${databaseUrl}"`,
+      { cwd: appDir, encoding: 'utf-8', stdio: 'pipe', env: { ...process.env, LC_ALL: 'C', NETLIFY_SITE_ID: siteId } }
+    )
+    appendLog('Set DATABASE_URL on Netlify site\n')
+  } catch (e: unknown) {
+    const err = e as { stdout?: string; stderr?: string }
+    appendLog('Warning: Could not set env var on Netlify: ' + (err.stdout || '') + (err.stderr || '') + '\n')
   }
 
   // ── Step 6: Build ──────────────────────────────────────────────────────

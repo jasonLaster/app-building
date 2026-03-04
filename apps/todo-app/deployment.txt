@@ -1,0 +1,15 @@
+url: https://69a8a6567be620d6a1490c47--todo-app-1772659647920.netlify.app
+site_id: 6fb1462b-4dcd-416a-985c-8683f792a394
+neon_project_id: cool-cake-64823997
+database_url: postgresql://neondb_owner:npg_31SeHwDcVIAl@ep-restless-silence-aizttqd1-pooler.c-4.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+--- Deployment 2026-03-04 ---
+Changes:
+- Initial deployment of Todo App
+- Main todo list page with add, edit, delete, and complete functionality
+- Filter bar with All/Active/Completed filters
+- Sort dropdown for ordering todos
+- Edit todo modal for modifying existing items
+- Header with app title and add-todo input
+- Neon Postgres database backend with Netlify Functions
+- Playwright test suite for all major components
+
