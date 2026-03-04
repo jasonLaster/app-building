@@ -1,0 +1,60 @@
+{
+  "tasks": [
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "Unpack: Write test specification"
+      ],
+      "timestamp": "2026-03-04T19:20:05.325Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeShared.md",
+      "subtasks": [
+        "Unpack: Write app shared code"
+      ],
+      "timestamp": "2026-03-04T19:20:01.948Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "Unpack: Write the app"
+      ],
+      "timestamp": "2026-03-04T19:19:58.634Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/writeScript.md",
+      "subtasks": [
+        "Unpack: Implement package scripts"
+      ],
+      "timestamp": "2026-03-04T19:19:55.535Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeTests.md",
+      "subtasks": [
+        "Unpack: Write Playwright tests"
+      ],
+      "timestamp": "2026-03-04T19:19:52.226Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "Unpack: Get all tests passing"
+      ],
+      "timestamp": "2026-03-04T19:19:48.944Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/deployment.md",
+      "subtasks": [
+        "Unpack: Deploy to production"
+      ],
+      "timestamp": "2026-03-04T19:19:43.994Z",
+      "app": "todo-app"
+    }
+  ]
+}
