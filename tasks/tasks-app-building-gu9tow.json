@@ -1,11 +1,101 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/writeScript.md",
+      "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteScriptDeploy: Implement the deploy script (scripts/deploy.ts) per skills/scripts/deploy.md"
+        "WriteTestModalPreFilled: Write test for Modal opens with all fields pre-filled from existing todo",
+        "WriteTestModalDefaultValues: Write test for Modal opens with default values for a todo with minimal data",
+        "WriteTestTitleRequired: Write test for Title field is a required text input",
+        "WriteTestEditTitleSave: Write test for Edit the title field and save",
+        "WriteTestPriorityDropdownOptions: Write test for Priority dropdown shows Low, Medium, and High options",
+        "WriteTestChangePrioritySave: Write test for Change priority and save",
+        "WriteTestSetDueDate: Write test for Set a due date via the date picker",
+        "WriteTestClearDueDate: Write test for Clear an existing due date",
+        "WriteTestAddNotes: Write test for Add notes to a todo",
+        "WriteTestEditNotes: Write test for Edit existing notes",
+        "WriteTestNotesMultiline: Write test for Notes textarea supports multiline text",
+        "WriteTestSaveAllChanges: Write test for Save button saves all changes and closes the modal",
+        "WriteTestSaveButtonAppearance: Write test for Save button appearance",
+        "WriteTestCancelDiscards: Write test for Cancel button discards changes and closes the modal",
+        "WriteTestCancelButtonAppearance: Write test for Cancel button appearance",
+        "WriteTestClickOutsideDiscards: Write test for Clicking outside the modal discards changes and closes it",
+        "WriteTestModalDialogOverlay: Write test for Modal displays as a dialog overlay"
       ],
-      "timestamp": "2026-03-04T20:21:11.634Z",
+      "timestamp": "2026-03-04T20:29:13.048Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeTests.md",
+      "subtasks": [
+        "WriteTestSortDropdownDefault: Write test for Sort dropdown displays with default Newest First selected",
+        "WriteTestSortDropdownOptions: Write test for Sort dropdown shows all four sort options",
+        "WriteTestSortNewestFirst: Write test for Sort by Newest First orders todos by creation date descending",
+        "WriteTestSortOldestFirst: Write test for Sort by Oldest First orders todos by creation date ascending",
+        "WriteTestSortPriority: Write test for Sort by Priority orders todos by priority level",
+        "WriteTestSortDueDate: Write test for Sort by Due Date orders todos by due date",
+        "WriteTestSortWithFilter: Write test for Sorting works in combination with active filter",
+        "WriteTestSortPersistsNewTodo: Write test for Sort selection persists when adding a new todo"
+      ],
+      "timestamp": "2026-03-04T20:29:05.792Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeTests.md",
+      "subtasks": [
+        "WriteTestFilterBarButtons: Write test for Filter bar displays All, Active, and Completed buttons",
+        "WriteTestAllFilter: Write test for All filter shows all todos",
+        "WriteTestActiveFilter: Write test for Active filter shows only incomplete todos",
+        "WriteTestCompletedFilter: Write test for Completed filter shows only completed todos",
+        "WriteTestSelectedFilterHighlight: Write test for Selected filter button is visually highlighted",
+        "WriteTestSwitchBackToAll: Write test for Switching from Active filter back to All shows all todos again",
+        "WriteTestClearCompleted: Write test for Clear Completed button removes all completed todos",
+        "WriteTestClearCompletedVisible: Write test for Clear Completed button is visible in the filter bar",
+        "WriteTestFilterPersistsToggle: Write test for Filter persists when a todo is toggled",
+        "WriteTestCompletingTodoCompletedFilter: Write test for Completing a todo while Completed filter is active shows it in the list"
+      ],
+      "timestamp": "2026-03-04T20:29:00.652Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeTests.md",
+      "subtasks": [
+        "WriteTestTodoItemDisplay: Write test for Todo item displays checkbox, text, priority badge, due date, and delete button",
+        "WriteTestPriorityBadgeColors: Write test for Priority badge displays correct colors for each level",
+        "WriteTestDueDateToday: Write test for Due date shows Today for todos due today",
+        "WriteTestDueDateTomorrow: Write test for Due date shows Tomorrow for todos due tomorrow",
+        "WriteTestDueDateOverdue: Write test for Due date shows Overdue for todos past their due date",
+        "WriteTestNoDueDate: Write test for Todo with no due date does not show a date label",
+        "WriteTestToggleCompletion: Write test for Toggle todo completion via checkbox",
+        "WriteTestUncheckCompleted: Write test for Uncheck a completed todo to mark it active again",
+        "WriteTestCompletedStyling: Write test for Completed todo has strikethrough text and reduced opacity",
+        "WriteTestDeleteButtonHover: Write test for Delete button appears on hover",
+        "WriteTestDeleteWithConfirmation: Write test for Delete a todo with confirmation",
+        "WriteTestCancelDeletion: Write test for Cancel todo deletion via confirmation prompt",
+        "WriteTestClickOpensEditModal: Write test for Clicking todo text opens the Edit Todo Modal",
+        "WriteTestEmptyState: Write test for Empty state when no todos exist"
+      ],
+      "timestamp": "2026-03-04T20:28:55.551Z",
+      "app": "todo-app"
+    },
+    {
+      "skill": "skills/tasks/build/writeTests.md",
+      "subtasks": [
+        "WriteTestHeaderDisplaysAppTitle: Write test for Header displays app title",
+        "WriteTestHeaderShowsCountIncomplete: Write test for Header shows count of incomplete todos when some are active",
+        "WriteTestHeaderShowsZeroCount: Write test for Header shows zero count when all todos are completed",
+        "WriteTestHeaderShowsSingularItem: Write test for Header shows correct count with singular item",
+        "WriteTestHeaderCountToggledComplete: Write test for Header count updates when a todo is toggled complete",
+        "WriteTestHeaderCountToggledActive: Write test for Header count updates when a todo is toggled back to active",
+        "WriteTestHeaderCountNewTodo: Write test for Header count updates when a new todo is added",
+        "WriteTestHeaderCountDeleted: Write test for Header count updates when a todo is deleted",
+        "WriteTestAddTodoPlaceholder: Write test for Add todo input displays placeholder text",
+        "WriteTestCreateTodoEnter: Write test for Create a new todo by pressing Enter",
+        "WriteTestEmptyInputNoCreate: Write test for Pressing Enter with empty input does not create a todo",
+        "WriteTestWhitespaceNoCreate: Write test for Pressing Enter with whitespace-only input does not create a todo",
+        "WriteTestInputClearsAfterCreate: Write test for Input clears after successfully creating a todo",
+        "WriteTestNewTodoAtTop: Write test for New todo appears at the top of the list"
+      ],
+      "timestamp": "2026-03-04T20:28:49.506Z",
       "app": "todo-app"
     },
     {
