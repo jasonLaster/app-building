@@ -3,30 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestModalPreFilled: Write test for Modal opens with all fields pre-filled from existing todo",
-        "WriteTestModalDefaultValues: Write test for Modal opens with default values for a todo with minimal data",
-        "WriteTestTitleRequired: Write test for Title field is a required text input",
-        "WriteTestEditTitleSave: Write test for Edit the title field and save",
-        "WriteTestPriorityDropdownOptions: Write test for Priority dropdown shows Low, Medium, and High options",
-        "WriteTestChangePrioritySave: Write test for Change priority and save",
-        "WriteTestSetDueDate: Write test for Set a due date via the date picker",
-        "WriteTestClearDueDate: Write test for Clear an existing due date",
-        "WriteTestAddNotes: Write test for Add notes to a todo",
-        "WriteTestEditNotes: Write test for Edit existing notes",
-        "WriteTestNotesMultiline: Write test for Notes textarea supports multiline text",
-        "WriteTestSaveAllChanges: Write test for Save button saves all changes and closes the modal",
-        "WriteTestSaveButtonAppearance: Write test for Save button appearance",
-        "WriteTestCancelDiscards: Write test for Cancel button discards changes and closes the modal",
-        "WriteTestCancelButtonAppearance: Write test for Cancel button appearance",
-        "WriteTestClickOutsideDiscards: Write test for Clicking outside the modal discards changes and closes it",
-        "WriteTestModalDialogOverlay: Write test for Modal displays as a dialog overlay"
-      ],
-      "timestamp": "2026-03-04T20:29:13.048Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestSortDropdownDefault: Write test for Sort dropdown displays with default Newest First selected",
         "WriteTestSortDropdownOptions: Write test for Sort dropdown shows all four sort options",
         "WriteTestSortNewestFirst: Write test for Sort by Newest First orders todos by creation date descending",
