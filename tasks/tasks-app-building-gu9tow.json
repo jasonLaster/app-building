@@ -1,17 +1,11 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/testSpec.md",
+      "skill": "skills/tasks/resolveConflicts.md",
       "subtasks": [
-        "PlanPageMainTodoList: Decide on components, add sections to docs/tests.md",
-        "PlanComponentHeader: Add test entries for Header",
-        "PlanComponentAddTodo: Add test entries for AddTodo",
-        "PlanComponentTodoList: Add test entries for TodoList",
-        "PlanComponentFilterBar: Add test entries for FilterBar",
-        "PlanComponentSortDropdown: Add test entries for SortDropdown"
+        "Resolve merge conflicts from auto-resolution with --theirs and verify the codebase is correct"
       ],
-      "timestamp": "2026-03-04T19:21:22.391Z",
-      "app": "todo-app"
+      "timestamp": "2026-03-04T20:01:36.866Z"
     },
     {
       "skill": "skills/tasks/build/testSpec.md",
