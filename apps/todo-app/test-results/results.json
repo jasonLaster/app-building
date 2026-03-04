@@ -60,20 +60,20 @@
   },
   "suites": [
     {
-      "title": "sort-dropdown.spec.ts",
-      "file": "sort-dropdown.spec.ts",
+      "title": "todo-list.spec.ts",
+      "file": "todo-list.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "SortDropdown",
-          "file": "sort-dropdown.spec.ts",
-          "line": 19,
+          "title": "TodoList",
+          "file": "todo-list.spec.ts",
+          "line": 25,
           "column": 6,
           "specs": [
             {
-              "title": "Sort dropdown displays with default Newest First selected",
+              "title": "Todo item displays checkbox, text, priority badge, due date, and delete button",
               "ok": true,
               "tags": [],
               "tests": [
@@ -88,12 +88,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 553,
+                      "duration": 1032,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:15.806Z",
+                      "startTime": "2026-03-04T21:25:42.659Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -101,13 +101,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-a13f6a4b5b19a9a9c9cc",
-              "file": "sort-dropdown.spec.ts",
-              "line": 20,
+              "id": "b7b3cd975b7404354c7b-77b602805b17d2f365bb",
+              "file": "todo-list.spec.ts",
+              "line": 26,
               "column": 3
             },
             {
-              "title": "Sort dropdown shows all four sort options",
+              "title": "Priority badge displays correct colors for each level",
               "ok": true,
               "tags": [],
               "tests": [
@@ -122,12 +122,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 236,
+                      "duration": 663,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:16.391Z",
+                      "startTime": "2026-03-04T21:25:43.723Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -135,13 +135,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-8880d56045232e2ee1b8",
-              "file": "sort-dropdown.spec.ts",
-              "line": 27,
+              "id": "b7b3cd975b7404354c7b-f3ee31cc5fbceb972aed",
+              "file": "todo-list.spec.ts",
+              "line": 59,
               "column": 3
             },
             {
-              "title": "Sort by Newest First orders todos by creation date descending",
+              "title": "Due date shows Today for todos due today",
               "ok": true,
               "tags": [],
               "tests": [
@@ -156,12 +156,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 633,
+                      "duration": 662,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:16.632Z",
+                      "startTime": "2026-03-04T21:25:44.392Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -169,13 +169,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-0bd428072380c398a03e",
-              "file": "sort-dropdown.spec.ts",
-              "line": 37,
+              "id": "b7b3cd975b7404354c7b-272971be2667744855a8",
+              "file": "todo-list.spec.ts",
+              "line": 98,
               "column": 3
             },
             {
-              "title": "Sort by Oldest First orders todos by creation date ascending",
+              "title": "Due date shows Tomorrow for todos due tomorrow",
               "ok": true,
               "tags": [],
               "tests": [
@@ -190,12 +190,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 425,
+                      "duration": 634,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:17.270Z",
+                      "startTime": "2026-03-04T21:25:45.061Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -203,13 +203,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-f4f8d5a82d8b372138dc",
-              "file": "sort-dropdown.spec.ts",
-              "line": 57,
+              "id": "b7b3cd975b7404354c7b-84ec973cd306b988fb6e",
+              "file": "todo-list.spec.ts",
+              "line": 115,
               "column": 3
             },
             {
-              "title": "Sort by Priority orders todos by priority level",
+              "title": "Due date shows Overdue for todos past their due date",
               "ok": true,
               "tags": [],
               "tests": [
@@ -224,12 +224,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 425,
+                      "duration": 626,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:17.700Z",
+                      "startTime": "2026-03-04T21:25:45.701Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -237,13 +237,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-51d9febb39039bebb9ce",
-              "file": "sort-dropdown.spec.ts",
-              "line": 80,
+              "id": "b7b3cd975b7404354c7b-be26c89a7e303b3b2502",
+              "file": "todo-list.spec.ts",
+              "line": 132,
               "column": 3
             },
             {
-              "title": "Sort by Due Date orders todos by due date",
+              "title": "Todo with no due date does not show a date label",
               "ok": true,
               "tags": [],
               "tests": [
@@ -258,12 +258,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 426,
+                      "duration": 547,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:18.130Z",
+                      "startTime": "2026-03-04T21:25:46.333Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -271,13 +271,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-b3423d40dbf2525cc00b",
-              "file": "sort-dropdown.spec.ts",
-              "line": 102,
+              "id": "b7b3cd975b7404354c7b-b6d2ae1a04e30a5a61a8",
+              "file": "todo-list.spec.ts",
+              "line": 149,
               "column": 3
             },
             {
-              "title": "Sorting works in combination with active filter",
+              "title": "Toggle todo completion via checkbox",
               "ok": true,
               "tags": [],
               "tests": [
@@ -292,12 +292,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 779,
+                      "duration": 1021,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:18.562Z",
+                      "startTime": "2026-03-04T21:25:46.886Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -305,13 +305,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-060f2b78ea685faff471",
-              "file": "sort-dropdown.spec.ts",
-              "line": 127,
+              "id": "b7b3cd975b7404354c7b-5576385767852bbd7943",
+              "file": "todo-list.spec.ts",
+              "line": 157,
               "column": 3
             },
             {
-              "title": "Sort selection persists when adding a new todo",
+              "title": "Uncheck a completed todo to mark it active again",
               "ok": true,
               "tags": [],
               "tests": [
@@ -326,12 +326,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 814,
+                      "duration": 1038,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-04T21:24:19.346Z",
+                      "startTime": "2026-03-04T21:25:47.914Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -339,9 +339,213 @@
                   "status": "expected"
                 }
               ],
-              "id": "7709b2474f8755145dc0-8b3b0459598b502d71ae",
-              "file": "sort-dropdown.spec.ts",
-              "line": 156,
+              "id": "b7b3cd975b7404354c7b-d38b71712cf000070deb",
+              "file": "todo-list.spec.ts",
+              "line": 184,
+              "column": 3
+            },
+            {
+              "title": "Completed todo has strikethrough text and reduced opacity",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 565,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:25:48.960Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7b3cd975b7404354c7b-f6dbe426678033889b6d",
+              "file": "todo-list.spec.ts",
+              "line": 215,
+              "column": 3
+            },
+            {
+              "title": "Delete button appears on hover",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 956,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:25:49.532Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7b3cd975b7404354c7b-938312caa8af1f9b636a",
+              "file": "todo-list.spec.ts",
+              "line": 229,
+              "column": 3
+            },
+            {
+              "title": "Delete a todo with confirmation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1075,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:25:50.495Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7b3cd975b7404354c7b-72495fc13b9dcc1872ed",
+              "file": "todo-list.spec.ts",
+              "line": 245,
+              "column": 3
+            },
+            {
+              "title": "Cancel todo deletion via confirmation prompt",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 722,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:25:51.578Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7b3cd975b7404354c7b-d46d6f818b191c882a66",
+              "file": "todo-list.spec.ts",
+              "line": 284,
+              "column": 3
+            },
+            {
+              "title": "Clicking todo text opens the Edit Todo Modal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 491,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:25:52.306Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7b3cd975b7404354c7b-13b3f9806218ee63b380",
+              "file": "todo-list.spec.ts",
+              "line": 317,
+              "column": 3
+            },
+            {
+              "title": "Empty state when no todos exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 586,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-04T21:25:52.802Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b7b3cd975b7404354c7b-9d83b2cc45204cfa0a93",
+              "file": "todo-list.spec.ts",
+              "line": 340,
               "column": 3
             }
           ]
@@ -351,9 +555,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-04T21:24:15.354Z",
-    "duration": 4840.0199999999995,
-    "expected": 8,
+    "startTime": "2026-03-04T21:25:42.211Z",
+    "duration": 11202.728000000001,
+    "expected": 14,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

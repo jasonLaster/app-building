@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/sort-dropdown.spec.ts"
-      ],
-      "timestamp": "2026-03-04T20:43:09.111Z",
-      "app": "todo-app"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/todo-list.spec.ts"
       ],
       "timestamp": "2026-03-04T20:43:05.721Z",
