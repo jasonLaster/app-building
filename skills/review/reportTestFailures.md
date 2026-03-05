@@ -49,7 +49,9 @@ If a log has no test failures, just write the Summary section with TEST_FAILURES
 ### Clustered Failures
 
 When 5+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
-single cluster entry instead of repeating the full template for each:
+single cluster entry instead of repeating the full template for each. The cluster heading
+name (e.g., `Failure Cluster: neon-inherited-data`) serves as the cluster ID when using
+this collapsed format — an explicit `ROOT_CAUSE_CLUSTER` field is not needed in each entry:
 
 ```
 ### Failure Cluster: <ROOT_CAUSE_CLUSTER> (<count> tests)
@@ -94,6 +96,7 @@ Compile all analysis files into a single report with these sections:
 - Recording availability rate (failures where recording was available / total failures)
 - Debugging efficiency (failures where Replay was used but error output alone would have sufficed — helps optimize when to use Replay vs trust error output)
 - Cascading fixes (count of single code changes that resolved multiple test failures — signals high-value debugging efforts)
+- Self-inflicted failures (count of failures caused by the agent's own fix attempts during the session, from SELF_INFLICTED field — helps measure fix quality)
 - Total test re-runs across all logs (number of test re-runs needed to achieve all-pass)
 - Unique root causes (count of distinct ROOT_CAUSE_CLUSTER values + unclustered failures — when a cluster of N tests fails due to 1 root cause, count it as 1 unique root cause, not N failures)
 
@@ -118,7 +121,9 @@ they appeared in, and whether a single fix resolved them all.
 - When was Replay NOT used and why?
 - Common debugging strategies that worked
 - Common debugging strategies that failed
-- Recurring failure categories
+- Recurring failure categories — include a "Failure Category Distribution" table:
+  | Category | Count | % of Total |
+  showing the breakdown by FAILURE_CATEGORY. This is one of the most actionable outputs.
 
 ### 4. Recommendations
 Target these files with specific, actionable recommendations:

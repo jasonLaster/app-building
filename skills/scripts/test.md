@@ -152,4 +152,7 @@ preferable to increasing `actionTimeout` globally, since it only affects known s
   summary line.
 - The `RECORD_REPLAY_API_KEY` env var is already set in the container.
 - Reset the database between tests by truncating all app tables and re-running the seed script.
-  This ensures each test starts with a clean, known dataset.
+  This ensures each test starts with a clean, known dataset. Use `truncateAndSeed` (truncate
+  all tables then seed) rather than just `seedDatabase` — Neon branches inherit data from their
+  parent branch, and tests accumulate data across runs. Without truncation, tests see unexpected
+  rows from prior runs or inherited branch data, which is the #1 cause of test failures.

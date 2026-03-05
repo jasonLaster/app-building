@@ -37,11 +37,23 @@ ls ~/.replay/runtimes/chrome-linux/chrome
 If the Replay browser is not installed, run `npx replayio install` before any test execution.
 Without it, test failures produce no recordings and debugging is impossible.
 
-### 4. Verify dependencies
+### 4. Clear stale Replay recordings
 
 ```bash
-ls node_modules/@neondatabase/serverless 2>/dev/null || npm install
+npx replayio remove --all
 ```
+
+Old recordings from prior runs cause confusion when parsing results. Always clear them
+before starting a new test run.
+
+### 5. Verify dependencies
+
+```bash
+ls node_modules/@neondatabase/serverless 2>/dev/null || npm install --legacy-peer-deps
+```
+
+Use `--legacy-peer-deps` to avoid peer dependency conflicts with `netlify-cli` and ESLint
+packages. This is the standard approach for `npm install` in this ecosystem.
 
 ## Pre-Deploy Preflight
 

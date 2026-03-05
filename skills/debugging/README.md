@@ -101,6 +101,12 @@ always to add more specific selectors. Common fixes:
 Replay is not needed — the error message tells you exactly how many elements matched and
 what the ambiguous locator was.
 
+### Replay decision tree for data issues
+Use Replay when error output doesn't explain *why* the wrong data exists (e.g., unexpected
+records from an unknown source, API returning data that shouldn't be there). Skip Replay when
+error output shows a clear count mismatch with an obvious accumulation pattern (e.g., "expected
+3, got 30+" — this is almost certainly missing cleanup).
+
 ### Data contamination triage
 When Playwright error output shows expected count X but received Y (e.g., "expected 3 but
 received 4", "expected $7.00 but got $8.50"), check before reaching for Replay:

@@ -62,6 +62,22 @@ deployment, summarize the initial feature set.
 
 After deploying, you MUST perform a functional test to verify the app actually works in production.
 A deployment that serves HTTP 200 is not sufficient — the app must display real data and support updates.
+
+### Quick API Verification (Before Full Tests)
+
+Before running the full Playwright deployment test, verify that API endpoints are responding
+correctly using `curl`. This catches environment variable mismatches (e.g., missing `DATABASE_URL`)
+much faster than a full test suite:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>
+```
+
+If this returns 500, fix the environment variables before proceeding. See
+`skills/scripts/deploy-verification.md` for the full verification checklist.
+
+### Playwright Deployment Test
+
 The deployment test lives at `tests/deployment.spec.ts`, separate from the integration tests.
 It must be excluded from regular `npm run test` runs by adding it to `testIgnore` in
 `playwright.config.ts`:

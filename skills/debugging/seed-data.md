@@ -22,6 +22,24 @@ expected related data seeded in the ephemeral database branch.
 5. **`SearchSources`** — Check if the rendering code was hit at all. If entry-rendering code
    has 0 hits, the component received an empty data set and rendered nothing.
 
+## Quick Triage
+
+### Count-based assertion failures are almost always data contamination
+When a test expects N rows but gets more (e.g., "expected 2 rows, got 30+"), check for missing
+cleanup or accumulated data before reaching for Replay. Common causes:
+- A prior test creates records without cleanup
+- `beforeEach` cleanup was removed or is missing
+- Seed data inserts without truncating first
+
+These failures are self-diagnosing from error output alone — Replay is unnecessary.
+
+### Neon branch inheritance
+Ephemeral Neon branches inherit all data from the parent branch. Using `seedDatabase()` alone
+(which only inserts) will result in duplicate or unexpected data. **Always use
+`truncateAndSeed()`** (truncate all tables, then insert) to ensure a clean starting state.
+Without truncation, tests see inherited parent data plus newly seeded data, causing count
+mismatches and unexpected records.
+
 ## Common Root Causes (from observed failures)
 
 ### Navigation helper lands on a record with no related data

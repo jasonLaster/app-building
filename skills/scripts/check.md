@@ -81,6 +81,13 @@ as a problem with the check script itself.
 
 ## Common Issues
 
+- **`.netlify/functions-serve/` lint errors**: The `.netlify/functions-serve/` directory contains
+  build artifacts that may produce lint errors. These errors are not actionable — do not attempt
+  to fix them. If `npm run check` reports lint failures only in `.netlify/functions-serve/` paths,
+  they can be safely ignored. To prevent these from appearing, add `.netlify` to the ESLint
+  ignore configuration (e.g., `ignorePatterns: ['.netlify']` in `.eslintrc` or an equivalent
+  entry in `eslint.config.*`).
+
 - **`@neondatabase/serverless` resolution errors**: If `tsc` reports module resolution failures
   for `@neondatabase/serverless`, verify the package is installed: `ls node_modules/@neondatabase/serverless`.
   If missing, run `npm install` from the app directory. Note that `tsx`-based scripts (e.g.,

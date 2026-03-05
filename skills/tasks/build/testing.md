@@ -270,6 +270,11 @@ When testing the app after deployment, use the Replay browser to record the app 
   restart the dev server before re-running tests. The dev server may cache old function bundles.
   Kill background processes with `pkill -f "netlify"` and `pkill -f "vite"` before restarting.
 
+- When a checkDirectives finding suggests removing test code (e.g., "redundant" cleanup,
+  "unnecessary" helpers), always run the affected tests *before* committing the removal to
+  confirm the change is safe. Cleanup code that looks redundant may be essential for test
+  isolation.
+
 - All browsers must run headless. Never use Xvfb, never set `DISPLAY`, never use the `replayio record`
   CLI (it launches a headed browser). Use `@replayio/playwright` for recordings.
 
@@ -338,7 +343,9 @@ When testing the app after deployment, use the Replay browser to record the app 
   to ensure idempotency. Without truncation, re-running seeds causes duplicate key errors.
   Every test file's `beforeAll`/`beforeEach` should TRUNCATE relevant tables before inserting
   seed data, not just delete known IDs. Hardcoded ID deletion breaks when Neon branches
-  inherit data from parent branches.
+  inherit data from parent branches. **Always use `truncateAndSeed()`, never `seedDatabase()`
+  alone** — Neon ephemeral branches inherit parent data, so insert-only seeding produces
+  duplicates.
 - The Vite dev server cold start can cause the first test in a suite to timeout. Consider adding
   a warm-up navigation in `beforeAll` or increasing the first test's timeout to account for
   cold start latency.
@@ -408,6 +415,9 @@ When testing the app after deployment, use the Replay browser to record the app 
   test's API calls complete after the next test has started, polluting the data state. Use
   `test.describe.serial` for tests that share mutable state, or ensure API calls are fully
   settled before test completion.
+- Any test that creates records (orders, customers, etc.) should include a `beforeEach`
+  cleanup helper (e.g., `deleteAllOrders()`) to prevent data accumulation across tests.
+  Add this from the start when writing tests — don't wait for contamination failures.
 - Any test that deletes all records (e.g., empty state tests) must be in a
   `test.describe.serial` block at the end of the describe. Destructive tests placed earlier
   corrupt state for subsequent tests in the same file.
