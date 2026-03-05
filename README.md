@@ -23,21 +23,50 @@ Containers can run locally or remotely.
 npm install
 ```
 
-Copy `.env.example` to `.env` and fill in all required API keys.
+Copy `.env.example` to `.env` and fill in the required values:
+
+| Variable | Required | Description |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | Yes | Anthropic API key for Claude |
+| `GITHUB_TOKEN` | Yes | GitHub personal access token with **`repo`** scope |
+| `REPO_URL` | Yes | HTTPS URL of the target repo, e.g. `https://github.com/your-org/your-repo` — must be HTTPS, not SSH |
+| `NETLIFY_AUTH_TOKEN` | Yes | Netlify auth token for deploying apps |
+| `NETLIFY_ACCOUNT_SLUG` | Yes | Your Netlify account slug |
+| `NEON_API_KEY` | Yes | Neon API key for database provisioning |
+| `FLY_API_TOKEN` | No | Only needed when using `--remote` to run containers on Fly.io |
+| `UPLOADTHING_TOKEN` | No | For apps that need file uploads |
+| `RESEND_API_KEY` | No | For apps that send email |
+
+### GitHub token
+
+Create a token at github.com/settings/tokens and enable the **`repo`** scope (the top-level checkbox). This gives the agent the read/write access it needs to clone your repo and push commits back.
+
+### Branch setup
+
+The agent will not run when checked out on `main` — this is intentional to prevent accidental pushes to the main branch. Before running the agent, make sure you're on a feature branch:
+
+```bash
+git checkout -b feature/my-app
+git push -u origin feature/my-app
+```
+
+The agent uses your current branch by default. Use `--branch` to override and target a different branch than the one you have checked out locally.
 
 ## Running the Agent
 
-`npm run agent` starts a new container with the running agent. By default the container is local, add `--remote` to spawn the container remotely. This requires FLY_API_TOKEN in .env
+`npm run agent` starts a new container with the running agent. By default the container is local, add `--remote` to spawn the container remotely. This requires `FLY_API_TOKEN` in `.env`.
 
 ### Detached mode
 
 ```bash
-npm run agent
 npm run agent -- -p "<prompt>"
-npm run agent -- --branch dev --push-branch feature/xyz -p "<prompt>"
+npm run agent -- --branch feature/my-app -p "<prompt>"
+npm run agent -- --branch feature/my-app --push-branch feature/xyz -p "<prompt>"
 ```
 
 Starts a container, optionally queues a prompt, then detaches. The container processes the prompt followed by any pending tasks, commits and pushes results, then exits.
+
+Use `--push-branch` if you want to clone from one branch but push results to a different one.
 
 ### Interactive mode
 
