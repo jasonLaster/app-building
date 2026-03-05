@@ -99,6 +99,7 @@ Compile all analysis files into a single report with these sections:
 - Self-inflicted failures (count of failures caused by the agent's own fix attempts during the session, from SELF_INFLICTED field — helps measure fix quality)
 - Total test re-runs across all logs (number of test re-runs needed to achieve all-pass)
 - Unique root causes (count of distinct ROOT_CAUSE_CLUSTER values + unclustered failures — when a cluster of N tests fails due to 1 root cause, count it as 1 unique root cause, not N failures)
+- Failure phase distribution (breakdown by FAILURE_PHASE — e.g., writeTests: 5, fixTests: 72, deployment: 3. Highlights if failures are concentrated in a specific phase)
 
 ### 2. Failure Table
 A markdown table with columns:
@@ -124,6 +125,13 @@ they appeared in, and whether a single fix resolved them all.
 - Recurring failure categories — include a "Failure Category Distribution" table:
   | Category | Count | % of Total |
   showing the breakdown by FAILURE_CATEGORY. This is one of the most actionable outputs.
+- **Self-inflicted failure rate** — prominently report the percentage of failures that were
+  self-inflicted (from SELF_INFLICTED field). This is a key quality signal for the test-writing
+  process. A high rate (>50%) indicates systematic issues with how tests are written.
+- **Test Isolation Issues** — when data-contamination + strict-mode + seed-data-mismatch
+  categories collectively account for >50% of failures, include a dedicated subsection
+  analyzing test isolation patterns: which spec files are affected, whether serial execution
+  is the root cause, and what isolation strategies would have prevented the failures.
 
 ### 4. Recommendations
 Target these files with specific, actionable recommendations:

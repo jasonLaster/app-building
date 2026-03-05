@@ -72,7 +72,14 @@ When `npm run check` fails, read `logs/check.log` to determine which step failed
   - Multiple errors in the same file: Fix the first error — later errors are often cascading.
 - **Lint failures** (`eslint`): Look for rule names in the output (e.g., `no-unused-vars`).
   Many lint errors are auto-fixed by `--fix`. If errors persist after the run, they require
-  manual fixes.
+  manual fixes. Common error-level rules that need manual fixes:
+  - `no-unused-vars` / `@typescript-eslint/no-unused-vars`: Remove the unused import or variable,
+    or prefix with `_` if it is intentionally unused (e.g., `_event`).
+  - `no-explicit-any`: Replace `any` with a specific type. Use `unknown` if the type is truly
+    unknown and add type narrowing where the value is used.
+  - `prefer-const`: Change `let` to `const` for variables that are never reassigned.
+  - `no-empty`: Add a comment inside empty catch/if blocks (e.g., `// intentionally empty`)
+    or remove the empty block.
 - **Both fail**: Fix typecheck errors first. Lint errors often disappear once types are correct.
 
 During iterative development, typecheck/lint failures are expected. They are part of the

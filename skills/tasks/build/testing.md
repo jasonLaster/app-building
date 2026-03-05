@@ -252,6 +252,31 @@ The Replay recording contains the actual runtime state — use it.
 
 When testing the app after deployment, use the Replay browser to record the app and debug any problems.
 
+## Test Isolation Mandates
+
+These rules are mandatory for all test files. Violations are the most common source of test
+failures (~45% of observed failures come from shared database state).
+
+1. **No hardcoded entity counts in serial test files.** Tests MUST use relative assertions
+   (e.g., `toBeGreaterThan(0)`, "count decreased by 1") or query initial count before
+   asserting. Never hardcode expected values like "4 visits" or "3 customers".
+
+2. **Destructive tests go last.** Tests that delete all entities (empty state tests) or
+   rename entities MUST be ordered at the end of their describe block, or use
+   `test.describe.serial` with explicit dependencies. Placing them earlier corrupts state
+   for subsequent tests.
+
+3. **Unique entity names per test.** When tests create entities, use unique names
+   (e.g., include test name or timestamp) to avoid strict mode collisions from duplicate
+   data accumulating across serial test execution.
+
+4. **TRUNCATE before seeding (Neon branches).** Seed scripts MUST call `truncateAllTables()`
+   before inserting data. Neon branch creation inherits parent data, so insert-only seeding
+   produces duplicates. Always use `truncateAndSeed()`, never `seedDatabase()` alone.
+
+5. **Relative or data-independent assertions.** Tests that verify data after mutations must
+   query current state before the action and assert relative changes, not absolute values.
+
 ## Directives
 
 - Do NOT manually start `netlify dev` for testing. The test script manages the dev server

@@ -117,6 +117,37 @@ received 4", "expected $7.00 but got $8.50"), check before reaching for Replay:
 If the expected-vs-actual mismatch is clear from the error output, Replay is unnecessary.
 This pattern accounted for ~45% of failures in observed sessions.
 
+### Serial test data contamination
+When tests fail with unexpected counts, missing entities, or strict mode violations (e.g.,
+"expected 3, got 5" or "strict mode violation: 2 elements match"), first check if earlier
+tests in the same file created, renamed, or deleted entities. Serial test execution
+accumulates state — a test that creates a customer makes later tests see one extra customer;
+a test that renames an entity makes later tests fail to find the original name.
+
+**Diagnosis without Replay**: The error message shows an expected-vs-actual mismatch. Look at
+the test execution order: if an earlier test creates/deletes/renames records, the mismatch
+is explained by accumulated state. No recording is needed.
+
+**Fix patterns**:
+- Move destructive tests (deletes, renames) to the end of describe blocks
+- Use relative assertions ("count increased by 1") instead of absolute ("count is 4")
+- Use unique entity names per test to avoid strict mode collisions
+- Make later tests query current state before asserting
+
+This was the root cause of ~45% of observed test failures.
+
+### Redux state replacement
+When inline edit tests fail with missing nested data (e.g., arrays or related fields
+disappearing after an update), check if the Redux slice's `fulfilled` reducer replaces the
+entire entity instead of merging updated fields. For example, `updateTank.fulfilled` setting
+`state.currentTank = action.payload` will overwrite nested arrays that weren't included in
+the API response.
+
+**Diagnosis without Replay**: Read the Redux slice source code for the `fulfilled` handler.
+If it assigns the whole payload instead of spreading/merging, that's the bug.
+
+**Fix**: Change the reducer to merge fields: `state.currentEntity = { ...state.currentEntity, ...action.payload }`.
+
 ### Clear backend error in test output
 When Playwright error output includes the expected and actual values and the mismatch points
 directly to a backend bug (e.g., API returned wrong values, validation rejected valid input),
