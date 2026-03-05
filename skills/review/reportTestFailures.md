@@ -30,6 +30,8 @@ DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "p
 DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
 REPLAY_NECESSARY: yes/no/unknown (when REPLAY_USED is yes, was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit when REPLAY_USED is no.)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). Omit if this failure has a unique root cause.>
+SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure)
 
 #### Replay Usage (if REPLAY_USED is yes)
 OUTCOME: <what the Replay analysis revealed>
@@ -93,6 +95,7 @@ Compile all analysis files into a single report with these sections:
 - Debugging efficiency (failures where Replay was used but error output alone would have sufficed — helps optimize when to use Replay vs trust error output)
 - Cascading fixes (count of single code changes that resolved multiple test failures — signals high-value debugging efforts)
 - Total test re-runs across all logs (number of test re-runs needed to achieve all-pass)
+- Unique root causes (count of distinct ROOT_CAUSE_CLUSTER values + unclustered failures — when a cluster of N tests fails due to 1 root cause, count it as 1 unique root cause, not N failures)
 
 ### 2. Failure Table
 A markdown table with columns:

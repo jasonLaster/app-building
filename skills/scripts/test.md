@@ -99,6 +99,14 @@ tests during development and debugging.
   - 0: All tests passed.
   - Non-zero: Test failures (matches Playwright's exit code).
 
+## Reading Test Results
+
+Always determine pass/fail status from the log file (`logs/test-run-N.log`) or
+`test-results/results.json` — **never from stdout**. The Playwright output format combined
+with Replay recording can show "0 tests" on stdout even when tests actually ran and passed.
+This misleading output has caused repeated wasted investigation. If stdout says "0 tests",
+check the log file before concluding that tests didn't run.
+
 ## Parsing Test Failures
 
 To identify failing tests, parse `test-results/results.json` rather than grepping raw log

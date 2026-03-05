@@ -23,6 +23,11 @@ Ensure the locale workaround is in place — the deploy script must prefix Netli
 with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/deploy.md` §
 "Locale Workaround". Also verify dependencies are installed: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
 
+Pre-deployment checklist:
+1. Verify `DATABASE_URL` is set in `.env` (populated from `deployment.txt` or newly created).
+2. Verify the DB has been seeded with production data (the deploy script handles first-run seeding).
+3. Ensure the deploy script runs fully non-interactively — no CLI prompts that hang in CI.
+
 Then run `npm run deploy` from the app directory. See `skills/scripts/deploy.md` for the
 full script specification. The script handles database creation/sync, Netlify site
 creation/update, and writes the deployed URL to `deployment.txt`.

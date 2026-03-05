@@ -101,6 +101,16 @@ always to add more specific selectors. Common fixes:
 Replay is not needed — the error message tells you exactly how many elements matched and
 what the ambiguous locator was.
 
+### Data contamination triage
+When Playwright error output shows expected count X but received Y (e.g., "expected 3 but
+received 4", "expected $7.00 but got $8.50"), check before reaching for Replay:
+1. Does a prior test create or delete records without cleanup?
+2. Does the test assert a hardcoded record count instead of using relative assertions?
+3. Is the seed data inserting duplicates (missing TRUNCATE before INSERT)?
+
+If the expected-vs-actual mismatch is clear from the error output, Replay is unnecessary.
+This pattern accounted for ~45% of failures in observed sessions.
+
 ## Quick Reference: Which Tool to Start With
 
 | Symptom | Start with |

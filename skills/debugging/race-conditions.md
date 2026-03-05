@@ -55,6 +55,11 @@ In development mode, React strict mode runs effects twice. If an effect makes an
 (e.g., fetching data on mount), the second call's response can arrive and overwrite state
 set by earlier interactions.
 
+**Diagnosis tool sequence**: When a test hangs on an element action or shows stale data after
+a mutation, use `PlaywrightSteps → Screenshot → NetworkRequest` to check if concurrent API
+calls from StrictMode double-mounts are resetting state. NetworkRequest will show interleaved
+request ordering that reveals the race.
+
 **Fix**: Ensure effects are idempotent, or use abort controllers to cancel stale requests.
 
 ### Cross-test data contamination

@@ -103,6 +103,12 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
   - Verify that API endpoints are healthy before running deployment tests. See
     `skills/scripts/deploy-verification.md`.
 
+- When testing that an action adds or removes items from a list or table, assert relative changes
+  (e.g., count increased by 1) rather than hardcoding absolute expected counts. Capture the initial
+  count before the action and assert the new count equals `initialCount + 1` (or `- 1` for deletion).
+  Absolute counts couple the test to seed data and break when prior tests or setup changes alter the
+  starting state.
+
 - When a test spec entry describes editing or interacting with a specific field (e.g., "edit client
   field", "change value"), the test must exercise that exact field with corresponding actions and
   assertions. Do not write a test that only verifies a subset of the fields or operations mentioned
@@ -115,6 +121,32 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
   with the new credentials and verify the authenticated state. This catches issues like email
   confirmation requirements, incorrect error handling, and session establishment failures that
   unit-level or mocked tests miss.
+
+- When the spec says a value is automatically derived or auto-selected (e.g., "defaults to today",
+  "auto-selects the current user"), the test must verify that the auto-selection works on its own —
+  navigate to the page and assert the correct value is already selected without manually choosing it.
+  If the test manually selects the value before asserting, it bypasses the auto-selection code path
+  and will not catch bugs like format mismatches or incorrect comparisons.
+
+- When a test spec entry says a value should be displayed in a specific format (e.g., a formatted
+  date like "Mon, Mar 4", a currency like "$51.50"), the test must assert on the actual text content
+  of the element, not just that the element is visible or present. Checking only visibility will not
+  catch rendering bugs where the value is malformed (e.g., "Invalid Date", "$NaN", "undefined").
+  Use `.toHaveText()` or `.toContainText()` with the expected formatted value or a regex pattern.
+
+- When a test file's describe block contains tests that perform destructive mid-test operations
+  (e.g., deleting records via API requests during the test body) that would invalidate the
+  preconditions of other tests in the same block, wrap those tests in `test.describe.serial`
+  to guarantee sequential execution. With `fullyParallel: true` in the Playwright config,
+  tests within a plain `test.describe` can run concurrently or in any order, so a destructive
+  test may execute before or alongside tests that depend on the destroyed data.
+
+- When a test changes a selection (e.g., picks a different item from a dropdown) and then
+  performs a dependent action (e.g., deletes a row, checks a summary), the test must assert
+  that the selection is still the expected value before proceeding with the dependent action.
+  Async effects (especially under React StrictMode double-mount) can reset selections after
+  the user has changed them. If the test does not re-verify the selection, it may silently
+  operate on the wrong data, passing when the app is actually broken.
 
 - Auth flows that involve email-based verification (email confirmation, password reset) must
   have dedicated tests that exercise the real production code path — not the IS_TEST bypass.
@@ -143,8 +175,15 @@ directives) rather than importing `@neondatabase/serverless` directly.
 ### Test design rules
 
 - The database is reset between each test, so each test starts with a clean seed.
-- Never hardcode database IDs in tests. Query the UI or API to discover IDs for the records
-  you need to interact with.
+- Every test file that touches the database MUST rely on the test script's between-test DB
+  reset (truncate + re-seed). If the test script's reset is insufficient for a specific
+  scenario, add an explicit `beforeEach` hook that performs additional cleanup via API calls.
+  Missing DB cleanup between tests is the #1 cause of test isolation failures and retries.
+- Never hardcode database IDs in tests — including in cleanup and setup helpers. Query the
+  UI or API to discover IDs for the records you need to interact with. Cleanup helpers that
+  delete records must fetch ALL records of that type via the API and delete each one, rather
+  than deleting a hardcoded list of known seed IDs. Hardcoded ID lists silently miss records
+  created by prior tests, breaking data isolation.
 - Each spec file must contain **20 or fewer** `test()` calls. When a page has more tests,
   split them across multiple spec files grouped by feature area (e.g., `status-page-containers.spec.ts`,
   `status-page-webhook.spec.ts`). Consolidate similar tests where possible before splitting.

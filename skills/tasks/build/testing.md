@@ -336,12 +336,17 @@ When testing the app after deployment, use the Replay browser to record the app 
   previous tests. Each test starts with a fresh seed.
 - Seed scripts must always call `truncateAllTables()` (or equivalent) before inserting data
   to ensure idempotency. Without truncation, re-running seeds causes duplicate key errors.
+  Every test file's `beforeAll`/`beforeEach` should TRUNCATE relevant tables before inserting
+  seed data, not just delete known IDs. Hardcoded ID deletion breaks when Neon branches
+  inherit data from parent branches.
 - The Vite dev server cold start can cause the first test in a suite to timeout. Consider adding
   a warm-up navigation in `beforeAll` or increasing the first test's timeout to account for
   cold start latency.
 - Avoid hardcoding expected values in assertions. Tests that hardcode specific counts (e.g.,
   `expect 1 remaining task`) or specific names (e.g., `"David Lee"`) break when test data
   changes. Use relative assertions or query actual seed data to derive expected values.
+  Tests that verify "a new item was added" must count items before and after the action,
+  not assert a hardcoded total.
 - Validate that seed data exists before asserting on it. If a test expects a specific assignee
   name or record count, verify the data is present first. This catches seed data mismatches
   early instead of producing confusing assertion failures.
@@ -381,7 +386,9 @@ When testing the app after deployment, use the Replay browser to record the app 
 - Establish a consistent date handling convention: components should always format dates from
   ISO timestamps (what the API returns), and date inputs should always use `YYYY-MM-DD`
   format. Mismatches between API response format and component expectations are a recurring
-  source of failures.
+  source of failures. All date comparisons in frontend code and tests must normalize to
+  `YYYY-MM-DD` format before comparing, using `.split('T')[0]` or equivalent, since Postgres
+  TIMESTAMP/DATE columns may return ISO strings with time components.
 - When filtering by status values like "Active"/"Inactive", use exact text matching
   (e.g., `getByRole('option', { name: /^Active$/ })`) to avoid Playwright strict-mode
   violations from substring collisions (e.g., "Active" matching both "Active" and "Inactive").
@@ -393,3 +400,6 @@ When testing the app after deployment, use the Replay browser to record the app 
   test's API calls complete after the next test has started, polluting the data state. Use
   `test.describe.serial` for tests that share mutable state, or ensure API calls are fully
   settled before test completion.
+- Any test that deletes all records (e.g., empty state tests) must be in a
+  `test.describe.serial` block at the end of the describe. Destructive tests placed earlier
+  corrupt state for subsequent tests in the same file.

@@ -53,6 +53,14 @@ During iterative development when you only need to verify types (not lint), you 
 step and is useful when making rapid type-level changes. Always run the full `npm run check`
 before committing.
 
+## Partial Success (Lint Warnings)
+
+`npm run check` may exit 0 (success) while still producing lint warnings in `logs/check.log`.
+Warnings do not block the build or commit. Only lint **errors** cause a non-zero exit code.
+When reviewing `check.log`, distinguish between warnings (informational, no action required)
+and errors (must be fixed before committing). Common warning-level rules include
+`no-console` and `@typescript-eslint/no-explicit-any`.
+
 ## Interpreting Failures
 
 When `npm run check` fails, read `logs/check.log` to determine which step failed and why:

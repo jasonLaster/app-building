@@ -47,6 +47,12 @@ and playwright tests.
 
 ## Running tests
 
+Before running any tests, kill stale processes that may be holding ports:
+```bash
+pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null; sleep 1
+```
+Stale `netlify dev` or `node` processes from prior runs are a frequent cause of test failures.
+
 Make sure all tests pass. Read `skills/tasks/build/testing.md` to understand how to run tests and debug failures.
 
 ## Tips

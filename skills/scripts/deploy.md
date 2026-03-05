@@ -124,9 +124,11 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   `./node_modules/.bin/netlify deploy --prod ...`
 - **Both invocation methods fail**: The CLI may not be installed globally or locally. Install
   it explicitly: `npm install netlify-cli --save-dev`, then use `npx netlify`.
-- **Interactive prompts**: Netlify CLI commands like `netlify sites:create` will prompt
-  interactively for missing arguments (e.g., site name), which hangs in non-interactive shells.
-  Always pass required arguments explicitly (e.g., `--name <site-name>` or `--site <site-id>`).
+- **Interactive prompts** (CRITICAL): Netlify CLI commands like `netlify sites:create` will
+  prompt interactively for missing arguments (e.g., site name), which hangs in non-interactive
+  shells. The deploy script must NEVER produce interactive prompts. Always pass required
+  arguments explicitly (e.g., `--name <site-name>` or `--site <site-id>`). Test the script
+  end-to-end in a non-interactive shell before considering it complete.
 - **Authentication errors**: Verify `NETLIFY_AUTH_TOKEN` is set:
   `echo $NETLIFY_AUTH_TOKEN | head -c 5`
 
