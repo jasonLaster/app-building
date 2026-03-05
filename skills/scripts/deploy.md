@@ -124,6 +124,9 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   `./node_modules/.bin/netlify deploy --prod ...`
 - **Both invocation methods fail**: The CLI may not be installed globally or locally. Install
   it explicitly: `npm install netlify-cli --save-dev`, then use `npx netlify`.
+- **Interactive prompts**: Netlify CLI commands like `netlify sites:create` will prompt
+  interactively for missing arguments (e.g., site name), which hangs in non-interactive shells.
+  Always pass required arguments explicitly (e.g., `--name <site-name>` or `--site <site-id>`).
 - **Authentication errors**: Verify `NETLIFY_AUTH_TOKEN` is set:
   `echo $NETLIFY_AUTH_TOKEN | head -c 5`
 
@@ -135,7 +138,19 @@ log file rather than inheriting stdio.
 - Reuse `initSchema` from `scripts/schema.ts` for schema sync.
 - Reuse migration logic from `scripts/migrate-db.ts`.
 - Use the Neon REST API (`https://console.neon.tech/api/v2/...`) with `NEON_API_KEY` for
-  project creation.
+  project creation. Example:
+  ```bash
+  curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"project":{"name":"my-app"}}' \
+    https://console.neon.tech/api/v2/projects
+  ```
+- When running one-off database queries with `node -e`, use `--input-type=module` for ESM
+  packages like `@neondatabase/serverless`:
+  ```bash
+  node --input-type=module -e "import { neon } from '@neondatabase/serverless'; const sql = neon('...'); const r = await sql\`SELECT 1\`; console.log(r);"
+  ```
+  Do NOT use `require()` with ESM-only packages — it will fail.
 - Use `netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG` for site creation.
 - Use `netlify deploy --prod --dir dist --functions ./netlify/functions` for deployment.
 - Do NOT inherit stdio from subprocesses. Pipe all subprocess output to `logs/deploy.log`.

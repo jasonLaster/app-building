@@ -99,6 +99,18 @@ tests during development and debugging.
   - 0: All tests passed.
   - Non-zero: Test failures (matches Playwright's exit code).
 
+## Parsing Test Failures
+
+To identify failing tests, parse `test-results/results.json` rather than grepping raw log
+files. The JSON reporter produces structured data that is much more reliable to parse:
+
+```bash
+python3 -c "import json; data=json.load(open('test-results/results.json')); [print(s['title'], 'FAILED:', s.get('error',{}).get('message','')) for s in data.get('suites',[{}])[0].get('specs',[]) if s['ok']==False]"
+```
+
+This approach avoids false positives from grepping log files and gives you the exact test
+title and error message for each failure.
+
 ## Implementation Tips
 
 - Reuse `initSchema` from `scripts/schema.ts` and the seed logic from `scripts/seed-db.ts`.

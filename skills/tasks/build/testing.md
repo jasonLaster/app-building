@@ -163,12 +163,17 @@ Do not defer Replay installation to after failures are discovered.
 
 Before running any tests, perform these checks from the app directory:
 
-1. **Verify `NEON_PROJECT_ID` is set**: `grep NEON_PROJECT_ID .env` — the test script requires
+1. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+2. **Verify `NEON_PROJECT_ID` is set**: `grep NEON_PROJECT_ID .env` — the test script requires
    it for creating ephemeral Neon branches. If missing, check `deployment.txt` for the project ID.
-2. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
-3. **Verify dependencies**: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`
+3. **Verify Replay browser**: `ls ~/.replay/runtimes/chrome-linux/chrome` — if missing, run
+   `npx replayio install` before any test execution.
+4. **Verify dependencies**: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`
+5. **Clear old recordings**: `npx replayio remove --all` — clears stale local recordings from
+   prior runs that can cause confusion when diagnosing failures.
 
-See `skills/scripts/env-setup.md` for full environment prerequisites.
+See `skills/scripts/preflight.md` for the full pre-flight checklist and
+`skills/scripts/env-setup.md` for environment prerequisites.
 
 ## Running Tests
 
@@ -329,6 +334,8 @@ When testing the app after deployment, use the Replay browser to record the app 
   database branches). When verifying broad changes, pick the most relevant 2-3 spec files.
 - The database is reset between each test, so tests do not need to worry about data from
   previous tests. Each test starts with a fresh seed.
+- Seed scripts must always call `truncateAllTables()` (or equivalent) before inserting data
+  to ensure idempotency. Without truncation, re-running seeds causes duplicate key errors.
 - The Vite dev server cold start can cause the first test in a suite to timeout. Consider adding
   a warm-up navigation in `beforeAll` or increasing the first test's timeout to account for
   cold start latency.
@@ -338,6 +345,9 @@ When testing the app after deployment, use the Replay browser to record the app 
 - Validate that seed data exists before asserting on it. If a test expects a specific assignee
   name or record count, verify the data is present first. This catches seed data mismatches
   early instead of producing confusing assertion failures.
+- Use unique `data-testid` values across the page. When a page and a modal both contain similar
+  elements (e.g., a technician select), prefix testids with the component context to avoid
+  strict-mode violations (e.g., `modal-technician-select` vs `detail-technician-select`).
 - Before writing tests that rely on `data-testid` attributes, verify those attributes exist in
   the component source. Missing `data-testid` attributes cause test failures that are easy to
   prevent with a quick source check.
@@ -354,6 +364,10 @@ When testing the app after deployment, use the Replay browser to record the app 
   month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
   fail when run in a different month. Either make seed data date-relative or make test
   assertions date-aware.
+- Avoid redundant file exploration commands (`ls /repo/apps/`, `find ... -type f`, etc.)
+  across test runs. Once you know the project structure, do not re-discover it in every
+  iteration. Use the Glob and Grep tools instead of shell commands for file operations.
+
 - When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
   them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
   once per task to confirm, then focus on new failures only.
@@ -371,6 +385,10 @@ When testing the app after deployment, use the Replay browser to record the app 
 - When filtering by status values like "Active"/"Inactive", use exact text matching
   (e.g., `getByRole('option', { name: /^Active$/ })`) to avoid Playwright strict-mode
   violations from substring collisions (e.g., "Active" matching both "Active" and "Inactive").
+- Tests should never use raw HTML element selectors (`tr`, `td`, `li`) to locate rows or items.
+  Always use `data-testid` attributes instead. Raw element selectors break when the component's
+  HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
+  timeouts that are hard to diagnose.
 - Ensure tests don't leak state between runs. Data-contamination failures occur when a prior
   test's API calls complete after the next test has started, polluting the data state. Use
   `test.describe.serial` for tests that share mutable state, or ensure API calls are fully

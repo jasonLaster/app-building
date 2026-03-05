@@ -187,6 +187,36 @@ ReadSource on the handler confirms which values are sent.
 *Example*: CreateDealModal sent `'on_track'` as status but DB only accepted
 `'open'`/`'won'`/`'lost'`. 10 Replay tools used to trace.
 
+### FK constraint silent failures
+A DELETE request returns 500 due to a foreign key constraint violation, but the test only
+sees a timeout waiting for the empty state (no visible error in the UI).
+
+**Diagnosis with Replay**: `PlaywrightSteps` shows the test stuck waiting for elements to
+disappear after a delete action. `NetworkRequest` reveals the DELETE endpoint returned 500
+with a foreign key constraint error (e.g., `violates foreign key constraint`).
+
+**Fix**: Either add `ON DELETE CASCADE` to the foreign key constraint, or update the backend
+to delete dependent records before the parent record. Alternatively, update the test to clean
+up dependent records first.
+
+*Example*: Customer/service delete tests timed out waiting for empty state. NetworkRequest
+showed 500 errors from FK constraint violations on dependent order records.
+
+### PostgreSQL NUMERIC string coercion
+PostgreSQL returns `NUMERIC` and `DECIMAL` columns as strings in JavaScript (via the
+`@neondatabase/serverless` driver). Calling number methods like `.toFixed()` on these values
+throws `X.toFixed is not a function`.
+
+**Diagnosis with Replay**: `ConsoleMessages` shows `price.toFixed is not a function` or
+similar. `NetworkRequest` confirms the API returns the value as a string (e.g., `"49.99"`
+instead of `49.99`).
+
+**Fix**: Wrap NUMERIC column values with `Number()` or `parseFloat()` before calling number
+methods. Apply the conversion in the API handler or the component that consumes the data.
+
+*Example*: Service list crashed with `price.toFixed is not a function` because the PostgreSQL
+NUMERIC `price` column was returned as a string.
+
 ### Stale dev server with wrong database configuration
 When `reuseExistingServer` in Playwright config reuses a dev server from a previous run,
 all API calls may fail with connection or database errors if the server's state is stale.

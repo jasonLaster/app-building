@@ -159,6 +159,9 @@ contexts (testing, deployment).
   exploration and content searching. The dedicated tools provide better structured output and
   avoid unnecessary shell command overhead.
 
+- Run `npm install` once with all required packages rather than running it multiple times with
+  the same or overlapping packages. Batch all dependency additions into a single install command.
+
 - When downloading mockup images for visual reference, use `curl -L -o /tmp/<filename> <url>`.
   This pattern works well for fetching mockups from UploadThing or other image hosts.
 

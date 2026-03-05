@@ -32,7 +32,7 @@ Then choose the next tool based on what PlaywrightSteps reveals:
 - **Timeout from excessive assertions** (many steps each taking seconds) → the fix is
   usually to batch assertions via `page.evaluate`.
 
-This was the most frequently used and successful Replay approach (used in 6/9 Replay
+This was the most frequently used and successful Replay approach (used in 7/8+ Replay
 sessions with 100% success rate). When the UI renders but shows wrong data or times out
 waiting for content, `NetworkRequest` as a second step confirms whether the backend
 returned the expected data.

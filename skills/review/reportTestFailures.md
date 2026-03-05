@@ -28,6 +28,7 @@ RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failur
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
 DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
 DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
+REPLAY_NECESSARY: yes/no/unknown (when REPLAY_USED is yes, was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit when REPLAY_USED is no.)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). Omit if this failure has a unique root cause.>
 
 #### Replay Usage (if REPLAY_USED is yes)
@@ -102,6 +103,12 @@ app the failure belongs to (important for multi-worker reports). The "Replay Not
 column should contain a brief reason when Replay was not used (e.g., "diagnosed from error
 output", "no recording available", "not attempted — discovery run"). Leave blank when Replay
 was used.
+
+### Root Cause Clusters
+When failures share a `ROOT_CAUSE_CLUSTER`, summarize them in a table:
+| Cluster | Count | Logs | Resolution |
+One row per unique cluster ID, showing how many failures shared that root cause, which logs
+they appeared in, and whether a single fix resolved them all.
 
 ### 3. Patterns
 - When was Replay most effective? (failure categories, tool sequences)
