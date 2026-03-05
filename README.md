@@ -17,6 +17,11 @@ Core ideas:
 
 Containers can run locally or remotely.
 
+## Prerequisites
+
+- **Docker Desktop** — must be installed and running before starting the agent. Download at docker.com/products/docker-desktop.
+- **Node.js 18+**
+
 ## Setup
 
 ```bash
@@ -93,6 +98,39 @@ npm run stop -- <containerName>
 
 Sends an HTTP stop signal. Without arguments, finds and stops all running containers. Pass a container name to stop a specific one.
 
+## Replay Integration
+
+[Replay](https://replay.io) is a time-travel debugging tool. When integrated, the agent uses
+Replay's Playwright browser to record test runs, then queries those recordings to understand
+exactly what happened when a test failed — inspecting network requests, component state,
+console errors, and step-by-step UI interactions without re-running the test.
+
+Without Replay, the agent only has Playwright's error output to work from, which is often
+not enough to diagnose subtle failures. With Replay, it can pinpoint the root cause directly
+and fix it in fewer iterations.
+
+### Setup
+
+1. Create an account at [app.replay.io](https://app.replay.io)
+2. Go to your team settings and generate an API key
+3. Add it to `.env`:
+   ```
+   RECORD_REPLAY_API_KEY=<your-key>
+   ```
+
+The Replay browser is already installed in the Docker image — no additional setup needed.
+Once the key is present, the agent automatically gains access to these debugging tools
+during test runs:
+
+| Tool | What it shows |
+|---|---|
+| `PlaywrightSteps` | Step-by-step test actions with timing — first stop for any failure |
+| `NetworkRequest` | Request payloads and response bodies for API calls |
+| `Screenshot` | Visual snapshot at any point in the recording |
+| `Logpoint` | Whether a specific function or event handler was called |
+| `ConsoleMessages` | Browser console output at any point |
+| `ReactRenders` | React component render history and props |
+
 ## Finding Your App
 
 Once the agent has finished, check out the branch it pushed to. The built app lives at:
@@ -150,5 +188,8 @@ Key things to watch out for:
 
 * Best suited for CRUD and API-calling apps up to a medium level of complexity.
   Overly complicated or specialized apps will not work as well yet.
-* Make sure to get a Replay API key and configure it. The agent will use Replay to identify
-  and debug problems it encounters in tests or the deployed app.
+* A full initial build typically costs $2–10 in Anthropic API usage depending on app complexity.
+  Monitor spend with `npm run status` which shows running cost, and set API spend limits in your
+  Anthropic console as a safeguard.
+* Replay integration is optional but significantly improves the agent's ability to fix test
+  failures. See below for details.
