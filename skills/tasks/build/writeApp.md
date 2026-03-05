@@ -6,7 +6,11 @@ You are writing the database and code for the app to match the specs in AppSpec.
 
 Unpack the initial write app task into subtasks using `add-task`:
 
-First, add a setup task:
+First, add a setup task. The SetupApp subtask must complete ALL scaffolding, dependency
+installation, configuration (vite, tsconfig, netlify.toml, playwright config), and run
+`npm run check` successfully before any component writing begins. Do not leave infrastructure
+setup for component-writing tasks to discover and fix:
+
 ```
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app "<AppName>" \
   --subtask "SetupApp: Setup the app" \

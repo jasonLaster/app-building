@@ -99,6 +99,18 @@ a new URL and an empty database. Always check `deployment.txt` first.
   - 0: Deployment succeeded.
   - Non-zero: A step failed.
 
+## Post-Deploy Checklist
+
+After the first successful deployment, verify that required environment variables are set on
+the Netlify site. Missing env vars cause production 500 errors that are hard to diagnose:
+
+1. **Check existing env vars**: `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID`
+2. **Set `DATABASE_URL`**: `LC_ALL=C npx netlify env:set DATABASE_URL "<url>" --site $NETLIFY_SITE_ID`
+   The deploy script writes `DATABASE_URL` to `.env` but does NOT automatically set it on Netlify.
+   You must set it manually after the first deploy.
+3. **Run the deployment test** (`npx playwright test --config playwright.deployment.config.ts`)
+   to confirm the production app can load data and perform writes.
+
 ## Locale Workaround
 
 The Netlify CLI requires a valid locale. In containers that lack `en_US.UTF-8`, CLI commands

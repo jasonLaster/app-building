@@ -365,6 +365,14 @@ When testing the app after deployment, use the Replay browser to record the app 
   Adding a retry-with-delay (e.g., 5s between retries) can help distinguish transient
   infrastructure issues from persistent ones. If retries still fail, skip those tests and
   note the infrastructure issue.
+- Seed data that includes time values should use 24-hour format (e.g., `"14:30"` not
+  `"2:30 PM"`) to avoid text-based sorting issues in SQL. When PostgreSQL sorts TIME or
+  text-stored time values, 24-hour format produces correct chronological order while AM/PM
+  format does not (e.g., `"10:00 AM"` sorts after `"1:00 PM"` alphabetically).
+- Backend API functions should return date fields in a consistent format — either always
+  ISO timestamps (`2026-01-15T00:00:00.000Z`) or always `YYYY-MM-DD` strings, not a mix
+  of both. Mixed formats cause frontend parsing issues when components expect one format
+  but receive the other.
 - Seed data should use relative dates (e.g., "current month minus 1") rather than hardcoded
   month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
   fail when run in a different month. Either make seed data date-relative or make test

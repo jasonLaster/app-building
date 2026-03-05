@@ -15,6 +15,13 @@ tests during development and debugging.
   fails on module resolution for `@neondatabase/serverless` and other dependencies. The `npm run`
   wrapper sets up the correct resolution context.
 
+## Pre-Flight
+
+Before running `npm run test`, follow the pre-flight checklist in `skills/scripts/preflight.md`.
+In particular, always use `npx replayio install` (NOT `npx playwright install chromium`) for
+browser setup — the Replay browser installs to `~/.replay/runtimes/` and does not require
+the Playwright browsers path workaround.
+
 ## Behavior
 
 1. **Kill stale processes**: Kill any leftover `netlify` or `vite` dev server processes from
@@ -118,6 +125,12 @@ python3 -c "import json; data=json.load(open('test-results/results.json')); [pri
 
 This approach avoids false positives from grepping log files and gives you the exact test
 title and error message for each failure.
+
+## Timeout-Prone Tests
+
+When tests consistently time out under the Replay Chromium browser (which adds 2–3x overhead),
+use `test.slow()` at the top of the test body to triple Playwright's default timeout. This is
+preferable to increasing `actionTimeout` globally, since it only affects known slow tests.
 
 ## Implementation Tips
 

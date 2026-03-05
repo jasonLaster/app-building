@@ -32,6 +32,17 @@ Then run `npm run deploy` from the app directory. See `skills/scripts/deploy.md`
 full script specification. The script handles database creation/sync, Netlify site
 creation/update, and writes the deployed URL to `deployment.txt`.
 
+After the first deploy, you MUST set `DATABASE_URL` on the Netlify site so that production
+Netlify Functions can connect to the database. The deploy script writes it to `.env` but does
+NOT push it to Netlify automatically:
+
+```bash
+LC_ALL=C npx netlify env:set DATABASE_URL "$(grep DATABASE_URL .env | cut -d= -f2-)" --site $(grep NETLIFY_SITE_ID .env | cut -d= -f2-)
+```
+
+Verify it was set: `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID | grep DATABASE_URL`.
+See `skills/scripts/deploy.md` § "Post-Deploy Checklist" for the full list.
+
 After a successful deployment, you MUST append a deployment history entry to the end of
 `deployment.txt`. The entry must include the date and a summary of what changed:
 

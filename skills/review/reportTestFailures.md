@@ -28,8 +28,8 @@ RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failur
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
 DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
 DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
-REPLAY_NECESSARY: yes/no/unknown (when REPLAY_USED is yes, was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit when REPLAY_USED is no.)
-ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). Omit if this failure has a unique root cause.>
+REPLAY_NECESSARY: yes/no/unknown (REQUIRED when REPLAY_USED is yes — was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit when REPLAY_USED is no.)
+ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). IMPORTANT: Always use this field when failures are fixed by the same changeset, so the synthesizer can explicitly link them rather than inferring from matching SHAs. Omit if this failure has a unique root cause.>
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
 FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure)
 
