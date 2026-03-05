@@ -140,7 +140,7 @@ function buildExtraArgs(): string[] {
 
   // MCP servers
   const mcpServers: Record<string, object> = {
-    playwright: { type: "http", url: "http://localhost:8931/sse" },
+    playwright: { type: "http", url: "http://localhost:8931/mcp" },
   };
   const replayKey = process.env.RECORD_REPLAY_API_KEY;
   if (replayKey) {
