@@ -93,6 +93,40 @@ npm run stop -- <containerName>
 
 Sends an HTTP stop signal. Without arguments, finds and stops all running containers. Pass a container name to stop a specific one.
 
+## Finding Your App
+
+Once the agent has finished, check out the branch it pushed to. The built app lives at:
+
+```
+apps/<AppName>/
+```
+
+Key files:
+- `apps/<AppName>/src/` — React frontend source code
+- `apps/<AppName>/netlify/functions/` — serverless backend functions
+- `apps/<AppName>/tests/` — Playwright integration tests
+- `apps/<AppName>/AppSpec.md` — the spec the app was built from
+- `apps/<AppName>/docs/tests.md` — the full test specification
+
+### Checking the deployment
+
+After a successful deploy, the app URL and resource IDs are saved to:
+
+```
+apps/<AppName>/deployment.txt
+```
+
+Example contents:
+```
+url=https://your-app-abc123.netlify.app
+site_id=<netlify-site-id>
+neon_project_id=<neon-project-id>
+database_url=postgresql://...
+deployed_at=2026-01-01T00:00:00Z
+```
+
+Open the `url` value in a browser to see the live app. Each subsequent deploy appends a history entry to this file describing what changed.
+
 ## Skills
 
 The provided skill documents emphasize a structured approach for autonomously building
