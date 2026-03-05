@@ -160,8 +160,9 @@ export async function startContainer(
   // Build docker run args
   const args: string[] = ["run", "-d", "--rm", "--name", containerName];
 
-  // --network host: container shares host network stack (no -p needed)
-  args.push("--network", "host");
+  // Use explicit port mapping for macOS Docker Desktop compatibility
+  // (--network host only works on Linux)
+  args.push("-p", `${hostPort}:${hostPort}`);
 
   for (const [k, v] of Object.entries(containerEnv)) {
     args.push("--env", `${k}=${v}`);
