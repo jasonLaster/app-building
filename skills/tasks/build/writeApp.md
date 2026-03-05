@@ -25,6 +25,14 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app
   --subtask "WritePage<Name>: Write the page itself"
 ```
 
+## Reference Apps
+
+When scaffolding a new app, check for existing reference apps that can inform your setup.
+Use `git log --all --oneline` to find previous app builds in git history, then use
+`git show <commit>:<path>` to read their configuration files (e.g., `vite.config.ts`,
+`tsconfig.json`, `netlify.toml`, `playwright.config.ts`). This avoids exploratory trial
+and error for common configuration patterns.
+
 ## Guidelines
 
 - Write clean, working code. No TODOs, placeholder implementations, or mock data. All features must be real and fully functional end-to-end, backed by the database.

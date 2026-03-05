@@ -81,6 +81,11 @@ RECORDING_AVAILABLE: no
 NOTES: <brief description of the infrastructure issue>
 ```
 
+**Important**: Infrastructure failures are NOT counted in the TEST_FAILURES total or the Summary
+Statistics failure counts. They are reported separately. The Summary Statistics section should
+include an "Infrastructure failure events" row showing the count of infrastructure events and
+total affected tests, making it explicit that these are excluded from the main failure metrics.
+
 ## Report Synthesis
 
 Compile all analysis files into a single report with these sections:
@@ -99,6 +104,7 @@ Compile all analysis files into a single report with these sections:
 - Self-inflicted failures (count of failures caused by the agent's own fix attempts during the session, from SELF_INFLICTED field — helps measure fix quality)
 - Total test re-runs across all logs (number of test re-runs needed to achieve all-pass)
 - Unique root causes (count of distinct ROOT_CAUSE_CLUSTER values + unclustered failures — when a cluster of N tests fails due to 1 root cause, count it as 1 unique root cause, not N failures)
+- Fix reuse rate (count of distinct fix patterns applied to multiple spec files — e.g., the same wait-for-row pattern applied across 3 spec files counts as 1 reused fix. Identifies opportunities for shared test utilities or fixture improvements)
 - Failure phase distribution (breakdown by FAILURE_PHASE — e.g., writeTests: 5, fixTests: 72, deployment: 3. Highlights if failures are concentrated in a specific phase)
 
 ### 2. Failure Table

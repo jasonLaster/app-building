@@ -15,6 +15,17 @@ pass before every commit.
   `tsconfig.json` is used and avoids resolution issues.
 - Example: `cd /repo/apps/SalesCRM && npm run check`
 
+## First-Attempt Failures Are Normal
+
+`npm run check` frequently fails on its first run due to lint errors or type issues introduced
+during development. This is expected behavior, not a blocking problem. When it fails:
+1. Read `logs/check.log` to identify the errors.
+2. Fix the reported issues in your source files.
+3. Re-run `npm run check`.
+
+Do not treat a first-attempt failure as a sign that something is fundamentally wrong with the
+check script or project configuration.
+
 ## Behavior
 
 1. Run `npx tsc --noEmit` to typecheck. Capture output to a log file.

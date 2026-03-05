@@ -217,6 +217,25 @@ methods. Apply the conversion in the API handler or the component that consumes 
 *Example*: Service list crashed with `price.toFixed is not a function` because the PostgreSQL
 NUMERIC `price` column was returned as a string.
 
+### Redux SerializedError not an Error instance
+Redux Toolkit's `createAsyncThunk` rejects with `SerializedError` objects, not `Error` instances.
+Code that uses `instanceof Error` checks or `String(err)` to extract error messages will get
+`[object Object]` instead of the actual message.
+
+**Diagnosis**: UI displays `[object Object]` where an error message should appear. Error output
+from tests shows the literal string `[object Object]` in assertions.
+
+**Fix**: Extract `.message` from the error object explicitly rather than relying on
+`instanceof Error` or string coercion:
+```ts
+} catch (err: unknown) {
+  const message = (err as { message?: string }).message ?? 'Unknown error';
+  setError(message);
+}
+```
+
+This applies to any Redux `unwrapResult()` or `.unwrap()` rejection handler.
+
 ### Stale dev server with wrong database configuration
 When `reuseExistingServer` in Playwright config reuses a dev server from a previous run,
 all API calls may fail with connection or database errors if the server's state is stale.

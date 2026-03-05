@@ -79,6 +79,23 @@ show unexpected counts or data values that don't match what the test created.
 *Example*: 5 failures (15% of all failures) were caused by cross-test contamination in
 `fullyParallel` mode where tests shared the same client IDs and task names.
 
+### Async data load before count capture
+Tests that capture an initial count of list items (e.g., `initialCount = await rows.count()`)
+before performing an add/delete operation often fail because the count is captured before async
+data loading completes, returning 0 instead of the actual count.
+
+**Diagnosis**: Error output shows `expected N+1, received 1` or similar off-by-one from zero
+baseline. The test didn't wait for data to render before counting.
+
+**Fix**: Always wait for the first data row to be visible before capturing `initialCount`:
+```ts
+await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
+const initialCount = await page.locator('[data-testid="row"]').count();
+```
+
+This single pattern resolved 38.5% of all test failures in observed runs, across locations,
+machines, and products list pages.
+
 ### Stale fetch race condition
 A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,
 search or filter). The first fetch's response arrives after the second and overwrites the UI

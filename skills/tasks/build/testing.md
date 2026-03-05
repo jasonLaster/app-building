@@ -379,6 +379,21 @@ failures (~45% of observed failures come from shared database state).
   changes. Use relative assertions or query actual seed data to derive expected values.
   Tests that verify "a new item was added" must count items before and after the action,
   not assert a hardcoded total.
+- **Wait for data before counting rows.** Any test that captures an initial count of list items
+  (for add/delete assertions) MUST first wait for the first row to be visible:
+  ```ts
+  await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
+  const initialCount = await page.locator('[data-testid="row"]').count();
+  ```
+  Without this wait, async data loading may not have completed, returning 0 and causing
+  off-by-one assertion failures. This is the single highest-impact testing pattern — it
+  prevents ~38% of observed test failures.
+- **Use edge coordinates for backdrop click tests.** Tests for modal dismissal via backdrop/overlay
+  click should always use edge coordinates (e.g., `{ x: 10, y: 10 }`) rather than clicking the
+  center of the overlay, as modals often occupy the center and intercept the click.
+- **Validate seed data counts before asserting.** Tests that assert specific counts from seed data
+  should reference `seed-db.ts` directly or query the actual count rather than hardcoding expected
+  values. Seed data mismatches account for ~42% of observed test failures.
 - Validate that seed data exists before asserting on it. If a test expects a specific assignee
   name or record count, verify the data is present first. This catches seed data mismatches
   early instead of producing confusing assertion failures.
