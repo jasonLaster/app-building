@@ -3,9 +3,20 @@
 Simple and extensible platform for dark factory agentic app building: creating apps
 according to a spec without human involvement along the way. Example use cases:
 
-* `npm run agent -- -p "Build me an app XYZ based on this spec: ..."`
-* `npm run agent -- -p "Continue maintaining app XYZ and fix these bugs: ..."`
-* `npm run agent -- -i` for interactive access to the agent.
+* `npm run agent -- --branch feature/my-app -p "Build me an app XYZ based on this spec: ..."`
+* `npm run agent -- --branch feature/my-app -p "Continue maintaining app XYZ and fix these bugs: ..."`
+* `npm run agent -- --branch feature/my-app -i` for interactive access to the agent.
+
+### Tech stack
+
+Every app the agent builds uses the same stack:
+
+* **React** — frontend UI
+* **Netlify** — hosting and serverless functions (backend API)
+* **Neon** — serverless Postgres database
+* **Playwright** — integration tests
+
+If you need a different stack, this platform isn't the right fit yet.
 
 Core ideas:
 
@@ -183,6 +194,39 @@ similar problems in the future.
 As long as each individual step the agent takes is within its capabilities (it can usually
 do it but not always) the agent will converge on an app that follows the initial spec
 and skill directives.
+
+### Writing a good prompt
+
+The quality of the initial prompt directly affects the quality of the app. A good prompt includes:
+
+* **What the app does** — describe the core purpose in a sentence or two
+* **Key features** — list the main things users can do (e.g. create, edit, delete, filter, sort)
+* **Data the app stores** — what entities exist and how they relate (e.g. users have many tasks, tasks have a status)
+* **User roles** — if different users have different access levels, say so
+* **Any specific UI or UX requirements** — e.g. a dashboard layout, a modal for editing, etc.
+
+Example of a detailed prompt:
+```
+Build a project management app where users can create projects and add tasks to them.
+Each task has a title, description, status (todo/in-progress/done), priority (low/medium/high),
+and due date. Users can filter tasks by status and priority, and sort by due date or priority.
+Include a dashboard showing task counts by status across all projects.
+```
+
+The more specific you are, the closer the first build will be to what you want.
+
+### Iterating on a built app
+
+Once the agent finishes the initial build, you can ask it to make changes by running it
+again on the same branch with a new prompt describing what to fix or add:
+
+```bash
+npm run agent -- --branch feature/my-app -p "The task filter isn't working correctly — selecting 'done' still shows in-progress tasks. Also add the ability to assign tasks to team members."
+```
+
+The agent will clone the branch, read the existing code and spec, make the requested changes,
+run the tests, and push back. Each run is independent — you can queue as many follow-up
+prompts as needed.
 
 Key things to watch out for:
 
