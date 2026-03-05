@@ -4,7 +4,12 @@ Merge skill changes and the report into main via a squash-merge PR.
 
 ## Subtask Format
 
-`MergeToMain: <report-name>`
+`MergeToMain`
+
+## Archiving Logs
+
+The `ArchiveLogs` subtask might appear first. Move all worker logs from logs/ to logs/archive/,
+then commit and push.
 
 ## Procedure
 
@@ -20,28 +25,9 @@ SOURCE_BRANCH=$(git branch --show-current)
 MERGE_BASE=$(git merge-base origin/main HEAD)
 ```
 
-### 3. Determine which paths to include
+### 3. Delete unwanted files
 
-Include these paths:
-
-```
-skills/
-scripts/
-reports/<report-name>.md
-AGENTS.md
-CLAUDE.md
-Dockerfile
-.dockerignore
-.gitignore
-.rgignore
-.env.example
-package.json
-package-lock.json
-tsconfig.json
-README.md
-```
-
-Delete these paths:
+Delete files from these directories, which are not wanted in the main branch:
 
 ```
 apps/
