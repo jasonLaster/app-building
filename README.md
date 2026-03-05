@@ -109,7 +109,10 @@ npm run stop -- <containerName>
 
 Sends an HTTP stop signal. Without arguments, finds and stops all running containers. Pass a container name to stop a specific one.
 
-## Replay Integration
+## Replay Integration (Optional)
+
+* Replay integration is optional but significantly improves the agent's ability to fix test
+  failures.
 
 [Replay](https://replay.io) is a time-travel debugging tool. When integrated, the agent uses
 Replay's Playwright browser to record test runs, then queries those recordings to understand
@@ -235,5 +238,3 @@ Key things to watch out for:
 * A full initial build typically costs $2–10 in Anthropic API usage depending on app complexity.
   Monitor spend with `npm run status` which shows running cost, and set API spend limits in your
   Anthropic console as a safeguard.
-* Replay integration is optional but significantly improves the agent's ability to fix test
-  failures. See below for details.
