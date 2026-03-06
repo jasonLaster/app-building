@@ -2,9 +2,6 @@
 
 Merge skill changes and the report into main via a squash-merge PR.
 
-It is ULTRA IMPORTANT that when merging to main you do not revert other changes that have been made on the main branch.
-ONLY merge skill changes made since the merge base along with the new reports.
-
 ## Subtask Format
 
 `MergeToMain: <report-name>`

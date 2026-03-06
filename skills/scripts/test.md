@@ -22,6 +22,14 @@ In particular, always use `npx replayio install` (NOT `npx playwright install ch
 browser setup — the Replay browser installs to `~/.replay/runtimes/` and does not require
 the Playwright browsers path workaround.
 
+**Mandatory**: Kill stale `netlify dev` and `vite` processes before launching tests:
+`pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`. Stale processes from
+previous runs block ports and serve outdated code, causing spurious test failures.
+
+**Mandatory**: Ensure `netlify link` has been run for the site before tests. The test script
+starts `netlify dev`, which requires a linked site. If the site hasn't been linked yet, run
+`netlify link --id $NETLIFY_SITE_ID` first.
+
 ## Behavior
 
 1. **Kill stale processes**: Kill any leftover `netlify` or `vite` dev server processes from
@@ -143,6 +151,12 @@ For guidance on writing robust tests that work with this test script, see:
   cleanup hooks, relative assertions, and `data-testid` selector best practices.
 - `skills/tasks/build/writeTests.md` § "Directives" — test isolation mandates including no
   hardcoded row counts, unique entity names, and `:not()` filters for prefix selectors.
+
+## Timeout-Prone Tests
+
+When tests consistently time out under the Replay Chromium browser (which adds 2–3x overhead),
+use `test.slow()` at the top of the test body to triple Playwright's default timeout. This is
+preferable to increasing `actionTimeout` globally, since it only affects known slow tests.
 
 ## Implementation Tips
 

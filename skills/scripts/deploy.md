@@ -140,6 +140,7 @@ export $(grep -v '^#' .env | xargs)
 
 This exports all non-comment lines as environment variables accessible to subprocesses.
 
+
 ## Locale Workaround
 
 The Netlify CLI requires a valid locale. In containers that lack `en_US.UTF-8`, CLI commands
@@ -154,6 +155,18 @@ LC_ALL=C npx netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG
 The deploy script should set `LC_ALL=C` in the environment before spawning Netlify CLI
 subprocesses.
 
+## Neon DATABASE_URL `channel_binding` Issue
+
+Neon connection strings may include `?sslmode=require&channel_binding=require`. The
+`channel_binding=require` parameter causes 502 errors when used with some Node.js Postgres
+clients in Netlify Functions. If API endpoints return 502 after deployment, strip
+`channel_binding=require` from the `DATABASE_URL` before setting it on Netlify:
+
+```bash
+# Remove channel_binding parameter from DATABASE_URL
+echo "$DATABASE_URL" | sed 's/&channel_binding=require//' | sed 's/?channel_binding=require&/?/'
+```
+
 ## Netlify CLI Troubleshooting
 
 The Netlify CLI (`npx netlify`) can fail in container environments. Common issues:
@@ -165,6 +178,11 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   `./node_modules/.bin/netlify deploy --prod ...`
 - **Both invocation methods fail**: The CLI may not be installed globally or locally. Install
   it explicitly: `npm install netlify-cli --save-dev`, then use `npx netlify`.
+- **`netlify sites:create --json` not supported**: The `--json` flag does not work with
+  `sites:create`. To programmatically create a site and capture the site ID, use the Netlify
+  REST API instead: `curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -X POST
+  "https://api.netlify.com/api/v1/sites" -H "Content-Type: application/json"
+  -d '{"account_slug":"'$NETLIFY_ACCOUNT_SLUG'"}'`.
 - **Interactive prompts** (CRITICAL): Netlify CLI commands like `netlify sites:create` will
   prompt interactively for missing arguments (e.g., site name), which hangs in non-interactive
   shells. The deploy script must NEVER produce interactive prompts. Always pass required

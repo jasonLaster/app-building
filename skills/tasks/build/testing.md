@@ -257,6 +257,55 @@ The Replay recording contains the actual runtime state — use it.
 
 When testing the app after deployment, use the Replay browser to record the app and debug any problems.
 
+## localStorage Setup
+
+**Mandate: Use `page.addInitScript` for localStorage setup, never `page.evaluate` before navigation.**
+
+`page.evaluate(() => localStorage.setItem(...))` executed before `page.goto()` runs in a
+blank page context whose localStorage is discarded on navigation. This caused 132 test failures
+across 8 spec files in one observed session. Use `addInitScript` instead — it runs in every
+new document context including after navigation:
+
+```ts
+await page.addInitScript(() => {
+  localStorage.setItem('key', 'value');
+});
+await page.goto('/');
+```
+
+## Empty State Testing
+
+**Require API route mocking for empty state tests — never use fake/non-existent user IDs.**
+
+Using non-existent user IDs (e.g., random UUIDs) to test empty states causes `ProtectedRoute`
+to redirect to login, failing every assertion. Use `page.route()` to intercept API calls and
+return empty responses:
+
+```ts
+await page.route('**/api/medications*', route =>
+  route.fulfill({ status: 200, body: JSON.stringify([]) })
+);
+```
+
+This would have prevented 5+ self-inflicted failures in one observed session.
+
+## Input Clearing
+
+When using a `reliableFill` or similar helper to fill form fields, always `clear()` the input
+before `fill()` to avoid concatenated text (e.g., "alice@example.com-email"). Example:
+
+```ts
+await input.clear();
+await input.fill(value);
+```
+
+## Neon Date Format Handling
+
+Neon returns `DATE` columns as full ISO timestamps (e.g., `2026-01-15T00:00:00.000Z`), not
+`YYYY-MM-DD` strings. Frontend `formatDate` utilities must handle both formats. Use
+`.split('T')[0]` or `new Date(value)` to normalize before formatting. This affected 3 spec
+files in one observed session, producing "Invalid Date" errors.
+
 ## Test Isolation Mandates
 
 These rules are mandatory for all test files. Violations are the most common source of test

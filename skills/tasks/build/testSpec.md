@@ -54,8 +54,6 @@ The test spec must be written in docs/tests.md. This file is organized by page, 
 
 - Attachment functionality should support file uploads unless the mockup specifically indicates something else.
 
-- Address input fields should use a geocoding/autocomplete API (e.g. OpenStreetMap Nominatim) for search and autofill rather than plain text entry. Test entries for address fields must verify that typing triggers suggestions and selecting a suggestion populates the field.
-
 - Import/upload dialogs must specify the expected data format (e.g., required columns, accepted values, file type). Test entries should verify that format documentation is visible to the user before they attempt the import.
 
 - Backend integrations that the user can configure (webhooks, API connections, OAuth apps, etc.) must include

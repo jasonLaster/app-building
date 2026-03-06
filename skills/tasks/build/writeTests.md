@@ -92,6 +92,20 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
 - Skill files are at `/repo/skills/tasks/` and its subdirectories (the repo root), NOT inside
   the app directory. Always use `/repo/skills/tasks/build/writeTests.md`, etc.
 
+- For empty state tests (e.g., "no items to display"), use `page.route()` to intercept API
+  calls and return empty arrays. Do NOT rely on non-existent user IDs or fake UUIDs — apps with
+  `ProtectedRoute` will redirect to login, causing every assertion to fail. Example:
+  ```ts
+  await page.route('**/api/items*', route =>
+    route.fulfill({ status: 200, body: JSON.stringify([]) })
+  );
+  ```
+
+- Do NOT use `browser.newContext()` with the Replay Chromium browser. It is too slow and causes
+  timeouts during teardown. For cross-role verification (e.g., verifying a patient action is
+  visible to staff), use page reload + re-login within the same context, or split into separate
+  test files.
+
 - For deployment tests (tests run against a live deployed site rather than a local dev server):
   - Always use `data-testid` values that match the actual component markup. Read the component
     source to verify testid values before writing the test — do not guess.

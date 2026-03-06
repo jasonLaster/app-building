@@ -39,15 +39,13 @@ to refer to it and move onto the next subtask.
 3. Otherwise the bug is a functional problem. All functionality in the app must be covered by a test entry
    in `docs/tests.md`. Read this file at the point before the bug was fixed, using the git revision info
    in bugReports.md.
-4. If the old test entries specify the buggy behavior, look at AppSpec.md / AppRevisions.md to see if they
-   specify the behavior as well. If they do, this bug is a change in app requirements and there is no problem stage.
-   If they don't, the test entries were built incorrectly and the problem stage is `testSpec.md` (`skills/tasks/build/`)
-   which covers generation of the spec.
+4. If the old test entries specify the buggy behavior, this bug is a change in app requirements and
+   there is no problem stage.
 5. If the old test entries specify the correct behavior, the tests aren't covering it properly.
    The problem stage is `writeTests.md` (`skills/tasks/build/`) which covers writing playwright tests for the entries.
 6. Otherwise the test entries say nothing about this behavior. If the bug is asking for new functionality,
    there isn't a problem stage. If the bug is about existing functionality, the test entries are
-   underspecified and the problem stage is `testSpec.md`.
+   underspecified and the problem stage is `testSpec.md` (`skills/tasks/build/`) which covers generation of the spec.
 
 ## Updating directives
 

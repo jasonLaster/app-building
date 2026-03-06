@@ -151,3 +151,24 @@ Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
+
+### Replay Justification Note
+When Replay usage is 0% across an entire report, include a summary note in section 3 (Patterns)
+explaining whether this indicates: (a) Replay wasn't needed because error output was sufficient,
+(b) recordings weren't available for most failures, or (c) the agent didn't attempt Replay
+despite recordings being available. This helps distinguish intentional non-use from missed
+opportunities.
+
+### Anti-Pattern Tracking
+When the same anti-pattern appears across multiple logs (e.g., fake user IDs for empty states,
+`page.evaluate` for localStorage), track it explicitly in the Root Cause Clusters table with a
+note like "anti-pattern: <description>". This helps identify recurring process issues faster
+than tracking only fix patterns.
+
+### "Other" Category Subcategories
+When the "other" category exceeds 30% of total failures, consider breaking it into subcategories
+in the Failure Category Distribution table. Useful subcategories include:
+- `test-setup-error` — incorrect test preconditions (wrong IDs, missing testids)
+- `react-input-interaction` — flaky fill/clear/controlled input issues
+- `localStorage-access` — DOMException or storage access failures
+- `auth-redirect` — unexpected redirect to login page

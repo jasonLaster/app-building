@@ -89,10 +89,12 @@ tool sequence in the relevant debugging guide below.
 
 ## No-Replay Diagnostic Patterns
 
-**Error output first**: 98% of observed failures were diagnosed from Playwright error output
-alone (DOM snapshots, assertion messages, count mismatches). Always check error output before
-reaching for Replay. Reserve Replay for failures where the page state at failure time is
-ambiguous or the failure involves complex async timing.
+**Error output first**: In multiple observed sessions, 98–100% of failures were diagnosed from
+Playwright error output alone (DOM snapshots, assertion messages, count mismatches, DOMException
+messages, SQL errors, strict mode violation counts, timeout messages). Always check error output
+before reaching for Replay. Reserve Replay for failures where the page state at failure time is
+ambiguous or the failure involves complex async timing. One full app build-and-test cycle (41
+failures) was completed with 0% Replay usage — every failure was diagnosed from error output.
 
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 
@@ -178,6 +180,34 @@ directly to a backend bug (e.g., API returned wrong values, validation rejected 
 diagnose from the error output alone. Replay is unnecessary when the error message already
 identifies the broken code path. This saves time — load recordings only when the root cause
 is not obvious from the test output.
+
+### Clear backend error in test output
+When Playwright error output includes the expected and actual values and the mismatch points
+directly to a backend bug (e.g., API returned wrong values, validation rejected valid input),
+diagnose from the error output alone. Replay is unnecessary when the error message already
+identifies the broken code path. This saves time — load recordings only when the root cause
+is not obvious from the test output.
+
+### Empty state testing — use `page.route()`, not fake user IDs
+When testing empty states (e.g., "no medications", "no messages"), do NOT use non-existent
+user/patient IDs. Apps with `ProtectedRoute` redirect unauthenticated/non-existent users
+to the login page, causing all assertions to fail on the login form instead of the empty state.
+
+**Correct approach**: Use `page.route()` to intercept API calls and return empty arrays:
+```ts
+await page.route('**/api/medications*', route =>
+  route.fulfill({ status: 200, body: JSON.stringify([]) })
+);
+```
+This anti-pattern (fake IDs for empty states) was independently rediscovered 3 times in one
+session before being replaced with API mocking.
+
+### `browser.newContext()` timeout with Replay browser
+`browser.newContext()` is too slow with the Replay Chromium browser and causes timeouts during
+teardown. Do NOT use multi-context testing approaches with Replay.
+
+**Fix**: Replace `browser.newContext()` with page reload + re-login patterns, or use separate
+test files for cross-role verification.
 
 ## Quick Reference: Which Tool to Start With
 
