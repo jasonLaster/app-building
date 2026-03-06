@@ -62,19 +62,21 @@ export async function createApp(token: string, name: string, org?: string): Prom
 }
 
 /**
- * Create a Fly Volume in the app's primary region.
+ * Create a Fly Volume in the given region.
  * Returns the volume ID.
  */
 export async function createVolume(
   app: string,
   token: string,
   name: string,
+  region: string,
   sizeGb: number = 50,
 ): Promise<string> {
   const res = await flyFetch(`/apps/${app}/volumes`, token, {
     method: "POST",
     body: JSON.stringify({
       name,
+      region,
       size_gb: sizeGb,
       encrypted: true,
       require_unique_zone: false,
@@ -114,73 +116,75 @@ export async function createMachine(
   env: Record<string, string>,
   name: string,
 ): Promise<CreateMachineResult> {
-  // Create a volume for /repo storage
   const volumeName = `repo_${name.replace(/-/g, "_")}`.slice(0, 30);
-  const volumeId = await createVolume(app, token, volumeName, 50);
+
+  // Regions to try in order. dfw and iad have the most reliable capacity for
+  // performance machines. Fall back to ord and sjc if needed.
+  const regions = ["dfw", "iad", "ord", "sjc"];
 
   // Delete unattached volumes in parallel with creating the new machine.
-  const cleanupDone = listVolumes(app, token).then(vols => Promise.all(
-    vols.map(async ({ id, attached_machine_id }) => {
-      if (attached_machine_id || id == volumeId)
-        return;
-      await deleteVolume(app, token, id).catch(() => {});
-    }),
-  ));
+  let cleanupDone: Promise<unknown> | undefined;
 
-  const machineBody = JSON.stringify({
-    name,
-    config: {
-      image,
-      env,
-      auto_destroy: true,
-      restart: { policy: "no" },
-      guest: {
-        cpu_kind: "performance",
-        cpus: 16,
-        memory_mb: 32768,
-      },
-      mounts: [{ volume: volumeId, path: "/repo" }],
-      services: [
-        {
-          ports: [{ port: 443, handlers: ["tls", "http"] }],
-          protocol: "tcp",
-          internal_port: 3000,
-          autostart: false,
-          autostop: "off",
-        },
-      ],
-    },
-  });
+  for (const region of regions) {
+    const volumeId = await createVolume(app, token, volumeName, region, 50);
 
-  try {
-    // Retry machine creation — volume may take a moment to become available
-    let lastErr: unknown;
-    for (let attempt = 0; attempt < 5; attempt++) {
-      try {
-        const res = await flyFetch(`/apps/${app}/machines`, token, {
-          method: "POST",
-          body: machineBody,
-        });
-        const data = (await res.json()) as { id: string };
-        await cleanupDone;
-        return { machineId: data.id, volumeId };
-      } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : String(err);
-        if (msg.includes("volume not found") && attempt < 4) {
-          console.log(`Volume not yet available, retrying in 3s... (attempt ${attempt + 1})`);
-          await new Promise((r) => setTimeout(r, 3000));
-          lastErr = err;
-          continue;
-        }
-        throw err;
-      }
+    // Start cleanup on first attempt only
+    if (!cleanupDone) {
+      cleanupDone = listVolumes(app, token).then(vols => Promise.all(
+        vols.map(async ({ id, attached_machine_id }) => {
+          if (attached_machine_id || id === volumeId)
+            return;
+          await deleteVolume(app, token, id).catch(() => {});
+        }),
+      ));
     }
-    throw lastErr;
-  } catch (err) {
-    // Clean up volume if machine creation fails
-    await deleteVolume(app, token, volumeId).catch(() => {});
-    throw err;
+
+    try {
+      const res = await flyFetch(`/apps/${app}/machines`, token, {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          region,
+          config: {
+            image,
+            env,
+            auto_destroy: true,
+            restart: { policy: "no" },
+            guest: {
+              cpu_kind: "performance",
+              cpus: 16,
+              memory_mb: 32768,
+            },
+            mounts: [{ volume: volumeId, path: "/repo" }],
+            services: [
+              {
+                ports: [{ port: 443, handlers: ["tls", "http"] }],
+                protocol: "tcp",
+                internal_port: 3000,
+                autostart: false,
+                autostop: "off",
+              },
+            ],
+          },
+        }),
+      });
+
+      const data = (await res.json()) as { id: string };
+      await cleanupDone;
+      return { machineId: data.id, volumeId };
+    } catch (err) {
+      await deleteVolume(app, token, volumeId).catch(() => {});
+
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("412")) {
+        console.log(`Insufficient resources in ${region}, trying next region...`);
+        continue;
+      }
+      throw err;
+    }
   }
+
+  throw new Error("Failed to create machine after exhausting retries");
 }
 
 /**
