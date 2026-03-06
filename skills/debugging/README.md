@@ -179,6 +179,13 @@ diagnose from the error output alone. Replay is unnecessary when the error messa
 identifies the broken code path. This saves time — load recordings only when the root cause
 is not obvious from the test output.
 
+### Clear backend error in test output
+When Playwright error output includes the expected and actual values and the mismatch points
+directly to a backend bug (e.g., API returned wrong values, validation rejected valid input),
+diagnose from the error output alone. Replay is unnecessary when the error message already
+identifies the broken code path. This saves time — load recordings only when the root cause
+is not obvious from the test output.
+
 ## Quick Reference: Which Tool to Start With
 
 | Symptom | Start with |
