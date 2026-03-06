@@ -118,6 +118,15 @@ export async function createMachine(
   const volumeName = `repo_${name.replace(/-/g, "_")}`.slice(0, 30);
   const volumeId = await createVolume(app, token, volumeName, 50);
 
+  // Delete unattached volumes in parallel with creating the new machine.
+  const cleanupDone = listVolumes(app, token).then(vols => Promise.all(
+    vols.map(async ({ id, attached_machine_id }) => {
+      if (attached_machine_id || id == volumeId)
+        return;
+      await deleteVolume(app, token, id).catch(() => {});
+    }),
+  ));
+
   const machineBody = JSON.stringify({
     name,
     config: {
@@ -153,6 +162,7 @@ export async function createMachine(
           body: machineBody,
         });
         const data = (await res.json()) as { id: string };
+        await cleanupDone;
         return { machineId: data.id, volumeId };
       } catch (err: unknown) {
         const msg = err instanceof Error ? err.message : String(err);
