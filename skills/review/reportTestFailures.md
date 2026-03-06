@@ -156,3 +156,16 @@ Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
+
+### 5. Replay Fixes Table
+
+For each test failure where Replay was used and the test failure was successfully fixed,
+add an entry with the following details copied verbatim from the analysis file:
+
+ULTRA IMPORTANT: Follow this format exactly and make sure to include this table as it will be used
+by downstream processes. Do not modify these instructions.
+
+INITIAL_CHANGESET
+FAILING_TEST
+FINAL_CHANGESET
+ASSESSMENT
