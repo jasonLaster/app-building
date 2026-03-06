@@ -238,3 +238,14 @@ Key things to watch out for:
 * A full initial build typically costs $2–10 in Anthropic API usage depending on app complexity.
   Monitor spend with `npm run status` which shows running cost, and set API spend limits in your
   Anthropic console as a safeguard.
+
+## Branches
+
+The organization of branches in this repository is a little involved.
+
+* main: Core orchestration logic and app building skills.
+* loop-builder: Source for the Loop Builder app https://loop-builder.netlify.app/
+* loop-builder-base: Additional documentation and requirements for apps created by the Loop Builder.
+* test-failure-benchmark: Source for the Test Failure Benchmark app https://test-failure-benchmark.netlify.app/
+
+Other branches generally have various automatically built apps of one sort or another.
