@@ -114,6 +114,10 @@ contexts (testing, deployment).
   navigation item must have a unique route. Remove or consolidate any entries that would navigate
   to the same destination.
 
+- Navigation sidebars must be collapsible. Include a toggle button that switches between expanded
+  (full labels) and collapsed (icons only) states. When collapsed, show icon-only items at a narrow
+  width with title tooltips for accessibility.
+
 - Never use native HTML `<select>` elements for filter controls or dropdowns when the app has a
   custom design system or style guide. Native form elements cannot be fully styled and will revert
   to browser defaults on interaction. Always use custom dropdown components with React state.

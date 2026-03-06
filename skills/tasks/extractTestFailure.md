@@ -44,6 +44,6 @@ curl -X POST https://test-failure-benchmark.netlify.app/.netlify/functions/failu
       "github_repository": "https://github.com/replayio/app-building",
       "failing_changeset": "abc1234",
       "fixed_changeset": "def5678",
-      "steps_to_reproduce": "Follow reproduceFailure.md skill for tests/<test-file>.ts",
+      "steps_to_reproduce": "Run npm run test tests/auth.spec.ts",
       "assessment_string": "Button visibility CSS issue"
     }'
