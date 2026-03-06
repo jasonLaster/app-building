@@ -1,0 +1,106 @@
+Syncing database schema...
+Schema synced
+Setting DATABASE_URL on Netlify...
+Warning: Failed to set DATABASE_URL on Netlify:   ›   Error: unknown option '--site'
+(Did you mean --filter?)
+ ›   See more help with --help
+
+Building app...
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 1813 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.39 kB │ gzip:   0.27 kB
+dist/assets/index-BOS_youH.css     42.96 kB │ gzip:   5.24 kB
+dist/assets/index-2VWUkzvr.js   1,347.44 kB │ gzip: 225.29 kB │ map: 2,621.09 kB
+✓ built in 3.98s
+
+Build complete
+Deploying to Netlify...
+​
+Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+​
+> Version
+  @netlify/build 35.8.3
+​
+> Flags
+  accountId: 678304ff949e434cc70be5c7
+  deployId: 69ab2f2257cf503f21ea81ef
+​
+> Current directory
+  /repo/apps/KeyWorks
+​
+> Config file
+  /repo/apps/KeyWorks/netlify.toml
+​
+> Context
+  production
+​
+build.command from netlify.toml                               
+────────────────────────────────────────────────────────────────
+​
+$ npm run build
+
+> keyworks@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 1813 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.39 kB │ gzip:   0.27 kB
+dist/assets/index-BOS_youH.css     42.96 kB │ gzip:   5.24 kB
+dist/assets/index-2VWUkzvr.js   1,347.44 kB │ gzip: 225.29 kB │ map: 2,621.09 kB
+✓ built in 3.79s
+​
+(build.command completed in 7.4s)
+​
+Functions bundling                                            
+────────────────────────────────────────────────────────────────
+​
+Packaging Functions from netlify/functions directory:
+ - customer-jobs.ts
+ - customers.ts
+ - dashboard.ts
+ - db.ts
+ - jobs.ts
+ - services.ts
+ - technician-jobs.ts
+ - technicians.ts
+​
+​
+(Functions bundling completed in 1.5s)
+
+Deploying to Netlify
+────────────────────────────────────────────────────────────────
+
+[32mDeploy path: [39m       /repo/apps/KeyWorks/dist
+[32mFunctions path: [39m    /repo/apps/KeyWorks/netlify/functions
+[32mConfiguration path: [39m/repo/apps/KeyWorks/netlify.toml
+
+​
+Netlify Build Complete                                        
+────────────────────────────────────────────────────────────────
+​
+(Netlify Build completed in 23.7s)
+
+🚀 Deploy complete
+────────────────────────────────────────────────────────────────
+
+ ╭───────────────────── ⬥  Production deploy is live ⬥  ──────────────────────╮
+ │                                                                            │
+ │   Deployed to production URL: https://keyworks-1772691361712.netlify.app   │
+ │                                                                            │
+ │                             Unique deploy URL:                             │
+ │    https://69ab2f2257cf503f21ea81ef--keyworks-1772691361712.netlify.app    │
+ │                                                                            │
+ ╰────────────────────────────────────────────────────────────────────────────╯
+
+[32mBuild logs: [39m        https://app.netlify.com/projects/keyworks-1772691361712/deploys/69ab2f2257cf503f21ea81ef
+[32mFunction logs: [39m     https://app.netlify.com/projects/keyworks-1772691361712/logs/functions
+[32mEdge function Logs: [39mhttps://app.netlify.com/projects/keyworks-1772691361712/logs/edge-functions
+
+Deploy complete: https://keyworks-1772691361712.netlify.app

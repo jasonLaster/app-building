@@ -150,6 +150,12 @@ When tests consistently time out under the Replay Chromium browser (which adds 2
 use `test.slow()` at the top of the test body to triple Playwright's default timeout. This is
 preferable to increasing `actionTimeout` globally, since it only affects known slow tests.
 
+## Timeout-Prone Tests
+
+When tests consistently time out under the Replay Chromium browser (which adds 2–3x overhead),
+use `test.slow()` at the top of the test body to triple Playwright's default timeout. This is
+preferable to increasing `actionTimeout` globally, since it only affects known slow tests.
+
 ## Implementation Tips
 
 - Reuse `initSchema` from `scripts/schema.ts` and the seed logic from `scripts/seed-db.ts`.
