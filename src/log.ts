@@ -10,6 +10,9 @@ export type Logger = (message: string) => void;
 const SAFE_ENV_VARS = new Set([
   "NETLIFY_ACCOUNT_SLUG",
   "FLY_APP_NAME",
+  "CLONE_BRANCH",
+  "PORT",
+  "REPO_URL",
 ]);
 
 /** Load secret values from .env file */
