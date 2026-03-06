@@ -30,8 +30,8 @@ Containers can run locally or remotely.
 
 ## Prerequisites
 
-- **Docker Desktop** — must be installed and running before starting the agent. Download at docker.com/products/docker-desktop.
 - **Node.js 18+**
+- **A GitHub repo** to build into, with a feature branch checked out (not `main`)
 
 ## Setup
 
@@ -39,7 +39,7 @@ Containers can run locally or remotely.
 npm install
 ```
 
-Copy `.env.example` to `.env` and fill in the required values:
+Copy `.env.example` to `.env` and fill in the values that apply to your setup. The required ones are the same regardless of whether you run locally or remotely:
 
 | Variable | Required | Description |
 |---|---|---|
@@ -49,7 +49,6 @@ Copy `.env.example` to `.env` and fill in the required values:
 | `NETLIFY_AUTH_TOKEN` | Yes | Netlify auth token for deploying apps |
 | `NETLIFY_ACCOUNT_SLUG` | Yes | Your Netlify account slug |
 | `NEON_API_KEY` | Yes | Neon API key for database provisioning |
-| `FLY_API_TOKEN` | No | Only needed when using `--remote` to run containers on Fly.io |
 | `UPLOADTHING_TOKEN` | No | For apps that need file uploads |
 | `RESEND_API_KEY` | No | For apps that send email |
 
@@ -68,11 +67,17 @@ git push -u origin feature/my-app
 
 The agent uses your current branch by default. Use `--branch` to override and target a different branch than the one you have checked out locally.
 
-## Running the Agent
+---
 
-`npm run agent` starts a new container with the running agent. By default the container is local, add `--remote` to spawn the container remotely. This requires `FLY_API_TOKEN` in `.env`.
+## Running Locally
 
-### Detached mode
+Runs the agent in a Docker container on your machine.
+
+### Additional prerequisites
+
+- **Docker Desktop** — must be installed and running. Download at docker.com/products/docker-desktop.
+
+### Usage
 
 ```bash
 npm run agent -- -p "<prompt>"
@@ -80,7 +85,7 @@ npm run agent -- --branch feature/my-app -p "<prompt>"
 npm run agent -- --branch feature/my-app --push-branch feature/xyz -p "<prompt>"
 ```
 
-Starts a container, optionally queues a prompt, then detaches. The container processes the prompt followed by any pending tasks, commits and pushes results, then exits.
+Starts a container, queues the prompt, then detaches. The container clones your repo, processes the prompt, commits and pushes results, then exits.
 
 Use `--push-branch` if you want to clone from one branch but push results to a different one.
 
@@ -90,7 +95,47 @@ Use `--push-branch` if you want to clone from one branch but push results to a d
 npm run agent -- -i
 ```
 
-Chat with the agent inside a container. Output is streamed via event polling. Press ESC to interrupt the current message. On exit, the container is detached and finishes any remaining work.
+Chat with the agent in real time. Output is streamed via event polling. Press ESC to interrupt the current message. On exit, the container detaches and finishes any remaining work.
+
+---
+
+## Running Remotely (Fly.io)
+
+Runs the agent on a Fly.io machine instead of your local Docker. Useful for longer builds or running without tying up your machine.
+
+### Additional prerequisites
+
+- A **Fly.io account** at fly.io
+- The **`flyctl` CLI** installed: `brew install flyctl` then `fly auth login`
+
+### Fly setup
+
+1. Create a Fly app to use as the container namespace:
+   ```bash
+   fly apps create app-building-agent
+   ```
+   Or create one via the Fly dashboard — the app name is just a namespace, no deployment needed.
+
+2. Add these to your `.env`:
+   ```
+   FLY_API_TOKEN=<your fly token from fly.io/user/personal_access_tokens>
+   FLY_APP_NAME=app-building-agent
+   ```
+
+### Usage
+
+```bash
+npm run agent -- --remote -p "<prompt>"
+npm run agent -- --branch feature/my-app --remote -p "<prompt>"
+```
+
+The agent provisions a `performance-cpu-16x` Fly machine (32GB RAM), clones your repo, builds the app, pushes results, and destroys the machine when done. Docker Desktop is not required.
+
+---
+
+## Monitoring & Control
+
+These commands work the same whether running locally or remotely.
 
 ### Checking status
 

@@ -118,37 +118,54 @@ export async function createMachine(
   const volumeName = `repo_${name.replace(/-/g, "_")}`.slice(0, 30);
   const volumeId = await createVolume(app, token, volumeName, 50);
 
-  try {
-    const res = await flyFetch(`/apps/${app}/machines`, token, {
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        config: {
-          image,
-          env,
-          auto_destroy: true,
-          restart: { policy: "no" },
-          guest: {
-            cpu_kind: "performance",
-            cpus: 16,
-            memory_mb: 32768,
-          },
-          mounts: [{ volume: volumeId, path: "/repo" }],
-          services: [
-            {
-              ports: [{ port: 443, handlers: ["tls", "http"] }],
-              protocol: "tcp",
-              internal_port: 3000,
-              autostart: false,
-              autostop: "off",
-            },
-          ],
+  const machineBody = JSON.stringify({
+    name,
+    config: {
+      image,
+      env,
+      auto_destroy: true,
+      restart: { policy: "no" },
+      guest: {
+        cpu_kind: "performance",
+        cpus: 16,
+        memory_mb: 32768,
+      },
+      mounts: [{ volume: volumeId, path: "/repo" }],
+      services: [
+        {
+          ports: [{ port: 443, handlers: ["tls", "http"] }],
+          protocol: "tcp",
+          internal_port: 3000,
+          autostart: false,
+          autostop: "off",
         },
-      }),
-    });
+      ],
+    },
+  });
 
-    const data = (await res.json()) as { id: string };
-    return { machineId: data.id, volumeId };
+  try {
+    // Retry machine creation — volume may take a moment to become available
+    let lastErr: unknown;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      try {
+        const res = await flyFetch(`/apps/${app}/machines`, token, {
+          method: "POST",
+          body: machineBody,
+        });
+        const data = (await res.json()) as { id: string };
+        return { machineId: data.id, volumeId };
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : String(err);
+        if (msg.includes("volume not found") && attempt < 4) {
+          console.log(`Volume not yet available, retrying in 3s... (attempt ${attempt + 1})`);
+          await new Promise((r) => setTimeout(r, 3000));
+          lastErr = err;
+          continue;
+        }
+        throw err;
+      }
+    }
+    throw lastErr;
   } catch (err) {
     // Clean up volume if machine creation fails
     await deleteVolume(app, token, volumeId).catch(() => {});
