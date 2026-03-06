@@ -105,9 +105,11 @@ After the first successful deployment, verify that required environment variable
 the Netlify site. Missing env vars cause production 500 errors that are hard to diagnose:
 
 1. **Check existing env vars**: `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID`
-2. **Set `DATABASE_URL`**: `LC_ALL=C npx netlify env:set DATABASE_URL "<url>" --site $NETLIFY_SITE_ID`
+2. **Set `DATABASE_URL`**: `LC_ALL=C npx netlify env:set DATABASE_URL "<url>" --context production --site $NETLIFY_SITE_ID`
    The deploy script writes `DATABASE_URL` to `.env` but does NOT automatically set it on Netlify.
-   You must set it manually after the first deploy.
+   You must set it manually after the first deploy. Always use `--context production` to scope
+   the variable to production deploys. Without `--context`, the CLI may prompt interactively or
+   set the variable for all contexts.
 3. **Run the deployment test** (`npx playwright test --config playwright.deployment.config.ts`)
    to confirm the production app can load data and perform writes.
 

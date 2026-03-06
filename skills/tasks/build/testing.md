@@ -277,6 +277,15 @@ failures (~45% of observed failures come from shared database state).
 5. **Relative or data-independent assertions.** Tests that verify data after mutations must
    query current state before the action and assert relative changes, not absolute values.
 
+6. **Create test data via API, not seed reliance.** Every spec file should create its own
+   test data via API calls in `beforeEach`/`beforeAll` rather than relying on seed data.
+   This is the single highest-impact isolation improvement — 57.8% of observed failures
+   came from data contamination when tests shared seed data.
+
+7. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
+   than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
+   cascade, causing failures in later tests that reference them.
+
 ## Directives
 
 - Do NOT manually start `netlify dev` for testing. The test script manages the dev server
@@ -353,6 +362,10 @@ failures (~45% of observed failures come from shared database state).
   or fix a meaningful issue, commit those changes immediately even if other failures remain. An
   iteration that produces zero commits despite significant work (skill updates, code fixes,
   debugging progress) is wasted effort because the next iteration starts from scratch.
+- **Deployment tests (`tests/deployment.spec.ts`) only work after a deploy** and require a live
+  production URL. Do NOT run deployment tests as part of regular FixTests workflows — they will
+  return 0 tests or fail when run locally without a deployed environment. Only run them after
+  `npm run deploy` has completed successfully.
 - Before running deployment tests, verify that required environment variables (DATABASE_URL,
   etc.) are set on the deployment target (e.g., Netlify). Missing env vars cause infrastructure
   failures that waste a full test cycle. Use `netlify env:list` to check.

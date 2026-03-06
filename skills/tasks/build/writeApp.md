@@ -28,10 +28,11 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app
 ## Reference Apps
 
 When scaffolding a new app, check for existing reference apps that can inform your setup.
-Use `git log --all --oneline` to find previous app builds in git history, then use
-`git show <commit>:<path>` to read their configuration files (e.g., `vite.config.ts`,
-`tsconfig.json`, `netlify.toml`, `playwright.config.ts`). This avoids exploratory trial
-and error for common configuration patterns.
+Look for completed apps under `apps/` first — if any exist, read their configuration files
+directly (e.g., `vite.config.ts`, `tsconfig.json`, `netlify.toml`, `playwright.config.ts`).
+If no apps exist locally, use `git log --all --oneline` to find previous app builds in git
+history, then use `git show <commit>:<path>` to read their configuration files. Prefer
+reading existing local apps over git history exploration to avoid excessive shell commands.
 
 ## Guidelines
 

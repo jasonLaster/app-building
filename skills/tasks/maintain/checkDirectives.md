@@ -35,7 +35,7 @@ Example:
 ```
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" \
   --subtask "FixViolation: Fix <violation description>" \
-  --subtask "RunTests: Verify tests pass after fix" \
+  --subtask "RunTests: Run tests/<affected-spec>.spec.ts to verify fix" \
   --subtask "DocumentFix: Document the fix"
 ```
 

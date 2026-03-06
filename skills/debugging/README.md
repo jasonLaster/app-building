@@ -115,7 +115,9 @@ received 4", "expected $7.00 but got $8.50"), check before reaching for Replay:
 3. Is the seed data inserting duplicates (missing TRUNCATE before INSERT)?
 
 If the expected-vs-actual mismatch is clear from the error output, Replay is unnecessary.
-This pattern accounted for ~45% of failures in observed sessions.
+This pattern accounted for ~45-58% of failures in observed sessions. In one analysis,
+58% of Replay-used data-contamination failures could have been diagnosed from error
+output alone — skip Replay and go straight to test ordering and data isolation fixes.
 
 ### Serial test data contamination
 When tests fail with unexpected counts, missing entities, or strict mode violations (e.g.,
@@ -173,3 +175,4 @@ is not obvious from the test output.
 | Multiple timeouts on fresh build | `PlaywrightSteps` then `DescribeComponent` (Replay browser overhead?) |
 | Auth test returns 409/400 | `PlaywrightSteps` then `NetworkRequest` (check request payload) |
 | Action succeeds but UI doesn't update | `NetworkRequest`/`LocalStorage` then `ReactRenders` (state hydration gap?) |
+| Blank page / missing data (no error) | `PlaywrightSteps` then `NetworkRequest` (check for 404/500 silently swallowed) |
