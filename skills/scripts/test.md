@@ -18,9 +18,11 @@ tests during development and debugging.
 ## Pre-Flight
 
 Before running `npm run test`, follow the pre-flight checklist in `skills/scripts/preflight.md`.
-In particular, always use `npx replayio install` (NOT `npx playwright install chromium`) for
-browser setup — the Replay browser installs to `~/.replay/runtimes/` and does not require
-the Playwright browsers path workaround.
+The pre-flight kills stale servers, clears `test-results/results.json` (to prevent
+misleading counts from old runs), and removes stale Replay recordings. Always use
+`npx replayio install` (NOT `npx playwright install chromium`) for browser setup — the
+Replay browser installs to `~/.replay/runtimes/` and does not require the Playwright
+browsers path workaround.
 
 ## Behavior
 

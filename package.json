@@ -16,6 +16,7 @@
     "add-task": "tsx scripts/add-task.ts"
   },
   "devDependencies": {
+    "@replayio/playwright": "^5.0.2",
     "@types/node": "^25.3.0",
     "tsx": "^4.19.0",
     "typescript": "^5.5.0"

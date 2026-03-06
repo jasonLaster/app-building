@@ -164,6 +164,8 @@ Do not defer Replay installation to after failures are discovered.
 Before running any tests, perform these checks from the app directory:
 
 1. **Kill stale servers**: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+   Also check for processes holding port 8888: `lsof -ti:8888 | xargs kill -9 2>/dev/null`.
+   Stale `netlify dev` processes on port 8888 cause infrastructure failures across entire spec files.
 2. **Verify `NEON_PROJECT_ID` is set**: `grep NEON_PROJECT_ID .env` — the test script requires
    it for creating ephemeral Neon branches. If missing, check `deployment.txt` for the project ID.
 3. **Verify Replay browser**: `ls ~/.replay/runtimes/chrome-linux/chrome` — if missing, run
@@ -465,7 +467,9 @@ failures (~45% of observed failures come from shared database state).
   format. Mismatches between API response format and component expectations are a recurring
   source of failures. All date comparisons in frontend code and tests must normalize to
   `YYYY-MM-DD` format before comparing, using `.split('T')[0]` or equivalent, since Postgres
-  TIMESTAMP/DATE columns may return ISO strings with time components.
+  TIMESTAMP/DATE columns may return ISO strings with time components. Consider creating a shared
+  `normalizeDate(isoString: string): string` utility that all components use when consuming
+  date fields from the API, to prevent this recurring bug at the source.
 - When filtering by status values like "Active"/"Inactive", use exact text matching
   (e.g., `getByRole('option', { name: /^Active$/ })`) to avoid Playwright strict-mode
   violations from substring collisions (e.g., "Active" matching both "Active" and "Inactive").
@@ -473,6 +477,11 @@ failures (~45% of observed failures come from shared database state).
   Always use `data-testid` attributes instead. Raw element selectors break when the component's
   HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
   timeouts that are hard to diagnose.
+- **Pin react-leaflet to v4.x when using React 18.** react-leaflet v5 is incompatible with
+  React 18 and causes blank page crashes. If the app uses maps, ensure `package.json` pins
+  `react-leaflet` to `^4.2.1` (or latest v4) and `@react-leaflet/core` to the matching v4
+  version. This incompatibility manifests as all map-related tests crashing with no visible
+  error in the UI — only `Screenshot` + `ConsoleMessages` via Replay reveals the issue.
 - Ensure tests don't leak state between runs. Data-contamination failures occur when a prior
   test's API calls complete after the next test has started, polluting the data state. Use
   `test.describe.serial` for tests that share mutable state, or ensure API calls are fully

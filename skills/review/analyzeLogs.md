@@ -41,7 +41,8 @@ Subtask format: `AnalyzeGroup: <report-name> <report-file> <log1> <log2> ...`
 
 1. Parse the report name, report file path, and log file list from the subtask description.
 
-2. Ensure npm dependencies are installed: check that `node_modules/` exists at the repo root.
+2. Ensure npm dependencies are installed: check that `node_modules/` exists at the repo root
+   **once at the start of the group**. Do not re-check for each log file.
    If it does not, run `npm install` from the repo root before proceeding.
 
 3. Read the report file (e.g. `skills/review/reportTestFailures.md`) to get the per-log
@@ -56,3 +57,12 @@ Subtask format: `AnalyzeGroup: <report-name> <report-file> <log1> <log2> ...`
       If multiple logs share a filename, prefix with the parent directory name.
 
 5. After processing all logs in the group, signal completion.
+
+## Efficiency Guidelines
+
+- **Minimize redundant directory checks.** Run `comm -23` or `diff` once at the start
+  to get the full list of unanalyzed logs, then process them in a single pass. Do NOT
+  re-check directory state (via `ls`, `comm`, or `diff`) between each file.
+- **Check `node_modules/` once** at the start of the group, not per log file.
+- Avoid redundant `ls` calls on `/repo/logs/` or `report-data/` directories during
+  processing — the file list does not change within a single group run.

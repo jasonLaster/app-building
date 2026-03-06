@@ -11,14 +11,16 @@ and should be followed every time.
 Run these steps from the app directory **once** before each `npm run test` invocation.
 Do NOT repeat preflight steps multiple times — one invocation of each command is sufficient.
 
-### 1. Kill stale servers
+### 1. Kill stale servers and clear stale results
 
 ```bash
-pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
+pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null; rm -f test-results/results.json
 ```
 
 Stale `netlify dev` and `vite` processes from previous runs cause port conflicts and
-serve outdated code. Always kill them before starting tests.
+serve outdated code. Always kill them before starting tests. Also delete
+`test-results/results.json` to prevent misleading pass counts from a previous run —
+if `netlify dev` fails to start, the parser would otherwise read old results.
 
 ### 2. Verify `NEON_PROJECT_ID` in `.env`
 
