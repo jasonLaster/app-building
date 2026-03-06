@@ -99,19 +99,46 @@ a new URL and an empty database. Always check `deployment.txt` first.
   - 0: Deployment succeeded.
   - Non-zero: A step failed.
 
+## SPA Routing
+
+Single-page apps require a `_redirects` file so that Netlify serves `index.html` for all
+client-side routes. Without this, direct navigation to `/dashboard` or other routes returns 404.
+
+Create `public/_redirects` with:
+
+```
+/* /index.html 200
+```
+
+The deploy script should ensure this file exists before building. If the app uses client-side
+routing (React Router, etc.), this file is mandatory.
+
 ## Post-Deploy Checklist
 
 After the first successful deployment, verify that required environment variables are set on
-the Netlify site. Missing env vars cause production 500 errors that are hard to diagnose:
+the Netlify site. Missing env vars cause production 500 errors that are hard to diagnose.
 
-1. **Check existing env vars**: `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID`
-2. **Set `DATABASE_URL`**: `LC_ALL=C npx netlify env:set DATABASE_URL "<url>" --context production --site $NETLIFY_SITE_ID`
+Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
+flag is unreliable and silently fails in many environments. See `skills/scripts/netlify-env.md`
+for the working REST API approach.
+
+1. **Check existing env vars**: Use the Netlify REST API or `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID`
+2. **Set `DATABASE_URL`**: See `skills/scripts/netlify-env.md` for the REST API command.
    The deploy script writes `DATABASE_URL` to `.env` but does NOT automatically set it on Netlify.
-   You must set it manually after the first deploy. Always use `--context production` to scope
-   the variable to production deploys. Without `--context`, the CLI may prompt interactively or
-   set the variable for all contexts.
+   You must set it manually after the first deploy.
 3. **Run the deployment test** (`npx playwright test --config playwright.deployment.config.ts`)
    to confirm the production app can load data and perform writes.
+
+## Exporting `.env` for Shell Commands
+
+`source .env` does NOT export variables — they are only available in the current shell, not in
+subprocesses or `curl` commands. When you need `.env` values in shell commands, use:
+
+```bash
+export $(grep -v '^#' .env | xargs)
+```
+
+This exports all non-comment lines as environment variables accessible to subprocesses.
 
 ## Locale Workaround
 

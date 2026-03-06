@@ -27,6 +27,8 @@ Pre-deployment checklist:
 1. Verify `DATABASE_URL` is set in `.env` (populated from `deployment.txt` or newly created).
 2. Verify the DB has been seeded with production data (the deploy script handles first-run seeding).
 3. Ensure the deploy script runs fully non-interactively — no CLI prompts that hang in CI.
+4. Ensure `public/_redirects` exists with `/* /index.html 200` for SPA routing. Without this,
+   Netlify returns 404 for client-side routes when users navigate directly or refresh.
 
 Then run `npm run deploy` from the app directory. See `skills/scripts/deploy.md` for the
 full script specification. The script handles database creation/sync, Netlify site

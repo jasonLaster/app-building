@@ -14,7 +14,7 @@ For each log file, produce a markdown file with the following structure:
 NOTES: <brief summary of what this log was about>
 
 ## Test Failures
-TEST_FAILURES: <count of distinct test failures in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When multiple tests share a ROOT_CAUSE_CLUSTER, count each affected test as 1 distinct failure (not 1 per cluster). For example, a cluster of 8 tests = TEST_FAILURES: 8.>
+TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (5+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests.>
 TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 if all passed on first run>
 
 For each test failure:
@@ -33,6 +33,7 @@ ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cau
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
 FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the fix was to test code, app code, or both. "none" if not yet resolved. Helps identify whether the testing process or the app-building process needs improvement)
+FIX_ITERATIONS: <number of test re-runs needed to fully resolve this failure, 0 if not yet resolved. Captures debugging difficulty — failures taking 4+ iterations indicate complex root causes that may warrant process improvements. Omit if resolved in 1 run.>
 
 #### Replay Usage (if REPLAY_USED is yes)
 OUTCOME: <what the Replay analysis revealed>
@@ -64,7 +65,7 @@ RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
-FIX_PATTERN: <reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". REQUIRED when the same fix concept applies across multiple clusters or spec files — tag every instance, not just the first. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER and accurately measure fix reuse rate.>
+FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
 
@@ -109,8 +110,9 @@ Compile all analysis files into a single report with these sections:
 - Unique root causes (count of distinct ROOT_CAUSE_CLUSTER values + unclustered failures — when a cluster of N tests fails due to 1 root cause, count it as 1 unique root cause, not N failures)
 - Fix reuse rate (count of distinct fix patterns applied to multiple spec files — e.g., the same wait-for-row pattern applied across 3 spec files counts as 1 reused fix. Identifies opportunities for shared test utilities or fixture improvements)
 - Failure phase distribution (breakdown by FAILURE_PHASE — e.g., writeTests: 5, fixTests: 72, deployment: 3. Highlights if failures are concentrated in a specific phase)
-- Failure resolution type distribution (breakdown by FAILURE_RESOLUTION_TYPE — e.g., test-code: 22, app-code: 8, both: 5, none: 2. Helps calibrate whether the testing process or the app-building process needs improvement)
+- Failure resolution type distribution (breakdown by FAILURE_RESOLUTION_TYPE — e.g., test-code: 31, app-code: 5, both: 6, none: 2. Indicates whether the testing process or app-building process needs improvement)
 - Test Isolation Score (percentage of failures attributable to test isolation issues: data-contamination + strict-mode + seed-data-mismatch categories combined. A high score (>50%) signals that test isolation is the dominant failure mode and warrants dedicated process improvements)
+- Total affected tests (total number of individual tests affected, including all tests within clusters. Complements the distinct failure count — e.g., 15 distinct failures may affect 40 total tests when clusters are expanded)
 
 ### 2. Failure Table
 A markdown table with columns:
@@ -144,28 +146,8 @@ they appeared in, and whether a single fix resolved them all.
   analyzing test isolation patterns: which spec files are affected, whether serial execution
   is the root cause, and what isolation strategies would have prevented the failures.
 
-### Failure Resolution Type Breakdown
-Include a table showing:
-| Resolution Type | Count | % of Total |
-breaking down FAILURE_RESOLUTION_TYPE across all failures. This helps identify whether failures
-are predominantly test-code issues (suggesting testing process improvements) or app-code issues
-(suggesting app-building process improvements).
-
 ### 4. Recommendations
 Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
-
-### 5. Replay Fixes Table
-
-For each test failure where Replay was used and the test failure was successfully fixed,
-add an entry with the following details copied verbatim from the analysis file:
-
-ULTRA IMPORTANT: Follow this format exactly and make sure to include this table as it will be used
-by downstream processes. Do not modify these instructions.
-
-INITIAL_CHANGESET
-FAILING_TEST
-FINAL_CHANGESET
-ASSESSMENT

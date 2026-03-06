@@ -24,26 +24,6 @@ pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
   In most cases the port is released immediately.
 - Zombie processes (`<defunct>`) cannot be killed and are harmless — ignore them.
 
-## IPv6 Fallback
-
-`netlify dev` sometimes binds on IPv6 (`::1:8888`), which `pkill` may miss. If
-`pkill` does not free port 8888, use the `/proc` filesystem to find and kill the
-owning process:
-
-```bash
-# Find PIDs listening on port 8888 (hex 22B8) via /proc/net/tcp6
-grep ':22B8' /proc/net/tcp6 | awk '{print $10}' | sort -u | while read inode; do
-  for pid in /proc/[0-9]*/fd/*; do
-    link=$(readlink "$pid" 2>/dev/null)
-    if [ "$link" = "socket:[$inode]" ]; then
-      kill -9 "$(echo "$pid" | cut -d/ -f3)" 2>/dev/null
-    fi
-  done
-done
-```
-
-This approach works when `lsof`, `fuser`, and `ss` are unavailable in the container.
-
 ## When to Run
 
 - Before every `npm run test` invocation (see `preflight.md` step 1).

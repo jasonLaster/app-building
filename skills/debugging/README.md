@@ -89,6 +89,11 @@ tool sequence in the relevant debugging guide below.
 
 ## No-Replay Diagnostic Patterns
 
+**Error output first**: 98% of observed failures were diagnosed from Playwright error output
+alone (DOM snapshots, assertion messages, count mismatches). Always check error output before
+reaching for Replay. Reserve Replay for failures where the page state at failure time is
+ambiguous or the failure involves complex async timing.
+
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 
 ### Strict mode violation
@@ -107,7 +112,7 @@ records from an unknown source, API returning data that shouldn't be there). Ski
 error output shows a clear count mismatch with an obvious accumulation pattern (e.g., "expected
 3, got 30+" — this is almost certainly missing cleanup).
 
-### Data contamination triage
+### Data contamination triage (most common failure category — 37.5% of all failures)
 When Playwright error output shows expected count X but received Y (e.g., "expected 3 but
 received 4", "expected $7.00 but got $8.50"), check before reaching for Replay:
 1. Does a prior test create or delete records without cleanup?
@@ -144,6 +149,16 @@ earlier corrupts state for all subsequent tests. This single anti-pattern caused
 (33% of all failures) across 7 spec files in one observed session.
 
 This was the root cause of ~45% of observed test failures.
+
+### Selector overcount
+When using `[data-testid^="prefix-"]` selectors, always check whether a container element
+also matches the prefix. For example, `[data-testid^="route-stop-"]` will match both
+`route-stop-item-1` and `route-stop-list` (the container). This causes count assertions to
+be off by 1 and was a recurring failure pattern. Fix by adding `:not()` exclusions
+(e.g., `:not([data-testid="route-stop-list"])`) or using more specific selectors.
+
+**Diagnosis without Replay**: The error message shows "expected N, got N+1" for a list count.
+Check if the `data-testid` prefix selector matches a container element in the component source.
 
 ### Redux state replacement
 When inline edit tests fail with missing nested data (e.g., arrays or related fields

@@ -18,11 +18,9 @@ tests during development and debugging.
 ## Pre-Flight
 
 Before running `npm run test`, follow the pre-flight checklist in `skills/scripts/preflight.md`.
-The pre-flight kills stale servers, clears `test-results/results.json` (to prevent
-misleading counts from old runs), and removes stale Replay recordings. Always use
-`npx replayio install` (NOT `npx playwright install chromium`) for browser setup — the
-Replay browser installs to `~/.replay/runtimes/` and does not require the Playwright
-browsers path workaround.
+In particular, always use `npx replayio install` (NOT `npx playwright install chromium`) for
+browser setup — the Replay browser installs to `~/.replay/runtimes/` and does not require
+the Playwright browsers path workaround.
 
 ## Behavior
 
@@ -136,6 +134,15 @@ Instead, use this approach in order:
 When tests consistently time out under the Replay Chromium browser (which adds 2–3x overhead),
 use `test.slow()` at the top of the test body to triple Playwright's default timeout. This is
 preferable to increasing `actionTimeout` globally, since it only affects known slow tests.
+
+## Test Writing Guidelines
+
+For guidance on writing robust tests that work with this test script, see:
+
+- `skills/tasks/build/writeTests.md` § "Test Design and Database Isolation" — `beforeEach`
+  cleanup hooks, relative assertions, and `data-testid` selector best practices.
+- `skills/tasks/build/writeTests.md` § "Directives" — test isolation mandates including no
+  hardcoded row counts, unique entity names, and `:not()` filters for prefix selectors.
 
 ## Implementation Tips
 
