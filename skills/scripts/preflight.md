@@ -8,7 +8,8 @@ and should be followed every time.
 
 ## Pre-Test Preflight
 
-Run these steps from the app directory before any `npm run test` invocation:
+Run these steps from the app directory **once** before each `npm run test` invocation.
+Do NOT repeat preflight steps multiple times — one invocation of each command is sufficient.
 
 ### 1. Kill stale servers
 

@@ -34,13 +34,11 @@ creation/update, and writes the deployed URL to `deployment.txt`.
 
 After the first deploy, you MUST set `DATABASE_URL` on the Netlify site so that production
 Netlify Functions can connect to the database. The deploy script writes it to `.env` but does
-NOT push it to Netlify automatically:
+NOT push it to Netlify automatically.
 
-```bash
-LC_ALL=C npx netlify env:set DATABASE_URL "$(grep DATABASE_URL .env | cut -d= -f2-)" --site $(grep NETLIFY_SITE_ID .env | cut -d= -f2-)
-```
+Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
+flag does not work reliably. See `skills/scripts/netlify-env.md` for the exact API commands.
 
-Verify it was set: `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID | grep DATABASE_URL`.
 See `skills/scripts/deploy.md` § "Post-Deploy Checklist" for the full list.
 
 After a successful deployment, you MUST append a deployment history entry to the end of

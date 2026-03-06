@@ -116,15 +116,18 @@ check the log file before concluding that tests didn't run.
 
 ## Parsing Test Failures
 
-To identify failing tests, parse `test-results/results.json` rather than grepping raw log
-files. The JSON reporter produces structured data that is much more reliable to parse:
+The JSON log reporter strips test names and error details from `test-results/results.json`,
+making it unreliable for identifying which tests failed. Do NOT spend time trying to parse
+`results.json` with grep, python3, or node scripts — the data is not there.
 
-```bash
-python3 -c "import json; data=json.load(open('test-results/results.json')); [print(s['title'], 'FAILED:', s.get('error',{}).get('message','')) for s in data.get('suites',[{}])[0].get('specs',[]) if s['ok']==False]"
-```
+Instead, use this approach in order:
 
-This approach avoids false positives from grepping log files and gives you the exact test
-title and error message for each failure.
+1. **Check `test-results/*/error-context.md` files** — these contain readable failure details
+   including test names and error messages. This is the fastest way to identify failures.
+2. **Check `test-results/.last-run.json`** — provides high-level pass/fail status.
+3. **Use Replay MCP tools** — if error-context files are insufficient, inspect the uploaded
+   recording to diagnose the root cause. This is consistently the most effective approach
+   for understanding failures.
 
 ## Timeout-Prone Tests
 

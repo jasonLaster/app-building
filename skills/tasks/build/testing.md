@@ -190,6 +190,10 @@ for the full script specification). Do NOT manually run playwright or start dev 
 When tests fail, you MUST follow this process for each distinct failure. Every step is
 mandatory — do NOT skip or reorder steps.
 
+0. **Identify failing tests**: Check `test-results/*/error-context.md` files for readable
+   failure details. Do NOT parse `test-results/results.json` with grep/python3/node — the
+   JSON log reporter strips test names and error details. If error-context files are missing,
+   check `test-results/.last-run.json` for high-level status, then use Replay MCP tools.
 1. Announce `ANALYZING TEST FAILURE: <test name>`.
 2. **Read the debugging guides** in `skills/debugging/` to find the category matching your
    failure. The guides describe which Replay MCP tools to use first and what to look for:
@@ -261,10 +265,11 @@ failures (~45% of observed failures come from shared database state).
    (e.g., `toBeGreaterThan(0)`, "count decreased by 1") or query initial count before
    asserting. Never hardcode expected values like "4 visits" or "3 customers".
 
-2. **Destructive tests go last.** Tests that delete all entities (empty state tests) or
-   rename entities MUST be ordered at the end of their describe block, or use
-   `test.describe.serial` with explicit dependencies. Placing them earlier corrupts state
-   for subsequent tests.
+2. **Destructive tests go last AND use serial.** Tests that delete all entities (empty state
+   tests) or rename entities MUST be ordered at the end of their describe block AND wrapped
+   in `test.describe.serial`. This must be done during initial test authoring (writeTests),
+   not deferred to checkDirectives. Placing destructive tests earlier corrupts state for
+   subsequent tests — this caused 33% of all failures in one observed session.
 
 3. **Unique entity names per test.** When tests create entities, use unique names
    (e.g., include test name or timestamp) to avoid strict mode collisions from duplicate
@@ -441,6 +446,10 @@ failures (~45% of observed failures come from shared database state).
   across test runs. Once you know the project structure, do not re-discover it in every
   iteration. Use the Glob and Grep tools instead of shell commands for file operations.
 
+- **Cross-spec learning**: When a fix pattern is discovered in one spec file (e.g.,
+  wait-before-count, destructive test reordering, formatDate normalization), proactively apply
+  it to all other spec files in the same app before re-running tests. Fixing each file
+  independently wastes re-run cycles on the same known issue.
 - When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
   them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
   once per task to confirm, then focus on new failures only.

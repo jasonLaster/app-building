@@ -14,7 +14,7 @@ For each log file, produce a markdown file with the following structure:
 NOTES: <brief summary of what this log was about>
 
 ## Test Failures
-TEST_FAILURES: <count of distinct test failures in this log, 0 if none>
+TEST_FAILURES: <count of distinct test failures in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry.>
 TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 if all passed on first run>
 
 For each test failure:
@@ -63,6 +63,8 @@ REPLAY_NOT_USED_REASON: <reason>
 RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
+FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
+FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
 

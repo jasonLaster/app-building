@@ -93,8 +93,9 @@ await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
 const initialCount = await page.locator('[data-testid="row"]').count();
 ```
 
-This single pattern resolved 38.5% of all test failures in observed runs, across locations,
-machines, and products list pages.
+This single pattern resolved 22–38% of all test failures in observed runs. In one session it
+was the single most repeated self-inflicted bug, appearing identically in 6+ spec files (12
+failures). Always apply this fix proactively across all spec files when discovered in one.
 
 ### Stale fetch race condition
 A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,

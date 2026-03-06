@@ -86,6 +86,12 @@ When date-related assertions fail, check this sequence:
    If the API returns timestamps, the component must strip the time portion before setting
    the input value.
 
+**formatDate ISO timestamp pattern**: When `formatDate` or similar utility functions receive
+ISO timestamps (e.g., `2026-03-10T00:00:00.000Z`) but expect `YYYY-MM-DD`, they produce
+"Invalid Date" or wrong output. The fix is to strip the time component with `.split('T')[0]`
+before formatting. This bug recurred across 6+ components in one session — when found in one
+component, proactively fix all `formatDate` call sites.
+
 *Example*: 6 failures in a single log shared the same ISO-date-parsing root cause — the API
 returned timestamps but components expected date strings.
 

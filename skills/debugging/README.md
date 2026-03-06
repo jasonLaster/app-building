@@ -132,9 +132,16 @@ is explained by accumulated state. No recording is needed.
 
 **Fix patterns**:
 - Move destructive tests (deletes, renames) to the end of describe blocks
+- Wrap destructive tests in `test.describe.serial` from the start during test authoring
 - Use relative assertions ("count increased by 1") instead of absolute ("count is 4")
 - Use unique entity names per test to avoid strict mode collisions
 - Make later tests query current state before asserting
+- Add `beforeEach` cleanup to remove test-created data when tests create entities via API
+
+**Anti-pattern: Destructive test ordering.** Tests that delete all entities to verify empty
+state MUST run last in their describe block or use `test.describe.serial`. Placing them
+earlier corrupts state for all subsequent tests. This single anti-pattern caused 18 failures
+(33% of all failures) across 7 spec files in one observed session.
 
 This was the root cause of ~45% of observed test failures.
 
