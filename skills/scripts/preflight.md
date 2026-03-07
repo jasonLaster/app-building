@@ -11,16 +11,24 @@ and should be followed every time.
 Run these steps from the app directory **once** before each `npm run test` invocation.
 Do NOT repeat preflight steps multiple times — one invocation of each command is sufficient.
 
+Run all preflight steps as a single compound command to avoid redundant invocations:
+
+```bash
+pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null; \
+grep NEON_PROJECT_ID .env || echo "ERROR: NEON_PROJECT_ID not set"; \
+ls ~/.replay/runtimes/chrome-linux/chrome 2>/dev/null || npx replayio install; \
+ls node_modules/@neondatabase/serverless 2>/dev/null || npm install --legacy-peer-deps; \
+npx replayio remove --all 2>/dev/null
+```
+
+Do NOT run the compound command and then re-run individual checks separately — the single
+invocation covers everything. Redundant `pkill` and check commands are the largest source
+of unnecessary command volume.
+
 ### 1. Kill stale servers
 
 ```bash
 pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
-```
-
-If `pkill` is insufficient (processes still hold ports), use port-specific cleanup:
-
-```bash
-lsof -ti:8888 | xargs kill 2>/dev/null; lsof -ti:5173 | xargs kill 2>/dev/null
 ```
 
 Stale `netlify dev` and `vite` processes from previous runs cause port conflicts and

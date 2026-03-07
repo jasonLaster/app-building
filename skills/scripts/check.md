@@ -57,6 +57,12 @@ Before running lint, verify that the app has an ESLint configuration file (`.esl
 Do NOT retry `npx eslint` expecting different results when the underlying issue is a missing
 configuration file. The "no config found" error will not resolve on its own.
 
+## Canonical Command
+
+`npm run check` is the canonical command for quality checks. Do NOT use `npx tsc --noEmit`
+directly as a substitute — always use `npm run check` to ensure both typecheck and lint run
+with the correct configuration.
+
 ## Faster Type-Only Checks
 
 During iterative development when you only need to verify types (not lint), you can run

@@ -41,6 +41,10 @@ NOT push it to Netlify automatically.
 Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
 flag does not work reliably. See `skills/scripts/netlify-env.md` for the exact API commands.
 
+**Important**: When setting environment variable context via the Netlify API, use `"production"`
+not `"all"`. The `"all"` context may fail silently or produce errors. Always target `"production"`
+explicitly.
+
 See `skills/scripts/deploy.md` § "Post-Deploy Checklist" for the full list.
 
 After a successful deployment, you MUST append a deployment history entry to the end of
@@ -72,11 +76,6 @@ much faster than a full test suite:
 ```bash
 curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>
 ```
-
-**Netlify function routing:** Netlify v2 functions use `/api/*` routes instead of
-`/.netlify/functions/*`. If your functions use the v2 API (e.g., `export default async (req)`
-with `config.path`), test with the `/api/<path>` pattern. Check the function source for a
-`config` export with a `path` property to determine which routing convention applies.
 
 If this returns 500, fix the environment variables before proceeding. See
 `skills/scripts/deploy-verification.md` for the full verification checklist.

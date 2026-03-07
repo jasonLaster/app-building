@@ -163,7 +163,9 @@ Do not defer Replay installation to after failures are discovered.
 
 Before running any tests, run the standard pre-flight procedure from `skills/scripts/preflight.md`.
 Do NOT manually check each prerequisite individually — this wastes 3–8 commands per session
-reinventing the same sequence. Run all pre-flight steps once as a batch:
+reinventing the same sequence. Run all pre-flight steps **exactly once** as a single batch.
+Do NOT re-run individual preflight checks (e.g., extra `pkill` commands) after the batch —
+one invocation is sufficient:
 
 ```bash
 pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
@@ -292,7 +294,17 @@ failures (~45% of observed failures come from shared database state).
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
    cascade, causing failures in later tests that reference them.
 
-8. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+8. **Use `.last()` for newly-created records.** When a test creates a record (payment, line
+   item, customer) and then asserts on it, use `.last()` not `.first()` to locate it. Prior
+   tests in the same spec run may have created similar records, so `.first()` may match a
+   stale record from an earlier test rather than the one just created.
+
+9. **Explicit timestamps in seed data.** Seed data should use explicit timestamps (e.g.,
+   `'2026-01-15T10:00:00Z'`) rather than `NOW()` or `NOW() - INTERVAL` to ensure
+   deterministic ordering. Dynamic timestamps produce non-deterministic results when tests
+   assert on chronological ordering (e.g., revision history, activity logs).
+
+10. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
@@ -464,11 +476,6 @@ failures (~45% of observed failures come from shared database state).
   wait-before-count, destructive test reordering, formatDate normalization), proactively apply
   it to all other spec files in the same app before re-running tests. Fixing each file
   independently wastes re-run cycles on the same known issue.
-- **Fix shared utilities early**: When a bug is found in a shared utility function (e.g.,
-  `formatDate`, `formatCurrency`), fix it at the source and audit all call sites immediately
-  rather than fixing per-spec-file as failures surface. In one observed session, the same
-  `formatDate` ISO timestamp bug was independently discovered and fixed across 5 separate
-  logs — a single early fix would have prevented all downstream failures.
 - When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
   them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
   once per task to confirm, then focus on new failures only.
