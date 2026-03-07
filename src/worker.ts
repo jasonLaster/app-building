@@ -318,6 +318,18 @@ export function getNextTask(): Task | null {
   return data.tasks.length > 0 ? data.tasks[0] : null;
 }
 
+function truncate(s: string, max: number): string {
+  return s.length > max ? s.slice(0, max - 3) + "..." : s;
+}
+
+function taskCommitLabel(task: Task): string {
+  if (task.prompt) return truncate(task.prompt, 60);
+  if (task.subtasks.length === 0) return task.skill;
+  const first = truncate(task.subtasks[0], 60);
+  if (task.subtasks.length === 1) return first;
+  return `${first} (+${task.subtasks.length - 1} more)`;
+}
+
 export interface TaskResult {
   success: boolean;
   cost: number;
@@ -342,9 +354,13 @@ export async function processTask(
     if (shouldStop?.()) return { success: false, cost };
 
     const prompt = buildTaskPrompt(task);
-    log(`Running task: ${task.subtasks.length} subtask(s) (skill: ${task.skill})`);
-    for (const subtask of task.subtasks) {
-      log(`  - ${subtask}`);
+    if (task.prompt) {
+      log(`Running prompt task`);
+    } else {
+      log(`Running task: ${task.subtasks.length} subtask(s) (skill: ${task.skill})`);
+      for (const subtask of task.subtasks) {
+        log(`  - ${subtask}`);
+      }
     }
 
     let response: ClaudeResult;
@@ -372,12 +388,7 @@ export async function processTask(
       log(`Turns: ${response.num_turns}`);
     }
 
-    const subtaskSummary = task.subtasks[0].length > 60
-      ? task.subtasks[0].slice(0, 57) + "..."
-      : task.subtasks[0];
-    commitFn?.(task.subtasks.length === 1
-      ? subtaskSummary
-      : `${subtaskSummary} (+${task.subtasks.length - 1} more)`);
+    commitFn?.(taskCommitLabel(task));
 
     if (response.doneSignaled) {
       log(`Task signaled <DONE>. Completing task.`);
