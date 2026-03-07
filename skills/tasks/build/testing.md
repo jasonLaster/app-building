@@ -432,6 +432,14 @@ failures (~45% of observed failures come from shared database state).
   Without this wait, async data loading may not have completed, returning 0 and causing
   off-by-one assertion failures. This is the single highest-impact testing pattern — it
   prevents ~38% of observed test failures.
+- **Verify FK constraints on DELETE endpoints.** Before writing tests, verify that all DELETE
+  endpoints handle foreign key constraints (either via `ON DELETE CASCADE` in the schema or
+  explicit cascading deletes in the endpoint handler). DELETE endpoints that return 500 due
+  to FK violations cause test timeouts that are hard to diagnose without Replay.
+- **Use filtered locators by default in tests.** Tests should use filtered locators (e.g.,
+  `getByRole('row').filter({ hasText: 'unique-value' })`) rather than broad `getByTestId`
+  when multiple matching elements could exist. This prevents strict-mode violations from
+  ambiguous selectors.
 - **Use edge coordinates for backdrop click tests.** Tests for modal dismissal via backdrop/overlay
   click should always use edge coordinates (e.g., `{ x: 10, y: 10 }`) rather than clicking the
   center of the overlay, as modals often occupy the center and intercept the click.

@@ -43,7 +43,7 @@ TOOLS_USED: <comma-separated list of mcp__replay__* tools called>
 #### Resolution
 CHANGESET_REVISION: <git SHA from "CHANGESET REVISION:" line in log, or "none". Note: this captures the commit that fixed the issue. If the fix was applied during the same test-fixing session and no separate "CHANGESET REVISION:" line was emitted, use "none".>
 FAILING_TEST: <test name from "FAILING TEST:" line in log, or "none">
-CASCADING_FIX_COUNT: <number of distinct test failures resolved by this changeset, if > 1. Omit if only 1 test was fixed or changeset is "none".>
+CASCADING_FIX_COUNT: <number of distinct test failures (individual tests, not issues) resolved by this changeset, if > 1. This counts tests unblocked, not issues fixed — e.g., if fixing one config issue unblocks 11 tests, CASCADING_FIX_COUNT is 11. Omit if only 1 test was fixed or changeset is "none".>
 ```
 
 If a log has no test failures, just write the Summary section with TEST_FAILURES: 0.
@@ -66,6 +66,7 @@ REPLAY_NOT_USED_REASON: <reason>
 RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
+DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
@@ -115,6 +116,7 @@ Compile all analysis files into a single report with these sections:
 - Failure resolution type distribution (breakdown by FAILURE_RESOLUTION_TYPE — e.g., test-code: 31, app-code: 5, both: 6, none: 2. Indicates whether the testing process or app-building process needs improvement)
 - Test Isolation Score (percentage of failures attributable to test isolation issues: data-contamination + strict-mode + seed-data-mismatch categories combined. A high score (>50%) signals that test isolation is the dominant failure mode and warrants dedicated process improvements)
 - Total affected tests (total number of individual tests affected, including all tests within clusters. Complements the distinct failure count — e.g., 15 distinct failures may affect 40 total tests when clusters are expanded)
+- Pre-existing rate (percentage of failures that were pre-existing, from PRE_EXISTING field — a useful signal about writeTests/writeApp quality. Aggregates the per-failure PRE_EXISTING field into a single metric)
 
 ### 2. Failure Table
 A markdown table with columns:
@@ -153,16 +155,3 @@ Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
-
-### 5. Replay Fixes Table
-
-For each test failure where Replay was used and the test failure was successfully fixed,
-add an entry with the following details copied verbatim from the analysis file:
-
-ULTRA IMPORTANT: Follow this format exactly and make sure to include this table as it will be used
-by downstream processes. Do not modify these instructions.
-
-INITIAL_CHANGESET
-FAILING_TEST
-FINAL_CHANGESET
-ASSESSMENT

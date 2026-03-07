@@ -25,14 +25,19 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app
   --subtask "WritePage<Name>: Write the page itself"
 ```
 
+**Before queuing write tasks**, check which components and pages already exist in the app
+directory. Do not queue tasks for components that have already been built by earlier iterations.
+Use Glob (e.g., `src/components/*.tsx`, `src/pages/*.tsx`) to verify what exists.
+
 ## Reference Apps
 
 When scaffolding a new app, check for existing reference apps that can inform your setup.
 Look for completed apps under `apps/` first — if any exist, read their configuration files
 directly (e.g., `vite.config.ts`, `tsconfig.json`, `netlify.toml`, `playwright.config.ts`).
 If no apps exist locally, use `git log --all --oneline` to find previous app builds in git
-history, then use `git show <commit>:<path>` to read their configuration files. Prefer
-reading existing local apps over git history exploration to avoid excessive shell commands.
+history, then use `git show <commit>:<path>` to read their configuration files without
+checking out old branches. This is the standard pattern for inspecting historical files.
+Prefer reading existing local apps over git history exploration to avoid excessive shell commands.
 
 ## Guidelines
 
@@ -128,10 +133,6 @@ contexts (testing, deployment).
 
 - Attachment functionality must support actual file uploads. Any UI that allows adding attachments
   must include a working file upload mechanism (e.g., file picker, drag-and-drop), not just link entry.
-
-- All data tables and data lists must include a header row with column labels so the meaning of each
-  column is clear. Apply consistent header styling (smaller font size, muted color, medium weight) across
-  all tables in the app. Do not omit headers even when column meanings seem obvious from context.
 
 - Every page component must include consistent padding on its root element (`p-6 max-sm:p-3`)
   so content is never flush against the screen edges. This applies to all pages including

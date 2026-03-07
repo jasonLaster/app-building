@@ -15,6 +15,20 @@ pass before every commit.
   `tsconfig.json` is used and avoids resolution issues.
 - Example: `cd /repo/apps/SalesCRM && npm run check`
 
+## Pre-Flight Checklist
+
+Before running `npm run check`, do a quick mental review of the code you changed to catch
+common issues that cause first-attempt failures:
+
+1. **Unused imports/variables**: Did you remove or comment out code that left an import or
+   variable unused? Remove it or prefix with `_`.
+2. **Missing exports**: If you added a new component or function that another file imports,
+   did you export it?
+3. **Type mismatches**: Do function arguments and return types match their declarations?
+4. **`let` vs `const`**: Use `const` for variables that are never reassigned.
+
+Catching these before running the check reduces the ~5% first-attempt failure rate.
+
 ## First-Attempt Failures Are Normal
 
 `npm run check` frequently fails on its first run due to lint errors or type issues introduced
