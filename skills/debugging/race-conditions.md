@@ -127,6 +127,26 @@ to API response)
 re-reads the latest state after the API response arrives rather than capturing the value at
 click time.
 
+### Count=0 or disabled button after data load
+When tests fail with count=0 for a list or a button remains disabled after an action,
+the root cause is often a timing issue between data loading and the assertion/click. The
+data hasn't finished loading when the test checks.
+
+**Diagnosis with Replay**: `PlaywrightSteps` shows the timing gap between the page load
+and the assertion. `NetworkRequest` confirms whether the API call completed before the
+assertion ran.
+
+**Tool sequence**: `PlaywrightSteps → NetworkRequest` (measure timing gap, verify API completion)
+
+**Fix**: Wait for the expected element or data to appear before asserting:
+```ts
+await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
+```
+Or wait for the button to be enabled before clicking:
+```ts
+await expect(page.locator('button[data-testid="submit"]')).toBeEnabled();
+```
+
 ### Stale fetch race condition
 A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,
 search or filter). The first fetch's response arrives after the second and overwrites the UI

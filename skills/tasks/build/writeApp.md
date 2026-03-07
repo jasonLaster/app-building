@@ -25,19 +25,14 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app
   --subtask "WritePage<Name>: Write the page itself"
 ```
 
-**Before queuing write tasks**, check which components and pages already exist in the app
-directory. Do not queue tasks for components that have already been built by earlier iterations.
-Use Glob (e.g., `src/components/*.tsx`, `src/pages/*.tsx`) to verify what exists.
-
 ## Reference Apps
 
 When scaffolding a new app, check for existing reference apps that can inform your setup.
 Look for completed apps under `apps/` first — if any exist, read their configuration files
 directly (e.g., `vite.config.ts`, `tsconfig.json`, `netlify.toml`, `playwright.config.ts`).
 If no apps exist locally, use `git log --all --oneline` to find previous app builds in git
-history, then use `git show <commit>:<path>` to read their configuration files without
-checking out old branches. This is the standard pattern for inspecting historical files.
-Prefer reading existing local apps over git history exploration to avoid excessive shell commands.
+history, then use `git show <commit>:<path>` to read their configuration files. Prefer
+reading existing local apps over git history exploration to avoid excessive shell commands.
 
 ## Guidelines
 

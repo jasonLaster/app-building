@@ -304,7 +304,19 @@ failures (~45% of observed failures come from shared database state).
    deterministic ordering. Dynamic timestamps produce non-deterministic results when tests
    assert on chronological ordering (e.g., revision history, activity logs).
 
-10. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+10. **Use decimal-aware assertions for numeric values.** When asserting form field values
+    or displayed numbers from NUMERIC/DECIMAL database columns, expect decimal formatting
+    (e.g., `'10.00'` not `'10'`). PostgreSQL returns decimal strings for these column types.
+    If assertions fail on numeric values, check the column type and ensure the assertion
+    matches the formatted output.
+
+11. **Validate date formatting at the API layer.** Neon may return Date objects instead of
+    ISO strings for DATE columns. All Netlify functions must normalize date values to ISO
+    strings before returning them to the frontend. When `formatDate` or similar utilities
+    receive a Date object instead of a string, they produce "Invalid Date". This pattern
+    appeared repeatedly — always normalize at the API boundary.
+
+12. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
@@ -432,14 +444,6 @@ failures (~45% of observed failures come from shared database state).
   Without this wait, async data loading may not have completed, returning 0 and causing
   off-by-one assertion failures. This is the single highest-impact testing pattern — it
   prevents ~38% of observed test failures.
-- **Verify FK constraints on DELETE endpoints.** Before writing tests, verify that all DELETE
-  endpoints handle foreign key constraints (either via `ON DELETE CASCADE` in the schema or
-  explicit cascading deletes in the endpoint handler). DELETE endpoints that return 500 due
-  to FK violations cause test timeouts that are hard to diagnose without Replay.
-- **Use filtered locators by default in tests.** Tests should use filtered locators (e.g.,
-  `getByRole('row').filter({ hasText: 'unique-value' })`) rather than broad `getByTestId`
-  when multiple matching elements could exist. This prevents strict-mode violations from
-  ambiguous selectors.
 - **Use edge coordinates for backdrop click tests.** Tests for modal dismissal via backdrop/overlay
   click should always use edge coordinates (e.g., `{ x: 10, y: 10 }`) rather than clicking the
   center of the overlay, as modals often occupy the center and intercept the click.

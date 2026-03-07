@@ -15,20 +15,6 @@ pass before every commit.
   `tsconfig.json` is used and avoids resolution issues.
 - Example: `cd /repo/apps/SalesCRM && npm run check`
 
-## Pre-Flight Checklist
-
-Before running `npm run check`, do a quick mental review of the code you changed to catch
-common issues that cause first-attempt failures:
-
-1. **Unused imports/variables**: Did you remove or comment out code that left an import or
-   variable unused? Remove it or prefix with `_`.
-2. **Missing exports**: If you added a new component or function that another file imports,
-   did you export it?
-3. **Type mismatches**: Do function arguments and return types match their declarations?
-4. **`let` vs `const`**: Use `const` for variables that are never reassigned.
-
-Catching these before running the check reduces the ~5% first-attempt failure rate.
-
 ## First-Attempt Failures Are Normal
 
 `npm run check` frequently fails on its first run due to lint errors or type issues introduced
@@ -116,6 +102,20 @@ When `npm run check` fails, read `logs/check.log` to determine which step failed
 During iterative development, typecheck/lint failures are expected. They are part of the
 normal build-fix-check cycle. Focus on fixing the errors rather than treating each failure
 as a problem with the check script itself.
+
+## Handling Pre-Existing Lint Errors
+
+When `npm run check` fails, determine whether the errors are in files you modified or
+pre-existing in other files:
+
+1. Run `npm run check` and read `logs/check.log`.
+2. Check if the reported errors are in files you changed during this task.
+3. If errors are only in files you did NOT modify, they are pre-existing. Fix them if
+   trivial (e.g., unused imports), but do not spend significant time on unrelated errors.
+4. Use `cat logs/check.log | tail -30` to quickly see the error summary at the end of
+   the log.
+
+This distinction avoids wasted investigation on errors unrelated to your current work.
 
 ## Common Issues
 

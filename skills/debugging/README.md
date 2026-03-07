@@ -101,12 +101,6 @@ If any of these are present, diagnose directly from the error output. Reserve Re
 failures where the page state at failure time is ambiguous or the failure involves complex
 async timing.
 
-**Skip Replay for strict-mode and race-condition categories.** Error output is consistently
-sufficient for these two categories. Strict-mode violations show element counts and the
-ambiguous locator. Race conditions show expected vs. received counts. Reserve Replay for
-backend-bug and infrastructure failures where the HTTP response or server-side behavior is
-opaque.
-
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 
 ### Strict mode violation
@@ -118,15 +112,6 @@ always to add more specific selectors. Common fixes:
 
 Replay is not needed — the error message tells you exactly how many elements matched and
 what the ambiguous locator was.
-
-### Race condition (count mismatch)
-When Playwright error output shows `expected N, received 0` or `expected N+1, received 1`
-after a navigation or container visibility check, this is almost always a count-before-load
-race condition. The test captured element count before async data finished loading.
-
-Replay is not needed — the `toHaveCount expected N, received 0` pattern is a well-known
-race condition diagnosable from error output alone. Fix by adding `waitFor` or asserting
-with `toHaveCount` with a timeout before capturing initial counts.
 
 ### Replay decision tree for data issues
 Use Replay when error output doesn't explain *why* the wrong data exists (e.g., unexpected
@@ -193,6 +178,16 @@ the API response.
 If it assigns the whole payload instead of spreading/merging, that's the bug.
 
 **Fix**: Change the reducer to merge fields: `state.currentEntity = { ...state.currentEntity, ...action.payload }`.
+
+### Crash diagnosis (blank page, no error output)
+When the page is blank or shows unexpected content with no useful error output, use
+Replay tools in this order:
+1. **`ConsoleMessages`** first — check for JavaScript errors (TypeError, ReferenceError, etc.)
+2. **`Screenshot`** — verify the visual state at the failure point
+3. **`NetworkRequest`** — check if API responses returned errors (500s, empty bodies)
+
+This pattern is essential when error output alone doesn't explain the failure. It was
+effective for diagnosing crashes where the page rendered blank due to uncaught TypeErrors.
 
 ### Clear backend error in test output
 When Playwright error output includes the expected and actual values and the mismatch points

@@ -43,7 +43,7 @@ TOOLS_USED: <comma-separated list of mcp__replay__* tools called>
 #### Resolution
 CHANGESET_REVISION: <git SHA from "CHANGESET REVISION:" line in log, or "none". Note: this captures the commit that fixed the issue. If the fix was applied during the same test-fixing session and no separate "CHANGESET REVISION:" line was emitted, use "none".>
 FAILING_TEST: <test name from "FAILING TEST:" line in log, or "none">
-CASCADING_FIX_COUNT: <number of distinct test failures (individual tests, not issues) resolved by this changeset, if > 1. This counts tests unblocked, not issues fixed — e.g., if fixing one config issue unblocks 11 tests, CASCADING_FIX_COUNT is 11. Omit if only 1 test was fixed or changeset is "none".>
+CASCADING_FIX_COUNT: <number of distinct test failures resolved by this changeset, if > 1. Omit if only 1 test was fixed or changeset is "none".>
 ```
 
 If a log has no test failures, just write the Summary section with TEST_FAILURES: 0.
@@ -66,7 +66,8 @@ REPLAY_NOT_USED_REASON: <reason>
 RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
-DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
+DEBUGGING_SUCCESSFUL: yes/no/partial (REQUIRED for cluster entries — do not omit)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED for cluster entries — do not omit)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
@@ -106,7 +107,7 @@ Compile all analysis files into a single report with these sections:
 - Debugging success rate (successful + partial / total failures where debugging was attempted)
 - Replay-assisted success rate (successful among Replay-used failures)
 - Recording availability rate (failures where recording was available / total failures)
-- Debugging efficiency (failures where Replay was used but error output alone would have sufficed — helps optimize when to use Replay vs trust error output)
+- Debugging efficiency / Replay used but unnecessary (failures where Replay was used but error output alone would have sufficed — a first-class metric to optimize Replay usage. Report as both a count and a rate: e.g., "4/6 (66.7%)")
 - Cascading fixes (count of single code changes that resolved multiple test failures — signals high-value debugging efforts)
 - Self-inflicted failures (count of failures caused by the agent's own fix attempts during the session, from SELF_INFLICTED field — helps measure fix quality)
 - Total test re-runs across all logs (number of test re-runs needed to achieve all-pass)
@@ -116,7 +117,6 @@ Compile all analysis files into a single report with these sections:
 - Failure resolution type distribution (breakdown by FAILURE_RESOLUTION_TYPE — e.g., test-code: 31, app-code: 5, both: 6, none: 2. Indicates whether the testing process or app-building process needs improvement)
 - Test Isolation Score (percentage of failures attributable to test isolation issues: data-contamination + strict-mode + seed-data-mismatch categories combined. A high score (>50%) signals that test isolation is the dominant failure mode and warrants dedicated process improvements)
 - Total affected tests (total number of individual tests affected, including all tests within clusters. Complements the distinct failure count — e.g., 15 distinct failures may affect 40 total tests when clusters are expanded)
-- Pre-existing rate (percentage of failures that were pre-existing, from PRE_EXISTING field — a useful signal about writeTests/writeApp quality. Aggregates the per-failure PRE_EXISTING field into a single metric)
 
 ### 2. Failure Table
 A markdown table with columns:
