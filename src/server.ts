@@ -8,6 +8,7 @@ import {
   getPendingTaskCount,
   absorbForeignTaskFiles,
   addPromptTask,
+  requestInterrupt,
   type EventCallback,
 } from "./worker";
 import { createBufferedLogger, archiveCurrentLog, redactSecrets } from "./log";
@@ -186,6 +187,8 @@ function getQuery(url: string, key: string): string | null {
 
 async function processLoop(): Promise<void> {
   const extraArgs = buildExtraArgs();
+  // Track session ID across prompt tasks so interactive messages share context
+  let promptSessionId: string | undefined;
 
   while (true) {
     if (stopRequested) {
@@ -213,7 +216,11 @@ async function processLoop(): Promise<void> {
           }
         },
         PUSH_BRANCH,
+        task.prompt ? promptSessionId : undefined,
       );
+      if (task.prompt && result.session_id) {
+        promptSessionId = result.session_id;
+      }
       totalCost += result.cost;
       tasksProcessed++;
       postWebhook("task.done", { skill: task.skill, cost: result.cost, totalCost, failed: !result.success });
@@ -294,12 +301,8 @@ const server = createServer(async (req, res) => {
 
     // POST /interrupt
     if (method === "POST" && url === "/interrupt") {
-      if (currentClaudeProcess) {
-        currentClaudeProcess.kill("SIGINT");
-        json(res, 200, { interrupted: true });
-      } else {
-        json(res, 200, { interrupted: false, message: "no active process" });
-      }
+      requestInterrupt();
+      json(res, 200, { interrupted: !!currentClaudeProcess });
       return;
     }
 

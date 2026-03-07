@@ -49,6 +49,16 @@ export type EventCallback = (line: string) => void;
 /** Reference to the currently running Claude child process, if any. */
 export let currentClaudeProcess: ChildProcess | null = null;
 
+/** Set by the server when the user sends POST /interrupt. Cleared after processTask checks it. */
+export let interruptRequested = false;
+
+export function requestInterrupt(): void {
+  interruptRequested = true;
+  if (currentClaudeProcess) {
+    currentClaudeProcess.kill("SIGINT");
+  }
+}
+
 function hasDoneSignal(source: string, text: string): boolean {
   const match = /<DONE[\s/>]/.test(text);
   debug(`hasDoneSignal(${source}): match=${match} text=${JSON.stringify(text.slice(0, 200))}`);
@@ -333,6 +343,8 @@ function taskCommitLabel(task: Task): string {
 export interface TaskResult {
   success: boolean;
   cost: number;
+  /** Session ID from Claude, returned so callers can resume the session. */
+  session_id?: string;
 }
 
 /**
@@ -346,9 +358,11 @@ export async function processTask(
   shouldStop?: () => boolean,
   commitFn?: (label: string) => void,
   pushBranch?: string,
+  resumeSessionId?: string,
 ): Promise<TaskResult> {
   let retries = 0;
   let cost = 0;
+  let sessionId = resumeSessionId;
 
   while (true) {
     if (shouldStop?.()) return { success: false, cost };
@@ -363,10 +377,18 @@ export async function processTask(
       }
     }
 
+    interruptRequested = false;
     let response: ClaudeResult;
     try {
-      response = await processMessage(prompt, extraArgs, log, onEvent);
+      response = await processMessage(prompt, extraArgs, log, onEvent, task.prompt ? sessionId : undefined);
     } catch (e: any) {
+      if (interruptRequested) {
+        log(`Task interrupted.`);
+        interruptRequested = false;
+        commitFn?.("Interrupted");
+        completeTask(task, log);
+        return { success: false, cost };
+      }
       log(`Error running claude: ${e.message}`);
       commitFn?.("Agent error recovery");
       continue;
@@ -378,6 +400,10 @@ export async function processTask(
       } catch (e: any) {
         log(`Warning: failed to restore branch ${pushBranch}: ${e.message}`);
       }
+    }
+
+    if (response.session_id) {
+      sessionId = response.session_id;
     }
 
     if (response.cost_usd != null) {
@@ -393,14 +419,14 @@ export async function processTask(
     if (response.doneSignaled) {
       log(`Task signaled <DONE>. Completing task.`);
       completeTask(task, log);
-      return { success: true, cost };
+      return { success: true, cost, session_id: sessionId };
     }
 
     retries++;
     if (retries >= MAX_TASK_RETRIES) {
       log(`Task failed ${MAX_TASK_RETRIES} times. Aborting task queue.`);
       completeTask(task, log);
-      return { success: false, cost };
+      return { success: false, cost, session_id: sessionId };
     }
     log(`Task did NOT signal <DONE>. Retry ${retries}/${MAX_TASK_RETRIES}.`);
   }
