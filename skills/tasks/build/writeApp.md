@@ -129,6 +129,10 @@ contexts (testing, deployment).
   so content is never flush against the screen edges. This applies to all pages including
   centered layouts (auth forms, error pages) — add padding alongside centering utilities.
 
+- All data tables and data lists must include a header row with column labels so the meaning of each
+  column is clear. Apply consistent header styling (smaller font size, muted color, medium weight) across
+  all tables in the app. Do not omit headers even when column meanings seem obvious from context.
+
 - Multi-panel layouts (sidebar + list + detail) must use CSS that guarantees panels never overlap.
   Use a flex or grid layout where each panel has a defined width (fixed or fractional) and the
   content area uses `overflow: auto` or `overflow: hidden` so it scrolls internally rather than
