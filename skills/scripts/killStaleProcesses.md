@@ -24,6 +24,12 @@ pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
   In most cases the port is released immediately.
 - Zombie processes (`<defunct>`) cannot be killed and are harmless — ignore them.
 
+## Unavailable Tools
+
+Do NOT use `lsof`, `ss`, `fuser`, or `netstat` for port checking — none of these are
+installed in the container. Always use `pkill -f` to kill processes by name. Attempting
+these tools wastes time on guaranteed failures before falling back to `pkill` anyway.
+
 ## When to Run
 
 - Before every `npm run test` invocation (see `preflight.md` step 1).

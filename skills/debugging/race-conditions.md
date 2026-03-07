@@ -6,26 +6,31 @@ order. Replay recordings capture the exact execution, making the non-determinism
 
 ## Tool Sequence
 
+**Recommended first sequence for most race conditions: `PlaywrightSteps → NetworkRequest`.**
+This covers the majority of race condition failures (timing of UI actions vs. API responses).
+Only escalate to deeper tools if this doesn't reveal the root cause.
+
 1. **`PlaywrightSteps`** — Establish the test flow. Identify which step's assertion failed
    and what value it received vs. expected.
 
-2. **`Logpoint`** — Place logpoints on the code that produces the contested value. Inspect
+2. **`NetworkRequest`** — Check for overlapping or out-of-order API calls. A common pattern:
+   a PATCH (optimistic update) followed by a GET (refresh), where the GET response arrives
+   after the PATCH and overwrites the optimistic state with stale data. Also reveals whether
+   API responses arrived before or after count/assertion operations.
+
+3. **`Logpoint`** — Place logpoints on the code that produces the contested value. Inspect
    how many times it was called and what values flowed through. Key locations:
    - API response handlers (where state is set from fetched data)
    - Redux/state dispatches
    - Component render functions (to see re-render counts)
 
-3. **`SearchSources`** — Check hit counts on specific lines. If a line that should execute
+4. **`SearchSources`** — Check hit counts on specific lines. If a line that should execute
    once has multiple hits, something is triggering it repeatedly (e.g., React strict mode
    double-firing effects, or concurrent test workers hitting the same endpoint).
 
-4. **`Evaluate`** — Evaluate expressions at specific execution points to inspect intermediate
+5. **`Evaluate`** — Evaluate expressions at specific execution points to inspect intermediate
    state. Useful for checking array lengths, object properties, or computed values at the
    exact moment an assertion runs.
-
-5. **`NetworkRequest`** — Check for overlapping or out-of-order API calls. A common pattern:
-   a PATCH (optimistic update) followed by a GET (refresh), where the GET response arrives
-   after the PATCH and overwrites the optimistic state with stale data.
 
 ## Common Root Causes (from observed failures)
 
@@ -79,18 +84,26 @@ show unexpected counts or data values that don't match what the test created.
 *Example*: 5 failures (15% of all failures) were caused by cross-test contamination in
 `fullyParallel` mode where tests shared the same client IDs and task names.
 
-### Async data load before count capture
-Tests that capture an initial count of list items (e.g., `initialCount = await rows.count()`)
-before performing an add/delete operation often fail because the count is captured before async
-data loading completes, returning 0 instead of the actual count.
+### Async data load before count capture (wait-before-count)
+Tests that capture an initial count of list items or dropdown options (e.g.,
+`initialCount = await rows.count()`) before performing an operation often fail because the
+count is captured before async data loading completes, returning 0 instead of the actual count.
+This applies to both **table rows** and **dropdown/select options** that populate from API data.
 
 **Diagnosis**: Error output shows `expected N+1, received 1` or similar off-by-one from zero
-baseline. The test didn't wait for data to render before counting.
+baseline, or dropdown option count is 0. The test didn't wait for data to render before counting.
+When dropdown options show count 0, the first check should be whether the API response has
+arrived before the count operation — use `PlaywrightSteps → NetworkRequest` to confirm timing.
 
-**Fix**: Always wait for the first data row to be visible before capturing `initialCount`:
+**Fix**: Always wait for the first element to be visible before capturing counts:
 ```ts
+// For table rows:
 await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
 const initialCount = await page.locator('[data-testid="row"]').count();
+
+// For dropdown options:
+await expect(page.locator('select option').nth(1)).toBeAttached(); // wait for first non-placeholder option
+const optionCount = await page.locator('select option').count();
 ```
 
 This single pattern resolved 22–38% of all test failures in observed runs. In one session it

@@ -128,30 +128,6 @@ Read these skills to learn how to use these:
 https://raw.githubusercontent.com/replayio/skills/refs/heads/main/skills/replay-playwright/SKILL.md
 https://raw.githubusercontent.com/replayio/skills/refs/heads/main/skills/replay-mcp/SKILL.md
 
-## Netlify Deployment Details
-
-### Site Creation
-If the Netlify CLI's `sites:create --json` flag doesn't work, use the Netlify REST API:
-```bash
-curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" -X POST \
-  "https://api.netlify.com/api/v1/sites" \
-  -H "Content-Type: application/json" \
-  -d '{"account_slug":"'$NETLIFY_ACCOUNT_SLUG'"}'
-```
-
-### Environment Variables
-After creating the site and deploying, set `DATABASE_URL` on Netlify using the REST API
-(see `skills/scripts/netlify-env.md`). The CLI `env:set` flag is unreliable.
-
-**Important**: Strip `channel_binding=require` from the `DATABASE_URL` before setting it on
-Netlify. This parameter causes 502 errors with some Node.js Postgres clients in Netlify
-Functions.
-
-### `netlify link` Requirement
-Before running `netlify dev` or tests, ensure the site is linked:
-`netlify link --id $NETLIFY_SITE_ID`. Without linking, `netlify dev` cannot start and tests
-fail immediately.
-
 ## Tips
 
 - Do NOT use the `replayio record <url>` CLI to create recordings. It launches a headed browser

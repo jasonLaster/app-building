@@ -2,6 +2,9 @@
 
 Merge skill changes and the report into main via a squash-merge PR.
 
+It is ULTRA IMPORTANT that when merging to main you do not revert other changes that have been made on the main branch.
+ONLY merge skill changes made since the merge base along with the new reports.
+
 ## Subtask Format
 
 `MergeToMain: <report-name>`
@@ -21,6 +24,25 @@ MERGE_BASE=$(git merge-base origin/main HEAD)
 ```
 
 ### 3. Determine which paths to include
+
+Include these paths:
+
+```
+skills/
+scripts/
+reports/<report-name>.md
+AGENTS.md
+CLAUDE.md
+Dockerfile
+.dockerignore
+.gitignore
+.rgignore
+.env.example
+package.json
+package-lock.json
+tsconfig.json
+README.md
+```
 
 Delete these paths:
 

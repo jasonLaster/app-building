@@ -20,7 +20,7 @@ TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 i
 For each test failure:
 
 ### Failure: <test name>
-FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, backend-bug, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other>
+FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, race-condition, backend-bug, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other> (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual.)
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, explain why — e.g. "diagnosed from error output", "no recording available", "upload failed">
@@ -28,7 +28,7 @@ RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failur
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
 DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
 DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
-REPLAY_NECESSARY: yes/no/unknown (REQUIRED when REPLAY_USED is yes — was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit when REPLAY_USED is no.)
+REPLAY_NECESSARY: yes/no/unknown (STRICTLY REQUIRED when REPLAY_USED is yes — this field MUST NOT be omitted. Was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit ONLY when REPLAY_USED is no. Analyses missing this field when REPLAY_USED is yes are incomplete and must be corrected.)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). IMPORTANT: Always use this field when failures are fixed by the same changeset, so the synthesizer can explicitly link them rather than inferring from matching SHAs. Omit if this failure has a unique root cause.>
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
 FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure)
@@ -50,8 +50,10 @@ If a log has no test failures, just write the Summary section with TEST_FAILURES
 
 ### Clustered Failures
 
-When 5+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
-single cluster entry instead of repeating the full template for each. The cluster heading
+When 2+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
+single cluster entry instead of repeating the full template for each. Use the cluster format
+for any group of 2 or more failures with a shared root cause — the 5+ threshold is not
+required. The cluster heading
 name (e.g., `Failure Cluster: neon-inherited-data`) serves as the cluster ID when using
 this collapsed format — an explicit `ROOT_CAUSE_CLUSTER` field is not needed in each entry:
 
@@ -151,24 +153,3 @@ Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
-
-### Replay Justification Note
-When Replay usage is 0% across an entire report, include a summary note in section 3 (Patterns)
-explaining whether this indicates: (a) Replay wasn't needed because error output was sufficient,
-(b) recordings weren't available for most failures, or (c) the agent didn't attempt Replay
-despite recordings being available. This helps distinguish intentional non-use from missed
-opportunities.
-
-### Anti-Pattern Tracking
-When the same anti-pattern appears across multiple logs (e.g., fake user IDs for empty states,
-`page.evaluate` for localStorage), track it explicitly in the Root Cause Clusters table with a
-note like "anti-pattern: <description>". This helps identify recurring process issues faster
-than tracking only fix patterns.
-
-### "Other" Category Subcategories
-When the "other" category exceeds 30% of total failures, consider breaking it into subcategories
-in the Failure Category Distribution table. Useful subcategories include:
-- `test-setup-error` — incorrect test preconditions (wrong IDs, missing testids)
-- `react-input-interaction` — flaky fill/clear/controlled input issues
-- `localStorage-access` — DOMException or storage access failures
-- `auth-redirect` — unexpected redirect to login page

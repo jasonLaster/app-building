@@ -114,6 +114,10 @@ contexts (testing, deployment).
   navigation item must have a unique route. Remove or consolidate any entries that would navigate
   to the same destination.
 
+- Navigation sidebars must be collapsible. Include a toggle button that switches between expanded
+  (full labels) and collapsed (icons only) states. When collapsed, show icon-only items at a narrow
+  width with title tooltips for accessibility.
+
 - Never use native HTML `<select>` elements for filter controls or dropdowns when the app has a
   custom design system or style guide. Native form elements cannot be fully styled and will revert
   to browser defaults on interaction. Always use custom dropdown components with React state.
@@ -128,17 +132,6 @@ contexts (testing, deployment).
 - Every page component must include consistent padding on its root element (`p-6 max-sm:p-3`)
   so content is never flush against the screen edges. This applies to all pages including
   centered layouts (auth forms, error pages) — add padding alongside centering utilities.
-
-- All data tables and data lists must include a header row with column labels so the meaning of each
-  column is clear. Apply consistent header styling (smaller font size, muted color, medium weight) across
-  all tables in the app. Do not omit headers even when column meanings seem obvious from context.
-
-- Multi-panel layouts (sidebar + list + detail) must use CSS that guarantees panels never overlap.
-  Use a flex or grid layout where each panel has a defined width (fixed or fractional) and the
-  content area uses `overflow: auto` or `overflow: hidden` so it scrolls internally rather than
-  bleeding into adjacent panels. Tables must set `min-width` on columns and use `table-layout: fixed`
-  or constrained column widths so that header text and cell content don't collapse or overlap when
-  space is tight. Always test that the layout works at the narrowest reasonable viewport width.
 
 ## Tips
 
