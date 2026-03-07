@@ -126,9 +126,8 @@ Each container runs an HTTP server that accepts the following requests:
 
 | Method | Path | Description |
 |---|---|---|
-| `POST /message` | `{ prompt: string }` | Queue a message for processing. Returns `{ id }`. |
-| `GET /message/:id` | | Poll message status. Returns `{ id, status, result, error }`. |
-| `POST /detach` | | Signal the container to exit once all queued messages and tasks are done. |
+| `POST /message` | `{ prompt: string }` | Add a prompt as a task in the persistent task queue. Returns `{ ok: true }`. |
+| `POST /detach` | | Signal the container to exit once all tasks are done. |
 | `POST /stop` | | Force-stop the container immediately. Interrupts any running work, commits remaining changes, then exits. |
 | `POST /interrupt` | | Kill the currently running Claude process without stopping the container. |
 | `GET /status` | | Container state, queue depth, iteration count, cost, revision, etc. |

@@ -25,6 +25,8 @@ export interface Task {
   subtasks: string[];
   timestamp: string;
   app?: string;
+  /** Raw prompt for message-derived tasks (no skill file). */
+  prompt?: string;
 }
 
 interface TasksFile {
@@ -249,6 +251,15 @@ function completeTask(assignedTask: Task, log: Logger): void {
 }
 
 function buildTaskPrompt(task: Task): string {
+  if (task.prompt) {
+    return (
+      task.prompt +
+      `\n\nWhen you have completed all work, output <DONE> to signal completion.\n` +
+      `\n` +
+      `When you need to add new tasks, use:\n` +
+      `npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2"`
+    );
+  }
   const subtaskList = task.subtasks.map((j, i) => `${i + 1}. ${j}`).join("\n");
   return (
     `Read skill file: ${task.skill}\n` +
@@ -265,6 +276,21 @@ function buildTaskPrompt(task: Task): string {
 
 export function getPendingTaskCount(): number {
   return readTasksFile().tasks.length;
+}
+
+/**
+ * Add a raw prompt as a task in the task queue file.
+ * Used to convert incoming messages (including INITIAL_PROMPT) into persistent tasks.
+ */
+export function addPromptTask(prompt: string): void {
+  const data = readTasksFile();
+  data.tasks.push({
+    skill: "",
+    subtasks: [],
+    timestamp: new Date().toISOString(),
+    prompt,
+  });
+  writeTasksFile(data);
 }
 
 

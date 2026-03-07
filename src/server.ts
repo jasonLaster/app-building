@@ -2,13 +2,12 @@ import { createServer, IncomingMessage, ServerResponse } from "http";
 import { resolve } from "path";
 import { cloneRepo, checkoutTargetBranch, commitAndPushTarget, getRevision, toTokenUrl } from "./git";
 import {
-  processMessage,
   processTask,
   getNextTask,
   currentClaudeProcess,
   getPendingTaskCount,
   absorbForeignTaskFiles,
-  type ClaudeResult,
+  addPromptTask,
   type EventCallback,
 } from "./worker";
 import { createBufferedLogger, archiveCurrentLog, redactSecrets } from "./log";
@@ -52,33 +51,11 @@ class OffsetBuffer<T> {
   }
 }
 
-// --- Message queue ---
+// --- State ---
 
-interface MessageEntry {
-  id: string;
-  prompt: string;
-  status: "queued" | "processing" | "done" | "error";
-  result?: ClaudeResult;
-  error?: string;
-}
-
-const messageQueue: string[] = [];
-const messages = new Map<string, MessageEntry>();
 const eventBuffer = new OffsetBuffer<string>();
 const logBuffer = new OffsetBuffer<string>();
 
-let nextMessageId = 1;
-
-function queueMessage(prompt: string): string {
-  const id = String(nextMessageId++);
-  messages.set(id, { id, prompt, status: "queued" });
-  messageQueue.push(id);
-  return id;
-}
-
-if (INITIAL_PROMPT) {
-  queueMessage(INITIAL_PROMPT);
-}
 let totalCost = 0;
 let iteration = 0;
 let tasksProcessed = 0;
@@ -180,22 +157,6 @@ function json(res: ServerResponse, status: number, body: unknown): void {
   res.end(data);
 }
 
-function routeMatch(url: string, pattern: string): string | null {
-  // pattern like "/message/:id" matches "/message/abc" returning "abc"
-  const patternParts = pattern.split("/");
-  const urlParts = url.split("?")[0].split("/");
-  if (patternParts.length !== urlParts.length) return null;
-  let param: string | null = null;
-  for (let i = 0; i < patternParts.length; i++) {
-    if (patternParts[i].startsWith(":")) {
-      param = urlParts[i];
-    } else if (patternParts[i] !== urlParts[i]) {
-      return null;
-    }
-  }
-  return param;
-}
-
 function getQuery(url: string, key: string): string | null {
   const qIdx = url.indexOf("?");
   if (qIdx === -1) return null;
@@ -205,34 +166,26 @@ function getQuery(url: string, key: string): string | null {
 
 // --- Processing loop ---
 //
-// Container lifecycle:
+// The container runs a single loop that processes tasks from the persistent
+// task queue file. All work — including incoming messages and INITIAL_PROMPT —
+// is converted to tasks before processing. This means:
 //
-// The container runs a loop that processes messages (from HTTP POST /message)
-// and tasks (from the task queue file). Between work items, it idles and waits
-// for new work to arrive.
+// - On restart after a crash, the worker picks up remaining tasks from the
+//   last committed task file without re-processing completed work.
+// - The loop has a single code path for all work items.
 //
 // Shutdown is controlled by two mechanisms:
 //
 // 1. **Detach** (POST /detach): Sets `detachRequested`. The container continues
-//    processing any in-flight or queued work, then exits immediately once the
-//    message queue and task queue are both empty. This is the normal shutdown
-//    path. In interactive mode, the agent CLI sends /detach automatically when
-//    the user disconnects (Ctrl+C/D). In detached mode, /detach is sent right
-//    after startup so the container exits as soon as its initial work is done.
+//    processing any in-flight or queued tasks, then exits once the task queue
+//    is empty. This is the normal shutdown path.
 //
 // 2. **Stop** (POST /stop): Sets `stopRequested`. The container breaks out of
 //    the loop immediately (interrupting any running Claude process), commits
 //    any remaining work, and exits. This is the forced shutdown path.
-//
-// Without either signal, the container stays running and waits for new messages
-// or tasks indefinitely. This is intentional: in interactive mode, the user may
-// send follow-up messages at any time, so the container must stay alive until
-// the user explicitly disconnects.
 
 async function processLoop(): Promise<void> {
   const extraArgs = buildExtraArgs();
-  // Track the Claude session ID across interactive messages so context is preserved
-  let interactiveSessionId: string | undefined;
 
   while (true) {
     if (stopRequested) {
@@ -240,65 +193,11 @@ async function processLoop(): Promise<void> {
       break;
     }
 
-    // Check for queued messages
-    if (messageQueue.length > 0) {
-      state = "processing";
-      const msgId = messageQueue.shift()!;
-      const entry = messages.get(msgId)!;
-      entry.status = "processing";
-      iteration++;
-      postWebhook("message.started", { iteration, prompt: entry.prompt });
-
-      log(`=== Message ${msgId} (iteration ${iteration}) ===`);
-      log(`Initial revision: ${getRevision(REPO_DIR)}`);
-
-      const messageStartTime = Date.now();
-      try {
-        const result = await processMessage(entry.prompt, extraArgs, log, onEvent, interactiveSessionId);
-        entry.result = result;
-        entry.status = "done";
-
-        // Capture session ID for resuming subsequent messages
-        if (result.session_id) {
-          interactiveSessionId = result.session_id;
-        }
-
-        if (result.cost_usd != null) {
-          totalCost += result.cost_usd;
-          log(`Cost: $${result.cost_usd.toFixed(4)} (total: $${totalCost.toFixed(4)})`);
-        }
-
-        postWebhook("message.done", {
-          messageId: msgId,
-          cost_usd: result.cost_usd ?? 0,
-          duration_ms: Date.now() - messageStartTime,
-          num_turns: result.num_turns ?? 0,
-        });
-      } catch (e: any) {
-        entry.status = "error";
-        entry.error = e.message;
-        log(`Error: ${e.message}`);
-        postWebhook("message.error", { messageId: msgId, error: e.message });
-      }
-
-      lastActivityAt = new Date().toISOString();
-
-      // Final commit and push after message
-      if (!stopRequested) {
-        const summary = entry.prompt.length > 72 ? entry.prompt.slice(0, 69) + "..." : entry.prompt;
-        archiveCurrentLog(LOGS_DIR, CONTAINER_NAME, iteration);
-        commitAndPushTarget(`${CONTAINER_NAME} iteration ${iteration}: ${summary}`, PUSH_BRANCH, log, () => stopRequested, REPO_DIR);
-        log(`Final revision: ${getRevision(REPO_DIR)}`);
-      }
-
-      continue;
-    }
-
-    // Process pending tasks (after message handling above, or standalone)
+    // Process pending tasks
     const task = getNextTask();
     if (task) {
       state = "processing";
-      postWebhook("task.started", { iteration, skill: task.skill, subtasks: task.subtasks });
+      postWebhook("task.started", { iteration, skill: task.skill, subtasks: task.subtasks, prompt: !!task.prompt });
       const result = await processTask(
         task,
         extraArgs,
@@ -316,6 +215,7 @@ async function processLoop(): Promise<void> {
         PUSH_BRANCH,
       );
       totalCost += result.cost;
+      tasksProcessed++;
       postWebhook("task.done", { skill: task.skill, cost: result.cost, totalCost, failed: !result.success });
       if (!result.success) {
         log(`Task failed. Stopping task processing. ${getPendingTaskCount()} task(s) remain in queue.`);
@@ -324,21 +224,21 @@ async function processLoop(): Promise<void> {
       continue;
     }
 
-    // Detach: exit immediately when queue is empty and no pending tasks
+    // Detach: exit immediately when task queue is empty
     if (detachRequested) {
       log("Detach requested and all work complete. Exiting.");
       break;
     }
 
     // Wait for something to happen
-    log(`Idle. Queue: ${messageQueue.length} messages, ${getPendingTaskCount()} tasks pending. Waiting...`);
+    log(`Idle. ${getPendingTaskCount()} tasks pending. Waiting...`);
     state = "idle";
-    postWebhook("container.idle", { pendingTasks: getPendingTaskCount(), queueLength: messageQueue.length });
+    postWebhook("container.idle", { pendingTasks: getPendingTaskCount() });
     await waitForWake();
   }
 
-  // Only reachable via stopRequested — commit remaining work and exit
-  log("Stop requested. Shutting down.");
+  // Only reachable via stopRequested or detach — commit remaining work and exit
+  log("Shutting down.");
   postWebhook("container.stopping", {});
 
   try {
@@ -361,7 +261,7 @@ const server = createServer(async (req, res) => {
   const method = req.method ?? "GET";
 
   try {
-    // POST /message
+    // POST /message — add prompt as a task
     if (method === "POST" && url === "/message") {
       const body = JSON.parse(await readBody(req));
       const prompt = body.prompt;
@@ -369,27 +269,10 @@ const server = createServer(async (req, res) => {
         json(res, 400, { error: "prompt is required" });
         return;
       }
-      const id = queueMessage(prompt);
-      postWebhook("message.queued", { messageId: id, prompt });
+      addPromptTask(prompt);
+      postWebhook("message.queued", { prompt });
       wake();
-      json(res, 200, { id });
-      return;
-    }
-
-    // GET /message/:id
-    const msgId = routeMatch(url, "/message/:id");
-    if (method === "GET" && msgId !== null) {
-      const entry = messages.get(msgId);
-      if (!entry) {
-        json(res, 404, { error: "message not found" });
-        return;
-      }
-      json(res, 200, {
-        id: entry.id,
-        status: entry.status,
-        result: entry.result ?? null,
-        error: entry.error ?? null,
-      });
+      json(res, 200, { ok: true });
       return;
     }
 
@@ -446,7 +329,6 @@ const server = createServer(async (req, res) => {
         state,
         containerName: CONTAINER_NAME,
         pushBranch: PUSH_BRANCH,
-        queueLength: messageQueue.length,
         pendingTasks: getPendingTaskCount(),
         tasksProcessed,
         totalCost,
@@ -517,6 +399,14 @@ async function main(): Promise<void> {
   // Absorb task files from other containers before checking task count
   absorbForeignTaskFiles(log);
 
+  // Add INITIAL_PROMPT as a task only if there are no existing tasks.
+  // On restart after a crash, the cloned repo will have the last-pushed task
+  // file with remaining tasks, so INITIAL_PROMPT won't be re-added.
+  if (INITIAL_PROMPT && getPendingTaskCount() === 0) {
+    log("Adding initial prompt as task.");
+    addPromptTask(INITIAL_PROMPT);
+  }
+
   log(`Pending tasks: ${getPendingTaskCount()}`);
 
   // Change working directory to repo
@@ -527,7 +417,7 @@ async function main(): Promise<void> {
     log(`HTTP server listening on port ${PORT}`);
     state = "idle";
     postWebhook("container.started", { pushBranch: PUSH_BRANCH, revision: getRevision(REPO_DIR) });
-    postWebhook("container.idle", { pendingTasks: getPendingTaskCount(), queueLength: messageQueue.length });
+    postWebhook("container.idle", { pendingTasks: getPendingTaskCount() });
   });
 
   // Start processing loop
