@@ -34,6 +34,26 @@ Read `docs/plan.md` and check which polish stages still need work. For each inco
 add the appropriate tasks as described below. After adding tasks, update `docs/plan.md` with
 the planned items (unchecked). As each subtask completes, check off its entry.
 
+### Favicon
+
+If the `Favicon` section in `docs/plan.md` is missing or not marked `✓`, the app needs a
+favicon. Add a single task:
+
+```
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/polishApp.md" --app "<AppName>" \
+  --subtask "AddFavicon: Add an SVG favicon"
+```
+
+When working on the `AddFavicon` subtask:
+
+1. Create an inline SVG favicon in `public/favicon.svg` that visually represents the app's
+   purpose (e.g., a wrench for maintenance, a chart for analytics, a shopping cart for e-commerce).
+   Use simple geometric shapes and the app's primary brand color from the style guide. Keep the
+   SVG compact — no more than ~20 paths.
+2. Add `<link rel="icon" type="image/svg+xml" href="/favicon.svg" />` to the `<head>` in
+   `index.html`. Remove any existing generic favicon link.
+3. Mark the `Favicon` section in `docs/plan.md` with `✓`.
+
 ### Responsive UI
 
 If the `Responsive UI` section in `docs/plan.md` is missing or not marked `✓`, the app needs
