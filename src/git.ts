@@ -212,7 +212,8 @@ export function pushTarget(
         timeout: 120000,
         stdio: "pipe",
       });
-      log(`Pushed to ${targetBranch}${hadConflicts ? " (with conflicts)" : ""}`);
+      const rev = getRevision(dir).slice(0, 10);
+      log(`Pushed ${rev} to ${targetBranch}${hadConflicts ? " (with conflicts)" : ""}`);
 
       // Step 4: Queue conflict resolution task if needed
       if (hadConflicts && !shouldStop()) {
@@ -272,7 +273,30 @@ export function commitAndPushTarget(
     return;
   }
 
+  const summary = lastCommitSummary(dir);
+  log(`Committed: ${label}${summary ? `\n${summary}` : ""}`);
+
   pushTarget(targetBranch, log, shouldStop, dir);
+}
+
+/** Return per-file +/- summary of the last commit. */
+function lastCommitSummary(dir: string): string {
+  try {
+    // --numstat gives "added\tremoved\tfile" per line
+    const raw = execFileSync("git", ["diff", "--numstat", "HEAD~1", "HEAD"], {
+      cwd: dir,
+      encoding: "utf-8",
+      timeout: 10000,
+      stdio: "pipe",
+    }).trim();
+    if (!raw) return "";
+    return raw.split("\n").map((line) => {
+      const [added, removed, file] = line.split("\t");
+      return `  ${file} +${added}/-${removed}`;
+    }).join("\n");
+  } catch {
+    return "";
+  }
 }
 
 export function getRevision(dir: string = REPO_DIR): string {
