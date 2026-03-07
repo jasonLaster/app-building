@@ -17,6 +17,12 @@ Do NOT repeat preflight steps multiple times — one invocation of each command 
 pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
 ```
 
+If `pkill` is insufficient (processes still hold ports), use port-specific cleanup:
+
+```bash
+lsof -ti:8888 | xargs kill 2>/dev/null; lsof -ti:5173 | xargs kill 2>/dev/null
+```
+
 Stale `netlify dev` and `vite` processes from previous runs cause port conflicts and
 serve outdated code. Always kill them before starting tests.
 

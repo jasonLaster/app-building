@@ -73,6 +73,11 @@ much faster than a full test suite:
 curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>
 ```
 
+**Netlify function routing:** Netlify v2 functions use `/api/*` routes instead of
+`/.netlify/functions/*`. If your functions use the v2 API (e.g., `export default async (req)`
+with `config.path`), test with the `/api/<path>` pattern. Check the function source for a
+`config` export with a `path` property to determine which routing convention applies.
+
 If this returns 500, fix the environment variables before proceeding. See
 `skills/scripts/deploy-verification.md` for the full verification checklist.
 

@@ -464,6 +464,11 @@ failures (~45% of observed failures come from shared database state).
   wait-before-count, destructive test reordering, formatDate normalization), proactively apply
   it to all other spec files in the same app before re-running tests. Fixing each file
   independently wastes re-run cycles on the same known issue.
+- **Fix shared utilities early**: When a bug is found in a shared utility function (e.g.,
+  `formatDate`, `formatCurrency`), fix it at the source and audit all call sites immediately
+  rather than fixing per-spec-file as failures surface. In one observed session, the same
+  `formatDate` ISO timestamp bug was independently discovered and fixed across 5 separate
+  logs — a single early fix would have prevented all downstream failures.
 - When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
   them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
   once per task to confirm, then focus on new failures only.
