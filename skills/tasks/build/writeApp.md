@@ -129,6 +129,10 @@ contexts (testing, deployment).
 - Attachment functionality must support actual file uploads. Any UI that allows adding attachments
   must include a working file upload mechanism (e.g., file picker, drag-and-drop), not just link entry.
 
+- All data tables and data lists must include a header row with column labels so the meaning of each
+  column is clear. Apply consistent header styling (smaller font size, muted color, medium weight) across
+  all tables in the app. Do not omit headers even when column meanings seem obvious from context.
+
 - Every page component must include consistent padding on its root element (`p-6 max-sm:p-3`)
   so content is never flush against the screen edges. This applies to all pages including
   centered layouts (auth forms, error pages) — add padding alongside centering utilities.
