@@ -129,6 +129,13 @@ contexts (testing, deployment).
   so content is never flush against the screen edges. This applies to all pages including
   centered layouts (auth forms, error pages) — add padding alongside centering utilities.
 
+- Multi-panel layouts (sidebar + list + detail) must use CSS that guarantees panels never overlap.
+  Use a flex or grid layout where each panel has a defined width (fixed or fractional) and the
+  content area uses `overflow: auto` or `overflow: hidden` so it scrolls internally rather than
+  bleeding into adjacent panels. Tables must set `min-width` on columns and use `table-layout: fixed`
+  or constrained column widths so that header text and cell content don't collapse or overlap when
+  space is tight. Always test that the layout works at the narrowest reasonable viewport width.
+
 ## Tips
 
 - Production builds must use `sourcemap: true`, `minify: false`, and the React development build in

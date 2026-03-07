@@ -149,7 +149,7 @@ export async function createMachine(
             image,
             env,
             auto_destroy: true,
-            restart: { policy: "no" },
+            restart: { policy: "on-failure", max_retries: 3 },
             guest: {
               cpu_kind: "performance",
               cpus: 16,

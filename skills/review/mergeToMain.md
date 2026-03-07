@@ -22,25 +22,6 @@ MERGE_BASE=$(git merge-base origin/main HEAD)
 
 ### 3. Determine which paths to include
 
-Include these paths:
-
-```
-skills/
-scripts/
-reports/<report-name>.md
-AGENTS.md
-CLAUDE.md
-Dockerfile
-.dockerignore
-.gitignore
-.rgignore
-.env.example
-package.json
-package-lock.json
-tsconfig.json
-README.md
-```
-
 Delete these paths:
 
 ```
