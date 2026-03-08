@@ -14,13 +14,13 @@ For each log file, produce a markdown file with the following structure:
 NOTES: <brief summary of what this log was about>
 
 ## Test Failures
-TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (5+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests.>
+TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (2+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests. A test already counted in a cluster should NOT have a separate entry unless it has a distinct, independent root cause — avoid double-counting.>
 TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 if all passed on first run>
 
 For each test failure:
 
 ### Failure: <test name>
-FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, race-condition, backend-bug, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, test-bug, other> (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual. Use "test-bug" for test-code issues that don't fit other categories — e.g., floating-point comparison errors, incorrect assertion logic.)
+FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, race-condition, backend-bug, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other> (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual.)
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, explain why — e.g. "diagnosed from error output", "no recording available", "upload failed">
@@ -31,8 +31,8 @@ DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED i
 REPLAY_NECESSARY: yes/no/unknown (STRICTLY REQUIRED when REPLAY_USED is yes — this field MUST NOT be omitted. Was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit ONLY when REPLAY_USED is no. Analyses missing this field when REPLAY_USED is yes are incomplete and must be corrected.)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). IMPORTANT: Always use this field when failures are fixed by the same changeset, so the synthesizer can explicitly link them rather than inferring from matching SHAs. Omit if this failure has a unique root cause.>
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
-FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure. Use the phase name, not a sub-phase — e.g., use "fixTests" for all test-fixing failures regardless of whether the failure is in setup, execution, or assertion.)
-FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the fix was to test code, app code, or both. "none" if not yet resolved. Use exactly these values — e.g., "test-code" not "test-fix". Helps identify whether the testing process or the app-building process needs improvement)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure. Use the phase of the task that triggered the test run — e.g., if failures occur during a checkDirectives task, use "checkDirectives" even if the tests themselves are the same ones run during fixTests.)
+FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the fix was to test code, app code, or both. "none" if not yet resolved. Helps identify whether the testing process or the app-building process needs improvement)
 FIX_ITERATIONS: <number of test re-runs needed to fully resolve this failure, 0 if not yet resolved. Captures debugging difficulty — failures taking 4+ iterations indicate complex root causes that may warrant process improvements. Omit if resolved in 1 run.>
 
 #### Replay Usage (if REPLAY_USED is yes)
@@ -66,8 +66,7 @@ REPLAY_NOT_USED_REASON: <reason>
 RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
-DEBUGGING_SUCCESSFUL: yes/no/partial (REQUIRED for cluster entries — do not omit)
-FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED for cluster entries — do not omit)
+SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
@@ -107,7 +106,7 @@ Compile all analysis files into a single report with these sections:
 - Debugging success rate (successful + partial / total failures where debugging was attempted)
 - Replay-assisted success rate (successful among Replay-used failures)
 - Recording availability rate (failures where recording was available / total failures)
-- Debugging efficiency / Replay used but unnecessary (failures where Replay was used but error output alone would have sufficed — a first-class metric to optimize Replay usage. Report as both a count and a rate: e.g., "4/6 (66.7%)")
+- Debugging efficiency (failures where Replay was used but error output alone would have sufficed — helps optimize when to use Replay vs trust error output)
 - Cascading fixes (count of single code changes that resolved multiple test failures — signals high-value debugging efforts)
 - Self-inflicted failures (count of failures caused by the agent's own fix attempts during the session, from SELF_INFLICTED field — helps measure fix quality)
 - Total test re-runs across all logs (number of test re-runs needed to achieve all-pass)

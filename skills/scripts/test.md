@@ -22,13 +22,11 @@ In particular, always use `npx replayio install` (NOT `npx playwright install ch
 browser setup — the Replay browser installs to `~/.replay/runtimes/` and does not require
 the Playwright browsers path workaround.
 
-The canonical test execution sequence is:
-
-1. Run preflight once (see `skills/scripts/preflight.md`).
-2. Run `npm run test <spec>` from the app directory.
-
-Do NOT run `npx replayio remove --all` separately before each test — the preflight step
-already handles recording cleanup, and the test script itself clears recordings at startup.
+**Quick pre-checks** (these address the most common test failure causes):
+1. Kill stale dev servers: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+2. Verify dependencies: `ls node_modules/.package-lock.json` — if missing, run `npm install`.
+3. Run with a timeout mindset: if a test hangs, it's likely a stale process or port conflict,
+   not a test bug.
 
 ## Behavior
 

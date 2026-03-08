@@ -37,6 +37,10 @@ sessions with 100% success rate). When the UI renders but shows wrong data or ti
 waiting for content, `NetworkRequest` as a second step confirms whether the backend
 returned the expected data.
 
+**Minimal tool sequence**: When Replay is needed, `PlaywrightSteps` alone was sufficient in
+80% of cases. Only escalate to `Screenshot` or `Evaluate` when step-level information is
+insufficient (e.g., CSS/layout issues requiring visual confirmation).
+
 ## Cluster-Aware Debugging
 
 When 3+ failures share a spec file or show similar error patterns, check for a shared root
@@ -89,17 +93,11 @@ tool sequence in the relevant debugging guide below.
 
 ## No-Replay Diagnostic Patterns
 
-**Error output first**: In 50%+ of observed failures, Replay was unnecessary because the
-error output contained sufficient diagnostic information. Always check error output before
-reaching for Replay. Specifically, before launching Replay, check if the test failure message
-contains:
-- An expected-vs-received comparison (e.g., "expected 3, received 5")
-- A clear error string (SQL constraint violation, HTTP status code)
-- A floating-point formatting issue (e.g., `-0` vs `0`, `105.00` vs `105`)
-
-If any of these are present, diagnose directly from the error output. Reserve Replay for
-failures where the page state at failure time is ambiguous or the failure involves complex
-async timing.
+**Error output first**: For data-contamination, race-condition, strict-mode, and
+seed-data-mismatch categories, diagnose from error output before using Replay. In observed
+sessions, 100% of Replay uses for these categories were unnecessary — the error output alone
+sufficed. Reserve Replay for CSS/layout issues, complex race conditions where timing is
+ambiguous, and backend bugs where error output doesn't explain *why* the wrong data exists.
 
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 
@@ -179,16 +177,6 @@ If it assigns the whole payload instead of spreading/merging, that's the bug.
 
 **Fix**: Change the reducer to merge fields: `state.currentEntity = { ...state.currentEntity, ...action.payload }`.
 
-### Crash diagnosis (blank page, no error output)
-When the page is blank or shows unexpected content with no useful error output, use
-Replay tools in this order:
-1. **`ConsoleMessages`** first — check for JavaScript errors (TypeError, ReferenceError, etc.)
-2. **`Screenshot`** — verify the visual state at the failure point
-3. **`NetworkRequest`** — check if API responses returned errors (500s, empty bodies)
-
-This pattern is essential when error output alone doesn't explain the failure. It was
-effective for diagnosing crashes where the page rendered blank due to uncaught TypeErrors.
-
 ### Clear backend error in test output
 When Playwright error output includes the expected and actual values and the mismatch points
 directly to a backend bug (e.g., API returned wrong values, validation rejected valid input),
@@ -215,4 +203,3 @@ is not obvious from the test output.
 | Auth test returns 409/400 | `PlaywrightSteps` then `NetworkRequest` (check request payload) |
 | Action succeeds but UI doesn't update | `NetworkRequest`/`LocalStorage` then `ReactRenders` (state hydration gap?) |
 | Blank page / missing data (no error) | `PlaywrightSteps` then `NetworkRequest` (check for 404/500 silently swallowed) |
-| Default/fallback value used instead of API value | `PlaywrightSteps` then `NetworkRequest` (check API response timing vs UI action) |

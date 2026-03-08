@@ -57,12 +57,6 @@ Before running lint, verify that the app has an ESLint configuration file (`.esl
 Do NOT retry `npx eslint` expecting different results when the underlying issue is a missing
 configuration file. The "no config found" error will not resolve on its own.
 
-## Canonical Command
-
-`npm run check` is the canonical command for quality checks. Do NOT use `npx tsc --noEmit`
-directly as a substitute — always use `npm run check` to ensure both typecheck and lint run
-with the correct configuration.
-
 ## Faster Type-Only Checks
 
 During iterative development when you only need to verify types (not lint), you can run
@@ -103,19 +97,20 @@ During iterative development, typecheck/lint failures are expected. They are par
 normal build-fix-check cycle. Focus on fixing the errors rather than treating each failure
 as a problem with the check script itself.
 
-## Handling Pre-Existing Lint Errors
+## Troubleshooting Multi-Attempt Failures
 
-When `npm run check` fails, determine whether the errors are in files you modified or
-pre-existing in other files:
+`npm run check` has a ~20% multi-attempt rate. Common reasons for needing retries:
 
-1. Run `npm run check` and read `logs/check.log`.
-2. Check if the reported errors are in files you changed during this task.
-3. If errors are only in files you did NOT modify, they are pre-existing. Fix them if
-   trivial (e.g., unused imports), but do not spend significant time on unrelated errors.
-4. Use `cat logs/check.log | tail -30` to quickly see the error summary at the end of
-   the log.
+- **Cascading type errors**: A single root-cause type error produces many downstream errors.
+  Fix the first `error TS` line and re-run — most other errors often disappear.
+- **Lint autofix conflicts with types**: `eslint --fix` may rewrite code in a way that
+  introduces new type errors. If check fails after lint autofix, re-run — the second pass
+  usually catches both.
+- **Stale build artifacts**: If errors reference files you've already fixed, delete
+  `node_modules/.cache` and re-run.
 
-This distinction avoids wasted investigation on errors unrelated to your current work.
+When `npm run check` fails, always fix and re-run rather than switching to manual
+`npx tsc` / `npx eslint` invocations, which may use different configs.
 
 ## Common Issues
 

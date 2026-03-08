@@ -30,6 +30,24 @@ Do NOT use `lsof`, `ss`, `fuser`, or `netstat` for port checking — none of the
 installed in the container. Always use `pkill -f` to kill processes by name. Attempting
 these tools wastes time on guaranteed failures before falling back to `pkill` anyway.
 
+## Verifying Termination
+
+After killing processes, verify they are actually gone before starting new ones:
+
+```bash
+pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
+sleep 1
+# Verify no processes remain (pgrep exits 1 if no match = good)
+pgrep -f "netlify dev" >/dev/null 2>&1 && echo "WARNING: netlify still running" || true
+pgrep -f "vite" >/dev/null 2>&1 && echo "WARNING: vite still running" || true
+```
+
+If processes survive the initial `pkill`, escalate with `pkill -9`:
+
+```bash
+pkill -9 -f "netlify dev" 2>/dev/null; pkill -9 -f "vite" 2>/dev/null
+```
+
 ## When to Run
 
 - Before every `npm run test` invocation (see `preflight.md` step 1).

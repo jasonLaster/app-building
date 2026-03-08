@@ -163,9 +163,7 @@ Do not defer Replay installation to after failures are discovered.
 
 Before running any tests, run the standard pre-flight procedure from `skills/scripts/preflight.md`.
 Do NOT manually check each prerequisite individually — this wastes 3–8 commands per session
-reinventing the same sequence. Run all pre-flight steps **exactly once** as a single batch.
-Do NOT re-run individual preflight checks (e.g., extra `pkill` commands) after the batch —
-one invocation is sufficient:
+reinventing the same sequence. Run all pre-flight steps once as a batch:
 
 ```bash
 pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
@@ -294,29 +292,12 @@ failures (~45% of observed failures come from shared database state).
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
    cascade, causing failures in later tests that reference them.
 
-8. **Use `.last()` for newly-created records.** When a test creates a record (payment, line
-   item, customer) and then asserts on it, use `.last()` not `.first()` to locate it. Prior
-   tests in the same spec run may have created similar records, so `.first()` may match a
-   stale record from an earlier test rather than the one just created.
+8. **Pre-test state verification in serial suites.** Each test in a `test.describe.serial`
+   block should verify its preconditions rather than assuming state from prior tests. For
+   example, check that the expected number of rows exists before performing add/delete
+   operations, rather than relying on a previous test's side effects.
 
-9. **Explicit timestamps in seed data.** Seed data should use explicit timestamps (e.g.,
-   `'2026-01-15T10:00:00Z'`) rather than `NOW()` or `NOW() - INTERVAL` to ensure
-   deterministic ordering. Dynamic timestamps produce non-deterministic results when tests
-   assert on chronological ordering (e.g., revision history, activity logs).
-
-10. **Use decimal-aware assertions for numeric values.** When asserting form field values
-    or displayed numbers from NUMERIC/DECIMAL database columns, expect decimal formatting
-    (e.g., `'10.00'` not `'10'`). PostgreSQL returns decimal strings for these column types.
-    If assertions fail on numeric values, check the column type and ensure the assertion
-    matches the formatted output.
-
-11. **Validate date formatting at the API layer.** Neon may return Date objects instead of
-    ISO strings for DATE columns. All Netlify functions must normalize date values to ISO
-    strings before returning them to the frontend. When `formatDate` or similar utilities
-    receive a Date object instead of a string, they produce "Invalid Date". This pattern
-    appeared repeatedly — always normalize at the API boundary.
-
-12. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+9. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid

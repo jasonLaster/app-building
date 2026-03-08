@@ -41,10 +41,6 @@ NOT push it to Netlify automatically.
 Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
 flag does not work reliably. See `skills/scripts/netlify-env.md` for the exact API commands.
 
-**Important**: When setting environment variable context via the Netlify API, use `"production"`
-not `"all"`. The `"all"` context may fail silently or produce errors. Always target `"production"`
-explicitly.
-
 See `skills/scripts/deploy.md` § "Post-Deploy Checklist" for the full list.
 
 After a successful deployment, you MUST append a deployment history entry to the end of

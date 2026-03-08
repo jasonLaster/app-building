@@ -19,12 +19,6 @@ understand the persona, goals, and step-by-step actions for the journey.
 - `UPLOADTHING_TOKEN` must be set in the environment (it is provided in the container).
 - `RECORD_REPLAY_API_KEY` must be set in the environment.
 - Playwright MCP browser tools must be available (`browser_navigate`, `browser_click`, etc.).
-- **Database state**: Verify the database has been seeded with data before running journeys.
-  If the seed script fails due to existing data, clear the database first (see
-  `skills/scripts/seed-db.md`).
-- **Browser**: QA journey scripts that need video recording should use standard Chromium
-  (install via `npx playwright install chromium`) rather than the Replay browser. The Replay
-  browser is optimized for debugging recordings, not for video capture in QA automation.
 
 ## Procedure
 
