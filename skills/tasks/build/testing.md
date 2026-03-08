@@ -470,6 +470,9 @@ failures (~45% of observed failures come from shared database state).
   month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
   fail when run in a different month. Either make seed data date-relative or make test
   assertions date-aware.
+- **Verify directories before navigating.** Before using `cd` to navigate to an app directory,
+  verify it exists with `test -d` or `ls`. Directory navigation failures (`cd` to nonexistent
+  paths) are the most common command failure across all worker iterations.
 - Avoid redundant file exploration commands (`ls /repo/apps/`, `find ... -type f`, etc.)
   across test runs. Once you know the project structure, do not re-discover it in every
   iteration. Use the Glob and Grep tools instead of shell commands for file operations.
@@ -501,6 +504,12 @@ failures (~45% of observed failures come from shared database state).
   Always use `data-testid` attributes instead. Raw element selectors break when the component's
   HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
   timeouts that are hard to diagnose.
+- **Add useEffect editing guards for editable forms.** Any React form that loads data via
+  useEffect and allows editing must include an `isEditing` state guard that prevents useEffect
+  from overwriting user input during editing. Set `isEditing = true` when the user begins
+  editing, and skip the data-loading useEffect when `isEditing` is true. This pattern was
+  needed across 3 spec files (7 tests) in one session — apply it proactively to all edit
+  forms during initial component development.
 - Ensure tests don't leak state between runs. Data-contamination failures occur when a prior
   test's API calls complete after the next test has started, polluting the data state. Use
   `test.describe.serial` for tests that share mutable state, or ensure API calls are fully

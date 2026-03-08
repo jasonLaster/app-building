@@ -127,6 +127,37 @@ request ordering and ignore out-of-order responses.
 *Example*: Search bar test failed because the initial page-load fetch response arrived after
 the search-filtered fetch, overwriting search results with the full list.
 
+### useEffect overwrites form during editing (editing guard pattern)
+When tests show stale or null values in PUT/POST request bodies after a user edits a form,
+the root cause is typically a React `useEffect` that re-fires during editing and overwrites
+the user's input with fetched data. This differs from the "Form populate overwrites user edits"
+pattern (see `form-and-input.md`) because it specifically involves an `isEditing` state guard
+rather than a one-time ref guard.
+
+**Diagnosis with Replay**:
+1. `NetworkRequest` — Inspect the PUT/POST body. Confirm it contains stale/original values
+   instead of the user's edits.
+2. `Logpoint` — Place logpoints on the useEffect callback and on onChange/event handlers.
+   The timeline will show: user edits field → onChange fires → useEffect re-fires → state
+   resets to fetched data → save sends stale data.
+
+**Fix**: Add an `isEditing` state variable. Set it to `true` when the user begins editing
+(e.g., on click of Edit button or first input change). Guard the useEffect to skip when
+`isEditing` is true:
+```ts
+const [isEditing, setIsEditing] = useState(false);
+useEffect(() => {
+  if (isEditing) return;
+  if (data) {
+    setFormValues(data);
+  }
+}, [data, isEditing]);
+```
+
+This pattern was needed across 3 spec files (7 tests) in one session, all involving forms
+that load data via useEffect and allow inline editing. When found in one component,
+proactively check all similar edit forms in the app.
+
 ### Date.now() or shared identifiers across workers
 When parallel Playwright workers share a module-level `Date.now()` value for generating
 unique IDs (like test emails), all workers get the same value, causing collisions.

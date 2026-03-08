@@ -68,6 +68,7 @@ RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED — must not be omitted, same as individual failure entries)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
@@ -117,6 +118,8 @@ Compile all analysis files into a single report with these sections:
 - Failure resolution type distribution (breakdown by FAILURE_RESOLUTION_TYPE — e.g., test-code: 31, app-code: 5, both: 6, none: 2. Indicates whether the testing process or app-building process needs improvement)
 - Test Isolation Score (percentage of failures attributable to test isolation issues: data-contamination + strict-mode + seed-data-mismatch categories combined. A high score (>50%) signals that test isolation is the dominant failure mode and warrants dedicated process improvements)
 - Total affected tests (total number of individual tests affected, including all tests within clusters. Complements the distinct failure count — e.g., 15 distinct failures may affect 40 total tests when clusters are expanded)
+- Pre-existing failure rate (percentage and count of PRE_EXISTING=yes failures out of total failures. A high rate indicates the test suite is effective at finding real issues; a low rate may indicate the test-writing process is introducing bugs)
+- Replay decision quality (ratio of REPLAY_NECESSARY=no among REPLAY_USED=yes failures. A high ratio suggests Replay is being used speculatively for issues that could have been diagnosed from error output alone — indicates a process improvement opportunity)
 
 ### 2. Failure Table
 A markdown table with columns:
