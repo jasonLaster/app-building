@@ -25,6 +25,30 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app
   --subtask "WritePage<Name>: Write the page itself"
 ```
 
+## SetupApp Guidance
+
+During the SetupApp subtask, the app directory is mostly empty. Do not waste time searching
+for files that don't exist yet — create them. In particular:
+
+- **`store.ts`**: The Redux store file does not exist yet during setup. Create it at
+  `src/store.ts` rather than searching for it.
+- **Standard directory structure**: Create these directories up front:
+  - `src/pages/` — page components
+  - `src/components/` — shared UI components
+  - `src/slices/` — Redux slices
+  - `netlify/functions/` — backend serverless functions
+  - `scripts/` — build/db scripts (schema.ts, seed-db.ts, check.ts, test.ts)
+  - `tests/` — Playwright test files
+
+## Database Provisioning
+
+For Neon database setup during app creation, follow `skills/scripts/neon-setup.md`. Key points:
+
+- `NEON_API_KEY` is available as a container-level environment variable.
+- Use `$NEON_API_KEY` directly in curl headers (shell expansion). Do not use `printenv` in a subshell.
+- After creating a project, save the `NEON_PROJECT_ID` and `DATABASE_URL` to `.env`.
+- See `skills/scripts/env-setup.md` for the full list of required environment variables.
+
 ## Reference Apps
 
 When scaffolding a new app, check for existing reference apps that can inform your setup.
@@ -103,6 +127,18 @@ contexts (testing, deployment).
   before inserting or updating. Use `value || null` instead of `value ?? null`, because the nullish
   coalescing operator (`??`) does not convert empty strings.
 
+- When formatting date values received from the API/database for display or for use as
+  `<input type="date">` values, always normalize the string to `YYYY-MM-DD` first (e.g.,
+  `value.split('T')[0]`). PostgreSQL serializes DATE columns as full ISO timestamps (e.g.,
+  `1985-03-15T00:00:00.000Z`), not plain `YYYY-MM-DD` strings. HTML date inputs reject any
+  format other than `YYYY-MM-DD`, rendering the field empty. Likewise, passing an ISO timestamp
+  to `new Date()` with an appended timezone anchor produces an invalid date.
+
+- When a backend handler deletes and re-inserts related records (e.g., delete-then-reinsert
+  pattern for updating child rows), it must first delete any rows in other tables that have
+  foreign key references to the rows being deleted. Walk the FK dependency chain from leaf
+  tables inward before deleting the target rows.
+
 - Netlify Functions accessed at `/.netlify/functions/<name>/<resourceId>` have the function name at
   path index 2 and the resource ID at index 3 (after splitting on `/` and filtering empty segments).
   Common off-by-one error: using index 2 for the resource ID when it contains the function name.
@@ -110,9 +146,30 @@ contexts (testing, deployment).
 - When building modals that reference other entities (e.g., adding a relationship to a person), use a
   searchable select/dropdown component, not a plain text input for IDs.
 
+- When a `useEffect` derives local state from a URL parameter or route param (e.g., setting a
+  `viewingItemId` from a URL's `:id` segment), it must handle both the truthy case (param present →
+  set state) and the falsy case (param absent → clear state). Omitting the `else` branch causes
+  stale state to persist when navigating away from a parameterized route back to the base route.
+
+- When writing SQL queries for lookup/autocomplete endpoints that return distinct entities, use
+  `DISTINCT ON (<primary_identifier>)` (PostgreSQL) rather than `SELECT DISTINCT` across multiple
+  columns. `SELECT DISTINCT col1, col2` deduplicates on the combination of all listed columns, so
+  rows with the same primary identifier but different secondary values (e.g., same code with
+  different descriptions) will appear as separate results, causing duplicate entries in dropdowns.
+
 - Navigation sidebars and menus must not contain duplicate links pointing to the same URL. Each
   navigation item must have a unique route. Remove or consolidate any entries that would navigate
   to the same destination.
+
+- SQL queries in backend functions must only reference tables and columns that are defined in the
+  app's schema (`scripts/schema.ts`). Before writing a query that references a table, verify it
+  exists in `initSchema`. Referencing non-existent tables causes runtime "relation does not exist"
+  errors that silently break entire endpoints.
+
+- Do not use `type="number"` on input fields that display formatted values requiring trailing zeros
+  (e.g., currency amounts like "$175.00"). HTML number inputs normalize their value, stripping
+  trailing zeros. Use `type="text"` with `inputMode="decimal"` and format the displayed value
+  explicitly (e.g., `toFixed(2)` for currency).
 
 - Navigation sidebars must be collapsible. Include a toggle button that switches between expanded
   (full labels) and collapsed (icons only) states. When collapsed, show icon-only items at a narrow
@@ -128,17 +185,6 @@ contexts (testing, deployment).
 
 - Attachment functionality must support actual file uploads. Any UI that allows adding attachments
   must include a working file upload mechanism (e.g., file picker, drag-and-drop), not just link entry.
-
-- All data tables and data lists must include a header row with column labels so the meaning of each
-  column is clear. Apply consistent header styling (smaller font size, muted color, medium weight) across
-  all tables in the app. Do not omit headers even when column meanings seem obvious from context.
-
-- Multi-panel layouts (sidebar + list + detail) must use CSS that guarantees panels never overlap.
-  Use a flex or grid layout where each panel has a defined width (fixed or fractional) and the
-  content area uses `overflow: auto` or `overflow: hidden` so it scrolls internally rather than
-  bleeding into adjacent panels. Tables must set `min-width` on columns and use `table-layout: fixed`
-  or constrained column widths so that header text and cell content don't collapse or overlap when
-  space is tight. Always test that the layout works at the narrowest reasonable viewport width.
 
 - Every page component must include consistent padding on its root element (`p-6 max-sm:p-3`)
   so content is never flush against the screen edges. This applies to all pages including

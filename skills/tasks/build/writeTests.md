@@ -30,9 +30,11 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
 
 - For actions that produce side effects (e.g. history entries, timeline updates), write assertions that verify both the primary effect and the side effect. Also assert the side effect happens exactly once — duplicate entries from redundant API calls are a common bug.
 
-- Avoid using `getByText()` with common words that may appear as substrings in other elements (labels,
-  options, buttons). Playwright's `getByText` is case-insensitive and uses substring matching by default.
+- Avoid using `getByText()` or `filter({ hasText })` with common words that may appear as substrings
+  in other elements (labels, options, buttons). Both Playwright's `getByText` and `filter({ hasText })`
+  use case-insensitive substring matching by default — e.g., `hasText: 'Male'` also matches "Female".
   Prefer `getByTestId` for precise element targeting, or use `getByRole`/`getByLabel` with exact matching.
+  When using `filter({ hasText })`, pass a regex with anchors (e.g., `{ hasText: /^Male$/ }`) for exact matching.
   A `strict mode violation: getByText(...) resolved to N elements` error means the selector is ambiguous —
   never work around it with `.first()`, instead use a more specific selector like `getByTestId` or
   `getByRole` with `{ exact: true }`.
@@ -103,11 +105,28 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
   - Verify that API endpoints are healthy before running deployment tests. See
     `skills/scripts/deploy-verification.md`.
 
+- When using CSS attribute prefix selectors like `[data-testid^="prefix-"]` to count or collect
+  elements, verify that the prefix does not also match child elements with longer testid values
+  that share the same prefix. For example, `[data-testid^="group-"]` will match both `group-foo`
+  and `group-header-foo`. Either use a more specific selector, add a `:not()` exclusion, or
+  use exact `getByTestId` calls to target only the intended elements.
+
 - When testing that an action adds or removes items from a list or table, assert relative changes
   (e.g., count increased by 1) rather than hardcoding absolute expected counts. Capture the initial
   count before the action and assert the new count equals `initialCount + 1` (or `- 1` for deletion).
   Absolute counts couple the test to seed data and break when prior tests or setup changes alter the
   starting state.
+
+- Never hardcode time-dependent values (dates, timestamps) in test assertions. If a test spec
+  says a field defaults to "today" or "now", the test must compute the expected value dynamically
+  (e.g., `new Date().toISOString().split('T')[0]`) rather than hardcoding a specific date string.
+  Hardcoded dates cause the test to fail on any day other than the one when the test was written.
+
+- When asserting that a data field (e.g., totalPaid, balance) has been updated, verify it in
+  the view that actually renders that field. Read the component source to confirm which fields
+  are displayed in list/table views vs. detail views. A common bug is asserting on a table row
+  that only shows a subset of fields (e.g., totalCharged) when the expected field (e.g., totalPaid)
+  is only visible in the detail view.
 
 - When a test spec entry describes editing or interacting with a specific field (e.g., "edit client
   field", "change value"), the test must exercise that exact field with corresponding actions and
@@ -130,9 +149,12 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
 
 - When a test spec entry says a value should be displayed in a specific format (e.g., a formatted
   date like "Mon, Mar 4", a currency like "$51.50"), the test must assert on the actual text content
-  of the element, not just that the element is visible or present. Checking only visibility will not
-  catch rendering bugs where the value is malformed (e.g., "Invalid Date", "$NaN", "undefined").
-  Use `.toHaveText()` or `.toContainText()` with the expected formatted value or a regex pattern.
+  or input value of the element, not just that the element is visible or present. Checking only
+  visibility will not catch rendering bugs where the value is malformed (e.g., "Invalid Date",
+  "$NaN", "undefined"). Use `.toHaveText()` or `.toContainText()` for displayed text, and
+  `.toHaveValue()` for input fields, with the expected formatted value or a regex pattern. For
+  input fields that format values (e.g., monetary inputs formatting "130" as "130.00"), the
+  assertion must match the formatted value exactly, not just the numeric portion.
 
 - When a test file's describe block contains tests that perform destructive mid-test operations
   (e.g., deleting records via API requests during the test body) that would invalidate the
@@ -141,12 +163,45 @@ npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --a
   tests within a plain `test.describe` can run concurrently or in any order, so a destructive
   test may execute before or alongside tests that depend on the destroyed data.
 
+- When multiple tests in the same describe block perform state-changing operations on database
+  records (e.g., submitting a claim, changing a status), each test must operate on a distinct
+  record ID. Never have two tests mutate the same record, even if they run sequentially —
+  the second test's preconditions will be invalid because the first test already changed the
+  record's state. Use different seed data records for each test that performs mutations.
+
+- When a user action triggers a page navigation or data re-fetch (e.g., clicking a link that
+  navigates to a new page, changing a date range filter, selecting a different category,
+  submitting a search), or when a page loads data asynchronously on mount, the test must wait
+  for the data to appear in the UI before making assertions. Do not assert on element counts
+  or text content immediately after the action or page load — the DOM may still be in a
+  loading state, show stale data, or display initial/default values (e.g., "0") before the
+  API response arrives. In particular, never use `locator.count()` or `locator.textContent()`
+  immediately to assert on dynamic content — these are snapshots that return instantly without
+  waiting. Use auto-retrying assertions like `toHaveText()`, `toHaveCount()`, or
+  `toContainText()` instead. For example, use `await expect(el).toHaveText('5')` rather than
+  `const text = await el.textContent(); expect(Number(text)).toBe(5)`. Alternatively, use
+  `expect(...).toPass()`, wait for a specific element to be visible, or wait for a loading
+  indicator to disappear before asserting on the rendered data.
+
 - When a test changes a selection (e.g., picks a different item from a dropdown) and then
   performs a dependent action (e.g., deletes a row, checks a summary), the test must assert
   that the selection is still the expected value before proceeding with the dependent action.
   Async effects (especially under React StrictMode double-mount) can reset selections after
   the user has changed them. If the test does not re-verify the selection, it may silently
   operate on the wrong data, passing when the app is actually broken.
+
+- When asserting on URL query parameters in navigation tests, do not use `encodeURIComponent()`
+  to build expected URL patterns. `encodeURIComponent` encodes spaces as `%20`, but apps that
+  use `URLSearchParams` to construct query strings encode spaces as `+` (per the
+  `application/x-www-form-urlencoded` spec). Instead, construct the expected URL using the same
+  `URLSearchParams` API the app uses, or use a regex that accounts for both `+` and `%20` encoding.
+
+- When a test involves changing a parent selection that triggers auto-fill of dependent fields
+  (e.g., switching from Patient A to Patient B auto-fills the insurance dropdown), the test must
+  verify that the dependent fields are correctly populated with the NEW parent's data before
+  proceeding. Stale data from the previous selection can remain in the store while new data is
+  being fetched, causing auto-fill to silently select outdated values. Assert the dependent
+  field's value matches the new parent's expected data, not just that a value is present.
 
 - Auth flows that involve email-based verification (email confirmation, password reset) must
   have dedicated tests that exercise the real production code path — not the IS_TEST bypass.

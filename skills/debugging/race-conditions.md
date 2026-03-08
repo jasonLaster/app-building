@@ -110,43 +110,6 @@ This single pattern resolved 22–38% of all test failures in observed runs. In 
 was the single most repeated self-inflicted bug, appearing identically in 6+ spec files (12
 failures). Always apply this fix proactively across all spec files when discovered in one.
 
-### API response arrives after UI action (fallback value used)
-When a test asserts on a value that should come from an API response but instead sees a
-hardcoded default or fallback, the root cause is often that the API response arrived after
-the UI action that needed it. For example, a settings API returns the shop rate 85ms after
-the user clicks "Add Labor", so the labor line uses the hardcoded default rate instead.
-
-**Diagnosis with Replay**: `PlaywrightSteps` shows the button click timestamp.
-`NetworkRequest` shows the API response timestamp. If the response arrived after the click,
-the timing gap is the root cause.
-
-**Tool sequence**: `PlaywrightSteps → NetworkRequest` (check timing of button click relative
-to API response)
-
-**Fix**: Ensure the UI waits for API data before enabling the action, or ensure the component
-re-reads the latest state after the API response arrives rather than capturing the value at
-click time.
-
-### Count=0 or disabled button after data load
-When tests fail with count=0 for a list or a button remains disabled after an action,
-the root cause is often a timing issue between data loading and the assertion/click. The
-data hasn't finished loading when the test checks.
-
-**Diagnosis with Replay**: `PlaywrightSteps` shows the timing gap between the page load
-and the assertion. `NetworkRequest` confirms whether the API call completed before the
-assertion ran.
-
-**Tool sequence**: `PlaywrightSteps → NetworkRequest` (measure timing gap, verify API completion)
-
-**Fix**: Wait for the expected element or data to appear before asserting:
-```ts
-await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
-```
-Or wait for the button to be enabled before clicking:
-```ts
-await expect(page.locator('button[data-testid="submit"]')).toBeEnabled();
-```
-
 ### Stale fetch race condition
 A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,
 search or filter). The first fetch's response arrives after the second and overwrites the UI

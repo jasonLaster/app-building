@@ -457,6 +457,15 @@ failures (~45% of observed failures come from shared database state).
   ISO timestamps (`2026-01-15T00:00:00.000Z`) or always `YYYY-MM-DD` strings, not a mix
   of both. Mixed formats cause frontend parsing issues when components expect one format
   but receive the other.
+- **Format currency values with `.toFixed(2)`.** All currency display components must format
+  values with 2 decimal places (e.g., `175.00` not `175`). Multiple test failures arise from
+  assertions expecting formatted currency strings. Apply `.toFixed(2)` or equivalent formatting
+  at the display layer for any monetary amount.
+- **Use `type="text" inputMode="decimal"` for currency inputs from the start.** Avoid
+  `<input type="number">` for currency fields — it strips formatting and causes issues with
+  decimal display. Using `type="text"` with `inputMode="decimal"` provides the numeric
+  keyboard on mobile while allowing full control over formatting. Converting from `type="number"`
+  to `type="text"` mid-stream breaks existing test expectations.
 - Seed data should use relative dates (e.g., "current month minus 1") rather than hardcoded
   month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
   fail when run in a different month. Either make seed data date-relative or make test

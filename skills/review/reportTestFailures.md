@@ -24,14 +24,15 @@ FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout,
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, explain why — e.g. "diagnosed from error output", "no recording available", "upload failed">
+DIAGNOSED_FROM: <optional — when REPLAY_USED is no, capture the diagnostic source that was sufficient: one of: error-output, page-snapshot, error-context-snapshot, code-inspection. Helps identify which information sources are most valuable for non-Replay debugging.>
 RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failure, or no recording was created)
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
 DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
-DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
+DEBUGGING_SUCCESSFUL: yes/no/partial (REQUIRED when DEBUGGING_ATTEMPTED is yes — must not be omitted. Indicates whether the debugging effort succeeded.)
 REPLAY_NECESSARY: yes/no/unknown (STRICTLY REQUIRED when REPLAY_USED is yes — this field MUST NOT be omitted. Was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit ONLY when REPLAY_USED is no. Analyses missing this field when REPLAY_USED is yes are incomplete and must be corrected.)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). IMPORTANT: Always use this field when failures are fixed by the same changeset, so the synthesizer can explicitly link them rather than inferring from matching SHAs. Omit if this failure has a unique root cause.>
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
-FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure. Use the phase of the task that triggered the test run — e.g., if failures occur during a checkDirectives task, use "checkDirectives" even if the tests themselves are the same ones run during fixTests.)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED — must not be omitted. Which phase of the workflow produced this failure. Use the phase of the task that triggered the test run — e.g., if failures occur during a checkDirectives task, use "checkDirectives" even if the tests themselves are the same ones run during fixTests. Mapping: FixTests tasks → fixTests, FixViolation/checkDirectives tasks → checkDirectives, JourneyQA tasks → other.)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the fix was to test code, app code, or both. "none" if not yet resolved. Helps identify whether the testing process or the app-building process needs improvement)
 FIX_ITERATIONS: <number of test re-runs needed to fully resolve this failure, 0 if not yet resolved. Captures debugging difficulty — failures taking 4+ iterations indicate complex root causes that may warrant process improvements. Omit if resolved in 1 run.>
 
@@ -154,16 +155,3 @@ Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
-
-### 5. Replay Fixes Table
-
-For each test failure where Replay was used and the test failure was successfully fixed,
-add an entry with the following details copied verbatim from the analysis file:
-
-ULTRA IMPORTANT: Follow this format exactly and make sure to include this table as it will be used
-by downstream processes. Do not modify these instructions.
-
-INITIAL_CHANGESET
-FAILING_TEST
-FINAL_CHANGESET
-ASSESSMENT
