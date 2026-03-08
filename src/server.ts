@@ -277,6 +277,7 @@ const server = createServer(async (req, res) => {
         return;
       }
       addPromptTask(prompt);
+      log(`Message received (state=${state}, pendingTasks=${getPendingTaskCount()})`);
       postWebhook("message.queued", { prompt });
       wake();
       json(res, 200, { ok: true });
@@ -301,6 +302,7 @@ const server = createServer(async (req, res) => {
 
     // POST /interrupt
     if (method === "POST" && url === "/interrupt") {
+      log(`Interrupt received (state=${state}, hasProcess=${!!currentClaudeProcess})`);
       requestInterrupt();
       json(res, 200, { interrupted: !!currentClaudeProcess });
       return;
