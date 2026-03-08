@@ -72,52 +72,38 @@ When raw CSS is needed (e.g., table column hiding via nth-child or tag selectors
 (max-width: ...)` at 1024px, 768px, and 480px. The 480px CSS breakpoint covers the gap below
 Tailwind's 640px `max-sm:`.
 
-Do not use JavaScript-based layout switching. Do not add a hamburger menu or mobile navigation
-unless the app already has one — the sidebar stays fixed.
+Do not use JavaScript-based layout switching except for sidebar collapse (see below).
 
-### Layout adjustments
+### Sidebar collapse on mobile
 
-Apply these patterns at the Tailwind breakpoints:
+The sidebar is the single biggest source of mobile layout problems. On narrow viewports it can
+consume 35-45% of the screen, leaving the main content area unusable. The sidebar **must**
+auto-collapse on mobile:
 
-- **Page padding**: `p-6 max-sm:p-3` on the outermost page wrapper.
-- **Multi-column grids** (detail page bodies, metadata grids): start with the desktop column
-  count and collapse at each breakpoint.
-  - Two-column body: `grid grid-cols-2 max-md:grid-cols-1 gap-4`
-  - Four-column metadata: `grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4`
-- **Section card padding**: `p-4 max-sm:p-3` or `px-5 max-sm:px-3`.
-- **Form layouts** with side-by-side fields: `grid grid-cols-2 max-sm:grid-cols-1 gap-4`.
-- **Typography scaling**: reduce heading sizes at `max-sm:`.
-  - Page titles: `text-[24px] max-sm:text-[20px]`
-  - Detail headings: `text-[18px] max-sm:text-[16px]`
-- **Button text**: on narrow viewports, hide button labels and keep only icons:
-  `<span className="max-sm:hidden">Label</span>`
-- **Horizontal button rows** and action bars: use `flex-wrap` so they wrap naturally.
-- **Modals and dialogs**: constrain with `max-sm:max-w-[calc(100%-24px)]` and ensure
-  `overflow-y-auto` for tall content.
+- Add a React state (`sidebarOpen`) that defaults based on viewport width. On viewports ≤768px,
+  the sidebar should default to collapsed.
+- Use a `useEffect` with a `matchMedia` listener for `(max-width: 768px)` to auto-collapse
+  when the viewport shrinks and auto-expand when it grows.
+- When collapsed on mobile, the sidebar should be fully hidden (not just icon-only) and a
+  hamburger/menu button should appear in a top bar to toggle it open as an overlay.
+- When the sidebar is open on mobile, it should overlay the content (using absolute/fixed
+  positioning + z-index) rather than pushing the content into a narrow column.
+- Clicking a nav link on mobile should auto-close the sidebar.
+- Ensure the toggle button has a minimum 44x44px touch target.
 
-### Data density in lists and tables
+### Areas of focus
 
-Lists and tables are the most important thing to get right. On wide viewports they can show many
-columns, but on narrow viewports they must progressively hide less-important columns.
+These are the most common mobile problems observed in practice. Pay special attention to each:
 
-- Identify which columns are essential (e.g., name, status) vs secondary (e.g., created date,
-  assigned user, tags).
-- **Column hiding**: Use Tailwind `max-lg:hidden` and `max-md:hidden` directly on `<th>`/`<td>`
-  elements when the table is rendered with explicit column elements. When columns are generated
-  from mapped data or use CSS Grid, define named classes in `index.css` with `@media` rules.
-- **Card mode at narrowest viewport**: At 480px (via `@media` in `index.css`), hide the table
-  header and switch rows to `display: flex; flex-wrap: wrap` so each row reads as a card with
-  key fields only.
-- Ensure sort/filter controls remain accessible — use `flex-wrap` on filter bars so controls
-  wrap naturally on narrow viewports.
-
-### Card-based lists
-
-When the page uses cards instead of a table (e.g., task lists), adjust information density within
-each card at breakpoints:
-
-- At `max-lg:` hide secondary metadata (avatars, role text).
-- At `max-md:` relocate metadata that was in a side column to an inline row below the title
-  using `hidden max-md:flex`.
-- At `max-sm:` consolidate remaining metadata into a single compact row using
-  `hidden max-sm:flex`.
+1. **Tables and data lists**: Tables that work at desktop width become unreadable on mobile.
+   Columns get clipped or hidden behind the sidebar. Always verify tables are usable at 375px
+   viewport width with the sidebar collapsed.
+2. **Chart and graph labels**: Bar chart / pie chart category labels frequently overflow their
+   containers on narrow viewports. Labels should wrap, rotate, or truncate with tooltips rather
+   than being clipped.
+3. **Dashboard stat cards**: Multi-column stat grids (e.g., 3-4 KPI cards in a row) must
+   collapse to fewer columns on mobile. Verify that stat values and labels remain fully visible.
+4. **Touch target sizing**: All interactive elements (buttons, links, icons) must have at least
+   44x44px touch targets. Small icon-only buttons need extra padding on mobile.
+5. **Content behind sidebar**: After collapsing the sidebar, verify that no content is still
+   hidden or clipped on the left edge. Full-width content should use the entire viewport.
