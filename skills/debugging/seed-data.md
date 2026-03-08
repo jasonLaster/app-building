@@ -40,6 +40,30 @@ Ephemeral Neon branches inherit all data from the parent branch. Using `seedData
 Without truncation, tests see inherited parent data plus newly seeded data, causing count
 mismatches and unexpected records.
 
+## Data-Contamination Diagnosis Pattern
+
+When error output shows unexpected values — actual count higher than expected, wrong totals,
+unexpected records — the most likely cause is data contamination from a previous test in the
+same describe block. This is the single most common failure category (~43% of all observed
+failures).
+
+**Quick diagnosis** (no Replay needed):
+1. Check if the error shows `actual > expected` (e.g., expected 3 rows, got 5). This indicates
+   a prior test created records that weren't cleaned up.
+2. Check if the failing test is preceded by a test that creates, deletes, or modifies shared
+   records (invoices, payments, clients, etc.).
+3. Check if the spec file uses `beforeEach` data reset — if not, that's likely the fix.
+
+**Resolution strategies** (in order of preference):
+1. **beforeEach data reset** — Reset relevant state before each test.
+2. **Destructive test reordering** — Move tests that create/delete/void records to the end of
+   the describe block.
+3. **Create fresh data per test** — Avoid relying on shared seed data entirely.
+4. **Capture current values** — Read actual state (e.g., count rows) instead of hardcoding
+   expected values.
+
+These failures are self-diagnosing from error output alone — Replay is unnecessary.
+
 ## Common Root Causes (from observed failures)
 
 ### Navigation helper lands on a record with no related data

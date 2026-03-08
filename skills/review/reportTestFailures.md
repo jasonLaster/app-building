@@ -120,6 +120,8 @@ Compile all analysis files into a single report with these sections:
 - Total affected tests (total number of individual tests affected, including all tests within clusters. Complements the distinct failure count — e.g., 15 distinct failures may affect 40 total tests when clusters are expanded)
 - Pre-existing failure rate (percentage and count of PRE_EXISTING=yes failures out of total failures. A high rate indicates the test suite is effective at finding real issues; a low rate may indicate the test-writing process is introducing bugs)
 - Replay decision quality (ratio of REPLAY_NECESSARY=no among REPLAY_USED=yes failures. A high ratio suggests Replay is being used speculatively for issues that could have been diagnosed from error output alone — indicates a process improvement opportunity)
+- Diagnostic source effectiveness (breakdown of DIAGNOSED_FROM values among successfully resolved failures — e.g., error-output: 25, page-snapshot: 10, code-inspection: 2. Identifies which information sources are most valuable for non-Replay debugging and can inform when to skip Replay)
+- Fix iteration difficulty distribution (breakdown of FIX_ITERATIONS values — e.g., 1: 20, 2: 8, 3: 3, 4+: 2. Failures taking 4+ iterations are outliers that warrant process investigation. Include the specific test names for 4+ iteration failures)
 
 ### 2. Failure Table
 A markdown table with columns:
