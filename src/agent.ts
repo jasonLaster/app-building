@@ -110,21 +110,17 @@ async function pollEvents(
   return offset;
 }
 
-// --- Wait for message to complete ---
+// --- Wait for server to become idle (task completed) ---
 
-async function waitForMessage(
+async function waitForIdle(
   baseUrl: string,
-  messageId: string,
   signal: AbortSignal,
   httpOpts: HttpOptions,
 ): Promise<void> {
   while (!signal.aborted) {
     try {
-      const data = await httpGet(`${baseUrl}/message/${messageId}`, httpOpts);
-      if (data.status === "done" || data.status === "error") {
-        if (data.error) {
-          console.error(`Error: ${data.error}`);
-        }
+      const data = await httpGet(`${baseUrl}/status`, httpOpts);
+      if ((data.state === "idle" && data.pendingTasks === 0) || data.state === "stopping" || data.state === "stopped") {
         return;
       }
     } catch {
@@ -171,7 +167,7 @@ async function runInteractive(config: ContainerConfig, opts: {
       console.log("...");
 
       try {
-        const { id } = await httpPost(`${baseUrl}/message`, { prompt: input }, httpOpts);
+        await httpPost(`${baseUrl}/message`, { prompt: input }, httpOpts);
 
         // Poll events in background while waiting
         const abortController = new AbortController();
@@ -193,7 +189,7 @@ async function runInteractive(config: ContainerConfig, opts: {
 
         // Poll events and wait for completion concurrently
         const eventPoll = pollEvents(baseUrl, eventOffset, abortController.signal, httpOpts);
-        await waitForMessage(baseUrl, id, abortController.signal, httpOpts);
+        await waitForIdle(baseUrl, abortController.signal, httpOpts);
 
         // Stop event polling and capture final offset
         abortController.abort();
