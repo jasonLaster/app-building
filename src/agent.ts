@@ -122,18 +122,14 @@ async function waitForIdle(
     try {
       const data = await httpGet(`${baseUrl}/status`, httpOpts);
       pollCount++;
-      console.log(`waitForIdle poll #${pollCount}: state=${data.state} pendingTasks=${data.pendingTasks} tasksProcessed=${data.tasksProcessed}`);
       if ((data.state === "idle" && data.pendingTasks === 0) || data.state === "stopping" || data.state === "stopped") {
-        console.log(`waitForIdle done after ${pollCount} polls: state=${data.state}`);
         return;
       }
     } catch (err) {
       pollCount++;
-      console.log(`waitForIdle poll #${pollCount} error: ${err instanceof Error ? err.message : err}`);
     }
     await new Promise((r) => setTimeout(r, 500));
   }
-  console.log(`waitForIdle aborted after ${pollCount} polls`);
 }
 
 // --- Interactive mode ---
