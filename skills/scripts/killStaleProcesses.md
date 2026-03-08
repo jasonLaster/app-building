@@ -11,8 +11,23 @@ and serve outdated code.
 Run from any directory before starting tests or a dev server:
 
 ```bash
-pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
+pkill -f "netlify dev" 2>/dev/null || true; pkill -f "vite" 2>/dev/null || true
 ```
+
+**Always append `|| true`** when using `pkill` in chained commands or scripts. Without it,
+`pkill` returns exit code 1 when no matching process is found, which causes chained commands
+(using `&&`) to abort and scripts to report partial failures. This was the single most wasteful
+pattern observed — agents cycling through 3–5 different kill approaches per session.
+
+**Check before killing** when you need to know if processes exist:
+
+```bash
+pgrep -f "netlify dev" >/dev/null 2>&1 && pkill -f "netlify dev" || true
+pgrep -f "vite" >/dev/null 2>&1 && pkill -f "vite" || true
+```
+
+Use the simple `pkill ... || true` form for preflight cleanup where you don't care whether
+processes existed. Use the `pgrep` check form when you need to log or branch on process state.
 
 ## Details
 

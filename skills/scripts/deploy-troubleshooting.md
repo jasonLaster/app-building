@@ -58,6 +58,27 @@ curl -s -o /dev/null -w "%{http_code}" https://<site-url>/api/<function-name>
 If you see 404 errors when testing deployed functions, check whether the URL uses the old
 `/.netlify/functions/` path and switch to `/api/`.
 
+## `npm run deploy` Known Failure Modes
+
+`npm run deploy` has a ~60% multi-attempt rate. Common failure modes and workarounds:
+
+1. **TypeScript errors blocking build**: The deploy script runs `vite build` which typechecks.
+   Fix all `npm run check` errors before deploying.
+2. **Incorrect CLI flags**: Flags like `--json` may not be supported by all versions of the
+   Netlify CLI. If a flag causes errors, remove it and use the REST API instead.
+3. **REST API fallback**: When Netlify CLI commands fail repeatedly, use the Netlify REST API
+   directly with `curl`. This is more reliable than the CLI in container environments:
+   ```bash
+   # Deploy using the REST API (zip dist/ first, then POST)
+   curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+     -H "Content-Type: application/zip" \
+     --data-binary @dist.zip \
+     "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
+   ```
+
+Limit deployment retries to 3 attempts. If all fail, diagnose the root cause from
+`logs/deploy.log` rather than retrying blindly.
+
 ## DATABASE_URL Verification After Deploy
 
 After deployment, always verify the production API works before running full Playwright

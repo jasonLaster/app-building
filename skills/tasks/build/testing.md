@@ -186,6 +186,11 @@ for the full script specification). Do NOT manually run playwright or start dev 
 - Read the log file only when you need to diagnose failures.
 - Tests MUST run in parallel with multiple workers (use `fullyParallel: true` in playwright config).
 
+**Retry limit**: Limit test re-runs to 3 per failing test before investigating the root cause.
+Test failures during development are expected (test-fix-retest cycle), but re-running the same
+test more than 3 times without changing approach indicates the fix strategy is wrong. Stop,
+analyze the failure more carefully (use Replay if available), and try a different approach.
+
 ## Debugging
 
 When tests fail, you MUST follow this process for each distinct failure. Every step is
@@ -283,10 +288,13 @@ failures (~45% of observed failures come from shared database state).
 5. **Relative or data-independent assertions.** Tests that verify data after mutations must
    query current state before the action and assert relative changes, not absolute values.
 
-6. **Create test data via API, not seed reliance.** Every spec file should create its own
-   test data via API calls in `beforeEach`/`beforeAll` rather than relying on seed data.
-   This is the single highest-impact isolation improvement — 57.8% of observed failures
-   came from data contamination when tests shared seed data.
+6. **Distinct test data records per test.** Each test must operate on its own database
+   record (vendor, PO, delivery, etc.) rather than sharing records across tests. Every spec
+   file should create its own test data via API calls in `beforeEach`/`beforeAll` rather
+   than relying on seed data. This is the single highest-impact isolation improvement —
+   57.8% of observed failures came from data contamination when tests shared seed data.
+   In one session, this single change would have prevented 10+ data-contamination failures
+   across receive-delivery, vendor-detail, and PO-related spec files.
 
 7. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via

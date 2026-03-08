@@ -65,6 +65,13 @@ Before running lint, verify that the app has an ESLint configuration file (`.esl
 Do NOT retry `npx eslint` expecting different results when the underlying issue is a missing
 configuration file. The "no config found" error will not resolve on its own.
 
+## TypeScript Checking Retry Limits
+
+Do not retry `npx tsc --noEmit` (or `npm run check`) more than 2–3 times for the same error.
+If it fails repeatedly with the same type errors, the issue is in the code, not a transient
+problem. If it appears to hang (no output for 60+ seconds), check for configuration issues
+in `tsconfig.json` (e.g., incorrect `jsx` flag, missing `include` paths) rather than retrying.
+
 ## Faster Type-Only Checks
 
 During iterative development when you only need to verify types (not lint), you can run
