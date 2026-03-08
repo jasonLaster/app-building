@@ -15,13 +15,16 @@ for additional instructions. You will continue performing additional rounds of m
 
 5. polishApp.md: Improve the app's overall quality.
 
-6. deployment.md: Deploy the updated app to production.
+6. testing.md: Make sure all tests are passing, debugging and fixing the app / tests as needed.
+
+7. deployment.md: Deploy the updated app to production.
 
 Add tasks to the queue for each stage in **reverse order** (last stage first), since
 `add-task` always pushes to the front:
 
 ```
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/deployment.md" --app "<AppName>" --subtask "Unpack: Deploy to production"
+npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/testing.md" --app "<AppName>" --subtask "Unpack: Make sure all tests are passing"
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/polishApp.md" --app "<AppName>" --subtask "Unpack: Polish app quality"
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" --subtask "Unpack: Check directive compliance"
 npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/reviewBugReport.md" --app "<AppName>" --subtask "Unpack: Review fixed bug reports"
