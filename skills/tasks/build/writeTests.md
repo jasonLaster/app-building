@@ -264,3 +264,12 @@ directives) rather than importing `@neondatabase/serverless` directly.
   component, (3) 2-3 representative section components. Do not exhaustively read every file in the app.
 - If Playwright browser installation fails with permission errors, set `PLAYWRIGHT_BROWSERS_PATH` to
   a writable directory (e.g., `/home/node/.cache/ms-playwright`) before running `npx playwright install`.
+- When testing custom select/dropdown components (e.g., `CustomSelect`), standard Playwright
+  `selectOption()` will not work. Instead, click the dropdown trigger to open it, then click
+  the option using its `data-value` attribute (e.g., `page.click('[data-value="option1"]')`).
+  Similarly, `toHaveValue()` does not work on custom selects — use
+  `getAttribute('data-value')` to verify the selected value.
+- When running `npx playwright test` directly (outside the app's `npm run test` wrapper),
+  set `PLAYWRIGHT_BROWSERS_PATH=/opt/playwright` in the environment. Without this, Playwright
+  cannot find the installed browsers. If module resolution fails, add `NODE_PATH` pointing to
+  the app's `node_modules` directory.

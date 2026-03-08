@@ -43,13 +43,28 @@ NETLIFY_SITE_ID=<site-id> LC_ALL=C npx netlify env:list --json
 Alternatively, use the Netlify REST API directly for environment variable management
 (see `skills/scripts/netlify-env.md`), which avoids CLI flag issues entirely.
 
+## Netlify Functions v2 URL Paths
+
+Netlify Functions v2 uses the `/api/` prefix, **not** `/.netlify/functions/`. Requests to
+`/.netlify/functions/<name>` will return 404 on Functions v2.
+
+- **Frontend code** must use `/api/<function-name>` for all function calls.
+- **curl verification** must also use `/api/`:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}" https://<site-url>/api/<function-name>
+```
+
+If you see 404 errors when testing deployed functions, check whether the URL uses the old
+`/.netlify/functions/` path and switch to `/api/`.
+
 ## DATABASE_URL Verification After Deploy
 
 After deployment, always verify the production API works before running full Playwright
 deployment tests. Use `curl` to test a backend endpoint:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>
+curl -s -o /dev/null -w "%{http_code}" https://<site-url>/api/<function-name>
 ```
 
 A 500 response typically means `DATABASE_URL` is not set on the Netlify site. Set it

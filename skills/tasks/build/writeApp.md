@@ -105,6 +105,11 @@ contexts (testing, deployment).
   explicitly. When curling endpoints manually, start the server the same way:
   `npx netlify dev --port 8888 --functions ./netlify/functions`.
 
+- All frontend code must use the `/api/` prefix for calling Netlify Functions (e.g.,
+  `fetch('/api/my-function')`). Do NOT use `/.netlify/functions/` — this path returns 404
+  with Netlify Functions v2. The `/api/` prefix is the standard for all function calls in
+  both development and production.
+
 - Netlify functions must not import `@neondatabase/serverless` directly. Instead, each app must
   have a shared `netlify/functions/db.ts` module that all functions import:
 

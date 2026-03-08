@@ -158,6 +158,32 @@ This pattern was needed across 3 spec files (7 tests) in one session, all involv
 that load data via useEffect and allow inline editing. When found in one component,
 proactively check all similar edit forms in the app.
 
+### Lazy locator invalidated by state change (capture-testid-before-click)
+Playwright lazy locators filtered by text (e.g., `hasText: /^Scheduled$/`) re-evaluate on
+every use. If a click changes the element's text (e.g., status changes from "Scheduled" to
+"Checked In"), subsequent locator uses fail because the filter no longer matches.
+
+**Diagnosis**: Test clicks a status-change button, then tries to interact with the same row
+using the original locator. The locator resolves to 0 elements because the text changed.
+
+**Fix**: Capture a stable identifier (like `data-testid`) before the click, then use that
+identifier for subsequent interactions:
+```ts
+// Before clicking status change:
+const row = page.locator('[data-testid^="patient-row-"]', { hasText: /^Scheduled$/ });
+const testId = await row.getAttribute('data-testid');
+
+// Click status change
+await row.getByRole('button', { name: 'Check In' }).click();
+
+// After status changes, use the stable testid:
+const updatedRow = page.getByTestId(testId!);
+await expect(updatedRow).toContainText('Checked In');
+```
+
+This pattern was needed across 3 spec files (5 tests) where status-change buttons altered
+the text that lazy locators depended on.
+
 ### Date.now() or shared identifiers across workers
 When parallel Playwright workers share a module-level `Date.now()` value for generating
 unique IDs (like test emails), all workers get the same value, causing collisions.

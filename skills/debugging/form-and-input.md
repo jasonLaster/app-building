@@ -49,7 +49,17 @@ will fail or do nothing.
 InspectElement shows the element is a `<button>` or `<div>`, not a `<select>`.
 
 **Fix**: Use click-based interactions for custom dropdowns: click the trigger, wait for the
-options panel, click the desired option.
+options panel, click the desired option. For assertions, use `getAttribute('data-value')`
+instead of `toHaveValue()`, since `toHaveValue()` only works on native form elements:
+```ts
+// Interact with custom dropdown:
+await page.getByTestId('status-select-trigger').click();
+await page.getByRole('option', { name: 'Active' }).click();
+
+// Assert selected value:
+const value = await page.getByTestId('status-select-trigger').getAttribute('data-value');
+expect(value).toBe('active');
+```
 
 ### CSS hover interactions not triggering in Replay Chromium
 CSS `group-hover:opacity-100` may not reliably trigger from Playwright's programmatic hover

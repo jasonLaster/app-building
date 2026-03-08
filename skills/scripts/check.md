@@ -25,7 +25,10 @@ all successful). It is the most reliable quality gate and should always be used 
 `npm run check` frequently fails on its first run due to lint errors or type issues introduced
 during development. This is expected behavior, not a blocking problem. When it fails:
 1. Read `logs/check.log` to identify the errors.
-2. Fix the reported issues in your source files.
+2. Fix the reported issues in your source files **immediately** — do not proceed with other
+   work (writing more components, running tests, etc.) until `npm run check` passes. Lint
+   errors like unused variables accumulate quickly if left unfixed, making later runs harder
+   to diagnose.
 3. Re-run `npm run check`.
 
 Do not treat a first-attempt failure as a sign that something is fundamentally wrong with the

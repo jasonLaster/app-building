@@ -297,7 +297,17 @@ failures (~45% of observed failures come from shared database state).
    example, check that the expected number of rows exists before performing add/delete
    operations, rather than relying on a previous test's side effects.
 
-9. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+9. **Weekend-safe seed data.** Seed data must include entries for the current day
+   regardless of day-of-week. Use relative date calculations (e.g., `new Date()`) rather
+   than hardcoded weekday dates. Tests that rely on "today's appointments" or similar
+   day-specific queries will fail on weekends if seed data only contains weekday entries.
+
+10. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
+    components (non-native `<select>`), tests must use click-based interaction patterns
+    (`click trigger → click option`), not `page.selectOption()`. Assertions should use
+    `getAttribute('data-value')` instead of `toHaveValue()`.
+
+11. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
