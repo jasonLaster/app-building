@@ -23,7 +23,10 @@ FAILING_TEST
 FINAL_CHANGESET
 ASSESSMENT (if present)
 
-Queue separate tasks to extract each suitable failure you find, using the `extractTestFailure.md` skill.
+Write a file `reports/extractTestFailure/<report-name>.md` with all the suitable failures you found and
+any other interesting results of the analysis.
+
+Then queue separate tasks to extract each of these failures, using the `extractTestFailure.md` skill.
 
 ## Suitable Failures
 
