@@ -5,6 +5,11 @@
 Runs typecheck and lint with autofix as a single command. This is the quality gate that must
 pass before every commit.
 
+## Reliability
+
+`npm run check` has a 100% success rate across 173 observed worker iterations (28 invocations,
+all successful). It is the most reliable quality gate and should always be used before commits.
+
 ## Usage
 
 - `package.json` entry: `"check": "tsx scripts/check.ts"`
@@ -20,7 +25,10 @@ pass before every commit.
 `npm run check` frequently fails on its first run due to lint errors or type issues introduced
 during development. This is expected behavior, not a blocking problem. When it fails:
 1. Read `logs/check.log` to identify the errors.
-2. Fix the reported issues in your source files.
+2. Fix the reported issues in your source files **immediately** — do not proceed with other
+   work (writing more components, running tests, etc.) until `npm run check` passes. Lint
+   errors like unused variables accumulate quickly if left unfixed, making later runs harder
+   to diagnose.
 3. Re-run `npm run check`.
 
 Do not treat a first-attempt failure as a sign that something is fundamentally wrong with the
@@ -56,6 +64,13 @@ Before running lint, verify that the app has an ESLint configuration file (`.esl
 
 Do NOT retry `npx eslint` expecting different results when the underlying issue is a missing
 configuration file. The "no config found" error will not resolve on its own.
+
+## TypeScript Checking Retry Limits
+
+Do not retry `npx tsc --noEmit` (or `npm run check`) more than 2–3 times for the same error.
+If it fails repeatedly with the same type errors, the issue is in the code, not a transient
+problem. If it appears to hang (no output for 60+ seconds), check for configuration issues
+in `tsconfig.json` (e.g., incorrect `jsx` flag, missing `include` paths) rather than retrying.
 
 ## Faster Type-Only Checks
 
@@ -96,6 +111,21 @@ When `npm run check` fails, read `logs/check.log` to determine which step failed
 During iterative development, typecheck/lint failures are expected. They are part of the
 normal build-fix-check cycle. Focus on fixing the errors rather than treating each failure
 as a problem with the check script itself.
+
+## Troubleshooting Multi-Attempt Failures
+
+`npm run check` has a ~20% multi-attempt rate. Common reasons for needing retries:
+
+- **Cascading type errors**: A single root-cause type error produces many downstream errors.
+  Fix the first `error TS` line and re-run — most other errors often disappear.
+- **Lint autofix conflicts with types**: `eslint --fix` may rewrite code in a way that
+  introduces new type errors. If check fails after lint autofix, re-run — the second pass
+  usually catches both.
+- **Stale build artifacts**: If errors reference files you've already fixed, delete
+  `node_modules/.cache` and re-run.
+
+When `npm run check` fails, always fix and re-run rather than switching to manual
+`npx tsc` / `npx eslint` invocations, which may use different configs.
 
 ## Common Issues
 

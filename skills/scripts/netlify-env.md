@@ -34,6 +34,21 @@ curl -s -X PATCH "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG
 - `NETLIFY_ACCOUNT_SLUG`: The Netlify account slug (used in the API path).
 - `NETLIFY_SITE_ID`: The site to set the variable on (passed as query parameter).
 
+### Verify an environment variable
+
+```bash
+curl -s "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env/DATABASE_URL?site_id=${NETLIFY_SITE_ID}" \
+  -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN"
+```
+
+### Canonical workflow
+
+1. Read the value from `.env` (or `deployment.txt`).
+2. Set via `curl -X POST` (for new variables) or `curl -X PATCH` (for existing ones).
+3. Verify via `curl -X GET` to confirm the value was set correctly.
+
+Always use POST for initial creation. Using PATCH on a non-existent variable returns an error.
+
 ## Notes
 
 - Do NOT use `npx netlify env:set` or `npx netlify env:get` — these commands fail in contexts

@@ -42,6 +42,7 @@ curl -X POST https://test-failure-benchmark.netlify.app/.netlify/functions/failu
       "title": "Login button not visible after auth",
       "group_name": "app-building",
       "github_repository": "https://github.com/replayio/app-building",
+      "branch": "current-branch",
       "failing_changeset": "abc1234",
       "fixed_changeset": "def5678",
       "steps_to_reproduce": "Follow reproduceFailure.md skill for tests/<test-file>.ts",

@@ -22,6 +22,12 @@ In particular, always use `npx replayio install` (NOT `npx playwright install ch
 browser setup — the Replay browser installs to `~/.replay/runtimes/` and does not require
 the Playwright browsers path workaround.
 
+**Quick pre-checks** (these address the most common test failure causes):
+1. Kill stale dev servers: `pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`
+2. Verify dependencies: `ls node_modules/.package-lock.json` — if missing, run `npm install`.
+3. Run with a timeout mindset: if a test hangs, it's likely a stale process or port conflict,
+   not a test bug.
+
 ## Behavior
 
 1. **Kill stale processes**: Kill any leftover `netlify` or `vite` dev server processes from
@@ -128,6 +134,17 @@ Instead, use this approach in order:
 3. **Use Replay MCP tools** — if error-context files are insufficient, inspect the uploaded
    recording to diagnose the root cause. This is consistently the most effective approach
    for understanding failures.
+
+## Test Retry Limits
+
+When a test fails, do not blindly retry more than 3 times. After 3 failed runs, stop and
+investigate the root cause rather than hoping for a different result. Common reasons for
+persistent failures:
+- **ECONNREFUSED on port 8888**: The dev server has a port conflict from a stale process,
+  not a transient error. Kill stale processes (`pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null`)
+  and verify the port is free before retrying. Do not retry the test without clearing the port.
+- **Assertion mismatches repeating identically**: The test or app has a bug — retrying won't help.
+- **Timeouts on the same step**: Usually a stale process or resource issue, not flakiness.
 
 ## Timeout-Prone Tests
 

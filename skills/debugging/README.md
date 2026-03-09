@@ -37,6 +37,10 @@ sessions with 100% success rate). When the UI renders but shows wrong data or ti
 waiting for content, `NetworkRequest` as a second step confirms whether the backend
 returned the expected data.
 
+**Minimal tool sequence**: When Replay is needed, `PlaywrightSteps` alone was sufficient in
+80% of cases. Only escalate to `Screenshot` or `Evaluate` when step-level information is
+insufficient (e.g., CSS/layout issues requiring visual confirmation).
+
 ## Cluster-Aware Debugging
 
 When 3+ failures share a spec file or show similar error patterns, check for a shared root
@@ -89,10 +93,11 @@ tool sequence in the relevant debugging guide below.
 
 ## No-Replay Diagnostic Patterns
 
-**Error output first**: 98% of observed failures were diagnosed from Playwright error output
-alone (DOM snapshots, assertion messages, count mismatches). Always check error output before
-reaching for Replay. Reserve Replay for failures where the page state at failure time is
-ambiguous or the failure involves complex async timing.
+**Error output first**: For data-contamination, race-condition, strict-mode, and
+seed-data-mismatch categories, diagnose from error output before using Replay. In observed
+sessions, 100% of Replay uses for these categories were unnecessary — the error output alone
+sufficed. Reserve Replay for CSS/layout issues, complex race conditions where timing is
+ambiguous, and backend bugs where error output doesn't explain *why* the wrong data exists.
 
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 
@@ -106,11 +111,21 @@ always to add more specific selectors. Common fixes:
 Replay is not needed — the error message tells you exactly how many elements matched and
 what the ambiguous locator was.
 
-### Replay decision tree for data issues
-Use Replay when error output doesn't explain *why* the wrong data exists (e.g., unexpected
-records from an unknown source, API returning data that shouldn't be there). Skip Replay when
-error output shows a clear count mismatch with an obvious accumulation pattern (e.g., "expected
-3, got 30+" — this is almost certainly missing cleanup).
+### Replay decision heuristic
+**Skip Replay** when error output contains:
+- Strict mode violations (locator resolved to N elements)
+- Exact value mismatches shown in snapshots (e.g., "10.0000 mg/kg" vs "10 mg/kg")
+- "Element not found" with a clear locator name
+- Count mismatches with obvious accumulation (e.g., "expected 3, got 30+")
+
+**Use Replay** when:
+- PUT/POST request body has unexpected or stale values (use NetworkRequest)
+- Tests pass individually but fail together (timing-dependent interference)
+- Timing-dependent UI behavior where error output doesn't explain *why*
+- API returning data that shouldn't exist (unknown source)
+
+In observed sessions, 40% of Replay uses were unnecessary — the error output alone sufficed.
+Apply this heuristic to avoid speculative Replay usage on simple issues.
 
 ### Data contamination triage (most common failure category — 37.5% of all failures)
 When Playwright error output shows expected count X but received Y (e.g., "expected 3 but

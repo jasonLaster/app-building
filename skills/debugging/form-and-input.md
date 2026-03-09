@@ -49,7 +49,17 @@ will fail or do nothing.
 InspectElement shows the element is a `<button>` or `<div>`, not a `<select>`.
 
 **Fix**: Use click-based interactions for custom dropdowns: click the trigger, wait for the
-options panel, click the desired option.
+options panel, click the desired option. For assertions, use `getAttribute('data-value')`
+instead of `toHaveValue()`, since `toHaveValue()` only works on native form elements:
+```ts
+// Interact with custom dropdown:
+await page.getByTestId('status-select-trigger').click();
+await page.getByRole('option', { name: 'Active' }).click();
+
+// Assert selected value:
+const value = await page.getByTestId('status-select-trigger').getAttribute('data-value');
+expect(value).toBe('active');
+```
 
 ### CSS hover interactions not triggering in Replay Chromium
 CSS `group-hover:opacity-100` may not reliably trigger from Playwright's programmatic hover
@@ -108,3 +118,31 @@ actually click.
 
 *Example*: STP-WH-07 webhook toggle. The testid was on the hidden `sr-only` input.
 Moving it to the visible label fixed the timeout.
+
+### Form populate overwrites user edits
+When a form field shows old/stale values after user input (e.g., editing a price but the old
+price reappears), the root cause is usually a React `useEffect` that re-runs when Redux state
+or props update, overwriting user edits with fetched data.
+
+**Diagnosis with Replay**: `PlaywrightSteps` shows the fill action succeeded. `NetworkRequest`
+reveals the timing of API responses vs. user input — a GET response arriving after the user
+edited the field triggers a state update that re-fires the populate effect. `Screenshot` at
+the assertion point confirms the field reverted to the old value.
+
+**Tool sequence**: `PlaywrightSteps → NetworkRequest → Screenshot`
+
+**Fix**: Add a `formPopulated` or `editInitialized` ref guard in the component. Set it to
+`true` after the first populate, and skip the effect body on subsequent runs:
+```ts
+const formPopulated = useRef(false);
+useEffect(() => {
+  if (formPopulated.current) return;
+  if (data) {
+    form.reset(data);
+    formPopulated.current = true;
+  }
+}, [data]);
+```
+
+*Example*: Contract form edit test — PUT body contained old price because useEffect re-ran
+when Redux state reference changed after the GET response, overwriting the user's edit.

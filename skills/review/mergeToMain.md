@@ -62,23 +62,32 @@ git checkout -b <report-name>-merge origin/main
 
 ### 5. Apply changes from the source branch
 
-For each included path, check out the version from the source branch:
+**Important**: Do NOT wholesale copy directories from the source branch (e.g., `git checkout $SOURCE_BRANCH -- skills/`).
+That would revert changes merged to main by other branches. Instead, apply only the **diff since the merge base**.
+
+For skills/ and scripts/ (directories that multiple branches may modify), apply the branch's changes as a patch:
 
 ```bash
-git checkout $SOURCE_BRANCH -- skills/ scripts/ AGENTS.md CLAUDE.md \
+git diff $MERGE_BASE $SOURCE_BRANCH -- skills/ scripts/ | git apply --3way
+```
+
+For single-ownership files, checkout from the source branch directly:
+
+```bash
+git checkout $SOURCE_BRANCH -- AGENTS.md CLAUDE.md \
   Dockerfile .dockerignore .gitignore .rgignore .env.example \
   package.json package-lock.json tsconfig.json README.md
 git checkout $SOURCE_BRANCH -- "reports/<report-name>.md"
 ```
 
-If a file was deleted on the source branch, remove it on this branch too.
-Use the diff to identify deletions:
+Handle new files and deletions from the diff:
 
 ```bash
 git diff --name-status $MERGE_BASE $SOURCE_BRANCH -- skills/ scripts/
 ```
 
-Files with status `D` should be `git rm`'d.
+- Files with status `A` (added) that weren't captured by the patch: `git checkout $SOURCE_BRANCH -- <path>`
+- Files with status `D` (deleted): `git rm <path>`
 
 ### 6. Delete excluded paths
 

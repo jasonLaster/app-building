@@ -186,6 +186,11 @@ for the full script specification). Do NOT manually run playwright or start dev 
 - Read the log file only when you need to diagnose failures.
 - Tests MUST run in parallel with multiple workers (use `fullyParallel: true` in playwright config).
 
+**Retry limit**: Limit test re-runs to 3 per failing test before investigating the root cause.
+Test failures during development are expected (test-fix-retest cycle), but re-running the same
+test more than 3 times without changing approach indicates the fix strategy is wrong. Stop,
+analyze the failure more carefully (use Replay if available), and try a different approach.
+
 ## Debugging
 
 When tests fail, you MUST follow this process for each distinct failure. Every step is
@@ -283,16 +288,34 @@ failures (~45% of observed failures come from shared database state).
 5. **Relative or data-independent assertions.** Tests that verify data after mutations must
    query current state before the action and assert relative changes, not absolute values.
 
-6. **Create test data via API, not seed reliance.** Every spec file should create its own
-   test data via API calls in `beforeEach`/`beforeAll` rather than relying on seed data.
-   This is the single highest-impact isolation improvement — 57.8% of observed failures
-   came from data contamination when tests shared seed data.
+6. **Distinct test data records per test.** Each test must operate on its own database
+   record (vendor, PO, delivery, etc.) rather than sharing records across tests. Every spec
+   file should create its own test data via API calls in `beforeEach`/`beforeAll` rather
+   than relying on seed data. This is the single highest-impact isolation improvement —
+   57.8% of observed failures came from data contamination when tests shared seed data.
+   In one session, this single change would have prevented 10+ data-contamination failures
+   across receive-delivery, vendor-detail, and PO-related spec files.
 
 7. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
    cascade, causing failures in later tests that reference them.
 
-8. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+8. **Pre-test state verification in serial suites.** Each test in a `test.describe.serial`
+   block should verify its preconditions rather than assuming state from prior tests. For
+   example, check that the expected number of rows exists before performing add/delete
+   operations, rather than relying on a previous test's side effects.
+
+9. **Weekend-safe seed data.** Seed data must include entries for the current day
+   regardless of day-of-week. Use relative date calculations (e.g., `new Date()`) rather
+   than hardcoded weekday dates. Tests that rely on "today's appointments" or similar
+   day-specific queries will fail on weekends if seed data only contains weekday entries.
+
+10. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
+    components (non-native `<select>`), tests must use click-based interaction patterns
+    (`click trigger → click option`), not `page.selectOption()`. Assertions should use
+    `getAttribute('data-value')` instead of `toHaveValue()`.
+
+11. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
@@ -320,6 +343,13 @@ failures (~45% of observed failures come from shared database state).
   "unnecessary" helpers), always run the affected tests *before* committing the removal to
   confirm the change is safe. Cleanup code that looks redundant may be essential for test
   isolation.
+
+- **Use exact text matching for option selection.** When selecting dropdown options or matching
+  text that contains common words (e.g., "Monthly", "Active"), always use exact matching to
+  avoid strict-mode violations from substring collisions. Use `{ exact: true }` or regex
+  anchors: `getByText('Monthly', { exact: true })` or `hasText: /^Monthly$/`. Without exact
+  matching, "Monthly" matches both "Monthly" and "Bi-Monthly", causing Playwright strict-mode
+  errors.
 
 - All browsers must run headless. Never use Xvfb, never set `DISPLAY`, never use the `replayio record`
   CLI (it launches a headed browser). Use `@replayio/playwright` for recordings.
@@ -445,10 +475,22 @@ failures (~45% of observed failures come from shared database state).
   ISO timestamps (`2026-01-15T00:00:00.000Z`) or always `YYYY-MM-DD` strings, not a mix
   of both. Mixed formats cause frontend parsing issues when components expect one format
   but receive the other.
+- **Format currency values with `.toFixed(2)`.** All currency display components must format
+  values with 2 decimal places (e.g., `175.00` not `175`). Multiple test failures arise from
+  assertions expecting formatted currency strings. Apply `.toFixed(2)` or equivalent formatting
+  at the display layer for any monetary amount.
+- **Use `type="text" inputMode="decimal"` for currency inputs from the start.** Avoid
+  `<input type="number">` for currency fields — it strips formatting and causes issues with
+  decimal display. Using `type="text"` with `inputMode="decimal"` provides the numeric
+  keyboard on mobile while allowing full control over formatting. Converting from `type="number"`
+  to `type="text"` mid-stream breaks existing test expectations.
 - Seed data should use relative dates (e.g., "current month minus 1") rather than hardcoded
   month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
   fail when run in a different month. Either make seed data date-relative or make test
   assertions date-aware.
+- **Verify directories before navigating.** Before using `cd` to navigate to an app directory,
+  verify it exists with `test -d` or `ls`. Directory navigation failures (`cd` to nonexistent
+  paths) are the most common command failure across all worker iterations.
 - Avoid redundant file exploration commands (`ls /repo/apps/`, `find ... -type f`, etc.)
   across test runs. Once you know the project structure, do not re-discover it in every
   iteration. Use the Glob and Grep tools instead of shell commands for file operations.
@@ -480,6 +522,12 @@ failures (~45% of observed failures come from shared database state).
   Always use `data-testid` attributes instead. Raw element selectors break when the component's
   HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
   timeouts that are hard to diagnose.
+- **Add useEffect editing guards for editable forms.** Any React form that loads data via
+  useEffect and allows editing must include an `isEditing` state guard that prevents useEffect
+  from overwriting user input during editing. Set `isEditing = true` when the user begins
+  editing, and skip the data-loading useEffect when `isEditing` is true. This pattern was
+  needed across 3 spec files (7 tests) in one session — apply it proactively to all edit
+  forms during initial component development.
 - Ensure tests don't leak state between runs. Data-contamination failures occur when a prior
   test's API calls complete after the next test has started, polluting the data state. Use
   `test.describe.serial` for tests that share mutable state, or ensure API calls are fully

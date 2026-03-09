@@ -14,24 +14,25 @@ For each log file, produce a markdown file with the following structure:
 NOTES: <brief summary of what this log was about>
 
 ## Test Failures
-TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (5+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests.>
+TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (2+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests. A test already counted in a cluster should NOT have a separate entry unless it has a distinct, independent root cause — avoid double-counting. IMPORTANT: TEST_FAILURES must equal the number of failure/cluster entries in the file — if there are 3 individual failures and 2 cluster entries, TEST_FAILURES should be 5.>
 TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 if all passed on first run>
 
 For each test failure:
 
 ### Failure: <test name>
-FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, backend-bug, date-format, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other> (use "date-format" for date/timestamp format mismatches between PostgreSQL ISO timestamps and expected YYYY-MM-DD strings — this is the most common backend-bug subcategory)
+FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout, race-condition, backend-bug, date-format, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other> (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual. Use "date-format" for date/timestamp format mismatches between PostgreSQL ISO timestamps and expected YYYY-MM-DD strings.)
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, one of: error-output-sufficient, no-recording, code-inspection, out-of-scope, infrastructure-failure, upload-failed, other. Add a brief clarification after the enum value if needed (e.g., "error-output-sufficient — constraint violation pointed to missing cleanup")>
+DIAGNOSED_FROM: <REQUIRED when REPLAY_USED is no — capture the diagnostic source that was sufficient: one of: error-output, page-snapshot, error-context-snapshot, code-inspection. This field is critical for understanding diagnostic source effectiveness. Must not be omitted for non-Replay failures.>
 RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failure, or no recording was created)
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
 DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
-DEBUGGING_SUCCESSFUL: yes/no/partial (only meaningful when DEBUGGING_ATTEMPTED is yes)
-REPLAY_NECESSARY: yes/no/unknown (REQUIRED when REPLAY_USED is yes — was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit when REPLAY_USED is no.)
+DEBUGGING_SUCCESSFUL: yes/no/partial (REQUIRED when DEBUGGING_ATTEMPTED is yes — must not be omitted. Indicates whether the debugging effort succeeded.)
+REPLAY_NECESSARY: yes/no/unknown (STRICTLY REQUIRED when REPLAY_USED is yes — this field MUST NOT be omitted. Was Replay actually needed to diagnose the issue? "no" means error output alone would have sufficed. "unknown" if unclear. Omit ONLY when REPLAY_USED is no. Analyses missing this field when REPLAY_USED is yes are incomplete and must be corrected.)
 ROOT_CAUSE_CLUSTER: <optional — when multiple failures share a single root cause, use a shared cluster ID (e.g. "replay-browser-timeout", "missing-env-var"). IMPORTANT: Always use this field when failures are fixed by the same changeset, so the synthesizer can explicitly link them rather than inferring from matching SHAs. Omit if this failure has a unique root cause.>
 SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session, not from the original code. Helps measure fix quality.)
-FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (which phase of the workflow produced this failure)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED — must not be omitted. Which phase of the workflow produced this failure. Use the phase of the task that triggered the test run — e.g., if failures occur during a checkDirectives task, use "checkDirectives" even if the tests themselves are the same ones run during fixTests. Mapping: FixTests tasks → fixTests, FixViolation/checkDirectives tasks → checkDirectives, JourneyQA tasks → other.)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the fix was to test code, app code, or both. "none" if not yet resolved. Helps identify whether the testing process or the app-building process needs improvement)
 FIX_ITERATIONS: <number of test re-runs needed to fully resolve this failure, 0 if not yet resolved, 1 if resolved on first attempt. REQUIRED — captures debugging difficulty. Failures taking 4+ iterations indicate complex root causes that may warrant process improvements.>
 
@@ -50,8 +51,10 @@ If a log has no test failures, just write the Summary section with TEST_FAILURES
 
 ### Clustered Failures
 
-When 5+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
-single cluster entry instead of repeating the full template for each. The cluster heading
+When 2+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
+single cluster entry instead of repeating the full template for each. Use the cluster format
+for any group of 2 or more failures with a shared root cause — the 5+ threshold is not
+required. The cluster heading
 name (e.g., `Failure Cluster: neon-inherited-data`) serves as the cluster ID when using
 this collapsed format — an explicit `ROOT_CAUSE_CLUSTER` field is not needed in each entry:
 
@@ -64,6 +67,9 @@ REPLAY_NOT_USED_REASON: <reason>
 RECORDING_AVAILABLE: yes/no
 DEBUGGING_ATTEMPTED: yes/no
 DEBUGGING_SKIPPED_REASON: <reason if not attempted>
+DEBUGGING_SUCCESSFUL: yes/no/partial (REQUIRED when DEBUGGING_ATTEMPTED is yes — must not be omitted, same as individual failure entries. Avoids gaps in the debugging success rate calculation.)
+SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the current session)
+FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED — must not be omitted, same as individual failure entries)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 AFFECTED_TESTS: <comma-separated list of test names>
@@ -113,6 +119,10 @@ Compile all analysis files into a single report with these sections:
 - Failure resolution type distribution (breakdown by FAILURE_RESOLUTION_TYPE — e.g., test-code: 31, app-code: 5, both: 6, none: 2. Indicates whether the testing process or app-building process needs improvement)
 - Test Isolation Score (percentage of failures attributable to test isolation issues: data-contamination + strict-mode + seed-data-mismatch categories combined. A high score (>50%) signals that test isolation is the dominant failure mode and warrants dedicated process improvements)
 - Total affected tests (total number of individual tests affected, including all tests within clusters. Complements the distinct failure count — e.g., 15 distinct failures may affect 40 total tests when clusters are expanded)
+- Pre-existing failure rate (percentage and count of PRE_EXISTING=yes failures out of total failures. A high rate indicates the test suite is effective at finding real issues; a low rate may indicate the test-writing process is introducing bugs)
+- Replay decision quality (ratio of REPLAY_NECESSARY=no among REPLAY_USED=yes failures. A high ratio suggests Replay is being used speculatively for issues that could have been diagnosed from error output alone — indicates a process improvement opportunity)
+- Diagnostic source effectiveness (breakdown of DIAGNOSED_FROM values among successfully resolved failures — e.g., error-output: 25, page-snapshot: 10, code-inspection: 2. Identifies which information sources are most valuable for non-Replay debugging and can inform when to skip Replay)
+- Fix iteration difficulty distribution (breakdown of FIX_ITERATIONS values — e.g., 1: 20, 2: 8, 3: 3, 4+: 2. Failures taking 4+ iterations are outliers that warrant process investigation. Include the specific test names for 4+ iteration failures)
 
 ### 2. Failure Table
 A markdown table with columns:
@@ -151,3 +161,16 @@ Target these files with specific, actionable recommendations:
 - `skills/debugging/*.md` — New patterns, tool sequences, or categories to add
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
+
+### 5. Replay Fixes Table
+
+For each test failure where Replay was used and the test failure was successfully fixed,
+add an entry with the following details copied verbatim from the analysis file:
+
+ULTRA IMPORTANT: Follow this format exactly and make sure to include this table as it will be used
+by downstream processes. Do not modify these instructions.
+
+INITIAL_CHANGESET
+FAILING_TEST
+FINAL_CHANGESET
+ASSESSMENT
