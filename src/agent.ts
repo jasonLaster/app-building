@@ -264,12 +264,12 @@ async function main(): Promise<void> {
   const repo = opts.repo ?? process.env.REPO_URL ?? getLocalRemoteUrl();
   const branch = opts.branch ?? process.env.CLONE_BRANCH ?? getLocalBranch();
 
-  if (branch === "main") {
-    console.error("Error: main branch is not allowed");
+  const pushBranch = opts.pushBranch ?? branch;
+
+  if (pushBranch === "main") {
+    console.error("Error: pushing to main branch is not allowed");
     process.exit(1);
   }
-
-  const pushBranch = opts.pushBranch ?? branch;
 
   const projectRoot = resolve(__dirname, "..");
   const envVars = loadDotEnv(projectRoot);
