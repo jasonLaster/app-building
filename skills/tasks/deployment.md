@@ -72,13 +72,21 @@ A deployment that serves HTTP 200 is not sufficient — the app must display rea
 
 Before running the full Playwright deployment test, verify that API endpoints are responding
 correctly using `curl`. This catches environment variable mismatches (e.g., missing `DATABASE_URL`)
-much faster than a full test suite:
+much faster than a full test suite.
+
+Freshly deployed Netlify Functions may return 502 during cold start. Use a retry loop to
+handle propagation delay:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>
+for i in 1 2 3; do
+  STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>)
+  [ "$STATUS" = "200" ] && echo "API healthy" && break
+  echo "Attempt $i: got $STATUS, retrying in 3s..."
+  sleep 3
+done
 ```
 
-If this returns 500, fix the environment variables before proceeding. See
+If this returns 500 on all attempts, fix the environment variables before proceeding. See
 `skills/scripts/deploy-verification.md` for the full verification checklist.
 
 ### Verify Authentication (If Applicable)

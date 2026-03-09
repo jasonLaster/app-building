@@ -23,6 +23,13 @@ module-not-found or missing dependency error, run `npm install` and retry.
 
 - **stdout**: Formatted conversation output showing the full log contents.
 
+## Best Practice
+
+`npm run read-log` is the standard tool for all log analysis tasks. Avoid using raw `grep`
+on log files — the log format is inconsistent and grep patterns frequently miss matches or
+produce false positives. The read-log script handles JSON parsing and ANSI escape codes
+correctly, producing reliable, readable output.
+
 ## Common Issues
 
 - **Missing dependencies**: If `npm run read-log` fails with a module resolution error,

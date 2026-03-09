@@ -166,7 +166,8 @@ Do NOT manually check each prerequisite individually — this wastes 3–8 comma
 reinventing the same sequence. Run all pre-flight steps once as a batch:
 
 ```bash
-pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
+pgrep -f "netlify dev" && pkill -f "netlify dev" || true
+pgrep -f "vite" && pkill -f "vite" || true
 grep NEON_PROJECT_ID .env || echo "ERROR: NEON_PROJECT_ID not set"
 ls ~/.replay/runtimes/chrome-linux/chrome 2>/dev/null || npx replayio install
 ls node_modules/@neondatabase/serverless 2>/dev/null || npm install --legacy-peer-deps
@@ -524,6 +525,19 @@ failures (~45% of observed failures come from shared database state).
   Always use `data-testid` attributes instead. Raw element selectors break when the component's
   HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
   timeouts that are hard to diagnose.
+- **Trigger onBlur after fill() for blur-persisted forms.** When testing form components that
+  use `onBlur` for persistence (auto-save on blur), Playwright `fill()` alone won't trigger
+  the save. Always add `.blur()` after `.fill()` calls in these cases:
+  ```ts
+  await page.locator('#field').fill('value');
+  await page.locator('#field').blur();
+  ```
+
+- **Use ESM-compatible __dirname.** If test helpers or server code use `__dirname`, ensure
+  ESM-compatible alternatives are used: `import.meta.dirname` (Node 21.2+) or
+  `path.dirname(fileURLToPath(import.meta.url))`. CommonJS `__dirname` is not available in
+  ESM modules and will crash at runtime.
+
 - **Add useEffect editing guards for editable forms.** Any React form that loads data via
   useEffect and allows editing must include an `isEditing` state guard that prevents useEffect
   from overwriting user input during editing. Set `isEditing = true` when the user begins
@@ -541,6 +555,10 @@ failures (~45% of observed failures come from shared database state).
 - Any test that creates records (orders, customers, etc.) should include a `beforeEach`
   cleanup helper (e.g., `deleteAllOrders()`) to prevent data accumulation across tests.
   Add this from the start when writing tests — don't wait for contamination failures.
+- **Reset global settings in beforeEach.** Since settings are typically a single-row table,
+  any spec that tests settings modifications (business name, preferences, etc.) should reset
+  settings to known defaults in a `beforeEach` hook via API call. Otherwise, earlier tests
+  that modify settings will contaminate later tests in the same file.
 - Any test that deletes all records (e.g., empty state tests) must be in a
   `test.describe.serial` block at the end of the describe. Destructive tests placed earlier
   corrupt state for subsequent tests in the same file.

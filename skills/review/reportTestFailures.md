@@ -24,7 +24,7 @@ FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, CSS/layout,
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, one of: error-output-sufficient, no-recording, code-inspection, out-of-scope, infrastructure-failure, upload-failed, other. Add a brief clarification after the enum value if needed (e.g., "error-output-sufficient — constraint violation pointed to missing cleanup")>
-DIAGNOSED_FROM: <REQUIRED when REPLAY_USED is no — capture the diagnostic source that was sufficient: one of: error-output, page-snapshot, error-context-snapshot, code-inspection. This field is critical for understanding diagnostic source effectiveness. Must not be omitted for non-Replay failures.>
+DIAGNOSED_FROM: <REQUIRED for ALL failures (both REPLAY_USED=yes and REPLAY_USED=no) — capture the diagnostic source that was sufficient or would have been sufficient: one of: error-output, page-snapshot, error-context-snapshot, code-inspection, replay-necessary. Use "replay-necessary" only when Replay was genuinely needed (REPLAY_NECESSARY=yes). For REPLAY_USED=yes with REPLAY_NECESSARY=no, use the source that would have sufficed (e.g., error-output). This field is critical for understanding diagnostic source effectiveness and must not be omitted.>
 RECORDING_AVAILABLE: yes/no (no = recording upload failed, infrastructure failure, or no recording was created)
 DEBUGGING_ATTEMPTED: yes/no (no = failure was only identified/discovered, no debugging was done — e.g. initial discovery runs)
 DEBUGGING_SKIPPED_REASON: <if DEBUGGING_ATTEMPTED is no, explain why — e.g. "pre-existing and out of scope", "infrastructure failure with no recording", "transient timeout, retried successfully". Omit if DEBUGGING_ATTEMPTED is yes.>
@@ -72,7 +72,7 @@ SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the
 FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED — must not be omitted, same as individual failure entries)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
-DIAGNOSED_FROM: <REQUIRED — same as individual failure entries. One of: error-output, page-snapshot, error-context-snapshot, code-inspection. Must not be omitted — needed for diagnostic source effectiveness analysis.>
+DIAGNOSED_FROM: <REQUIRED — same as individual failure entries. One of: error-output, page-snapshot, error-context-snapshot, code-inspection, replay-necessary. Must not be omitted — needed for diagnostic source effectiveness analysis.>
 FIX_ITERATIONS: <REQUIRED — same as individual failure entries. Number of test re-runs needed to fully resolve this cluster. Must not be omitted — needed for difficulty analysis.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
@@ -92,7 +92,7 @@ failure template:
 ```
 ## Infrastructure Failures
 INFRA_FAILURE_COUNT: <count>
-INFRA_CATEGORY: <socket-timeout | navigation-timeout | network-error | other>
+INFRA_CATEGORY: <socket-timeout | navigation-timeout | network-error | recording-upload-failure | other>
 AFFECTED_TESTS: <comma-separated list or "all tests in <spec file>">
 RECORDING_AVAILABLE: no
 NOTES: <brief description of the infrastructure issue>
@@ -102,6 +102,12 @@ NOTES: <brief description of the infrastructure issue>
 Statistics failure counts. They are reported separately. The Summary Statistics section should
 include an "Infrastructure failure events" row showing the count of infrastructure events and
 total affected tests, making it explicit that these are excluded from the main failure metrics.
+
+**Scope**: Infrastructure failures include not only pre-test issues (socket timeouts, navigation
+failures) but also post-test issues like recording upload failures (e.g., "entity too large"
+errors). When a test passes but its recording cannot be uploaded, this is an infrastructure
+failure affecting debugging capability, not a test failure. Categorize it under infrastructure
+with `INFRA_CATEGORY: recording-upload-failure`.
 
 ## Report Synthesis
 

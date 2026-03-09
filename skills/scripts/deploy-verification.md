@@ -27,14 +27,22 @@ curl -s -X POST "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}
 
 ### 2. Verify API endpoints return 200
 
-Test at least one backend endpoint to confirm the database connection works:
+Test at least one backend endpoint to confirm the database connection works. Freshly deployed
+Netlify Functions may return 502 during cold start (propagation delay). Use a retry loop
+instead of failing immediately on the first attempt:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>
+for i in 1 2 3; do
+  STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<function-name>)
+  [ "$STATUS" = "200" ] && echo "API healthy" && break
+  echo "Attempt $i: got $STATUS, retrying in 3s..."
+  sleep 3
+done
 ```
 
-If this returns 500, the `DATABASE_URL` is likely not set or is incorrect. Do not proceed to
-deployment tests until API endpoints respond successfully.
+If all 3 attempts return 500, the `DATABASE_URL` is likely not set or is incorrect. If all
+return 502, the function may still be propagating — wait 10–15 seconds and retry. Do not
+proceed to deployment tests until API endpoints respond successfully.
 
 ### 3. Run deployment tests
 
