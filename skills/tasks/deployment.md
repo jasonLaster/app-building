@@ -81,6 +81,22 @@ curl -s -o /dev/null -w "%{http_code}" https://<site-url>/.netlify/functions/<fu
 If this returns 500, fix the environment variables before proceeding. See
 `skills/scripts/deploy-verification.md` for the full verification checklist.
 
+### Verify Authentication (If Applicable)
+
+If the app has login/signup functionality, verify that password hashes in the production
+database match expected values after seeding. A common post-deploy failure is seed data using
+plaintext passwords instead of bcrypt hashes, or hash rounds mismatching between seed and
+auth code. Test the login endpoint with `curl` before running Playwright tests:
+
+```bash
+curl -s -X POST https://<site-url>/.netlify/functions/auth \
+  -H "Content-Type: application/json" \
+  -d '{"email":"<seed-email>","password":"<seed-password>"}'
+```
+
+If login returns 401 or 500, check the seed script's password hashing and the auth function's
+hash comparison. Fix before proceeding to Playwright tests.
+
 ### Playwright Deployment Test
 
 The deployment test lives at `tests/deployment.spec.ts`, separate from the integration tests.

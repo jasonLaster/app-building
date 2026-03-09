@@ -20,6 +20,14 @@ all successful). It is the most reliable quality gate and should always be used 
   `tsconfig.json` is used and avoids resolution issues.
 - Example: `cd /repo/apps/SalesCRM && npm run check`
 
+## Proactive Cleanup Before Running
+
+Before running `npm run check`, proactively clean up unused imports and variables from files
+you just edited. The most common check failure (~80% of lint failures) is `no-unused-vars` /
+`@typescript-eslint/no-unused-vars` from imports or variables left behind during refactoring.
+Scanning your recent edits for stale imports before running the check saves a full
+fail-fix-rerun cycle.
+
 ## First-Attempt Failures Are Normal
 
 `npm run check` frequently fails on its first run due to lint errors or type issues introduced

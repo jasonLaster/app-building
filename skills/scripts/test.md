@@ -152,6 +152,24 @@ When tests consistently time out under the Replay Chromium browser (which adds 2
 use `test.slow()` at the top of the test body to triple Playwright's default timeout. This is
 preferable to increasing `actionTimeout` globally, since it only affects known slow tests.
 
+## Standard Test Execution Pattern
+
+Follow this iterative pattern when running tests. This is the proven approach across 100+
+worker iterations:
+
+1. **Pre-flight**: Follow `skills/scripts/preflight.md` (kill stale processes, verify env,
+   clear recordings). Do this once per test session, not before every individual run.
+2. **Run tests**: `npm run test tests/<spec-file>.spec.ts`
+3. **On failure**: Read `test-results/*/error-context.md` files to identify which tests
+   failed and why. Do NOT re-run without understanding the failure.
+4. **Fix and re-run**: Fix the identified issue in app or test code, then re-run.
+5. **Maximum 3 retries**: If the same test fails 3 times, stop and investigate the root
+   cause rather than hoping for a different result. Use Replay MCP tools on the uploaded
+   recording for deeper analysis.
+6. **When to file a bug vs. keep fixing**: If the failure is in test code (wrong selector,
+   hardcoded count, missing await), fix it. If the failure reveals an app bug that requires
+   significant refactoring, file it as a bug report and move on.
+
 ## Test Writing Guidelines
 
 For guidance on writing robust tests that work with this test script, see:

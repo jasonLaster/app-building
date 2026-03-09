@@ -169,6 +169,21 @@ useEffect(() => {
 
 This pattern resolved useEffect overwrite issues that took 5+ iterations to diagnose in
 observed sessions.
+### API timing race condition (NetworkRequest → Logpoint sequence)
+For race conditions involving async state management (useEffect + API response timing), where
+error output only shows the symptom (wrong value) but not the cause (when/why state was
+overwritten), use this specific tool sequence:
+
+1. **`NetworkRequest`** — Trace request/response timing to identify when API responses arrived
+   relative to user actions. Look for responses that arrive after state has already been updated.
+2. **`Logpoint`** — Verify state management (refs, counters, guards) to confirm the overwrite
+   mechanism. Place logpoints on useEffect callbacks and onChange handlers to see the exact
+   ordering of state updates.
+
+This sequence was the most effective diagnostic for useEffect race conditions across observed
+sessions — it revealed the exact timing of API responses overwriting local state when error
+output alone only showed "expected X, got Y."
+
 ### Stale fetch race condition
 A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,
 search or filter). The first fetch's response arrives after the second and overwrites the UI

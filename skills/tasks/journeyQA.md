@@ -159,3 +159,13 @@ is required — do NOT skip or reorder steps.
   credentials.
 - Continue through the entire journey even if a problem is found early — there may be
   multiple issues.
+- When running Playwright journey tests, use `--workers=1` to prevent shared mutable state
+  conflicts. Journey tests modify production data (passwords, survey status, records) and
+  parallel execution causes cascading failures.
+- Before running journey tests, reset production DB state that prior tests may have mutated
+  (e.g., passwords changed back to defaults, survey/onboarding status reset). Use `npx tsx`
+  scripts with direct SQL to reset specific rows. Without this, one test changing a password
+  breaks login for all subsequent tests.
+- Do NOT use `npx playwright test --list` — it does not work with the Replay Playwright
+  integration and fails 100% of the time. Read the test files directly to discover
+  available tests.

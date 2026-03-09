@@ -8,8 +8,11 @@ and should be followed every time.
 
 ## Pre-Test Preflight
 
-Run these steps from the app directory **once** before each `npm run test` invocation.
-Do NOT repeat preflight steps multiple times — one invocation of each command is sufficient.
+Run these steps from the app directory **once** before each test session (not before every
+individual test suite run). Steps 2–3 (env/browser verification) do not change between runs
+within the same session — re-checking them before every test is redundant and wastes time.
+Step 1 (kill stale processes) and step 4 (clear recordings) should be run before each
+`npm run test` invocation.
 
 ### 1. Kill stale servers
 

@@ -72,8 +72,15 @@ SELF_INFLICTED: yes/no (yes = failure was introduced by a fix attempt during the
 FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other> (REQUIRED — must not be omitted, same as individual failure entries)
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
+DIAGNOSED_FROM: <REQUIRED — same as individual failure entries. One of: error-output, page-snapshot, error-context-snapshot, code-inspection. Must not be omitted — needed for diagnostic source effectiveness analysis.>
+FIX_ITERATIONS: <REQUIRED — same as individual failure entries. Number of test re-runs needed to fully resolve this cluster. Must not be omitted — needed for difficulty analysis.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
+
+**IMPORTANT: Avoiding double-counting in clusters.** When an individual failure is part of a
+cluster (same ROOT_CAUSE_CLUSTER), the TEST_FAILURES count should include only the cluster
+entry, not both the cluster and the individual. A test already counted in a cluster should NOT
+have a separate entry unless it has a distinct, independent root cause.
 
 ### Infrastructure Failures
 
