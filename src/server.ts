@@ -223,7 +223,7 @@ async function processLoop(): Promise<void> {
       }
       totalCost += result.cost;
       tasksProcessed++;
-      postWebhook("task.done", { skill: task.skill, cost: result.cost, totalCost, failed: !result.success });
+      postWebhook("task.done", { skill: task.skill, cost: result.cost, totalCost, failed: !result.success, pendingTasks: getPendingTaskCount() });
       if (!result.success) {
         log(`Task failed. Stopping task processing. ${getPendingTaskCount()} task(s) remain in queue.`);
         detachRequested = true;
