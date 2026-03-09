@@ -200,7 +200,8 @@ async function processLoop(): Promise<void> {
     const task = getNextTask();
     if (task) {
       state = "processing";
-      postWebhook("task.started", { iteration, skill: task.skill, subtasks: task.subtasks, prompt: !!task.prompt });
+      postWebhook("task.started", { iteration, skill: task.skill, subtasks: task.subtasks, prompt: task.prompt ?? null });
+      const taskStartedAt = Date.now();
       const result = await processTask(
         task,
         extraArgs,
@@ -223,7 +224,7 @@ async function processLoop(): Promise<void> {
       }
       totalCost += result.cost;
       tasksProcessed++;
-      postWebhook("task.done", { skill: task.skill, cost: result.cost, totalCost, failed: !result.success, pendingTasks: getPendingTaskCount() });
+      postWebhook("task.done", { skill: task.skill, subtasks: task.subtasks, prompt: task.prompt ?? null, cost: result.cost, totalCost, failed: !result.success, pendingTasks: getPendingTaskCount(), duration_ms: Date.now() - taskStartedAt });
       if (!result.success) {
         log(`Task failed. Stopping task processing. ${getPendingTaskCount()} task(s) remain in queue.`);
         detachRequested = true;

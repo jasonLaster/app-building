@@ -188,8 +188,8 @@ Every POST body has this shape:
 | `message.started` | Message processing begins | `iteration`, `prompt` |
 | `message.done` | Message processing complete | `messageId`, `cost_usd`, `duration_ms`, `num_turns` |
 | `message.error` | Message processing failed | `messageId`, `error` |
-| `task.started` | Task processing begins | `iteration`, `skill`, `subtasks` |
-| `task.done` | Task processing complete | `skill`, `cost`, `totalCost`, `failed`, `pendingTasks` |
+| `task.started` | Task processing begins | `iteration`, `skill`, `subtasks`, `prompt` |
+| `task.done` | Task processing complete | `skill`, `subtasks`, `prompt`, `cost`, `totalCost`, `failed`, `pendingTasks`, `duration_ms` |
 | `log` | Each log line | `line` |
 
 ### Example
