@@ -106,6 +106,11 @@ All database accesses must happen in backend Netlify functions. Netlify function
 and operate on specific parts of the database corresponding to the needs of one or more specific
 frontend components.
 
+## Running Tests
+
+You MUST read `skills/tasks/build/testing.md` and precisely follow its instructions when running
+tests and debugging test failures.
+
 ## Quality Gates
 
 Before each commit, run `npm run check` (see `skills/scripts/check.md`). Do not commit

@@ -13,11 +13,13 @@ test failures for problems to extract.
 When extracting a test failure the following steps must be followed in order.
 
 1. Checkout the changeset where the test failure occurred.
-2. Run the file with the failing test to reproduce the failure. If the failure does not reproduce,
-   make a note of it and bail out.
+2. Run the file with the failing test to reproduce the failure using `npm run test tests/<test-file>.spec.ts`.
+   **NEVER use `npx playwright test` directly** — it skips critical setup (Neon branch, seeding, dev server).
+   Always use `npm run test` as described in `skills/scripts/test.md`.
+   If the failure does not reproduce, make a note of it and bail out.
 3. Checkout the changeset after the fix.
-4. Run the test file again and verify the problem is fixed. If the failure still happens, make a note
-   of it and bail out.
+4. Run the test file again using `npm run test tests/<test-file>.spec.ts` and verify the problem is fixed.
+   If the failure still happens, make a note of it and bail out.
 5. Submit the test failure according to the instructions below.
 
 After either successfully extracting a test failure or bailing out, clean up state by checking out the

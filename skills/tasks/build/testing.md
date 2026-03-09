@@ -181,6 +181,8 @@ See `skills/scripts/preflight.md` for the full pre-flight checklist and
 Run tests via `npm run test <testFile>` from the app directory (see `skills/scripts/test.md`
 for the full script specification). Do NOT manually run playwright or start dev servers.
 
+ULTRA IMPORTANT: NEVER EVER EVER RUN `npx playwright test`. You must use the provided test script.
+
 - The script prints a one-line summary to stdout (e.g., `8 passed, 2 failed — see logs/test-run-3.log`).
 - Full test output and recording metadata are in the log file referenced by the summary.
 - Read the log file only when you need to diagnose failures.
