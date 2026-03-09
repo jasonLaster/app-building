@@ -24,7 +24,12 @@ with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/dep
 "Locale Workaround". Also verify dependencies are installed: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
 
 Pre-deployment checklist:
-1. Verify `DATABASE_URL` is set in `.env` (populated from `deployment.txt` or newly created).
+1. Verify required environment variables are set:
+   - `DATABASE_URL` in `.env` (populated from `deployment.txt` or newly created)
+   - `NEON_API_KEY` in the container environment (`echo $NEON_API_KEY | head -c 5`)
+   - `NETLIFY_AUTH_TOKEN` in the container environment (`echo $NETLIFY_AUTH_TOKEN | head -c 5`)
+   - `NETLIFY_SITE_ID` in `.env` if redeploying (populated from `deployment.txt`)
+   - `RECORD_REPLAY_API_KEY` in the container environment (for deployment test recordings)
 2. Verify the DB has been seeded with production data (the deploy script handles first-run seeding).
 3. Ensure the deploy script runs fully non-interactively — no CLI prompts that hang in CI.
 4. Ensure `public/_redirects` exists with `/* /index.html 200` for SPA routing. Without this,

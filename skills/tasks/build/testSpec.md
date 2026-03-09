@@ -65,8 +65,6 @@ The test spec must be written in docs/tests.md. This file is organized by page, 
   and any required configuration on the external side. Test entries should verify that these instructions are
   visible and accurate for each supported platform.
 
-- For interactive elements that can be used repeatedly (search inputs, dropdowns, filters), write test entries that exercise the element multiple times in sequence, including scenarios where the user interacts with other elements in between. A single-use test is not sufficient — verify the element works correctly on subsequent uses after focus changes or intervening actions.
-
 - State-changing actions must have tests that when performed other parts of the app update appropriately. For example:
 * If the app has a timeline or history feature, every mutation that the timeline tracks must write a history entry. Ensure this happens atomically to avoid duplicates from re-renders. Think through every field that can change and whether it needs history tracking.
 * If the app has symmetrical or reciprocal relationships (e.g., contact relationships, mutual links between entities), creating/updating/deleting one side must automatically update the other side. Test entries must verify both sides of the relationship are in sync.

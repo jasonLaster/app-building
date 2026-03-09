@@ -56,28 +56,6 @@ returned. Tracing the conditional revealed `IS_TEST` was undefined.
 *Example*: Auth tests failed because signup returned no token. Logpoints on the auth
 handler revealed IS_TEST was not set.
 
-### Detail panel overlay blocking navigation (close-detail-panel-before-nav)
-When a detail/overlay panel is open, it can intercept clicks on sidebar navigation or other
-UI elements underneath it. Tests that navigate away while a detail panel is open will fail
-with timeout or "element not clickable" errors because the overlay captures the click.
-
-**Diagnosis**: Test clicks a sidebar link or navigation element but the click is intercepted.
-Screenshot shows a detail panel or overlay covering the navigation area.
-
-**Fix**: Explicitly close the detail panel before navigating to another page:
-```ts
-// Close detail panel before navigating
-await page.locator('[data-testid="close-detail"]').click();
-await expect(page.locator('[data-testid="detail-panel"]')).toBeHidden();
-
-// Now navigate
-await page.locator('[data-testid="nav-inventory"]').click();
-```
-
-This pattern was needed across 3 spec files where item-detail overlays intercepted sidebar
-navigation clicks. When found in one test, proactively check all navigation tests in the
-same app for the same issue.
-
 ### Silent API errors leaving state empty
 A component fetches data in `useEffect`, but the API call fails and the catch block swallows
 the error, leaving state as the initial empty array. The component renders but shows no data.

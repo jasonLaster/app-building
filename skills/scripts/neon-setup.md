@@ -59,6 +59,27 @@ Where:
 - `host`: The endpoint host from the branch creation response (e.g., `ep-xxx.us-east-2.aws.neon.tech`)
 - `dbname`: Usually `neondb` (default)
 
+## Verification After Setup
+
+After creating a project or branch and constructing the `DATABASE_URL`, verify connectivity
+before proceeding with schema setup or test runs:
+
+```bash
+curl -s "$DATABASE_URL" -c '' --max-time 5 -o /dev/null -w "%{http_code}"
+```
+
+Or use a quick SQL query via the Neon SQL API:
+
+```bash
+curl -s -X POST "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches/$BRANCH_ID/sql" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "SELECT 1"}' | jq .
+```
+
+Catching connection issues here prevents cryptic failures later during schema initialization
+or test execution.
+
 ## Common Pitfalls
 
 - **Empty passwords**: Always check if the password field is populated in branch/project

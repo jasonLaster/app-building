@@ -14,16 +14,11 @@ Do NOT repeat preflight steps multiple times — one invocation of each command 
 ### 1. Kill stale servers
 
 ```bash
-pkill -f "netlify dev" 2>/dev/null || true; pkill -f "vite" 2>/dev/null || true
+pkill -f "netlify dev" 2>/dev/null; pkill -f "vite" 2>/dev/null
 ```
 
 Stale `netlify dev` and `vite` processes from previous runs cause port conflicts and
-serve outdated code. Always kill them before starting tests. The `|| true` suffix prevents
-this step from failing when no matching process exists, which would abort chained commands.
-
-**Run each preflight step as a separate command**, not as a combined one-liner. The pattern
-`cd X && pkill ... && grep ... && ls ...` fails if any sub-command fails (especially pkill
-when no process exists), wasting effort decomposing and re-running individual commands.
+serve outdated code. Always kill them before starting tests.
 
 ### 2. Verify `NEON_PROJECT_ID` in `.env`
 

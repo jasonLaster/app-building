@@ -40,30 +40,6 @@ Ephemeral Neon branches inherit all data from the parent branch. Using `seedData
 Without truncation, tests see inherited parent data plus newly seeded data, causing count
 mismatches and unexpected records.
 
-## Data-Contamination Diagnosis Pattern
-
-When error output shows unexpected values — actual count higher than expected, wrong totals,
-unexpected records — the most likely cause is data contamination from a previous test in the
-same describe block. This is the single most common failure category (~43% of all observed
-failures).
-
-**Quick diagnosis** (no Replay needed):
-1. Check if the error shows `actual > expected` (e.g., expected 3 rows, got 5). This indicates
-   a prior test created records that weren't cleaned up.
-2. Check if the failing test is preceded by a test that creates, deletes, or modifies shared
-   records (invoices, payments, clients, etc.).
-3. Check if the spec file uses `beforeEach` data reset — if not, that's likely the fix.
-
-**Resolution strategies** (in order of preference):
-1. **beforeEach data reset** — Reset relevant state before each test.
-2. **Destructive test reordering** — Move tests that create/delete/void records to the end of
-   the describe block.
-3. **Create fresh data per test** — Avoid relying on shared seed data entirely.
-4. **Capture current values** — Read actual state (e.g., count rows) instead of hardcoding
-   expected values.
-
-These failures are self-diagnosing from error output alone — Replay is unnecessary.
-
 ## Common Root Causes (from observed failures)
 
 ### Navigation helper lands on a record with no related data
@@ -119,6 +95,21 @@ is in the app's formatting layer, not in the test assertions.
 *Example*: Three related failures (`RUN-ACT-2`, `CAL-GRID-4`, `RUN-HDR-10`) all stemmed from
 `NUMERIC(15,2)` columns returning `"500.00"` instead of `500`. A single formatting utility
 fix resolved all three.
+
+### PostgreSQL date column returns ISO timestamp
+PostgreSQL DATE columns return ISO timestamps (`2026-03-06T00:00:00.000Z`) through the Neon
+driver, not `YYYY-MM-DD` strings. Components that compare or display dates will show
+"Invalid Date" or fail date comparisons when they receive the full timestamp.
+
+**Diagnosis without Replay**: Error output shows "Invalid Date" in rendered text, or date
+comparison assertions fail with timestamp vs. date-string mismatches.
+
+**Fix**: Apply `.split('T')[0]` normalization wherever dates from the API are displayed or
+compared. This was the #1 backend-bug root cause in observed sessions (~30% of all failures).
+
+*Example*: `formatDate` helpers across 6+ components failed because they received
+`2026-03-06T00:00:00.000Z` but expected `2026-03-06`. Adding `.split('T')[0]` before
+parsing resolved all of them.
 
 ## General Guidance
 
