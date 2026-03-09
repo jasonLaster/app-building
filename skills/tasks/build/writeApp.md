@@ -148,6 +148,11 @@ contexts (testing, deployment).
   path index 2 and the resource ID at index 3 (after splitting on `/` and filtering empty segments).
   Common off-by-one error: using index 2 for the resource ID when it contains the function name.
 
+- Detail/record pages should use inline editing (click-to-edit fields, inline selectors, inline
+  dropdowns, etc.) for editing properties of the record rather than opening an edit modal. Inline
+  editing keeps the user in context and is simpler to implement and test. Only use modals for
+  complex multi-step workflows or confirmations (e.g. delete confirmation).
+
 - When building modals that reference other entities (e.g., adding a relationship to a person), use a
   searchable select/dropdown component, not a plain text input for IDs.
 

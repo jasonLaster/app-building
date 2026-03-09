@@ -50,6 +50,11 @@ The test spec must be written in docs/tests.md. This file is organized by page, 
 
 - Button and control appearance matters: if a mockup shows specific text, icons, or styling for a button, the test entry should verify that appearance — not just that some button exists.
 
+- Detail/record pages should use inline editing (click-to-edit fields, inline selectors, inline
+  dropdowns, etc.) for editing properties of the record rather than opening an edit modal.
+  Inline editing is preferred because it keeps the user in context and is easier to test.
+  Only use modals for complex multi-step workflows or confirmations (e.g. delete confirmation).
+
 - Completely test that modal dialogs work properly.
 
 - Attachment functionality should support file uploads unless the mockup specifically indicates something else.
