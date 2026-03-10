@@ -15,9 +15,11 @@ You will build the app in the following stages, with task skill files in `skills
 
 5. writeTests.md: Write the tests according to the two specs.
 
-6. testing.md: Get all tests to pass, debugging and fixing the app / tests as needed.
+6. deployment.md: Do an initial deploy of the app to production.
 
-7. deployment.md: Deploy the app to production.
+7. testing.md: Get all tests to pass, debugging and fixing the app / tests as needed.
+
+8. deployment.md: Do another deployment of the app with fixes for problems found.
 
 Add tasks to the queue for each stage in **reverse order** (last stage first), since
 `add-task` always pushes to the front:
