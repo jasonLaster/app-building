@@ -44,10 +44,10 @@ explicitly in the JSON array:
 ```bash
 npx tsx /repo/scripts/add-task.ts <<'EOF'
 [
-  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure1.id> <failure1.reproduce_notes>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure1.id>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["FixTestFailure: <failure1.id> <agent.prompt>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["VerifyTestFailure: <failure1.id> <failure1.assessment_string>"] },
-  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure2.id> <failure2.reproduce_notes>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure2.id>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["FixTestFailure: <failure2.id> <agent.prompt>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["VerifyTestFailure: <failure2.id> <failure2.assessment_string>"] }
 ]
@@ -94,6 +94,8 @@ by sending a PATCH request to https://test-failure-benchmark.netlify.app/.netlif
   "reproduce_notes": "string (required) — notes on how to reproduce the failure"
 }
 ```
+
+Reproduction notes must not have any details about the resulting failure.
 
 ## Fixing test failures
 
