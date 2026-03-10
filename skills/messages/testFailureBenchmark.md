@@ -35,7 +35,7 @@ interface FailureRow {
 ```
 
 For each failure you are given, write a file `report-data/testFailure-<failure.id>.md` which will keep track of this work.
-Initialize the file with the entire failure row EXCEPT assessment_string.
+Initialize the file with the entire failure row EXCEPT title and assessment_string (these have clues about how to fix the problem).
 
 Then add the tasks for ALL failures in a single `add-task` call. For each failure, add three
 tasks (Reproduce, Fix, Verify) in order. Do NOT use a loop or script — write out every task
