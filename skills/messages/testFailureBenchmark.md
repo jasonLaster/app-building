@@ -63,7 +63,7 @@ The third task reads that report and the logs and decides based on the assessmen
 
 ## Reproducing test failures
 
-1. Clone the failure branch into /tmp and check out the failing changeset from the repository.
+1. Clone the failure branch into /tmp/test-app and check out the failing changeset from the repository.
    Avoid doing a full repo clone for efficiency.
 
 2. Delete the following files from the cloned repo:
@@ -123,3 +123,5 @@ Reproduction notes must not have any details about the resulting failure.
    this benchmark problem has passed. Decide whether the problem passes and write the following XML:
 
    <result id=[failure.id] passed=[true|false]>reason</result>
+
+4. Delete the `/tmp/test-app` directory.
