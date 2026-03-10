@@ -101,14 +101,17 @@ Reproduction notes must not have any details about the resulting failure.
 
 1. Read the `report-data/testFailure-<failure.id>.md` file to get the failure message and Replay recording ID.
 
-2. Follow the directions from the agent prompt in the subtask to fix the code and/or test to make the test pass.
+2. Read and remember the time you started on fixing the problem.
+
+3. Follow the directions from the agent prompt in the subtask to fix the code and/or test to make the test pass.
    If you weren't given additional directions, do what you normally do and do not look at the Replay recording.
-   If you don't know what's wrong, don't guess and move on to the next step.
+   - If you don't know what's wrong, don't guess and move on to the next step.
+   - If you have taken more than 30 minutes to fix the problem, give up on fixing the issue and move on to the next step.
 
-3. Get the patch with your changes that fixed the test failure (if you did fix it).
+4. Get the patch with your changes.
 
-4. Update the `report-data/testFailure-<failure.id>.md` file with info about whether you fixed the test failure,
-   the patch that fixed the test failure and a description of what was causing the failure.
+5. Update the `report-data/testFailure-<failure.id>.md` file with info about whether you fixed the test failure,
+   the patch with your changes, and a description of what was causing the failure.
 
 ## Verifying test failures
 
