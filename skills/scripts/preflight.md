@@ -17,15 +17,13 @@ Step 1 (kill stale processes) and step 4 (clear recordings) should be run before
 ### 1. Kill stale servers
 
 ```bash
-pgrep -f "netlify dev" && pkill -f "netlify dev" || true
-pgrep -f "vite" && pkill -f "vite" || true
+pkill -f "netlify|vite" 2>/dev/null || true
 ```
 
 Stale `netlify dev` and `vite` processes from previous runs cause port conflicts and
-serve outdated code. Always kill them before starting tests. The `pgrep && pkill || true`
-pattern avoids false "failure" signals when no process exists — `pkill` returns non-zero
-when no process matches, which can abort chained commands. Using `pgrep` first checks
-whether the process exists before attempting to kill it.
+serve outdated code. Always kill them before starting tests. Use a single combined
+`pkill` command — do not cycle through multiple separate kill invocations.
+See `skills/scripts/killStaleProcesses.md` for details.
 
 **Run each preflight step as a separate command**, not as a combined one-liner. The pattern
 `cd X && pkill ... && grep ... && ls ...` fails if any sub-command fails (especially pkill

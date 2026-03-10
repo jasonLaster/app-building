@@ -110,6 +110,23 @@ contexts (testing, deployment).
   with Netlify Functions v2. The `/api/` prefix is the standard for all function calls in
   both development and production.
 
+- **Ensure `netlify.toml` or `_redirects` correctly routes `/api/*` to Netlify Functions.**
+  Without explicit routing rules, the SPA catch-all redirect (`/* /index.html 200`) will
+  serve HTML for API endpoint requests instead of routing them to functions. This is the most
+  common cause of `curl` returning HTML instead of JSON when testing deployed API endpoints.
+  Place API redirects before the SPA catch-all:
+  ```toml
+  [[redirects]]
+    from = "/api/*"
+    to = "/.netlify/functions/:splat"
+    status = 200
+
+  [[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+  ```
+
 - Netlify functions must not import `@neondatabase/serverless` directly. Instead, each app must
   have a shared `netlify/functions/db.ts` module that all functions import:
 

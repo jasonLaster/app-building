@@ -8,11 +8,17 @@ and serve outdated code.
 
 ## Usage
 
-Run from any directory before starting tests or a dev server:
+Run from any directory before starting tests or a dev server. Use a single combined
+command to kill both process types at once:
 
 ```bash
-pkill -f "netlify dev" 2>/dev/null || true; pkill -f "vite" 2>/dev/null || true
+pkill -f "netlify|vite" 2>/dev/null || true
 ```
+
+This replaces the previous pattern of running separate `pkill` commands for each process
+type, and eliminates the ad-hoc retry pattern of trying `pkill -f "netlify dev"`, then
+`pkill -f "netlify"`, then `kill $(pgrep -f netlify)` — all of which are redundant.
+Only retry once if processes persist (see "Verifying Termination" below).
 
 **Always append `|| true`** when using `pkill` in chained commands or scripts. Without it,
 `pkill` returns exit code 1 when no matching process is found, which causes chained commands

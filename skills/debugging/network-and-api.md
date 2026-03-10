@@ -95,6 +95,34 @@ component, proactively fix all `formatDate` call sites.
 *Example*: 6 failures in a single log shared the same ISO-date-parsing root cause — the API
 returned timestamps but components expected date strings.
 
+### Check API response codes for timeout-waiting-for-data failures
+When a test times out waiting for data that never appears (empty lists, missing records, no
+dropdown options), **inspect the network response first** before debugging the frontend. In
+observed sessions, 3 of 4 genuinely-Replay-necessary failures were backend routing bugs where
+the API returned HTML instead of JSON or a 405 Method Not Allowed instead of the expected data.
+The test output only showed a generic timeout — Replay `NetworkRequest` revealed the actual
+routing issue.
+
+**Tool sequence**: `NetworkRequest` (filter by the API URL) → check status code and content type.
+- If the response is HTML instead of JSON → missing Netlify redirect or wrong route
+- If the response is 405 → the HTTP method handler is missing in the backend function
+- If the response is 404 → the endpoint path doesn't match the redirect rule
+
+### URL segment index off-by-one in Netlify functions
+Netlify functions parse URL segments to extract resource IDs (e.g., `segments[2]` for
+`/api/resources/:id`). A recurring bug is using the wrong segment index — e.g., `segments[3]`
+instead of `segments[2]` — which causes the function to read `undefined` as the ID and return
+405 or wrong results. This exact bug appeared in 3 separate backend functions (categories.ts,
+preventive-schedules.ts, staff.ts) in one session.
+
+**Diagnosis with Replay**: `NetworkRequest` shows PUT/DELETE requests returning 405 Method Not
+Allowed. The request URL is correct, but the function can't parse the ID from the URL.
+
+**Fix**: Check the URL segment parsing in the Netlify function. Count segments from index 0:
+for a URL like `/.netlify/functions/resource/123`, the segments after splitting on `/` depend
+on whether there's a redirect. Always verify by logging `segments` or checking the actual URL
+the function receives.
+
 ## Common Root Causes (from observed failures)
 
 ### Auth request payload mismatch

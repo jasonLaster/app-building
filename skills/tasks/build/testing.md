@@ -166,8 +166,7 @@ Do NOT manually check each prerequisite individually — this wastes 3–8 comma
 reinventing the same sequence. Run all pre-flight steps once as a batch:
 
 ```bash
-pgrep -f "netlify dev" && pkill -f "netlify dev" || true
-pgrep -f "vite" && pkill -f "vite" || true
+pkill -f "netlify|vite" 2>/dev/null || true
 grep NEON_PROJECT_ID .env || echo "ERROR: NEON_PROJECT_ID not set"
 ls ~/.replay/runtimes/chrome-linux/chrome 2>/dev/null || npx replayio install
 ls node_modules/@neondatabase/serverless 2>/dev/null || npm install --legacy-peer-deps
@@ -518,6 +517,17 @@ process in the section below, and respect the 3-retry limit before changing appr
   across test runs. Once you know the project structure, do not re-discover it in every
   iteration. Use the Glob and Grep tools instead of shell commands for file operations.
 
+- **Verify seed data covers all test tables.** After writing or modifying seed-database
+  functions, verify that all tables referenced in tests are properly seeded. Missing table
+  seeding (e.g., categories table truncated but never re-seeded) causes tests to time out
+  waiting for data that doesn't exist. Check each `TRUNCATE` call has a corresponding `INSERT`.
+
+- **Validate Netlify function URL routing.** After writing backend functions, verify that
+  `[[redirects]]` in `netlify.toml` includes all `/api/*` patterns and that URL segment
+  parsing uses the correct index. A recurring bug is `segments[N]` off-by-one errors where
+  the function reads `undefined` instead of the resource ID, returning 405. This appeared in
+  3 separate functions in one session.
+
 - **Cross-spec learning**: When a fix pattern is discovered in one spec file (e.g.,
   wait-before-count, destructive test reordering, formatDate normalization), proactively apply
   it to all other spec files in the same app before re-running tests. Fixing each file
@@ -545,6 +555,12 @@ process in the section below, and respect the 3-retry limit before changing appr
   Always use `data-testid` attributes instead. Raw element selectors break when the component's
   HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
   timeouts that are hard to diagnose.
+- **Use `click()` + `type()` instead of `fill()` for onChange-dependent inputs.** Playwright's
+  `fill()` sets the input value directly and only fires `input` and `change` events at the end,
+  which may not trigger React's synthetic `onChange` handler in all component implementations.
+  If `fill()` doesn't trigger the expected behavior, switch to `click()` on the input followed
+  by `type()` to simulate real keystrokes, which fires `onChange` on each character.
+
 - **Trigger onBlur after fill() for blur-persisted forms.** When testing form components that
   use `onBlur` for persistence (auto-save on blur), Playwright `fill()` alone won't trigger
   the save. Always add `.blur()` after `.fill()` calls in these cases:
