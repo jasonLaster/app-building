@@ -45,6 +45,7 @@ curl -X POST https://test-failure-benchmark.netlify.app/.netlify/functions/failu
       "group_name": "app-building",
       "github_repository": "https://github.com/replayio/app-building",
       "branch": "current-branch",
+      "neon_project_id": "project-id",
       "failing_changeset": "abc1234",
       "fixed_changeset": "def5678",
       "test_file": "tests/<test-file>.ts",
