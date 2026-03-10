@@ -7,7 +7,7 @@
   "scripts": {
     "agent": "tsx src/agent.ts",
     "status": "tsx src/status.ts",
-    "read-log": "tsx src/read-log.ts",
+    "read-log": "tsx scripts/read-log.ts",
     "reset-app": "tsx src/reset-app.ts",
     "docker:build": "docker build --no-cache --network=host -t app-building .",
     "test-container": "tsx src/test-container.ts",

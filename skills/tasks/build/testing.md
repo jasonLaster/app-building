@@ -324,6 +324,26 @@ failures (~45% of observed failures come from shared database state).
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
    overcounting.
 
+## JourneyQA / Batch Test Isolation
+
+When running multiple spec files in a single batch (e.g., JourneyQA tasks), each spec file
+must have full database isolation. Running multiple spec files against a single Neon branch
+causes cross-spec data contamination — one batch run caused 19 test failures from shared
+state. Isolation strategies:
+
+1. **Per-spec Neon branches**: Each spec file should get its own ephemeral Neon branch.
+2. **Sequential with resets**: Run specs sequentially with a full database reset (truncate +
+   re-seed) between each spec file.
+3. **Never share a single branch across parallel spec files**: This is the most common source
+   of batch contamination.
+
+## Test Command Reliability
+
+`npm run test` has a ~59% clean-pass rate (41% of runs encounter at least one failure).
+Test failures during development are expected — they are part of the test-fix-retest cycle.
+Do not treat a first-run failure as a sign of a fundamental problem. Follow the debugging
+process in the section below, and respect the 3-retry limit before changing approach.
+
 ## Directives
 
 - Do NOT manually start `netlify dev` for testing. The test script manages the dev server

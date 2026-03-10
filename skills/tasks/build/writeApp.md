@@ -239,6 +239,11 @@ contexts (testing, deployment).
   root elements. Let the parent page/layout control spacing. When components embed their own padding,
   composing them in flex rows causes double-padding conflicts that require rework.
 
+- **`jq` is not available in the container.** When you need to parse JSON from shell commands
+  (e.g., Neon API responses, Netlify CLI output), use `python3 -c` or `node -e` instead of
+  `jq`. Example: `curl -s ... | python3 -c "import sys,json; print(json.load(sys.stdin)['key'])"`
+  or `curl -s ... | node -e "process.stdin.on('data',d=>console.log(JSON.parse(d).key))"`.
+
 - Prefer using the Glob and Grep tools over shell `find`, `ls`, and `grep` commands for file
   exploration and content searching. The dedicated tools provide better structured output and
   avoid unnecessary shell command overhead.

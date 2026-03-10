@@ -78,6 +78,26 @@ This pattern was needed across 3 spec files where item-detail overlays intercept
 navigation clicks. When found in one test, proactively check all navigation tests in the
 same app for the same issue.
 
+### ConsoleMessages for component crashes (multiple locator timeouts)
+When multiple tests in the same spec file fail with the same locator timeout (e.g., all tests
+can't find any interactive elements), the root cause may be a JavaScript runtime error that
+crashed the entire component tree. Instead of debugging each timeout individually, check
+`ConsoleMessages` first for runtime errors like `X.toFixed is not a function` or
+`Cannot read properties of undefined`.
+
+**Diagnosis with Replay**: `ConsoleMessages` reveals the runtime error. `NetworkRequest`
+confirms the API returned data in an unexpected type (e.g., PostgreSQL NUMERIC as string).
+`Screenshot` shows detached or missing DOM elements.
+
+**Tool sequence**: `PlaywrightSteps → Screenshot → ConsoleMessages → NetworkRequest`
+
+**Fix**: Fix the runtime error (e.g., add `Number()` coercion for NUMERIC columns). A single
+fix typically resolves all the cascading timeout failures.
+
+*Example*: 14 tests failed with locator timeouts in log 73. ConsoleMessages revealed
+`qty.toFixed is not a function` — PostgreSQL NUMERIC returned as string. Fixing with
+`Number()` parsing resolved all 14 tests.
+
 ### Silent API errors leaving state empty
 A component fetches data in `useEffect`, but the API call fails and the catch block swallows
 the error, leaving state as the initial empty array. The component renders but shows no data.

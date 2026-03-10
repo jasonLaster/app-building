@@ -135,6 +135,24 @@ compared. This was the #1 backend-bug root cause in observed sessions (~30% of a
 `2026-03-06T00:00:00.000Z` but expected `2026-03-06`. Adding `.split('T')[0]` before
 parsing resolved all of them.
 
+### Content-over-count assertions for shared database environments
+When tests assert on element counts (e.g., `expect(rows).toHaveCount(5)`) and fail with
+unexpected counts, the fix is often to switch to content-based assertions rather than fixing
+the count. In shared database environments, exact counts are fragile because parallel tests
+or prior tests may create/delete records.
+
+**Fix**: Replace count-based assertions with content-based ones:
+```ts
+// Fragile — breaks when other tests add/remove items:
+await expect(page.locator('[data-testid="row"]')).toHaveCount(5);
+
+// Resilient — checks for specific content regardless of total count:
+await expect(page.locator('[data-testid="row"]').filter({ hasText: 'Expected Item' })).toBeVisible();
+```
+
+This pattern is especially important for tests that verify data after mutations — capture
+initial state and assert relative changes rather than hardcoded absolute values.
+
 ## General Guidance
 
 When many detail-page tests fail with `expected count > 0, received 0`, resist the urge to
