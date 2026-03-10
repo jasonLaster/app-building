@@ -197,7 +197,7 @@ async function processLoop(): Promise<void> {
     }
 
     // Process pending tasks
-    const task = getNextTask();
+    const task = getNextTask(log);
     if (task) {
       state = "processing";
       postWebhook("task.started", { iteration, skill: task.skill, subtasks: task.subtasks, prompt: task.prompt ?? null });

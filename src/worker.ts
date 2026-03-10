@@ -31,6 +31,7 @@ export interface Task {
 
 interface TasksFile {
   tasks: Task[];
+  current?: Task;
 }
 
 // --- Claude invocation ---
@@ -215,6 +216,10 @@ export function absorbForeignTaskFiles(log: Logger): void {
         continue;
       }
       const foreign: TasksFile = JSON.parse(content);
+      // If the foreign file has a current task, prepend it to its own tasks
+      if (foreign.current) {
+        foreign.tasks.unshift(foreign.current);
+      }
       if (foreign.tasks.length > 0) {
         ownData.tasks.push(...foreign.tasks);
         absorbed += foreign.tasks.length;
@@ -237,37 +242,33 @@ function writeTasksFile(data: TasksFile): void {
   writeFileSync(TASKS_FILE, JSON.stringify(data, null, 2) + "\n");
 }
 
-function tasksMatch(a: Task, b: Task): boolean {
-  return (
-    a.skill === b.skill &&
-    a.timestamp === b.timestamp &&
-    a.subtasks.length === b.subtasks.length &&
-    a.subtasks.every((j, i) => j === b.subtasks[i])
-  );
-}
-
-function completeTask(assignedTask: Task, log: Logger): void {
+function clearCurrentTask(log: Logger): void {
   const data = readTasksFile();
-  const idx = data.tasks.findIndex((g) => tasksMatch(g, assignedTask));
-  if (idx === -1) {
-    debug(`completeTask: assigned task not found in task file (skill=${assignedTask.skill})`);
-    log(`Warning: assigned task not found in task file, may have already been removed`);
-    return;
+  if (data.current) {
+    debug(`clearCurrentTask: clearing current task (skill=${data.current.skill})`);
+    log(`Completed task: ${data.current.subtasks.length} subtask(s) (skill: ${data.current.skill})`);
+    delete data.current;
+    writeTasksFile(data);
   }
-  const [completed] = data.tasks.splice(idx, 1);
-  writeTasksFile(data);
-  debug(`completeTask: removed task at index ${idx} (skill=${completed.skill})`);
-  log(`Dequeued task: ${completed.subtasks.length} subtask(s) (skill: ${completed.skill})`);
 }
 
 function buildTaskPrompt(task: Task): string {
+  const addTaskDoc =
+    `When you need to add new tasks, use a single add-task call with all tasks in a JSON array via stdin heredoc:\n` +
+    `\`\`\`bash\n` +
+    `npx tsx /repo/scripts/add-task.ts <<'EOF'\n` +
+    `[\n` +
+    `  { "skill": "skills/tasks/build/writeApp.md", "app": "AppName", "subtasks": ["Task1: Description", "Task2: Description"] }\n` +
+    `]\n` +
+    `EOF\n` +
+    `\`\`\``;
+
   if (task.prompt) {
     return (
       task.prompt +
       `\n\nWhen you have completed all work, output <DONE> to signal completion.\n` +
       `\n` +
-      `When you need to add new tasks, use:\n` +
-      `npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2"`
+      addTaskDoc
     );
   }
   const subtaskList = task.subtasks.map((j, i) => `${i + 1}. ${j}`).join("\n");
@@ -279,13 +280,13 @@ function buildTaskPrompt(task: Task): string {
     `Work through each subtask following the skill. When you have completed ALL subtasks,\n` +
     `output <DONE> to signal completion.\n` +
     `\n` +
-    `When you need to add new tasks, use:\n` +
-    `npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2"`
+    addTaskDoc
   );
 }
 
 export function getPendingTaskCount(): number {
-  return readTasksFile().tasks.length;
+  const data = readTasksFile();
+  return data.tasks.length + (data.current ? 1 : 0);
 }
 
 /**
@@ -323,9 +324,21 @@ export async function processMessage(
   return runClaude(claudeArgs, log, onEvent);
 }
 
-export function getNextTask(): Task | null {
+export function getNextTask(log: Logger): Task | null {
   const data = readTasksFile();
-  return data.tasks.length > 0 ? data.tasks[0] : null;
+
+  // If there's already a current task (e.g. from a retry), return it
+  if (data.current) return data.current;
+
+  if (data.tasks.length === 0) return null;
+
+  // Move the first task from the queue into current
+  const task = data.tasks.shift()!;
+  data.current = task;
+  writeTasksFile(data);
+  debug(`getNextTask: moved task to current (skill=${task.skill})`);
+  log(`Dequeued task: ${task.subtasks.length} subtask(s) (skill: ${task.skill})`);
+  return task;
 }
 
 function truncate(s: string, max: number): string {
@@ -386,7 +399,7 @@ export async function processTask(
         log(`Task interrupted.`);
         interruptRequested = false;
         commitFn?.("Interrupted");
-        completeTask(task, log);
+        clearCurrentTask(log);
         return { success: false, cost };
       }
       log(`Error running claude: ${e.message}`);
@@ -418,14 +431,13 @@ export async function processTask(
 
     if (response.doneSignaled) {
       log(`Task signaled <DONE>. Completing task.`);
-      completeTask(task, log);
+      clearCurrentTask(log);
       return { success: true, cost, session_id: sessionId };
     }
 
     retries++;
     if (retries >= MAX_TASK_RETRIES) {
       log(`Task failed ${MAX_TASK_RETRIES} times. Aborting task queue.`);
-      completeTask(task, log);
       return { success: false, cost, session_id: sessionId };
     }
     log(`Task did NOT signal <DONE>. Retry ${retries}/${MAX_TASK_RETRIES}.`);

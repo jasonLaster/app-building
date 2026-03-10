@@ -39,6 +39,7 @@ interface TaskInput {
 
 interface TasksFile {
   tasks: Task[];
+  current?: Task;
 }
 
 function readTasksFile(): TasksFile {
