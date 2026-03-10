@@ -30,6 +30,7 @@ interface FailureRow {
   failing_changeset: string
   test_file: string
   assessment_string: string
+  reproduce_notes: string
 }
 ```
 
@@ -43,10 +44,10 @@ explicitly in the JSON array:
 ```bash
 npx tsx /repo/scripts/add-task.ts <<'EOF'
 [
-  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure1.id>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure1.id> <failure1.reproduce_notes>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["FixTestFailure: <failure1.id> <agent.prompt>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["VerifyTestFailure: <failure1.id> <failure1.assessment_string>"] },
-  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure2.id>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure2.id> <failure2.reproduce_notes>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["FixTestFailure: <failure2.id> <agent.prompt>"] },
   { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["VerifyTestFailure: <failure2.id> <failure2.assessment_string>"] }
 ]
@@ -83,6 +84,15 @@ Add the following section to `report-data/testFailure-<failure.id>.md`. ULTRA IM
 <playwright-failure-message>
 
 Replay recording: <recording-id>
+```
+
+4. If you had difficulty reproducing the test failure based on the provided notes, they can be updated
+by sending a PATCH request to https://test-failure-benchmark.netlify.app/.netlify/functions/failures/:id with this body:
+
+```
+{
+  "reproduce_notes": "string (required) — notes on how to reproduce the failure"
+}
 ```
 
 ## Fixing test failures
