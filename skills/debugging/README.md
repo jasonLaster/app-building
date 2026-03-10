@@ -127,7 +127,13 @@ what the ambiguous locator was.
 In observed sessions, 40% of Replay uses were unnecessary — the error output alone sufficed.
 Apply this heuristic to avoid speculative Replay usage on simple issues.
 
-### Data contamination triage (most common failure category — 37.5% of all failures)
+### Data-contamination diagnostic shortcut
+When error output shows count mismatches (expected N, received N+M) or "No X found" messages,
+skip Replay entirely and diagnose directly from error output. These failures are always caused
+by accumulated/deleted data from prior tests. In observed sessions, 100% of Replay uses for
+data-contamination failures were unnecessary — error output was always sufficient.
+
+### Data contamination triage (most common failure category — 57% of all failures)
 When Playwright error output shows expected count X but received Y (e.g., "expected 3 but
 received 4", "expected $7.00 but got $8.50"), check before reaching for Replay:
 1. Does a prior test create or delete records without cleanup?
@@ -186,6 +192,15 @@ the API response.
 If it assigns the whole payload instead of spreading/merging, that's the bug.
 
 **Fix**: Change the reducer to merge fields: `state.currentEntity = { ...state.currentEntity, ...action.payload }`.
+
+### Invalid Playwright assertion API (e.g., toEndWith)
+Playwright does not have a `toEndWith` assertion. If tests use `toEndWith` or other
+non-existent assertion methods, they will fail with a runtime error. Common invalid assertions:
+- `toEndWith` — use `toMatch(/\.csv$/)` or `expect(value.endsWith('.csv')).toBe(true)` instead
+- `toStartWith` — use `toMatch(/^prefix/)` or `expect(value.startsWith('prefix')).toBe(true)`
+
+**Diagnosis without Replay**: The error message shows the assertion method is not a function.
+Fix by replacing with a valid Playwright/Jest assertion.
 
 ### Clear backend error in test output
 When Playwright error output includes the expected and actual values and the mismatch points

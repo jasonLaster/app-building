@@ -135,6 +135,25 @@ as a problem with the check script itself.
 When `npm run check` fails, always fix and re-run rather than switching to manual
 `npx tsc` / `npx eslint` invocations, which may use different configs.
 
+## Common Lint Error Fix Patterns
+
+These are the most frequent lint errors that require manual fixes after `eslint --fix`:
+
+- **`react-hooks/exhaustive-deps` (setState in useEffect)**: An effect calls a state setter
+  that isn't in the dependency array, or has a dependency that causes infinite re-renders.
+  Fix: move the setter into the dependency array, or restructure to use a ref or callback
+  pattern. Example — change `useEffect(() => { setFoo(bar) }, [bar])` to include `setFoo`
+  in deps (stable from useState) or combine state updates.
+
+- **`react-compiler/react-compiler` (ref access during render)**: Reading `.current` from a
+  ref during render is unsafe because refs are mutable and don't trigger re-renders. Fix:
+  move the ref read into a `useEffect`, event handler, or callback — never in the render
+  body or useMemo/useCallback.
+
+- **`no-unused-vars` / `@typescript-eslint/no-unused-vars`**: Remove the unused import or
+  variable. If intentionally unused (e.g., rest parameter), prefix with `_`. This is the
+  most common lint error (~80% of failures) — proactively clean up imports before running.
+
 ## Common Issues
 
 - **`.netlify/functions-serve/` lint errors**: The `.netlify/functions-serve/` directory contains

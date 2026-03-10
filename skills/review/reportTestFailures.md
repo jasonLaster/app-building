@@ -20,7 +20,7 @@ TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 i
 For each test failure:
 
 ### Failure: <test name>
-FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, batch-contamination, CSS/layout, race-condition, backend-bug, date-format, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, other> (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual. Use "date-format" for date/timestamp format mismatches between PostgreSQL ISO timestamps and expected YYYY-MM-DD strings. Use "batch-contamination" for cross-spec data contamination in batch/JourneyQA runs where multiple spec files share a single database branch — this is qualitatively different from within-spec "data-contamination".)
+FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, batch-contamination, CSS/layout, race-condition, backend-bug, date-format, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, bad-assertion-api, other> (Use "bad-assertion-api" when tests use non-existent Playwright assertion methods like `toEndWith`, `toStartWith`, etc.) (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual. Use "date-format" for date/timestamp format mismatches between PostgreSQL ISO timestamps and expected YYYY-MM-DD strings. Use "batch-contamination" for cross-spec data contamination in batch/JourneyQA runs where multiple spec files share a single database branch — this is qualitatively different from within-spec "data-contamination".)
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
 REPLAY_USED: yes/no (yes = agent actively called mcp__replay__* tools to analyze a recording)
 REPLAY_NOT_USED_REASON: <if REPLAY_USED is no, one of: error-output-sufficient, no-recording, code-inspection, out-of-scope, infrastructure-failure, upload-failed, other. Add a brief clarification after the enum value if needed (e.g., "error-output-sufficient — constraint violation pointed to missing cleanup")>
@@ -82,6 +82,11 @@ AFFECTED_TESTS: <comma-separated list of test names>
 cluster (same ROOT_CAUSE_CLUSTER), the TEST_FAILURES count should include only the cluster
 entry, not both the cluster and the individual. A test already counted in a cluster should NOT
 have a separate entry unless it has a distinct, independent root cause.
+
+**IMPORTANT: Cluster entries count as 1 in TEST_FAILURES.** When using the cluster format,
+each cluster counts as 1 in the TEST_FAILURES tally regardless of how many tests it contains.
+For example, if a log has 1 individual failure + 1 cluster of 3 tests, TEST_FAILURES should
+be 2 (not 4). When counting failures in analysis files, always count cluster entries as 1.
 
 ### Infrastructure Failures
 
@@ -163,6 +168,12 @@ they appeared in, and whether a single fix resolved them all.
 - Recurring failure categories — include a "Failure Category Distribution" table:
   | Category | Count | % of Total |
   showing the breakdown by FAILURE_CATEGORY. This is one of the most actionable outputs.
+- **Data-contamination sub-categories** — when data-contamination is the dominant failure
+  category (>40%), break it into sub-categories in the Patterns section for more actionable
+  analysis: `destructive-ordering` (tests that delete/modify all records run before dependent
+  tests), `accumulated-data` (tests create records that persist and inflate counts for
+  subsequent tests), `settings-contamination` (settings modifications affect subsequent tests
+  expecting defaults). This breakdown helps target specific isolation strategies.
 - **Self-inflicted failure rate** — prominently report the percentage of failures that were
   self-inflicted (from SELF_INFLICTED field). This is a key quality signal for the test-writing
   process. A high rate (>50%) indicates systematic issues with how tests are written.
