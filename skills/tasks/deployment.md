@@ -157,6 +157,34 @@ Read these skills to learn how to use these:
 https://raw.githubusercontent.com/replayio/skills/refs/heads/main/skills/replay-playwright/SKILL.md
 https://raw.githubusercontent.com/replayio/skills/refs/heads/main/skills/replay-mcp/SKILL.md
 
+## Troubleshooting DATABASE_URL Conflicts
+
+If deployment tests or API calls fail with 500 errors despite `DATABASE_URL` being set on the
+Netlify site, the cause may be an account-level `DATABASE_URL` overriding the site-level value.
+Netlify account-level env vars take precedence over site-level ones.
+
+To diagnose and fix:
+
+1. **Check account-level env vars:**
+   ```bash
+   curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+     "https://api.netlify.com/api/v1/accounts/$NETLIFY_ACCOUNT_SLUG/env" | python3 -c "
+   import sys, json
+   for v in json.load(sys.stdin):
+       if 'DATABASE' in v['key']:
+           print(v['key'], '=', v['values'][0]['value'][:30] if v['values'] else '(empty)')
+   "
+   ```
+
+2. **Verify the database is reachable:** Query it directly to confirm the URL is correct:
+   ```bash
+   node --input-type=module -e "import { neon } from '@neondatabase/serverless'; const sql = neon('$DATABASE_URL'); const r = await sql\`SELECT 1\`; console.log(r);"
+   ```
+
+3. **Override at site level with production context:** Use `"context": "production"` (not `"all"`)
+   when setting the override via the Netlify REST API. Using `"all"` returns a 422 error.
+   See `skills/scripts/deploy.md` § "Post-Deploy Checklist" for the exact API command.
+
 ## Tips
 
 - Do NOT use the `replayio record <url>` CLI to create recordings. It launches a headed browser

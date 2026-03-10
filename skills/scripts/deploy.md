@@ -118,6 +118,28 @@ routing (React Router, etc.), this file is mandatory.
 After the first successful deployment, verify that required environment variables are set on
 the Netlify site. Missing env vars cause production 500 errors that are hard to diagnose.
 
+**IMPORTANT: Check for account-level env var overrides.** Netlify account-level environment
+variables take precedence over site-level variables. If `DATABASE_URL` is set at the account
+level, it will override the site-level value, causing the production app to connect to the
+wrong database. To check and fix:
+
+```bash
+# Check account-level env vars
+curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+  "https://api.netlify.com/api/v1/accounts/$NETLIFY_ACCOUNT_SLUG/env" | python3 -c "
+import sys, json
+for v in json.load(sys.stdin):
+    print(v['key'], '=', v['values'][0]['value'][:20] if v['values'] else '(empty)')
+"
+
+# If DATABASE_URL exists at account level, delete or override it at site level
+# Use context "production" (not "all") when setting site-level overrides
+curl -s -X PATCH -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+  -H "Content-Type: application/json" \
+  "https://api.netlify.com/api/v1/accounts/$NETLIFY_ACCOUNT_SLUG/env/DATABASE_URL" \
+  -d '{"context":"production","value":"<correct-database-url>"}'
+```
+
 Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
 flag is unreliable and silently fails in many environments. See `skills/scripts/netlify-env.md`
 for the working REST API approach.

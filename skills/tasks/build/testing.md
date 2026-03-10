@@ -166,14 +166,28 @@ Do not defer Replay installation to after failures are discovered.
 ## Pre-Flight Checks
 
 Before running any tests, run the standard pre-flight procedure from `skills/scripts/preflight.md`.
-Do NOT manually check each prerequisite individually — this wastes 3–8 commands per session
-reinventing the same sequence. Run all pre-flight steps once as a batch:
+Run each preflight step as a **separate command** — do NOT chain them with `&&` or `;` in a
+single command. Chained commands fail if any sub-command fails (especially `pkill` when no
+process exists), producing confusing output and wasting effort decomposing and re-running.
 
 ```bash
+# Step 1: Kill stale servers
 pkill -f "netlify|vite" 2>/dev/null || true
+```
+```bash
+# Step 2: Verify env vars
 grep NEON_PROJECT_ID .env || echo "ERROR: NEON_PROJECT_ID not set"
+```
+```bash
+# Step 3: Verify Replay browser
 ls ~/.replay/runtimes/chrome-linux/chrome 2>/dev/null || npx replayio install
+```
+```bash
+# Step 4: Verify dependencies
 ls node_modules/@neondatabase/serverless 2>/dev/null || npm install --legacy-peer-deps
+```
+```bash
+# Step 5: Clear stale recordings
 npx replayio remove --all 2>/dev/null
 ```
 
@@ -595,6 +609,17 @@ process in the section below, and respect the 3-retry limit before changing appr
   Always use `data-testid` attributes instead. Raw element selectors break when the component's
   HTML structure changes (e.g., switching from `<table>` to `<div>`-based layout), causing
   timeouts that are hard to diagnose.
+- **Click visible labels for custom checkboxes/toggles.** When testing checkboxes or toggle
+  inputs with custom CSS styling, the native `<input>` may be hidden and overlaid by a styled
+  element (e.g., `<span>`, `<label>`). Playwright's `click()` on the hidden input will fail
+  with "click intercepted by..." errors. Always click the visible label or wrapper element
+  instead of the hidden input. Check the component source to identify which element is visually
+  clickable.
+
+- **Document seed data in test specs.** Test spec files should include a comment at the top
+  documenting what seed data exists (e.g., number of pre-existing records, their names/types)
+  so test authors can account for it upfront rather than discovering mismatches at runtime.
+
 - **Use `click()` + `type()` instead of `fill()` for onChange-dependent inputs.** Playwright's
   `fill()` sets the input value directly and only fires `input` and `change` events at the end,
   which may not trigger React's synthetic `onChange` handler in all component implementations.

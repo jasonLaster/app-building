@@ -242,6 +242,11 @@ directives) rather than importing `@neondatabase/serverless` directly.
   reset (truncate + re-seed). If the test script's reset is insufficient for a specific
   scenario, add an explicit `beforeEach` hook that performs additional cleanup via API calls.
   Missing DB cleanup between tests is the #1 cause of test isolation failures and retries.
+- Every test file that creates records (tasks, orders, customers, etc.) should include a
+  `beforeEach` cleanup helper (e.g., `deleteAllTasks()`) that removes all records of the
+  relevant type via API before each test. Add this from the start when writing tests — do
+  not wait for data contamination failures to surface. This is a template requirement, not
+  an optimization.
 - Never hardcode database IDs in tests — including in cleanup and setup helpers. Query the
   UI or API to discover IDs for the records you need to interact with. Cleanup helpers that
   delete records must fetch ALL records of that type via the API and delete each one, rather
