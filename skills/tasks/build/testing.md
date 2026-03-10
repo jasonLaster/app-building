@@ -193,6 +193,22 @@ Test failures during development are expected (test-fix-retest cycle), but re-ru
 test more than 3 times without changing approach indicates the fix strategy is wrong. Stop,
 analyze the failure more carefully (use Replay if available), and try a different approach.
 
+## Replay Decision Heuristic
+
+Use Replay only when error output does not contain the failing assertion's expected/received
+values or when the failure involves visual/layout issues not captured in error snapshots.
+Specifically:
+- **Skip Replay** for data-contamination failures (count mismatches, "No X found") — error
+  output is always sufficient.
+- **Skip Replay** for strict-mode violations — the error tells you exactly what matched.
+- **Skip Replay** for invalid assertion API errors (e.g., `toEndWith` not a function).
+- **Use Replay** for CSS/layout issues where visual confirmation is needed.
+- **Use Replay** for complex race conditions where timing is ambiguous from error output.
+- **Use Replay** for backend bugs where error output doesn't explain *why* wrong data exists.
+
+In observed sessions, 100% of Replay uses for data-contamination and strict-mode failures
+were unnecessary — error output was always sufficient.
+
 ## Debugging
 
 When tests fail, you MUST follow this process for each distinct failure. Every step is
@@ -335,6 +351,26 @@ state. Isolation strategies:
    re-seed) between each spec file.
 3. **Never share a single branch across parallel spec files**: This is the most common source
    of batch contamination.
+
+## React StrictMode and Double-Render
+
+React StrictMode (enabled by default in development) intentionally double-invokes render
+functions, effects, and callbacks to help detect side effects. This causes:
+
+- **Double API calls**: Effects that fetch data will fire twice. Tests that count exact API
+  calls (e.g., expecting exactly 1 fetch) will see 2. Use `waitFor` patterns that assert on
+  DOM state rather than counting network requests.
+- **Race conditions**: Two concurrent fetches for the same data can cause state flicker or
+  stale data display. Components should handle this with cleanup functions in useEffect
+  (abort controllers) or by ignoring stale responses.
+- **Test flakiness**: If tests assert on intermediate render states, StrictMode's extra
+  render cycle can cause intermittent failures. Always wait for the final stable state
+  using `expect(...).toBeVisible()` or `expect(...).toPass()` rather than asserting
+  immediately after navigation.
+
+When writing tests, assume double-renders will occur and avoid assertions that depend on
+exact render or fetch counts. Use DOM-based assertions (`toBeVisible`, `toHaveText`) that
+naturally wait for the final state.
 
 ## Test Command Reliability
 
