@@ -71,10 +71,19 @@ The third task reads that report and the logs and decides based on the assessmen
 3. Reproduce the test failure:
    - Set NEON_PROJECT_ID in the app's .env file
    - Run `npm install` in the app's directory.
-   - Run `npm run test <testFile>` in the app's directory and make sure the test fails.
+   - Run `npm run test <testFile>` in the app's directory and make sure the test fails. Get the test failure message.
 
 Make sure you have reproduced the failure and have a Replay recording ID.
-Add the failure message and the Replay recording ID to `report-data/testFailure-<failure.id>.md`.
+
+Add the following section to `report-data/testFailure-<failure.id>.md`. ULTRA IMPORTANT: Follow this format exactly.
+
+```
+## Reproduction
+
+<playwright-failure-message>
+
+Replay recording: <recording-id>
+```
 
 ## Fixing test failures
 
