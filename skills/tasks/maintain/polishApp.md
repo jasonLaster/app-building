@@ -34,6 +34,23 @@ Read `docs/plan.md` and check which polish stages still need work. For each inco
 add the appropriate tasks as described below. After adding tasks, update `docs/plan.md` with
 the planned items (unchecked). As each subtask completes, check off its entry.
 
+### Accessibility
+
+If the `Accessibility` section in `docs/plan.md` is missing or not marked `✓`, the app needs
+accessibility work. Read `docs/tests.md` to identify all pages, then add ALL page tasks in a
+single `add-task` call — write out every page explicitly, do not use a loop or script:
+
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/maintain/polishApp.md", "app": "<AppName>", "subtasks": ["MakeAccessible<Page1>: Make <Page1> accessible"] },
+  { "skill": "skills/tasks/maintain/polishApp.md", "app": "<AppName>", "subtasks": ["MakeAccessible<Page2>: Make <Page2> accessible"] }
+]
+EOF
+```
+
+Add or update the `Accessibility` section in `docs/plan.md` with an unchecked entry for each page.
+
 ### Responsive UI
 
 If the `Responsive UI` section in `docs/plan.md` is missing or not marked `✓`, the app needs
@@ -50,6 +67,67 @@ EOF
 ```
 
 Add or update the `Responsive UI` section in `docs/plan.md` with an unchecked entry for each page.
+
+## Making a Page Accessible
+
+When working on a `MakeAccessible` subtask, audit the page and its components for accessibility
+issues and fix them. The goal is that all functionality is usable via keyboard alone and that
+screen readers can navigate and understand all content.
+
+After completing the work, check off the page in `docs/plan.md`. If all pages are done, mark the
+section heading with `✓`.
+
+### Semantic HTML
+
+- Use semantic elements (`<nav>`, `<main>`, `<section>`, `<header>`, `<footer>`, `<aside>`) instead
+  of bare `<div>`s for page structure. Each page's content area should be wrapped in `<main>`.
+- Use `<button>` for clickable actions and `<a>` for navigation. Never attach click handlers to
+  `<div>` or `<span>` elements.
+- Use heading elements (`<h1>`–`<h6>`) in proper hierarchical order — one `<h1>` per page, no
+  skipped levels.
+- Use `<ul>`/`<ol>` for lists of items, `<table>` for tabular data.
+
+### Keyboard navigation
+
+- All interactive elements must be reachable via Tab and activatable via Enter/Space.
+- Modals and dialogs must trap focus while open and return focus to the trigger element on close.
+- Dropdown menus and popovers must support Escape to close and arrow keys to navigate options.
+- Visible focus indicators must be present on all focusable elements — never set `outline: none`
+  without providing an alternative focus style.
+
+### ARIA attributes
+
+- Add `aria-label` or `aria-labelledby` to interactive elements that lack visible text labels
+  (icon-only buttons, icon links, search inputs).
+- Use `role="dialog"` and `aria-modal="true"` on modal containers with `aria-labelledby` pointing
+  to the modal title.
+- Use `aria-expanded` on buttons that toggle collapsible sections or dropdowns.
+- Use `aria-current="page"` on the active navigation link in sidebars/navbars.
+- Add `aria-live="polite"` to regions that update dynamically (toast notifications, status messages,
+  loading states).
+- Use `aria-describedby` to associate error messages with their form fields.
+
+### Forms
+
+- Every form input must have an associated `<label>` element (via `htmlFor`) or an `aria-label`.
+- Group related fields with `<fieldset>` and `<legend>` where appropriate.
+- Display validation errors adjacent to the relevant field with `role="alert"` or linked via
+  `aria-describedby`.
+- Required fields should use the `aria-required="true"` attribute.
+
+### Color and contrast
+
+- Text must meet WCAG AA contrast ratios: 4.5:1 for normal text, 3:1 for large text (18px+ bold
+  or 24px+ regular).
+- Never convey information through color alone — pair colors with icons, text labels, or patterns
+  (e.g., status badges should include text, not just a colored dot).
+- Focus indicators must have at least 3:1 contrast against adjacent colors.
+
+### Images and media
+
+- All `<img>` elements must have an `alt` attribute. Decorative images use `alt=""`.
+- Icons used as the sole content of a button or link need `aria-label` on the parent element or
+  `aria-hidden="true"` on the icon with a visually hidden text label alongside it.
 
 ## Making a Page Responsive
 
