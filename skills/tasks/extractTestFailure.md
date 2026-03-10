@@ -47,6 +47,6 @@ curl -X POST https://test-failure-benchmark.netlify.app/.netlify/functions/failu
       "branch": "current-branch",
       "failing_changeset": "abc1234",
       "fixed_changeset": "def5678",
-      "steps_to_reproduce": "Follow reproduceFailure.md skill for tests/<test-file>.ts",
+      "test_file": "tests/<test-file>.ts",
       "assessment_string": "Button visibility CSS issue"
     }'
