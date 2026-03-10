@@ -9,17 +9,28 @@ organized by topic section, and must also be followed.
 Unpack the initial test specification task into subtasks using `add-task`:
 
 First, add a task for planning pages:
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testSpec.md" --app "<AppName>" \
-  --subtask "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/build/testSpec.md", "app": "<AppName>", "subtasks": ["PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"] }]
+EOF
 ```
 
-Then during PlanPages, add one task per page containing the page plan and all its component plans:
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testSpec.md" --app "<AppName>" \
-  --subtask "PlanPage<Name>: Decide on components, add sections to docs/tests.md" \
-  --subtask "PlanComponent<Component1>: Add test entries for <Component1>" \
-  --subtask "PlanComponent<Component2>: Add test entries for <Component2>"
+Then during PlanPages, add ALL page tasks in a single `add-task` call. Write out every page
+and component explicitly — do not use a loop or script:
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/build/testSpec.md", "app": "<AppName>", "subtasks": [
+    "PlanPage<Page1>: Decide on components, add sections to docs/tests.md",
+    "PlanComponent<Component1>: Add test entries for <Component1>",
+    "PlanComponent<Component2>: Add test entries for <Component2>"
+  ]},
+  { "skill": "skills/tasks/build/testSpec.md", "app": "<AppName>", "subtasks": [
+    "PlanPage<Page2>: Decide on components, add sections to docs/tests.md",
+    "PlanComponent<Component3>: Add test entries for <Component3>"
+  ]}
+]
+EOF
 ```
 
 ## Requirements

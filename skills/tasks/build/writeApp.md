@@ -11,18 +11,28 @@ installation, configuration (vite, tsconfig, netlify.toml, playwright config), a
 `npm run check` successfully before any component writing begins. Do not leave infrastructure
 setup for component-writing tasks to discover and fix:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app "<AppName>" \
-  --subtask "SetupApp: Setup the app" \
-  --subtask "DesignDatabase: Design the database"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/build/writeApp.md", "app": "<AppName>", "subtasks": ["SetupApp: Setup the app", "DesignDatabase: Design the database"] }]
+EOF
 ```
 
-Then add one task per page, containing all components and the page itself:
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeApp.md" --app "<AppName>" \
-  --subtask "WriteComponent<Component1>: Write the <Component1> component" \
-  --subtask "WriteComponent<Component2>: Write the <Component2> component" \
-  --subtask "WritePage<Name>: Write the page itself"
+Then add ALL page tasks in a single `add-task` call. Write out every page and component
+explicitly — do not use a loop or script:
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/build/writeApp.md", "app": "<AppName>", "subtasks": [
+    "WriteComponent<Component1>: Write the <Component1> component",
+    "WriteComponent<Component2>: Write the <Component2> component",
+    "WritePage<Page1>: Write the page itself"
+  ]},
+  { "skill": "skills/tasks/build/writeApp.md", "app": "<AppName>", "subtasks": [
+    "WriteComponent<Component3>: Write the <Component3> component",
+    "WritePage<Page2>: Write the page itself"
+  ]}
+]
+EOF
 ```
 
 ## SetupApp Guidance

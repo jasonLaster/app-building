@@ -27,26 +27,20 @@ If the user's request doesn't clearly match a report type, ask them to clarify.
    - `<branchName>` is the current git branch
    - `<TIMESTAMP>` is `YYYYMMDD-HHmmss` format
 
-4. Queue the pipeline tasks in **reverse order** (last stage first), since
-   `add-task` always pushes to the front:
+4. Queue the pipeline tasks in execution order. When multiple reports are being generated,
+   the mergeToMain task must be added only for the first report so that only a single merge
+   happens at the end:
 
 ```bash
-// When multiple reports are being generated this one must be done only for the first report
-// whose tasks are enqueued, so that only a single merge happens at the end.
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/mergeToMain.md" \
-  --subtask "MergeToMain: <report-name>"
-
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/updateSkills.md" \
-  --subtask "UpdateSkills: <report-name>"
-
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/synthesizeReport.md" \
-  --subtask "Synthesize: <report-name> <report-file>"
-
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/analyzeLogs.md" \
-  --subtask "Unpack: <report-name> <report-file>"
-
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/mergeFromMain.md" \
-  --subtask "MergeFromMain: Merge latest main into branch"
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/mergeFromMain.md", "subtasks": ["MergeFromMain: Merge latest main into branch"] },
+  { "skill": "skills/review/analyzeLogs.md", "subtasks": ["Unpack: <report-name> <report-file>"] },
+  { "skill": "skills/review/synthesizeReport.md", "subtasks": ["Synthesize: <report-name> <report-file>"] },
+  { "skill": "skills/review/updateSkills.md", "subtasks": ["UpdateSkills: <report-name>"] },
+  { "skill": "skills/review/mergeToMain.md", "subtasks": ["MergeToMain: <report-name>"] }
+]
+EOF
 ```
 
 5. Confirm to the user that the report pipeline has been queued with the report name.

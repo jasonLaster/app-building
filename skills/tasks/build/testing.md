@@ -4,22 +4,26 @@ You will run all the tests in the app and get them to pass..
 
 ## Unpack Subtasks
 
-List all test files in the app's `tests/` directory. Add one task per test file, in reverse
-order (last file first) so they run in alphabetical order. Make sure to call add-task separately
-for each spec file.
+List all test files in the app's `tests/` directory. Add ALL test file tasks in a single
+`add-task` call, one task per test file in alphabetical order. Write out every task
+explicitly — do not use a loop or script:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testing.md" --app "<AppName>" \
-  --subtask "FixTests: tests/<file>.spec.ts"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/build/testing.md", "app": "<AppName>", "subtasks": ["FixTests: tests/<file1>.spec.ts"] },
+  { "skill": "skills/tasks/build/testing.md", "app": "<AppName>", "subtasks": ["FixTests: tests/<file2>.spec.ts"] }
+]
+EOF
 ```
 
 After running tests and there are failures, pick specific failing tests and add a task to fix
 them without regressing any tests that passed in previous runs:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/testing.md" --app "<AppName>" \
-  --subtask "Fix: <failing test name 1>" \
-  --subtask "Fix: <failing test name 2>"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/build/testing.md", "app": "<AppName>", "subtasks": ["Fix: <failing test name 1>", "Fix: <failing test name 2>"] }]
+EOF
 ```
 
 ## Requirements

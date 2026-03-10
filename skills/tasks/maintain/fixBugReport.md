@@ -17,13 +17,16 @@ the oldest ones, which will be listed last.
 5. ResolveBug: Mark the bug as resolved and in need of review.
 
 Example:
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/fixBugReport.md" --app "<AppName>" \
-  --subtask "AnalyzeBug: Analyze <BugName>" \
-  --subtask "FixBug: Fix <BugName>" \
-  --subtask "UpdateTests: Update tests for <BugName>" \
-  --subtask "UpdateRevisions: Record spec changes for <BugName>" \
-  --subtask "ResolveBug: Mark <BugName> as resolved"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/maintain/fixBugReport.md", "app": "<AppName>", "subtasks": [
+  "AnalyzeBug: Analyze <BugName>",
+  "FixBug: Fix <BugName>",
+  "UpdateTests: Update tests for <BugName>",
+  "UpdateRevisions: Record spec changes for <BugName>",
+  "ResolveBug: Mark <BugName> as resolved"
+]}]
+EOF
 ```
 
 ## Analyzing bugs

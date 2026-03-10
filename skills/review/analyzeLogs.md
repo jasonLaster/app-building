@@ -25,11 +25,16 @@ Subtask format: `Unpack: <report-name> <report-file>`
 
 3. Break the log list into groups of ~10 logs each.
 
-4. Queue an AnalyzeGroup subtask for each group at the FRONT of the queue:
+4. Queue ALL AnalyzeGroup tasks in a single `add-task` call. Write out every group
+explicitly — do not use a loop or script:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/review/analyzeLogs.md" \
-  --subtask "AnalyzeGroup: <report-name> <report-file> <log1> <log2> ... <log10>"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/review/analyzeLogs.md", "subtasks": ["AnalyzeGroup: <report-name> <report-file> <log1> <log2> ... <log10>"] },
+  { "skill": "skills/review/analyzeLogs.md", "subtasks": ["AnalyzeGroup: <report-name> <report-file> <log11> <log12> ... <log20>"] }
+]
+EOF
 ```
 
 Each AnalyzeGroup subtask contains the report name, report file path, and the list of

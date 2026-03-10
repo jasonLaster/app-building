@@ -102,8 +102,9 @@ VIDEO: <uploadthing-url>: <description>
 Then queue a task to analyze the recording and fix the issue:
 
 ```bash
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/journeyQA.md" --app "<AppName>" \
-  --subtask "FixJourney: <journey-title> — <problem description>"
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/journeyQA.md", "app": "<AppName>", "subtasks": ["FixJourney: <journey-title> — <problem description>"] }]
+EOF
 ```
 
 ### 6. Fix journey problems (FixJourney subtasks)

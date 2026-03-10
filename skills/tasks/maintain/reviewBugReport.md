@@ -13,11 +13,14 @@ using `add-task`:
 3. FinishBug: Mark the bug as reviewed.
 
 Example:
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/reviewBugReport.md" --app "<AppName>" \
-  --subtask "ClassifyBug: Classify <BugName>" \
-  --subtask "UpdateDirectives: Update directives for <BugName>" \
-  --subtask "FinishBug: Mark <BugName> as reviewed"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/maintain/reviewBugReport.md", "app": "<AppName>", "subtasks": [
+  "ClassifyBug: Classify <BugName>",
+  "UpdateDirectives: Update directives for <BugName>",
+  "FinishBug: Mark <BugName> as reviewed"
+]}]
+EOF
 ```
 
 ## Classifying bugs

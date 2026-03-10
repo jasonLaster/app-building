@@ -36,15 +36,25 @@ interface FailureRow {
 For each failure you are given, write a file `report-data/testFailure-<failure.id>.md` which will keep track of this work.
 Initialize the file with the entire failure row EXCEPT assessment_string.
 
-Then add the following tasks using add-task (calling in reverse order when pushing tasks onto the stack).
+Then add the tasks for ALL failures in a single `add-task` call. For each failure, add three
+tasks (Reproduce, Fix, Verify) in order. Do NOT use a loop or script — write out every task
+explicitly in the JSON array:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/messages/testFailureBenchmark.md" --subtask "ReproduceTestFailure: <failure.id>"
-npx tsx /repo/scripts/add-task.ts --skill "skills/messages/testFailureBenchmark.md" --subtask "FixTestFailure: <failure.id> <agent.prompt>"
-npx tsx /repo/scripts/add-task.ts --skill "skills/messages/testFailureBenchmark.md" --subtask "VerifyTestFailure: <failure.id> <failure.assessment_string>"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure1.id>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["FixTestFailure: <failure1.id> <agent.prompt>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["VerifyTestFailure: <failure1.id> <failure1.assessment_string>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["ReproduceTestFailure: <failure2.id>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["FixTestFailure: <failure2.id> <agent.prompt>"] },
+  { "skill": "skills/messages/testFailureBenchmark.md", "subtasks": ["VerifyTestFailure: <failure2.id> <failure2.assessment_string>"] }
+]
+EOF
 ```
 
 ULTRA IMPORTANT: You must follow these instructions and the format for subtasks EXACTLY.
+All tasks for all failures must be in a single `add-task` call. Do NOT call `add-task` multiple times.
 
 The first task reproduces the test failure.
 The second task fixes the test failure and fills in the report.

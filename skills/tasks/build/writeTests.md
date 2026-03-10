@@ -4,14 +4,22 @@ You are writing playwright tests which check that all the different entries in d
 
 ## Unpack Subtasks
 
-Unpack the initial write tests task into subtasks using `add-task`. Add one task per page,
-containing all test entries for that page:
+Unpack the initial write tests task into subtasks using `add-task`. Add ALL page tasks in a
+single `add-task` call, with one task per page containing all test entries for that page.
+Write out every task explicitly — do not use a loop or script:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/build/writeTests.md" --app "<AppName>" \
-  --subtask "WriteTest<TestEntry1>: Write test for <TestEntry1>" \
-  --subtask "WriteTest<TestEntry2>: Write test for <TestEntry2>" \
-  --subtask "WriteTest<TestEntry3>: Write test for <TestEntry3>"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/build/writeTests.md", "app": "<AppName>", "subtasks": [
+    "WriteTest<TestEntry1>: Write test for <TestEntry1>",
+    "WriteTest<TestEntry2>: Write test for <TestEntry2>"
+  ]},
+  { "skill": "skills/tasks/build/writeTests.md", "app": "<AppName>", "subtasks": [
+    "WriteTest<TestEntry3>: Write test for <TestEntry3>"
+  ]}
+]
+EOF
 ```
 
 ## Guidelines

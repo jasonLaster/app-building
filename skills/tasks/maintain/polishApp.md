@@ -37,11 +37,16 @@ the planned items (unchecked). As each subtask completes, check off its entry.
 ### Responsive UI
 
 If the `Responsive UI` section in `docs/plan.md` is missing or not marked `✓`, the app needs
-responsive work. Read `docs/tests.md` to identify all pages, then add one task per page:
+responsive work. Read `docs/tests.md` to identify all pages, then add ALL page tasks in a
+single `add-task` call — write out every page explicitly, do not use a loop or script:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/polishApp.md" --app "<AppName>" \
-  --subtask "MakeResponsive<PageName>: Make <PageName> responsive"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/maintain/polishApp.md", "app": "<AppName>", "subtasks": ["MakeResponsive<Page1>: Make <Page1> responsive"] },
+  { "skill": "skills/tasks/maintain/polishApp.md", "app": "<AppName>", "subtasks": ["MakeResponsive<Page2>: Make <Page2> responsive"] }
+]
+EOF
 ```
 
 Add or update the `Responsive UI` section in `docs/plan.md` with an unchecked entry for each page.

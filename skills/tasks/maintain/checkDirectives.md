@@ -6,21 +6,23 @@ go through the entire app and check that its behavior is following all directive
 
 ## Unpack Subtasks
 
-Read `docs/tests.md` to understand the existing application structure. Add one task per
-page using `add-task`, with all checks for that page in the same task:
+Read `docs/tests.md` to understand the existing application structure. Add ALL page tasks
+and the backend task in a single `add-task` call. Write out every page explicitly — do not
+use a loop or script:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" \
-  --subtask "CheckTestSpec<PageName>: Check testSpec.md directive violations in <PageName> test entries" \
-  --subtask "CheckComponents<PageName>: Check writeApp.md directive violations in <PageName> components" \
-  --subtask "CheckTests<PageName>: Check writeTests.md directive violations in <PageName> tests"
-```
-
-Also add a separate task for non-page specific checks:
-
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" \
-  --subtask "CheckBackend: Check writeApp.md directive violations in all backend functions"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/maintain/checkDirectives.md", "app": "<AppName>", "subtasks": [
+    "CheckTestSpec<PageName>: Check testSpec.md directive violations in <PageName> test entries",
+    "CheckComponents<PageName>: Check writeApp.md directive violations in <PageName> components",
+    "CheckTests<PageName>: Check writeTests.md directive violations in <PageName> tests"
+  ]},
+  { "skill": "skills/tasks/maintain/checkDirectives.md", "app": "<AppName>", "subtasks": [
+    "CheckBackend: Check writeApp.md directive violations in all backend functions"
+  ]}
+]
+EOF
 ```
 
 ## Checking for violations
@@ -32,11 +34,14 @@ You must do this systematically and announce each entry name / file you are chec
 For any violations you find, add a fix task using `add-task`. Do not fix them immediately.
 
 Example:
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" \
-  --subtask "FixViolation: Fix <violation description>" \
-  --subtask "RunTests: Run tests/<affected-spec>.spec.ts to verify fix" \
-  --subtask "DocumentFix: Document the fix"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[{ "skill": "skills/tasks/maintain/checkDirectives.md", "app": "<AppName>", "subtasks": [
+  "FixViolation: Fix <violation description>",
+  "RunTests: Run tests/<affected-spec>.spec.ts to verify fix",
+  "DocumentFix: Document the fix"
+]}]
+EOF
 ```
 
 ## Fixing violations

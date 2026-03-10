@@ -67,16 +67,30 @@ a `timestamp`, and an optional `app` name:
 }
 ```
 
-The agent NEVER reads or writes task files directly. Instead, use:
+The agent NEVER reads or writes task files directly. Instead, use `add-task` via stdin heredoc:
 
-* **`npx tsx /repo/scripts/add-task.ts --skill "<path>" --subtask "desc1" --subtask "desc2" [--app "<name>"]`**:
-  Adds a task to the FRONT of the queue (next to be processed). Each `--subtask` flag
-  adds one subtask to the task. Subtasks execute in the order listed.
-  Use `--app` to associate the task with a specific app (the directory name under `apps/`).
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/build/writeApp.md", "app": "SalesCRM", "subtasks": ["SetupApp: Setup the app", "DesignDatabase: Design the database"] },
+  { "skill": "skills/tasks/build/writeTests.md", "app": "SalesCRM", "subtasks": ["WriteTestAuth: Write test for Auth"] }
+]
+EOF
+```
 
-All subtasks in a task share the same skill. Group related subtasks together — for example,
-all checks for a single page go in one task. When a skill needs to "unpack" into
-sub-tasks, use `add-task` to insert them at the front of the queue.
+Tasks are inserted at the front of the queue in the order listed (first element = first to run).
+Each task object must have `skill` and `subtasks`. `app` is optional.
+
+**CRITICAL: `add-task` usage rules**
+
+- When unpacking tasks, put ALL new tasks in a **single `add-task` call**. Do NOT call
+  `add-task` multiple times.
+- Write out every task explicitly in the JSON array. Do NOT use loops, scripts, or code
+  to generate tasks programmatically.
+- All subtasks in a task share the same skill. Group related subtasks together — for example,
+  all checks for a single page go in one task.
+- When a skill needs to "unpack" into sub-tasks, use `add-task` to insert them at the
+  front of the queue.
 
 **CRITICAL: Task scope rules**
 

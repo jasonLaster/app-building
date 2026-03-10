@@ -17,16 +17,19 @@ for additional instructions. You will continue performing additional rounds of m
 
 6. deployment.md: Deploy the updated app to production.
 
-Add tasks to the queue for each stage in **reverse order** (last stage first), since
-`add-task` always pushes to the front:
+Add all tasks to the queue in execution order:
 
-```
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/deployment.md" --app "<AppName>" --subtask "Unpack: Deploy to production"
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/polishApp.md" --app "<AppName>" --subtask "Unpack: Polish app quality"
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/checkDirectives.md" --app "<AppName>" --subtask "Unpack: Check directive compliance"
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/reviewBugReport.md" --app "<AppName>" --subtask "Unpack: Review fixed bug reports"
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/maintain/fixBugReport.md" --app "<AppName>" --subtask "Unpack: Fix open bug reports"
-npx tsx /repo/scripts/add-task.ts --skill "skills/tasks/mergeFromMain.md" --app "<AppName>" --subtask "MergeFromMain: Merge latest main into branch"
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/mergeFromMain.md", "app": "<AppName>", "subtasks": ["MergeFromMain: Merge latest main into branch"] },
+  { "skill": "skills/tasks/maintain/fixBugReport.md", "app": "<AppName>", "subtasks": ["Unpack: Fix open bug reports"] },
+  { "skill": "skills/tasks/maintain/reviewBugReport.md", "app": "<AppName>", "subtasks": ["Unpack: Review fixed bug reports"] },
+  { "skill": "skills/tasks/maintain/checkDirectives.md", "app": "<AppName>", "subtasks": ["Unpack: Check directive compliance"] },
+  { "skill": "skills/tasks/maintain/polishApp.md", "app": "<AppName>", "subtasks": ["Unpack: Polish app quality"] },
+  { "skill": "skills/tasks/deployment.md", "app": "<AppName>", "subtasks": ["Unpack: Deploy to production"] }
+]
+EOF
 ```
 
 The worker will pick up and process each task in order (mergeFromMain → fixBugReport → reviewBugReport → checkDirectives → polishApp → deployment).
