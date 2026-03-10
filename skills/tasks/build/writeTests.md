@@ -42,7 +42,12 @@ EOF
   in other elements (labels, options, buttons). Both Playwright's `getByText` and `filter({ hasText })`
   use case-insensitive substring matching by default — e.g., `hasText: 'Male'` also matches "Female".
   Prefer `getByTestId` for precise element targeting, or use `getByRole`/`getByLabel` with exact matching.
-  When using `filter({ hasText })`, pass a regex with anchors (e.g., `{ hasText: /^Male$/ }`) for exact matching.
+  When using `filter({ hasText })`, pass a regex with anchors (e.g., `{ hasText: /^Male$/ }`) for exact matching
+  ONLY on leaf elements that contain just the target text. On composite elements (cards, rows, list items)
+  whose `textContent` includes text from multiple children (name, category, status, etc.), anchored regex
+  will fail because it matches against the full concatenated text. For composite elements, use
+  `filter({ has: page.locator('[data-testid="child-element"]', { hasText: /^exact text$/ }) })` to target
+  a specific child element instead.
   A `strict mode violation: getByText(...) resolved to N elements` error means the selector is ambiguous —
   never work around it with `.first()`, instead use a more specific selector like `getByTestId` or
   `getByRole` with `{ exact: true }`.
