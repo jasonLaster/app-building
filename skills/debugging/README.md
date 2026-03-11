@@ -127,6 +127,16 @@ what the ambiguous locator was.
 In observed sessions, 40% of Replay uses were unnecessary — the error output alone sufficed.
 Apply this heuristic to avoid speculative Replay usage on simple issues.
 
+### Data-contamination quick-check
+When error output shows strict mode violations or unexpected counts, **first check if prior
+tests in the same file create/modify matching data** before opening Replay. Specifically:
+1. Look at the error: does it show duplicate elements, count mismatches, or "No X found"?
+2. Scan prior tests in the same spec file for `create`, `add`, `insert`, or mutation calls.
+3. If a prior test creates/modifies data that matches the error, the diagnosis is complete —
+   no Replay needed.
+
+This quick-check would have correctly skipped Replay for 7/16 failures in one observed session.
+
 ### Data-contamination diagnostic shortcut
 When error output shows count mismatches (expected N, received N+M) or "No X found" messages,
 skip Replay entirely and diagnose directly from error output. These failures are always caused
@@ -214,6 +224,7 @@ is not obvious from the test output.
 | Symptom | Start with |
 |---------|-----------|
 | Test timed out | `PlaywrightSteps` |
+| Test timed out waiting for click | `PlaywrightSteps` then `InspectElement` (check for obstructing elements) |
 | Element not found / count mismatch | `PlaywrightSteps` then `Screenshot` |
 | Wrong data displayed | `NetworkRequest` then `Logpoint` |
 | Component not rendering | `Screenshot` then `ConsoleMessages` |

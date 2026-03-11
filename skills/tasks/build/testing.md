@@ -313,9 +313,11 @@ failures (~45% of observed failures come from shared database state).
    not deferred to checkDirectives. Placing destructive tests earlier corrupts state for
    subsequent tests — this caused 33% of all failures in one observed session.
 
-3. **Unique entity names per test.** When tests create entities, use unique names
-   (e.g., include test name or timestamp) to avoid strict mode collisions from duplicate
-   data accumulating across serial test execution.
+3. **Unique entity names per test.** All test data created by tests (customer names,
+   addresses, property names, etc.) MUST include `Date.now()` or `crypto.randomUUID()`
+   suffixes to prevent cross-test contamination. For example, use
+   `Test Customer ${Date.now()}` instead of `Test Customer`. This single practice prevents
+   the majority of data-contamination failures from duplicate name collisions.
 
 4. **TRUNCATE before seeding (Neon branches).** Seed scripts MUST call `truncateAllTables()`
    before inserting data. Neon branch creation inherits parent data, so insert-only seeding
@@ -341,17 +343,23 @@ failures (~45% of observed failures come from shared database state).
    example, check that the expected number of rows exists before performing add/delete
    operations, rather than relying on a previous test's side effects.
 
-9. **Weekend-safe seed data.** Seed data must include entries for the current day
+9. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
+   for API-driven setup in `beforeEach` or `beforeAll` MUST call `page.goto()` first to
+   navigate to the app. `fetch()` with relative URLs fails at `about:blank` because there
+   is no base URL to resolve against. Always ensure the page has navigated before making
+   fetch calls via `page.evaluate`.
+
+10. **Weekend-safe seed data.** Seed data must include entries for the current day
    regardless of day-of-week. Use relative date calculations (e.g., `new Date()`) rather
    than hardcoded weekday dates. Tests that rely on "today's appointments" or similar
    day-specific queries will fail on weekends if seed data only contains weekday entries.
 
-10. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
+11. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
     components (non-native `<select>`), tests must use click-based interaction patterns
     (`click trigger → click option`), not `page.selectOption()`. Assertions should use
     `getAttribute('data-value')` instead of `toHaveValue()`.
 
-11. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+12. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
@@ -389,6 +397,17 @@ functions, effects, and callbacks to help detect side effects. This causes:
 When writing tests, assume double-renders will occur and avoid assertions that depend on
 exact render or fetch counts. Use DOM-based assertions (`toBeVisible`, `toHaveText`) that
 naturally wait for the final state.
+
+## Test Counting
+
+Do NOT use `npx playwright test --list` to count or list tests — it is unreliable and
+frequently fails or produces unhelpful output (~20% success rate). Instead, use:
+
+```bash
+grep -c "test('" <file>
+```
+
+This reliably counts the number of tests in a spec file for verifying the per-file test limit.
 
 ## Test Command Reliability
 
@@ -560,10 +579,12 @@ process in the section below, and respect the 3-retry limit before changing appr
   decimal display. Using `type="text"` with `inputMode="decimal"` provides the numeric
   keyboard on mobile while allowing full control over formatting. Converting from `type="number"`
   to `type="text"` mid-stream breaks existing test expectations.
-- Seed data should use relative dates (e.g., "current month minus 1") rather than hardcoded
-  month names. Tests that assert on date-filtered data (e.g., expecting "Jan" entries) will
-  fail when run in a different month. Either make seed data date-relative or make test
-  assertions date-aware.
+- **Seed data MUST use relative date offsets from `new Date()`** rather than hardcoded date
+  strings or month names. Tests that assert on date-filtered data (e.g., expecting "Jan"
+  entries or "No upcoming visits") will fail when run on different days or months. Use
+  expressions like `new Date(Date.now() + 86400000)` for "tomorrow" or subtract days for
+  past dates. This prevents failures when tests run on different days than when seeds were
+  written — hardcoded dates caused a cluster of 3 test failures in one observed session.
 - **Verify directories before navigating.** Before using `cd` to navigate to an app directory,
   verify it exists with `test -d` or `ls`. Directory navigation failures (`cd` to nonexistent
   paths) are the most common command failure across all worker iterations.

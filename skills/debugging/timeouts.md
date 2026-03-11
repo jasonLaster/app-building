@@ -24,6 +24,20 @@ to see which step got stuck and what the page looked like at that moment.
 
 ## Common Root Causes (from observed failures)
 
+### Click timeout from obstructing element (dropdown, modal, tooltip)
+When a test times out waiting for a click to succeed, the target element may be obscured by
+an overlaying element (autocomplete dropdown, modal, tooltip, etc.) that intercepts the click.
+
+**Diagnosis with Replay**: `PlaywrightSteps` shows the stuck step (e.g., step 14 waiting for
+click). `InspectElement` at that point reveals the obstructing element on top of the target.
+
+**Fix**: Prevent the obstructing element from appearing (e.g., mock the API that triggers
+the dropdown) or dismiss it before clicking.
+
+*Example*: 3 tests failed because a Nominatim autocomplete dropdown obscured the Save button.
+PlaywrightSteps found the stuck click step, InspectElement confirmed dropdown obstruction.
+Fix mocked the Nominatim API to prevent the dropdown from appearing.
+
 ### Wrong locator / data-testid
 A step tries to click `data-testid="client-row"` but the actual attribute is
 `data-testid="client-row-123"`. PlaywrightSteps shows the step stuck at "click", and

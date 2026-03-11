@@ -59,6 +59,29 @@ For Neon database setup during app creation, follow `skills/scripts/neon-setup.m
 - After creating a project, save the `NEON_PROJECT_ID` and `DATABASE_URL` to `.env`.
 - See `skills/scripts/env-setup.md` for the full list of required environment variables.
 
+## Required Configuration Files
+
+The SetupApp subtask must create all of the following configuration files. Do NOT explore
+git history to discover these — create them directly using the patterns below:
+
+- **`package.json`** — Dependencies, scripts (`check`, `test`, `deploy`), type: module
+- **`tsconfig.json`** — Strict mode, JSX react-jsx, ES2020 target, path aliases
+- **`vite.config.ts`** — React plugin, sourcemap: true, minify: false, process.env.NODE_ENV define
+- **`netlify.toml`** — `base` set to app subdirectory, redirects for `/api/*` and SPA catch-all
+- **`playwright.config.ts`** — Replay browser, reporter, timeouts, webServer with `--functions`
+- **`index.html`** — Vite entry point
+- **`src/main.tsx`** — React root with Provider and Router
+- **`src/App.tsx`** — Router outlet / layout
+- **`src/store.ts`** — Redux store
+- **`src/index.css`** — Global styles and CSS variables
+- **`scripts/check.ts`** — Typecheck + lint quality gate
+- **`scripts/test.ts`** — Test runner with Neon branch management
+- **`scripts/schema.ts`** — `initSchema` function (single source of truth for DB schema)
+- **`scripts/seed-db.ts`** — Seed data with `truncateAndSeed`
+- **`scripts/deploy.ts`** — Production deployment script
+- **`.eslintrc.cjs`** or **`eslint.config.*`** — ESLint configuration
+- **`netlify/functions/db.ts`** — Shared `getSql()` database helper
+
 ## Reference Apps
 
 When scaffolding a new app, check for existing reference apps that can inform your setup.
