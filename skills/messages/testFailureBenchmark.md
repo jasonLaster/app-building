@@ -85,9 +85,7 @@ Make sure you have reproduced the failure and have a Replay recording ID.
 Add the following section to `report-data/testFailure-<failure.id>.md`. ULTRA IMPORTANT: Follow this format exactly.
 
 ```
-## Reproduction
-
-<playwright-failure-message>
+## Recording
 
 Replay recording: <recording-id>
 ```
