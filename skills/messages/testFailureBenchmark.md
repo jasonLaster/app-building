@@ -68,8 +68,14 @@ The third task reads that report and the logs and decides based on the assessmen
 
 2. Delete the following files from the cloned repo:
    - All logs/ files.
+   - The .git folder
 
-3. Reproduce the test failure:
+3. Reinitialize git, so diffs can be computed but the entire repo history is not available.
+   - git init
+   - git add -A
+   - git commit -m "reproduction"
+
+4. Reproduce the test failure:
    - Set NEON_PROJECT_ID in the app's .env file
    - Run `npm install` in the app's directory.
    - Run `npm run test <testFile>` in the app's directory and make sure the test fails. Get the test failure message.
