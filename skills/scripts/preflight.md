@@ -17,13 +17,16 @@ recordings) need to run before each `npm run test` invocation.
 ### 1. Kill stale servers
 
 ```bash
-pkill -f "netlify|vite" 2>/dev/null || true
+ps aux | grep -E "netlify|vite" | grep -v grep | awk '{print $2}' | xargs -r kill 2>/dev/null; echo "servers cleared"
 ```
 
 Stale `netlify dev` and `vite` processes from previous runs cause port conflicts and
-serve outdated code. Always kill them before starting tests. Use a single combined
-`pkill` command — do not cycle through multiple separate kill invocations.
-See `skills/scripts/killStaleProcesses.md` for details.
+serve outdated code. Always kill them before starting tests.
+
+**Important**: Do NOT use `pkill -f "netlify|vite" 2>/dev/null || true` as the primary
+approach — `pkill` exits 0 even when no process is found, so `|| true` makes it look
+successful even when servers are still running. The `ps aux | xargs kill` pipeline is more
+reliable. See `skills/scripts/killStaleProcesses.md` for details and fallback approaches.
 
 **Run each preflight step as a separate command**, not as a combined one-liner. The pattern
 `cd X && pkill ... && grep ... && ls ...` fails if any sub-command fails (especially pkill

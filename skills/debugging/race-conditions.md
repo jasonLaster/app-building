@@ -258,6 +258,53 @@ await expect(updatedRow).toContainText('Checked In');
 This pattern was needed across 3 spec files (5 tests) where status-change buttons altered
 the text that lazy locators depended on.
 
+### React StrictMode concurrent fetch race condition (request-id-tracking)
+When Redux slices dispatch fetch thunks in `useEffect`, React StrictMode double-fires the
+effect, causing two concurrent API requests. The stale response from the first (duplicate)
+request can arrive after the correct response and overwrite it with wrong data.
+
+**Symptom**: Filters appear to work intermittently; test sees unfiltered data after applying
+a filter. Or a month/date filter shows `$0` instead of the correct value.
+
+**Root cause**: React StrictMode double-fires effects, causing two concurrent fetches where
+the stale unfiltered response arrives after the filtered one and overwrites Redux state.
+
+**Diagnostic tool sequence**: `NetworkRequest` to see request timing and which response
+arrived last. Look for two requests to the same endpoint within milliseconds, where the
+earlier request's response arrives after the later one.
+
+**Fix**: Track a `requestId` (incrementing counter or UUID) in the Redux slice. On each
+fetch dispatch, increment the ID. In the fulfilled reducer, compare the response's request
+ID against the current ID — discard responses from superseded requests. Alternatively, use
+`AbortController` to cancel stale requests.
+
+**Cross-slice application**: When this fix is applied to one Redux slice (e.g., invoicesSlice),
+check whether other slices using the same fetching pattern need the same fix (e.g.,
+paymentsSlice, reportsSlice), and apply it proactively to all of them at once.
+
+*Example*: In VetLedger, this pattern was independently needed for invoicesSlice,
+paymentsSlice, and reportsSlice. Applying it to all three at once would have saved 2
+additional test-fix cycles.
+
+### Checklist double-toggle (click propagation)
+When a test clicks a "container" element that encloses a checklist option, click propagation
+selects the option (container click lands on option → selected), then the explicit option
+click immediately deselects it. The item ends up unselected at submit time.
+
+**Symptom**: Validation error like "Please select at least one invoice" despite the test
+clicking the invoice option. Error output alone does not reveal the double-toggle.
+
+**Diagnostic tool sequence**: `Logpoint` on the selection state array (e.g.,
+`selectedInvoiceIds`) to see toggle-on / toggle-off sequence within milliseconds of each
+other. `PlaywrightSteps` to confirm the click sequence.
+
+**Fix**: Skip clicking the container; click the option element directly. Ensure the test
+locator targets the specific checkbox/option, not a wrapping container.
+
+*Example*: In DailyReconciliationView and PaymentListTable, clicking the
+`payment-invoice-select` container propagated to the invoice option (selecting it), then
+the explicit invoice option click deselected it.
+
 ### Date.now() or shared identifiers across workers
 When parallel Playwright workers share a module-level `Date.now()` value for generating
 unique IDs (like test emails), all workers get the same value, causing collisions.

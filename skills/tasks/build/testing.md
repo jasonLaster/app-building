@@ -216,6 +216,11 @@ analyze the failure more carefully (use Replay if available), and try a differen
 
 ## Replay Decision Heuristic
 
+**Before opening a Replay recording**, read the full error output and error context snapshot
+(`test-results/*/error-context.md`). If the expected vs received values, selector name, or
+API response clearly identify the root cause, fix directly — do not use Replay speculatively.
+In observed sessions, 44% of Replay usages were speculative (error output would have sufficed).
+
 Use Replay only when error output does not contain the failing assertion's expected/received
 values or when the failure involves visual/layout issues not captured in error snapshots.
 Specifically:
@@ -691,3 +696,19 @@ process in the section below, and respect the 3-retry limit before changing appr
 - Any test that deletes all records (e.g., empty state tests) must be in a
   `test.describe.serial` block at the end of the describe. Destructive tests placed earlier
   corrupt state for subsequent tests in the same file.
+
+- **Run targeted tests after accessibility refactors.** After any HTML structure change
+  (element type changes like `<span>` to `<th>`, nesting changes), run the spec file for
+  that component before committing. `npm run check` does not catch selector breakage — only
+  running the actual tests will reveal it. This applies especially to polishApp accessibility
+  refactors.
+
+- **JourneyQA tests must not assume live data state.** Do not assume records from prior test
+  runs persist in the deployed database. Either (a) create all required seed data
+  programmatically within the test, or (b) query the API at the start of the test to find an
+  existing record rather than hard-coding an ID or name.
+
+- **Apply race-condition fixes across all slices at once.** When a race-condition fix (e.g.,
+  request-id tracking) is applied to one Redux slice, check whether other slices using the
+  same fetching pattern need the same fix, and apply it proactively. This avoids discovering
+  the same bug independently in each slice across multiple test-fix cycles.

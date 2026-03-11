@@ -108,6 +108,12 @@ always to add more specific selectors. Common fixes:
 - Use `filter({ hasText: ... })` to disambiguate
 - Add a unique `data-testid` attribute to the target element
 
+**Column header ambiguity**: List tables with both filter buttons and column headers using
+generic text labels (Status, Method, Client) will fail Playwright strict-mode because the
+label text matches both the filter button and the column header. Best practice: always add
+`data-testid` to column header elements during writeTests, or scope column header assertions
+to a `thead` context (e.g., `page.locator('thead').getByText('Status')`).
+
 Replay is not needed — the error message tells you exactly how many elements matched and
 what the ambiguous locator was.
 

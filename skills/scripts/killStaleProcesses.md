@@ -8,16 +8,23 @@ and serve outdated code.
 
 ## Usage
 
-Run from any directory before starting tests or a dev server. Use a single combined
-command to kill both process types at once:
+Run from any directory before starting tests or a dev server. The most reliable approach
+is the `ps aux | xargs kill` pipeline:
+
+```bash
+ps aux | grep -E "netlify|vite" | grep -v grep | awk '{print $2}' | xargs -r kill 2>/dev/null; echo "servers cleared"
+```
+
+This is more reliable than `pkill` because `pkill` exits 0 even when no process is found
+(or when processes survive), making `|| true` suppress real failures. The pipeline explicitly
+finds and kills matching PIDs.
+
+**Fallback**: If you prefer `pkill`, use it with verification:
 
 ```bash
 pkill -f "netlify|vite" 2>/dev/null || true
 ```
 
-This replaces the previous pattern of running separate `pkill` commands for each process
-type, and eliminates the ad-hoc retry pattern of trying `pkill -f "netlify dev"`, then
-`pkill -f "netlify"`, then `kill $(pgrep -f netlify)` — all of which are redundant.
 Only retry once if processes persist (see "Verifying Termination" below).
 
 **Always append `|| true`** when using `pkill` in chained commands or scripts. Without it,

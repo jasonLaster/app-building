@@ -3,8 +3,6 @@ FROM node:22-bookworm
 # System dependencies for Playwright browsers
 RUN apt-get update && apt-get install -y \
     git \
-    tree \
-    jq \
     libnss3 \
     libatk1.0-0 \
     libatk-bridge2.0-0 \

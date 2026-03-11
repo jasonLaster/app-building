@@ -176,6 +176,11 @@ LC_ALL=C npx netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG
 The deploy script should set `LC_ALL=C` in the environment before spawning Netlify CLI
 subprocesses.
 
+**ANSI code contamination**: `LC_ALL=C` also prevents ANSI escape codes from appearing in
+CLI output. Without it, extracting URLs or site IDs from `netlify deploy` output may capture
+embedded escape sequences that corrupt `.env` values and break subsequent `curl` calls. See
+`skills/scripts/deploy-troubleshooting.md` for details.
+
 ## Netlify CLI Troubleshooting
 
 The Netlify CLI (`npx netlify`) can fail in container environments. Common issues:
