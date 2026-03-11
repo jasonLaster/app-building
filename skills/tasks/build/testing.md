@@ -728,6 +728,13 @@ process in the section below, and respect the 3-retry limit before changing appr
   programmatically within the test, or (b) query the API at the start of the test to find an
   existing record rather than hard-coding an ID or name.
 
+- **Prefer `toContainText` for cells with potential sr-only text.** When asserting on table
+  cells, score displays, or other elements that may contain visually-hidden accessibility
+  annotations (e.g., sr-only "(leader)" spans), use `toContainText` instead of `toHaveText`.
+  `toHaveText` requires an exact match including hidden text, which breaks when accessibility
+  improvements add sr-only content. This pattern caused a cluster of 9 test failures across
+  multiple spec files in one observed session — all resolved by switching to `toContainText`.
+
 - **Apply race-condition fixes across all slices at once.** When a race-condition fix (e.g.,
   request-id tracking) is applied to one Redux slice, check whether other slices using the
   same fetching pattern need the same fix, and apply it proactively. This avoids discovering

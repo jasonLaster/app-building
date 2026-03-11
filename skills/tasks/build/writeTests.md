@@ -279,6 +279,22 @@ directives) rather than importing `@neondatabase/serverless` directly.
   their dev servers simultaneously, pages can take 25+ seconds to load. A 30s timeout that works
   locally with standard Chrome will cause widespread flakes under recording.
 
+## Playwright Config Selection
+
+Apps may have multiple Playwright config files for different purposes. Use the correct config
+for each test type:
+
+- **`playwright.config.ts`** — Default config for local development tests. Used by `npm run test`.
+  This is the config you should use for all `FixTests` and `WriteTests` workflows.
+- **`playwright.deployment.config.ts`** — For deployment verification tests that run against a
+  live deployed URL. Only use after `npm run deploy` has completed successfully.
+- **`playwright.journey.config.ts`** — For JourneyQA end-to-end journey tests that validate
+  full user flows. Used during JourneyQA tasks.
+
+When running tests via `npm run test`, the test script uses the default `playwright.config.ts`
+automatically. Do not pass `--config` to override this unless you specifically need a different
+config (e.g., deployment testing).
+
 ## Tips
 
 - Before writing tests that interact with shared UI components (ConfirmDialog, modals, dropdowns),

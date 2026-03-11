@@ -190,6 +190,19 @@ earlier corrupts state for all subsequent tests. This single anti-pattern caused
 
 This was the root cause of ~45% of observed test failures.
 
+### SR-only text mismatch
+When accessibility improvements add visually-hidden text (e.g., "(leader)" via `sr-only` spans),
+existing `toHaveText` assertions fail because the element's text content includes the hidden text.
+The error output shows expected vs received with the extra sr-only text appended (e.g., expected
+"25" received "25 (leader)").
+
+**Diagnosis without Replay**: The Playwright error output shows exact expected/received values
+with the sr-only text visible in the "received" side. No recording is needed.
+
+**Fix**: Use `toContainText` instead of `toHaveText` for cells/elements that may contain sr-only
+accessibility annotations. Alternatively, scope the assertion to exclude sr-only children using
+a more specific locator.
+
 ### Selector overcount
 When using `[data-testid^="prefix-"]` selectors, always check whether a container element
 also matches the prefix. For example, `[data-testid^="route-stop-"]` will match both

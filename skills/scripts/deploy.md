@@ -203,6 +203,23 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
 All Netlify CLI commands in the deploy script should use `LC_ALL=C` and pipe output to the
 log file rather than inheriting stdio.
 
+## Database Schema Execution
+
+When running schema scripts directly (outside the deploy script), use `npx tsx -e` with an
+inline import rather than `npx tsx scripts/schema.ts`. The direct file invocation has known
+module resolution issues with `@neondatabase/serverless`:
+
+```bash
+# This often fails with module resolution errors:
+npx tsx scripts/schema.ts
+
+# This works reliably:
+npx tsx -e "import { initSchema } from './scripts/schema.ts'; await initSchema(process.env.DATABASE_URL!);"
+```
+
+The deploy script handles this internally, but if you need to run schema operations manually
+(e.g., during initial setup or debugging), use the inline import pattern.
+
 ## Implementation Tips
 
 - Reuse `initSchema` from `scripts/schema.ts` for schema sync.
