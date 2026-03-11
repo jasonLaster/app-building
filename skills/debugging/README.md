@@ -234,7 +234,7 @@ is not obvious from the test output.
 |---------|-----------|
 | Test timed out | `PlaywrightSteps` |
 | Test timed out waiting for click | `PlaywrightSteps` then `InspectElement` (check for obstructing elements) |
-| Element not found / count mismatch | `PlaywrightSteps` then `Screenshot` |
+| Element not found / count mismatch | `PlaywrightSteps` then `Screenshot` (check data-contamination first — see seed-data.md) |
 | Wrong data displayed | `NetworkRequest` then `Logpoint` |
 | Component not rendering | `Screenshot` then `ConsoleMessages` |
 | API returning errors | `NetworkRequest` then `ConsoleMessages` |

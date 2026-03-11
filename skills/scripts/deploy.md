@@ -223,6 +223,12 @@ log file rather than inheriting stdio.
   Do NOT use `require()` with ESM-only packages — it will fail.
 - Use `netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG` for site creation.
 - Use `netlify deploy --prod --dir dist --functions ./netlify/functions` for deployment.
+  If available, use `--json` to get machine-readable output that avoids ANSI escape code
+  parsing issues.
+- After deployment, verify the site URL returns 200 before proceeding to tests:
+  ```bash
+  curl -s -o /dev/null -w "%{http_code}" <deployed-url>
+  ```
 - Do NOT inherit stdio from subprocesses. Pipe all subprocess output to `logs/deploy.log`.
 - Read/write `.env` using `fs` — parse as key=value lines, append new entries, don't
   clobber existing values.

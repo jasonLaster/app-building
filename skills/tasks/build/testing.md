@@ -342,6 +342,12 @@ failures (~45% of observed failures come from shared database state).
    In one session, this single change would have prevented 10+ data-contamination failures
    across receive-delivery, vendor-detail, and PO-related spec files.
 
+   **State reset for destructive operations**: Every `describe` block containing tests that
+   perform destructive operations (delete, modify, toggle) MUST include a `beforeEach` or
+   `beforeAll` hook that resets state to a known baseline. Without this, earlier tests that
+   delete or modify entities corrupt state for subsequent tests. This single practice would
+   have prevented 4 data-contamination clusters (22 affected tests) in one observed session.
+
 7. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
    cascade, causing failures in later tests that reference them.

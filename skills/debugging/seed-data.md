@@ -50,9 +50,12 @@ failures).
 **Quick diagnosis** (no Replay needed):
 1. Check if the error shows `actual > expected` (e.g., expected 3 rows, got 5). This indicates
    a prior test created records that weren't cleaned up.
-2. Check if the failing test is preceded by a test that creates, deletes, or modifies shared
+2. Check if the error shows "timeout waiting for element" — this can indicate a prior test
+   deleted the entity being waited on (e.g., a test deleted all stores, then a later test
+   times out waiting for a store with a specific UUID).
+3. Check if the failing test is preceded by a test that creates, deletes, or modifies shared
    records (invoices, payments, clients, etc.).
-3. Check if the spec file uses `beforeEach` data reset — if not, that's likely the fix.
+4. Check if the spec file uses `beforeEach` data reset — if not, that's likely the fix.
 
 **Resolution strategies** (in order of preference):
 1. **beforeEach data reset** — Reset relevant state before each test.
