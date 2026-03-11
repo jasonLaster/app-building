@@ -180,6 +180,14 @@ contexts (testing, deployment).
   syntax for queries: `` sql`SELECT * FROM table WHERE id = ${id}` ``. NEVER use `sql(queryString, paramsArray)`.
   For dynamic WHERE clauses, build composable query fragments and conditionally include them in the tagged template.
 
+- **Handle `noUncheckedIndexedAccess` with Neon query results.** When `tsconfig.json` enables
+  `noUncheckedIndexedAccess` (included in strict mode), accessing array elements by index (e.g.,
+  `rows[0]`) returns `T | undefined`. For Neon query results, always check for undefined before
+  accessing properties: `const row = rows[0]; if (!row) return notFound();`. Do NOT use non-null
+  assertions (`rows[0]!`) to silence the error — handle the undefined case properly. This is the
+  most common TypeScript error during app development with Neon, requiring multiple `npm run check`
+  iterations to resolve.
+
 - For database columns with DATE, TIMESTAMP, or UUID types, always convert empty strings to null
   before inserting or updating. Use `value || null` instead of `value ?? null`, because the nullish
   coalescing operator (`??`) does not convert empty strings.

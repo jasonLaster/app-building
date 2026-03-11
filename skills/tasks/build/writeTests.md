@@ -118,6 +118,14 @@ EOF
   - Verify that API endpoints are healthy before running deployment tests. See
     `skills/scripts/deploy-verification.md`.
 
+- **Avoid `.or()` locator patterns that can match multiple elements.** Playwright's `.or()` combinator
+  creates a locator that matches elements from either branch. When both branches resolve to elements on
+  the page, the combined locator matches multiple elements and causes strict-mode violations. For example,
+  `page.getByRole('button', { name: 'Save' }).or(page.getByTestId('save-btn'))` will fail if both
+  a button named "Save" and an element with testid `save-btn` exist (or are the same element matched
+  differently). Prefer a single, specific locator (`getByTestId` or `getByRole` with exact matching)
+  over `.or()` fallback chains.
+
 - When using CSS attribute prefix selectors like `[data-testid^="prefix-"]` to count or collect
   elements, verify that the prefix does not also match child elements with longer testid values
   that share the same prefix. For example, `[data-testid^="group-"]` will match both `group-foo`

@@ -107,6 +107,9 @@ always to add more specific selectors. Common fixes:
 - Add `nth(0)` or `first()` to narrow to a single match
 - Use `filter({ hasText: ... })` to disambiguate
 - Add a unique `data-testid` attribute to the target element
+- **Remove `.or()` locator patterns** — `.or()` creates a combined locator that matches elements
+  from either branch, which can resolve to multiple elements and trigger strict-mode violations.
+  Replace with a single specific locator.
 
 **Column header ambiguity**: List tables with both filter buttons and column headers using
 generic text labels (Status, Method, Client) will fail Playwright strict-mode because the

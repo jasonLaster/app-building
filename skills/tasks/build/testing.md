@@ -458,6 +458,11 @@ process in the section below, and respect the 3-retry limit before changing appr
   matching, "Monthly" matches both "Monthly" and "Bi-Monthly", causing Playwright strict-mode
   errors.
 
+- **Avoid `.or()` locator patterns.** Playwright's `.or()` combinator creates a locator matching
+  elements from either branch. When both branches resolve to elements on the page, the combined
+  locator matches multiple elements and triggers strict-mode violations. Use a single specific
+  locator (`getByTestId` or `getByRole` with exact matching) instead of `.or()` fallback chains.
+
 - All browsers must run headless. Never use Xvfb, never set `DISPLAY`, never use the `replayio record`
   CLI (it launches a headed browser). Use `@replayio/playwright` for recordings.
 
@@ -518,6 +523,10 @@ process in the section below, and respect the 3-retry limit before changing appr
 - Before running deployment tests, verify that required environment variables (DATABASE_URL,
   etc.) are set on the deployment target (e.g., Netlify). Missing env vars cause infrastructure
   failures that waste a full test cycle. Use `netlify env:list` to check.
+- Before running deployment tests, also verify that all Netlify Functions are actually deployed
+  by curling at least one API endpoint. Functions may silently fail to deploy if the `--functions`
+  flag was missing or if there were build errors. A quick `curl -s -o /dev/null -w "%{http_code}"
+  https://<site-url>/api/<function>` returning 200 confirms functions are live.
 - Before running tests, verify `NEON_PROJECT_ID` is set in the environment. The test script
   requires it for creating ephemeral Neon branches.
 - Running the full test suite at once (e.g., `npx playwright test` with no file argument) can
@@ -619,6 +628,11 @@ process in the section below, and respect the 3-retry limit before changing appr
   wait-before-count, destructive test reordering, formatDate normalization), proactively apply
   it to all other spec files in the same app before re-running tests. Fixing each file
   independently wastes re-run cycles on the same known issue.
+- **Validate journey/QA test prerequisites.** Before running journey or QA tests that depend on
+  specific data states (e.g., member with points > 0, active subscriptions), verify the test data
+  meets preconditions. A test that selects a member with 0 points to test redemption will fail at
+  the UI level (disabled button) rather than giving a clear data error. Add precondition checks
+  or use seed data that guarantees the required state.
 - When many tests are pre-existing failures unrelated to the current task, avoid re-verifying
   them on every run. Use the `git stash` triage approach (see `skills/debugging/README.md`)
   once per task to confirm, then focus on new failures only.
