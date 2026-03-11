@@ -15,7 +15,10 @@ understand the persona, goals, and step-by-step actions for the journey.
 
 ## Prerequisites
 
-- The app must be deployed. Read `deployment.txt` to get the deployed URL.
+- The app must be deployed. Follow `skills/scripts/deployment-url.md` to find the deployed URL.
+  Do not search for `deployment.txt` — it does not exist. Check `.netlify/state.json` or use
+  `npx netlify sites:list --json` instead. If the app is not deployed, use `npm run test`
+  (local dev server mode) for journey tests unless the task specifically requires a deployed URL.
 - `UPLOADTHING_TOKEN` must be set in the environment (it is provided in the container).
 - `RECORD_REPLAY_API_KEY` must be set in the environment.
 - Playwright MCP browser tools must be available (`browser_navigate`, `browser_click`, etc.).
@@ -27,7 +30,7 @@ understand the persona, goals, and step-by-step actions for the journey.
 Read `docs/userJourneys.md` and find the journey matching the subtask title. Note the persona,
 the expected actions, and what success looks like.
 
-Read `deployment.txt` to get the deployed app URL.
+Find the deployed app URL following `skills/scripts/deployment-url.md`.
 
 ### 2. Browse the journey
 

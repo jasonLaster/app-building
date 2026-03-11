@@ -196,6 +196,17 @@ Target these files with specific, actionable recommendations:
 - `skills/tasks/build/testing.md` — Process improvements for the testing workflow
 - `skills/review/reportTestFailures.md` — Improvements to this report template itself
 
+**Self-inflicted failure patterns**: When reporting self-inflicted failures, explicitly call out
+the pattern of fixing a backend issue (e.g., adding cascade delete) without simultaneously
+checking whether the fix creates new test ordering problems. This is the most common
+self-inflicted pattern — the backend fix enables a destructive test to wipe data that later
+tests depend on.
+
+**Test isolation score threshold**: If the test isolation score (data-contamination +
+strict-mode + seed-data-mismatch as a percentage of total failures) exceeds 50%, flag it as a
+systemic issue in the recommendations section. Suggest mandating beforeEach cleanup helpers in
+all spec files that modify data, rather than fixing isolation issues reactively per-file.
+
 ### 5. Replay Fixes Table
 
 For each test failure where Replay was used and the test failure was successfully fixed,

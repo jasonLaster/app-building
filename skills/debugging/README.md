@@ -12,6 +12,8 @@ that matches your failure and follow the recommended tool sequence.
 - `network-and-api.md` — API errors, missing data, wrong responses
 - `form-and-input.md` — Form validation, input interactions, browser-native behavior
 - `seed-data.md` — Missing test data, empty collections, count mismatches
+- `test-isolation.md` — Data contamination: destructive ordering, accumulated data, seed mismatch
+- `stale-closure.md` — React stale closures: state not updating after user action
 
 ## Default First Tool: PlaywrightSteps
 

@@ -98,3 +98,10 @@ or test execution.
 - **API key format**: The `NEON_API_KEY` env var is set at the container level. Verify it
   exists with `echo $NEON_API_KEY | head -c 5` before making API calls.
 - **SSL mode**: Always include `?sslmode=require` in the connection URL. Neon requires SSL.
+- **Scripts require explicit connection string**: `scripts/schema.ts` and `scripts/seed-db.ts`
+  require an explicit `"postgresql://..."` argument. They fail silently or with confusing
+  errors when no connection string is passed. Always invoke them with the DATABASE_URL:
+  ```bash
+  npx tsx scripts/schema.ts "$(grep DATABASE_URL .env | cut -d= -f2-)"
+  npx tsx scripts/seed-db.ts "$(grep DATABASE_URL .env | cut -d= -f2-)"
+  ```

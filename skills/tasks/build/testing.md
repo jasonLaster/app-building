@@ -739,3 +739,14 @@ process in the section below, and respect the 3-retry limit before changing appr
   request-id tracking) is applied to one Redux slice, check whether other slices using the
   same fetching pattern need the same fix, and apply it proactively. This avoids discovering
   the same bug independently in each slice across multiple test-fix cycles.
+
+- **Check test suite after cascade-delete fixes.** When fixing a backend DELETE endpoint to
+  add cascade behavior (e.g., deleting dependent records before the parent), immediately check
+  the test suite for any test that relies on the cascaded data existing later in the file.
+  Fix both the backend and the test ordering in the same changeset — otherwise the cascade fix
+  enables a destructive test to wipe data that subsequent tests depend on.
+
+- **Deploy before writing journey tests.** Journey tests that run against a deployed URL
+  require the correct app to be deployed and the production DB seeded. Verify the deployed URL
+  in `playwright.config.ts` before writing selectors. Do not write journey tests against a URL
+  that belongs to a different app.
