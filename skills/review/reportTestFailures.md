@@ -100,14 +100,18 @@ failure template:
 ```
 ## Infrastructure Failures
 INFRA_FAILURE_COUNT: <count>
-INFRA_CATEGORY: <socket-timeout | navigation-timeout | network-error | recording-upload-failure | other>
+INFRA_CATEGORY: <socket-timeout | navigation-timeout | network-error | recording-upload-failure | port-conflict | other>
 AFFECTED_TESTS: <comma-separated list or "all tests in <spec file>">
+INFRA_AFFECTED_TEST_COUNT: <actual number of tests affected, for computing totals>
 RECORDING_AVAILABLE: no
 NOTES: <brief description of the infrastructure issue>
 ```
 
 **Important**: Infrastructure failures are NOT counted in the TEST_FAILURES total or the Summary
-Statistics failure counts. They are reported separately. The Summary Statistics section should
+Statistics failure counts. They are reported separately. Config/import errors that prevent test
+execution entirely (e.g., Playwright config SyntaxError, missing module imports) belong in the
+infrastructure section, not in TEST_FAILURES — they are not test-level failures but environment
+failures that block all tests from running. The Summary Statistics section should
 include an "Infrastructure failure events" row showing the count of infrastructure events and
 total affected tests, making it explicit that these are excluded from the main failure metrics.
 

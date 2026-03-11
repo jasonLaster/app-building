@@ -171,8 +171,11 @@ single command. Chained commands fail if any sub-command fails (especially `pkil
 process exists), producing confusing output and wasting effort decomposing and re-running.
 
 ```bash
-# Step 1: Kill stale servers
+# Step 1: Kill stale servers (including zombies holding port 8888)
 pkill -f "netlify|vite" 2>/dev/null || true
+# If port 8888 is still occupied after pkill (zombie processes invisible to lsof),
+# find PIDs via /proc/net/tcp6 and kill -9 them:
+fuser -k 8888/tcp 2>/dev/null || true
 ```
 ```bash
 # Step 2: Verify env vars
@@ -438,6 +441,10 @@ process in the section below, and respect the 3-retry limit before changing appr
   "unnecessary" helpers), always run the affected tests *before* committing the removal to
   confirm the change is safe. Cleanup code that looks redundant may be essential for test
   isolation.
+
+- **Use content-based locators over positional.** Tests should use `filter({ hasText })` or
+  `getByText()` instead of `nth()` for dropdown/list assertions to avoid ordering-dependent
+  failures. API response ordering is not guaranteed to match creation order.
 
 - **Use exact text matching for option selection.** When selecting dropdown options or matching
   text that contains common words (e.g., "Monthly", "Active"), always use exact matching to

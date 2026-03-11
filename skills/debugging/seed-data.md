@@ -153,6 +153,20 @@ await expect(page.locator('[data-testid="row"]').filter({ hasText: 'Expected Ite
 This pattern is especially important for tests that verify data after mutations — capture
 initial state and assert relative changes rather than hardcoded absolute values.
 
+### Stale seed data dates
+When date-filtered queries return unexpected counts (e.g., "expected 4 showings today, got 0"),
+check whether seed dates have become stale relative to today's date. Hardcoded dates like
+`2026-01-15` will fall outside "today" or "this week" filters as time passes. This was the
+root cause of 3 failures in one session.
+
+**Diagnosis without Replay**: Error output shows expected vs actual counts for date-filtered
+data. If the expected count is the total seed count but actual is 0 or lower, seed dates
+have likely moved outside the filter window.
+
+**Fix**: Change seed data to use relative dates (e.g., `new Date()` minus offsets) instead
+of hardcoded dates. This ensures seed data always falls within date-based filters regardless
+of when tests run.
+
 ## General Guidance
 
 When many detail-page tests fail with `expected count > 0, received 0`, resist the urge to
