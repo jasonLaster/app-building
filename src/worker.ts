@@ -27,6 +27,8 @@ export interface Task {
   app?: string;
   /** Raw prompt for message-derived tasks (no skill file). */
   prompt?: string;
+  /** Custom command (agent + args) to run instead of the default "claude" with extraArgs. */
+  command?: string;
 }
 
 interface TasksFile {
@@ -34,9 +36,9 @@ interface TasksFile {
   current?: Task;
 }
 
-// --- Claude invocation ---
+// --- Agent invocation ---
 
-export interface ClaudeResult {
+export interface AgentResult {
   result: string;
   cost_usd?: number;
   duration_ms?: number;
@@ -47,16 +49,16 @@ export interface ClaudeResult {
 
 export type EventCallback = (line: string) => void;
 
-/** Reference to the currently running Claude child process, if any. */
-export let currentClaudeProcess: ChildProcess | null = null;
+/** Reference to the currently running agent child process, if any. */
+export let currentAgentProcess: ChildProcess | null = null;
 
 /** Set by the server when the user sends POST /interrupt. Cleared after processTask checks it. */
-export let interruptRequested = false;
+let interruptRequested = false;
 
 export function requestInterrupt(): void {
   interruptRequested = true;
-  if (currentClaudeProcess) {
-    currentClaudeProcess.kill("SIGINT");
+  if (currentAgentProcess) {
+    currentAgentProcess.kill("SIGINT");
   }
 }
 
@@ -66,32 +68,39 @@ function hasDoneSignal(source: string, text: string): boolean {
   return match;
 }
 
-function buildClaudeArgs(prompt: string, extraArgs: string[], resumeSessionId?: string): string[] {
-  const args: string[] = [];
-  if (resumeSessionId) {
-    args.push("--resume", resumeSessionId, "-p", prompt);
-  } else {
-    args.push("-p", prompt);
-  }
-  args.push(...extraArgs);
-  args.push("--output-format", "stream-json", "--verbose");
-  return args;
+export interface CommandSpec {
+  bin: string;
+  args: string[];
 }
 
-function runClaude(
-  claudeArgs: string[],
+function parseCommand(command: string): CommandSpec {
+  const parts = command.split(/\s+/);
+  return { bin: parts[0], args: parts.slice(1) };
+}
+
+function buildAgentArgs(spec: CommandSpec, prompt: string, resumeSessionId?: string): CommandSpec {
+  const args: string[] = [...spec.args];
+  if (resumeSessionId) {
+    args.push("--resume", resumeSessionId);
+  }
+  args.push("--print", "--output-format", "stream-json", "--verbose", prompt);
+  return { bin: spec.bin, args };
+}
+
+function runAgent(
+  cmd: CommandSpec,
   log: Logger,
   onEvent?: EventCallback,
-): Promise<ClaudeResult> {
+): Promise<AgentResult> {
   return new Promise((resolve, reject) => {
-    const child = spawn("claude", claudeArgs, {
+    const child = spawn(cmd.bin, cmd.args, {
       env: process.env,
       stdio: ["ignore", "pipe", "pipe"],
     });
 
-    currentClaudeProcess = child;
+    currentAgentProcess = child;
 
-    let resultEvent: ClaudeResult | null = null;
+    let resultEvent: AgentResult | null = null;
     let doneSignaled = false;
     let sessionId: string | undefined;
     let buffer = "";
@@ -137,18 +146,18 @@ function runClaude(
 
     child.stderr!.on("data", (data: Buffer) => {
       for (const line of data.toString().split("\n")) {
-        if (line.trim()) log(`[claude:err] ${line}`);
+        if (line.trim()) log(`[agent:err] ${line}`);
       }
     });
 
     child.on("error", (err) => {
-      currentClaudeProcess = null;
+      currentAgentProcess = null;
       reject(err);
     });
 
     child.on("close", (code) => {
-      currentClaudeProcess = null;
-      debug(`claude process closed with code=${code}`);
+      currentAgentProcess = null;
+      debug(`agent process closed with code=${code}`);
       if (buffer.trim()) {
         debug(`final buffer: ${buffer.slice(0, 300)}`);
         log(buffer);
@@ -168,9 +177,9 @@ function runClaude(
           }
         } catch {}
       }
-      debug(`runClaude finished: doneSignaled=${doneSignaled} hasResultEvent=${!!resultEvent}`);
+      debug(`runAgent finished: doneSignaled=${doneSignaled} hasResultEvent=${!!resultEvent}`);
       if (code !== 0 && !resultEvent) {
-        reject(new Error(`claude exited with code ${code}`));
+        reject(new Error(`agent exited with code ${code}`));
         return;
       }
       const result = resultEvent ?? { result: "", doneSignaled: false };
@@ -307,22 +316,6 @@ export function addPromptTask(prompt: string): void {
 
 // --- Exported API ---
 
-/**
- * Run a single prompt through Claude and return the result.
- * If resumeSessionId is provided, the prompt is sent as a follow-up
- * in the existing Claude Code session.
- */
-export async function processMessage(
-  prompt: string,
-  extraArgs: string[],
-  log: Logger,
-  onEvent?: EventCallback,
-  resumeSessionId?: string,
-): Promise<ClaudeResult> {
-  const claudeArgs = buildClaudeArgs(prompt, extraArgs, resumeSessionId);
-  log(`Running Claude${resumeSessionId ? ` (resume ${resumeSessionId.slice(0, 8)}...)` : ""}...`);
-  return runClaude(claudeArgs, log, onEvent);
-}
 
 export function getNextTask(log: Logger): Task | null {
   const data = readTasksFile();
@@ -356,7 +349,7 @@ function taskCommitLabel(task: Task): string {
 export interface TaskResult {
   success: boolean;
   cost: number;
-  /** Session ID from Claude, returned so callers can resume the session. */
+  /** Session ID from the agent, returned so callers can resume the session. */
   session_id?: string;
 }
 
@@ -365,7 +358,7 @@ export interface TaskResult {
  */
 export async function processTask(
   task: Task,
-  extraArgs: string[],
+  defaultAgent: CommandSpec,
   log: Logger,
   onEvent?: EventCallback,
   shouldStop?: () => boolean,
@@ -391,9 +384,12 @@ export async function processTask(
     }
 
     interruptRequested = false;
-    let response: ClaudeResult;
+    const agent = task.command ? parseCommand(task.command) : defaultAgent;
+    const cmd = buildAgentArgs(agent, prompt, task.prompt ? sessionId : undefined);
+    log(`Running ${cmd.bin}${sessionId && !task.command ? ` (resume ${sessionId.slice(0, 8)}...)` : ""}...`);
+    let response: AgentResult;
     try {
-      response = await processMessage(prompt, extraArgs, log, onEvent, task.prompt ? sessionId : undefined);
+      response = await runAgent(cmd, log, onEvent);
     } catch (e: any) {
       if (interruptRequested) {
         log(`Task interrupted.`);
@@ -402,7 +398,7 @@ export async function processTask(
         clearCurrentTask(log);
         return { success: false, cost };
       }
-      log(`Error running claude: ${e.message}`);
+      log(`Error running agent: ${e.message}`);
       commitFn?.("Agent error recovery");
       continue;
     }

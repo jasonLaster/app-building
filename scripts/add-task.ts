@@ -29,12 +29,14 @@ interface Task {
   subtasks: string[];
   timestamp: string;
   app?: string;
+  command?: string;
 }
 
 interface TaskInput {
   skill: string;
   subtasks: string[];
   app?: string;
+  command?: string;
 }
 
 interface TasksFile {
@@ -165,6 +167,7 @@ ERROR: No input provided. Pass a JSON array via stdin or use --skill/--subtask f
       subtasks: input.subtasks,
       timestamp,
       ...(input.app && { app: input.app }),
+      ...(input.command && { command: input.command }),
     });
   }
 

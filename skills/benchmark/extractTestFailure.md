@@ -31,7 +31,9 @@ It is very important when fixing tests to make sure the fix is correct. The test
 behaving correctly according to the requirements of the corresponding test spec entry, and the app must
 not inappropriately hardcode values which the test expects to find.
 
-When submitting a test failure an assessment string is provided which is 
+When submitting a test failure an assessment string is provided which is used to evaluate whether the fix
+was done correctly. Assessments should describe the root cause of the problem which the fix must address,
+along with any known ways to fix that root cause.
 
 ## Submitting test failures
 
@@ -41,13 +43,12 @@ The group name must be filled in as specified, other fields must be updated for 
 curl -X POST https://test-failure-benchmark.netlify.app/.netlify/functions/failures \
   -H "Content-Type: application/json" \
     -d '{
-      "title": "Login button not visible after auth",
       "group_name": "app-building",
+      "title": "Login button not visible after auth",
       "github_repository": "https://github.com/replayio/app-building",
       "branch": "current-branch",
-      "neon_project_id": "project-id",
       "failing_changeset": "abc1234",
       "fixed_changeset": "def5678",
       "test_file": "tests/<test-file>.ts",
-      "assessment_string": "Button visibility CSS issue"
+      "assessment_string": "..."
     }'

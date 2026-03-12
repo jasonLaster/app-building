@@ -292,6 +292,5 @@ The organization of branches in this repository is a little involved.
 * loop-builder: Source for the Loop Builder app https://loop-builder.netlify.app/
 * loop-builder-base: Base branch for Loop Builder apps, has additional documentation and requirements.
 * test-failure-benchmark: Source for the Test Failure Benchmark app https://test-failure-benchmark.netlify.app/
-* test-failure-benchmark-base: Base branch for Test Failure Benchmark runs, only has skills for running tests.
 
 Other branches generally have various automatically built apps of one sort or another.

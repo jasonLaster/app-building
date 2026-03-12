@@ -4,12 +4,13 @@ import { cloneRepo, checkoutTargetBranch, commitAndPushTarget, getRevision, toTo
 import {
   processTask,
   getNextTask,
-  currentClaudeProcess,
+  currentAgentProcess,
   getPendingTaskCount,
   absorbForeignTaskFiles,
   addPromptTask,
   requestInterrupt,
   type EventCallback,
+  type CommandSpec,
 } from "./worker";
 import { createBufferedLogger, archiveCurrentLog, redactSecrets } from "./log";
 import { formatLogLine, stripTimestamp } from "./format";
@@ -109,9 +110,9 @@ function postWebhook(type: string, data?: Record<string, unknown>): void {
   });
 }
 
-// --- Claude extra args ---
+// --- Default agent config ---
 
-function buildExtraArgs(): string[] {
+function buildDefaultAgent(): CommandSpec {
   const args: string[] = [];
   args.push("--model", "claude-opus-4-6");
   args.push("--dangerously-skip-permissions");
@@ -126,7 +127,7 @@ function buildExtraArgs(): string[] {
   }
   args.push("--mcp-config", JSON.stringify({ mcpServers }));
 
-  return args;
+  return { bin: "claude", args };
 }
 
 // --- Logger (initialized after clone) ---
@@ -182,11 +183,11 @@ function getQuery(url: string, key: string): string | null {
 //    is empty. This is the normal shutdown path.
 //
 // 2. **Stop** (POST /stop): Sets `stopRequested`. The container breaks out of
-//    the loop immediately (interrupting any running Claude process), commits
+//    the loop immediately (interrupting any running agent process), commits
 //    any remaining work, and exits. This is the forced shutdown path.
 
 async function processLoop(): Promise<void> {
-  const extraArgs = buildExtraArgs();
+  const defaultAgent = buildDefaultAgent();
   // Track session ID across prompt tasks so interactive messages share context
   let promptSessionId: string | undefined;
 
@@ -204,7 +205,7 @@ async function processLoop(): Promise<void> {
       const taskStartedAt = Date.now();
       const result = await processTask(
         task,
-        extraArgs,
+        defaultAgent,
         log,
         onEvent,
         () => stopRequested,
@@ -303,9 +304,9 @@ const server = createServer(async (req, res) => {
 
     // POST /interrupt
     if (method === "POST" && url === "/interrupt") {
-      log(`Interrupt received (state=${state}, hasProcess=${!!currentClaudeProcess})`);
+      log(`Interrupt received (state=${state}, hasProcess=${!!currentAgentProcess})`);
       requestInterrupt();
-      json(res, 200, { interrupted: !!currentClaudeProcess });
+      json(res, 200, { interrupted: !!currentAgentProcess });
       return;
     }
 
@@ -320,9 +321,9 @@ const server = createServer(async (req, res) => {
     // POST /stop
     if (method === "POST" && url === "/stop") {
       stopRequested = true;
-      // Kill any running claude process
-      if (currentClaudeProcess) {
-        currentClaudeProcess.kill("SIGINT");
+      // Kill any running agent process
+      if (currentAgentProcess) {
+        currentAgentProcess.kill("SIGINT");
       }
       wake();
       json(res, 200, { stopping: true });
