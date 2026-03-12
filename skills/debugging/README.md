@@ -149,10 +149,12 @@ tests in the same file create/modify matching data** before opening Replay. Spec
 This quick-check would have correctly skipped Replay for 7/16 failures in one observed session.
 
 ### Data-contamination diagnostic shortcut
-When error output shows count mismatches (expected N, received N+M) or "No X found" messages,
-skip Replay entirely and diagnose directly from error output. These failures are always caused
-by accumulated/deleted data from prior tests. In observed sessions, 100% of Replay uses for
-data-contamination failures were unnecessary — error output was always sufficient.
+When error output shows count mismatches (expected N, received N+M) or "No X found" messages
+after a destructive test, skip Replay entirely and go straight to test ordering analysis.
+These failures are always caused by accumulated/deleted data from prior tests — check which
+earlier test created, deleted, or modified records. In observed sessions, 100% of Replay uses
+for data-contamination failures were unnecessary — error output was always sufficient. This
+shortcut correctly diagnosed 16/27 failures (59%) in one session.
 
 ### Data contamination triage (most common failure category — 57% of all failures)
 When Playwright error output shows expected count X but received Y (e.g., "expected 3 but

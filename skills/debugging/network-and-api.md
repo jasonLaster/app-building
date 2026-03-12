@@ -112,16 +112,24 @@ routing issue.
 Netlify functions parse URL segments to extract resource IDs (e.g., `segments[2]` for
 `/api/resources/:id`). A recurring bug is using the wrong segment index — e.g., `segments[3]`
 instead of `segments[2]` — which causes the function to read `undefined` as the ID and return
-405 or wrong results. This exact bug appeared in 3 separate backend functions (categories.ts,
-preventive-schedules.ts, staff.ts) in one session.
+405 or wrong results. This bug has appeared across multiple apps and sessions.
 
-**Diagnosis with Replay**: `NetworkRequest` shows PUT/DELETE requests returning 405 Method Not
-Allowed. The request URL is correct, but the function can't parse the ID from the URL.
+**Key pattern**: The `/api/` redirect prefix changes segment indices compared to the
+`/.netlify/functions/` prefix. When Netlify rewrites `/api/contacts/1` to
+`/.netlify/functions/contacts/1`, the segment index for the ID changes. If functions were
+written assuming `/.netlify/functions/` paths (e.g., `segments[3]`), switching to `/api/`
+prefix breaks all ID parsing. In one session, this single architectural bug caused 7 test
+failures across 3 logs and 5 backend functions.
+
+**Diagnosis**: When API returns HTML instead of JSON, 405 Method Not Allowed, or returns all
+records instead of one, check segment indexing first. `NetworkRequest` confirms the issue but
+error output (HTML response, 405 status) is usually sufficient.
 
 **Fix**: Check the URL segment parsing in the Netlify function. Count segments from index 0:
 for a URL like `/.netlify/functions/resource/123`, the segments after splitting on `/` depend
 on whether there's a redirect. Always verify by logging `segments` or checking the actual URL
-the function receives.
+the function receives. When migrating between URL prefixes, audit all functions that parse
+segments — the bug will affect every function, not just one.
 
 ## Common Root Causes (from observed failures)
 

@@ -177,6 +177,11 @@ EOF
   input fields that format values (e.g., monetary inputs formatting "130" as "130.00"), the
   assertion must match the formatted value exactly, not just the numeric portion.
 
+- Always generate unique test data names by including `Date.now()` or `crypto.randomUUID()`
+  suffixes (e.g., `Test Customer ${Date.now()}` instead of `Test Customer`). Non-unique test
+  data causes strict-mode violations and cross-test contamination when multiple tests create
+  records with identical names. This is a template requirement for all test data creation.
+
 - When a test file's describe block contains tests that perform destructive mid-test operations
   (e.g., deleting records via API requests during the test body) that would invalidate the
   preconditions of other tests in the same block, wrap those tests in `test.describe.serial`

@@ -10,6 +10,12 @@ pass before every commit.
 `npm run check` has a 100% success rate across 173 observed worker iterations (28 invocations,
 all successful). It is the most reliable quality gate and should always be used before commits.
 
+## When to Run
+
+`npm run check` should be the **last command before task completion** — run it as a final
+quality gate, not speculatively mid-task. Running it mid-development wastes cycles on errors
+that will be fixed by subsequent edits. Complete all code changes first, then run check once.
+
 ## Usage
 
 - `package.json` entry: `"check": "tsx scripts/check.ts"`

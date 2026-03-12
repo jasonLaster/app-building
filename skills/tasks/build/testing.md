@@ -209,10 +209,21 @@ ULTRA IMPORTANT: NEVER EVER EVER RUN `npx playwright test`. You must use the pro
 - Read the log file only when you need to diagnose failures.
 - Tests MUST run in parallel with multiple workers (use `fullyParallel: true` in playwright config).
 
+**ERR_CONNECTION_REFUSED on first run**: If the first test run fails with
+`ERR_CONNECTION_REFUSED`, the dev server likely wasn't fully ready. Wait 5 seconds and retry
+once before investigating further. Do not immediately launch into manual `netlify dev` startup
+or port debugging — the test script manages the server automatically and a single retry usually
+resolves transient startup delays.
+
 **Retry limit**: Limit test re-runs to 3 per failing test before investigating the root cause.
 Test failures during development are expected (test-fix-retest cycle), but re-running the same
 test more than 3 times without changing approach indicates the fix strategy is wrong. Stop,
 analyze the failure more carefully (use Replay if available), and try a different approach.
+
+**Batch failure triage**: When multiple tests fail, categorize failures before fixing them
+one-by-one. Common categories (data contamination, missing serial blocks, non-unique test data)
+often share a single root cause that can be fixed once to resolve many failures. Running all
+tests first and grouping failures by category is more efficient than fixing tests sequentially.
 
 ## Replay Decision Heuristic
 
@@ -334,7 +345,13 @@ failures (~45% of observed failures come from shared database state).
 5. **Relative or data-independent assertions.** Tests that verify data after mutations must
    query current state before the action and assert relative changes, not absolute values.
 
-6. **Distinct test data records per test.** Each test must operate on its own database
+6. **Status transition tests must reset state.** Tests that change entity status (e.g., RFI
+   status, submittal status) MUST include `beforeEach` API calls to reset the entity back to
+   its initial state. Without this, status transition tests leave entities in terminal states
+   that break subsequent tests. In one session, this pattern caused 14 affected tests across
+   RFI and submittal status spec files.
+
+7. **Distinct test data records per test.** Each test must operate on its own database
    record (vendor, PO, delivery, etc.) rather than sharing records across tests. Every spec
    file should create its own test data via API calls in `beforeEach`/`beforeAll` rather
    than relying on seed data. This is the single highest-impact isolation improvement —
@@ -348,36 +365,45 @@ failures (~45% of observed failures come from shared database state).
    delete or modify entities corrupt state for subsequent tests. This single practice would
    have prevented 4 data-contamination clusters (22 affected tests) in one observed session.
 
-7. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
+8. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
    cascade, causing failures in later tests that reference them.
 
-8. **Pre-test state verification in serial suites.** Each test in a `test.describe.serial`
+9. **Pre-test state verification in serial suites.** Each test in a `test.describe.serial`
    block should verify its preconditions rather than assuming state from prior tests. For
    example, check that the expected number of rows exists before performing add/delete
    operations, rather than relying on a previous test's side effects.
 
-9. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
+10. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
    for API-driven setup in `beforeEach` or `beforeAll` MUST call `page.goto()` first to
    navigate to the app. `fetch()` with relative URLs fails at `about:blank` because there
    is no base URL to resolve against. Always ensure the page has navigated before making
    fetch calls via `page.evaluate`.
 
-10. **Weekend-safe seed data.** Seed data must include entries for the current day
+11. **Weekend-safe seed data.** Seed data must include entries for the current day
    regardless of day-of-week. Use relative date calculations (e.g., `new Date()`) rather
    than hardcoded weekday dates. Tests that rely on "today's appointments" or similar
    day-specific queries will fail on weekends if seed data only contains weekday entries.
 
-11. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
+12. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
     components (non-native `<select>`), tests must use click-based interaction patterns
     (`click trigger → click option`), not `page.selectOption()`. Assertions should use
     `getAttribute('data-value')` instead of `toHaveValue()`.
 
-12. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+13. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
    overcounting.
+
+## Pre-Commit Checklist for New Spec Files
+
+Before committing a new spec file, verify:
+- No test creates, modifies, or deletes shared data without cleanup or isolation.
+- Destructive tests (delete-all, empty-state) are in `test.describe.serial` at the end.
+- Status transition tests include `beforeEach` state resets.
+- Created records use unique identifiers (`Date.now()`, `crypto.randomUUID()`).
+- Count assertions use flexible matching (`toBeGreaterThan`) or relative counts.
 
 ## JourneyQA / Batch Test Isolation
 
@@ -391,6 +417,10 @@ state. Isolation strategies:
    re-seed) between each spec file.
 3. **Never share a single branch across parallel spec files**: This is the most common source
    of batch contamination.
+4. **JourneyQA URL validation**: Journey tests against deployed apps MUST use the `/api/`
+   prefix for API calls, not `/.netlify/functions/api/`. The Netlify redirect rewrites `/api/`
+   to `/.netlify/functions/`, so using the full `/.netlify/functions/api/` path results in
+   double-prefixed URLs that return HTML instead of JSON.
 
 ## React StrictMode and Double-Render
 
