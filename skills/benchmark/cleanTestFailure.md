@@ -16,12 +16,13 @@ Take the following steps:
    Avoid doing a full repo clone for efficiency.
 
 2. Add a shell script at the project root `reproduce_failure` which reproduces the failure from a bare repository.
+   The script should print progress and timing information for each potentially long-running step.
    - Creates a new Neon project.
    - Runs `npm install` in the app's directory.
    - Sets up the project's main branch for use by the test.
    - Runs `npm run test <testFile>` in the app's directory.
    - Writes out the error message from playwright and the Replay recordings of the failures to a file in logs/.
-   - Writes the name of the result file to stderr along with a PASSED or FAILED marker.
+   - Prints the name of the result file along with a PASSED or FAILED marker.
    - Deletes the new Neon project.
 
 3. Run the script and iterate to make sure it behaves as expected:
