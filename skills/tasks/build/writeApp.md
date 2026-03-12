@@ -233,6 +233,10 @@ contexts (testing, deployment).
   rows with the same primary identifier but different secondary values (e.g., same code with
   different descriptions) will appear as separate results, causing duplicate entries in dropdowns.
 
+- Multi-page apps must include a navigation sidebar or menu component that provides links to all
+  top-level pages. The navigation must be present on every page via the app's root layout. Do not
+  rely on users manually entering URLs to navigate between pages.
+
 - Navigation sidebars and menus must not contain duplicate links pointing to the same URL. Each
   navigation item must have a unique route. Remove or consolidate any entries that would navigate
   to the same destination.
