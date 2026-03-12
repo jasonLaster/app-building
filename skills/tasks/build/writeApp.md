@@ -221,6 +221,12 @@ contexts (testing, deployment).
   set state) and the falsy case (param absent → clear state). Omitting the `else` branch causes
   stale state to persist when navigating away from a parameterized route back to the base route.
 
+- Gate dependent API calls on prerequisite data being loaded. When a component fetches data
+  that depends on another piece of state (e.g., fetching dashboard stats requires `currentUser`
+  to be loaded first), add a guard condition to the `useEffect` or thunk that checks for the
+  prerequisite before dispatching. Without this, race conditions cause fetches to fire before
+  prerequisite data is available, resulting in empty or wrong responses that break tests.
+
 - When writing SQL queries for lookup/autocomplete endpoints that return distinct entities, use
   `DISTINCT ON (<primary_identifier>)` (PostgreSQL) rather than `SELECT DISTINCT` across multiple
   columns. `SELECT DISTINCT col1, col2` deduplicates on the combination of all listed columns, so

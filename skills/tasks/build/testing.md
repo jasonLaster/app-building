@@ -244,7 +244,9 @@ Specifically:
 - **Use Replay** for backend bugs where error output doesn't explain *why* wrong data exists.
 
 In observed sessions, 100% of Replay uses for data-contamination and strict-mode failures
-were unnecessary — error output was always sufficient.
+were unnecessary — error output was always sufficient. Also skip Replay for seed-data-mismatch
+failures — these are diagnosable by comparing test expectations against seed data or API
+responses without visual debugging.
 
 ## Debugging
 
@@ -421,6 +423,10 @@ state. Isolation strategies:
    prefix for API calls, not `/.netlify/functions/api/`. The Netlify redirect rewrites `/api/`
    to `/.netlify/functions/`, so using the full `/.netlify/functions/api/` path results in
    double-prefixed URLs that return HTML instead of JSON.
+5. **JourneyQA dynamic ID discovery**: JourneyQA tests MUST dynamically discover entity IDs
+   from API responses rather than hardcoding UUIDs. Hardcoded UUIDs that exist in one database
+   state may not exist in the deployed database, causing seed-data-mismatch failures. Always
+   query the API for the list of entities and select by name or attribute, not by UUID.
 
 ## React StrictMode and Double-Render
 
@@ -501,6 +507,10 @@ process in the section below, and respect the 3-retry limit before changing appr
 
 - All browsers must run headless. Never use Xvfb, never set `DISPLAY`, never use the `replayio record`
   CLI (it launches a headed browser). Use `@replayio/playwright` for recordings.
+
+- Do NOT wrap test commands with `timeout` or `nohup`. Neither works reliably in this
+  environment — `timeout` exits with signal errors (exit code 124/137) and `nohup` fails
+  to background processes correctly. Let the test script manage its own lifecycle.
 
 - Tests run serially with `--workers 1`. The test script resets the database between each test.
 

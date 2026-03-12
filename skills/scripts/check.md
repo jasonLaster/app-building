@@ -34,6 +34,13 @@ you just edited. The most common check failure (~80% of lint failures) is `no-un
 Scanning your recent edits for stale imports before running the check saves a full
 fail-fix-rerun cycle.
 
+## Incremental Checking for Complex Pages
+
+When building complex pages with 10+ components, run `npm run check` incrementally during
+development (e.g., after every 2-3 components) rather than only at the end. Complex component
+builds commonly produce type errors on the first check, and catching them early prevents
+2-3 fix-and-recheck cycles at the end of the task.
+
 ## First-Attempt Failures Are Normal
 
 `npm run check` frequently fails on its first run due to lint errors or type issues introduced

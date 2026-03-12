@@ -89,6 +89,30 @@ set in `playwright.config.ts` from the start for any project using Replay Chromi
 DescribeComponent confirmed elements rendered close to the timeout limit. Fixed by
 increasing config timeouts.
 
+### CDP click stalling on rapid interactions (Replay browser)
+When a test performs 3+ rapid click cycles on the same element type (e.g., opening a dropdown,
+selecting an option, repeating), Playwright's CDP-based click may stall on the 3rd+ cycle.
+`PlaywrightSteps` shows the click step stuck, but `Screenshot` confirms the target element
+is visible and interactive — the issue is in the click mechanism, not the app.
+
+**Diagnosis**: The test times out on a click, but the element is clearly visible and functional.
+Previous identical clicks in the same test succeeded. This is specific to the Replay browser's
+instrumentation interacting with CDP click dispatch.
+
+**Fix**: Replace `locator.click()` with a JavaScript click via `page.evaluate()`:
+```ts
+// Instead of: await dropdown.click()
+await page.evaluate((el) => el.click(), await dropdown.elementHandle());
+// Or: await page.evaluate(() => document.querySelector('[data-testid="dropdown"]')!.click());
+```
+
+This bypasses the CDP click path entirely. Apply this pattern when Playwright clicks stall
+on repeated interactions with the same element type, especially under the Replay browser.
+
+*Example*: "GroupBy dropdown can be changed multiple times" timed out on the 3rd dropdown
+cycle. Extensive Replay investigation (25 tool calls) confirmed the app was correct. Fix
+was replacing `locator.click()` with `page.evaluate()` JavaScript clicks.
+
 ### Browser-native validation blocking form submission
 A form has `<input type="email">` and the test fills an intentionally invalid email to test
 app-level validation. But the browser's native validation fires first, preventing

@@ -91,6 +91,13 @@ EOF
   calls that can block indefinitely. Use locator chaining (`.filter()`, `.locator()`) and
   single-assertion expect matchers (`.toHaveCount()`, `.toContainText()`, `.toBeVisible()`) instead.
 
+- Every test file that modifies database records MUST include a `beforeEach` cleanup helper
+  that resets the relevant data via API calls. Do not wait for data contamination failures
+  to surface before adding cleanup — add it from the start during test authoring. This is
+  the #1 cause of test difficulty, accounting for 24%+ of all test failures. The cleanup
+  helper should fetch ALL records of the relevant type and delete each one, rather than
+  deleting a hardcoded list of known IDs.
+
 - Do not add unnecessary state cleanup (e.g., `localStorage.removeItem`, `page.reload()`) in
   `beforeEach` hooks when Playwright already provides a fresh browser context per test. Redundant
   cleanup wastes time and can cause tests to exceed their timeout under recording or CI overhead.

@@ -77,6 +77,7 @@ FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none>
 FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", "destructive-test-reordering", "formatDate-normalization". Use when the same fix applies across multiple clusters or spec files. Helps the synthesizer identify reusable fixes distinct from ROOT_CAUSE_CLUSTER.>
 DIAGNOSED_FROM: <REQUIRED — same as individual failure entries. One of: error-output, page-snapshot, error-context-snapshot, code-inspection, replay-necessary. Must not be omitted — needed for diagnostic source effectiveness analysis.>
 FIX_ITERATIONS: <REQUIRED — same as individual failure entries. Number of test re-runs needed to fully resolve this cluster. Must not be omitted — needed for difficulty analysis.>
+TOOL_CALL_COUNT: <recommended — same as individual failure entries. Total tool calls used to diagnose and fix this cluster. Must not be omitted when available — needed for resolution effort analysis.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
 
@@ -89,6 +90,10 @@ have a separate entry unless it has a distinct, independent root cause.
 each cluster counts as 1 in the TEST_FAILURES tally regardless of how many tests it contains.
 For example, if a log has 1 individual failure + 1 cluster of 3 tests, TEST_FAILURES should
 be 2 (not 4). When counting failures in analysis files, always count cluster entries as 1.
+
+**Example**: A log has 2 individual failures and 1 cluster of 3 tests sharing a root cause.
+TEST_FAILURES should be 3 (2 individual + 1 cluster), NOT 5. The cluster counts as 1 entry
+regardless of how many tests it contains.
 
 ### Infrastructure Failures
 
