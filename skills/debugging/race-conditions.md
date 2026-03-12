@@ -197,19 +197,36 @@ output alone only showed "expected X, got Y."
 ### Stale fetch race condition
 A component fires a fetch on mount, then fires another fetch in response to user action (e.g.,
 search or filter). The first fetch's response arrives after the second and overwrites the UI
-with stale data.
+with stale data. This is especially common with search/filter components where typing triggers
+multiple rapid fetches.
 
 **Diagnosis with Replay**: `NetworkRequest` shows two requests to the same endpoint.
 `Logpoint` on the response handler confirms the first response arrived after the second.
-`Evaluate` at the assertion point shows stale data in the component state.
+`Evaluate` at the assertion point shows stale data in the component state. Replay
+`NetworkRequest` timing analysis is the most effective diagnostic tool for this category —
+the timing information is only visible in Replay.
 
 **Tool sequence**: `NetworkRequest → Logpoint → Evaluate`
 
 **Fix**: Use abort controllers to cancel pending requests when a new one fires, or track
-request ordering and ignore out-of-order responses.
+request ordering with request IDs and ignore out-of-order responses:
+```ts
+// Request ID tracking pattern
+let currentRequestId = 0;
+const fetchData = async (query: string) => {
+  const requestId = ++currentRequestId;
+  const response = await fetch(`/api/search?q=${query}`);
+  const data = await response.json();
+  // Ignore stale responses
+  if (requestId !== currentRequestId) return;
+  setResults(data);
+};
+```
 
 *Example*: Search bar test failed because the initial page-load fetch response arrived after
-the search-filtered fetch, overwriting search results with the full list.
+the search-filtered fetch, overwriting search results with the full list. In another session,
+two empty-query responses arrived after a filtered response in a fleet list component,
+overwriting the correct results.
 
 ### useEffect overwrites form during editing (editing guard pattern)
 When tests show stale or null values in PUT/POST request bodies after a user edits a form,

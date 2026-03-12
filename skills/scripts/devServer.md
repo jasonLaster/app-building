@@ -8,7 +8,14 @@ before the server is ready.
 
 ## Starting the Dev Server
 
-Start the dev server in the background from the app directory:
+**Always kill existing processes and free ports before starting.** This eliminates the #1
+source of dev server failures:
+
+```bash
+pkill -f "netlify|vite" 2>/dev/null || true
+```
+
+Then start the dev server in the background from the app directory:
 
 ```bash
 npx netlify dev --port 8888 --functions ./netlify/functions &

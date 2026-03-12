@@ -131,6 +131,26 @@ on whether there's a redirect. Always verify by logging `segments` or checking t
 the function receives. When migrating between URL prefixes, audit all functions that parse
 segments — the bug will affect every function, not just one.
 
+## SPA Redirect Blocking Application Mount
+
+When all tests fail with timeouts and React never mounts (blank page, empty body), check for
+conflicting `_redirects` rules in both `netlify.toml` and `dist/_redirects`. The SPA catch-all
+redirect (`/* /index.html 200`) can intercept Vite ESM module requests during development,
+preventing the application from loading.
+
+**Diagnostic signature**: Replay screenshots showing a blank page with no React component tree.
+`NetworkRequest` shows Vite module requests (e.g., `/@vite/client`, `/src/main.tsx`) returning
+HTML instead of JavaScript.
+
+**Tool sequence**: `Screenshot` → `NetworkRequest` → `ReactComponentTree`
+
+**Fix**: Remove duplicate `_redirects` rules. Ensure the SPA redirect only exists in one
+location (`netlify.toml` OR `dist/_redirects`, not both). Verify that the redirect does not
+intercept development server module requests.
+
+*Example*: In one session, duplicate `_redirects` rules caused 21 test failures across 4 spec
+files. The fix required 4 iterations and 108 tool calls to diagnose via Replay.
+
 ## Common Root Causes (from observed failures)
 
 ### Auth request payload mismatch

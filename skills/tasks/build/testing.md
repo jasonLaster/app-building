@@ -322,13 +322,25 @@ When testing the app after deployment, use the Replay browser to record the app 
 ## Test Isolation Mandates
 
 These rules are mandatory for all test files. Violations are the most common source of test
-failures (~45% of observed failures come from shared database state).
+failures (~57% of observed failures come from shared database state).
 
-1. **No hardcoded entity counts in serial test files.** Tests MUST use relative assertions
+1. **Mandatory beforeEach database cleanup.** Every spec file that creates, modifies, or
+   deletes records MUST include a `beforeEach` hook that resets the relevant table(s) to seed
+   state via API calls. This single practice prevents the majority of data-contamination
+   failures. The pattern is:
+   ```typescript
+   test.beforeEach(async ({ request }) => {
+     // Delete all non-seed records, then re-seed if needed
+     await request.delete(`${BASE}/api/resource`);
+     await request.post(`${BASE}/api/resource/seed`);
+   });
+   ```
+
+2. **No hardcoded entity counts in serial test files.** Tests MUST use relative assertions
    (e.g., `toBeGreaterThan(0)`, "count decreased by 1") or query initial count before
    asserting. Never hardcode expected values like "4 visits" or "3 customers".
 
-2. **Destructive tests go last AND use serial.** Tests that delete all entities (empty state
+3. **Destructive tests go last AND use serial.** Tests that delete all entities (empty state
    tests) or rename entities MUST be ordered at the end of their describe block AND wrapped
    in `test.describe.serial`. This must be done during initial test authoring (writeTests),
    not deferred to checkDirectives. Placing destructive tests earlier corrupts state for
@@ -337,26 +349,26 @@ failures (~45% of observed failures come from shared database state).
    create its own data in `beforeEach` or (b) restore original state in `afterEach`. This
    prevents 73% of data-contamination failures caused by destructive-ordering.
 
-3. **Unique entity names per test.** All test data created by tests (customer names,
+4. **Unique entity names per test.** All test data created by tests (customer names,
    addresses, property names, etc.) MUST include `Date.now()` or `crypto.randomUUID()`
    suffixes to prevent cross-test contamination. For example, use
    `Test Customer ${Date.now()}` instead of `Test Customer`. This single practice prevents
    the majority of data-contamination failures from duplicate name collisions.
 
-4. **TRUNCATE before seeding (Neon branches).** Seed scripts MUST call `truncateAllTables()`
+5. **TRUNCATE before seeding (Neon branches).** Seed scripts MUST call `truncateAllTables()`
    before inserting data. Neon branch creation inherits parent data, so insert-only seeding
    produces duplicates. Always use `truncateAndSeed()`, never `seedDatabase()` alone.
 
-5. **Relative or data-independent assertions.** Tests that verify data after mutations must
+6. **Relative or data-independent assertions.** Tests that verify data after mutations must
    query current state before the action and assert relative changes, not absolute values.
 
-6. **Status transition tests must reset state.** Tests that change entity status (e.g., RFI
+7. **Status transition tests must reset state.** Tests that change entity status (e.g., RFI
    status, submittal status) MUST include `beforeEach` API calls to reset the entity back to
    its initial state. Without this, status transition tests leave entities in terminal states
    that break subsequent tests. In one session, this pattern caused 14 affected tests across
    RFI and submittal status spec files.
 
-7. **Distinct test data records per test.** Each test must operate on its own database
+8. **Distinct test data records per test.** Each test must operate on its own database
    record (vendor, PO, delivery, etc.) rather than sharing records across tests. Every spec
    file should create its own test data via API calls in `beforeEach`/`beforeAll` rather
    than relying on seed data. This is the single highest-impact isolation improvement —
@@ -370,32 +382,32 @@ failures (~45% of observed failures come from shared database state).
    delete or modify entities corrupt state for subsequent tests. This single practice would
    have prevented 4 data-contamination clusters (22 affected tests) in one observed session.
 
-8. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
+9. **No hardcoded seed data UUIDs.** Always discover entity IDs via API by name rather
    than assuming seed UUIDs exist. Seed record UUIDs may be deleted by earlier tests via
    cascade, causing failures in later tests that reference them.
 
-9. **Pre-test state verification in serial suites.** Each test in a `test.describe.serial`
+10. **Pre-test state verification in serial suites.** Each test in a `test.describe.serial`
    block should verify its preconditions rather than assuming state from prior tests. For
    example, check that the expected number of rows exists before performing add/delete
    operations, rather than relying on a previous test's side effects.
 
-10. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
+11. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
    for API-driven setup in `beforeEach` or `beforeAll` MUST call `page.goto()` first to
    navigate to the app. `fetch()` with relative URLs fails at `about:blank` because there
    is no base URL to resolve against. Always ensure the page has navigated before making
    fetch calls via `page.evaluate`.
 
-11. **Weekend-safe seed data.** Seed data must include entries for the current day
+12. **Weekend-safe seed data.** Seed data must include entries for the current day
    regardless of day-of-week. Use relative date calculations (e.g., `new Date()`) rather
    than hardcoded weekday dates. Tests that rely on "today's appointments" or similar
    day-specific queries will fail on weekends if seed data only contains weekday entries.
 
-12. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
+13. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
     components (non-native `<select>`), tests must use click-based interaction patterns
     (`click trigger → click option`), not `page.selectOption()`. Assertions should use
     `getAttribute('data-value')` instead of `toHaveValue()`.
 
-13. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
+14. **Validate `data-testid` prefix selectors.** When using `[data-testid^="prefix-"]`
    selectors, verify that container/wrapper elements don't also match the prefix. A selector
    like `[data-testid^="route-stop-"]` will match both list items and the container if
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
@@ -447,6 +459,10 @@ state. Isolation strategies:
    from API responses rather than hardcoding UUIDs. Hardcoded UUIDs that exist in one database
    state may not exist in the deployed database, causing seed-data-mismatch failures. Always
    query the API for the list of entities and select by name or attribute, not by UUID.
+6. **JourneyQA must default to deployed URL**: JourneyQA tests should always target the
+   deployed URL, not the local dev server. Local dev server tests consistently fail with
+   Replay's Chromium browser due to browser/server incompatibility. Avoid the local server
+   entirely for JourneyQA tasks.
 
 ## React StrictMode and Double-Render
 

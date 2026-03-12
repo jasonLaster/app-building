@@ -37,6 +37,7 @@ FAILURE_PHASE: <one of: writeTests, fixTests, checkDirectives, deployment, other
 FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the fix was to test code, app code, or both. "none" if not yet resolved. Helps identify whether the testing process or the app-building process needs improvement)
 FIX_ITERATIONS: <number of test re-runs needed to fully resolve this failure, 0 if not yet resolved, 1 if resolved on first attempt. REQUIRED — captures debugging difficulty. Failures taking 4+ iterations indicate complex root causes that may warrant process improvements.>
 TOOL_CALL_COUNT: <recommended — total number of tool calls (Replay MCP, file reads, code searches) used to diagnose and fix this failure. Complements FIX_ITERATIONS as a resolution effort metric — when most failures resolve in 1 iteration, tool call count differentiates easy fixes (2-3 tool calls) from complex investigations (10+ tool calls). Include whenever possible to improve resolution effort analysis coverage.>
+SPEC_FILE: <recommended — the spec file containing this test, e.g. "tests/customer-list.spec.ts". Simplifies aggregation by spec file and makes the failure table more scannable. Many clusters are spec-file-specific, so this field enables per-file failure analysis.>
 
 #### Replay Usage (if REPLAY_USED is yes)
 OUTCOME: <what the Replay analysis revealed>
@@ -79,6 +80,7 @@ FIX_PATTERN: <optional — reusable fix pattern name, e.g. "wait-before-count", 
 DIAGNOSED_FROM: <REQUIRED — same as individual failure entries. One of: error-output, page-snapshot, error-context-snapshot, code-inspection, replay-necessary. Must not be omitted — needed for diagnostic source effectiveness analysis.>
 FIX_ITERATIONS: <REQUIRED — same as individual failure entries. Number of test re-runs needed to fully resolve this cluster. Must not be omitted — needed for difficulty analysis.>
 TOOL_CALL_COUNT: <recommended — same as individual failure entries. Total tool calls used to diagnose and fix this cluster. Must not be omitted when available — needed for resolution effort analysis.>
+SPEC_FILE: <recommended — same as individual failure entries. The spec file containing this cluster's tests.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
 
@@ -158,6 +160,8 @@ Compile all analysis files into a single report with these sections:
 - Self-inflicted fix quality cost (among SELF_INFLICTED=yes failures, count the total additional test re-runs they caused. This quantifies the cost of self-inflicted issues beyond just their count — e.g., a self-inflicted failure that required 3 re-runs is more costly than one resolved immediately)
 - Fix iteration difficulty distribution (breakdown of FIX_ITERATIONS values — e.g., 1: 20, 2: 8, 3: 3, 4+: 2. Failures taking 4+ iterations are outliers that warrant process investigation. Include the specific test names for 4+ iteration failures)
 - Resolution effort distribution (when TOOL_CALL_COUNT data is available, show the breakdown — e.g., 1-3 calls: 15, 4-9 calls: 8, 10+ calls: 3. Complements FIX_ITERATIONS when most failures resolve in 1 iteration but vary widely in investigation effort)
+- Test Isolation Score trend (when prior reports exist for the same container/app, compare the current Test Isolation Score against previous reports to measure whether beforeEach cleanup mandates are reducing isolation failures over time. Show the trend as: `current% (previous%→current%)` or `current% (first report)` if no prior data exists)
+- Infrastructure failure sub-categories (break down infrastructure failures into: environment (socket-timeout, navigation-timeout, port-conflict), recording (recording-upload-failure), and agent-workflow-error (running `npx playwright test` directly instead of `npm run test`, missing dev server startup). Agent workflow errors are distinct from real infrastructure issues and indicate process compliance gaps rather than environmental problems)
 
 ### 2. Failure Table
 A markdown table with columns:
