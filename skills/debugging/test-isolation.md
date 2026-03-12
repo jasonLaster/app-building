@@ -51,6 +51,36 @@ of the same type. No Replay needed.
 - Query current state dynamically rather than hardcoding expected values.
 - Reference seed data constants or query the API for initial counts.
 
+### Data-Contamination → beforeEach API Reset
+
+**Symptom**: Test failures show unexpected counts, stale values, or wrong entity states that
+were correct in earlier tests. Error output clearly shows expected vs actual mismatches.
+
+**Cause**: A prior test modified or created records (payments, status changes, line items)
+without cleanup, leaving the database in a dirty state for subsequent tests.
+
+**Diagnosis**: Error output is always sufficient — it shows `expected N, got M` or wrong
+field values. No Replay needed. Check if any earlier test in the same file modifies the
+same entity type.
+
+**Fix**: Add a `beforeEach` hook that resets the relevant entities to seed state via API
+PUT/DELETE calls. This is the single most common fix pattern for data contamination (~54%
+of all failures in one observed session). Example:
+```ts
+test.beforeEach(async ({ request }) => {
+  // Reset payments to seed state
+  const payments = await request.get('/api/payments').then(r => r.json());
+  for (const p of payments.data || payments) {
+    if (p.id !== SEED_PAYMENT_ID) {
+      await request.delete(`/api/payments/${p.id}`);
+    }
+  }
+});
+```
+
+When the same pattern is needed across multiple spec files (e.g., invoice payment reset
+was applied to 3 spec files in one session), consider extracting it to a shared test utility.
+
 ## Quick Diagnostic
 
 When error output shows a wrong count or wrong value that was correct in an earlier test:

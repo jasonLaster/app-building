@@ -315,6 +315,64 @@ locator targets the specific checkbox/option, not a wrapping container.
 `payment-invoice-select` container propagated to the invoice option (selecting it), then
 the explicit invoice option click deselected it.
 
+### Sort race-condition → client-side useMemo
+
+When sort tests fail with wrong ordering after clicking column headers, the root cause is
+typically nested `setState` in `handleSort` causing stale closures, combined with concurrent
+API requests overwriting locally-sorted results.
+
+**Symptom**: After clicking a column header to sort, the sort indicator shows the correct
+direction but the data is in the wrong order. Or the data briefly appears sorted, then
+reverts to the original order.
+
+**Diagnosis**: Error output shows expected sort order vs actual order. Check the component's
+`handleSort` function for patterns like:
+- `setState(sortField)` followed by a re-fetch that overwrites the sorted data
+- Multiple `useEffect` hooks that trigger concurrent API calls on sort state change
+- No Replay needed — code inspection suffices.
+
+**Fix**: Replace async sort-then-refetch with client-side sorting via `useMemo`:
+```ts
+const sortedData = useMemo(() => {
+  if (!sortField) return data;
+  return [...data].sort((a, b) => {
+    const aVal = a[sortField];
+    const bVal = b[sortField];
+    return sortDirection === 'asc'
+      ? String(aVal).localeCompare(String(bVal))
+      : String(bVal).localeCompare(String(aVal));
+  });
+}, [data, sortField, sortDirection]);
+```
+
+This pattern resolved sort failures across multiple pages in one session (Orders, MenuItems,
+Clients). When found in one page, proactively check all other list pages for the same pattern.
+
+### Dual-useEffect race → consolidated effect
+
+When filter or search tests fail with stale results, the root cause is often two separate
+`useEffect` hooks dispatching overlapping API fetches.
+
+**Symptom**: After applying a filter, the results briefly show filtered data then revert to
+unfiltered data. Or the filter appears to have no effect.
+
+**Diagnosis**: Check the component for two `useEffect` hooks that both trigger API calls when
+filter state changes — one for the filter and one for the general data load. The unfiltered
+fetch's response arrives after the filtered one and overwrites it.
+
+**Fix**: Consolidate the two effects into a single `useEffect` that includes all filter/search
+parameters in its dependency array:
+```ts
+useEffect(() => {
+  const params = new URLSearchParams();
+  if (statusFilter) params.set('status', statusFilter);
+  if (searchQuery) params.set('search', searchQuery);
+  fetchData(`/api/items?${params}`);
+}, [statusFilter, searchQuery]);
+```
+
+This prevents overlapping fetches from separate effects racing against each other.
+
 ### Date.now() or shared identifiers across workers
 When parallel Playwright workers share a module-level `Date.now()` value for generating
 unique IDs (like test emails), all workers get the same value, causing collisions.

@@ -401,6 +401,23 @@ failures (~45% of observed failures come from shared database state).
    named `route-stop-list`. Use `:not()` exclusions or more specific selectors to avoid
    overcounting.
 
+14. **Mandatory beforeEach cleanup in ALL spec files that modify data.** Every spec file
+    that creates, updates, or deletes records MUST include a `beforeEach` hook that resets
+    the relevant data to seed state via API calls. This is a writing-time requirement, not
+    a fixTests concern. Data contamination accounted for 54% of all test failures in one
+    observed session (62.9% test isolation score). Do not wait for contamination to occur
+    before adding cleanup — add it proactively from the start.
+
+15. **Use `test.describe.serial` as the default for all spec files.** Since all tests share
+    a database branch, parallel execution within a spec file causes data-contamination
+    failures. Serial execution should be the default. Only use `fullyParallel` when tests
+    are provably independent (no shared mutable state).
+
+16. **Shared test utility for seed data reset.** When the same API-based reset logic is
+    needed across multiple spec files (e.g., `resetPayments()`, `resetOrderStatuses()`),
+    extract it to a shared test utility file (e.g., `tests/helpers/reset.ts`). This
+    reduces boilerplate and ensures consistent cleanup across all spec files.
+
 ## Pre-Commit Checklist for New Spec Files
 
 Before committing a new spec file, verify:
