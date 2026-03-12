@@ -323,7 +323,7 @@ config (e.g., deployment testing).
   the option using its `data-value` attribute (e.g., `page.click('[data-value="option1"]')`).
   Similarly, `toHaveValue()` does not work on custom selects — use
   `getAttribute('data-value')` to verify the selected value.
-- When running `npx playwright test` directly (outside the app's `npm run test` wrapper),
-  set `PLAYWRIGHT_BROWSERS_PATH=/opt/playwright` in the environment. Without this, Playwright
-  cannot find the installed browsers. If module resolution fails, add `NODE_PATH` pointing to
-  the app's `node_modules` directory.
+- **NEVER invoke `npx playwright test` directly.** Always use `npm run test <file>` from the
+  app directory. Direct `npx playwright test` invocations skip essential setup (dev server
+  startup, ephemeral database branch creation, schema init, seeding) and fail ~80% of the time.
+  The `npm run test` script handles the full server and database lifecycle automatically.

@@ -95,11 +95,15 @@ tool sequence in the relevant debugging guide below.
 
 ## No-Replay Diagnostic Patterns
 
-**Error output first**: For data-contamination, race-condition, strict-mode, and
-seed-data-mismatch categories, diagnose from error output before using Replay. In observed
-sessions, 100% of Replay uses for these categories were unnecessary — the error output alone
-sufficed. Reserve Replay for CSS/layout issues, complex race conditions where timing is
-ambiguous, and backend bugs where error output doesn't explain *why* the wrong data exists.
+**Error output first — mandatory first step**: Always analyze Playwright error messages
+(expected/received values, locator errors, timeout messages) before reaching for Replay.
+Across observed sessions, 92.7% of failures were diagnosed from error output alone. Only
+use Replay when error output is ambiguous or points to visual/timing issues that cannot be
+confirmed from text. For data-contamination, race-condition, strict-mode, and
+seed-data-mismatch categories, error output is always sufficient — 100% of Replay uses for
+these categories were unnecessary. Reserve Replay for CSS/layout issues, complex race
+conditions where timing is ambiguous, and backend bugs where error output doesn't explain
+*why* the wrong data exists.
 
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 

@@ -332,7 +332,10 @@ failures (~45% of observed failures come from shared database state).
    tests) or rename entities MUST be ordered at the end of their describe block AND wrapped
    in `test.describe.serial`. This must be done during initial test authoring (writeTests),
    not deferred to checkDirectives. Placing destructive tests earlier corrupts state for
-   subsequent tests — this caused 33% of all failures in one observed session.
+   subsequent tests — this caused 33% of all failures in one observed session. Any test that
+   modifies or deletes shared data (status changes, renames, deletions) MUST either (a)
+   create its own data in `beforeEach` or (b) restore original state in `afterEach`. This
+   prevents 73% of data-contamination failures caused by destructive-ordering.
 
 3. **Unique entity names per test.** All test data created by tests (customer names,
    addresses, property names, etc.) MUST include `Date.now()` or `crypto.randomUUID()`
@@ -471,10 +474,12 @@ process in the section below, and respect the 3-retry limit before changing appr
 - Do NOT manually start `netlify dev` for testing. The test script manages the dev server
   automatically. Only use manual `netlify dev` for one-off curl checks.
 
-- If you do manually start `netlify dev` for curl testing, you MUST pass `--functions ./netlify/functions`
-  to avoid 404 errors on function endpoints. The `base` setting in `netlify.toml` causes the functions
-  directory to resolve incorrectly without this flag. Example:
-  `npx netlify dev --port 8888 --functions ./netlify/functions`
+- If you do manually start `netlify dev` for curl testing, you MUST pass `--offline` and
+  `--functions ./netlify/functions`. The `--offline` flag is required in this container
+  environment to avoid authentication failures. The `--functions` flag avoids 404 errors on
+  function endpoints (the `base` setting in `netlify.toml` causes the functions directory to
+  resolve incorrectly without it). Example:
+  `npx netlify dev --offline --port 8888 --functions ./netlify/functions`
 
 - The Playwright `webServer` command should also include `--functions ./netlify/functions` when
   using Netlify Functions, to ensure function endpoints resolve correctly during test runs.
@@ -488,6 +493,18 @@ process in the section below, and respect the 3-retry limit before changing appr
   "unnecessary" helpers), always run the affected tests *before* committing the removal to
   confirm the change is safe. Cleanup code that looks redundant may be essential for test
   isolation.
+
+- **Require `data-testid` for all assertable elements.** Tests MUST NOT rely on CSS selectors
+  tied to colors, styles, or computed attributes (e.g., `path[stroke="#4d7c5e"]`,
+  `[style*="background: red"]`). Always use `data-testid` attributes for test selectors.
+  This prevents self-inflicted failures when refactoring tasks (e.g., checkDirectives)
+  replace hardcoded colors with CSS variables.
+
+- **Selector audit step for refactoring tasks.** When checkDirectives removes hardcoded
+  colors or replaces them with CSS variables, the task MUST grep test files for selectors
+  that depend on the affected values before committing (e.g.,
+  `grep -r "stroke=\|fill=\|background:" tests/`). Update any matching test selectors to
+  use `data-testid` in the same changeset.
 
 - **Use content-based locators over positional.** Tests should use `filter({ hasText })` or
   `getByText()` instead of `nth()` for dropdown/list assertions to avoid ordering-dependent
@@ -558,6 +575,10 @@ process in the section below, and respect the 3-retry limit before changing appr
 - Zombie processes (`<defunct>`) from previous `vite` or `netlify` runs are harmless and cannot be
   killed (they are orphaned child processes waiting for PID 1 to reap them). Ignore them. The
   Playwright `webServer` config starts fresh processes on different ports and is not affected.
+- **Kill stale processes before every test run.** Port conflicts from stale `netlify dev`
+  processes are a significant source of infrastructure failures (20 events affecting 225 test
+  runs in one observed session). Always run the pre-flight cleanup (`pkill -f "netlify|vite"`,
+  `fuser -k 8888/tcp`) before each test run, not just the first run in a session.
 - Commit incrementally during debugging sessions. If you improve test results (e.g., 81→207 passing)
   or fix a meaningful issue, commit those changes immediately even if other failures remain. An
   iteration that produces zero commits despite significant work (skill updates, code fixes,

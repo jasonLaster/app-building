@@ -14,7 +14,7 @@ For each log file, produce a markdown file with the following structure:
 NOTES: <brief summary of what this log was about>
 
 ## Test Failures
-TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (2+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests. A test already counted in a cluster should NOT have a separate entry unless it has a distinct, independent root cause — avoid double-counting. IMPORTANT: TEST_FAILURES must equal the number of failure/cluster entries in the file — if there are 3 individual failures and 2 cluster entries, TEST_FAILURES should be 5. When a cluster spans multiple test runs within the same log (e.g., tests fail in run 1, get partially fixed, then different tests from the same root cause fail in run 2), still count the cluster as 1 entry if the root cause is the same. Example: 1 individual failure + 1 cluster of 3 tests = TEST_FAILURES: 2 (not 4), because the cluster counts as 1 entry regardless of how many tests it contains.>
+TEST_FAILURES: <count of distinct test failure entries in this log, 0 if none. When the same test fails in run 1 for reason A and run 2 for reason B, count it as 1 distinct test failure with multiple root causes noted in its entry. When using the cluster format (2+ failures sharing a root cause), each cluster counts as 1 failure entry, not N individual tests. A test already counted in a cluster should NOT have a separate entry unless it has a distinct, independent root cause — avoid double-counting. IMPORTANT: TEST_FAILURES must equal the number of failure/cluster entries in the file — if there are 3 individual failures and 2 cluster entries, TEST_FAILURES should be 5. When a cluster spans multiple test runs within the same log (e.g., tests fail in run 1, get partially fixed, then different tests from the same root cause fail in run 2), still count the cluster as 1 entry if the root cause is the same. Example: 1 individual failure + 1 cluster of 3 tests = TEST_FAILURES: 2 (not 4), because the cluster counts as 1 entry regardless of how many tests it contains. VALIDATION: After writing all entries, count the ### Failure and ### Failure Cluster headings in the file and verify the total matches TEST_FAILURES. If they don't match, correct TEST_FAILURES before submitting.>
 TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 if all passed on first run>
 
 For each test failure:
@@ -63,6 +63,7 @@ this collapsed format — an explicit `ROOT_CAUSE_CLUSTER` field is not needed i
 ```
 ### Failure Cluster: <ROOT_CAUSE_CLUSTER> (<count> tests)
 FAILURE_CATEGORY: <category>
+DATA_CONTAMINATION_SUBCATEGORY: <if FAILURE_CATEGORY is data-contamination, one of: accumulated-data, destructive-ordering, settings-contamination. Same definition as individual entries. Omit if FAILURE_CATEGORY is not data-contamination.>
 PRE_EXISTING: yes/no
 REPLAY_USED: yes/no
 REPLAY_NOT_USED_REASON: <reason>
@@ -105,6 +106,7 @@ failure template:
 ```
 ## Infrastructure Failures
 INFRA_FAILURE_COUNT: <count>
+INFRA_TOTAL_EVENTS: <total number of infrastructure failure events in this log, across all test runs. A single port-conflict event that blocks an entire test run of 20 tests counts as 1 event affecting 20 tests. This metric enables accurate cross-log totals in the synthesis report.>
 INFRA_CATEGORY: <socket-timeout | navigation-timeout | network-error | recording-upload-failure | port-conflict | other>
 AFFECTED_TESTS: <comma-separated list or "all tests in <spec file>">
 INFRA_AFFECTED_TEST_COUNT: <actual number of tests affected, for computing totals>

@@ -52,6 +52,13 @@ during development. This is expected behavior, not a blocking problem. When it f
    to diagnose.
 3. Re-run `npm run check`.
 
+## Pre-Existing Lint Failures
+
+If `npm run check` reports lint or type errors in files you did **not** modify, these are
+pre-existing issues. Do not spend multiple attempts trying to fix errors that were not
+introduced by your changes — this wastes significant time. Focus on fixing errors in files
+you touched. If the only failures are in untouched files, you may proceed with your task.
+
 Do not treat a first-attempt failure as a sign that something is fundamentally wrong with the
 check script or project configuration.
 

@@ -199,6 +199,10 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   end-to-end in a non-interactive shell before considering it complete.
 - **Authentication errors**: Verify `NETLIFY_AUTH_TOKEN` is set:
   `echo $NETLIFY_AUTH_TOKEN | head -c 5`
+- **"Site not found" errors on deploy**: If `netlify deploy` fails with a site-not-found error,
+  run `npx netlify link --id $NETLIFY_SITE_ID` before deploying. This writes the site ID to
+  `.netlify/state.json`, which the CLI reads to identify the target site. The site ID can be
+  found in `.env` (`NETLIFY_SITE_ID`) or `deployment.txt` (`site_id`).
 
 All Netlify CLI commands in the deploy script should use `LC_ALL=C` and pipe output to the
 log file rather than inheriting stdio.

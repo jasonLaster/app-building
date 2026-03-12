@@ -95,7 +95,9 @@ baseline, or dropdown option count is 0. The test didn't wait for data to render
 When dropdown options show count 0, the first check should be whether the API response has
 arrived before the count operation — use `PlaywrightSteps → NetworkRequest` to confirm timing.
 
-**Fix**: Always wait for the first element to be visible before capturing counts:
+**Fix**: Always wait for the first element to be visible before capturing counts. For
+count-based assertions after async operations, combine `waitForResponse` with `waitForSelector`
+to ensure both the API response has arrived and the DOM has updated:
 ```ts
 // For table rows:
 await expect(page.locator('[data-testid="row"]').first()).toBeVisible();
@@ -104,7 +106,15 @@ const initialCount = await page.locator('[data-testid="row"]').count();
 // For dropdown options:
 await expect(page.locator('select option').nth(1)).toBeAttached(); // wait for first non-placeholder option
 const optionCount = await page.locator('select option').count();
+
+// For count assertions after mutations (standard wait pattern):
+await page.waitForResponse(resp => resp.url().includes('/api/items') && resp.status() === 200);
+await expect(page.locator('[data-testid="row"]')).toHaveCount(expectedCount);
 ```
+
+This `waitForResponse` + element assertion pattern is the standard fix for count-based race
+conditions. It ensures the API call has completed before asserting on DOM state, preventing
+flaky failures from timing gaps.
 
 This single pattern resolved 22–38% of all test failures in observed runs. In one session it
 was the single most repeated self-inflicted bug, appearing identically in 6+ spec files (12
