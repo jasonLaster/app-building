@@ -68,6 +68,21 @@ EOF
 
 Add or update the `Responsive UI` section in `docs/plan.md` with an unchecked entry for each page.
 
+### Performance
+
+If the `Performance` section in `docs/plan.md` is missing or not marked `✓`, the app needs
+performance work. Add a single task for the backend API review:
+
+```bash
+npx tsx /repo/scripts/add-task.ts <<'EOF'
+[
+  { "skill": "skills/tasks/maintain/polishApp.md", "app": "<AppName>", "subtasks": ["PaginateAPIs: Review and paginate backend APIs that return large datasets"] }
+]
+EOF
+```
+
+Add or update the `Performance` section in `docs/plan.md` with an unchecked entry for the API review.
+
 ## Making a Page Accessible
 
 When working on a `MakeAccessible` subtask, audit the page and its components for accessibility
@@ -204,3 +219,46 @@ each card at breakpoints:
   using `hidden max-md:flex`.
 - At `max-sm:` consolidate remaining metadata into a single compact row using
   `hidden max-sm:flex`.
+
+## Paginating Backend APIs
+
+When working on a `PaginateAPIs` subtask, review every backend API function (Netlify function or
+equivalent) that returns a list of records. Any endpoint that could return an unbounded or large
+number of rows must be updated to limit the data returned per request.
+
+After completing the work, check off the entry in `docs/plan.md`. If all performance items are
+done, mark the section heading with `✓`.
+
+### Identifying endpoints to fix
+
+Read all backend function files and find every endpoint that queries a list of records (e.g.,
+`SELECT * FROM ...` without a `LIMIT`, or an ORM call like `.findMany()` / `.select()` that
+returns all matching rows). Endpoints that return a single record by ID or a small fixed set
+(e.g., enum values, current user) can be skipped.
+
+### Choosing a strategy
+
+Pick the approach that fits how the frontend consumes the data:
+
+- **Cursor-based pagination** (preferred for lists the user scrolls through): return a `cursor`
+  (typically the last row's ID or sort key) and a `hasMore` flag. The frontend requests the next
+  page by passing the cursor back. This avoids the count query and handles concurrent inserts
+  gracefully.
+- **Offset/limit pagination** (acceptable when the UI shows page numbers): return `items`,
+  `total`, `page`, and `pageSize`. Use `LIMIT` and `OFFSET` in the query.
+- **Chunked loading** (for data that must all be present client-side, e.g., chart data, reports):
+  if the total dataset can grow large but the frontend needs it all, break it into smaller
+  sequential requests by date range or category rather than loading everything in one call.
+
+### Implementation guidelines
+
+- Default page size should be reasonable for the data type — typically 20–50 rows for table/list
+  views, up to 100 for lightweight records.
+- Accept `pageSize` / `limit` as a query parameter but enforce a maximum (e.g., 100) to prevent
+  abuse.
+- Always apply an `ORDER BY` to ensure stable pagination ordering.
+- Update the corresponding frontend code to pass pagination parameters and handle paginated
+  responses (load-more buttons, infinite scroll, or page controls as appropriate for the UI).
+- Update any frontend code that assumes all records are returned at once (e.g., client-side
+  filtering/sorting across the full dataset) — either move that logic server-side or fetch all
+  pages when needed for search/filter.
