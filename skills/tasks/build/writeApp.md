@@ -219,10 +219,23 @@ contexts (testing, deployment).
 - When building modals that reference other entities (e.g., adding a relationship to a person), use a
   searchable select/dropdown component, not a plain text input for IDs.
 
+- Redux async thunk `.fulfilled` handlers for mutation operations (create, update, delete) must
+  update the relevant `state.items` array with the response data, not just close modals or clear
+  editing state. Relying solely on a background refetch (`dispatch(fetchAll())`) after a mutation
+  causes stale data if the user interacts with the UI before the refetch completes. Always apply
+  the mutation result to local state immediately in the fulfilled handler.
+
 - When a `useEffect` derives local state from a URL parameter or route param (e.g., setting a
   `viewingItemId` from a URL's `:id` segment), it must handle both the truthy case (param present →
   set state) and the falsy case (param absent → clear state). Omitting the `else` branch causes
   stale state to persist when navigating away from a parameterized route back to the base route.
+
+- When implementing bidirectional sync between URL params and Redux state using separate
+  `useEffect` hooks (one for URL→state, another for state→URL), the state-to-URL effect must
+  not redirect on the initial render. On mount, Redux state is still at its initial value before
+  the URL→state effect has run, so the state-to-URL effect sees "no selection" and redirects away
+  from a valid URL. Use a ref to skip the first render or guard against redirecting when state has
+  never been set from the URL.
 
 - Gate dependent API calls on prerequisite data being loaded. When a component fetches data
   that depends on another piece of state (e.g., fetching dashboard stats requires `currentUser`

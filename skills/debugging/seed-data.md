@@ -170,6 +170,29 @@ have likely moved outside the filter window.
 of hardcoded dates. This ensures seed data always falls within date-based filters regardless
 of when tests run.
 
+## FK Constraint Violation → Check Seed Data
+
+When error output shows a foreign key constraint violation (e.g., `Key (member_id)=... is not
+present in table "members"` or `Key (instructor_id)=... is not present in table "instructors"`),
+this almost always indicates cross-run data accumulation requiring `beforeEach` reseeding, not
+an application bug.
+
+**Quick diagnosis** (no Replay needed):
+1. The FK constraint error names the missing table and column — check if seed data for that
+   table was deleted or never re-seeded between test runs.
+2. Check if the spec file has a `beforeEach` hook that reseeds the dependent table.
+3. If not, add a `beforeEach` that reseeds tables in FK dependency order (see
+   `skills/tasks/build/testing.md` § "Test Isolation Mandates").
+
+**FK dependency reseed order**: When reseeding multiple tables, respect foreign key constraints.
+Seed parent tables before child tables. For example: `instructors → members → bookings` (members
+reference instructors, bookings reference members). Seeding in the wrong order causes the same
+FK constraint errors the tests are hitting.
+
+**Resolution**: Add a `beforeEach` hook that calls seed endpoints in the correct dependency
+order. This is the same fix as cross-run-accumulation — FK violations are a symptom of
+missing reseeding, not a distinct failure category.
+
 ## General Guidance
 
 When many detail-page tests fail with `expected count > 0, received 0`, resist the urge to

@@ -448,6 +448,19 @@ failures (~57% of observed failures come from shared database state).
     seed-data-mismatch appeared in 3 separate logs because the fix from the first log
     was overridden by a later worker.
 
+18. **Audit `deleteAll*` helpers for paginated API responses.** When test utilities call
+    `deleteAll` endpoints that return paginated responses (e.g., `{ items: [...], total: N }`),
+    they MUST destructure the response correctly: `const { items } = await response.json()`.
+    Using the raw response object as an array (iterating over `{ items, total }` instead of
+    `items`) silently fails to delete anything, corrupting database state for subsequent tests.
+    This was the direct cause of member table corruption in one observed session.
+
+19. **Reseed tables in FK dependency order.** When reseeding multiple tables in `beforeEach`
+    hooks, respect foreign key constraints by seeding parent tables before child tables. For
+    example: `instructors → members → bookings` (members reference instructors, bookings
+    reference members). Calling reseed endpoints in the wrong order causes FK constraint
+    violations that look like application bugs but are actually test infrastructure issues.
+
 ## Pre-Commit Checklist for New Spec Files
 
 Before committing a new spec file, verify:

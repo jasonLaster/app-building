@@ -26,6 +26,18 @@ that will be fixed by subsequent edits. Complete all code changes first, then ru
   `tsconfig.json` is used and avoids resolution issues.
 - Example: `cd /repo/apps/SalesCRM && npm run check`
 
+## Pre-Flight Disk Space Check
+
+Before running `npm run check`, verify sufficient disk space:
+
+```bash
+df -h / | awk 'NR==2 {print $4}'
+```
+
+If free space is below 1GB, run the disk cleanup procedure in `skills/scripts/disk-cleanup.md`
+before proceeding. TypeScript compilation and ESLint both need temporary disk space — running
+them on a full disk produces confusing errors unrelated to your code.
+
 ## Proactive Cleanup Before Running
 
 Before running `npm run check`, proactively clean up unused imports and variables from files

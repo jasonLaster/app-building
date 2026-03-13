@@ -46,6 +46,16 @@ steps and they succeed, do not then re-run each step individually as a "double c
 pattern wastes 3-5 commands per test run and provides no additional value. Trust the output
 of each step — if it passed, move on.
 
+### 1b. Check disk space
+
+```bash
+df -h / | awk 'NR==2 {print $4}'
+```
+
+If free space is below 1GB, run the disk cleanup procedure in `skills/scripts/disk-cleanup.md`
+before proceeding. Disk exhaustion (0 bytes free) causes cascading failures: dev server crashes,
+Replay browser deletion, and npm install failures.
+
 ### 2. Verify `NEON_PROJECT_ID` in `.env`
 
 ```bash
