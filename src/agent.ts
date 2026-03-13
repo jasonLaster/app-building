@@ -117,16 +117,21 @@ async function waitForIdle(
   signal: AbortSignal,
   httpOpts: HttpOptions,
 ): Promise<void> {
-  let pollCount = 0;
+  let consecutiveErrors = 0;
   while (!signal.aborted) {
     try {
       const data = await httpGet(`${baseUrl}/status`, httpOpts);
-      pollCount++;
+      consecutiveErrors = 0;
       if ((data.state === "idle" && data.pendingTasks === 0) || data.state === "stopping" || data.state === "stopped") {
         return;
       }
     } catch (err) {
-      pollCount++;
+      consecutiveErrors++;
+      console.log(`Status poll failed (${consecutiveErrors}): ${err instanceof Error ? err.message : err}`);
+      if (consecutiveErrors >= 10) {
+        console.log("Container is unreachable, exiting.");
+        return;
+      }
     }
     await new Promise((r) => setTimeout(r, 500));
   }
