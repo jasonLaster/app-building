@@ -1,6 +1,6 @@
 {
   "name": "@replayio/app-building",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "Library for managing agentic app-building containers",
   "type": "module",
   "exports": {

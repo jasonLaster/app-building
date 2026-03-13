@@ -43,7 +43,8 @@ Copy `.env.example` to `.env` and fill in the values:
 
 | Variable | Required | Description |
 |---|---|---|
-| `INFISICAL_TOKEN` | Yes | Infisical service token for fetching build secrets |
+| `INFISICAL_CLIENT_ID` | Yes | Infisical machine identity Client ID |
+| `INFISICAL_CLIENT_SECRET` | Yes | Infisical machine identity Client Secret |
 | `INFISICAL_PROJECT_ID` | Yes | Infisical project ID |
 | `INFISICAL_ENVIRONMENT` | Yes | Infisical environment (e.g. `prod`) |
 | `FLY_API_TOKEN` | For remote | Fly.io personal access token |
@@ -59,7 +60,7 @@ Per-branch deployment secrets (database URLs, site IDs) are stored in Infisical 
 1. Create a project at [app.infisical.com](https://app.infisical.com)
 2. Create a `/global/` folder and add the required build secrets listed in `src/package/.env.example`
 3. Create `/branches/<branch>/` folders as needed for per-branch deployment secrets
-4. Generate a service token and add `INFISICAL_TOKEN`, `INFISICAL_PROJECT_ID`, and `INFISICAL_ENVIRONMENT` to your `.env`
+4. Create a machine identity with Universal Auth and add `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET`, `INFISICAL_PROJECT_ID`, and `INFISICAL_ENVIRONMENT` to your `.env`
 
 ### GitHub token
 

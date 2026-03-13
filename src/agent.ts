@@ -273,7 +273,7 @@ async function main(): Promise<void> {
 
   const projectRoot = resolve(__dirname, "..");
   const orchestrationVars = loadDotEnv(projectRoot);
-  const infisicalConfig = getInfisicalConfig(orchestrationVars);
+  const infisicalConfig = await getInfisicalConfig(orchestrationVars);
   const containerSecrets = await resolveContainerSecrets(infisicalConfig);
 
   const config: ContainerConfig = {

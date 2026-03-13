@@ -22,6 +22,27 @@ export interface InfisicalConfig {
   environment: string;
 }
 
+/**
+ * Log in to Infisical using Universal Auth (Client ID + Client Secret).
+ * Returns a short-lived access token (default 30 day TTL).
+ */
+export async function infisicalLogin(
+  clientId: string,
+  clientSecret: string,
+): Promise<string> {
+  const res = await fetch(`${INFISICAL_API_BASE}/api/v1/auth/universal-auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ clientId, clientSecret }),
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Infisical login failed → ${res.status}: ${body}`);
+  }
+  const data = (await res.json()) as { accessToken: string };
+  return data.accessToken;
+}
+
 async function infisicalFetch(
   path: string,
   config: InfisicalConfig,
@@ -115,22 +136,27 @@ export async function resolveContainerSecrets(
 }
 
 /**
- * Extract Infisical config from environment variables.
- * Throws if any required Infisical var is missing.
+ * Extract Infisical config from environment variables and log in.
+ * Reads INFISICAL_CLIENT_ID, INFISICAL_CLIENT_SECRET, INFISICAL_PROJECT_ID,
+ * and INFISICAL_ENVIRONMENT from the env vars.
+ * Throws if any required var is missing.
  */
-export function getInfisicalConfig(
+export async function getInfisicalConfig(
   envVars: Record<string, string>,
-): InfisicalConfig {
-  const token = envVars.INFISICAL_TOKEN;
+): Promise<InfisicalConfig> {
+  const clientId = envVars.INFISICAL_CLIENT_ID;
+  const clientSecret = envVars.INFISICAL_CLIENT_SECRET;
   const projectId = envVars.INFISICAL_PROJECT_ID;
   const environment = envVars.INFISICAL_ENVIRONMENT;
   const missing = [
-    !token && "INFISICAL_TOKEN",
+    !clientId && "INFISICAL_CLIENT_ID",
+    !clientSecret && "INFISICAL_CLIENT_SECRET",
     !projectId && "INFISICAL_PROJECT_ID",
     !environment && "INFISICAL_ENVIRONMENT",
   ].filter(Boolean);
   if (missing.length > 0) {
     throw new Error(`Missing Infisical config in .env: ${missing.join(", ")}`);
   }
-  return { token: token!, projectId: projectId!, environment: environment! };
+  const token = await infisicalLogin(clientId!, clientSecret!);
+  return { token, projectId: projectId!, environment: environment! };
 }

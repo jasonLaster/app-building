@@ -8,7 +8,7 @@ const projectRoot = resolve(__dirname, "..");
 const orchestrationVars = loadDotEnv(projectRoot);
 
 async function main() {
-  const infisicalConfig = getInfisicalConfig(orchestrationVars);
+  const infisicalConfig = await getInfisicalConfig(orchestrationVars);
   const containerSecrets = await resolveContainerSecrets(infisicalConfig);
 
   const config: ContainerConfig = {
