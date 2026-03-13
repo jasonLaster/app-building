@@ -39,21 +39,31 @@ Containers can run locally or remotely.
 npm install
 ```
 
-Copy `.env.example` to `.env` and fill in the values that apply to your setup. The required ones are the same regardless of whether you run locally or remotely:
+Copy `.env.example` to `.env` and fill in the values:
 
 | Variable | Required | Description |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Yes | Anthropic API key for Claude |
-| `GITHUB_TOKEN` | Yes | GitHub personal access token with **`repo`** scope |
-| `NETLIFY_AUTH_TOKEN` | Yes | Netlify auth token for deploying apps |
-| `NETLIFY_ACCOUNT_SLUG` | Yes | Your Netlify account slug |
-| `NEON_API_KEY` | Yes | Neon API key for database provisioning |
-| `UPLOADTHING_TOKEN` | No | For apps that need file uploads |
-| `RESEND_API_KEY` | No | For apps that send email |
+| `INFISICAL_TOKEN` | Yes | Infisical service token for fetching build secrets |
+| `INFISICAL_PROJECT_ID` | Yes | Infisical project ID |
+| `INFISICAL_ENVIRONMENT` | Yes | Infisical environment (e.g. `prod`) |
+| `FLY_API_TOKEN` | For remote | Fly.io personal access token |
+| `FLY_APP_NAME` | For remote | Fly.io app name for container namespace |
+| `LOCAL_CONTAINER_PORT` | No | Override the host port for local containers (auto-selected if unset) |
+
+Build secrets (API keys for Anthropic, GitHub, Netlify, Neon, etc.) are managed in **Infisical** under the `/global/` folder. The orchestration scripts fetch them at container startup and inject them into the container environment. See `src/package/.env.example` for the full list of required build secrets.
+
+Per-branch deployment secrets (database URLs, site IDs) are stored in Infisical under `/branches/<branch>/` and fetched by the container at deploy time.
+
+### Infisical setup
+
+1. Create a project at [app.infisical.com](https://app.infisical.com)
+2. Create a `/global/` folder and add the required build secrets listed in `src/package/.env.example`
+3. Create `/branches/<branch>/` folders as needed for per-branch deployment secrets
+4. Generate a service token and add `INFISICAL_TOKEN`, `INFISICAL_PROJECT_ID`, and `INFISICAL_ENVIRONMENT` to your `.env`
 
 ### GitHub token
 
-Create a token at github.com/settings/tokens and enable the **`repo`** scope (the top-level checkbox). This gives the agent the read/write access it needs to clone your repo and push commits back.
+Create a token at github.com/settings/tokens and enable the **`repo`** scope (the top-level checkbox). This gives the agent the read/write access it needs to clone your repo and push commits back. Add it to the Infisical `/global/` folder as `GITHUB_TOKEN`.
 
 ### Branch setup
 
@@ -115,11 +125,7 @@ Runs the agent on a Fly.io machine instead of your local Docker. Useful for long
    ```
    Or create one via the Fly dashboard — the app name is just a namespace, no deployment needed.
 
-2. Add these to your `.env`:
-   ```
-   FLY_API_TOKEN=<your fly token from fly.io/user/personal_access_tokens>
-   FLY_APP_NAME=app-building-agent
-   ```
+2. Add `FLY_API_TOKEN` (from fly.io/user/personal_access_tokens) and `FLY_APP_NAME` to your `.env`
 
 ### Usage
 
@@ -171,10 +177,7 @@ and fix it in fewer iterations.
 
 1. Create an account at [app.replay.io](https://app.replay.io)
 2. Go to your team settings and generate an API key
-3. Add it to `.env`:
-   ```
-   RECORD_REPLAY_API_KEY=<your-key>
-   ```
+3. Add it to Infisical `/global/` as `RECORD_REPLAY_API_KEY`
 
 The Replay browser is already installed in the Docker image — no additional setup needed.
 Once the key is present, the agent automatically gains access to these debugging tools

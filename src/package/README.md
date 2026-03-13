@@ -14,6 +14,8 @@ npm install @replayio/app-building
 import {
   loadDotEnv,
   FileContainerRegistry,
+  getInfisicalConfig,
+  resolveContainerSecrets,
   createMachine,
   destroyMachine,
   type ContainerConfig,
@@ -23,14 +25,17 @@ import {
   httpOptsFor,
 } from "@replayio/app-building";
 
-// Assemble config once at startup
-const envVars = loadDotEnv("/path/to/project");
+// Load orchestration vars from .env, then fetch build secrets from Infisical
+const orchestrationVars = loadDotEnv("/path/to/project");
+const infisicalConfig = getInfisicalConfig(orchestrationVars);
+const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+
 const config: ContainerConfig = {
   projectRoot: "/path/to/project",  // optional — only needed for local Docker operations
-  envVars,
+  envVars: containerSecrets,
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
-  flyToken: envVars.FLY_API_TOKEN,
-  flyApp: envVars.FLY_APP_NAME,
+  flyToken: orchestrationVars.FLY_API_TOKEN,
+  flyApp: orchestrationVars.FLY_APP_NAME,
 };
 
 // Create a Fly machine (automatically provisions a volume)
@@ -54,7 +59,7 @@ await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars`, `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`detached`/`initialPrompt`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
+| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars` (build secrets from Infisical), `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`webhookSecret`/`detached`/`initialPrompt`/`localPort`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
 | `FileContainerRegistry` | Built-in file-backed implementation of `ContainerRegistry`, backed by a `.jsonl` file. |
@@ -183,7 +188,7 @@ so that interactive users can send follow-up messages at any time.
 
 ## Webhooks
 
-Set `webhookUrl` on `ContainerConfig` to receive real-time notifications of container activity. The container POSTs JSON to that URL on key events (no retries; failures are logged to stderr). If `WEBHOOK_SECRET` is set in the environment, the container sends it as a `Bearer` token in the `Authorization` header.
+Set `webhookUrl` on `ContainerConfig` to receive real-time notifications of container activity. The container POSTs JSON to that URL on key events (no retries; failures are logged to stderr). Set `webhookSecret` to include a `Bearer` token in the `Authorization` header for authenticating webhook requests.
 
 ### Payload format
 
@@ -224,10 +229,15 @@ Every POST body has this shape:
 ### Example
 
 ```ts
+const orchestrationVars = loadDotEnv("/path/to/project");
+const infisicalConfig = getInfisicalConfig(orchestrationVars);
+const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+
 const config: ContainerConfig = {
   projectRoot: "/path/to/project",
-  envVars: loadDotEnv("/path/to/project"),
+  envVars: containerSecrets,
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
   webhookUrl: "https://example.com/hooks/container-events",
+  webhookSecret: "your-webhook-secret",
 };
 ```
