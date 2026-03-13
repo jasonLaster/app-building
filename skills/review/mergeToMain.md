@@ -80,6 +80,18 @@ git checkout $SOURCE_BRANCH -- AGENTS.md CLAUDE.md \
 git checkout $SOURCE_BRANCH -- "reports/<report-name>.md"
 ```
 
+**Watch for deletions on main**: Before committing, check if main has deleted any files or
+content that the source branch still has. The branch may be based on an older main and could
+inadvertently restore deleted files or content.
+
+```bash
+# Files deleted on main since the merge base — do NOT restore these
+git diff --name-status $MERGE_BASE origin/main -- skills/ scripts/ | grep '^D'
+```
+
+If any files were deleted on main, make sure they stay deleted in the merge branch (`git rm` them
+if the patch or checkout restored them).
+
 Handle new files and deletions from the diff:
 
 ```bash
