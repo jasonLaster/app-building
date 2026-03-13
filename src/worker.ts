@@ -55,10 +55,22 @@ export let currentAgentProcess: ChildProcess | null = null;
 /** Set by the server when the user sends POST /interrupt. Cleared after processTask checks it. */
 let interruptRequested = false;
 
-export function requestInterrupt(): void {
+export function requestInterrupt(log: Logger): void {
   interruptRequested = true;
+
+  // Clear pending tasks so nothing else runs after the interrupt
+  const data = readTasksFile();
+  const cleared = data.tasks.length + (data.current ? 1 : 0);
+  data.tasks = [];
+  delete data.current;
+  writeTasksFile(data);
+  log(`Interrupt: cleared ${cleared} pending task(s).`);
+
   if (currentAgentProcess) {
+    log(`Interrupt: killing agent process (pid=${currentAgentProcess.pid}).`);
     currentAgentProcess.kill("SIGINT");
+  } else {
+    log("Interrupt: no agent process running.");
   }
 }
 

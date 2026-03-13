@@ -305,8 +305,9 @@ const server = createServer(async (req, res) => {
     // POST /interrupt
     if (method === "POST" && url === "/interrupt") {
       log(`Interrupt received (state=${state}, hasProcess=${!!currentAgentProcess})`);
-      requestInterrupt();
-      json(res, 200, { interrupted: !!currentAgentProcess });
+      const hadProcess = !!currentAgentProcess;
+      requestInterrupt(log);
+      json(res, 200, { interrupted: hadProcess });
       return;
     }
 
