@@ -224,6 +224,16 @@ npx tsx -e "import { initSchema } from './scripts/schema.ts'; await initSchema(p
 The deploy script handles this internally, but if you need to run schema operations manually
 (e.g., during initial setup or debugging), use the inline import pattern.
 
+## JSON Parsing in Shell
+
+**`jq` is not available in the container.** When you need to parse JSON from shell commands
+(e.g., Neon API responses, Netlify CLI output), use `node -e` or `python3 -c` instead.
+Example:
+
+```bash
+curl -s ... | node -e "process.stdin.on('data',d=>console.log(JSON.parse(d).key))"
+```
+
 ## Implementation Tips
 
 - Reuse `initSchema` from `scripts/schema.ts` for schema sync.

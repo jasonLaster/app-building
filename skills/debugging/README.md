@@ -97,13 +97,20 @@ tool sequence in the relevant debugging guide below.
 
 **Error output first — mandatory first step**: Always analyze Playwright error messages
 (expected/received values, locator errors, timeout messages) before reaching for Replay.
-Across observed sessions, 92.7% of failures were diagnosed from error output alone. Only
+Across observed sessions, 81–93% of failures were diagnosed from error output alone. Only
 use Replay when error output is ambiguous or points to visual/timing issues that cannot be
 confirmed from text. For data-contamination, race-condition, strict-mode, and
 seed-data-mismatch categories, error output is always sufficient — 100% of Replay uses for
 these categories were unnecessary. Reserve Replay for CSS/layout issues, complex race
 conditions where timing is ambiguous, and backend bugs where error output doesn't explain
 *why* the wrong data exists.
+
+**Replay decision gate**: Only use Replay when the failure involves **network timing,
+request interception, or visual rendering issues**. For count mismatches and state
+mismatches, error output is almost always sufficient — in one session, 80% of Replay uses
+were unnecessary because error output showed the count/state mismatch directly. Replay
+excels specifically when you need to see request/response timing (e.g., stale API response
+overwriting local state) or verify that route mocks intercepted the correct requests.
 
 Some failures can be diagnosed from Playwright error output alone without needing Replay:
 
@@ -138,8 +145,10 @@ what the ambiguous locator was.
 - Tests pass individually but fail together (timing-dependent interference)
 - Timing-dependent UI behavior where error output doesn't explain *why*
 - API returning data that shouldn't exist (unknown source)
+- Route mock pattern doesn't match actual requests (e.g., mock `**/api/resource` misses
+  requests with query parameters like `?page=1&pageSize=20` — NetworkRequest reveals this)
 
-In observed sessions, 40% of Replay uses were unnecessary — the error output alone sufficed.
+In observed sessions, 40–80% of Replay uses were unnecessary — the error output alone sufficed.
 Apply this heuristic to avoid speculative Replay usage on simple issues.
 
 ### Data-contamination quick-check

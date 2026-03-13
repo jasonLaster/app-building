@@ -179,6 +179,30 @@ useEffect(() => {
 
 This pattern resolved useEffect overwrite issues that took 5+ iterations to diagnose in
 observed sessions.
+
+### useEffect autosave feedback loop
+When a form component auto-saves on change and also syncs state from fetched data via
+`useEffect`, the auto-save triggers a refetch, which triggers the `useEffect`, which
+overwrites the form state, which triggers another auto-save — creating an infinite loop
+or rapid state oscillation. This caused 11 failures in one form-editor component and 3
+in a personal-info component.
+
+**Diagnosis without Replay**: Test fills a form field, but the value reverts or the form
+enters an update loop. Error output shows the original value instead of the edited value,
+or timeout from repeated saves.
+
+**Fix**: Add an editing guard (dirty flag or `isEditing` state) AND debounce the auto-save.
+The `useEffect` that syncs from fetched data must skip when the user is actively editing:
+```ts
+const [isEditing, setIsEditing] = useState(false);
+useEffect(() => {
+  if (isEditing) return; // Don't overwrite during editing
+  if (fetchedData) setFormState(fetchedData);
+}, [fetchedData, isEditing]);
+```
+When found in one form component, proactively check all other form components with
+auto-save for the same pattern.
+
 ### API timing race condition (NetworkRequest → Logpoint sequence)
 For race conditions involving async state management (useEffect + API response timing), where
 error output only shows the symptom (wrong value) but not the cause (when/why state was

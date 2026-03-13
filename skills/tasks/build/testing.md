@@ -391,7 +391,14 @@ failures (~57% of observed failures come from shared database state).
    example, check that the expected number of rows exists before performing add/delete
    operations, rather than relying on a previous test's side effects.
 
-11. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
+11. **Password-change tests must restore original credentials.** Any spec file that
+    changes a user's password MUST restore the original password in `afterAll` or use a
+    dedicated test user account. Password mutations cascade into 18+ failures across other
+    spec files (e.g., personal-info, messages) that rely on the original credentials for
+    API authentication and `beforeEach` cleanup. This is the highest-blast-radius
+    data-contamination pattern observed — a single password change can break 3+ spec files.
+
+12. **Navigate before `page.evaluate(fetch(...))`**. Tests that use `page.evaluate(fetch(...))`
    for API-driven setup in `beforeEach` or `beforeAll` MUST call `page.goto()` first to
    navigate to the app. `fetch()` with relative URLs fails at `about:blank` because there
    is no base URL to resolve against. Always ensure the page has navigated before making
@@ -428,7 +435,18 @@ failures (~57% of observed failures come from shared database state).
 16. **Shared test utility for seed data reset.** When the same API-based reset logic is
     needed across multiple spec files (e.g., `resetPayments()`, `resetOrderStatuses()`),
     extract it to a shared test utility file (e.g., `tests/helpers/reset.ts`). This
-    reduces boilerplate and ensures consistent cleanup across all spec files.
+    reduces boilerplate and ensures consistent cleanup across all spec files. The
+    `destructive-test-reordering` pattern was applied identically across 4 spec files in
+    one session — a shared `resetDatabase(resource)` helper would have prevented this
+    duplication.
+
+17. **Single source of truth for seed data expectations.** Seed data counts and values
+    used in test assertions MUST be derived from a single shared constant or queried from
+    the API at test time — never hardcoded independently in multiple spec files. When
+    multiple workers modify the same test files, independent seed data assumptions drift
+    and cause recurring seed-data-mismatch failures. In one session, the same
+    seed-data-mismatch appeared in 3 separate logs because the fix from the first log
+    was overridden by a later worker.
 
 ## Pre-Commit Checklist for New Spec Files
 
@@ -483,6 +501,52 @@ functions, effects, and callbacks to help detect side effects. This causes:
 When writing tests, assume double-renders will occur and avoid assertions that depend on
 exact render or fetch counts. Use DOM-based assertions (`toBeVisible`, `toHaveText`) that
 naturally wait for the final state.
+
+## useEffect Race Conditions
+
+A common pattern in app bugs (observed in multiple test sessions) is `useEffect` hooks that
+overwrite user input with stale API data. This occurs when:
+
+1. User starts editing a form field (local state changes)
+2. An API response arrives (from a fetch triggered by a prior render or StrictMode double-mount)
+3. The `useEffect` that processes the API response overwrites local state, discarding user input
+
+**The fix pattern**: Add an "editing guard" that prevents API data from overwriting local state
+while the user is actively editing. Two common implementations:
+
+```typescript
+// Pattern 1: useRef editing flag
+const isEditingRef = useRef(false);
+
+useEffect(() => {
+  if (!isEditingRef.current && apiData) {
+    setLocalValue(apiData.value);
+  }
+}, [apiData]);
+
+// Set isEditingRef.current = true in onChange, false in onBlur/onSave
+```
+
+```typescript
+// Pattern 2: pendingSavesRef to track in-flight saves
+const pendingSavesRef = useRef(0);
+
+const handleSave = async () => {
+  pendingSavesRef.current++;
+  await saveToApi(value);
+  pendingSavesRef.current--;
+};
+
+useEffect(() => {
+  if (pendingSavesRef.current === 0 && apiData) {
+    setLocalValue(apiData.value);
+  }
+}, [apiData]);
+```
+
+When debugging tests where user input appears to be "lost" or fields revert to old values,
+check for unguarded `useEffect` hooks that sync API data to local state. This pattern is
+most reliably diagnosed using Replay recordings to observe the exact sequence of state updates.
 
 ## Test Counting
 

@@ -20,6 +20,7 @@ TEST_RERUNS: <number of test re-runs needed in this log to achieve all-pass, 0 i
 For each test failure:
 
 ### Failure: <test name>
+WORKER: <worker name, e.g. "gwk308" or "clean_2b90d218" — identifies which worker produced this log. Required for multi-worker reports to simplify synthesis without inferring from log filenames.>
 FAILURE_CATEGORY: <one of: timeout, strict-mode, data-contamination, batch-contamination, CSS/layout, race-condition, sort-race-condition, backend-bug, api-routing, date-format, missing-testid, seed-data-mismatch, infrastructure, spa-redirect, recording-upload-failure, bad-assertion-api, wrong-url, test-setup-error, other> (Use "bad-assertion-api" when tests use non-existent Playwright assertion methods like `toEndWith`, `toStartWith`, etc.) (Use "race-condition" when the failure is caused by async timing — e.g., count before load, API response ordering. Prefer "race-condition" over "CSS/layout" when the root cause is timing-based rather than visual. Use "date-format" for date/timestamp format mismatches between PostgreSQL ISO timestamps and expected YYYY-MM-DD strings. Use "batch-contamination" for cross-spec data contamination in batch/JourneyQA runs where multiple spec files share a single database branch — this is qualitatively different from within-spec "data-contamination". Use "seed-data-mismatch" for journeyQA tests that assume specific pre-existing records in the deployed database but the actual live state differs — this is distinct from within-spec data contamination and represents a test-assumption mismatch rather than cross-test interference.) (Use "wrong-url" when the test navigates to or asserts on an incorrect URL path — e.g., `/visits/` vs `/service-visits/`.) (Use "api-routing" when the failure is caused by URL segment parsing, wrong API prefix, or Netlify function routing issues — e.g., API returns HTML instead of JSON due to wrong redirect prefix, or `segments[3]` vs `segments[2]` off-by-one. Prefer "api-routing" over "backend-bug" when the root cause is URL routing rather than business logic.) (Use "sort-race-condition" when the failure is caused specifically by sort/filter state management patterns — e.g., nested setState in handleSort causing stale closures, concurrent API requests overwriting locally-sorted results, or dual-useEffect patterns dispatching overlapping fetches. This is distinct from general "race-condition" which covers async timing issues. Prefer "sort-race-condition" when the root cause involves column header sorting or filter state management.) (Use "test-setup-error" when the test's setup/beforeEach code fails — e.g., `page.evaluate(fetch(...))` at `about:blank`, missing navigation before API calls.) (CSS/layout vs strict-mode boundary: Use "strict-mode" when the root cause is a Playwright locator matching multiple elements due to anchored regex on composite text — e.g., `hasText: /^Leather Sofa$/` failing because the element contains additional text like room/category. Use "CSS/layout" only when the failure requires visual confirmation — e.g., elements are overlapping, hidden by CSS, or positioned off-screen. If the fix is changing a locator/selector, prefer "strict-mode"; if the fix is changing CSS/layout, use "CSS/layout".)
 DATA_CONTAMINATION_SUBCATEGORY: <if FAILURE_CATEGORY is data-contamination, one of: accumulated-data, destructive-ordering, settings-contamination, cross-run-accumulation. "accumulated-data" = tests create records without cleanup within a single run, causing subsequent tests to find duplicate entries or unexpected counts. "destructive-ordering" = edit/modify/delete tests change data that subsequent tests depend on. "settings-contamination" = settings modifications affect subsequent tests expecting defaults. "cross-run-accumulation" = records (payments, line items, invoices) accumulate across repeated test runs without cleanup, inflating counts for tests in later runs. This is distinct from within-run "accumulated-data" because it persists across separate test executions and requires beforeEach API resets rather than test reordering. Omit if FAILURE_CATEGORY is not data-contamination.>
 PRE_EXISTING: yes/no (yes = failure existed before the current work and is unrelated)
@@ -52,6 +53,16 @@ CASCADING_FIX_COUNT: <number of distinct test failures resolved by this changese
 
 If a log has no test failures, just write the Summary section with TEST_FAILURES: 0.
 
+### Cross-Log Deduplication
+
+When analyzing multiple logs, note when a failure is a repeat of one already analyzed in a
+prior log. Add a `CROSS_LOG_DUPLICATE: yes — same as <prior-log-filename>` field to the
+entry. This prevents inflating distinct failure counts in synthesis. The synthesizer should
+count cross-log duplicates as a single distinct failure (the first occurrence) and note the
+repeat in the Root Cause Clusters table. Example: if seed-data-pending-surveys appears
+identically in clean-2, clean-3, and clean-26, count it as 1 distinct failure with 3
+occurrences, not 3 distinct failures.
+
 ### Clustered Failures
 
 When 2+ failures in the same log share a single ROOT_CAUSE_CLUSTER, collapse them into a
@@ -63,6 +74,7 @@ this collapsed format — an explicit `ROOT_CAUSE_CLUSTER` field is not needed i
 
 ```
 ### Failure Cluster: <ROOT_CAUSE_CLUSTER> (<count> tests)
+WORKER: <worker name>
 FAILURE_CATEGORY: <category>
 DATA_CONTAMINATION_SUBCATEGORY: <if FAILURE_CATEGORY is data-contamination, one of: accumulated-data, destructive-ordering, settings-contamination, cross-run-accumulation. Same definition as individual entries. Omit if FAILURE_CATEGORY is not data-contamination.>
 PRE_EXISTING: yes/no
@@ -83,6 +95,13 @@ TOOL_CALL_COUNT: <recommended — same as individual failure entries. Total tool
 SPEC_FILE: <recommended — same as individual failure entries. The spec file containing this cluster's tests.>
 AFFECTED_TESTS: <comma-separated list of test names>
 ```
+
+**IMPORTANT: No infrastructure category in failure clusters.** `### Failure Cluster` headings
+must NOT use `infrastructure` as a FAILURE_CATEGORY. Infrastructure failures belong
+exclusively in the `## Infrastructure Failures` section and are not counted in TEST_FAILURES.
+Using infrastructure as a failure cluster category inflates the TEST_FAILURES count. If a
+group of failures is caused by an infrastructure issue (e.g., port conflict blocking all
+tests), report it in the Infrastructure Failures section, not as a Failure Cluster.
 
 **IMPORTANT: Avoiding double-counting in clusters.** When an individual failure is part of a
 cluster (same ROOT_CAUSE_CLUSTER), the TEST_FAILURES count should include only the cluster

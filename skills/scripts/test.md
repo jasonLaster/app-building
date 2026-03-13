@@ -28,6 +28,12 @@ the Playwright browsers path workaround.
 3. Run with a timeout mindset: if a test hangs, it's likely a stale process or port conflict,
    not a test bug.
 
+**Note**: The test script already handles process cleanup (step 1 of Behavior) and recording
+cleanup (step 6) internally. You do NOT need to run these pre-flight steps separately before
+every `npm run test` invocation — only run the full pre-flight checklist once per test session
+to verify env vars, Replay browser, and dependencies. Re-running pre-flight checks before
+every individual test file wastes significant time.
+
 ## Behavior
 
 1. **Kill stale processes**: Kill any leftover `netlify` or `vite` dev server processes from

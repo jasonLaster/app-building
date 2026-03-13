@@ -28,9 +28,23 @@ approach — `pkill` exits 0 even when no process is found, so `|| true` makes i
 successful even when servers are still running. The `ps aux | xargs kill` pipeline is more
 reliable. See `skills/scripts/killStaleProcesses.md` for details and fallback approaches.
 
+**Port recovery**: If the port is still occupied after killing processes (zombie processes
+invisible to `ps`), use `fuser` to force-free it:
+
+```bash
+fuser -k 8888/tcp 2>/dev/null || true
+```
+
+This should be a standard fallback when `netlify dev` fails to bind a port.
+
 **Run each preflight step as a separate command**, not as a combined one-liner. The pattern
 `cd X && pkill ... && grep ... && ls ...` fails if any sub-command fails (especially pkill
 when no process exists), wasting effort decomposing and re-running individual commands.
+
+**Do NOT re-run individual checks after a combined check passes.** If you run all preflight
+steps and they succeed, do not then re-run each step individually as a "double check". This
+pattern wastes 3-5 commands per test run and provides no additional value. Trust the output
+of each step — if it passed, move on.
 
 ### 2. Verify `NEON_PROJECT_ID` in `.env`
 
