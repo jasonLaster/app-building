@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { Command } from "commander";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor, getInfisicalConfig, resolveContainerSecrets } from "./package";
 import { startRemoteContainer } from "./remote-container";
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
 import { formatEvent } from "./format";
@@ -261,8 +261,8 @@ async function main(): Promise<void> {
 
   const opts = program.opts();
 
-  const repo = opts.repo ?? process.env.REPO_URL ?? getLocalRemoteUrl();
-  const branch = opts.branch ?? process.env.CLONE_BRANCH ?? getLocalBranch();
+  const repo = opts.repo ?? getLocalRemoteUrl();
+  const branch = opts.branch ?? getLocalBranch();
 
   const pushBranch = opts.pushBranch ?? branch;
 
@@ -272,14 +272,18 @@ async function main(): Promise<void> {
   }
 
   const projectRoot = resolve(__dirname, "..");
-  const envVars = loadDotEnv(projectRoot);
+  const orchestrationVars = loadDotEnv(projectRoot);
+  const infisicalConfig = getInfisicalConfig(orchestrationVars);
+  const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+
   const config: ContainerConfig = {
     projectRoot,
-    envVars,
+    envVars: containerSecrets,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
-    flyToken: envVars.FLY_API_TOKEN,
-    flyApp: envVars.FLY_APP_NAME,
+    flyToken: orchestrationVars.FLY_API_TOKEN,
+    flyApp: orchestrationVars.FLY_APP_NAME,
     webhookUrl: opts.webhook,
+    localPort: orchestrationVars.LOCAL_CONTAINER_PORT ? parseInt(orchestrationVars.LOCAL_CONTAINER_PORT, 10) : undefined,
   };
 
   if (opts.interactive) {

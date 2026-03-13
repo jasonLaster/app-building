@@ -114,6 +114,35 @@ await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
 
 **Types:** `FlyMachineInfo`, `FlyVolumeInfo`, `CreateMachineResult`
 
+### Secrets (Infisical)
+
+| Export | Description |
+|---|---|
+| `getInfisicalConfig(envVars)` | Extract `InfisicalConfig` from env vars. Returns `null` if any required var is missing (enables fallback to raw `.env`). |
+| `resolveContainerSecrets(config)` | Fetch global build secrets from Infisical and merge with Infisical config vars. Returns a `Record<string, string>` suitable for `ContainerConfig.envVars`. |
+| `fetchGlobalSecrets(config)` | Fetch secrets from the `/global/` path. |
+| `fetchBranchSecrets(config, branch)` | Fetch secrets from `/branches/<branch>/`. |
+| `fetchInfisicalSecrets(config, path)` | Raw fetch from any Infisical folder path. |
+
+**Types:** `InfisicalConfig`
+
+**Usage pattern** (orchestration scripts):
+
+```ts
+const orchestrationVars = loadDotEnv(projectRoot);
+const infisicalConfig = getInfisicalConfig(orchestrationVars);
+const containerSecrets = infisicalConfig
+  ? await resolveContainerSecrets(infisicalConfig)
+  : orchestrationVars; // fallback for local dev without Infisical
+
+const config: ContainerConfig = {
+  envVars: containerSecrets,
+  flyToken: orchestrationVars.FLY_API_TOKEN,
+  flyApp: orchestrationVars.FLY_APP_NAME,
+  ...
+};
+```
+
 ### Image ref
 
 | Export | Description |

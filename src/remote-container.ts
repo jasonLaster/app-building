@@ -61,6 +61,7 @@ export async function startRemoteContainer(
     CONTAINER_NAME: machineName,
   };
   if (config.webhookUrl) remoteExtra.WEBHOOK_URL = config.webhookUrl;
+  if (config.webhookSecret) remoteExtra.WEBHOOK_SECRET = config.webhookSecret;
   if (config.detached) remoteExtra.DETACHED = "1";
   if (config.initialPrompt) remoteExtra.INITIAL_PROMPT = config.initialPrompt;
   const containerEnv = buildContainerEnv(repo, config.envVars, remoteExtra);

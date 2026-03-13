@@ -3,10 +3,6 @@
 When a user reports a bug, add it to the app's `docs/bugReports.md` file so it can be
 picked up and fixed during the next maintenance cycle.
 
-Sometimes you might be instructed to immediately fix the bug. In this case you should go through
-the steps in `skills/tasks/maintain/fixBugReport.md` and `skills/tasks/maintain/reviewBugReport.md` directly
-instead of queueing tasks. Update `docs/bugReports.md` and add the bug to the finished section.
-
 ## Identifying the app
 
 Determine which app the bug report is for. If the user does not specify, infer it from

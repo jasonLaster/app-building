@@ -27,10 +27,13 @@ export interface ContainerConfig {
   flyApp?: string;
   imageRef?: string;
   webhookUrl?: string;
+  webhookSecret?: string;
   /** Start the container in detached mode. It will exit after processing all messages and tasks. */
   detached?: boolean;
   /** Initial prompt to queue at container startup (before the HTTP server accepts external requests). */
   initialPrompt?: string;
+  /** Override the host port for local containers (default: auto-selected). */
+  localPort?: number;
 }
 
 export interface RepoOptions {
@@ -146,13 +149,15 @@ export async function startContainer(
 
   const uniqueId = Math.random().toString(36).slice(2, 8);
   const containerName = `app-building-${uniqueId}`;
-  const hostPort = findFreePort();
+  const containerPort = 3000;
+  const hostPort = config.localPort ?? findFreePort();
 
   const extra: Record<string, string> = {
-    PORT: String(hostPort),
+    PORT: String(containerPort),
     CONTAINER_NAME: containerName,
   };
   if (config.webhookUrl) extra.WEBHOOK_URL = config.webhookUrl;
+  if (config.webhookSecret) extra.WEBHOOK_SECRET = config.webhookSecret;
   if (config.detached) extra.DETACHED = "1";
   if (config.initialPrompt) extra.INITIAL_PROMPT = config.initialPrompt;
   const containerEnv = buildContainerEnv(repo, config.envVars, extra);
@@ -162,7 +167,7 @@ export async function startContainer(
 
   // Use explicit port mapping for macOS Docker Desktop compatibility
   // (--network host only works on Linux)
-  args.push("-p", `${hostPort}:${hostPort}`);
+  args.push("-p", `${hostPort}:${containerPort}`);
 
   for (const [k, v] of Object.entries(containerEnv)) {
     args.push("--env", `${k}=${v}`);

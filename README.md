@@ -45,7 +45,6 @@ Copy `.env.example` to `.env` and fill in the values that apply to your setup. T
 |---|---|---|
 | `ANTHROPIC_API_KEY` | Yes | Anthropic API key for Claude |
 | `GITHUB_TOKEN` | Yes | GitHub personal access token with **`repo`** scope |
-| `REPO_URL` | Yes | HTTPS URL of the target repo, e.g. `https://github.com/your-org/your-repo` — must be HTTPS, not SSH |
 | `NETLIFY_AUTH_TOKEN` | Yes | Netlify auth token for deploying apps |
 | `NETLIFY_ACCOUNT_SLUG` | Yes | Your Netlify account slug |
 | `NEON_API_KEY` | Yes | Neon API key for database provisioning |

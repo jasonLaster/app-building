@@ -6,7 +6,7 @@
  */
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions, getInfisicalConfig, resolveContainerSecrets } from "./package";
 import { startRemoteContainer, stopRemoteContainer } from "./remote-container";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -32,17 +32,20 @@ async function waitForMessage(
 
 async function main() {
   const projectRoot = resolve(__dirname, "..");
-  const envVars = loadDotEnv(projectRoot);
+  const orchestrationVars = loadDotEnv(projectRoot);
+  const infisicalConfig = getInfisicalConfig(orchestrationVars);
+  const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+
   const config: ContainerConfig = {
     projectRoot,
-    envVars,
+    envVars: containerSecrets,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
-    flyToken: envVars.FLY_API_TOKEN,
-    flyApp: envVars.FLY_APP_NAME,
+    flyToken: orchestrationVars.FLY_API_TOKEN,
+    flyApp: orchestrationVars.FLY_APP_NAME,
   };
 
-  const repo = process.env.REPO_URL ?? getLocalRemoteUrl();
-  const branch = process.env.CLONE_BRANCH ?? getLocalBranch();
+  const repo = getLocalRemoteUrl();
+  const branch = getLocalBranch();
 
   const repoOpts: RepoOptions = {
     repoUrl: repo,

@@ -41,7 +41,7 @@ function loadSecretsFromFile(): string[] {
  *  Reads .env.example to know which keys came from .env, then checks
  *  process.env for their values. */
 function loadSecretsFromEnv(): string[] {
-  const examplePath = resolve(__dirname, "..", ".env.example");
+  const examplePath = resolve(__dirname, "package", ".env.example");
   let envKeys: string[] = [];
   if (existsSync(examplePath)) {
     envKeys = readFileSync(examplePath, "utf-8")
