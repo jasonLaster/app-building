@@ -216,7 +216,13 @@ as separate clusters across different logs.
   analysis: `destructive-ordering` (tests that delete/modify all records run before dependent
   tests), `accumulated-data` (tests create records that persist and inflate counts for
   subsequent tests), `settings-contamination` (settings modifications affect subsequent tests
-  expecting defaults). This breakdown helps target specific isolation strategies.
+  expecting defaults), `cross-run-accumulation` (records accumulate across repeated test runs
+  without cleanup). This breakdown helps target specific isolation strategies.
+- **Cross-run-accumulation detection heuristic** — when >40% of data-contamination failures
+  are classified as cross-run-accumulation, flag it as indicating missing `beforeEach` seed
+  calls rather than within-spec test ordering issues. This sub-category requires a different
+  fix (API-level state reset) than within-run contamination (test reordering or per-test
+  cleanup).
 - **Self-inflicted failure rate** — prominently report the percentage of failures that were
   self-inflicted (from SELF_INFLICTED field). This is a key quality signal for the test-writing
   process. A high rate (>50%) indicates systematic issues with how tests are written.

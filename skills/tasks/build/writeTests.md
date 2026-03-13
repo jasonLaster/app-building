@@ -38,6 +38,8 @@ EOF
 
 - For actions that produce side effects (e.g. history entries, timeline updates), write assertions that verify both the primary effect and the side effect. Also assert the side effect happens exactly once — duplicate entries from redundant API calls are a common bug.
 
+- When an action modifies child records (e.g., adding, editing, or removing line items, entries, or sub-rows), the test must also assert that any parent-level computed/aggregate values (e.g., total cost, item count, running balance) are updated correctly in the UI. Backend endpoints that modify children may forget to recalculate the parent aggregate, so only an explicit assertion on the updated parent value will catch this.
+
 - Avoid using `getByText()` or `filter({ hasText })` with common words that may appear as substrings
   in other elements (labels, options, buttons). Both Playwright's `getByText` and `filter({ hasText })`
   use case-insensitive substring matching by default — e.g., `hasText: 'Male'` also matches "Female".
@@ -215,6 +217,18 @@ EOF
   `const text = await el.textContent(); expect(Number(text)).toBe(5)`. Alternatively, use
   `expect(...).toPass()`, wait for a specific element to be visible, or wait for a loading
   indicator to disappear before asserting on the rendered data.
+
+- When asserting on values derived from seed data (e.g., sums, counts, aggregates computed by
+  the backend), verify the expected value by tracing through the actual seed data records and the
+  query/computation that produces the displayed value. Do not guess or approximate — compute the
+  expected value from the seed data to avoid arithmetic errors such as off-by-one mistakes.
+
+- Never use positional selectors (`.nth()`, `.first()`, `.last()`) to target specific rows or
+  items when asserting on their content. Row ordering depends on backend sort order (often by
+  UUID or insertion order), which may not match the order listed in the test spec entry. Instead,
+  use content-based locators such as `rows.filter({ has: page.locator(...) })` to find the row
+  containing the expected data, then assert on that row's contents. This ensures the test validates
+  the correct data regardless of display order.
 
 - When a test changes a selection (e.g., picks a different item from a dropdown) and then
   performs a dependent action (e.g., deletes a row, checks a summary), the test must assert

@@ -42,6 +42,9 @@ for files that don't exist yet — create them. In particular:
 
 - **`store.ts`**: The Redux store file does not exist yet during setup. Create it at
   `src/store.ts` rather than searching for it.
+- **Install Playwright and Replay as dev dependencies** during setup so they are available
+  when test-writing begins. Run `npm install --save-dev @playwright/test @replayio/playwright`
+  and `npx replayio install` during SetupApp, not later when tests are first run.
 - **Standard directory structure**: Create these directories up front:
   - `src/pages/` — page components
   - `src/components/` — shared UI components

@@ -81,6 +81,24 @@ test.beforeEach(async ({ request }) => {
 When the same pattern is needed across multiple spec files (e.g., invoice payment reset
 was applied to 3 spec files in one session), consider extracting it to a shared test utility.
 
+### Cross-Run Accumulation
+
+**Symptom**: Count assertions fail with values significantly higher than expected (e.g.,
+"expected 3, got 9") and the count increases with each test run.
+
+**Cause**: Records persist across repeated test runs without cleanup. Each run creates new
+records, and subsequent runs see the accumulated total from all previous runs. This is
+distinct from within-run "accumulated-data" because it persists across separate test
+executions.
+
+**Diagnosis**: When >40% of data-contamination failures show cross-run-accumulation, the
+root cause is missing `beforeEach` seed calls rather than within-spec test ordering issues.
+Error output alone is sufficient — the pattern `expected N, received M where M > N` is
+deterministic and diagnostic. No Replay needed.
+
+**Fix**: Add a `beforeEach` hook that calls `POST /api/seed` or deletes all records of the
+relevant type via API. This single fix prevents the entire sub-category.
+
 ## Quick Diagnostic
 
 When error output shows a wrong count or wrong value that was correct in an earlier test:
@@ -94,3 +112,12 @@ without needing Replay or code inspection. In one session, error output alone di
 81.5% of all failures — for data-contamination specifically, check (a) test ordering for
 destructive operations, (b) prior test runs for cross-run accumulation, (c) seed data
 assumptions before considering Replay.
+
+### Count Mismatch Shortcut
+
+When a test fails with a count mismatch (`expected N, received M where M > N`), the first
+action should be checking for a missing `beforeEach` seed or cleanup call — not launching
+Replay. Error output is sufficient for 84%+ of data-contamination cases. Replay adds no
+diagnostic value for data-contamination failures because the error message pattern
+(`toHaveCount expected X received Y`) is deterministic. Reserve Replay for CSS/layout,
+race-condition, and other categories where visual or temporal state matters.

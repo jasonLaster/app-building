@@ -44,3 +44,13 @@ npx tsx scripts/seed-db.ts
 ```
 
 This eliminates the #2 source of test failures (data contamination from accumulated state).
+
+### When to use `scripts/seed-db.ts` vs `/api/seed`
+
+- **`npx tsx scripts/seed-db.ts`**: Use for initial database setup, manual re-seeding before
+  test runs, and when the dev server is not running. Runs directly against the database.
+- **`POST /api/seed` endpoint**: Use inside test `beforeEach`/`beforeAll` hooks to reset
+  state between tests while the dev server is running. This is the preferred approach for
+  in-test reseeding because it uses the same database connection as the running server and
+  avoids connection conflicts. Many test failures trace back to stale seed data — using the
+  `/api/seed` endpoint in `beforeEach` hooks is the most effective mitigation.
