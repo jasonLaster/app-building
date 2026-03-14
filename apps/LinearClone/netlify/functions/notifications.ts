@@ -29,9 +29,10 @@ export default async function handler(req: Request, _context: Context) {
     const memberId = session.member_id;
     const url = new URL(req.url);
     const pathParts = url.pathname.split('/').filter(Boolean);
-    // pathParts: ["api", "notifications"] or ["api", "notifications", "<id>", "<action>"]
-    const notificationId = pathParts[2];
-    const action = pathParts[3];
+    // pathParts: [".netlify", "functions", "notifications", "<id>", "<action>"]
+    const funcIndex = pathParts.indexOf('notifications');
+    const notificationId = funcIndex >= 0 ? pathParts[funcIndex + 1] || null : null;
+    const action = funcIndex >= 0 ? pathParts[funcIndex + 2] || null : null;
 
     if (req.method === 'GET' && !notificationId) {
       const notifications = await sql`

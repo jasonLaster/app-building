@@ -1,0 +1,15 @@
+url=https://linear-clone-1773531033239.netlify.app
+site_id=5b3efec8-ad83-4543-97fd-18ac01a0892e
+neon_project_id=muddy-art-91639904
+database_url=postgresql://neondb_owner:npg_vA4Xi2MugnQc@ep-dry-pine-a6056yqe-pooler.us-west-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+
+--- Deployment 2026-03-14 ---
+Changes:
+- Initial production deployment of LinearClone app
+- Full project management app with teams, issues, cycles, projects, labels, and members
+- Authentication with login/signup, session management
+- SPA routing with API proxy redirects for Netlify Functions
+- Fixed named/default export mismatches in App.tsx imports
+- Fixed URL path parsing in teams and notifications Netlify Functions for production environment
+- Database seeded with Acme Corp workspace, 3 members, 2 teams (Engineering, Design), issues, cycles, projects, and labels
+- Deployment test verified: login, data display, and team CRUD operations working

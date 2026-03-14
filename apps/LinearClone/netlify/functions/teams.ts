@@ -27,7 +27,9 @@ export default async function handler(req: Request, _context: Context) {
     const sql = getSql();
     const url = new URL(req.url);
     const pathParts = url.pathname.split('/').filter(Boolean);
-    const teamId = pathParts[2] || null;
+    // In Netlify, path is /.netlify/functions/teams/<teamId>
+    const funcIndex = pathParts.indexOf('teams');
+    const teamId = funcIndex >= 0 ? pathParts[funcIndex + 1] || null : null;
 
     if (req.method === 'GET' && !teamId) {
       const teams = await sql`

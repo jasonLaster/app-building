@@ -1,15 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/deployment.md",
-      "subtasks": [
-        "DoDeploy: Deploy the app to production",
-        "TestDeploy: Test the deployed app"
-      ],
-      "timestamp": "2026-03-14T23:29:37.099Z",
-      "app": "LinearClone"
-    },
-    {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
         "Unpack: Get all tests passing"
@@ -29,9 +20,10 @@
   "current": {
     "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "Unpack: Do an initial production deployment"
+      "DoDeploy: Deploy the app to production",
+      "TestDeploy: Test the deployed app"
     ],
-    "timestamp": "2026-03-14T18:21:07.448Z",
+    "timestamp": "2026-03-14T23:29:37.099Z",
     "app": "LinearClone"
   }
 }
