@@ -29,11 +29,6 @@ function redact(text: string, secretValues: string[]): string {
   return result;
 }
 
-/** Get current list of non-empty secret values for redaction. */
-function getAllValues(store: SecretsStore): string[] {
-  return Object.values(store).filter((v) => v.length > 0);
-}
-
 /**
  * Check if a value appears in any logged output.
  * Returns an error message if found, null if clean.
@@ -154,7 +149,7 @@ export function startSecretsServer(opts: SecretsServerOptions, log: (msg: string
       const chunks: Buffer[] = [];
       for await (const chunk of req) chunks.push(chunk as Buffer);
 
-      let body: { secrets: string[]; cmd: string[] };
+      let body: { secrets: string[]; cmd: string[]; cwd?: string };
       try {
         body = JSON.parse(Buffer.concat(chunks).toString());
       } catch {
@@ -202,23 +197,27 @@ export function startSecretsServer(opts: SecretsServerOptions, log: (msg: string
       }
       log(`exec-secrets: ${body.cmd.join(" ")} (secrets: ${(body.secrets ?? []).join(", ")})`);
 
-      // Redact all current store values (including any added via /set)
-      const allValues = getAllValues(opts.store);
+      // Only redact values of the secrets that were requested
+      const requestedValues: string[] = [];
+      for (const name of body.secrets ?? []) {
+        const value = opts.store[name];
+        if (value) requestedValues.push(value);
+      }
 
       res.writeHead(200, { "Content-Type": "application/x-ndjson" });
 
       const child = spawn(body.cmd[0], body.cmd.slice(1), {
         env,
         stdio: ["ignore", "pipe", "pipe"],
-        cwd: process.cwd(),
+        cwd: body.cwd || process.cwd(),
       });
 
       child.stdout!.on("data", (data: Buffer) => {
-        res.write(JSON.stringify({ s: "o", d: redact(data.toString(), allValues) }) + "\n");
+        res.write(JSON.stringify({ s: "o", d: redact(data.toString(), requestedValues) }) + "\n");
       });
 
       child.stderr!.on("data", (data: Buffer) => {
-        res.write(JSON.stringify({ s: "e", d: redact(data.toString(), allValues) }) + "\n");
+        res.write(JSON.stringify({ s: "e", d: redact(data.toString(), requestedValues) }) + "\n");
       });
 
       child.on("close", (code) => {
