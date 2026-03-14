@@ -473,6 +473,40 @@ async function main(): Promise<void> {
   processLoop(agentEnv, secrets);
 }
 
+// --- Process exit diagnostics ---
+
+process.on("exit", (code) => {
+  console.log(`[${new Date().toISOString()}] Process exiting with code ${code}`);
+});
+
+process.on("SIGTERM", () => {
+  console.log(`[${new Date().toISOString()}] Received SIGTERM`);
+  stopRequested = true;
+  if (currentAgentProcess) {
+    currentAgentProcess.kill("SIGINT");
+  }
+  wake();
+});
+
+process.on("SIGINT", () => {
+  console.log(`[${new Date().toISOString()}] Received SIGINT`);
+  stopRequested = true;
+  if (currentAgentProcess) {
+    currentAgentProcess.kill("SIGINT");
+  }
+  wake();
+});
+
+process.on("uncaughtException", (err) => {
+  console.error(`[${new Date().toISOString()}] Uncaught exception: ${err.stack ?? err.message}`);
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error(`[${new Date().toISOString()}] Unhandled rejection: ${reason}`);
+  process.exit(1);
+});
+
 main().catch((e) => {
   console.error(e);
   process.exit(1);
