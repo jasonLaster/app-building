@@ -264,6 +264,35 @@ export async function truncateAndSeed(databaseUrl: string) {
   await createFlight('UA', 'UA600', 'SFO', 'ORD', '2026-04-01 07:00', '2026-04-01 13:00', 270, 'Boeing 737-900', true, true, false, 140, 179)
   await createFlight('AA', 'AA600', 'SFO', 'ORD', '2026-04-01 11:00', '2026-04-01 17:00', 270, 'Airbus A321', true, true, false, 145, 189)
 
+  // SFO-JFK (23 flights for pagination testing)
+  await createFlight('UA', 'UA650', 'SFO', 'JFK', '2026-04-01 05:00', '2026-04-01 13:30', 330, 'Boeing 777-200', true, true, true, 155, 179)
+  await createFlight('DL', 'DL650', 'SFO', 'JFK', '2026-04-01 05:30', '2026-04-01 14:00', 330, 'Boeing 767-400', true, true, false, 160, 199)
+  await createFlight('AA', 'AA650', 'SFO', 'JFK', '2026-04-01 06:00', '2026-04-01 14:30', 330, 'Boeing 737 MAX', true, false, false, 165, 189)
+  await createFlight('B6', 'B6650', 'SFO', 'JFK', '2026-04-01 06:30', '2026-04-01 15:00', 330, 'Airbus A321', true, true, false, 150, 159)
+  await createFlight('NK', 'NK650', 'SFO', 'JFK', '2026-04-01 07:00', '2026-04-01 15:30', 330, 'Airbus A320neo', false, false, false, 145, 99)
+  await createFlight('WN', 'WN650', 'SFO', 'JFK', '2026-04-01 07:30', '2026-04-01 16:00', 330, 'Boeing 737-800', false, false, false, 140, 119)
+  await createFlight('AS', 'AS650', 'SFO', 'JFK', '2026-04-01 08:00', '2026-04-01 16:30', 330, 'Boeing 737-900ER', true, true, false, 155, 149)
+  await createFlight('UA', 'UA651', 'SFO', 'JFK', '2026-04-01 08:30', '2026-04-01 17:00', 330, 'Boeing 787-9', true, true, true, 160, 209)
+  await createFlight('DL', 'DL651', 'SFO', 'JFK', '2026-04-01 09:00', '2026-04-01 17:30', 330, 'Airbus A321neo', true, true, true, 155, 219)
+  await createFlight('AA', 'AA651', 'SFO', 'JFK', '2026-04-01 09:30', '2026-04-01 18:00', 330, 'Boeing 737-800', true, true, false, 165, 229)
+  await createFlight('UA', 'UA652', 'SFO', 'JFK', '2026-04-01 10:00', '2026-04-01 18:30', 330, 'Boeing 757-200', true, true, false, 150, 239)
+  await createFlight('DL', 'DL652', 'SFO', 'JFK', '2026-04-01 10:30', '2026-04-01 19:00', 330, 'Boeing 767-300', true, true, true, 160, 249)
+  await createFlight('AA', 'AA652', 'SFO', 'JFK', '2026-04-01 11:00', '2026-04-01 19:30', 330, 'Boeing 777-300ER', true, true, true, 170, 259)
+  await createFlight('B6', 'B6651', 'SFO', 'JFK', '2026-04-01 11:30', '2026-04-01 20:00', 330, 'Airbus A321LR', true, true, false, 150, 169)
+  await createFlight('UA', 'UA653', 'SFO', 'JFK', '2026-04-01 12:00', '2026-04-01 20:30', 330, 'Boeing 787-10', true, true, true, 155, 269)
+  await createFlight('DL', 'DL653', 'SFO', 'JFK', '2026-04-01 12:30', '2026-04-01 21:00', 330, 'Airbus A330-300', true, true, true, 165, 279)
+  await createFlight('AA', 'AA653', 'SFO', 'JFK', '2026-04-01 13:00', '2026-04-01 21:30', 330, 'Boeing 787-9', true, true, true, 170, 289)
+  await createFlight('UA', 'UA654', 'SFO', 'JFK', '2026-04-01 14:00', '2026-04-01 22:30', 330, 'Boeing 777-200', true, true, true, 160, 299)
+  await createFlight('DL', 'DL654', 'SFO', 'JFK', '2026-04-01 15:00', '2026-04-01 23:30', 330, 'Airbus A321neo', true, true, true, 155, 309)
+  await createFlight('AA', 'AA654', 'SFO', 'JFK', '2026-04-01 16:00', '2026-04-02 00:30', 330, 'Boeing 737 MAX', true, true, false, 165, 319)
+  await createFlight('UA', 'UA655', 'SFO', 'JFK', '2026-04-01 17:00', '2026-04-02 01:30', 330, 'Boeing 787-9', true, true, true, 160, 329)
+  await createFlight('DL', 'DL655', 'SFO', 'JFK', '2026-04-01 18:00', '2026-04-02 02:30', 330, 'Airbus A330-900neo', true, true, true, 165, 339)
+  await createFlight('AA', 'AA655', 'SFO', 'JFK', '2026-04-01 14:30', '2026-04-02 00:00', 420, 'Boeing 737 MAX', true, true, false, 200, 189,
+    [
+      { origin: 'SFO', dest: 'ORD', dep: '2026-04-01 14:30', arr: '2026-04-01 20:00', dur: 240, terminal_dep: 'T2', terminal_arr: 'T1' },
+      { origin: 'ORD', dest: 'JFK', dep: '2026-04-01 21:30', arr: '2026-04-02 00:00', dur: 150, terminal_dep: 'T2', terminal_arr: 'T5' }
+    ])
+
   // LAX-LHR
   await createFlight('BA', 'BA500', 'LAX', 'LHR', '2026-04-01 20:00', '2026-04-02 14:30', 630, 'Boeing 777-300ER', true, true, true, 380, 649)
   await createFlight('AA', 'AA800', 'LAX', 'LHR', '2026-04-01 18:00', '2026-04-02 12:30', 630, 'Boeing 787-9', true, true, true, 370, 599)

@@ -110,7 +110,7 @@ function FlightResultCard({ flight }: FlightResultCardProps) {
         <div className="flight-card__duration" data-testid={`flight-card-duration-${flight.id}`}>
           <span className="flight-card__duration-text">{formatDuration(flight.duration_minutes)}</span>
           <span className="flight-card__stops" data-testid={`flight-card-stops-${flight.id}`}>
-            {getStopsLabel(Number(flight.num_legs))}
+            {getStopsLabel(Number(flight.num_legs))}{flight.layover_codes ? ` · ${flight.layover_codes}` : ''}
           </span>
         </div>
 

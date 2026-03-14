@@ -24,7 +24,8 @@ export default async (request: Request, _context: Context) => {
            oa.iata_code as origin_code, oa.name as origin_name, oa.city as origin_city,
            da.iata_code as dest_code, da.name as dest_name, da.city as dest_city,
            p.total_price_cents, p.base_price_cents, p.taxes_cents, p.cabin_class, p.available_seats,
-           (SELECT COUNT(*) FROM flight_legs fl WHERE fl.flight_id = f.id) as num_legs
+           (SELECT COUNT(*) FROM flight_legs fl WHERE fl.flight_id = f.id) as num_legs,
+           COALESCE((SELECT string_agg(a2.iata_code, ', ' ORDER BY fl2.leg_order) FROM flight_legs fl2 JOIN airports a2 ON fl2.origin_airport_id = a2.id WHERE fl2.flight_id = f.id AND fl2.leg_order > 1), '') as layover_codes
     FROM flights f
     JOIN airlines al ON f.airline_id = al.id
     JOIN airports oa ON f.origin_airport_id = oa.id

@@ -26,6 +26,7 @@ export interface FlightResult {
   cabin_class: string
   available_seats: number
   num_legs: number
+  layover_codes: string
 }
 
 export interface FlightLeg {
