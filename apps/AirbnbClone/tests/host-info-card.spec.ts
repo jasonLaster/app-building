@@ -76,9 +76,9 @@ test.describe('Property Detail - HostInfoCard', () => {
     await page.goto(`/properties/${PROPERTY_CABIN}`)
     await expect(page.getByTestId('host-info-card')).toBeVisible({ timeout: 30000 })
 
-    // Remove Mike's bio via API
+    // Remove Mike's bio via API (explicitly preserve avatar in case another test cleared it)
     await page.request.put(`/api/users/${HOST_MIKE_ID}`, {
-      data: { bio: null },
+      data: { bio: null, avatar_url: 'https://i.pravatar.cc/150?u=mike' },
     })
 
     // Reload to see updated data

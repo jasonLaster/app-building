@@ -1,0 +1,30 @@
+Created branch: test-run-1773531081959 (br-falling-paper-ahjccrmc)
+Test DB URL: postgresql://neondb_owner:***@ep-falling-term-ah81o8zg.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:7453) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"0b5db804-2a0d-4078-bc33-3d27200f8ed4","duration":0,"result":"passed","title":""}
+{"id":"5b40d58a-d529-44b4-9a02-aee51d47ceb2","duration":0,"result":"passed","title":""}
+{"id":"a0f3fca3-c8f6-481d-a214-24ba9dfbc882","duration":0,"result":"passed","title":""}
+{"id":"a6fa6463-7070-41c4-8b72-7d5171c1d838","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: a6fa6463-7070-41c4-8b72-7d5171c1d838
+⠙ Initializing…
+Uploading recordings...
+   a6fa6463…  Host info card displays correctly when host has no…  19s ago  12.7s   
+
+Uploaded recordings
+ ✘  a6fa6463…  Host info card displays correctly when host has no…  20s ago  12.7s  (failed) 
+
+

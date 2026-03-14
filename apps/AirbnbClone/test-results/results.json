@@ -75,20 +75,20 @@
   },
   "suites": [
     {
-      "title": "host-dashboard-listings.spec.ts",
-      "file": "host-dashboard-listings.spec.ts",
+      "title": "host-info-card.spec.ts",
+      "file": "host-info-card.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Host Dashboard - Listings Tab",
-          "file": "host-dashboard-listings.spec.ts",
-          "line": 23,
+          "title": "Property Detail - HostInfoCard",
+          "file": "host-info-card.spec.ts",
+          "line": 12,
           "column": 6,
           "specs": [
             {
-              "title": "Listings tab displays host's properties in a grid",
+              "title": "Host info card displays host name, avatar, bio, and member since date",
               "ok": true,
               "tags": [],
               "tests": [
@@ -97,7 +97,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/8cc6baf0-854e-455f-8de5-b7e40bca5306"
+                      "description": "https://app.replay.io/recording/297812aa-a464-4ce4-8ff0-13d5cefa11db"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -108,12 +108,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5409,
+                      "duration": 3247,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:28:11.901Z",
+                      "startTime": "2026-03-14T23:33:26.295Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -121,13 +121,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3e159e54ec7484d99da6-779dee00fee71100f51d",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 30,
+              "id": "b9c85aa47ec1a68277b1-8c3be11d13faf7c5f76e",
+              "file": "host-info-card.spec.ts",
+              "line": 13,
               "column": 3
             },
             {
-              "title": "Listing card shows property details",
+              "title": "Host info card displays number of listings",
               "ok": true,
               "tags": [],
               "tests": [
@@ -136,7 +136,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/36bfcd01-4a5a-40b2-b227-4a4894fe5641"
+                      "description": "https://app.replay.io/recording/45f77bd3-1338-4a22-84e7-b120cfb032bd"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -147,12 +147,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3719,
+                      "duration": 1398,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:28:17.488Z",
+                      "startTime": "2026-03-14T23:33:29.710Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -160,286 +160,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3e159e54ec7484d99da6-3e9a6eab122efcbeea09",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 43,
+              "id": "b9c85aa47ec1a68277b1-fcd68c691d341eda7082",
+              "file": "host-info-card.spec.ts",
+              "line": 35,
               "column": 3
             },
             {
-              "title": "Listing card has Edit button that navigates to property detail",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/956944c9-c59d-4cbb-bfc4-8f55e1cdbfa6"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3603,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:21.227Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-876511c0ef8e6179d406",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 59,
-              "column": 3
-            },
-            {
-              "title": "Listing card has Deactivate button for active properties",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/61a44858-dd8e-4d2b-856a-16b6c5af5cbe"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3649,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:24.845Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-88bdfbaafb20366e9995",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 69,
-              "column": 3
-            },
-            {
-              "title": "Confirming deactivation sets property to inactive",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/c7c62db2-cb16-439e-900c-217b9f7c5867"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 4403,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:28.509Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-bd463a0fac644072dff7",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 84,
-              "column": 3
-            },
-            {
-              "title": "Dismissing deactivation dialog keeps property active",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/9e717b9b-1093-45bc-9bcd-d2c3b05089d4"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3671,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:32.926Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-6f0f5c525326ecc19965",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 105,
-              "column": 3
-            },
-            {
-              "title": "Listing card shows Activate button for inactive properties",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/94666b35-59f8-40aa-a8f7-5230fa12b154"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 5505,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:36.612Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-a853da716bb0a2384044",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 122,
-              "column": 3
-            },
-            {
-              "title": "Listings tab shows empty state for host with no properties",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/4388981b-863c-4f46-9ace-5140bc9d4acc"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3995,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:42.133Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-5c657ed38aa88b2a1695",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 147,
-              "column": 3
-            },
-            {
-              "title": "Add Listing button is visible on the Listings tab",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/f81303eb-d867-4217-ae6a-9270f96e5f38"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3677,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:28:46.143Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3e159e54ec7484d99da6-b25a2d1b8f552eccdf08",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 165,
-              "column": 3
-            },
-            {
-              "title": "Deactivate and activate actions work on repeated use",
+              "title": "Host info card shows placeholder avatar when host has no avatar",
               "ok": true,
               "tags": [],
               "tests": [
@@ -449,14 +176,14 @@
                     {
                       "type": "slow",
                       "location": {
-                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-listings.spec.ts",
-                        "line": 174,
+                        "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
+                        "line": 46,
                         "column": 10
                       }
                     },
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/634c3987-dbef-4d12-b553-50c89218dcf2"
+                      "description": "https://app.replay.io/recording/aff071cc-e9f2-45d3-b552-901c0262c7cc"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -467,18 +194,18 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5881,
+                      "duration": 3014,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:28:49.838Z",
+                      "startTime": "2026-03-14T23:33:31.127Z",
                       "annotations": [
                         {
                           "type": "slow",
                           "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-listings.spec.ts",
-                            "line": 174,
+                            "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
+                            "line": 46,
                             "column": 10
                           }
                         }
@@ -489,9 +216,65 @@
                   "status": "expected"
                 }
               ],
-              "id": "3e159e54ec7484d99da6-c5aacdf65d32d8324046",
-              "file": "host-dashboard-listings.spec.ts",
-              "line": 173,
+              "id": "b9c85aa47ec1a68277b1-36d5060cc8103622d06d",
+              "file": "host-info-card.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "Host info card displays correctly when host has no bio",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
+                        "line": 73,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/457db050-bc35-4775-a617-fba08f7207f7"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3052,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T23:33:34.159Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
+                            "line": 73,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b9c85aa47ec1a68277b1-87e25baafd4b7e0d22d7",
+              "file": "host-info-card.spec.ts",
+              "line": 72,
               "column": 3
             }
           ]
@@ -501,9 +284,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-14T23:28:06.336Z",
-    "duration": 49567.638,
-    "expected": 10,
+    "startTime": "2026-03-14T23:33:20.872Z",
+    "duration": 16542.623,
+    "expected": 4,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
