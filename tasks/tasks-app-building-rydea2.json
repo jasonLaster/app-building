@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestCreateProjectLeadMultiple: Write test for Create project modal Lead selector can be used multiple times",
-        "WriteTestCreateProjectTeamsToggle: Write test for Create project modal Teams selector can be toggled multiple times"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestProjectHeaderRenders: Write test for Project header renders all fields for an existing project",
         "WriteTestProjectInlineEditName: Write test for Inline edit project name",
         "WriteTestProjectInlineEditNameCancel: Write test for Inline edit project name — cancel edit",
@@ -293,26 +284,8 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestProjectsTeamFilterDropdown: Write test for Team filter dropdown shows all teams",
-      "WriteTestProjectsTeamFilterFilters: Write test for Team filter filters projects by selected team",
-      "WriteTestProjectsMultipleFiltersAND: Write test for Multiple filters combine with AND logic",
-      "WriteTestProjectsClearFilter: Write test for Clearing a filter restores all projects",
-      "WriteTestProjectsFiltersReusable: Write test for Filters can be used repeatedly after clearing",
-      "WriteTestProjectsFilterIndicators: Write test for Filter state shows active filter indicators",
-      "WriteTestCreateProjectButtonOpens: Write test for Create Project button opens the create project modal",
-      "WriteTestCreateProjectModalFields: Write test for Create project modal renders all required fields",
-      "WriteTestCreateProjectStatusDropdown: Write test for Create project modal Status dropdown shows all project statuses",
-      "WriteTestCreateProjectLeadSearchable: Write test for Create project modal Lead selector is searchable",
-      "WriteTestCreateProjectDatePicker: Write test for Create project modal Target date uses a date picker",
-      "WriteTestCreateProjectTeamsMultiSelect: Write test for Create project modal Teams selector allows multi-select",
-      "WriteTestCreateProjectAllFields: Write test for Successful project creation with all fields",
-      "WriteTestCreateProjectRequiredOnly: Write test for Successful project creation with only required fields",
-      "WriteTestCreateProjectNameRequired: Write test for Create project modal validates name is required",
-      "WriteTestCreateProjectCancelCloses: Write test for Cancel button closes create project modal without creating",
-      "WriteTestCreateProjectBackdropCloses: Write test for Create project modal can be closed by clicking backdrop",
-      "WriteTestCreateProjectEscapeCloses: Write test for Create project modal can be closed with Escape key",
-      "WriteTestCreateProjectResetsOnReopen: Write test for Creating a project and then opening modal again resets fields",
-      "WriteTestCreatedProjectAppearsInList: Write test for Created project appears immediately in the project list"
+      "WriteTestCreateProjectLeadMultiple: Write test for Create project modal Lead selector can be used multiple times",
+      "WriteTestCreateProjectTeamsToggle: Write test for Create project modal Teams selector can be toggled multiple times"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"

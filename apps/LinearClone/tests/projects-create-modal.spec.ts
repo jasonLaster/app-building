@@ -374,6 +374,67 @@ test.describe('CreateProjectModal', () => {
     await expect(page.getByTestId('create-project-selected-teams')).toHaveCount(0);
   });
 
+  test('Create project modal Lead selector can be used multiple times', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+    const { members } = await getProjectsData(baseURL!, token);
+
+    const alice = members.find((m) => m.name === 'Alice Johnson')!;
+    const bob = members.find((m) => m.name === 'Bob Smith')!;
+
+    await openCreateProjectModal(page);
+
+    // Open lead selector and select Alice
+    await page.getByTestId('create-project-lead-selector').click();
+    await expect(page.getByTestId('create-project-lead-dropdown')).toBeVisible({ timeout: 5000 });
+    await page.getByTestId(`create-project-lead-option-${alice.id}`).click();
+
+    // Verify Alice is selected and dropdown closed
+    await expect(page.getByTestId('create-project-lead-selector')).toContainText('Alice Johnson');
+    await expect(page.getByTestId('create-project-lead-dropdown')).toHaveCount(0);
+
+    // Open lead selector again and change to Bob
+    await page.getByTestId('create-project-lead-selector').click();
+    await expect(page.getByTestId('create-project-lead-dropdown')).toBeVisible({ timeout: 5000 });
+    await page.getByTestId(`create-project-lead-option-${bob.id}`).click();
+
+    // Verify Bob is now selected (only one lead at a time)
+    await expect(page.getByTestId('create-project-lead-selector')).toContainText('Bob Smith');
+    await expect(page.getByTestId('create-project-lead-dropdown')).toHaveCount(0);
+  });
+
+  test('Create project modal Teams selector can be toggled multiple times', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+    const { teams } = await getProjectsData(baseURL!, token);
+
+    const eng = teams.find((t) => t.name === 'Engineering')!;
+    const des = teams.find((t) => t.name === 'Design')!;
+
+    await openCreateProjectModal(page);
+
+    // Open teams dropdown
+    await page.getByTestId('create-project-teams-selector').click();
+    await expect(page.getByTestId('create-project-teams-dropdown')).toBeVisible({ timeout: 5000 });
+
+    // Select Engineering
+    await page.getByTestId(`create-project-team-option-${eng.id}`).click();
+    await expect(page.getByTestId(`create-project-team-chip-${eng.id}`)).toBeVisible();
+
+    // Also select Design
+    await page.getByTestId(`create-project-team-option-${des.id}`).click();
+    await expect(page.getByTestId(`create-project-team-chip-${des.id}`)).toBeVisible();
+
+    // Both should be selected
+    await expect(page.getByTestId(`create-project-team-chip-${eng.id}`)).toBeVisible();
+    await expect(page.getByTestId(`create-project-team-chip-${des.id}`)).toBeVisible();
+
+    // Deselect Engineering by clicking it again in the dropdown
+    await page.getByTestId(`create-project-team-option-${eng.id}`).click();
+
+    // Only Design should remain selected
+    await expect(page.getByTestId(`create-project-team-chip-${eng.id}`)).toHaveCount(0);
+    await expect(page.getByTestId(`create-project-team-chip-${des.id}`)).toBeVisible();
+  });
+
   test('Created project appears immediately in the project list', async ({ page, baseURL }) => {
     const { token } = await loginAndGoToProjects(page, baseURL!);
 
