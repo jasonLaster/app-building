@@ -3,22 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestPressingCOpensModal: Write test for Pressing C opens create issue modal",
-        "WriteTestPressingCNoModalInInput: Write test for Pressing C does not open modal when typing in input",
-        "WriteTestGThenINavigates: Write test for G then I navigates to My Issues",
-        "WriteTestGThenNNavigates: Write test for G then N navigates to Inbox",
-        "WriteTestGINoNavigateInInput: Write test for G then I does not navigate when typing in input",
-        "WriteTestGChordTimesOut: Write test for G chord times out if second key is delayed",
-        "WriteTestGUnrecognizedKey: Write test for G followed by unrecognized key does nothing",
-        "WriteTestShortcutsFromDifferentPages: Write test for Keyboard shortcuts work from different pages",
-        "WriteTestShortcutsNotFireWhenModalOpen: Write test for Keyboard shortcuts do not fire when modal is open"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestMyIssuesGroupedByStatus: Write test for My Issues page renders with issues grouped by status",
         "WriteTestMyIssuesEmptyState: Write test for My Issues page shows empty state when no issues assigned",
         "WriteTestStatusGroupCollapsible: Write test for Status group is collapsible",
@@ -741,20 +725,15 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestSidebarSettingsNavigates: Write test for Sidebar Settings link navigates correctly",
-      "WriteTestSidebarHighlightsCurrent: Write test for Sidebar highlights current page link",
-      "WriteTestSidebarActiveHighlightUpdates: Write test for Sidebar active highlight updates on navigation",
-      "WriteTestSidebarPresentOnAllPages: Write test for Sidebar is present on all authenticated pages",
-      "WriteTestSidebarNotShownOnLogin: Write test for Sidebar is not shown on login page",
-      "WriteTestSidebarNotShownOnSignup: Write test for Sidebar is not shown on signup page",
-      "WriteTestSidebarCollapseToggleVisible: Write test for Sidebar collapse toggle button is visible",
-      "WriteTestSidebarCollapsesToIconOnly: Write test for Sidebar collapses to icon-only mode",
-      "WriteTestSidebarExpandsFromIconOnly: Write test for Sidebar expands from icon-only mode",
-      "WriteTestSidebarCollapseStatePersists: Write test for Sidebar collapse state persists across navigation",
-      "WriteTestSidebarIconsClickableCollapsed: Write test for Sidebar icons are still clickable in collapsed mode",
-      "WriteTestSidebarCollapseToggleMultiple: Write test for Sidebar collapse toggle works multiple times in sequence",
-      "WriteTestSidebarTeamSectionsCollapsed: Write test for Sidebar team sections visible in collapsed mode",
-      "WriteTestSidebarWorkspaceSectionCollapsed: Write test for Sidebar workspace section visible in collapsed mode"
+      "WriteTestPressingCOpensModal: Write test for Pressing C opens create issue modal",
+      "WriteTestPressingCNoModalInInput: Write test for Pressing C does not open modal when typing in input",
+      "WriteTestGThenINavigates: Write test for G then I navigates to My Issues",
+      "WriteTestGThenNNavigates: Write test for G then N navigates to Inbox",
+      "WriteTestGINoNavigateInInput: Write test for G then I does not navigate when typing in input",
+      "WriteTestGChordTimesOut: Write test for G chord times out if second key is delayed",
+      "WriteTestGUnrecognizedKey: Write test for G followed by unrecognized key does nothing",
+      "WriteTestShortcutsFromDifferentPages: Write test for Keyboard shortcuts work from different pages",
+      "WriteTestShortcutsNotFireWhenModalOpen: Write test for Keyboard shortcuts do not fire when modal is open"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
