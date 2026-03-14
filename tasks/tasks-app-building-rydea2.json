@@ -1,15 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
-        "PlanPageSettings: Decide on components, add sections to docs/tests.md",
-        "PlanComponentWorkspaceSettings: Add test entries for WorkspaceSettings"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
       "skill": "skills/tasks/build/writeShared.md",
       "subtasks": [
         "Unpack: Write app shared code"
@@ -69,10 +60,8 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageLabels: Decide on components, add sections to docs/tests.md",
-      "PlanComponentLabelList: Add test entries for LabelList",
-      "PlanComponentCreateLabel: Add test entries for CreateLabel",
-      "PlanComponentEditDeleteLabel: Add test entries for EditDeleteLabel"
+      "PlanPageSettings: Decide on components, add sections to docs/tests.md",
+      "PlanComponentWorkspaceSettings: Add test entries for WorkspaceSettings"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"

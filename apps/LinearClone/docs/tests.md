@@ -2632,4 +2632,54 @@
 
 ## Settings Page (`/settings`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: WorkspaceSettings
+
+### WorkspaceSettings
+
+#### Test: Settings page renders workspace name and default team fields
+- **Initial state**: User is authenticated and navigates to `/settings`. Workspace is named "My Workspace" and has teams "Engineering" and "Design".
+- **Expected**: The page displays a "Workspace name" text input pre-filled with "My Workspace", and a "Default team for new issues" dropdown showing the currently configured default team. A page heading "Settings" is visible.
+
+#### Test: Edit workspace name inline
+- **Initial state**: User is on `/settings`. Workspace name is "My Workspace".
+- **Action**: User clears the workspace name field, types "Acme Corp", and clicks the "Save" button (or presses Enter)
+- **Expected**: The workspace name is updated to "Acme Corp". A success confirmation is shown (e.g., toast or inline message). The sidebar workspace header updates to reflect the new name "Acme Corp".
+
+#### Test: Workspace name cannot be saved as empty
+- **Initial state**: User is on `/settings`. Workspace name is "My Workspace".
+- **Action**: User clears the workspace name field entirely and attempts to save
+- **Expected**: A validation error is shown indicating the workspace name is required. The save action is prevented. The workspace name remains "My Workspace".
+
+#### Test: Edit workspace name and verify persistence after navigation
+- **Initial state**: User is on `/settings`. Workspace name is "My Workspace".
+- **Action**: User changes workspace name to "New Name" and saves. Then user navigates to `/my-issues` via the sidebar and navigates back to `/settings`.
+- **Expected**: The workspace name field shows "New Name", confirming the change was persisted to the database.
+
+#### Test: Change default team for new issues
+- **Initial state**: User is on `/settings`. Teams "Engineering" and "Design" exist. Default team is set to "Engineering".
+- **Action**: User clicks the "Default team for new issues" dropdown and selects "Design". User clicks "Save".
+- **Expected**: The default team is updated to "Design". A success confirmation is shown. When the user opens the Create Issue modal from any page, the team selector defaults to "Design".
+
+#### Test: Default team dropdown lists all available teams
+- **Initial state**: User is on `/settings`. Workspace has teams "Engineering", "Design", and "QA".
+- **Action**: User clicks the "Default team for new issues" dropdown
+- **Expected**: The dropdown shows all three teams: "Engineering", "Design", and "QA".
+
+#### Test: Change default team and verify it affects issue creation
+- **Initial state**: User is on `/settings`. Default team is "Engineering". Teams "Engineering" and "Design" exist.
+- **Action**: User changes default team to "Design" and saves. User navigates to `/team/design/issues` and clicks the "New Issue" button.
+- **Expected**: The Create Issue modal opens with the team selector defaulted to "Design".
+
+#### Test: Settings page is accessible from sidebar navigation
+- **Initial state**: User is authenticated and on `/my-issues`. Sidebar is visible.
+- **Action**: User clicks "Settings" (with settings icon) in the Workspace section of the sidebar
+- **Expected**: User is navigated to `/settings`. The Settings page loads with workspace settings fields.
+
+#### Test: Workspace name edit can be cancelled
+- **Initial state**: User is on `/settings`. Workspace name is "My Workspace".
+- **Action**: User changes the workspace name field to "Changed Name" but navigates away without saving (e.g., clicks "My Issues" in sidebar)
+- **Expected**: The workspace name remains "My Workspace" (unsaved changes are discarded). Returning to `/settings` shows the original name.
+
+#### Test: Settings page shows appropriate heading and layout
+- **Initial state**: User navigates to `/settings`
+- **Expected**: The page has a clear "Settings" heading. The workspace name field and default team dropdown are displayed in a clean form layout consistent with the app's dark theme. Fields have labels clearly indicating their purpose.
