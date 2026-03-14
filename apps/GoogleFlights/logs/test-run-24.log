@@ -1,0 +1,61 @@
+Creating branch: test-run-1773526670034
+Branch DB URL: postgresql://neondb_owner:***@ep-plain-bar-ahg4mrfq.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/cancel-booking-modal.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 7 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/cancel-booking-modal.spec.ts:33:3 › CancelBookingModal › CancelBookingModal opens when Cancel button is clicked (717ms)
+  ✓  2 [replay-chromium] › tests/cancel-booking-modal.spec.ts:62:3 › CancelBookingModal › CancelBookingModal shows booking details (339ms)
+  ✓  3 [replay-chromium] › tests/cancel-booking-modal.spec.ts:83:3 › CancelBookingModal › CancelBookingModal confirms cancellation (474ms)
+  ✓  4 [replay-chromium] › tests/cancel-booking-modal.spec.ts:104:3 › CancelBookingModal › CancelBookingModal dismiss keeps booking (404ms)
+  ✓  5 [replay-chromium] › tests/cancel-booking-modal.spec.ts:124:3 › CancelBookingModal › CancelBookingModal close via overlay click (427ms)
+  ✓  6 [replay-chromium] › tests/cancel-booking-modal.spec.ts:141:3 › CancelBookingModal › CancelBookingModal shows loading state during cancellation (482ms)
+  ✘  7 [replay-chromium] › tests/cancel-booking-modal.spec.ts:161:3 › CancelBookingModal › CancelBookingModal cancelled trip persists in correct tab (1.0m)
+
+
+  1) [replay-chromium] › tests/cancel-booking-modal.spec.ts:161:3 › CancelBookingModal › CancelBookingModal cancelled trip persists in correct tab 
+
+    [31mTest timeout of 60000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 60000ms exceeded.
+    Call log:
+    [2m  - waiting for getByTestId('trips-upcoming-list').locator('[data-testid^="trip-card-"]').filter({ has: locator('[data-testid^="trip-card-ref-"]').filter({ hasText: 'GF-SORT02' }) }).locator('[data-testid^="trip-card-cancel-"]')[22m
+
+
+      26 |   await expect(card).toBeVisible({ timeout: 10000 })
+      27 |   const cancelBtn = card.locator('[data-testid^="trip-card-cancel-"]')
+    > 28 |   await cancelBtn.click()
+         |                   ^
+      29 |   await expect(page.getByTestId('cancel-booking-modal')).toBeVisible({ timeout: 10000 })
+      30 | }
+      31 |
+        at openCancelModalForBooking (/repo/apps/GoogleFlights/tests/cancel-booking-modal.spec.ts:28:19)
+        at /repo/apps/GoogleFlights/tests/cancel-booking-modal.spec.ts:163:5
+
+    Error Context: test-results/cancel-booking-modal-Cance-aad37-rip-persists-in-correct-tab-replay-chromium/error-context.md
+
+  1 failed
+    [replay-chromium] › tests/cancel-booking-modal.spec.ts:161:3 › CancelBookingModal › CancelBookingModal cancelled trip persists in correct tab 
+  6 passed (1.1m)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 102 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

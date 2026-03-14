@@ -159,13 +159,13 @@ test.describe('CancelBookingModal', () => {
   })
 
   test('CancelBookingModal cancelled trip persists in correct tab', async ({ page }) => {
-    // Cancel a booking via the modal
-    await openCancelModalForBooking(page, 'GF-SORT02')
+    // Cancel a booking via the modal (use GF-ONEW01 which is still confirmed at this point)
+    await openCancelModalForBooking(page, 'GF-ONEW01')
     await page.getByTestId('cancel-modal-confirm').click()
     await expect(page.getByTestId('cancel-booking-modal')).toBeHidden({ timeout: 15000 })
 
     // Verify cancelled status in Upcoming tab
-    const card = findTripCardByRef(page, 'trips-upcoming-list', 'GF-SORT02')
+    const card = findTripCardByRef(page, 'trips-upcoming-list', 'GF-ONEW01')
     const statusEl = card.locator('[data-testid^="trip-card-status-"]')
     await expect(statusEl).toHaveText('Cancelled', { timeout: 15000 })
 
@@ -176,7 +176,7 @@ test.describe('CancelBookingModal', () => {
     ).toBeVisible({ timeout: 15000 })
 
     // Verify cancelled trip is NOT in the past tab (departure is in the future)
-    const pastCard = page.getByTestId('trips-past-list').locator('[data-testid^="trip-card-ref-"]', { hasText: 'GF-SORT02' })
+    const pastCard = page.getByTestId('trips-past-list').locator('[data-testid^="trip-card-ref-"]', { hasText: 'GF-ONEW01' })
     await expect(pastCard).toHaveCount(0)
 
     // Switch back to Upcoming tab
@@ -184,7 +184,7 @@ test.describe('CancelBookingModal', () => {
     await expect(page.getByTestId('trips-upcoming-list')).toBeVisible({ timeout: 15000 })
 
     // Verify cancelled trip still appears in Upcoming tab
-    const upcomingCard = findTripCardByRef(page, 'trips-upcoming-list', 'GF-SORT02')
+    const upcomingCard = findTripCardByRef(page, 'trips-upcoming-list', 'GF-ONEW01')
     await expect(upcomingCard).toBeVisible({ timeout: 10000 })
     const upcomingStatus = upcomingCard.locator('[data-testid^="trip-card-status-"]')
     await expect(upcomingStatus).toHaveText('Cancelled')
