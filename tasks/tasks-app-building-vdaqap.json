@@ -3,9 +3,9 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "Unpack: Write test specification"
+        "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
       ],
-      "timestamp": "2026-03-14T18:21:13.050Z",
+      "timestamp": "2026-03-14T18:21:43.157Z",
       "app": "GoogleFlights"
     },
     {
@@ -66,9 +66,11 @@
     }
   ],
   "current": {
-    "skill": "",
-    "subtasks": [],
-    "timestamp": "2026-03-14T18:19:39.123Z",
-    "prompt": "Build me a google flights clone"
+    "skill": "skills/tasks/build/testSpec.md",
+    "subtasks": [
+      "Unpack: Write test specification"
+    ],
+    "timestamp": "2026-03-14T18:21:13.050Z",
+    "app": "GoogleFlights"
   }
 }
