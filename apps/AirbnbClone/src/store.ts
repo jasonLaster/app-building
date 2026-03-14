@@ -7,6 +7,7 @@ import propertyDetailReducer from './slices/propertyDetailSlice'
 import bookingsReducer from './slices/bookingsSlice'
 import hostReducer from './slices/hostSlice'
 import userReviewsReducer from './slices/userReviewsSlice'
+import reviewFormReducer from './slices/reviewFormSlice'
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     bookings: bookingsReducer,
     host: hostReducer,
     userReviews: userReviewsReducer,
+    reviewForm: reviewFormReducer,
   },
 })
 
