@@ -421,7 +421,357 @@
 - TrackPricesToggle
 - Pagination
 
-_(Test entries to be added by PlanPage tasks)_
+### SearchSummaryBar
+
+#### Test: SearchSummaryBar displays search parameters after search
+- **Components**: SearchSummaryBar
+- **Initial state**: User searched LAX → JFK, Mar 25 – Apr 1, 1 adult, Economy, Round trip
+- **Action**: User observes the summary bar at the top of the results page
+- **Expected**: The bar displays origin "LAX", destination "JFK", dates "Mar 25 – Apr 1", "1 adult", and "Economy" inline. Each parameter is visually distinct and clickable.
+
+#### Test: SearchSummaryBar inline edit origin airport
+- **Components**: SearchSummaryBar, AirportAutocomplete
+- **Initial state**: Results page showing LAX → JFK search
+- **Action**: User clicks the origin parameter ("LAX") in the summary bar
+- **Expected**: An inline editor opens with an airport autocomplete field pre-filled with "LAX". User types "SFO", selects "San Francisco International Airport (SFO)" from suggestions, and confirms. The search re-executes with SFO → JFK and results update.
+
+#### Test: SearchSummaryBar inline edit destination airport
+- **Components**: SearchSummaryBar, AirportAutocomplete
+- **Initial state**: Results page showing LAX → JFK search
+- **Action**: User clicks the destination parameter ("JFK") in the summary bar
+- **Expected**: An inline editor opens with an airport autocomplete field pre-filled with "JFK". User types "ORD", selects "O'Hare International Airport (ORD)" from suggestions, and confirms. The search re-executes with LAX → ORD and results update.
+
+#### Test: SearchSummaryBar inline edit departure date
+- **Components**: SearchSummaryBar, DatePicker
+- **Initial state**: Results page showing search with departure Mar 25
+- **Action**: User clicks the departure date parameter in the summary bar
+- **Expected**: A date picker opens with Mar 25 selected. User selects Mar 28. The search re-executes with the new departure date and results update.
+
+#### Test: SearchSummaryBar inline edit return date
+- **Components**: SearchSummaryBar, DatePicker
+- **Initial state**: Results page showing round trip search with return Apr 1
+- **Action**: User clicks the return date parameter in the summary bar
+- **Expected**: A date picker opens with Apr 1 selected. User selects Apr 5. The search re-executes with the new return date and results update.
+
+#### Test: SearchSummaryBar inline edit passengers
+- **Components**: SearchSummaryBar, PassengerCountSelector
+- **Initial state**: Results page showing search with 1 adult
+- **Action**: User clicks the passenger count parameter in the summary bar
+- **Expected**: A passenger selector dropdown opens showing Adults: 1, Children: 0, Infants: 0. User increments adults to 2 and closes. The search re-executes with 2 adults and results update with new pricing.
+
+#### Test: SearchSummaryBar inline edit cabin class
+- **Components**: SearchSummaryBar, CabinClassSelector
+- **Initial state**: Results page showing Economy search
+- **Action**: User clicks the cabin class parameter in the summary bar
+- **Expected**: A dropdown opens showing Economy, Premium Economy, Business, First. User selects "Business". The search re-executes with Business class and results update with new pricing.
+
+#### Test: SearchSummaryBar inline editor closes without changes on outside click
+- **Components**: SearchSummaryBar
+- **Initial state**: User has clicked the origin parameter and the inline editor is open
+- **Action**: User clicks outside the inline editor
+- **Expected**: The inline editor closes. The original search parameters are unchanged. No re-search occurs.
+
+#### Test: SearchSummaryBar can be edited multiple times in sequence
+- **Components**: SearchSummaryBar
+- **Initial state**: Results page showing LAX → JFK search
+- **Action**: User edits origin to SFO (results update), then edits cabin class to Business (results update again)
+- **Expected**: Each edit triggers a new search. The summary bar reflects all changes: SFO → JFK, Business. Results correspond to the updated parameters.
+
+### FilterSidebar
+
+#### Test: FilterSidebar displays all filter sections
+- **Components**: FilterSidebar
+- **Initial state**: Search results page loaded with results
+- **Action**: User observes the left sidebar
+- **Expected**: The sidebar displays filter sections: Stops, Airlines, Price range, Duration range, Departure time, and a Sort by dropdown. All sections are visible and labeled.
+
+#### Test: FilterSidebar stops filter — check Nonstop
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with mix of nonstop and connecting flights
+- **Action**: User checks the "Nonstop" checkbox in the Stops filter
+- **Expected**: Only nonstop flights are displayed in the results list. Flights with 1+ stops are hidden.
+
+#### Test: FilterSidebar stops filter — check 1 stop
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with mix of nonstop and connecting flights, no filters applied
+- **Action**: User checks the "1 stop" checkbox
+- **Expected**: Only 1-stop flights are displayed. Nonstop and 2+ stop flights are hidden.
+
+#### Test: FilterSidebar stops filter — check multiple options
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with various flights
+- **Action**: User checks both "Nonstop" and "1 stop" checkboxes
+- **Expected**: Both nonstop and 1-stop flights are displayed. Only 2+ stop flights are hidden.
+
+#### Test: FilterSidebar stops filter — uncheck to remove filter
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: "Nonstop" checkbox is checked, only nonstop flights shown
+- **Action**: User unchecks "Nonstop"
+- **Expected**: All flights are displayed again (no stops filter active).
+
+#### Test: FilterSidebar airlines filter shows airlines with flight counts
+- **Components**: FilterSidebar
+- **Initial state**: Results page loaded with results from multiple airlines
+- **Action**: User observes the Airlines filter section
+- **Expected**: A list of airline names is shown, each with a checkbox and a count of how many flights that airline has in the results (e.g., "Delta (12)", "United (8)").
+
+#### Test: FilterSidebar airlines filter — select specific airline
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results with flights from Delta, United, and American
+- **Action**: User checks the "Delta" checkbox in the Airlines filter
+- **Expected**: Only Delta flights are shown in results. United and American flights are hidden.
+
+#### Test: FilterSidebar airlines filter — select multiple airlines
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results with flights from multiple airlines
+- **Action**: User checks "Delta" and "United"
+- **Expected**: Only Delta and United flights are shown. Other airline flights are hidden.
+
+#### Test: FilterSidebar price range slider displays histogram
+- **Components**: FilterSidebar
+- **Initial state**: Results page loaded
+- **Action**: User observes the Price range filter section
+- **Expected**: A price range slider is displayed with min and max handles. Above or within the slider, a histogram shows the distribution of prices across the results. The min and max price labels are shown.
+
+#### Test: FilterSidebar price range slider filters results
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights ranging from $150 to $800
+- **Action**: User drags the max price handle to $400
+- **Expected**: Only flights priced at $400 or below are displayed. Flights above $400 are hidden. The slider shows the updated max value.
+
+#### Test: FilterSidebar price range slider — adjust min price
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights ranging from $150 to $800
+- **Action**: User drags the min price handle to $300
+- **Expected**: Only flights priced at $300 or above are displayed. Flights below $300 are hidden.
+
+#### Test: FilterSidebar duration range slider filters results
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights of various durations
+- **Action**: User adjusts the duration slider to max 6 hours
+- **Expected**: Only flights with duration of 6 hours or less are displayed. Longer flights are hidden.
+
+#### Test: FilterSidebar departure time filter — Morning checkbox
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights at various times
+- **Action**: User checks "Morning" in the Departure time filter
+- **Expected**: Only flights departing in the morning time window are displayed.
+
+#### Test: FilterSidebar departure time filter — multiple time periods
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights at various times
+- **Action**: User checks "Morning" and "Evening"
+- **Expected**: Flights departing in either morning or evening time windows are displayed. Afternoon and night flights are hidden.
+
+#### Test: FilterSidebar departure time filter — arrival time checkboxes
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page loaded
+- **Action**: User checks "Afternoon" in the arrival time checkbox group
+- **Expected**: Only flights arriving in the afternoon are displayed.
+
+#### Test: FilterSidebar sort by dropdown — default "Best"
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page loaded, no sort selection made
+- **Action**: User observes the Sort by dropdown
+- **Expected**: The dropdown shows "Best" as the default selected sort option.
+
+#### Test: FilterSidebar sort by Price (lowest)
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with multiple flights at different prices
+- **Action**: User selects "Price (lowest)" from the Sort by dropdown
+- **Expected**: Results are reordered with the cheapest flight first. Prices increase going down the list.
+
+#### Test: FilterSidebar sort by Duration (shortest)
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights of various durations
+- **Action**: User selects "Duration (shortest)" from the Sort by dropdown
+- **Expected**: Results are reordered with the shortest flight first. Durations increase going down the list.
+
+#### Test: FilterSidebar sort by Departure time (earliest)
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights at various departure times
+- **Action**: User selects "Departure time (earliest)" from the Sort by dropdown
+- **Expected**: Results are reordered with the earliest departure first.
+
+#### Test: FilterSidebar sort by Arrival time (earliest)
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with flights at various arrival times
+- **Action**: User selects "Arrival time (earliest)" from the Sort by dropdown
+- **Expected**: Results are reordered with the earliest arrival first.
+
+#### Test: FilterSidebar combining multiple filters
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with diverse flights
+- **Action**: User checks "Nonstop" in Stops, selects "Delta" in Airlines, and sets max price to $500
+- **Expected**: Only nonstop Delta flights priced at $500 or below are shown. All three filters are applied simultaneously.
+
+#### Test: FilterSidebar filters can be used repeatedly
+- **Components**: FilterSidebar, FlightResultCard
+- **Initial state**: Results page with no filters
+- **Action**: User checks "Nonstop", observes filtered results, then unchecks "Nonstop" and checks "1 stop", then changes sort to "Price (lowest)"
+- **Expected**: Each filter change updates results correctly. The filters work properly on repeated use.
+
+### FlightResultCard
+
+#### Test: FlightResultCard displays airline info
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded with flights
+- **Action**: User observes a flight result card
+- **Expected**: The card shows a colored circle with the airline's initials (airline logo) and the airline name next to it.
+
+#### Test: FlightResultCard displays departure and arrival times
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded
+- **Action**: User observes a flight result card
+- **Expected**: The card shows departure time → arrival time (e.g., "8:00 AM → 4:30 PM"). If the flight arrives on a different day, a "+1" day indicator is shown next to the arrival time.
+
+#### Test: FlightResultCard displays flight duration
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded
+- **Action**: User observes a flight result card
+- **Expected**: The card shows the total flight duration in hours and minutes format (e.g., "5h 30m").
+
+#### Test: FlightResultCard displays stops and layover info
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded with a connecting flight
+- **Action**: User observes a flight result card for a connecting flight
+- **Expected**: The card shows the number of stops and layover airport codes (e.g., "1 stop · DFW"). A nonstop flight shows "Nonstop".
+
+#### Test: FlightResultCard displays price prominently
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded
+- **Action**: User observes a flight result card
+- **Expected**: The price is displayed prominently and right-aligned on the card (e.g., "$342").
+
+#### Test: FlightResultCard displays CO₂ emissions
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded
+- **Action**: User observes a flight result card
+- **Expected**: A CO₂ emissions estimate is shown on the card (e.g., "130 kg CO₂").
+
+#### Test: FlightResultCard expand to show details
+- **Components**: FlightResultCard
+- **Initial state**: Results page loaded, flight card is collapsed
+- **Action**: User clicks on a flight result card to expand it
+- **Expected**: The card expands to show a detailed section including: each leg of the journey with departure/arrival times and airports, terminal info, layover duration and airport (for connecting flights), aircraft type, amenities icons (Wi-Fi, power, entertainment), and baggage allowance information.
+
+#### Test: FlightResultCard collapse details
+- **Components**: FlightResultCard
+- **Initial state**: A flight result card is expanded showing details
+- **Action**: User clicks the card again to collapse it
+- **Expected**: The expanded details section collapses. The card returns to its compact view.
+
+#### Test: FlightResultCard details show leg-by-leg breakdown
+- **Components**: FlightResultCard
+- **Initial state**: A connecting flight card is expanded
+- **Action**: User examines the expanded details
+- **Expected**: Each leg is shown separately with: departure time and airport (with terminal), arrival time and airport (with terminal), flight number, and duration. Between legs, the layover duration and airport are displayed.
+
+#### Test: FlightResultCard details show amenities icons
+- **Components**: FlightResultCard
+- **Initial state**: A flight card is expanded showing details
+- **Action**: User examines the amenities section
+- **Expected**: Icons for available amenities are shown: Wi-Fi icon (if has_wifi), power outlet icon (if has_power), entertainment icon (if has_entertainment). Only available amenities are shown or unavailable ones are visually muted.
+
+#### Test: FlightResultCard details show baggage allowance
+- **Components**: FlightResultCard
+- **Initial state**: A flight card is expanded showing details
+- **Action**: User examines the baggage section
+- **Expected**: Baggage allowance information is displayed in the expanded details.
+
+#### Test: FlightResultCard overnight flight shows +1 day indicator
+- **Components**: FlightResultCard
+- **Initial state**: Results include an overnight flight (e.g., departs 11:00 PM, arrives 6:00 AM next day)
+- **Action**: User observes the overnight flight card
+- **Expected**: The arrival time shows a "+1" indicator next to it (e.g., "6:00 AM +1") to indicate arrival on the next day.
+
+#### Test: FlightResultCard clicking "Select" navigates to booking page
+- **Components**: FlightResultCard
+- **Initial state**: Results page with flight cards, a card is expanded
+- **Action**: User clicks the select/book button on a flight card
+- **Expected**: The app navigates to the Flight Details / Booking page with the selected flight's information.
+
+#### Test: FlightResultCard expand and collapse multiple cards
+- **Components**: FlightResultCard
+- **Initial state**: Results page with multiple flight cards
+- **Action**: User expands card A, then expands card B, then collapses card A
+- **Expected**: Each card independently expands and collapses. Card B remains expanded when card A is collapsed.
+
+### TrackPricesToggle
+
+#### Test: TrackPricesToggle is displayed on results page
+- **Components**: TrackPricesToggle
+- **Initial state**: Search results page loaded
+- **Action**: User observes the track prices control
+- **Expected**: A "Track prices" toggle button is visible on the results page. It is initially in the off/untracked state.
+
+#### Test: TrackPricesToggle enables price tracking
+- **Components**: TrackPricesToggle
+- **Initial state**: Results page for LAX → JFK, Mar 25 – Apr 1, toggle is off
+- **Action**: User clicks the "Track prices" toggle
+- **Expected**: The toggle switches to the on/tracked state with a visual indicator (e.g., filled toggle, checkmark, or color change). The route is saved to tracked_routes in the database for the current session.
+
+#### Test: TrackPricesToggle disables price tracking
+- **Components**: TrackPricesToggle
+- **Initial state**: Price tracking is enabled (toggle is on) for the current route
+- **Action**: User clicks the "Track prices" toggle again
+- **Expected**: The toggle switches to the off/untracked state. The route is removed from tracked_routes in the database.
+
+#### Test: TrackPricesToggle reflects existing tracked route
+- **Components**: TrackPricesToggle
+- **Initial state**: User previously tracked LAX → JFK route, then searches LAX → JFK again
+- **Action**: User observes the toggle on the results page
+- **Expected**: The toggle is in the on/tracked state, reflecting that this route is already being tracked.
+
+#### Test: TrackPricesToggle tracked route appears in My Trips
+- **Components**: TrackPricesToggle, TrackedRouteCard
+- **Initial state**: User enables price tracking for LAX → JFK
+- **Action**: User navigates to My Trips page and selects the "Tracked" tab
+- **Expected**: The tracked route (LAX → JFK) appears in the Tracked tab with route details, date range, current lowest price, and untrack button.
+
+#### Test: TrackPricesToggle can be toggled multiple times
+- **Components**: TrackPricesToggle
+- **Initial state**: Results page, toggle is off
+- **Action**: User toggles on, interacts with filters, toggles off, then toggles on again
+- **Expected**: Each toggle correctly switches state. The database is updated on each toggle. The final state is tracked (on).
+
+### Pagination
+
+#### Test: Pagination "Load more" button is displayed at bottom of results
+- **Components**: Pagination
+- **Initial state**: Search results page with more results available than initially displayed
+- **Action**: User scrolls to the bottom of the results list
+- **Expected**: A "Load more results" button is visible at the bottom of the results list.
+
+#### Test: Pagination loading more results appends to list
+- **Components**: Pagination, FlightResultCard
+- **Initial state**: Results page showing initial set of results (e.g., 20 flights), more available
+- **Action**: User clicks the "Load more results" button
+- **Expected**: Additional flight results are appended below the existing results. The previously displayed results remain in place. The new results are visible.
+
+#### Test: Pagination button hidden when all results loaded
+- **Components**: Pagination
+- **Initial state**: All available flight results have been loaded
+- **Action**: User scrolls to the bottom of the results list
+- **Expected**: The "Load more results" button is no longer displayed (or is disabled) since there are no more results to load.
+
+#### Test: Pagination shows loading state while fetching
+- **Components**: Pagination
+- **Initial state**: Results page with more results available
+- **Action**: User clicks the "Load more results" button
+- **Expected**: The button shows a loading indicator (spinner or "Loading..." text) while additional results are being fetched. The button is not clickable during loading.
+
+#### Test: Pagination preserves filters when loading more
+- **Components**: Pagination, FilterSidebar, FlightResultCard
+- **Initial state**: Results page with "Nonstop" filter active, showing filtered results
+- **Action**: User clicks "Load more results"
+- **Expected**: The newly loaded results also respect the active filters. Only nonstop flights are appended.
+
+#### Test: Pagination can be used repeatedly
+- **Components**: Pagination, FlightResultCard
+- **Initial state**: Results page with many available results
+- **Action**: User clicks "Load more" three times in sequence
+- **Expected**: Each click appends more results. Results accumulate correctly without duplicates. The button disappears when no more results remain.
 
 ## Page: Flight Details / Booking
 

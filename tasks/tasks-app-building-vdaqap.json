@@ -3,19 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageSearchResults: Decide on components, add sections to docs/tests.md",
-        "PlanComponentSearchSummaryBar: Add test entries for SearchSummaryBar",
-        "PlanComponentFilterSidebar: Add test entries for FilterSidebar",
-        "PlanComponentFlightResultCard: Add test entries for FlightResultCard",
-        "PlanComponentTrackPricesToggle: Add test entries for TrackPricesToggle",
-        "PlanComponentPagination: Add test entries for Pagination"
-      ],
-      "timestamp": "2026-03-14T18:22:32.754Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageFlightDetailsBooking: Decide on components, add sections to docs/tests.md",
         "PlanComponentFlightSummary: Add test entries for FlightSummary",
         "PlanComponentPriceBreakdown: Add test entries for PriceBreakdown",
@@ -108,15 +95,12 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageSearchPage: Decide on components, add sections to docs/tests.md",
-      "PlanComponentTripTypeSelector: Add test entries for TripTypeSelector",
-      "PlanComponentPassengerCountSelector: Add test entries for PassengerCountSelector",
-      "PlanComponentCabinClassSelector: Add test entries for CabinClassSelector",
-      "PlanComponentAirportAutocomplete: Add test entries for AirportAutocomplete",
-      "PlanComponentDatePicker: Add test entries for DatePicker",
-      "PlanComponentSearchButton: Add test entries for SearchButton",
-      "PlanComponentRecentSearches: Add test entries for RecentSearches",
-      "PlanComponentPopularDestinations: Add test entries for PopularDestinations"
+      "PlanPageSearchResults: Decide on components, add sections to docs/tests.md",
+      "PlanComponentSearchSummaryBar: Add test entries for SearchSummaryBar",
+      "PlanComponentFilterSidebar: Add test entries for FilterSidebar",
+      "PlanComponentFlightResultCard: Add test entries for FlightResultCard",
+      "PlanComponentTrackPricesToggle: Add test entries for TrackPricesToggle",
+      "PlanComponentPagination: Add test entries for Pagination"
     ],
     "timestamp": "2026-03-14T18:22:32.754Z",
     "app": "GoogleFlights"
