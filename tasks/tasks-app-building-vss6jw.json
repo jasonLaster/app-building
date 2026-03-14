@@ -3,32 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestHostDashboardRequiresLogin: Write test for Host Dashboard requires login — redirects unauthenticated users",
-        "WriteTestHostDashboardRequiresHost: Write test for Host Dashboard requires host status — shows upgrade prompt for non-hosts",
-        "WriteTestStatsOverviewTotalListings: Write test for Stats overview displays total listings count",
-        "WriteTestStatsOverviewActiveBookings: Write test for Stats overview displays active bookings count",
-        "WriteTestStatsOverviewTotalEarnings: Write test for Stats overview displays total earnings",
-        "WriteTestStatsOverviewAverageRating: Write test for Stats overview displays average rating",
-        "WriteTestStatsOverviewZerosNewHost: Write test for Stats overview shows zeros for a new host with no data",
-        "WriteTestHostDashboardTabs: Write test for Host Dashboard displays navigation tabs for Listings and Bookings",
-        "WriteTestSwitchListingsBookingsTabs: Write test for Switching between Listings and Bookings tabs",
-        "WriteTestListingsTabGrid: Write test for Listings tab displays host's properties in a grid",
-        "WriteTestListingCardDetails: Write test for Listing card shows property details",
-        "WriteTestListingCardEditButton: Write test for Listing card has Edit button that navigates to property detail",
-        "WriteTestListingCardDeactivateButton: Write test for Listing card has Deactivate button for active properties",
-        "WriteTestConfirmDeactivation: Write test for Confirming deactivation sets property to inactive",
-        "WriteTestDismissDeactivationDialog: Write test for Dismissing deactivation dialog keeps property active",
-        "WriteTestListingCardActivateButton: Write test for Listing card shows Activate button for inactive properties",
-        "WriteTestListingsTabEmptyState: Write test for Listings tab shows empty state for host with no properties",
-        "WriteTestAddListingButtonVisible: Write test for Add Listing button is visible on the Listings tab",
-        "WriteTestDeactivateActivateRepeatedUse: Write test for Deactivate and activate actions work on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestBookingsTabDisplaysTable: Write test for Bookings tab displays table of bookings for host's properties",
         "WriteTestBookingsTableData: Write test for Bookings table shows correct data for each booking",
         "WriteTestBookingsTabStatusFilters: Write test for Bookings tab has status filter controls",
@@ -207,16 +181,25 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestClickWriteReviewNavigates: Write test for Clicking Write Review button navigates to review page",
-      "WriteTestWriteReviewNotOnOtherStatuses: Write test for Write Review button does not appear on pending, confirmed, or cancelled bookings",
-      "WriteTestTripCardsOrderedByCheckIn: Write test for Trip cards are ordered by check-in date",
-      "WriteTestCancelDialogOpens: Write test for Clicking Cancel button opens confirmation dialog",
-      "WriteTestConfirmCancellationUpdatesStatus: Write test for Confirming cancellation updates booking status to cancelled",
-      "WriteTestDismissCancelDialogKeepsBooking: Write test for Dismissing cancellation dialog keeps booking unchanged",
-      "WriteTestCloseDialogViaOverlay: Write test for Closing the dialog via overlay click keeps booking unchanged",
-      "WriteTestCancelDialogShowsContext: Write test for Cancel dialog shows property and date context",
-      "WriteTestAfterCancellationMoveToTab: Write test for After cancellation, booking moves from Upcoming to Cancelled tab",
-      "WriteTestCancelDialogRepeatedUse: Write test for Cancel dialog is functional on repeated use"
+      "WriteTestHostDashboardRequiresLogin: Write test for Host Dashboard requires login — redirects unauthenticated users",
+      "WriteTestHostDashboardRequiresHost: Write test for Host Dashboard requires host status — shows upgrade prompt for non-hosts",
+      "WriteTestStatsOverviewTotalListings: Write test for Stats overview displays total listings count",
+      "WriteTestStatsOverviewActiveBookings: Write test for Stats overview displays active bookings count",
+      "WriteTestStatsOverviewTotalEarnings: Write test for Stats overview displays total earnings",
+      "WriteTestStatsOverviewAverageRating: Write test for Stats overview displays average rating",
+      "WriteTestStatsOverviewZerosNewHost: Write test for Stats overview shows zeros for a new host with no data",
+      "WriteTestHostDashboardTabs: Write test for Host Dashboard displays navigation tabs for Listings and Bookings",
+      "WriteTestSwitchListingsBookingsTabs: Write test for Switching between Listings and Bookings tabs",
+      "WriteTestListingsTabGrid: Write test for Listings tab displays host's properties in a grid",
+      "WriteTestListingCardDetails: Write test for Listing card shows property details",
+      "WriteTestListingCardEditButton: Write test for Listing card has Edit button that navigates to property detail",
+      "WriteTestListingCardDeactivateButton: Write test for Listing card has Deactivate button for active properties",
+      "WriteTestConfirmDeactivation: Write test for Confirming deactivation sets property to inactive",
+      "WriteTestDismissDeactivationDialog: Write test for Dismissing deactivation dialog keeps property active",
+      "WriteTestListingCardActivateButton: Write test for Listing card shows Activate button for inactive properties",
+      "WriteTestListingsTabEmptyState: Write test for Listings tab shows empty state for host with no properties",
+      "WriteTestAddListingButtonVisible: Write test for Add Listing button is visible on the Listings tab",
+      "WriteTestDeactivateActivateRepeatedUse: Write test for Deactivate and activate actions work on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
