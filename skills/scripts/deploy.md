@@ -73,30 +73,51 @@ python3 -c "import json; r=json.load(open('/tmp/neon-resp.json')); print(r['conn
 On redeployment, check `list-secrets` for existing `NEON_PROJECT_ID`, `DATABASE_URL`, and
 `NETLIFY_SITE_ID`. If all three exist, the deploy script can reuse the existing resources.
 
-If `NEON_PROJECT_ID` exists as a branch secret but `DATABASE_URL` does not, the old
-connection string was leaked (previously committed in `deployment.txt`). You MUST reset
-the database password and store a fresh connection string:
+If none of the three branch secrets exist, check whether `deployment.txt` has old-format
+resource info (it may contain `neon_project_id`, `site_id`, or `database_url` from before
+the secrets system was introduced). Follow the migration steps below.
+
+If there is no `deployment.txt` either, this is a first deploy — the script creates new
+resources.
+
+## Migrating from old deployment.txt format
+
+Old `deployment.txt` files may contain `neon_project_id`, `site_id`, and `database_url`.
+These need to be migrated to branch secrets. **CRITICAL: the `database_url` in
+`deployment.txt` is leaked (committed to git) and MUST NOT be reused.** You must reset
+the database password and obtain a fresh connection string.
+
+Step 1 — Store the non-sensitive identifiers. These are safe to read from `deployment.txt`
+directly (they are just identifiers, not credentials):
 
 ```bash
-# 1. Get branches
+grep neon_project_id deployment.txt | cut -d' ' -f2 | set-branch-secret NEON_PROJECT_ID
+grep site_id deployment.txt | cut -d' ' -f2 | set-branch-secret NETLIFY_SITE_ID
+```
+
+Step 2 — Reset the database password and store a fresh `DATABASE_URL`. Do NOT use the
+`database_url` from `deployment.txt` — it is compromised:
+
+```bash
+# Get branches
 exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c 'curl -s \
   -H "Authorization: Bearer $NEON_API_KEY" \
   "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches" > /tmp/branches.json'
 
-# 2. Extract main branch ID
+# Extract main branch ID
 BRANCH_ID=$(python3 -c "import json; bs=json.load(open('/tmp/branches.json'))['branches']; print(next(b['id'] for b in bs if b.get('primary',False) or b['name']=='main'))")
 
-# 3. Reset password
+# Reset password
 exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c "curl -s -X POST \
   -H 'Authorization: Bearer \$NEON_API_KEY' \
   'https://console.neon.tech/api/v2/projects/\$NEON_PROJECT_ID/branches/$BRANCH_ID/roles/neondb_owner/reset_password' > /tmp/reset.json"
 
-# 4. Get endpoint host
+# Get endpoint host
 exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c "curl -s \
   -H 'Authorization: Bearer \$NEON_API_KEY' \
   'https://console.neon.tech/api/v2/projects/\$NEON_PROJECT_ID/endpoints' > /tmp/endpoints.json"
 
-# 5. Store fresh DATABASE_URL
+# Store fresh DATABASE_URL
 python3 -c "
 import json
 pw = json.load(open('/tmp/reset.json'))['role']['password']
@@ -105,7 +126,9 @@ print(f'postgresql://neondb_owner:{pw}@{host}/neondb?sslmode=require')
 " | set-branch-secret DATABASE_URL
 ```
 
-If none of the three branch secrets exist, the script creates new resources.
+Step 3 — Strip secrets from `deployment.txt`, keeping only `url` and `deployed_at`.
+
+After migration, all three branch secrets are set and subsequent deploys will use them.
 
 ## Inputs
 

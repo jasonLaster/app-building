@@ -109,13 +109,17 @@ export function startSecretsServer(opts: SecretsServerOptions, log: (msg: string
           return;
         }
 
-        // Safety check: reject if value appears in any logs
-        const leakMessage = valueAppearsInLogs(body.value, opts);
-        if (leakMessage) {
-          log(`set-branch-secret: REJECTED ${body.name} — value found in logs`);
-          res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ error: leakMessage }));
-          return;
+        // Safety check: reject if value appears in any logs.
+        // Skip for non-sensitive identifiers that are safe even if logged.
+        const LEAK_CHECK_SKIP = new Set(["NETLIFY_SITE_ID", "NEON_PROJECT_ID", "NETLIFY_ACCOUNT_SLUG"]);
+        if (!LEAK_CHECK_SKIP.has(body.name)) {
+          const leakMessage = valueAppearsInLogs(body.value, opts);
+          if (leakMessage) {
+            log(`set-branch-secret: REJECTED ${body.name} — value found in logs`);
+            res.writeHead(400, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: leakMessage }));
+            return;
+          }
         }
 
         // Store in Infisical if configured

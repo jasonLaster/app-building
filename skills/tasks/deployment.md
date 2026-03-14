@@ -18,9 +18,10 @@ Before running the deploy script, run `list-secrets` to check whether the app ha
 deployed before. If `NEON_PROJECT_ID`, `DATABASE_URL`, and `NETLIFY_SITE_ID` exist as
 branch secrets, the deploy script will reuse existing resources.
 
-If `NEON_PROJECT_ID` exists but `DATABASE_URL` does not, the old connection string was
-leaked. You MUST reset the database password and store a fresh one. See
-`skills/scripts/deploy.md` § "Redeployments" for the exact steps.
+If branch secrets are missing but `deployment.txt` has old-format resource info
+(`neon_project_id`, `site_id`, `database_url`), you must migrate to branch secrets.
+See `skills/scripts/deploy.md` § "Migrating from old deployment.txt format". **Do NOT
+copy `database_url` from `deployment.txt`** — it is leaked. You must reset the password.
 
 Ensure the locale workaround is in place — the deploy script must prefix Netlify CLI commands
 with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/deploy.md` §
