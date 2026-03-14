@@ -1,0 +1,34 @@
+Created branch: test-run-1773528886243 (br-wispy-bread-ahjisxam)
+Test DB URL: postgresql://neondb_owner:***@ep-restless-leaf-ahjno6j3.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:31532) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"9f8c11a5-0b14-4887-9556-789d904eff59","duration":0,"result":"passed","title":""}
+{"id":"7b4148a4-4ba8-4bb2-88f3-b5c54045c88e","duration":0,"result":"passed","title":""}
+{"id":"24b8655b-c37c-44af-94ac-bfca8a752188","duration":0,"result":"passed","title":""}
+{"id":"e32e8848-7c57-4088-9835-e9267fa2364b","duration":0,"result":"passed","title":""}
+{"id":"065cf1d7-631a-442b-9a23-b95177cfb359","duration":0,"result":"passed","title":""}
+{"id":"bc1cd151-6869-405e-bc4c-6872027c9cb4","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: bc1cd151-6869-405e-bc4c-6872027c9cb4
+⠙ Initializing…
+Uploading recordings...
+   bc1cd151…  Confirm and cancel actions work on repeated use  22s ago  17.1s   
+
+Uploaded recordings
+ ✔  bc1cd151…  Confirm and cancel actions work on repeated use  24s ago  17.1s  (uploaded) 
+
+View recording at:
+https://app.replay.io/recording/bc1cd151-6869-405e-bc4c-6872027c9cb4
+

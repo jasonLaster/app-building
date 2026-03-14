@@ -75,20 +75,20 @@
   },
   "suites": [
     {
-      "title": "host-dashboard-auth-stats.spec.ts",
-      "file": "host-dashboard-auth-stats.spec.ts",
+      "title": "host-dashboard-bookings-actions.spec.ts",
+      "file": "host-dashboard-bookings-actions.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Host Dashboard - Auth & Stats",
-          "file": "host-dashboard-auth-stats.spec.ts",
-          "line": 10,
-          "column": 6,
+          "title": "Host Dashboard - Bookings Actions",
+          "file": "host-dashboard-bookings-actions.spec.ts",
+          "line": 52,
+          "column": 15,
           "specs": [
             {
-              "title": "Host Dashboard requires login — redirects unauthenticated users",
+              "title": "Host can confirm a pending booking",
               "ok": true,
               "tags": [],
               "tests": [
@@ -97,7 +97,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/7d26dcb1-2392-4ca1-86f1-75e6db0705fd"
+                      "description": "https://app.replay.io/recording/a2335a89-1527-403b-9473-8f254426a6a5"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -108,12 +108,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2825,
+                      "duration": 5792,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:43:57.877Z",
+                      "startTime": "2026-03-14T22:58:18.990Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -121,13 +121,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "bdf116901cc7cdd4302c-11c593943200d8b3cf1b",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 11,
+              "id": "42fabb543f7d1c954889-f97c12f5c3ad5a8e874f",
+              "file": "host-dashboard-bookings-actions.spec.ts",
+              "line": 58,
               "column": 3
             },
             {
-              "title": "Host Dashboard requires host status — shows upgrade prompt for non-hosts",
+              "title": "Host can cancel a pending booking",
               "ok": true,
               "tags": [],
               "tests": [
@@ -136,7 +136,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/4cea9e85-9c5d-490c-8bac-1df0bd4806e9"
+                      "description": "https://app.replay.io/recording/be6e1838-c85b-41c2-87ac-6a66316b2f44"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -147,12 +147,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2409,
+                      "duration": 3472,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:44:00.854Z",
+                      "startTime": "2026-03-14T22:58:24.946Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -160,13 +160,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "bdf116901cc7cdd4302c-b3fca77dd3f6141b71aa",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 17,
+              "id": "42fabb543f7d1c954889-12398e9ebab9d3544093",
+              "file": "host-dashboard-bookings-actions.spec.ts",
+              "line": 90,
               "column": 3
             },
             {
-              "title": "Stats overview displays total listings count",
+              "title": "Confirming cancellation of a booking updates status",
               "ok": true,
               "tags": [],
               "tests": [
@@ -175,7 +175,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/27eed659-1437-4fbb-af7e-a1647e04aadb"
+                      "description": "https://app.replay.io/recording/e7d91d2d-88f0-4b02-b3c8-9f22057d70e0"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -186,12 +186,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2667,
+                      "duration": 4910,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:44:03.277Z",
+                      "startTime": "2026-03-14T22:58:28.435Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -199,13 +199,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "bdf116901cc7cdd4302c-6ae64a3476643e234966",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 30,
+              "id": "42fabb543f7d1c954889-fbec2848b2b100c947a0",
+              "file": "host-dashboard-bookings-actions.spec.ts",
+              "line": 116,
               "column": 3
             },
             {
-              "title": "Stats overview displays active bookings count",
+              "title": "Dismissing booking cancellation dialog keeps booking unchanged",
               "ok": true,
               "tags": [],
               "tests": [
@@ -214,7 +214,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/6c2b6b2c-a613-4e6b-b8c5-6f2157dd844d"
+                      "description": "https://app.replay.io/recording/37ec9f24-95c9-4aac-87ae-010be13b2698"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -225,12 +225,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2654,
+                      "duration": 3465,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:44:05.960Z",
+                      "startTime": "2026-03-14T22:58:33.364Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -238,13 +238,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "bdf116901cc7cdd4302c-bf4ed9b9a5ac10b57793",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 42,
+              "id": "42fabb543f7d1c954889-26e2d8727eb5a541414d",
+              "file": "host-dashboard-bookings-actions.spec.ts",
+              "line": 154,
               "column": 3
             },
             {
-              "title": "Stats overview displays total earnings",
+              "title": "Host can cancel a confirmed booking",
               "ok": true,
               "tags": [],
               "tests": [
@@ -253,7 +253,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/b036beba-3ce7-4e81-9154-16ef78753580"
+                      "description": "https://app.replay.io/recording/88689707-b931-42a1-a6ab-96f06a07e9c8"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -264,12 +264,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2798,
+                      "duration": 4413,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:44:08.633Z",
+                      "startTime": "2026-03-14T22:58:36.846Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -277,22 +277,30 @@
                   "status": "expected"
                 }
               ],
-              "id": "bdf116901cc7cdd4302c-477bb3106beb05466550",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 54,
+              "id": "42fabb543f7d1c954889-2718f495e6e0ac7e26c6",
+              "file": "host-dashboard-bookings-actions.spec.ts",
+              "line": 184,
               "column": 3
             },
             {
-              "title": "Stats overview displays average rating",
+              "title": "Confirm and cancel actions work on repeated use",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 180000,
                   "annotations": [
                     {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings-actions.spec.ts",
+                        "line": 214,
+                        "column": 10
+                      }
+                    },
+                    {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/8b9f9546-376f-408f-9e8b-55ed7734e8c3"
+                      "description": "https://app.replay.io/recording/83ffcea9-2cdf-4476-a931-3fbf89f4d10a"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -303,139 +311,31 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2722,
+                      "duration": 5666,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:44:11.447Z",
-                      "annotations": [],
+                      "startTime": "2026-03-14T22:58:41.277Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings-actions.spec.ts",
+                            "line": 214,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "bdf116901cc7cdd4302c-7ed4442c3fcad61859e4",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 66,
-              "column": 3
-            },
-            {
-              "title": "Stats overview shows zeros for a new host with no data",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/dae0cc92-d04c-472e-ba2a-18baa21d730b"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3049,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:44:14.184Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "bdf116901cc7cdd4302c-ea7bdff0279968c93ca2",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 78,
-              "column": 3
-            },
-            {
-              "title": "Host Dashboard displays navigation tabs for Listings and Bookings",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/fc4287e5-5d68-40ce-9b10-563caf4d9b51"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2324,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:44:17.245Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "bdf116901cc7cdd4302c-adcd986872a2d02d706b",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 93,
-              "column": 3
-            },
-            {
-              "title": "Switching between Listings and Bookings tabs",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/533e9b14-3086-4e30-9f71-ec8c8fd9b132"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2473,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:44:19.581Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "bdf116901cc7cdd4302c-6157e36eb8dfcf089ff1",
-              "file": "host-dashboard-auth-stats.spec.ts",
-              "line": 110,
+              "id": "42fabb543f7d1c954889-65e1211ae420f8481039",
+              "file": "host-dashboard-bookings-actions.spec.ts",
+              "line": 213,
               "column": 3
             }
           ]
@@ -445,9 +345,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-14T22:43:52.409Z",
-    "duration": 29859.533000000003,
-    "expected": 9,
+    "startTime": "2026-03-14T22:58:13.512Z",
+    "duration": 33621.742,
+    "expected": 6,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

@@ -1,9 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-// Sarah's host ID
-const SARAH_ID = 'a1111111-1111-1111-1111-111111111111'
 const BOOKING_CONFIRMED_VILLA = 'e2222222-2222-2222-2222-222222222222' // Villa, Alex, confirmed
-const BOOKING_CONFIRMED_TOWNHOUSE = 'e6666666-6666-6666-6666-666666666666' // Townhouse, Emma, confirmed
 
 // For creating pending bookings
 const PROP_LOFT = 'b1111111-1111-1111-1111-111111111111'
@@ -50,6 +47,11 @@ async function createPendingBooking(
 }
 
 test.describe.serial('Host Dashboard - Bookings Actions', () => {
+  test.beforeEach(async ({ request }) => {
+    // Reset bookings to seed state before each test
+    await request.delete('http://localhost:8888/api/bookings')
+  })
+
   test('Host can confirm a pending booking', async ({ page, request }) => {
     // Create a pending booking
     const pendingBooking = await createPendingBooking(
@@ -104,8 +106,8 @@ test.describe.serial('Host Dashboard - Bookings Actions', () => {
     // Dialog should show booking details
     await expect(dialog).toContainText('Cozy Downtown Loft with City Views')
     await expect(dialog).toContainText('Emma Wilson')
-    await expect(dialog).toContainText('Sep 1, 2027')
-    await expect(dialog).toContainText('Sep 5, 2027')
+    await expect(dialog).toContainText('Oct 1, 2027')
+    await expect(dialog).toContainText('Oct 5, 2027')
   })
 
   test('Confirming cancellation of a booking updates status', async ({ page, request }) => {

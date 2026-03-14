@@ -52,11 +52,17 @@ export default function HostDashboard() {
 
   const handleConfirmBooking = useCallback(async (bookingId: string) => {
     await dispatch(updateHostBookingStatus({ bookingId, status: 'confirmed' }))
-  }, [dispatch])
+    if (currentUser) {
+      dispatch(fetchHostStats(currentUser.id))
+    }
+  }, [dispatch, currentUser])
 
   const handleCancelBooking = useCallback(async (bookingId: string) => {
     await dispatch(updateHostBookingStatus({ bookingId, status: 'cancelled' }))
-  }, [dispatch])
+    if (currentUser) {
+      dispatch(fetchHostStats(currentUser.id))
+    }
+  }, [dispatch, currentUser])
 
   const handleAddListingSuccess = useCallback(() => {
     setShowAddForm(false)

@@ -65,6 +65,38 @@ export default async (request: Request, _context: Context) => {
     return new Response(JSON.stringify(booking), { status: 200, headers })
   }
 
+  if (request.method === 'DELETE' && bookingId) {
+    const result = await sql`
+      DELETE FROM bookings WHERE id = ${bookingId} RETURNING *
+    `
+    const booking = result[0]
+    if (!booking) {
+      return new Response(JSON.stringify({ error: 'Booking not found' }), { status: 404, headers })
+    }
+    return new Response(JSON.stringify(booking), { status: 200, headers })
+  }
+
+  if (request.method === 'DELETE' && !bookingId) {
+    // Delete all non-seed bookings (seed IDs follow pattern e*-*-*-*-*)
+    const seedIds = [
+      'e1111111-1111-1111-1111-111111111111',
+      'e2222222-2222-2222-2222-222222222222',
+      'e3333333-3333-3333-3333-333333333333',
+      'e4444444-4444-4444-4444-444444444444',
+      'e5555555-5555-5555-5555-555555555555',
+      'e6666666-6666-6666-6666-666666666666',
+    ]
+    await sql`DELETE FROM bookings WHERE id != ALL(${seedIds})`
+    // Reset seed bookings to original statuses
+    await sql`UPDATE bookings SET status = 'completed' WHERE id = 'e1111111-1111-1111-1111-111111111111'`
+    await sql`UPDATE bookings SET status = 'confirmed' WHERE id = 'e2222222-2222-2222-2222-222222222222'`
+    await sql`UPDATE bookings SET status = 'pending' WHERE id = 'e3333333-3333-3333-3333-333333333333'`
+    await sql`UPDATE bookings SET status = 'completed' WHERE id = 'e4444444-4444-4444-4444-444444444444'`
+    await sql`UPDATE bookings SET status = 'cancelled' WHERE id = 'e5555555-5555-5555-5555-555555555555'`
+    await sql`UPDATE bookings SET status = 'confirmed' WHERE id = 'e6666666-6666-6666-6666-666666666666'`
+    return new Response(JSON.stringify({ success: true }), { status: 200, headers })
+  }
+
   if (request.method === 'GET') {
     const guestId = url.searchParams.get('guest_id')
     if (!guestId) {

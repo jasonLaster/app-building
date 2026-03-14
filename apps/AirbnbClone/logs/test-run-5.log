@@ -1,0 +1,30 @@
+Cleaned up stale branch: test-run-1773528355739
+Created branch: test-run-1773528364103 (br-hidden-sky-ahepjy66)
+Test DB URL: postgresql://neondb_owner:***@ep-cool-glitter-ahhn5ex5.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:30222) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"e9e658dd-8040-4e3d-840a-6bcabbf6e9e5","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: e9e658dd-8040-4e3d-840a-6bcabbf6e9e5
+⠙ Initializing…
+Uploading recordings...
+   e9e658dd…  Host can confirm a pending booking  20s ago  17.6s   
+
+Uploaded recordings
+ ✔  e9e658dd…  Host can confirm a pending booking  23s ago  17.6s  (uploaded) 
+
+View recording at:
+https://app.replay.io/recording/e9e658dd-8040-4e3d-840a-6bcabbf6e9e5
+
