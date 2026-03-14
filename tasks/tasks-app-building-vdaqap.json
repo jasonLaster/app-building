@@ -3,18 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageMyTrips: Decide on components, add sections to docs/tests.md",
-        "PlanComponentTripsTabs: Add test entries for TripsTabs",
-        "PlanComponentTripCard: Add test entries for TripCard",
-        "PlanComponentTrackedRouteCard: Add test entries for TrackedRouteCard",
-        "PlanComponentCancelBookingModal: Add test entries for CancelBookingModal"
-      ],
-      "timestamp": "2026-03-14T18:22:32.754Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageExplore: Decide on components, add sections to docs/tests.md",
         "PlanComponentDestinationMap: Add test entries for DestinationMap",
         "PlanComponentFlexibleDatesGrid: Add test entries for FlexibleDatesGrid",
@@ -83,11 +71,11 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageFlightDetailsBooking: Decide on components, add sections to docs/tests.md",
-      "PlanComponentFlightSummary: Add test entries for FlightSummary",
-      "PlanComponentPriceBreakdown: Add test entries for PriceBreakdown",
-      "PlanComponentPassengerForm: Add test entries for PassengerForm",
-      "PlanComponentBookingAction: Add test entries for BookingAction"
+      "PlanPageMyTrips: Decide on components, add sections to docs/tests.md",
+      "PlanComponentTripsTabs: Add test entries for TripsTabs",
+      "PlanComponentTripCard: Add test entries for TripCard",
+      "PlanComponentTrackedRouteCard: Add test entries for TrackedRouteCard",
+      "PlanComponentCancelBookingModal: Add test entries for CancelBookingModal"
     ],
     "timestamp": "2026-03-14T18:22:32.754Z",
     "app": "GoogleFlights"

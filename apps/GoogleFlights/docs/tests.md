@@ -983,7 +983,241 @@
 - TrackedRouteCard
 - CancelBookingModal
 
-_(Test entries to be added by PlanPage tasks)_
+### TripsTabs
+
+#### Test: TripsTabs displays three tabs
+- **Components**: TripsTabs
+- **Initial state**: User navigates to the My Trips page
+- **Action**: User observes the tab bar at the top of the page
+- **Expected**: Three tabs are displayed: "Upcoming", "Past", and "Tracked". The "Upcoming" tab is selected by default and visually highlighted (e.g., underline or bold text with primary color #1A73E8).
+
+#### Test: TripsTabs switches to Past tab
+- **Components**: TripsTabs, TripCard
+- **Initial state**: My Trips page loaded with "Upcoming" tab active, user has both upcoming and past bookings
+- **Action**: User clicks the "Past" tab
+- **Expected**: The "Past" tab becomes visually selected. The content area updates to show only trips with past departure dates (status "Completed" or "Cancelled"). Upcoming trips are no longer visible.
+
+#### Test: TripsTabs switches to Tracked tab
+- **Components**: TripsTabs, TrackedRouteCard
+- **Initial state**: My Trips page loaded with "Upcoming" tab active, user has tracked routes
+- **Action**: User clicks the "Tracked" tab
+- **Expected**: The "Tracked" tab becomes visually selected. The content area updates to show tracked route cards instead of trip cards. Trip cards are no longer visible.
+
+#### Test: TripsTabs switches back to Upcoming after visiting other tabs
+- **Components**: TripsTabs, TripCard
+- **Initial state**: User is on My Trips page viewing the "Tracked" tab
+- **Action**: User clicks "Past" tab, then clicks "Upcoming" tab
+- **Expected**: Each tab click updates the selected tab styling and displayed content correctly. After returning to "Upcoming", only upcoming trips are shown with the "Upcoming" tab visually selected.
+
+#### Test: TripsTabs Upcoming tab shows empty state
+- **Components**: TripsTabs, TripCard
+- **Initial state**: User has no upcoming bookings
+- **Action**: User views the "Upcoming" tab on My Trips page
+- **Expected**: An empty state message is displayed (e.g., "No upcoming trips. Search for flights to plan your next trip!"). No trip cards are shown.
+
+#### Test: TripsTabs Past tab shows empty state
+- **Components**: TripsTabs, TripCard
+- **Initial state**: User has no past bookings
+- **Action**: User clicks the "Past" tab
+- **Expected**: An empty state message is displayed (e.g., "No past trips yet."). No trip cards are shown.
+
+#### Test: TripsTabs Tracked tab shows empty state
+- **Components**: TripsTabs, TrackedRouteCard
+- **Initial state**: User has no tracked routes
+- **Action**: User clicks the "Tracked" tab
+- **Expected**: An empty state message is displayed (e.g., "No tracked routes. Use the 'Track prices' button on search results to start tracking."). No tracked route cards are shown.
+
+#### Test: TripsTabs Upcoming tab sorts trips by departure date ascending
+- **Components**: TripsTabs, TripCard
+- **Initial state**: User has 3 upcoming bookings with departure dates Mar 25, Apr 10, and Mar 30
+- **Action**: User views the "Upcoming" tab
+- **Expected**: Trip cards are sorted by departure date ascending: Mar 25 first, Mar 30 second, Apr 10 third. The soonest departure is at the top.
+
+### TripCard
+
+#### Test: TripCard displays route information
+- **Components**: TripCard
+- **Initial state**: User has an upcoming booking from LAX to JFK
+- **Action**: User observes a trip card in the Upcoming tab
+- **Expected**: The card displays the route as "LAX → JFK" showing the origin and destination airport IATA codes.
+
+#### Test: TripCard displays travel dates
+- **Components**: TripCard
+- **Initial state**: User has a round-trip booking departing Mar 25, returning Mar 30
+- **Action**: User observes the trip card
+- **Expected**: The card displays the departure date "Mar 25" and return date "Mar 30". For one-way trips, only the departure date is shown.
+
+#### Test: TripCard displays airline and flight info
+- **Components**: TripCard
+- **Initial state**: User has a booking on Delta flight DL100
+- **Action**: User observes the trip card
+- **Expected**: The card shows the airline name "Delta" and flight number "DL100". The airline logo (colored circle with airline initials) is displayed.
+
+#### Test: TripCard displays Confirmed status badge
+- **Components**: TripCard
+- **Initial state**: User has an upcoming confirmed booking
+- **Action**: User observes the trip card status
+- **Expected**: A status badge reading "Confirmed" is displayed on the card. The badge has a visual style indicating active status (e.g., green or blue background with white text).
+
+#### Test: TripCard displays Completed status badge
+- **Components**: TripCard
+- **Initial state**: User views the Past tab with a completed trip
+- **Action**: User observes the trip card status
+- **Expected**: A status badge reading "Completed" is displayed. The badge has a distinct style from Confirmed (e.g., gray background).
+
+#### Test: TripCard displays Cancelled status badge
+- **Components**: TripCard
+- **Initial state**: User views trips that include a cancelled booking
+- **Action**: User observes the cancelled trip card
+- **Expected**: A status badge reading "Cancelled" is displayed. The badge has a distinct style (e.g., red or muted background) indicating the trip was cancelled.
+
+#### Test: TripCard displays price paid
+- **Components**: TripCard
+- **Initial state**: User has a booking with total_price_cents = 29500
+- **Action**: User observes the trip card
+- **Expected**: The card displays the price as "$295.00" prominently on the card.
+
+#### Test: TripCard displays booking reference
+- **Components**: TripCard
+- **Initial state**: User has a booking with booking_reference "GF-ABC123"
+- **Action**: User observes the trip card
+- **Expected**: The booking reference "GF-ABC123" is displayed on the card so the user can identify and reference their booking.
+
+#### Test: TripCard shows cancel button for upcoming confirmed flights
+- **Components**: TripCard, CancelBookingModal
+- **Initial state**: User has an upcoming confirmed booking
+- **Action**: User observes the trip card in the Upcoming tab
+- **Expected**: A "Cancel" button is visible on the card. The button is styled as a secondary/destructive action (e.g., red text or outline).
+
+#### Test: TripCard does not show cancel button for past flights
+- **Components**: TripCard
+- **Initial state**: User views the Past tab with completed trips
+- **Action**: User observes trip cards in the Past tab
+- **Expected**: No "Cancel" button is shown on any trip card in the Past tab. Completed and past trips cannot be cancelled.
+
+#### Test: TripCard does not show cancel button for already cancelled flights
+- **Components**: TripCard
+- **Initial state**: User has a cancelled booking visible in any tab
+- **Action**: User observes the cancelled trip card
+- **Expected**: No "Cancel" button is shown. The card only displays the "Cancelled" status badge.
+
+#### Test: TripCard displays one-way trip correctly
+- **Components**: TripCard
+- **Initial state**: User has a one-way booking from SFO to ORD on Apr 5
+- **Action**: User observes the trip card
+- **Expected**: The card shows route "SFO → ORD", a single departure date "Apr 5", and no return date. All other fields (airline, price, status, reference) are displayed normally.
+
+#### Test: TripCard displays round-trip with return flight info
+- **Components**: TripCard
+- **Initial state**: User has a round-trip booking LAX → JFK departing Mar 25, returning Mar 30
+- **Action**: User observes the trip card
+- **Expected**: The card shows route "LAX → JFK", both dates "Mar 25 – Mar 30", and all booking details. The card indicates it is a round-trip booking.
+
+### TrackedRouteCard
+
+#### Test: TrackedRouteCard displays route
+- **Components**: TrackedRouteCard
+- **Initial state**: User has a tracked route from LAX to LHR, visible in the Tracked tab
+- **Action**: User observes the tracked route card
+- **Expected**: The card displays the route as "LAX → LHR" with origin and destination airport codes.
+
+#### Test: TrackedRouteCard displays date range being tracked
+- **Components**: TrackedRouteCard
+- **Initial state**: User tracks a route with departure_date_start "2026-04-01" and departure_date_end "2026-04-15"
+- **Action**: User observes the tracked route card
+- **Expected**: The card displays the tracked date range as "Apr 1 – Apr 15" (or similar formatted date range).
+
+#### Test: TrackedRouteCard displays current lowest price
+- **Components**: TrackedRouteCard
+- **Initial state**: User has a tracked route and there are flights available on that route with the lowest price being $320
+- **Action**: User observes the tracked route card
+- **Expected**: The card displays the current lowest price as "$320" prominently.
+
+#### Test: TrackedRouteCard displays price trend indicator going up
+- **Components**: TrackedRouteCard
+- **Initial state**: User has a tracked route where prices have increased by 12% compared to when tracking started
+- **Action**: User observes the tracked route card price trend
+- **Expected**: An upward arrow icon is displayed with "+12%" text next to the current price, indicating prices have risen. The trend indicator is styled in a color indicating increase (e.g., red).
+
+#### Test: TrackedRouteCard displays price trend indicator going down
+- **Components**: TrackedRouteCard
+- **Initial state**: User has a tracked route where prices have decreased by 8% compared to when tracking started
+- **Action**: User observes the tracked route card price trend
+- **Expected**: A downward arrow icon is displayed with "-8%" text next to the current price, indicating prices have dropped. The trend indicator is styled in a color indicating decrease (e.g., green).
+
+#### Test: TrackedRouteCard Search button navigates to search results
+- **Components**: TrackedRouteCard
+- **Initial state**: User has a tracked route LAX → LHR, Apr 1 – Apr 15
+- **Action**: User clicks the "Search" button on the tracked route card
+- **Expected**: The user is navigated to the Search Results page with the route (LAX → LHR) and date range (Apr 1 – Apr 15) pre-populated. Current flights for this route are displayed.
+
+#### Test: TrackedRouteCard Untrack button removes tracking
+- **Components**: TrackedRouteCard
+- **Initial state**: User has 2 tracked routes in the Tracked tab
+- **Action**: User clicks the "Untrack" button on one of the tracked route cards
+- **Expected**: The tracked route is removed from the database (tracked_routes table). The card is removed from the Tracked tab. Only 1 tracked route card remains. No confirmation modal is shown for untracking.
+
+#### Test: TrackedRouteCard Untrack then re-check shows updated list
+- **Components**: TrackedRouteCard, TripsTabs
+- **Initial state**: User has 3 tracked routes in the Tracked tab
+- **Action**: User clicks "Untrack" on the first card, then switches to "Upcoming" tab and back to "Tracked" tab
+- **Expected**: The Tracked tab consistently shows only 2 remaining tracked route cards. The untracked route does not reappear.
+
+#### Test: TrackedRouteCard Search button works for multiple cards
+- **Components**: TrackedRouteCard
+- **Initial state**: User has 2 tracked routes: LAX → LHR and SFO → NRT
+- **Action**: User clicks "Search" on the SFO → NRT card, navigates back to My Trips, then clicks "Search" on the LAX → LHR card
+- **Expected**: Each "Search" click navigates to the Search Results page with the correct route and dates pre-populated for that specific tracked route. The second search correctly shows LAX → LHR results, not the previous SFO → NRT search.
+
+### CancelBookingModal
+
+#### Test: CancelBookingModal opens when Cancel button is clicked
+- **Components**: CancelBookingModal, TripCard
+- **Initial state**: User has an upcoming confirmed booking in the Upcoming tab
+- **Action**: User clicks the "Cancel" button on the trip card
+- **Expected**: A modal dialog opens with a confirmation message (e.g., "Are you sure you want to cancel this booking?"). The modal displays the booking details: route, dates, airline, and booking reference. The modal has two buttons: "Cancel Booking" (destructive/confirm action) and "Keep Booking" (dismiss action).
+
+#### Test: CancelBookingModal shows booking details
+- **Components**: CancelBookingModal, TripCard
+- **Initial state**: User clicks Cancel on a booking LAX → JFK, Mar 25, Delta DL100, ref GF-ABC123
+- **Action**: User observes the modal content
+- **Expected**: The modal displays the specific booking details: route "LAX → JFK", date "Mar 25", airline "Delta DL100", booking reference "GF-ABC123". This helps the user confirm they are cancelling the correct booking.
+
+#### Test: CancelBookingModal confirms cancellation
+- **Components**: CancelBookingModal, TripCard
+- **Initial state**: Cancel modal is open for an upcoming booking
+- **Action**: User clicks the "Cancel Booking" button in the modal
+- **Expected**: The booking status is updated to "cancelled" in the database. The modal closes. The trip card updates to show a "Cancelled" status badge. The "Cancel" button is no longer visible on that trip card. The trip card remains visible in the list.
+
+#### Test: CancelBookingModal dismiss keeps booking
+- **Components**: CancelBookingModal, TripCard
+- **Initial state**: Cancel modal is open for an upcoming booking
+- **Action**: User clicks the "Keep Booking" button in the modal
+- **Expected**: The modal closes. The booking remains unchanged with status "Confirmed". The trip card still shows the "Confirmed" badge and the "Cancel" button is still available.
+
+#### Test: CancelBookingModal close via overlay click
+- **Components**: CancelBookingModal
+- **Initial state**: Cancel modal is open
+- **Action**: User clicks the modal overlay/backdrop (outside the modal content)
+- **Expected**: The modal closes without cancelling the booking. The booking status remains "Confirmed".
+
+#### Test: CancelBookingModal shows loading state during cancellation
+- **Components**: CancelBookingModal
+- **Initial state**: Cancel modal is open, user clicks "Cancel Booking"
+- **Action**: User observes the modal during the cancellation request
+- **Expected**: The "Cancel Booking" button shows a loading indicator (spinner or "Cancelling..." text) while the request is processing. Both buttons are disabled during this time to prevent duplicate actions.
+
+#### Test: CancelBookingModal cancellation error handling
+- **Components**: CancelBookingModal
+- **Initial state**: Cancel modal is open, a network error occurs during cancellation
+- **Action**: User clicks "Cancel Booking" and the request fails
+- **Expected**: An error message is displayed in the modal (e.g., "Failed to cancel booking. Please try again."). The modal remains open. The buttons become clickable again so the user can retry or dismiss.
+
+#### Test: CancelBookingModal cancelled trip persists in correct tab
+- **Components**: CancelBookingModal, TripCard, TripsTabs
+- **Initial state**: User cancels an upcoming booking via the modal
+- **Action**: User switches to "Past" tab and back to "Upcoming" tab
+- **Expected**: The cancelled trip still appears in the "Upcoming" tab (since the departure date is still in the future) with the "Cancelled" status badge. It is not duplicated across tabs.
 
 ## Page: Explore
 
