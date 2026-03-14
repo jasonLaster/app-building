@@ -5,6 +5,7 @@ import favoritesReducer from './slices/favoritesSlice'
 import amenitiesReducer from './slices/amenitiesSlice'
 import propertyDetailReducer from './slices/propertyDetailSlice'
 import bookingsReducer from './slices/bookingsSlice'
+import hostReducer from './slices/hostSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     amenities: amenitiesReducer,
     propertyDetail: propertyDetailReducer,
     bookings: bookingsReducer,
+    host: hostReducer,
   },
 })
 

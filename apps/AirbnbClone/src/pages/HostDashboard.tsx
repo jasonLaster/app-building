@@ -1,0 +1,156 @@
+import { useState, useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import type { RootState, AppDispatch } from '../store'
+import {
+  fetchHostStats,
+  fetchHostListings,
+  fetchHostBookings,
+  deactivateProperty,
+  activateProperty,
+  updateHostBookingStatus,
+} from '../slices/hostSlice'
+import type { Property } from '../slices/propertiesSlice'
+import StatsOverview from '../components/StatsOverview'
+import ListingsTab from '../components/ListingsTab'
+import BookingsTab from '../components/BookingsTab'
+import AddListingForm from '../components/AddListingForm'
+
+type Tab = 'listings' | 'bookings'
+
+export default function HostDashboard() {
+  const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
+  const currentUser = useSelector((state: RootState) => state.auth.currentUser)
+  const { stats, listings, bookings, statsLoading, listingsLoading, bookingsLoading } = useSelector(
+    (state: RootState) => state.host
+  )
+  const [activeTab, setActiveTab] = useState<Tab>('listings')
+  const [showAddForm, setShowAddForm] = useState(false)
+
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/login')
+    }
+  }, [currentUser, navigate])
+
+  useEffect(() => {
+    if (currentUser?.is_host) {
+      dispatch(fetchHostStats(currentUser.id))
+      dispatch(fetchHostListings(currentUser.id))
+      dispatch(fetchHostBookings(currentUser.id))
+    }
+  }, [dispatch, currentUser])
+
+  const handleDeactivate = useCallback(async (property: Property) => {
+    await dispatch(deactivateProperty(property.id))
+  }, [dispatch])
+
+  const handleActivate = useCallback(async (property: Property) => {
+    await dispatch(activateProperty(property.id))
+  }, [dispatch])
+
+  const handleConfirmBooking = useCallback(async (bookingId: string) => {
+    await dispatch(updateHostBookingStatus({ bookingId, status: 'confirmed' }))
+  }, [dispatch])
+
+  const handleCancelBooking = useCallback(async (bookingId: string) => {
+    await dispatch(updateHostBookingStatus({ bookingId, status: 'cancelled' }))
+  }, [dispatch])
+
+  const handleAddListingSuccess = useCallback(() => {
+    setShowAddForm(false)
+    if (currentUser) {
+      dispatch(fetchHostStats(currentUser.id))
+      dispatch(fetchHostListings(currentUser.id))
+    }
+  }, [dispatch, currentUser])
+
+  if (!currentUser) {
+    return null
+  }
+
+  if (!currentUser.is_host) {
+    return (
+      <div data-testid="host-dashboard" className="p-6 max-sm:p-3">
+        <div className="max-w-lg mx-auto text-center py-16">
+          <h1 className="text-2xl font-bold text-text mb-4">Become a Host</h1>
+          <p className="text-text-secondary mb-6">
+            You need to become a host to access this page. Visit your profile to get started.
+          </p>
+          <button
+            data-testid="become-host-link"
+            onClick={() => navigate('/profile')}
+            className="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors"
+          >
+            Go to Profile
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div data-testid="host-dashboard" className="p-6 max-sm:p-3">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-2xl font-bold text-text mb-6">Host Dashboard</h1>
+
+        <StatsOverview stats={stats} loading={statsLoading} />
+
+        <div className="mt-8 mb-6">
+          <div className="flex border-b border-border">
+            <button
+              data-testid="tab-listings"
+              onClick={() => setActiveTab('listings')}
+              className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'listings'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-text-secondary hover:text-text'
+              }`}
+            >
+              Listings
+            </button>
+            <button
+              data-testid="tab-bookings"
+              onClick={() => setActiveTab('bookings')}
+              className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                activeTab === 'bookings'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-text-secondary hover:text-text'
+              }`}
+            >
+              Bookings
+            </button>
+          </div>
+        </div>
+
+        {activeTab === 'listings' && (
+          <ListingsTab
+            listings={listings}
+            loading={listingsLoading}
+            onDeactivate={handleDeactivate}
+            onActivate={handleActivate}
+            onAddListing={() => setShowAddForm(true)}
+          />
+        )}
+
+        {activeTab === 'bookings' && (
+          <BookingsTab
+            bookings={bookings}
+            loading={bookingsLoading}
+            onConfirm={handleConfirmBooking}
+            onCancel={handleCancelBooking}
+          />
+        )}
+
+        {showAddForm && (
+          <AddListingForm
+            hostId={currentUser.id}
+            onClose={() => setShowAddForm(false)}
+            onSuccess={handleAddListingSuccess}
+          />
+        )}
+      </div>
+    </div>
+  )
+}

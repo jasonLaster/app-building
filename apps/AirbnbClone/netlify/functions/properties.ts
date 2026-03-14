@@ -138,5 +138,105 @@ export default async (request: Request, _context: Context) => {
     }), { status: 200, headers })
   }
 
+  if (request.method === 'POST') {
+    const body = await request.json() as {
+      host_id: string
+      title: string
+      description: string
+      property_type: string
+      price_per_night: number
+      cleaning_fee: number
+      max_guests: number
+      bedrooms: number
+      beds: number
+      bathrooms: number
+      address: string
+      city: string
+      state: string | null
+      country: string
+      latitude: number | null
+      longitude: number | null
+      amenity_ids?: string[]
+    }
+
+    const {
+      host_id, title, description, property_type, price_per_night, cleaning_fee,
+      max_guests, bedrooms, beds, bathrooms, address, city, state, country,
+      latitude, longitude, amenity_ids,
+    } = body
+
+    if (!host_id || !title || !property_type || !price_per_night || !max_guests || !city || !country) {
+      return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400, headers })
+    }
+
+    const result = await sql`
+      INSERT INTO properties (id, host_id, title, description, property_type, price_per_night, cleaning_fee,
+        max_guests, bedrooms, beds, bathrooms, address, city, state, country, latitude, longitude,
+        is_active, created_at, updated_at)
+      VALUES (gen_random_uuid(), ${host_id}, ${title}, ${description || ''}, ${property_type},
+        ${price_per_night}, ${cleaning_fee || 0}, ${max_guests}, ${bedrooms || 0}, ${beds || 0},
+        ${bathrooms || 0}, ${address || ''}, ${city}, ${state || null}, ${country},
+        ${latitude || null}, ${longitude || null}, true, now(), now())
+      RETURNING *
+    `
+    const property = result[0]
+
+    if (amenity_ids && amenity_ids.length > 0) {
+      for (const amenityId of amenity_ids) {
+        await sql`
+          INSERT INTO property_amenities (property_id, amenity_id)
+          VALUES (${(property as Record<string, unknown>).id as string}, ${amenityId})
+          ON CONFLICT DO NOTHING
+        `
+      }
+    }
+
+    return new Response(JSON.stringify(property), { status: 201, headers })
+  }
+
+  if (request.method === 'PUT' && propertyId) {
+    const body = await request.json() as {
+      is_active?: boolean
+      title?: string
+      description?: string
+      price_per_night?: number
+      cleaning_fee?: number
+    }
+
+    const existing = await sql`SELECT * FROM properties WHERE id = ${propertyId}`
+    const existingProp = existing[0]
+    if (!existingProp) {
+      return new Response(JSON.stringify({ error: 'Property not found' }), { status: 404, headers })
+    }
+
+    const ep = existingProp as Record<string, unknown>
+    const result = await sql`
+      UPDATE properties SET
+        is_active = ${body.is_active !== undefined ? body.is_active : ep.is_active as boolean},
+        title = ${body.title !== undefined ? body.title : ep.title as string},
+        description = ${body.description !== undefined ? body.description : ep.description as string},
+        price_per_night = ${body.price_per_night !== undefined ? body.price_per_night : ep.price_per_night as number},
+        cleaning_fee = ${body.cleaning_fee !== undefined ? body.cleaning_fee : ep.cleaning_fee as number},
+        updated_at = now()
+      WHERE id = ${propertyId}
+      RETURNING *
+    `
+    const property = result[0]
+    return new Response(JSON.stringify(property), { status: 200, headers })
+  }
+
+  if (request.method === 'DELETE' && propertyId) {
+    const result = await sql`
+      UPDATE properties SET is_active = false, updated_at = now()
+      WHERE id = ${propertyId}
+      RETURNING *
+    `
+    const property = result[0]
+    if (!property) {
+      return new Response(JSON.stringify({ error: 'Property not found' }), { status: 404, headers })
+    }
+    return new Response(JSON.stringify(property), { status: 200, headers })
+  }
+
   return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers })
 }
