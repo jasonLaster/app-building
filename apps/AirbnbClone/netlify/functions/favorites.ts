@@ -36,7 +36,7 @@ export default async (request: Request, _context: Context) => {
   }
 
   if (request.method === 'DELETE') {
-    const propertyId = segments[2] // /api/favorites/:propertyId
+    const propertyId = segments[3] // /.netlify/functions/favorites/:propertyId
     const userId = url.searchParams.get('user_id')
     if (!propertyId || !userId) {
       return new Response(JSON.stringify({ error: 'propertyId and user_id are required' }), { status: 400, headers })

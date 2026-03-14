@@ -1,0 +1,21 @@
+url=https://magenta-jelly-44409b.netlify.app
+site_id=11cc3866-0d3e-433d-8d8d-1c4a7c3aec53
+neon_project_id=rough-firefly-06431753
+database_url=postgresql://neondb_owner:npg_lFq34TIxYSep@ep-sparkling-fog-ahd3l34v.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+--- Deployment 2026-03-14 ---
+Changes:
+- Initial production deployment of AirbnbClone app
+- Property listings with search, filtering, and pagination
+- User authentication (email-based login/register)
+- Property detail pages with images, amenities, and reviews
+- Booking system with date selection and guest count
+- Favorites functionality (add/remove favorite properties)
+- Host dashboard with listings management, bookings, and stats
+- My Trips page with booking history and cancellation
+- User profile with become-host functionality
+- Write review flow with rating sliders
+- Fixed Netlify function URL path parsing (segments index)
+- Added Tailwind CSS v4 with Vite plugin for production build
+- Added SPA routing redirects for Netlify
+- Replay recording: https://app.replay.io/recording/23652cf3-9a59-46b3-806d-fc28382c1eaa

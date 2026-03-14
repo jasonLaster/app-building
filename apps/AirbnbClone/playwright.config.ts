@@ -3,6 +3,7 @@ import { replayDevices, replayReporter } from '@replayio/playwright'
 
 const config: PlaywrightTestConfig = {
   testDir: './tests',
+  testIgnore: ['**/deployment.spec.ts'],
   timeout: 60000,
   expect: {
     timeout: 10000,

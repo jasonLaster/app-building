@@ -5,7 +5,7 @@ export default async (request: Request, _context: Context) => {
   const sql = getSql()
   const url = new URL(request.url)
   const segments = url.pathname.split('/').filter(Boolean)
-  const imageId = segments[2]
+  const imageId = segments[3]
   const headers = { 'Content-Type': 'application/json' }
 
   if (request.method === 'POST') {

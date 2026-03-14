@@ -1,0 +1,102 @@
+Schema synced
+=== Build ===
+vite v6.4.1 building for production...
+transforming...
+✓ 1649 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.46 kB │ gzip:   0.30 kB
+dist/assets/index-BJgZ59QQ.css     41.05 kB │ gzip:   6.88 kB
+dist/assets/index-BaB4rp7P.js   1,406.98 kB │ gzip: 241.99 kB │ map: 2,707.23 kB
+✓ built in 4.01s
+
+=== Deploy ===
+​
+Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+​
+> Version
+  @netlify/build 35.8.8
+​
+> Flags
+  accountId: 67db64f88522edc0da7e6ec8
+  deployId: 69b5d54369a13fd41b17ec29
+​
+> Current directory
+  /repo/apps/AirbnbClone
+​
+> Config file
+  /repo/apps/AirbnbClone/netlify.toml
+​
+> Context
+  production
+​
+build.command from netlify.toml                               
+────────────────────────────────────────────────────────────────
+​
+$ npm run build
+
+> airbnb-clone@1.0.0 build
+> vite build
+
+vite v6.4.1 building for production...
+transforming...
+✓ 1649 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.46 kB │ gzip:   0.30 kB
+dist/assets/index-BJgZ59QQ.css     41.05 kB │ gzip:   6.88 kB
+dist/assets/index-BaB4rp7P.js   1,406.98 kB │ gzip: 241.99 kB │ map: 2,707.23 kB
+✓ built in 3.87s
+​
+(build.command completed in 4.4s)
+​
+Functions bundling                                            
+────────────────────────────────────────────────────────────────
+​
+Packaging Functions from netlify/functions directory:
+ - amenities.ts
+ - auth.ts
+ - bookings.ts
+ - db.ts
+ - favorites.ts
+ - host-bookings.ts
+ - host-listings.ts
+ - host-stats.ts
+ - properties.ts
+ - property-images.ts
+ - reviews.ts
+ - users.ts
+​
+​
+(Functions bundling completed in 1.4s)
+
+Deploying to Netlify
+────────────────────────────────────────────────────────────────
+
+[32mDeploy path: [39m       /repo/apps/AirbnbClone/dist
+[32mFunctions path: [39m    /repo/apps/AirbnbClone/netlify/functions
+[32mConfiguration path: [39m/repo/apps/AirbnbClone/netlify.toml
+
+​
+Netlify Build Complete                                        
+────────────────────────────────────────────────────────────────
+​
+(Netlify Build completed in 20.5s)
+
+🚀 Deploy complete
+────────────────────────────────────────────────────────────────
+
+  ╭──────────────────── ⬥  Production deploy is live ⬥  ─────────────────────╮
+  │                                                                          │
+  │   Deployed to production URL: https://magenta-jelly-44409b.netlify.app   │
+  │                                                                          │
+  │                            Unique deploy URL:                            │
+  │    https://69b5d54369a13fd41b17ec29--magenta-jelly-44409b.netlify.app    │
+  │                                                                          │
+  ╰──────────────────────────────────────────────────────────────────────────╯
+
+[32mBuild logs: [39m        https://app.netlify.com/projects/magenta-jelly-44409b/deploys/69b5d54369a13fd41b17ec29
+[32mFunction logs: [39m     https://app.netlify.com/projects/magenta-jelly-44409b/logs/functions
+[32mEdge function Logs: [39mhttps://app.netlify.com/projects/magenta-jelly-44409b/logs/edge-functions
+
