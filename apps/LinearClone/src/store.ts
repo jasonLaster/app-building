@@ -8,6 +8,7 @@ import issuesReducer from './slices/issuesSlice';
 import labelsReducer from './slices/labelsSlice';
 import teamIssuesReducer from './slices/teamIssuesSlice';
 import issueDetailReducer from './slices/issueDetailSlice';
+import cyclesReducer from './slices/cyclesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     labels: labelsReducer,
     teamIssues: teamIssuesReducer,
     issueDetail: issueDetailReducer,
+    cycles: cyclesReducer,
   },
 });
 

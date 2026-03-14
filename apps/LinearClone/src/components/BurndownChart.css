@@ -1,0 +1,108 @@
+.burndown-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.burndown-chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.burndown-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+}
+
+.burndown-chart-empty p {
+  margin: 0;
+}
+
+.burndown-chart-container {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  min-height: 160px;
+}
+
+.burndown-chart-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.burndown-chart-y-label {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.burndown-chart-bars-wrapper {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.burndown-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 120px;
+  min-width: fit-content;
+}
+
+.burndown-chart-bar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 16px;
+  max-width: 40px;
+}
+
+.burndown-chart-bar-track {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.burndown-chart-bar {
+  width: 70%;
+  min-width: 8px;
+  max-width: 28px;
+  background-color: var(--color-accent);
+  border-radius: 3px 3px 0 0;
+  transition: height 300ms ease;
+  cursor: default;
+}
+
+.burndown-chart-bar:hover {
+  opacity: 0.85;
+}
+
+.burndown-chart-x-label {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  margin-top: 4px;
+  text-align: center;
+}
+
+.burndown-chart-x-label-hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,70 @@
+.active-cycle-page {
+  padding: 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .active-cycle-page {
+    padding: 12px;
+  }
+}
+
+.active-cycle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.active-cycle-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.active-cycle-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.active-cycle-back-btn:hover {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.active-cycle-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.active-cycle-new-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background-color: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+  white-space: nowrap;
+}
+
+.active-cycle-new-btn:hover {
+  background-color: #4f5bc4;
+}
