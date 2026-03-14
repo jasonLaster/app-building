@@ -3,28 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestPropertyGridResponsiveLayout: Write test for Property grid displays properties in a responsive grid layout",
-        "WriteTestPropertyGridNoMatchMessage: Write test for Property grid shows message when no properties match filters",
-        "WriteTestPropertyGridLoadsFromAPI: Write test for Property grid loads and displays properties from API on initial page load",
-        "WriteTestPropertyCardDisplaysInfo: Write test for Property card displays all required information",
-        "WriteTestPropertyCardShowsImage: Write test for Property card shows property image",
-        "WriteTestClickPropertyCardNavigates: Write test for Clicking a property card navigates to property detail page",
-        "WriteTestPropertyCardTypeBadge: Write test for Property card displays property type badge",
-        "WriteTestPropertyCardAverageRating: Write test for Property card displays average rating with review count",
-        "WriteTestFavoriteButtonOutlineHeart: Write test for Favorite button shows outline heart when property is not favorited",
-        "WriteTestFavoriteButtonAddsToFavorites: Write test for Clicking favorite button on unfavorited property adds it to favorites",
-        "WriteTestFavoriteButtonRemovesFromFavorites: Write test for Clicking favorite button on favorited property removes it from favorites",
-        "WriteTestFavoriteButtonNoNavigation: Write test for Favorite button does not navigate to property detail page",
-        "WriteTestFavoriteButtonNotShownLoggedOut: Write test for Favorite button is not shown when user is not logged in",
-        "WriteTestFavoriteButtonCorrectState: Write test for Favorite button reflects correct state on page load",
-        "WriteTestFavoriteButtonRepeatedUse: Write test for Favorite button is functional on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestFiltersPanelHiddenByDefault: Write test for Filters panel is hidden by default with a visible toggle button",
         "WriteTestClickFiltersButtonOpens: Write test for Clicking the Filters button opens the filters panel",
         "WriteTestClickFiltersButtonCloses: Write test for Clicking the Filters button again closes the filters panel",
@@ -381,23 +359,21 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestSearchBarDisplaysAllInputFields: Write test for Search bar displays all input fields on load",
-      "WriteTestSearchByLocation: Write test for Search by location filters property results",
-      "WriteTestSearchByDates: Write test for Search by check-in and check-out dates filters results",
-      "WriteTestSearchByGuestCount: Write test for Search by guest count filters results",
-      "WriteTestCombinedSearch: Write test for Combined search with all fields filters results",
-      "WriteTestClearingSearchFields: Write test for Clearing search fields and re-searching shows all results",
-      "WriteTestSearchBarRepeatedUse: Write test for Search bar is functional on repeated use",
-      "WriteTestCheckInDatePreventsPassDates: Write test for Check-in date picker prevents selecting past dates",
-      "WriteTestCheckOutDateAfterCheckIn: Write test for Check-out date must be after check-in date",
-      "WriteTestGuestCountMinimum: Write test for Guest count selector enforces minimum of 1",
-      "WriteTestCategoryFilterDisplaysChips: Write test for Category filter bar displays all property type chips",
-      "WriteTestClickCategoryChipFilters: Write test for Clicking a category chip filters properties by that type",
-      "WriteTestClickSelectedCategoryDeselects: Write test for Clicking the selected category chip deselects it and shows all properties",
-      "WriteTestSwitchBetweenCategoryChips: Write test for Switching between category chips updates the filter",
-      "WriteTestCategoryFilterWithSearchBar: Write test for Category filter works in combination with search bar",
-      "WriteTestCategoryFilterScrollable: Write test for Category filter bar is horizontally scrollable when chips overflow",
-      "WriteTestCategoryChipRepeatedUse: Write test for Category chip is functional on repeated use"
+      "WriteTestPropertyGridResponsiveLayout: Write test for Property grid displays properties in a responsive grid layout",
+      "WriteTestPropertyGridNoMatchMessage: Write test for Property grid shows message when no properties match filters",
+      "WriteTestPropertyGridLoadsFromAPI: Write test for Property grid loads and displays properties from API on initial page load",
+      "WriteTestPropertyCardDisplaysInfo: Write test for Property card displays all required information",
+      "WriteTestPropertyCardShowsImage: Write test for Property card shows property image",
+      "WriteTestClickPropertyCardNavigates: Write test for Clicking a property card navigates to property detail page",
+      "WriteTestPropertyCardTypeBadge: Write test for Property card displays property type badge",
+      "WriteTestPropertyCardAverageRating: Write test for Property card displays average rating with review count",
+      "WriteTestFavoriteButtonOutlineHeart: Write test for Favorite button shows outline heart when property is not favorited",
+      "WriteTestFavoriteButtonAddsToFavorites: Write test for Clicking favorite button on unfavorited property adds it to favorites",
+      "WriteTestFavoriteButtonRemovesFromFavorites: Write test for Clicking favorite button on favorited property removes it from favorites",
+      "WriteTestFavoriteButtonNoNavigation: Write test for Favorite button does not navigate to property detail page",
+      "WriteTestFavoriteButtonNotShownLoggedOut: Write test for Favorite button is not shown when user is not logged in",
+      "WriteTestFavoriteButtonCorrectState: Write test for Favorite button reflects correct state on page load",
+      "WriteTestFavoriteButtonRepeatedUse: Write test for Favorite button is functional on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
