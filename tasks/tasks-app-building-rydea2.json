@@ -3,19 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentIssueHeader: Write the IssueHeader with inline-editable title and status selector",
-        "WriteComponentIssueDescription: Write the IssueDescription with markdown support and inline editing",
-        "WriteComponentSubIssues: Write the SubIssues section with child issue list and add button",
-        "WriteComponentActivityComments: Write the ActivityComments section with tab toggle, activity history, and comment input",
-        "WriteComponentIssueSidebar: Write the IssueSidebar with all property fields (status, priority, assignee, labels, project, cycle, due date)",
-        "WritePageIssueDetail: Write the Issue Detail page with two-panel layout"
-      ],
-      "timestamp": "2026-03-14T18:57:06.538Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentCycleList: Write the CycleList component with progress bars and active highlight",
         "WriteComponentCycleDetail: Write the CycleDetail view with progress stats and issue list",
         "WriteComponentCreateCycle: Write the CreateCycle modal with name and date fields",
@@ -142,9 +129,12 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentCreateIssueForm: Write the CreateIssueForm with all fields (team, title, description, status, priority, assignee, labels, project, cycle, due date, parent)",
-      "WriteComponentCreateIssueActions: Write the CreateIssueActions with create and cancel buttons",
-      "WriteComponentCreateIssueModal: Write the CreateIssueModal wrapper"
+      "WriteComponentIssueHeader: Write the IssueHeader with inline-editable title and status selector",
+      "WriteComponentIssueDescription: Write the IssueDescription with markdown support and inline editing",
+      "WriteComponentSubIssues: Write the SubIssues section with child issue list and add button",
+      "WriteComponentActivityComments: Write the ActivityComments section with tab toggle, activity history, and comment input",
+      "WriteComponentIssueSidebar: Write the IssueSidebar with all property fields (status, priority, assignee, labels, project, cycle, due date)",
+      "WritePageIssueDetail: Write the Issue Detail page with two-panel layout"
     ],
     "timestamp": "2026-03-14T18:57:06.538Z",
     "app": "LinearClone"

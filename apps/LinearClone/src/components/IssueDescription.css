@@ -1,0 +1,115 @@
+.issue-description {
+  margin-bottom: 24px;
+}
+
+.issue-description-content {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 8px;
+  margin-left: -8px;
+  transition: background-color 150ms ease;
+  min-height: 40px;
+}
+
+.issue-description-content:hover {
+  background-color: var(--color-bg-surface);
+}
+
+.issue-description-placeholder {
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.issue-description-editor {
+  width: 100%;
+  min-height: 120px;
+  padding: 8px;
+  margin-left: -8px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-family: monospace;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+}
+
+.issue-description-editor:focus {
+  border-color: var(--color-accent);
+}
+
+.issue-description-rendered {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+.issue-description-rendered h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 16px 0 8px;
+  color: var(--color-text-primary);
+}
+
+.issue-description-rendered h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 14px 0 6px;
+  color: var(--color-text-primary);
+}
+
+.issue-description-rendered h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 12px 0 4px;
+  color: var(--color-text-primary);
+}
+
+.issue-description-rendered p {
+  margin: 6px 0;
+}
+
+.issue-description-rendered strong {
+  font-weight: 600;
+}
+
+.issue-description-rendered em {
+  font-style: italic;
+}
+
+.issue-description-rendered ul,
+.issue-description-rendered ol {
+  padding-left: 24px;
+  margin: 8px 0;
+}
+
+.issue-description-rendered li {
+  margin: 4px 0;
+}
+
+.issue-description-rendered .md-code-block {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 12px;
+  margin: 8px 0;
+  overflow-x: auto;
+}
+
+.issue-description-rendered .md-code-block code {
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--color-text-primary);
+}
+
+.issue-description-rendered .md-inline-code {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-family: monospace;
+  font-size: 13px;
+}

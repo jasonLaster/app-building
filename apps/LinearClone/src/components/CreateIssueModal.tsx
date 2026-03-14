@@ -5,6 +5,7 @@ import type { RootState, AppDispatch } from '../store';
 import { closeCreateIssueModal } from '../slices/uiSlice';
 import { createIssue } from '../slices/issuesSlice';
 import { fetchTeamIssues } from '../slices/teamIssuesSlice';
+import { fetchIssueDetail } from '../slices/issueDetailSlice';
 import CreateIssueForm from './CreateIssueForm';
 import type { CreateIssueFormData } from './CreateIssueForm';
 import CreateIssueActions from './CreateIssueActions';
@@ -28,7 +29,7 @@ export default function CreateIssueModal() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const params = useParams<{ teamId?: string }>();
-  const { createIssueModalOpen } = useSelector((state: RootState) => state.ui);
+  const { createIssueModalOpen, createIssueDefaultParentId, createIssueDefaultTeamId } = useSelector((state: RootState) => state.ui);
 
   const [formData, setFormData] = useState<CreateIssueFormData>({ ...INITIAL_FORM_DATA });
   const [titleError, setTitleError] = useState<string | null>(null);
@@ -38,12 +39,16 @@ export default function CreateIssueModal() {
   // Reset form when modal opens
   useEffect(() => {
     if (createIssueModalOpen) {
-      setFormData({ ...INITIAL_FORM_DATA });
+      setFormData({
+        ...INITIAL_FORM_DATA,
+        parentId: createIssueDefaultParentId || null,
+        teamId: createIssueDefaultTeamId || '',
+      });
       setTitleError(null);
       setSubmitting(false);
       setCreatedIdentifier(null);
     }
-  }, [createIssueModalOpen]);
+  }, [createIssueModalOpen, createIssueDefaultParentId, createIssueDefaultTeamId]);
 
   const handleClose = useCallback(() => {
     dispatch(closeCreateIssueModal());
@@ -92,11 +97,16 @@ export default function CreateIssueModal() {
         dispatch(fetchTeamIssues(formData.teamId));
       }
 
+      // Refetch issue detail if this was a sub-issue creation
+      if (formData.parentId) {
+        dispatch(fetchIssueDetail(formData.parentId));
+      }
+
       // Close after a brief delay to show identifier
       setTimeout(() => {
         dispatch(closeCreateIssueModal());
-        // Navigate to team issues if we have a team
-        if (formData.teamId && !params.teamId) {
+        // Navigate to team issues if we have a team and not on issue detail
+        if (formData.teamId && !params.teamId && !formData.parentId) {
           navigate(`/team/${formData.teamId}/issues`);
         }
       }, 1500);
