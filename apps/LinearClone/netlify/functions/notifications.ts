@@ -39,7 +39,7 @@ export default async function handler(req: Request, _context: Context) {
           n.id,
           n.type,
           n.issue_id,
-          n.description,
+          n.message AS description,
           n.read,
           n.archived,
           n.created_at,

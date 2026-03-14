@@ -165,16 +165,16 @@ export async function seedDatabase(databaseUrl: string) {
 
   if (notifIssueId) {
     await sql`
-      INSERT INTO notifications (member_id, type, message, issue_id, read, archived)
-      VALUES (${aliceId}, 'assigned', 'You were assigned to ENG-2: Implement real-time notifications', ${notifIssueId}, false, false)
+      INSERT INTO notifications (member_id, type, message, issue_id, read, archived, created_at)
+      VALUES (${aliceId}, 'assignment', 'You were assigned to this issue', ${notifIssueId}, false, false, NOW() - INTERVAL '5 minutes')
     `;
     await sql`
-      INSERT INTO notifications (member_id, type, message, issue_id, read, archived)
-      VALUES (${aliceId}, 'comment', 'Bob commented on ENG-2: Implement real-time notifications', ${notifIssueId}, false, false)
+      INSERT INTO notifications (member_id, type, message, issue_id, read, archived, created_at)
+      VALUES (${aliceId}, 'update', 'Status changed to In Progress', ${notifIssueId}, false, false, NOW() - INTERVAL '1 hour')
     `;
     await sql`
-      INSERT INTO notifications (member_id, type, message, issue_id, read, archived)
-      VALUES (${aliceId}, 'mention', 'Carol mentioned you in ENG-2: Implement real-time notifications', ${notifIssueId}, false, false)
+      INSERT INTO notifications (member_id, type, message, issue_id, read, archived, created_at)
+      VALUES (${aliceId}, 'mention', 'Carol mentioned you in a comment', ${notifIssueId}, true, false, NOW() - INTERVAL '1 day')
     `;
   }
 
