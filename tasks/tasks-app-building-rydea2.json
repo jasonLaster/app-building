@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeShared.md",
-      "subtasks": [
-        "Unpack: Write app shared code"
-      ],
-      "timestamp": "2026-03-14T18:21:07.448Z",
-      "app": "LinearClone"
-    },
-    {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
         "Unpack: Write the app"
@@ -58,12 +50,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/testSpec.md",
+    "skill": "skills/tasks/build/writeShared.md",
     "subtasks": [
-      "PlanPageSettings: Decide on components, add sections to docs/tests.md",
-      "PlanComponentWorkspaceSettings: Add test entries for WorkspaceSettings"
+      "Unpack: Write app shared code"
     ],
-    "timestamp": "2026-03-14T18:22:34.151Z",
+    "timestamp": "2026-03-14T18:21:07.448Z",
     "app": "LinearClone"
   }
 }
