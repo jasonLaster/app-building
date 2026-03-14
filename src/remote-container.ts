@@ -64,6 +64,7 @@ export async function startRemoteContainer(
   if (config.webhookSecret) remoteExtra.WEBHOOK_SECRET = config.webhookSecret;
   if (config.detached) remoteExtra.DETACHED = "1";
   if (config.initialPrompt) remoteExtra.INITIAL_PROMPT = config.initialPrompt;
+  if (config.absorbTasks) remoteExtra.ABSORB_TASKS = "1";
   const containerEnv = buildContainerEnv(repo, config.envVars, remoteExtra);
 
   // Log existing machines (but don't destroy — multiple containers may run concurrently)

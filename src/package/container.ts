@@ -34,6 +34,8 @@ export interface ContainerConfig {
   initialPrompt?: string;
   /** Override the host port for local containers (default: auto-selected). */
   localPort?: number;
+  /** Absorb task files from other containers at startup. Default: false. */
+  absorbTasks?: boolean;
 }
 
 export interface RepoOptions {
@@ -160,6 +162,7 @@ export async function startContainer(
   if (config.webhookSecret) extra.WEBHOOK_SECRET = config.webhookSecret;
   if (config.detached) extra.DETACHED = "1";
   if (config.initialPrompt) extra.INITIAL_PROMPT = config.initialPrompt;
+  if (config.absorbTasks) extra.ABSORB_TASKS = "1";
   const containerEnv = buildContainerEnv(repo, config.envVars, extra);
 
   // Build docker run args

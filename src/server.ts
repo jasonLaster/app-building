@@ -445,8 +445,10 @@ async function main(): Promise<void> {
   log(`Revision: ${getRevision(REPO_DIR)}`);
   log(`Push branch: ${PUSH_BRANCH}`);
 
-  // Absorb task files from other containers before checking task count
-  absorbForeignTaskFiles(log);
+  // Absorb task files from other containers (opt-in via ABSORB_TASKS env var)
+  if (process.env.ABSORB_TASKS === "1") {
+    absorbForeignTaskFiles(log);
+  }
 
   // Add INITIAL_PROMPT as a task only if there are no existing tasks.
   if (INITIAL_PROMPT && getPendingTaskCount() === 0) {
