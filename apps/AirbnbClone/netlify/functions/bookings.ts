@@ -10,6 +10,7 @@ export default async (request: Request, _context: Context) => {
 
   const headers = { 'Content-Type': 'application/json' }
 
+  try {
   if (request.method === 'POST') {
     const body = await request.json() as {
       property_id: string
@@ -117,4 +118,7 @@ export default async (request: Request, _context: Context) => {
   }
 
   return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers })
+  } catch {
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers })
+  }
 }

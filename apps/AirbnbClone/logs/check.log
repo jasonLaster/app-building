@@ -2,16 +2,13 @@
 
 === Lint ===
 
-/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts
-  4:7  error  'SARAH_ID' is assigned a value but never used  @typescript-eslint/no-unused-vars
-
 /repo/apps/AirbnbClone/tests/write-review-context.spec.ts
   10:7  error  'EMMA_COMPLETED_PROPERTY' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 /repo/apps/AirbnbClone/tests/write-review-form.spec.ts
   10:7  error  'EMMA_ID' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
-✖ 3 problems (3 errors, 0 warnings)
+✖ 2 problems (2 errors, 0 warnings)
 
 
 

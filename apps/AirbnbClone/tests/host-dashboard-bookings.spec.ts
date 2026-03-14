@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-// Sarah's host ID and booking IDs
-const SARAH_ID = 'a1111111-1111-1111-1111-111111111111'
+// Booking IDs
 const BOOKING_COMPLETED = 'e1111111-1111-1111-1111-111111111111' // Loft, Emma, completed
 const BOOKING_CONFIRMED_VILLA = 'e2222222-2222-2222-2222-222222222222' // Villa, Alex, confirmed
 const BOOKING_CANCELLED = 'e5555555-5555-5555-5555-555555555555' // Loft, Alex, cancelled
@@ -41,6 +40,11 @@ async function createPendingBooking(request: import('@playwright/test').APIReque
 }
 
 test.describe('Host Dashboard - Bookings Tab Display & Filters', () => {
+  test.beforeEach(async ({ request }) => {
+    // Clean up non-seed bookings and reset seed booking statuses
+    await request.delete('http://localhost:8888/api/bookings')
+  })
+
   test('Bookings tab displays table of bookings for host\'s properties', async ({ page }) => {
     await goToBookingsTab(page)
 

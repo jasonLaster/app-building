@@ -15,6 +15,7 @@ export default async (request: Request, _context: Context) => {
     return new Response(JSON.stringify({ error: 'User ID is required' }), { status: 400, headers })
   }
 
+  try {
   if (request.method === 'GET') {
     const result = await sql`SELECT * FROM users WHERE id = ${userId}`
     const user = result[0]
@@ -64,4 +65,7 @@ export default async (request: Request, _context: Context) => {
   }
 
   return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers })
+  } catch {
+    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers })
+  }
 }

@@ -1,0 +1,30 @@
+Cleaned up stale branch: test-run-1773529802332
+Created branch: test-run-1773529808187 (br-wandering-butterfly-ahyisrju)
+Test DB URL: postgresql://neondb_owner:***@ep-dawn-base-ahg3g1k4.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+(node:1866) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"3f507e76-d6fa-45b6-a4f8-e5b6a836cc66","duration":0,"result":"failed","title":""}
+{"id":"1487375f-c503-4bb5-b54d-199d27faa0e8","duration":0,"result":"failed","title":""}
+{"id":"d5f9d852-1b49-41ab-820c-330674d4d939","duration":0,"result":"failed","title":""}
+{"id":"9dea8cd7-1ee4-41cb-bc4f-8cc1a8ee7f1f","duration":0,"result":"failed","title":""}
+{"id":"048b4844-011f-4a19-9ef1-5b6409df1097","duration":0,"result":"failed","title":""}
+{"id":"584055bc-679c-4a09-a700-cf7b7c80a3ab","duration":0,"result":"failed","title":""}
+{"id":"00c3772e-8503-4a5d-97fb-4447c751e358","duration":0,"result":"failed","title":""}
+{"id":"793f5014-4a56-4672-914c-8c58c024d927","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: 3f507e76-d6fa-45b6-a4f8-e5b6a836cc66
+⠙ Initializing…
+Uploading recordings...
+   3f507e76…  Bookings tab displays table of bookings for host's…  4m ago  31.4s   
+
+Uploaded recordings
+ ✘  3f507e76…  Bookings tab displays table of bookings for host's…  4m ago  31.4s  (failed) 
+
+

@@ -1,0 +1,38 @@
+Created branch: test-run-1773530186562 (br-proud-leaf-ahfyr2ub)
+Test DB URL: postgresql://neondb_owner:***@ep-aged-paper-aht507y5.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:3230) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"44e12b38-0ded-4d75-8898-276e7523df55","duration":0,"result":"passed","title":""}
+{"id":"49762a73-542e-4cf7-9afe-7169488863e0","duration":0,"result":"passed","title":""}
+{"id":"0446296d-4e67-437a-953c-106504c10197","duration":0,"result":"passed","title":""}
+{"id":"dc43a820-497a-4213-b233-2f3ef0fb0085","duration":0,"result":"passed","title":""}
+{"id":"8014bfc4-5cc7-44fd-b77b-f080fb19953a","duration":0,"result":"passed","title":""}
+{"id":"3de2564c-fb6d-4d1a-b62e-92de053f5186","duration":0,"result":"passed","title":""}
+{"id":"a4da77cf-c0e9-400a-9dd1-41e4d8c3d83e","duration":0,"result":"passed","title":""}
+{"id":"bd0d3001-e06f-4596-bdc6-b20067e121d6","duration":0,"result":"failed","title":""}
+{"id":"5c0374b6-4e0f-49a3-92af-c8ea3e858642","duration":0,"result":"passed","title":""}
+{"id":"555051ae-cc95-47b1-aeb7-9ed0a40968ce","duration":0,"result":"passed","title":""}
+{"id":"8245a7b5-1b76-411d-8f95-044fb5c6b769","duration":0,"result":"passed","title":""}
+{"id":"e1904d46-24b3-44f4-ba64-cc25408b3037","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: bd0d3001-e06f-4596-bdc6-b20067e121d6
+⠙ Initializing…
+Uploading recordings...
+   bd0d3001…  Resetting filter to All shows all bookings  49s ago  17.1s   
+
+Uploaded recordings
+ ✘  bd0d3001…  Resetting filter to All shows all bookings  49s ago  17.1s  (failed) 
+
+
