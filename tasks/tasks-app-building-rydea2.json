@@ -3,33 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestMembersPageRendersList: Write test for Members page renders with list of all workspace members",
-        "WriteTestMemberRowFields: Write test for Member row displays avatar, name, email, role, and team badges",
-        "WriteTestMembersRoleBadges: Write test for Members list shows correct role badges with visual distinction",
-        "WriteTestMembersTeamBadges: Write test for Members list shows team badges for each member",
-        "WriteTestMemberNoTeams: Write test for Members list shows member with no teams",
-        "WriteTestMembersEmptyState: Write test for Members page shows empty state when no members exist",
-        "WriteTestMembersUpdatesAfterInvite: Write test for Members list updates after inviting a new member",
-        "WriteTestMembersUpdatesAfterRemove: Write test for Members list updates after removing a member",
-        "WriteTestInviteButtonOpensModal: Write test for Invite Member button opens invite modal",
-        "WriteTestInviteValidEmail: Write test for Invite member with valid email",
-        "WriteTestInviteInvalidEmail: Write test for Invite member with invalid email format",
-        "WriteTestInviteEmptyEmail: Write test for Invite member with empty email field",
-        "WriteTestInviteExistingEmail: Write test for Invite member with already existing email",
-        "WriteTestCancelInviteModal: Write test for Cancel invite member modal",
-        "WriteTestCloseInviteBackdrop: Write test for Close invite modal by clicking backdrop",
-        "WriteTestInviteSubmitEnter: Write test for Invite modal email field can be submitted via Enter key",
-        "WriteTestInviteModalMultipleTimes: Write test for Invite member modal can be opened multiple times in sequence",
-        "WriteTestChangeRoleMemberToAdmin: Write test for Change member role from Member to Admin",
-        "WriteTestChangeRoleAdminToMember: Write test for Change member role from Admin to Member",
-        "WriteTestRoleDropdownOptions: Write test for Role dropdown displays available roles"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestRoleDropdownMultipleTimes: Write test for Role dropdown can be used multiple times in sequence",
         "WriteTestRemoveMemberConfirmation: Write test for Remove member button shows confirmation dialog",
         "WriteTestConfirmRemoveMember: Write test for Confirm member removal deletes the member",
@@ -198,7 +171,26 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestProjectKeyMetricsZeroIssues: Write test for Key metrics handle project with zero issues"
+      "WriteTestMembersPageRendersList: Write test for Members page renders with list of all workspace members",
+      "WriteTestMemberRowFields: Write test for Member row displays avatar, name, email, role, and team badges",
+      "WriteTestMembersRoleBadges: Write test for Members list shows correct role badges with visual distinction",
+      "WriteTestMembersTeamBadges: Write test for Members list shows team badges for each member",
+      "WriteTestMemberNoTeams: Write test for Members list shows member with no teams",
+      "WriteTestMembersEmptyState: Write test for Members page shows empty state when no members exist",
+      "WriteTestMembersUpdatesAfterInvite: Write test for Members list updates after inviting a new member",
+      "WriteTestMembersUpdatesAfterRemove: Write test for Members list updates after removing a member",
+      "WriteTestInviteButtonOpensModal: Write test for Invite Member button opens invite modal",
+      "WriteTestInviteValidEmail: Write test for Invite member with valid email",
+      "WriteTestInviteInvalidEmail: Write test for Invite member with invalid email format",
+      "WriteTestInviteEmptyEmail: Write test for Invite member with empty email field",
+      "WriteTestInviteExistingEmail: Write test for Invite member with already existing email",
+      "WriteTestCancelInviteModal: Write test for Cancel invite member modal",
+      "WriteTestCloseInviteBackdrop: Write test for Close invite modal by clicking backdrop",
+      "WriteTestInviteSubmitEnter: Write test for Invite modal email field can be submitted via Enter key",
+      "WriteTestInviteModalMultipleTimes: Write test for Invite member modal can be opened multiple times in sequence",
+      "WriteTestChangeRoleMemberToAdmin: Write test for Change member role from Member to Admin",
+      "WriteTestChangeRoleAdminToMember: Write test for Change member role from Admin to Member",
+      "WriteTestRoleDropdownOptions: Write test for Role dropdown displays available roles"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
