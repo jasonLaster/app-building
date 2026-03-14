@@ -3,31 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestPropertyBookingContextDisplays: Write test for Property info displays for the booking being reviewed",
-        "WriteTestPropertyBookingContextGuestCount: Write test for Property booking context shows guest count",
-        "WriteTestPropertyBookingContextTotalPrice: Write test for Property booking context shows total price paid",
-        "WriteTestWriteReviewRedirectToLogin: Write test for Redirect to login if not authenticated",
-        "WriteTestWriteReviewBookingNotFound: Write test for Error state when booking does not exist",
-        "WriteTestWriteReviewBookingBelongsToOther: Write test for Error state when booking belongs to another user",
-        "WriteTestWriteReviewBookingNotCompleted: Write test for Error state when booking is not completed",
-        "WriteTestWriteReviewAlreadyExists: Write test for Error state when review already exists for booking",
-        "WriteTestAllSixRatingSliders: Write test for All six rating sliders display with default values",
-        "WriteTestAdjustOverallRating: Write test for Adjust overall rating slider",
-        "WriteTestAdjustCleanlinessRating: Write test for Adjust cleanliness rating slider",
-        "WriteTestAdjustAccuracyRating: Write test for Adjust accuracy rating slider",
-        "WriteTestAdjustCommunicationRating: Write test for Adjust communication rating slider",
-        "WriteTestAdjustLocationRating: Write test for Adjust location rating slider",
-        "WriteTestAdjustValueRating: Write test for Adjust value rating slider",
-        "WriteTestRatingSlidersEnforceRange: Write test for Rating sliders enforce 1-5 range",
-        "WriteTestMultipleSlidersIndependent: Write test for Multiple sliders can be set independently",
-        "WriteTestRatingSliderVisualFeedback: Write test for Rating slider visual feedback shows filled stars or highlighted segments"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestReviewFormCommentTextArea: Write test for Review form displays comment text area",
         "WriteTestReviewFormSubmitButton: Write test for Submit button is visible",
         "WriteTestTypeCommentInTextArea: Write test for Type a comment in the text area",
@@ -73,9 +48,24 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestReviewsListDetails: Write test for Reviews list shows review details correctly",
-      "WriteTestReviewsListUpdatesAfterNew: Write test for Reviews list updates after writing a new review",
-      "WriteTestReviewsListChronologicalOrder: Write test for Reviews list shows multiple reviews in chronological order"
+      "WriteTestPropertyBookingContextDisplays: Write test for Property info displays for the booking being reviewed",
+      "WriteTestPropertyBookingContextGuestCount: Write test for Property booking context shows guest count",
+      "WriteTestPropertyBookingContextTotalPrice: Write test for Property booking context shows total price paid",
+      "WriteTestWriteReviewRedirectToLogin: Write test for Redirect to login if not authenticated",
+      "WriteTestWriteReviewBookingNotFound: Write test for Error state when booking does not exist",
+      "WriteTestWriteReviewBookingBelongsToOther: Write test for Error state when booking belongs to another user",
+      "WriteTestWriteReviewBookingNotCompleted: Write test for Error state when booking is not completed",
+      "WriteTestWriteReviewAlreadyExists: Write test for Error state when review already exists for booking",
+      "WriteTestAllSixRatingSliders: Write test for All six rating sliders display with default values",
+      "WriteTestAdjustOverallRating: Write test for Adjust overall rating slider",
+      "WriteTestAdjustCleanlinessRating: Write test for Adjust cleanliness rating slider",
+      "WriteTestAdjustAccuracyRating: Write test for Adjust accuracy rating slider",
+      "WriteTestAdjustCommunicationRating: Write test for Adjust communication rating slider",
+      "WriteTestAdjustLocationRating: Write test for Adjust location rating slider",
+      "WriteTestAdjustValueRating: Write test for Adjust value rating slider",
+      "WriteTestRatingSlidersEnforceRange: Write test for Rating sliders enforce 1-5 range",
+      "WriteTestMultipleSlidersIndependent: Write test for Multiple sliders can be set independently",
+      "WriteTestRatingSliderVisualFeedback: Write test for Rating slider visual feedback shows filled stars or highlighted segments"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
