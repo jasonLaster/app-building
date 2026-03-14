@@ -1,0 +1,39 @@
+Creating branch: test-run-1773529477799
+Branch DB URL: postgresql://neondb_owner:***@ep-winter-star-ah39iuyh.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/destination-map.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 10 tests using 1 worker
+
+  ✓   1 [replay-chromium] › tests/destination-map.spec.ts:20:3 › DestinationMap › DestinationMap displays interactive map on Explore page (266ms)
+  ✓   2 [replay-chromium] › tests/destination-map.spec.ts:36:3 › DestinationMap › DestinationMap shows origin airport selector (163ms)
+  ✓   3 [replay-chromium] › tests/destination-map.spec.ts:45:3 › DestinationMap › DestinationMap changing origin updates displayed destinations (1.8s)
+  ✓   4 [replay-chromium] › tests/destination-map.spec.ts:67:3 › DestinationMap › DestinationMap displays destination markers with prices (684ms)
+  ✓   5 [replay-chromium] › tests/destination-map.spec.ts:85:3 › DestinationMap › DestinationMap clicking a destination marker initiates a search (705ms)
+  ✓   6 [replay-chromium] › tests/destination-map.spec.ts:107:3 › DestinationMap › DestinationMap hover on destination marker shows tooltip (747ms)
+  ✓   7 [replay-chromium] › tests/destination-map.spec.ts:132:3 › DestinationMap › DestinationMap zoom and pan interaction (233ms)
+  ✓   8 [replay-chromium] › tests/destination-map.spec.ts:163:3 › DestinationMap › DestinationMap shows loading state while fetching destinations (651ms)
+  ✓   9 [replay-chromium] › tests/destination-map.spec.ts:177:3 › DestinationMap › DestinationMap shows empty state when no destinations available (679ms)
+  ✓  10 [replay-chromium] › tests/destination-map.spec.ts:187:3 › DestinationMap › DestinationMap origin can be changed repeatedly (1.9s)
+
+  10 passed (8.7s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 142 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

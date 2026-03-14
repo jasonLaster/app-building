@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/destination-map.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:03:06.948Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/filter-sidebar-combined.spec.ts"
       ],
       "timestamp": "2026-03-14T21:03:06.948Z",
@@ -164,7 +156,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/deployment.spec.ts"
+      "FixTests: tests/destination-map.spec.ts"
     ],
     "timestamp": "2026-03-14T21:03:06.948Z",
     "app": "GoogleFlights"
