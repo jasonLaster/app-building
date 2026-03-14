@@ -168,8 +168,8 @@ export default async function handler(req: Request, _context: Context) {
     // Create activity entry
     if (activityAction) {
       await sql`
-        INSERT INTO activity (issue_id, member_id, action, created_at)
-        VALUES (${issueId}, ${session.member_id}, ${activityAction}, NOW())
+        INSERT INTO activity (issue_id, member_id, action, field, new_value, created_at)
+        VALUES (${issueId}, ${session.member_id}, ${activityAction}, ${field}, ${value ?? null}, NOW())
       `;
     }
 
