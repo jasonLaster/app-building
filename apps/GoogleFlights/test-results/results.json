@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "airport-autocomplete.spec.ts",
-      "file": "airport-autocomplete.spec.ts",
+      "title": "booking-action.spec.ts",
+      "file": "booking-action.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "AirportAutocomplete",
-          "file": "airport-autocomplete.spec.ts",
-          "line": 3,
+          "title": "BookingAction",
+          "file": "booking-action.spec.ts",
+          "line": 107,
           "column": 6,
           "specs": [
             {
-              "title": "AirportAutocomplete origin field shows placeholder text",
+              "title": "BookingAction displays Book Flight button",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 345,
+                      "duration": 1796,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:10:44.456Z",
+                      "startTime": "2026-03-14T22:14:31.496Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "fe242eade1b613968d5e-45b0c9ae7c5b7ac438a0",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 9,
+              "id": "450f1b9ffd5503e2aeb9-d079302871789442fe75",
+              "file": "booking-action.spec.ts",
+              "line": 108,
               "column": 3
             },
             {
-              "title": "AirportAutocomplete destination field shows placeholder text",
+              "title": "BookingAction successfully books a flight",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 147,
+                      "duration": 1542,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:10:44.899Z",
+                      "startTime": "2026-03-14T22:14:33.922Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "fe242eade1b613968d5e-dc7ece2209663e3328d1",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 16,
+              "id": "450f1b9ffd5503e2aeb9-45c2ffef5ef188f4ffa1",
+              "file": "booking-action.spec.ts",
+              "line": 117,
               "column": 3
             },
             {
-              "title": "AirportAutocomplete shows suggestions when typing airport name",
+              "title": "BookingAction shows booking reference number",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 751,
+                      "duration": 1544,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:10:45.052Z",
+                      "startTime": "2026-03-14T22:14:35.473Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "fe242eade1b613968d5e-66f22a64c84a0297f43e",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 23,
+              "id": "450f1b9ffd5503e2aeb9-4bedfc442401e653e1c6",
+              "file": "booking-action.spec.ts",
+              "line": 135,
               "column": 3
             },
             {
-              "title": "AirportAutocomplete shows suggestions when typing IATA code",
+              "title": "BookingAction prevents double booking",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 537,
+                      "duration": 1515,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:10:45.816Z",
+                      "startTime": "2026-03-14T22:14:37.025Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "fe242eade1b613968d5e-4054747e2d5ae7f36f05",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 37,
+              "id": "450f1b9ffd5503e2aeb9-d2e61e91d5dbffc1a825",
+              "file": "booking-action.spec.ts",
+              "line": 151,
               "column": 3
             },
             {
-              "title": "AirportAutocomplete shows suggestions when typing city name",
+              "title": "BookingAction shows loading state during submission",
               "ok": true,
               "tags": [],
               "tests": [
@@ -231,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 551,
+                      "duration": 1414,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:10:46.364Z",
+                      "startTime": "2026-03-14T22:14:38.551Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -244,19 +244,28 @@
                   "status": "expected"
                 }
               ],
-              "id": "fe242eade1b613968d5e-8e64cbdc1609fe0c10d9",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 51,
+              "id": "450f1b9ffd5503e2aeb9-93b1001e18594cddff7c",
+              "file": "booking-action.spec.ts",
+              "line": 164,
               "column": 3
             },
             {
-              "title": "AirportAutocomplete selects a suggestion and populates the field",
+              "title": "BookingAction booking appears in My Trips",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/GoogleFlights/tests/booking-action.spec.ts",
+                        "line": 183,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -265,192 +274,31 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 605,
+                      "duration": 1650,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:10:46.927Z",
-                      "annotations": [],
+                      "startTime": "2026-03-14T22:14:39.976Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/GoogleFlights/tests/booking-action.spec.ts",
+                            "line": 183,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "fe242eade1b613968d5e-dde043464ddece0b3a32",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 65,
-              "column": 3
-            },
-            {
-              "title": "AirportAutocomplete swap button exchanges origin and destination",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1039,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:10:47.544Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "fe242eade1b613968d5e-6e970e2ea828b614717c",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 79,
-              "column": 3
-            },
-            {
-              "title": "AirportAutocomplete swap button works with empty fields",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 615,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:10:48.588Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "fe242eade1b613968d5e-21a876f4885d3b894c85",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 104,
-              "column": 3
-            },
-            {
-              "title": "AirportAutocomplete clears field and shows new suggestions",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1157,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:10:49.214Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "fe242eade1b613968d5e-3d89c47cdda186fd4939",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 124,
-              "column": 3
-            },
-            {
-              "title": "AirportAutocomplete shows no results for invalid query",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 554,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:10:50.401Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "fe242eade1b613968d5e-6a57ce82f971d6312cd9",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 146,
-              "column": 3
-            },
-            {
-              "title": "AirportAutocomplete destination works after using origin",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1027,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:10:50.968Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "fe242eade1b613968d5e-0afe950b01547dd1b4b6",
-              "file": "airport-autocomplete.spec.ts",
-              "line": 159,
+              "id": "450f1b9ffd5503e2aeb9-3463bf4e501da2f9962f",
+              "file": "booking-action.spec.ts",
+              "line": 182,
               "column": 3
             }
           ]
@@ -460,9 +308,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-14T22:10:43.893Z",
-    "duration": 8135.3279999999995,
-    "expected": 11,
+    "startTime": "2026-03-14T22:14:30.745Z",
+    "duration": 10911.473999999998,
+    "expected": 6,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

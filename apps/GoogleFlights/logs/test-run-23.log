@@ -1,0 +1,35 @@
+Creating branch: test-run-1773526420194
+Branch DB URL: postgresql://neondb_owner:***@ep-holy-sky-ahv9klsc.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/booking-action.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 6 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/booking-action.spec.ts:108:3 › BookingAction › BookingAction displays Book Flight button (1.8s)
+  ✓  2 [replay-chromium] › tests/booking-action.spec.ts:117:3 › BookingAction › BookingAction successfully books a flight (1.5s)
+  ✓  3 [replay-chromium] › tests/booking-action.spec.ts:135:3 › BookingAction › BookingAction shows booking reference number (1.5s)
+  ✓  4 [replay-chromium] › tests/booking-action.spec.ts:151:3 › BookingAction › BookingAction prevents double booking (1.5s)
+  ✓  5 [replay-chromium] › tests/booking-action.spec.ts:164:3 › BookingAction › BookingAction shows loading state during submission (1.4s)
+  ✓  6 [replay-chromium] › tests/booking-action.spec.ts:182:3 › BookingAction › BookingAction booking appears in My Trips (1.6s)
+
+  6 passed (10.9s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 111 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch
