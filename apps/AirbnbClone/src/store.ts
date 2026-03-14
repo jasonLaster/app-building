@@ -3,6 +3,8 @@ import authReducer from './slices/authSlice'
 import propertiesReducer from './slices/propertiesSlice'
 import favoritesReducer from './slices/favoritesSlice'
 import amenitiesReducer from './slices/amenitiesSlice'
+import propertyDetailReducer from './slices/propertyDetailSlice'
+import bookingsReducer from './slices/bookingsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,8 @@ export const store = configureStore({
     properties: propertiesReducer,
     favorites: favoritesReducer,
     amenities: amenitiesReducer,
+    propertyDetail: propertyDetailReducer,
+    bookings: bookingsReducer,
   },
 })
 

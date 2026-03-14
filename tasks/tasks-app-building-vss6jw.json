@@ -3,22 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentImageGallery: Write the ImageGallery component",
-        "WriteComponentPropertyHeader: Write the PropertyHeader component",
-        "WriteComponentPropertyInfo: Write the PropertyInfo component",
-        "WriteComponentPropertyDescription: Write the PropertyDescription component",
-        "WriteComponentAmenitiesList: Write the AmenitiesList component",
-        "WriteComponentBookingCard: Write the BookingCard component",
-        "WriteComponentReviewsSection: Write the ReviewsSection component",
-        "WriteComponentHostInfoCard: Write the HostInfoCard component",
-        "WritePagePropertyDetail: Write the Property Detail page"
-      ],
-      "timestamp": "2026-03-14T19:01:21.956Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentTripsTabs: Write the TripsTabs component",
         "WriteComponentTripCard: Write the TripCard component",
         "WriteComponentCancelBookingDialog: Write the CancelBookingDialog component",
@@ -114,14 +98,15 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentSearchBar: Write the SearchBar component",
-      "WriteComponentCategoryFilter: Write the CategoryFilter component",
-      "WriteComponentPropertyCard: Write the PropertyCard component",
-      "WriteComponentFavoriteButton: Write the FavoriteButton component",
-      "WriteComponentFiltersPanel: Write the FiltersPanel component",
-      "WriteComponentPagination: Write the Pagination component",
-      "WriteComponentPropertyGrid: Write the PropertyGrid component",
-      "WritePageHomeSearch: Write the Home / Search page"
+      "WriteComponentImageGallery: Write the ImageGallery component",
+      "WriteComponentPropertyHeader: Write the PropertyHeader component",
+      "WriteComponentPropertyInfo: Write the PropertyInfo component",
+      "WriteComponentPropertyDescription: Write the PropertyDescription component",
+      "WriteComponentAmenitiesList: Write the AmenitiesList component",
+      "WriteComponentBookingCard: Write the BookingCard component",
+      "WriteComponentReviewsSection: Write the ReviewsSection component",
+      "WriteComponentHostInfoCard: Write the HostInfoCard component",
+      "WritePagePropertyDetail: Write the Property Detail page"
     ],
     "timestamp": "2026-03-14T19:01:21.956Z",
     "app": "AirbnbClone"
