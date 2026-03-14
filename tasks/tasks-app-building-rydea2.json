@@ -3,26 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestFiltersToolbarRenders: Write test for Filters toolbar renders with Status, Priority, and Label filters",
-        "WriteTestStatusFilterDropdown: Write test for Status filter dropdown shows all statuses with icons",
-        "WriteTestStatusFilterFilters: Write test for Status filter filters issues by selected statuses",
-        "WriteTestStatusFilterMultiSelect: Write test for Status filter allows multi-select",
-        "WriteTestPriorityFilterDropdown: Write test for Priority filter dropdown shows all priorities with icons",
-        "WriteTestPriorityFilterFilters: Write test for Priority filter filters issues by selected priorities",
-        "WriteTestLabelFilterDropdown: Write test for Label filter dropdown shows all available labels",
-        "WriteTestLabelFilterFilters: Write test for Label filter filters issues by selected labels",
-        "WriteTestMultipleFiltersAND: Write test for Multiple filters combine with AND logic",
-        "WriteTestClearFilterRestores: Write test for Clearing a filter restores all issues",
-        "WriteTestFiltersReusable: Write test for Filters can be used repeatedly after clearing",
-        "WriteTestFilterActiveIndicators: Write test for Filter state shows active filter indicators",
-        "WriteTestFiltersPersist: Write test for Filters persist while navigating within the page"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestInboxRendersList: Write test for Inbox page renders with list of notifications",
         "WriteTestInboxEmptyState: Write test for Inbox page shows empty state when no notifications",
         "WriteTestInboxUnreadDistinct: Write test for Inbox shows unread notifications visually distinct from read",
@@ -698,26 +678,19 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestMyIssuesGroupedByStatus: Write test for My Issues page renders with issues grouped by status",
-      "WriteTestMyIssuesEmptyState: Write test for My Issues page shows empty state when no issues assigned",
-      "WriteTestStatusGroupCollapsible: Write test for Status group is collapsible",
-      "WriteTestStatusGroupCollapseMultiple: Write test for Status group collapse toggles multiple times",
-      "WriteTestMultipleGroupsIndependent: Write test for Multiple status groups can be independently collapsed",
-      "WriteTestMyIssuesOnlyCurrentUser: Write test for My Issues page only shows issues assigned to current user",
-      "WriteTestMyIssuesUpdatesOnAssign: Write test for My Issues page updates when issue is assigned to user",
-      "WriteTestMyIssuesHeader: Write test for My Issues page title and header are displayed",
-      "WriteTestIssueRowAllFields: Write test for Issue row displays all required fields",
-      "WriteTestIssueRowTitleNavigates: Write test for Issue row title is clickable and navigates to issue detail",
-      "WriteTestIssueRowStatusClickable: Write test for Issue row status icon is clickable to change status",
-      "WriteTestIssueRowStatusChangePersists: Write test for Changing status via issue row status dropdown persists",
-      "WriteTestIssueRowStatusUpdatesGroup: Write test for Issue row status change updates group membership",
-      "WriteTestIssueRowStatusMultipleTimes: Write test for Issue row status dropdown can be used multiple times",
-      "WriteTestIssueRowPriorityIcon: Write test for Issue row displays priority icon with correct color",
-      "WriteTestIssueRowLabelBadges: Write test for Issue row displays labels as colored badges",
-      "WriteTestIssueRowAssigneeAvatar: Write test for Issue row shows assignee avatar",
-      "WriteTestIssueRowDueDate: Write test for Issue row shows due date",
-      "WriteTestIssueRowProjectName: Write test for Issue row shows project name when assigned",
-      "WriteTestIssueRowHidesOptional: Write test for Issue row hides optional fields when not set"
+      "WriteTestFiltersToolbarRenders: Write test for Filters toolbar renders with Status, Priority, and Label filters",
+      "WriteTestStatusFilterDropdown: Write test for Status filter dropdown shows all statuses with icons",
+      "WriteTestStatusFilterFilters: Write test for Status filter filters issues by selected statuses",
+      "WriteTestStatusFilterMultiSelect: Write test for Status filter allows multi-select",
+      "WriteTestPriorityFilterDropdown: Write test for Priority filter dropdown shows all priorities with icons",
+      "WriteTestPriorityFilterFilters: Write test for Priority filter filters issues by selected priorities",
+      "WriteTestLabelFilterDropdown: Write test for Label filter dropdown shows all available labels",
+      "WriteTestLabelFilterFilters: Write test for Label filter filters issues by selected labels",
+      "WriteTestMultipleFiltersAND: Write test for Multiple filters combine with AND logic",
+      "WriteTestClearFilterRestores: Write test for Clearing a filter restores all issues",
+      "WriteTestFiltersReusable: Write test for Filters can be used repeatedly after clearing",
+      "WriteTestFilterActiveIndicators: Write test for Filter state shows active filter indicators",
+      "WriteTestFiltersPersist: Write test for Filters persist while navigating within the page"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"

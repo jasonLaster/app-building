@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import type { RootState, AppDispatch } from '../store';
 import { fetchMyIssues } from '../slices/issuesSlice';
 import { fetchLabels } from '../slices/labelsSlice';
@@ -7,14 +8,36 @@ import FiltersToolbar from '../components/FiltersToolbar';
 import MyIssuesList from '../components/MyIssuesList';
 import './MyIssues.css';
 
+function parseParam(params: URLSearchParams, key: string): string[] {
+  const val = params.get(key);
+  return val ? val.split(',').filter(Boolean) : [];
+}
+
 export default function MyIssues() {
   const dispatch = useDispatch<AppDispatch>();
   const { token } = useSelector((state: RootState) => state.auth);
   const { myIssues, loading } = useSelector((state: RootState) => state.issues);
 
-  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
-  const [selectedPriorities, setSelectedPriorities] = useState<string[]>([]);
-  const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedStatuses = useMemo(() => parseParam(searchParams, 'status'), [searchParams]);
+  const selectedPriorities = useMemo(() => parseParam(searchParams, 'priority'), [searchParams]);
+  const selectedLabels = useMemo(() => parseParam(searchParams, 'label'), [searchParams]);
+
+  const updateParam = useCallback((key: string, values: string[]) => {
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      if (values.length > 0) {
+        next.set(key, values.join(','));
+      } else {
+        next.delete(key);
+      }
+      return next;
+    });
+  }, [setSearchParams]);
+
+  const setSelectedStatuses = useCallback((v: string[]) => updateParam('status', v), [updateParam]);
+  const setSelectedPriorities = useCallback((v: string[]) => updateParam('priority', v), [updateParam]);
+  const setSelectedLabels = useCallback((v: string[]) => updateParam('label', v), [updateParam]);
 
   useEffect(() => {
     if (token) {
