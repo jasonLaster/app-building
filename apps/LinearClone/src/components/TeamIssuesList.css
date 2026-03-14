@@ -1,0 +1,130 @@
+.team-issues-list-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+.team-issues-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+  gap: 12px;
+}
+
+.team-issues-list-empty p {
+  margin: 0;
+}
+
+.team-issues-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-issues-group {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.team-issues-group:last-child {
+  border-bottom: none;
+}
+
+.team-issues-group-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.team-issues-group-select {
+  display: flex;
+  align-items: center;
+  padding: 8px 0 8px 12px;
+  cursor: pointer;
+}
+
+.team-issues-group-checkbox {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.team-issues-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding: 8px 12px 8px 4px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.team-issues-group-toggle:hover {
+  background-color: var(--color-bg-surface);
+}
+
+.team-issues-group-chevron {
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  opacity: 0.5;
+}
+
+.team-issues-group-chevron-expanded {
+  transform: rotate(90deg);
+}
+
+.team-issues-group-label {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.team-issues-group-count {
+  color: var(--color-text-tertiary);
+  font-weight: 400;
+}
+
+.team-issues-group-items {
+  border-top: 1px solid var(--color-border);
+}
+
+.team-issues-list-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.team-issues-list-avatar-empty {
+  background-color: var(--color-border);
+  color: var(--color-text-tertiary);
+}
+
+.team-issues-list-label-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}

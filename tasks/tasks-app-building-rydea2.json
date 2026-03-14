@@ -3,18 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentBulkActions: Write the BulkActions toolbar for multi-issue status, priority, assignee, and label changes",
-        "WriteComponentGroupBySort: Write the GroupBySort controls for grouping and sorting issues",
-        "WriteComponentTeamFilters: Write the TeamFilters toolbar with Status, Priority, Assignee, Label, Project, and Cycle filters",
-        "WriteComponentTeamIssuesList: Write the TeamIssuesList component",
-        "WritePageTeamIssues: Write the Team Issues page"
-      ],
-      "timestamp": "2026-03-14T18:57:06.538Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentCreateIssueForm: Write the CreateIssueForm with all fields (team, title, description, status, priority, assignee, labels, project, cycle, due date, parent)",
         "WriteComponentCreateIssueActions: Write the CreateIssueActions with create and cancel buttons",
         "WriteComponentCreateIssueModal: Write the CreateIssueModal wrapper"
@@ -164,9 +152,11 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentNotificationRow: Write the NotificationRow component with type icons, timestamps, and archive button",
-      "WriteComponentNotificationList: Write the NotificationList component with read/unread distinction",
-      "WritePageInbox: Write the Inbox page"
+      "WriteComponentBulkActions: Write the BulkActions toolbar for multi-issue status, priority, assignee, and label changes",
+      "WriteComponentGroupBySort: Write the GroupBySort controls for grouping and sorting issues",
+      "WriteComponentTeamFilters: Write the TeamFilters toolbar with Status, Priority, Assignee, Label, Project, and Cycle filters",
+      "WriteComponentTeamIssuesList: Write the TeamIssuesList component",
+      "WritePageTeamIssues: Write the Team Issues page"
     ],
     "timestamp": "2026-03-14T18:57:06.538Z",
     "app": "LinearClone"

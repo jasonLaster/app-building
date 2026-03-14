@@ -13,6 +13,28 @@
   background-color: var(--color-bg-surface);
 }
 
+.issue-row-selected {
+  background-color: rgba(94, 106, 210, 0.08);
+}
+
+.issue-row-selected:hover {
+  background-color: rgba(94, 106, 210, 0.12);
+}
+
+.issue-row-checkbox-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.issue-row-checkbox {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
 .issue-row-left {
   display: flex;
   align-items: center;

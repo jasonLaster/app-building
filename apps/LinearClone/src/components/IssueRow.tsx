@@ -136,9 +136,12 @@ function formatDueDate(dateStr: string): string {
 
 interface IssueRowProps {
   issue: Issue;
+  showCheckbox?: boolean;
+  checked?: boolean;
+  onCheckChange?: (issueId: string) => void;
 }
 
-export default function IssueRow({ issue }: IssueRowProps) {
+export default function IssueRow({ issue, showCheckbox, checked, onCheckChange }: IssueRowProps) {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
@@ -174,8 +177,18 @@ export default function IssueRow({ issue }: IssueRowProps) {
   const priorityConfig = PRIORITY_CONFIG[issue.priority] || PRIORITY_CONFIG.none;
 
   return (
-    <div className="issue-row" data-testid={`issue-row-${issue.id}`}>
+    <div className={`issue-row ${checked ? 'issue-row-selected' : ''}`} data-testid={`issue-row-${issue.id}`}>
       <div className="issue-row-left">
+        {showCheckbox && (
+          <label className="issue-row-checkbox-wrapper" data-testid={`issue-checkbox-${issue.id}`} onClick={(e) => e.stopPropagation()}>
+            <input
+              type="checkbox"
+              className="issue-row-checkbox"
+              checked={!!checked}
+              onChange={() => onCheckChange?.(issue.id)}
+            />
+          </label>
+        )}
         <span className="issue-row-priority" title={priorityConfig.label} data-testid={`issue-priority-${issue.id}`}>
           <PriorityIcon priority={issue.priority} />
         </span>
