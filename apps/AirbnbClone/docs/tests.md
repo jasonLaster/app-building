@@ -1216,3 +1216,160 @@
 ## Page: Write Review (`/trips/:bookingId/review`)
 
 <!-- Components: ReviewForm, RatingSliders, PropertyBookingContext -->
+
+### Component: PropertyBookingContext
+
+#### Test: Property info displays for the booking being reviewed
+- **Initial state:** User "guest@example.com" is logged in and has a completed booking (booking-789) for "Oceanfront Villa" in Malibu, CA with check-in 2026-01-10 and check-out 2026-01-15.
+- **Action:** User navigates to `/trips/booking-789/review`.
+- **Expected:** The page displays the property context section showing the property title "Oceanfront Villa", the location "Malibu, CA", the property's main image, check-in date "Jan 10, 2026", check-out date "Jan 15, 2026", and the number of nights (5 nights).
+
+#### Test: Property booking context shows guest count
+- **Initial state:** User is logged in with a completed booking (booking-789) for 3 guests at "Oceanfront Villa".
+- **Action:** User navigates to `/trips/booking-789/review`.
+- **Expected:** The property booking context section displays "3 guests" alongside the booking dates.
+
+#### Test: Property booking context shows total price paid
+- **Initial state:** User is logged in with a completed booking (booking-789) with a total_price of $1,250.
+- **Action:** User navigates to `/trips/booking-789/review`.
+- **Expected:** The property booking context displays the total price "$1,250" that was paid for the booking.
+
+#### Test: Redirect to login if not authenticated
+- **Initial state:** No user is logged in.
+- **Action:** User navigates to `/trips/booking-789/review`.
+- **Expected:** The app redirects the user to `/login`. The Write Review page is not displayed.
+
+#### Test: Error state when booking does not exist
+- **Initial state:** User "guest@example.com" is logged in.
+- **Action:** User navigates to `/trips/nonexistent-booking-id/review`.
+- **Expected:** The page displays an error message such as "Booking not found" and does not show the review form.
+
+#### Test: Error state when booking belongs to another user
+- **Initial state:** User "other@example.com" is logged in. Booking booking-789 belongs to "guest@example.com".
+- **Action:** User navigates to `/trips/booking-789/review`.
+- **Expected:** The page displays an error message such as "You cannot review this booking" and does not show the review form.
+
+#### Test: Error state when booking is not completed
+- **Initial state:** User "guest@example.com" is logged in with a booking (booking-pending) that has status "pending".
+- **Action:** User navigates to `/trips/booking-pending/review`.
+- **Expected:** The page displays an error message such as "You can only review completed bookings" and does not show the review form.
+
+#### Test: Error state when review already exists for booking
+- **Initial state:** User "guest@example.com" is logged in with a completed booking (booking-reviewed) that already has a review submitted.
+- **Action:** User navigates to `/trips/booking-reviewed/review`.
+- **Expected:** The page displays a message such as "You have already reviewed this booking" and does not show the review form. Optionally shows a link back to My Trips.
+
+### Component: RatingSliders
+
+#### Test: All six rating sliders display with default values
+- **Initial state:** User is logged in and navigates to `/trips/booking-789/review` for a completed booking.
+- **Expected:** Six rating sliders are visible with labels: "Overall", "Cleanliness", "Accuracy", "Communication", "Location", and "Value". Each slider defaults to a mid-range value (e.g., 3 out of 5) or is unset, and shows the current numeric value.
+
+#### Test: Adjust overall rating slider
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User drags the "Overall" slider to 5.
+- **Expected:** The "Overall" slider displays value 5. The numeric display next to the slider updates to "5". Other sliders remain at their previous values.
+
+#### Test: Adjust cleanliness rating slider
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User drags the "Cleanliness" slider to 4.
+- **Expected:** The "Cleanliness" slider displays value 4. The numeric display updates to "4".
+
+#### Test: Adjust accuracy rating slider
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User drags the "Accuracy" slider to 2.
+- **Expected:** The "Accuracy" slider displays value 2. The numeric display updates to "2".
+
+#### Test: Adjust communication rating slider
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User drags the "Communication" slider to 5.
+- **Expected:** The "Communication" slider displays value 5. The numeric display updates to "5".
+
+#### Test: Adjust location rating slider
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User drags the "Location" slider to 3.
+- **Expected:** The "Location" slider displays value 3. The numeric display updates to "3".
+
+#### Test: Adjust value rating slider
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User drags the "Value" slider to 1.
+- **Expected:** The "Value" slider displays value 1. The numeric display updates to "1".
+
+#### Test: Rating sliders enforce 1-5 range
+- **Initial state:** User is on the Write Review page.
+- **Action:** User interacts with any rating slider.
+- **Expected:** The slider only allows integer values from 1 to 5 inclusive. The slider cannot go below 1 or above 5.
+
+#### Test: Multiple sliders can be set independently
+- **Initial state:** User is on the Write Review page with all sliders at default.
+- **Action:** User sets "Overall" to 5, "Cleanliness" to 4, "Accuracy" to 3, "Communication" to 5, "Location" to 4, "Value" to 2.
+- **Expected:** Each slider displays its independently set value. No slider affects another slider's value.
+
+#### Test: Rating slider visual feedback shows filled stars or highlighted segments
+- **Initial state:** User is on the Write Review page.
+- **Action:** User sets the "Overall" slider to 4.
+- **Expected:** The slider visually indicates the selected rating (e.g., filled stars up to 4 out of 5, or a highlighted slider track up to the 4 position). The visual feedback clearly distinguishes selected vs unselected portions.
+
+### Component: ReviewForm
+
+#### Test: Review form displays comment text area
+- **Initial state:** User is logged in and navigates to `/trips/booking-789/review` for a completed booking.
+- **Expected:** A text area is visible with a placeholder such as "Write your review..." or "Tell others about your experience" for entering the review comment.
+
+#### Test: Submit button is visible
+- **Initial state:** User is on the Write Review page.
+- **Expected:** A "Submit Review" button is visible at the bottom of the form.
+
+#### Test: Type a comment in the text area
+- **Initial state:** User is on the Write Review page with an empty comment text area.
+- **Action:** User types "Amazing stay! The villa was beautiful and the host was very responsive." in the comment text area.
+- **Expected:** The text area displays the typed text "Amazing stay! The villa was beautiful and the host was very responsive."
+
+#### Test: Submit review with all ratings and comment
+- **Initial state:** User is on the Write Review page. User has set Overall to 5, Cleanliness to 5, Accuracy to 4, Communication to 5, Location to 4, Value to 4, and typed "Wonderful experience, would definitely come back!" in the comment area.
+- **Action:** User clicks the "Submit Review" button.
+- **Expected:** The review is submitted successfully via `POST /api/reviews`. The app navigates back to `/trips` (My Trips page). A success notification or message such as "Review submitted successfully" appears.
+
+#### Test: Submitted review appears on property detail page
+- **Initial state:** User just submitted a review for booking-789 (property "Oceanfront Villa") with Overall rating 5 and comment "Wonderful experience, would definitely come back!".
+- **Action:** User navigates to the property detail page for "Oceanfront Villa" (`/properties/:id`).
+- **Expected:** The reviews section shows the newly submitted review with the guest's name, the rating of 5, and the comment "Wonderful experience, would definitely come back!". The property's average rating and review count are updated.
+
+#### Test: Submitted review appears in user profile reviews list
+- **Initial state:** User just submitted a review for "Oceanfront Villa".
+- **Action:** User navigates to `/profile`.
+- **Expected:** The user's reviews list includes the newly submitted review for "Oceanfront Villa" with the correct rating and comment.
+
+#### Test: Submit review with ratings but no comment
+- **Initial state:** User is on the Write Review page. User has set all six rating sliders (Overall: 3, Cleanliness: 3, Accuracy: 3, Communication: 3, Location: 3, Value: 3) but left the comment text area empty.
+- **Action:** User clicks the "Submit Review" button.
+- **Expected:** The review is submitted successfully (comment is optional per the data model). The app navigates back to `/trips`.
+
+#### Test: Submit button is disabled when ratings are not set
+- **Initial state:** User navigates to the Write Review page. No rating sliders have been adjusted from their unset/default state.
+- **Expected:** The "Submit Review" button is disabled or grayed out, preventing submission without ratings.
+
+#### Test: Form validation prevents submission without all ratings
+- **Initial state:** User is on the Write Review page. User has set Overall to 5 but left other rating sliders unset.
+- **Action:** User clicks the "Submit Review" button.
+- **Expected:** The form shows a validation error indicating all ratings are required (e.g., "Please rate all categories"). The review is not submitted.
+
+#### Test: Write Review button on My Trips disappears after submitting review
+- **Initial state:** User has a completed booking for "Oceanfront Villa" showing a "Write Review" button on the My Trips page.
+- **Action:** User clicks "Write Review", fills out all ratings (all set to 4) and a comment "Great stay!", and clicks "Submit Review". User is redirected to `/trips`.
+- **Expected:** The trip card for "Oceanfront Villa" no longer shows the "Write Review" button. It may show "Reviewed" text or a checkmark instead.
+
+#### Test: Navigate back from review page without submitting
+- **Initial state:** User is on the Write Review page and has set some ratings and typed partial comment text.
+- **Action:** User clicks the browser back button or a "Cancel" / back navigation link on the page.
+- **Expected:** The user is taken back to `/trips`. No review is submitted. The "Write Review" button still appears on the trip card.
+
+#### Test: Comment text area allows multi-line input
+- **Initial state:** User is on the Write Review page.
+- **Action:** User types a multi-line comment: "First line.\nSecond line.\nThird line." using Enter/Return key to create line breaks.
+- **Expected:** The text area displays the comment with line breaks preserved across all three lines.
+
+#### Test: Re-visiting review page after submission shows already-reviewed state
+- **Initial state:** User "guest@example.com" has already submitted a review for booking-789.
+- **Action:** User navigates to `/trips/booking-789/review` directly via URL.
+- **Expected:** The page displays a message such as "You have already reviewed this booking" instead of the review form. A link to return to My Trips is available.
