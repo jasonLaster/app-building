@@ -1,0 +1,112 @@
+.cancel-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.cancel-modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-modal__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.cancel-modal__message {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.cancel-modal__details {
+  background: var(--color-background);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cancel-modal__detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel-modal__label {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+.cancel-modal__value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.cancel-modal__value--mono {
+  font-family: monospace;
+}
+
+.cancel-modal__error {
+  background: #FDECEA;
+  color: var(--color-error);
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.cancel-modal__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancel-modal__btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.cancel-modal__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-modal__btn--dismiss {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.cancel-modal__btn--dismiss:hover:not(:disabled) {
+  background: var(--color-background);
+}
+
+.cancel-modal__btn--confirm {
+  background: var(--color-error);
+  color: white;
+  border: none;
+}
+
+.cancel-modal__btn--confirm:hover:not(:disabled) {
+  background: #C5221F;
+}

@@ -3,18 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentTripsTabs: Write the TripsTabs component",
-        "WriteComponentTripCard: Write the TripCard component",
-        "WriteComponentTrackedRouteCard: Write the TrackedRouteCard component",
-        "WriteComponentCancelBookingModal: Write the CancelBookingModal component",
-        "WritePageMyTrips: Write the My Trips page"
-      ],
-      "timestamp": "2026-03-14T18:35:59.821Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentDestinationMap: Write the DestinationMap component",
         "WriteComponentFlexibleDatesGrid: Write the FlexibleDatesGrid component",
         "WriteComponentDealsSection: Write the DealsSection component",
@@ -76,11 +64,11 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentFlightSummary: Write the FlightSummary component",
-      "WriteComponentPriceBreakdown: Write the PriceBreakdown component",
-      "WriteComponentPassengerForm: Write the PassengerForm component",
-      "WriteComponentBookingAction: Write the BookingAction component",
-      "WritePageFlightDetailsBooking: Write the Flight Details / Booking page"
+      "WriteComponentTripsTabs: Write the TripsTabs component",
+      "WriteComponentTripCard: Write the TripCard component",
+      "WriteComponentTrackedRouteCard: Write the TrackedRouteCard component",
+      "WriteComponentCancelBookingModal: Write the CancelBookingModal component",
+      "WritePageMyTrips: Write the My Trips page"
     ],
     "timestamp": "2026-03-14T18:35:59.821Z",
     "app": "GoogleFlights"

@@ -1,0 +1,137 @@
+.trip-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px var(--color-shadow);
+  padding: 20px;
+  transition: box-shadow 0.2s;
+}
+
+.trip-card:hover {
+  box-shadow: 0 2px 8px var(--color-shadow-hover);
+}
+
+.trip-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.trip-card__airline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trip-card__airline-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.trip-card__airline-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-card__airline-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.trip-card__flight-number {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.trip-card__status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+}
+
+.trip-card__status--confirmed {
+  background: #E8F5E9;
+  color: #1E8E3E;
+}
+
+.trip-card__status--completed {
+  background: #F1F3F4;
+  color: var(--color-text-secondary);
+}
+
+.trip-card__status--cancelled {
+  background: #FDECEA;
+  color: var(--color-error);
+}
+
+.trip-card__route {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.trip-card__route-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+}
+
+.trip-card__dates {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.trip-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trip-card__details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.trip-card__price {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.trip-card__ref {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+  font-family: monospace;
+}
+
+.trip-card__cancel-btn {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  padding: 6px 16px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.trip-card__cancel-btn:hover {
+  background: #FDECEA;
+}

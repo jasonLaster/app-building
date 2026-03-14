@@ -30,11 +30,18 @@ export default async (request: Request, _context: Context) => {
       return Response.json({ tracked: result.length > 0, id: result[0]?.id || null })
     }
 
-    // Get all tracked routes
+    // Get all tracked routes with lowest current price
     const routes = await sql`
       SELECT tr.id, tr.departure_date_start, tr.departure_date_end, tr.cabin_class, tr.created_at,
              oa.iata_code as origin_code, oa.city as origin_city,
-             da.iata_code as dest_code, da.city as dest_city
+             da.iata_code as dest_code, da.city as dest_city,
+             (
+               SELECT MIN(p.total_price_cents)
+               FROM flights f2
+               JOIN prices p ON p.flight_id = f2.id AND p.cabin_class = tr.cabin_class
+               WHERE f2.origin_airport_id = tr.origin_airport_id
+                 AND f2.destination_airport_id = tr.destination_airport_id
+             ) as lowest_price_cents
       FROM tracked_routes tr
       JOIN sessions s ON tr.session_id = s.id
       JOIN airports oa ON tr.origin_airport_id = oa.id
@@ -93,16 +100,25 @@ export default async (request: Request, _context: Context) => {
   if (request.method === 'DELETE') {
     const body = await request.json() as {
       sessionToken: string
-      originCode: string
-      destCode: string
+      originCode?: string
+      destCode?: string
+      id?: string
     }
 
-    await sql`
-      DELETE FROM tracked_routes
-      WHERE session_id IN (SELECT id FROM sessions WHERE session_token = ${body.sessionToken})
-        AND origin_airport_id IN (SELECT id FROM airports WHERE iata_code = ${body.originCode})
-        AND destination_airport_id IN (SELECT id FROM airports WHERE iata_code = ${body.destCode})
-    `
+    if (body.id) {
+      await sql`
+        DELETE FROM tracked_routes
+        WHERE id = ${body.id}
+          AND session_id IN (SELECT id FROM sessions WHERE session_token = ${body.sessionToken})
+      `
+    } else if (body.originCode && body.destCode) {
+      await sql`
+        DELETE FROM tracked_routes
+        WHERE session_id IN (SELECT id FROM sessions WHERE session_token = ${body.sessionToken})
+          AND origin_airport_id IN (SELECT id FROM airports WHERE iata_code = ${body.originCode})
+          AND destination_airport_id IN (SELECT id FROM airports WHERE iata_code = ${body.destCode})
+      `
+    }
 
     return Response.json({ success: true })
   }

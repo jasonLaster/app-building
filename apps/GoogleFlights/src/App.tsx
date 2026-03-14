@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar'
 import SearchPage from './pages/SearchPage'
 import SearchResultsPage from './pages/SearchResultsPage'
 import FlightDetailsPage from './pages/FlightDetailsPage'
+import MyTripsPage from './pages/MyTripsPage'
 import './App.css'
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
           <Route path="/" element={<SearchPage />} />
           <Route path="/results" element={<SearchResultsPage />} />
           <Route path="/booking/:id" element={<FlightDetailsPage />} />
-          <Route path="/trips" element={<div>My Trips (Coming Soon)</div>} />
+          <Route path="/trips" element={<MyTripsPage />} />
           <Route path="/explore" element={<div>Explore (Coming Soon)</div>} />
         </Routes>
       </main>
