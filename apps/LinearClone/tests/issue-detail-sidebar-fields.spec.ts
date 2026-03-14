@@ -320,3 +320,69 @@ test.describe('Issue Detail Sidebar - Due Date and Timestamps', () => {
     await expect(updatedField.locator('input')).toHaveCount(0);
   });
 });
+
+test.describe('Issue Detail Sidebar - Dropdown Behavior', () => {
+  test('Sidebar dropdowns close on outside click', async ({ page, baseURL }) => {
+    // ENG-4: in_review, high priority
+    await loginAndNavigateToIssue(page, baseURL!, 4);
+
+    // Verify current priority
+    await expect(page.getByTestId('sidebar-priority-btn')).toContainText('High');
+
+    // Open the priority dropdown
+    await page.getByTestId('sidebar-priority-btn').click();
+    await expect(page.getByTestId('sidebar-priority-dropdown')).toBeVisible();
+
+    // Click outside the dropdown (on the description area)
+    await page.getByTestId('issue-description').click();
+
+    // Verify the dropdown closes
+    await expect(page.getByTestId('sidebar-priority-dropdown')).toHaveCount(0, { timeout: 10000 });
+
+    // Verify the priority value did not change
+    await expect(page.getByTestId('sidebar-priority-btn')).toContainText('High');
+  });
+
+  test('Use assignee selector multiple times in sequence', async ({ page, baseURL }) => {
+    // ENG-1: assigned to Alice Johnson
+    const { token } = await loginAndNavigateToIssue(page, baseURL!, 1);
+
+    // Verify initial assignee is Alice
+    await expect(page.getByTestId('sidebar-assignee-btn')).toContainText('Alice Johnson');
+
+    // Get the initial activity count
+    await page.getByTestId('activity-tab').click();
+    const activityList = page.getByTestId('activity-list');
+    await expect(activityList).toBeVisible({ timeout: 30000 });
+    const initialEntryCount = await activityList.locator('[data-testid^="activity-entry-"]').count();
+
+    // First selection: click Assignee field, select Bob Smith
+    await page.getByTestId('sidebar-assignee-btn').click();
+    await expect(page.getByTestId('sidebar-assignee-dropdown')).toBeVisible();
+    // Verify the search input is empty (reset)
+    await expect(page.getByTestId('sidebar-assignee-search')).toHaveValue('');
+    const bobOption = page.getByTestId('sidebar-assignee-dropdown').locator('button').filter({ hasText: 'Bob Smith' });
+    await bobOption.click();
+
+    // Verify dropdown closes and assignee updates to Bob
+    await expect(page.getByTestId('sidebar-assignee-dropdown')).toHaveCount(0);
+    await expect(page.getByTestId('sidebar-assignee-btn')).toContainText('Bob Smith', { timeout: 30000 });
+
+    // Second selection: click Assignee field again, select Carol Davis
+    await page.getByTestId('sidebar-assignee-btn').click();
+    await expect(page.getByTestId('sidebar-assignee-dropdown')).toBeVisible();
+    // Verify the search input is reset between uses
+    await expect(page.getByTestId('sidebar-assignee-search')).toHaveValue('');
+    const carolOption = page.getByTestId('sidebar-assignee-dropdown').locator('button').filter({ hasText: 'Carol Davis' });
+    await carolOption.click();
+
+    // Verify dropdown closes and assignee updates to Carol Davis
+    await expect(page.getByTestId('sidebar-assignee-dropdown')).toHaveCount(0);
+    await expect(page.getByTestId('sidebar-assignee-btn')).toContainText('Carol Davis', { timeout: 30000 });
+
+    // Verify both changes created separate activity entries
+    await expect(
+      activityList.locator('[data-testid^="activity-entry-"]')
+    ).toHaveCount(initialEntryCount + 2, { timeout: 30000 });
+  });
+});
