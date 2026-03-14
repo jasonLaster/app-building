@@ -750,6 +750,344 @@
 
 <!-- Components: StatsOverview, ListingsTab, BookingsTab, AddListingForm -->
 
+### Component: StatsOverview
+
+#### Test: Host Dashboard requires login — redirects unauthenticated users
+- **Initial state:** No user is logged in.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** The app redirects the user to `/login`. The Host Dashboard is not rendered.
+
+#### Test: Host Dashboard requires host status — shows upgrade prompt for non-hosts
+- **Initial state:** A user is logged in with `is_host` set to false.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** The page displays a message indicating the user is not a host (e.g., "You need to become a host to access this page") with a link or button to navigate to their profile page (`/profile`) where they can become a host.
+
+#### Test: Stats overview displays total listings count
+- **Initial state:** User is logged in as a host with 5 active properties and 1 inactive property in the database.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** The StatsOverview section displays a "Total Listings" stat card showing "5" (only active listings counted). The card has a label "Total Listings" and a numeric value.
+
+#### Test: Stats overview displays active bookings count
+- **Initial state:** User is logged in as a host. Their properties have 3 bookings with status "confirmed", 2 with status "pending", and 4 with status "completed".
+- **Action:** User navigates to `/hosting`.
+- **Expected:** The StatsOverview section displays an "Active Bookings" stat card showing "5" (pending + confirmed bookings). The card has a label "Active Bookings" and a numeric value.
+
+#### Test: Stats overview displays total earnings
+- **Initial state:** User is logged in as a host. Their properties have completed bookings with total_price values of $500, $750, and $1200.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** The StatsOverview section displays a "Total Earnings" stat card showing "$2,450" (sum of completed booking total prices). The value is formatted as currency.
+
+#### Test: Stats overview displays average rating
+- **Initial state:** User is logged in as a host. Their properties have reviews with overall ratings of 4, 5, 3, and 5.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** The StatsOverview section displays an "Average Rating" stat card showing "4.3" (average of all review ratings, rounded to one decimal). A star icon is displayed next to the value.
+
+#### Test: Stats overview shows zeros for a new host with no data
+- **Initial state:** User is logged in as a host with no properties, no bookings, and no reviews.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** All four stat cards display zero/empty values: "Total Listings: 0", "Active Bookings: 0", "Total Earnings: $0", and "Average Rating: —" (or "N/A" when no reviews exist).
+
+#### Test: Host Dashboard displays navigation tabs for Listings and Bookings
+- **Initial state:** User is logged in as a host.
+- **Action:** User navigates to `/hosting`.
+- **Expected:** Below the stats overview, two tabs are visible: "Listings" and "Bookings". The "Listings" tab is active/selected by default.
+
+#### Test: Switching between Listings and Bookings tabs
+- **Initial state:** User is logged in as a host and on `/hosting` with the "Listings" tab active.
+- **Action:** User clicks the "Bookings" tab.
+- **Expected:** The Bookings tab content is displayed (table of bookings). The "Bookings" tab appears active/selected. User clicks "Listings" tab again and the listings grid is displayed.
+
+### Component: ListingsTab
+
+#### Test: Listings tab displays host's properties in a grid
+- **Initial state:** User is logged in as a host with 3 active properties: "Beach House" ($150/night), "Mountain Cabin" ($200/night), "City Loft" ($120/night).
+- **Action:** User navigates to `/hosting` (Listings tab is active by default).
+- **Expected:** A grid of 3 property cards is displayed. Each card shows the property title, main image, price per night, and status (active/inactive).
+
+#### Test: Listing card shows property details
+- **Initial state:** User is logged in as a host with a property: title "Beach House", price $150/night, city "Malibu", 4.5 average rating, 10 reviews, active status.
+- **Expected:** The listing card displays the property title "Beach House", price "$150/night", location "Malibu", average rating "4.5" with star icon, review count "10 reviews", and a green "Active" badge.
+
+#### Test: Listing card has Edit button that navigates to property detail
+- **Initial state:** User is logged in as a host with a property (id "prop-123").
+- **Action:** User clicks the "Edit" button on the property card.
+- **Expected:** The app navigates to `/properties/prop-123` where the host can view and edit their property details.
+
+#### Test: Listing card has Deactivate button for active properties
+- **Initial state:** User is logged in as a host with an active property "Beach House".
+- **Action:** User clicks the "Deactivate" button on the "Beach House" card.
+- **Expected:** A confirmation dialog appears asking "Are you sure you want to deactivate this listing?". The dialog shows the property name "Beach House".
+
+#### Test: Confirming deactivation sets property to inactive
+- **Initial state:** The deactivation confirmation dialog is open for "Beach House".
+- **Action:** User clicks the confirm button (e.g., "Yes, Deactivate").
+- **Expected:** The app calls `DELETE /api/properties/:id` (which sets `is_active` to false). The dialog closes. The property card updates to show an "Inactive" status badge (gray or muted). A success message is displayed (e.g., "Listing deactivated"). The stats overview updates the "Total Listings" count to reflect the change.
+
+#### Test: Dismissing deactivation dialog keeps property active
+- **Initial state:** The deactivation confirmation dialog is open for "Beach House".
+- **Action:** User clicks the dismiss/cancel button.
+- **Expected:** The dialog closes. The property remains active with no changes.
+
+#### Test: Listing card shows Activate button for inactive properties
+- **Initial state:** User is logged in as a host with an inactive property "Old Cabin".
+- **Action:** User clicks the "Activate" button on the "Old Cabin" card.
+- **Expected:** The app calls `PUT /api/properties/:id` to set `is_active` to true. The property card updates to show a green "Active" badge. The "Total Listings" stat updates.
+
+#### Test: Listings tab shows empty state for host with no properties
+- **Initial state:** User is logged in as a host with no properties.
+- **Expected:** The Listings tab displays an empty state message (e.g., "You don't have any listings yet") and a prominent "Add Listing" button or call-to-action.
+
+#### Test: Add Listing button is visible on the Listings tab
+- **Initial state:** User is logged in as a host.
+- **Expected:** An "Add Listing" button is prominently displayed on the Listings tab (e.g., in the header area or as a floating action button). The button has clear text "Add Listing" or a "+" icon with label.
+
+#### Test: Deactivate and activate actions work on repeated use
+- **Initial state:** User is logged in as a host with two active properties.
+- **Action:** User deactivates the first property (confirms dialog), then activates it again, then deactivates the second property.
+- **Expected:** Each action updates the correct property's status. The stats overview correctly reflects the current count of active listings after each action.
+
+### Component: BookingsTab
+
+#### Test: Bookings tab displays table of bookings for host's properties
+- **Initial state:** User is logged in as a host. Their properties have bookings from various guests.
+- **Action:** User clicks the "Bookings" tab.
+- **Expected:** A table is displayed with columns: Property, Guest, Check-in, Check-out, Guests, Total, Status, and Actions. Each booking is a row in the table.
+
+#### Test: Bookings table shows correct data for each booking
+- **Initial state:** User is logged in as a host. A booking exists: property "Beach House", guest "Alice Smith", check-in "2026-07-01", check-out "2026-07-05", 2 guests, total $750, status "confirmed".
+- **Expected:** The table row displays: "Beach House", "Alice Smith", "Jul 1, 2026", "Jul 5, 2026", "2", "$750", a green "Confirmed" status badge.
+
+#### Test: Bookings tab has status filter controls
+- **Initial state:** User is logged in as a host on the Bookings tab.
+- **Expected:** Filter controls are visible above the table allowing the host to filter by status: "All", "Pending", "Confirmed", "Cancelled", "Completed". "All" is selected by default.
+
+#### Test: Filtering bookings by Pending status
+- **Initial state:** User is logged in as a host on the Bookings tab. Bookings exist with statuses "pending", "confirmed", and "completed".
+- **Action:** User clicks the "Pending" status filter.
+- **Expected:** Only bookings with status "pending" are displayed in the table. The "Pending" filter appears active/selected.
+
+#### Test: Filtering bookings by Confirmed status
+- **Initial state:** User is logged in as a host on the Bookings tab with various bookings.
+- **Action:** User clicks the "Confirmed" status filter.
+- **Expected:** Only bookings with status "confirmed" are shown. Other bookings are hidden.
+
+#### Test: Filtering bookings by Completed status
+- **Initial state:** User is logged in as a host on the Bookings tab with various bookings.
+- **Action:** User clicks the "Completed" status filter.
+- **Expected:** Only bookings with status "completed" are shown.
+
+#### Test: Filtering bookings by Cancelled status
+- **Initial state:** User is logged in as a host on the Bookings tab with various bookings.
+- **Action:** User clicks the "Cancelled" status filter.
+- **Expected:** Only bookings with status "cancelled" are shown.
+
+#### Test: Resetting filter to All shows all bookings
+- **Initial state:** User is on the Bookings tab with the "Pending" filter active.
+- **Action:** User clicks the "All" filter.
+- **Expected:** All bookings across all statuses are displayed again.
+
+#### Test: Status filters work on repeated use
+- **Initial state:** User is on the Bookings tab with various bookings.
+- **Action:** User clicks "Pending", then "Confirmed", then "All", then "Completed".
+- **Expected:** Each filter correctly shows the appropriate subset of bookings. The active filter indicator updates correctly each time.
+
+#### Test: Host can confirm a pending booking
+- **Initial state:** User is logged in as a host on the Bookings tab. A booking with status "pending" for guest "Bob" at property "Beach House" is displayed.
+- **Action:** User clicks the "Confirm" button on that booking row.
+- **Expected:** The app calls `PUT /api/bookings/:id` with status "confirmed". The booking's status badge changes from yellow "Pending" to green "Confirmed". The "Confirm" button is no longer visible for that booking. A success message is displayed (e.g., "Booking confirmed"). The "Active Bookings" stat in StatsOverview remains accurate.
+
+#### Test: Host can cancel a pending booking
+- **Initial state:** User is logged in as a host on the Bookings tab. A pending booking is displayed.
+- **Action:** User clicks the "Cancel" button on the pending booking row.
+- **Expected:** A confirmation dialog appears asking the host to confirm cancellation. The dialog shows the guest name, property, and dates for context.
+
+#### Test: Confirming cancellation of a booking updates status
+- **Initial state:** The cancellation confirmation dialog is open for a pending booking.
+- **Action:** User clicks the confirm button in the dialog.
+- **Expected:** The app calls `PUT /api/bookings/:id` with status "cancelled". The dialog closes. The booking's status badge changes to red "Cancelled". The "Cancel" and "Confirm" action buttons are removed for that booking. A success message is displayed. The "Active Bookings" stat decreases by 1.
+
+#### Test: Dismissing booking cancellation dialog keeps booking unchanged
+- **Initial state:** The cancellation confirmation dialog is open for a booking.
+- **Action:** User clicks the dismiss button or clicks outside the dialog.
+- **Expected:** The dialog closes. The booking status remains unchanged.
+
+#### Test: Host can cancel a confirmed booking
+- **Initial state:** User is logged in as a host on the Bookings tab. A booking with status "confirmed" is displayed.
+- **Action:** User clicks the "Cancel" button on the confirmed booking row and confirms in the dialog.
+- **Expected:** The app calls `PUT /api/bookings/:id` with status "cancelled". The status badge changes to red "Cancelled". The "Active Bookings" stat decreases.
+
+#### Test: Completed and cancelled bookings have no action buttons
+- **Initial state:** User is logged in as a host on the Bookings tab. Bookings exist with statuses "completed" and "cancelled".
+- **Expected:** Booking rows with "completed" or "cancelled" status do not display "Confirm" or "Cancel" action buttons. Only pending and confirmed bookings show action buttons.
+
+#### Test: Bookings tab shows empty state when no bookings exist
+- **Initial state:** User is logged in as a host with properties but no bookings.
+- **Action:** User clicks the "Bookings" tab.
+- **Expected:** The tab displays an empty state message (e.g., "No bookings yet").
+
+#### Test: Status badges display correct colors
+- **Initial state:** User is on the Bookings tab with bookings in all four statuses.
+- **Expected:** Status badges use the correct colors: "Pending" has a yellow badge, "Confirmed" has a green badge, "Cancelled" has a red badge, "Completed" has a blue badge.
+
+#### Test: Confirm and cancel actions work on repeated use
+- **Initial state:** User is on the Bookings tab with three pending bookings.
+- **Action:** User confirms the first booking, cancels the second booking (confirming the dialog), and then confirms the third booking.
+- **Expected:** Each action updates the correct booking. The first and third show "Confirmed" badges, the second shows "Cancelled". Stats update correctly after each action.
+
+### Component: AddListingForm
+
+#### Test: Clicking Add Listing button opens the multi-step form
+- **Initial state:** User is logged in as a host on the Listings tab.
+- **Action:** User clicks the "Add Listing" button.
+- **Expected:** A multi-step form opens (modal or full-page). Step 1 is displayed with fields for property type and title. A step indicator shows progress (Step 1 of 7). "Next" and "Cancel" buttons are visible.
+
+#### Test: Step 1 — Property type selection and title input
+- **Initial state:** The Add Listing form is open on Step 1.
+- **Expected:** A dropdown or selection control lists property types: "Apartment", "House", "Cabin", "Villa", "Condo", "Loft", "Cottage", "Townhouse". A text input field for the property title is visible. Both fields are required.
+
+#### Test: Step 1 — Selecting property type and entering title
+- **Initial state:** The Add Listing form is on Step 1.
+- **Action:** User selects "Cabin" from the property type selector and types "Cozy Mountain Retreat" in the title field.
+- **Expected:** The property type shows "Cabin" selected. The title field displays "Cozy Mountain Retreat". The "Next" button becomes enabled (or was already enabled).
+
+#### Test: Step 1 — Validation prevents proceeding without required fields
+- **Initial state:** The Add Listing form is on Step 1 with no selections made.
+- **Action:** User clicks "Next" without selecting a property type or entering a title.
+- **Expected:** Validation errors are displayed for both fields (e.g., "Property type is required", "Title is required"). The form does not advance to Step 2.
+
+#### Test: Step 2 — Location fields displayed
+- **Initial state:** User completed Step 1 and clicked "Next".
+- **Expected:** Step 2 is displayed with fields for: address (with geocoding/autocomplete), city, state, and country. A "Back" button and "Next" button are visible. The step indicator shows Step 2 of 7.
+
+#### Test: Step 2 — Address field uses autocomplete
+- **Initial state:** The Add Listing form is on Step 2.
+- **Action:** User types "123 Main" in the address field.
+- **Expected:** An autocomplete dropdown appears with address suggestions from a geocoding API (e.g., OpenStreetMap Nominatim). Selecting a suggestion populates the address field with the full address.
+
+#### Test: Step 2 — Address autocomplete populates related fields
+- **Initial state:** The Add Listing form is on Step 2.
+- **Action:** User types in the address field and selects an autocomplete suggestion for "123 Main St, Denver, CO, USA".
+- **Expected:** The address field is populated with "123 Main St". The city field is auto-filled with "Denver". The state field is auto-filled with "CO". The country field is auto-filled with "USA".
+
+#### Test: Step 2 — Validation requires city and country
+- **Initial state:** The Add Listing form is on Step 2 with address filled but city and country empty.
+- **Action:** User clicks "Next".
+- **Expected:** Validation errors appear for city and country (e.g., "City is required", "Country is required"). The form does not advance.
+
+#### Test: Step 3 — Details fields displayed
+- **Initial state:** User completed Step 2 and clicked "Next".
+- **Expected:** Step 3 is displayed with numeric input fields for: max guests, bedrooms, beds, and bathrooms. Each field has increment/decrement controls or is a number input. The step indicator shows Step 3 of 7.
+
+#### Test: Step 3 — Setting property details
+- **Initial state:** The Add Listing form is on Step 3.
+- **Action:** User sets max guests to 4, bedrooms to 2, beds to 3, bathrooms to 1.
+- **Expected:** All fields display the entered values. The "Next" button is enabled.
+
+#### Test: Step 3 — Validation requires all detail fields
+- **Initial state:** The Add Listing form is on Step 3 with all fields at 0 or empty.
+- **Action:** User clicks "Next".
+- **Expected:** Validation errors appear (e.g., "Max guests must be at least 1"). The form does not advance.
+
+#### Test: Step 4 — Amenities selection displayed
+- **Initial state:** User completed Step 3 and clicked "Next".
+- **Expected:** Step 4 is displayed with checkboxes for amenities grouped by category: "Essentials", "Features", "Safety", "Location". Each category heading is visible with its amenities listed below. The step indicator shows Step 4 of 7.
+
+#### Test: Step 4 — Selecting amenities
+- **Initial state:** The Add Listing form is on Step 4 with amenities loaded from `GET /api/amenities`.
+- **Action:** User checks "WiFi" and "Kitchen" under Essentials, and "Pool" under Features.
+- **Expected:** The selected amenities show as checked. The user can proceed to the next step. Amenities are optional (no validation error if none selected).
+
+#### Test: Step 4 — Amenities are toggleable
+- **Initial state:** The Add Listing form is on Step 4 with "WiFi" already checked.
+- **Action:** User clicks "WiFi" to uncheck it, then checks it again.
+- **Expected:** The checkbox toggles correctly on each click.
+
+#### Test: Step 5 — Photo URL input displayed
+- **Initial state:** User completed Step 4 and clicked "Next".
+- **Expected:** Step 5 is displayed with an input field for image URLs and an "Add Photo" button. A list/grid of added photos is shown below (initially empty). The step indicator shows Step 5 of 7.
+
+#### Test: Step 5 — Adding a photo URL
+- **Initial state:** The Add Listing form is on Step 5.
+- **Action:** User types "https://example.com/photo1.jpg" in the URL input and clicks "Add Photo".
+- **Expected:** The photo URL is added to the list. A preview or thumbnail of the image is displayed. The URL input is cleared for the next entry. An optional caption field may be shown for the added photo.
+
+#### Test: Step 5 — Adding multiple photo URLs
+- **Initial state:** The Add Listing form is on Step 5 with one photo already added.
+- **Action:** User adds two more photo URLs.
+- **Expected:** All three photos are displayed in the list/grid. Each photo can be reordered or removed.
+
+#### Test: Step 5 — Removing a photo
+- **Initial state:** The Add Listing form is on Step 5 with 3 photos added.
+- **Action:** User clicks the remove/delete button on the second photo.
+- **Expected:** The second photo is removed from the list. The remaining 2 photos are displayed.
+
+#### Test: Step 5 — Validation requires at least one photo
+- **Initial state:** The Add Listing form is on Step 5 with no photos added.
+- **Action:** User clicks "Next".
+- **Expected:** A validation error appears (e.g., "At least one photo is required"). The form does not advance.
+
+#### Test: Step 6 — Pricing fields displayed
+- **Initial state:** User completed Step 5 and clicked "Next".
+- **Expected:** Step 6 is displayed with numeric input fields for: price per night and cleaning fee. The price per night field is required. The cleaning fee defaults to 0. Currency formatting or prefix ($) is shown. The step indicator shows Step 6 of 7.
+
+#### Test: Step 6 — Entering pricing information
+- **Initial state:** The Add Listing form is on Step 6.
+- **Action:** User enters 150 for price per night and 50 for cleaning fee.
+- **Expected:** The fields display $150 and $50 respectively.
+
+#### Test: Step 6 — Validation requires price per night
+- **Initial state:** The Add Listing form is on Step 6 with price per night empty or 0.
+- **Action:** User clicks "Next".
+- **Expected:** A validation error appears (e.g., "Price per night is required and must be greater than 0"). The form does not advance.
+
+#### Test: Step 7 — Review and publish page displayed
+- **Initial state:** User completed Step 6 and clicked "Next".
+- **Expected:** Step 7 displays a summary of all entered information: property type, title, full address (address, city, state, country), details (guests, bedrooms, beds, bathrooms), selected amenities, photo thumbnails, price per night, and cleaning fee. A "Publish" button and "Back" button are visible. The step indicator shows Step 7 of 7.
+
+#### Test: Step 7 — Review page shows all entered data correctly
+- **Initial state:** User has filled out all steps: type "Cabin", title "Cozy Mountain Retreat", address "123 Pine Rd, Aspen, CO, USA", 4 guests, 2 bedrooms, 2 beds, 1 bathroom, amenities "WiFi" and "Kitchen", 2 photos, price $200/night, cleaning fee $75.
+- **Expected:** The review page displays all of these values accurately. No data is missing or incorrect.
+
+#### Test: Publishing a new listing creates the property
+- **Initial state:** User is on Step 7 (Review) with all data entered correctly.
+- **Action:** User clicks the "Publish" button.
+- **Expected:** The app calls `POST /api/properties` with the property data, then `POST /api/property-images` for each photo. A success message is displayed (e.g., "Listing published successfully!"). The form closes. The new property appears in the Listings tab grid. The "Total Listings" stat increments by 1.
+
+#### Test: Back button navigates to the previous step
+- **Initial state:** User is on Step 3 of the Add Listing form.
+- **Action:** User clicks the "Back" button.
+- **Expected:** The form navigates to Step 2. All previously entered data in Step 2 is preserved (city, address, etc. are still filled).
+
+#### Test: Cancel button closes the form without saving
+- **Initial state:** User is on Step 4 of the Add Listing form with data entered in Steps 1–3.
+- **Action:** User clicks the "Cancel" button.
+- **Expected:** A confirmation dialog appears asking "Discard your listing? All entered information will be lost." with "Discard" and "Keep Editing" buttons.
+
+#### Test: Confirming cancel discards the listing form
+- **Initial state:** The discard confirmation dialog is open.
+- **Action:** User clicks "Discard".
+- **Expected:** The form closes. No API calls are made. The user returns to the Listings tab. No new property is created.
+
+#### Test: Dismissing cancel keeps the form open
+- **Initial state:** The discard confirmation dialog is open.
+- **Action:** User clicks "Keep Editing".
+- **Expected:** The dialog closes. The form remains on the current step with all data preserved.
+
+#### Test: Step indicator shows correct progress throughout the form
+- **Initial state:** User opens the Add Listing form.
+- **Action:** User navigates through all 7 steps using Next/Back buttons.
+- **Expected:** The step indicator accurately shows the current step (e.g., "Step 1 of 7", "Step 2 of 7", etc.) at each stage. Completed steps may show a checkmark or different styling.
+
+#### Test: Data persistence across steps when navigating back and forth
+- **Initial state:** User has filled out Steps 1–5 and is on Step 5.
+- **Action:** User clicks "Back" twice to Step 3, then "Next" twice to Step 5.
+- **Expected:** All data entered in Steps 3, 4, and 5 is preserved after navigating back and forth. No data is lost.
+
+#### Test: Add Listing form works correctly on repeated use
+- **Initial state:** User is logged in as a host. User has already published one listing successfully.
+- **Action:** User clicks "Add Listing" again, fills out all steps, and publishes.
+- **Expected:** A second property is created successfully. Both properties appear in the Listings tab. The "Total Listings" stat shows the correct total.
+
 ## Page: User Profile (`/profile`)
 
 <!-- Components: ProfileForm, BecomeHostButton, UserReviewsList -->
