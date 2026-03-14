@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestProjectKeyMetricsZeroIssues: Write test for Key metrics handle project with zero issues"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestMembersPageRendersList: Write test for Members page renders with list of all workspace members",
         "WriteTestMemberRowFields: Write test for Member row displays avatar, name, email, role, and team badges",
         "WriteTestMembersRoleBadges: Write test for Members list shows correct role badges with visual distinction",
@@ -206,26 +198,7 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestProjectOverviewRenders: Write test for Overview tab renders description, milestones, and key metrics sections",
-      "WriteTestProjectDescriptionEditable: Write test for Description is inline editable",
-      "WriteTestProjectEditSaveDescription: Write test for Edit and save description",
-      "WriteTestProjectDescriptionMarkdown: Write test for Description supports markdown rendering",
-      "WriteTestProjectCancelDescriptionEdit: Write test for Cancel description edit reverts changes",
-      "WriteTestProjectDescriptionPlaceholder: Write test for Description shows placeholder when empty",
-      "WriteTestProjectMilestonesDisplay: Write test for Milestones section displays existing milestones",
-      "WriteTestProjectAddMilestone: Write test for Add a new milestone",
-      "WriteTestProjectSaveMilestone: Write test for Save a new milestone",
-      "WriteTestProjectCancelMilestone: Write test for Cancel adding a new milestone",
-      "WriteTestProjectToggleMilestoneComplete: Write test for Toggle milestone completion status",
-      "WriteTestProjectToggleMilestoneIncomplete: Write test for Toggle milestone back to incomplete",
-      "WriteTestProjectDeleteMilestoneConfirm: Write test for Delete a milestone with confirmation",
-      "WriteTestProjectConfirmMilestoneDeletion: Write test for Confirm milestone deletion",
-      "WriteTestProjectCancelMilestoneDeletion: Write test for Cancel milestone deletion",
-      "WriteTestProjectEditMilestoneName: Write test for Edit milestone name inline",
-      "WriteTestProjectEditMilestoneDate: Write test for Edit milestone target date",
-      "WriteTestProjectMilestonesEmptyState: Write test for Milestones section shows empty state when no milestones",
-      "WriteTestProjectKeyMetrics: Write test for Key metrics section displays project statistics",
-      "WriteTestProjectKeyMetricsUpdate: Write test for Key metrics update when issue statuses change"
+      "WriteTestProjectKeyMetricsZeroIssues: Write test for Key metrics handle project with zero issues"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"

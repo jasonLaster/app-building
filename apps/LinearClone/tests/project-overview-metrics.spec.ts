@@ -55,6 +55,25 @@ async function goToOverviewTab(page: import('@playwright/test').Page) {
   await expect(page.getByTestId('project-overview-tab')).toBeVisible({ timeout: 10000 });
 }
 
+async function createProject(baseURL: string, token: string, name: string) {
+  const response = await fetch(`${baseURL}/api/projects`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, status: 'planned' }),
+  });
+  return response.json() as Promise<{ id: string; name: string }>;
+}
+
+async function deleteProject(baseURL: string, token: string, projectId: string) {
+  await fetch(`${baseURL}/api/projects?id=${projectId}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
 test.describe('Project Overview - Key Metrics', () => {
   test('Key metrics section displays project statistics', async ({ page, baseURL }) => {
     const data = await loginViaApi(baseURL!);
@@ -153,5 +172,46 @@ test.describe('Project Overview - Key Metrics', () => {
     await expect(
       page.getByTestId('project-overview-metric-percentage').locator('.project-overview-metric-value')
     ).toHaveText(`${newPercentage}%`, { timeout: 10000 });
+  });
+
+  test('Key metrics handle project with zero issues', async ({ page, baseURL }) => {
+    const data = await loginViaApi(baseURL!);
+    const projectName = `Empty Project ${Date.now()}`;
+    const created = await createProject(baseURL!, data.token, projectName);
+
+    try {
+      await loginAndGoToProject(page, baseURL!, created.id);
+      await goToOverviewTab(page);
+
+      // Verify metrics section is visible
+      await expect(page.getByTestId('project-overview-metrics')).toBeVisible({ timeout: 10000 });
+
+      // Verify total issues is 0
+      await expect(
+        page.getByTestId('project-overview-metric-total').locator('.project-overview-metric-value')
+      ).toHaveText('0', { timeout: 10000 });
+
+      // Verify completed issues is 0
+      await expect(
+        page.getByTestId('project-overview-metric-completed').locator('.project-overview-metric-value')
+      ).toHaveText('0', { timeout: 10000 });
+
+      // Verify in-progress issues is 0
+      await expect(
+        page.getByTestId('project-overview-metric-in-progress').locator('.project-overview-metric-value')
+      ).toHaveText('0', { timeout: 10000 });
+
+      // Verify remaining issues is 0
+      await expect(
+        page.getByTestId('project-overview-metric-remaining').locator('.project-overview-metric-value')
+      ).toHaveText('0', { timeout: 10000 });
+
+      // Verify completion percentage is 0% (not NaN or error)
+      await expect(
+        page.getByTestId('project-overview-metric-percentage').locator('.project-overview-metric-value')
+      ).toHaveText('0%', { timeout: 10000 });
+    } finally {
+      await deleteProject(baseURL!, data.token, created.id);
+    }
   });
 });
