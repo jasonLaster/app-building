@@ -128,8 +128,8 @@ test.describe('Add Listing Form - Steps 1 to 6', () => {
     for (const type of types) {
       await expect(page.getByTestId(`property-type-option-${type}`)).toBeVisible()
     }
-    // Close the dropdown by clicking outside
-    await page.getByTestId('listing-title-input').click()
+    // Close the dropdown by clicking the select button again
+    await page.getByTestId('property-type-select').click()
 
     // Title input is visible
     const titleInput = page.getByTestId('listing-title-input')

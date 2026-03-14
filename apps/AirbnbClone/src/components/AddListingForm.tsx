@@ -82,6 +82,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
   const [addressSuggestions, setAddressSuggestions] = useState<AddressSuggestion[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [propertyTypeOpen, setPropertyTypeOpen] = useState(false)
+  const propertyTypeRef = useRef<HTMLDivElement>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -89,6 +90,17 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       dispatch(fetchAmenities())
     }
   }, [dispatch, amenities.length])
+
+  useEffect(() => {
+    if (!propertyTypeOpen) return
+    const handleClickOutside = (e: MouseEvent) => {
+      if (propertyTypeRef.current && !propertyTypeRef.current.contains(e.target as Node)) {
+        setPropertyTypeOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [propertyTypeOpen])
 
   const fetchAddressSuggestions = useCallback(async (query: string) => {
     if (query.length < 3) {
@@ -291,7 +303,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-text mb-1.5">Property Type *</label>
-        <div className="relative">
+        <div className="relative" ref={propertyTypeRef}>
           <button
             type="button"
             data-testid="property-type-select"
