@@ -1445,7 +1445,174 @@
 
 ## Active Cycle Page (`/team/:teamId/cycles`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: CycleList, CycleDetail, CreateCycle, BurndownChart
+
+### CycleList
+
+#### Test: Cycle list renders all team cycles with name, date range, progress bar, and issue count
+- **Initial state**: User is authenticated, navigates to `/team/eng-1/cycles`. The "Engineering" team has 3 cycles: "Sprint 1" (Jan 1–Jan 14, 8/10 issues done), "Sprint 2" (Jan 15–Jan 28, 3/8 issues done, active), "Sprint 3" (Jan 29–Feb 11, 0/5 issues done).
+- **Expected**: A list of 3 cycle rows is displayed. Each row shows the cycle name, date range (e.g., "Jan 1 – Jan 14"), a progress bar reflecting the completion percentage (e.g., 80% for Sprint 1), and the issue count (e.g., "10 issues"). Rows are ordered chronologically.
+
+#### Test: Active cycle is visually highlighted in the list
+- **Initial state**: User is on `/team/eng-1/cycles`. "Sprint 2" is the active cycle.
+- **Expected**: The "Sprint 2" row has a distinct visual highlight (e.g., accent border, background color, or "Active" badge) that distinguishes it from the other cycles. Non-active cycles do not have this highlight.
+
+#### Test: Clicking a cycle navigates to cycle detail view
+- **Initial state**: User is on `/team/eng-1/cycles` viewing the cycle list.
+- **Action**: User clicks on the "Sprint 2" cycle row.
+- **Expected**: The cycle detail view for "Sprint 2" is displayed, showing the cycle name, date range, progress stats, issue list, and burndown chart.
+
+#### Test: Cycle list shows empty state when team has no cycles
+- **Initial state**: User is authenticated, navigates to `/team/design-1/cycles`. The "Design" team has no cycles.
+- **Expected**: An empty state message is displayed (e.g., "No cycles yet. Create your first cycle to get started.") with an icon. The "New Cycle" button is still visible.
+
+#### Test: Cycle list progress bar accurately reflects issue completion percentage
+- **Initial state**: User is on `/team/eng-1/cycles`. "Sprint 1" has 8 of 10 issues done (80%), "Sprint 2" has 3 of 8 done (37.5%), "Sprint 3" has 0 of 5 done (0%).
+- **Expected**: Each cycle's progress bar width corresponds to its completion percentage. Sprint 1 shows ~80% filled, Sprint 2 shows ~37.5% filled, Sprint 3 shows 0% filled (empty bar).
+
+#### Test: Cycle list updates when a new cycle is created
+- **Initial state**: User is on `/team/eng-1/cycles` with 2 existing cycles.
+- **Action**: User creates a new cycle "Sprint 4" via the "New Cycle" button.
+- **Expected**: The cycle list now shows 3 cycles, with "Sprint 4" appearing in the list with 0 issues and an empty progress bar.
+
+#### Test: Clicking a different cycle after viewing one switches the detail view
+- **Initial state**: User is on `/team/eng-1/cycles` and has clicked "Sprint 2" to view its detail.
+- **Action**: User clicks back to the cycle list and clicks "Sprint 1".
+- **Expected**: The detail view updates to show "Sprint 1" cycle information (name, date range, stats, issues, burndown chart). No stale data from "Sprint 2" is shown.
+
+### CycleDetail
+
+#### Test: Cycle detail view renders cycle name and date range
+- **Initial state**: User is on `/team/eng-1/cycles` and clicks on "Sprint 2" (Jan 15–Jan 28).
+- **Expected**: The detail view header displays the cycle name "Sprint 2" and the date range "Jan 15 – Jan 28" prominently at the top.
+
+#### Test: Cycle detail shows progress stats (total, completed, in progress, remaining)
+- **Initial state**: User views cycle detail for "Sprint 2" which has 8 total issues: 3 done, 2 in progress, 3 remaining (backlog/todo).
+- **Expected**: Four progress stat cards/sections are displayed: "Total: 8", "Completed: 3", "In Progress: 2", "Remaining: 3". The stats are clearly labeled and visually distinct.
+
+#### Test: Cycle detail shows progress bar with correct completion percentage
+- **Initial state**: User views cycle detail for "Sprint 2" with 3 of 8 issues completed (37.5%).
+- **Expected**: A progress bar is displayed showing approximately 37.5% completion. The percentage text "37.5%" (or "3 of 8") is visible near the progress bar.
+
+#### Test: Cycle detail displays filtered issue list matching Team Issues layout
+- **Initial state**: User views cycle detail for "Sprint 2" which has 8 issues across various statuses and priorities.
+- **Expected**: An issue list is displayed below the progress stats using the same layout as the Team Issues page. Each issue row shows: priority icon, issue identifier (e.g., "ENG-42"), title (clickable), status icon, labels as colored badges, assignee avatar, due date, and project name. Issues are grouped by status by default.
+
+#### Test: Clicking an issue in cycle detail navigates to issue detail page
+- **Initial state**: User is viewing cycle detail for "Sprint 2" with issue "ENG-42" visible.
+- **Action**: User clicks on the issue title "ENG-42".
+- **Expected**: User is navigated to `/issue/<issueId>` showing the full issue detail page for ENG-42.
+
+#### Test: Cycle detail issue list supports grouping by status, priority, assignee
+- **Initial state**: User is viewing cycle detail for "Sprint 2" with 8 issues.
+- **Action**: User changes the "Group by" option from "Status" to "Priority".
+- **Expected**: Issues are regrouped by priority level (Urgent, High, Medium, Low, No Priority). Each group has a collapsible header showing the priority icon and name. Changing to "Assignee" regroups by assigned team member.
+
+#### Test: Cycle detail issue list supports sorting
+- **Initial state**: User is viewing cycle detail for "Sprint 2" with issues grouped by status.
+- **Action**: User changes "Sort by" to "Priority".
+- **Expected**: Issues within each group are reordered by priority (Urgent first, then High, Medium, Low, No Priority).
+
+#### Test: Cycle detail issue list supports filtering
+- **Initial state**: User is viewing cycle detail for "Sprint 2" with 8 issues. 2 issues have status "Done".
+- **Action**: User opens the Status filter and selects "Done" only.
+- **Expected**: The issue list shows only the 2 completed issues. Other issues are hidden. The filter is visually indicated as active.
+
+#### Test: Cycle detail issue list supports bulk actions
+- **Initial state**: User is viewing cycle detail for "Sprint 2" with multiple issues.
+- **Action**: User selects checkboxes on 3 issues, then uses the bulk action to change status to "In Progress".
+- **Expected**: All 3 selected issues update their status to "In Progress". The progress stats update accordingly (e.g., "In Progress" count increases by 3). Checkboxes are deselected after the action.
+
+#### Test: Cycle detail progress stats update when an issue status changes
+- **Initial state**: User is viewing cycle detail for "Sprint 2" with 3 completed and 5 remaining issues.
+- **Action**: User changes one issue's status from "Todo" to "Done" via the status icon in the issue row.
+- **Expected**: The progress stats update to show "Completed: 4", "Remaining: 4". The progress bar updates to reflect 4/8 = 50% completion.
+
+#### Test: Cycle detail renders correctly for a cycle with no issues
+- **Initial state**: User views a newly created cycle "Sprint 4" that has no issues.
+- **Expected**: The progress stats show "Total: 0", "Completed: 0", "In Progress: 0", "Remaining: 0". The progress bar is empty (0%). The issue list shows an empty state message (e.g., "No issues in this cycle"). The burndown chart shows no data.
+
+### CreateCycle
+
+#### Test: "New Cycle" button is visible on the cycles page
+- **Initial state**: User is authenticated, navigates to `/team/eng-1/cycles`.
+- **Expected**: A "New Cycle" button is visible on the page, styled consistently with other create buttons in the app (e.g., primary accent color, plus icon or text label "New Cycle").
+
+#### Test: Clicking "New Cycle" opens create cycle modal with correct fields
+- **Initial state**: User is on `/team/eng-1/cycles`.
+- **Action**: User clicks the "New Cycle" button.
+- **Expected**: A modal dialog opens with: a "Name" text input field (required), a "Start date" date picker, an "End date" date picker, a "Create" button, and a "Cancel" button. The modal has a title like "New Cycle" or "Create Cycle".
+
+#### Test: Successfully creating a cycle with all fields filled
+- **Initial state**: Create cycle modal is open. Team has no active cycle.
+- **Action**: User enters "Sprint 5" in the Name field, selects Feb 12 as Start date, selects Feb 25 as End date, and clicks "Create".
+- **Expected**: The modal closes. The cycle list now includes "Sprint 5" with the date range "Feb 12 – Feb 25", 0 issues, and an empty progress bar. The new cycle appears in the list.
+
+#### Test: Create cycle validates that name is required
+- **Initial state**: Create cycle modal is open.
+- **Action**: User leaves the Name field empty, sets start and end dates, and clicks "Create".
+- **Expected**: A validation error message appears near the Name field (e.g., "Name is required"). The modal remains open. No cycle is created.
+
+#### Test: Create cycle validates that end date is after start date
+- **Initial state**: Create cycle modal is open.
+- **Action**: User enters "Sprint 5" in Name, selects Feb 25 as Start date, selects Feb 12 as End date (before start), and clicks "Create".
+- **Expected**: A validation error message appears (e.g., "End date must be after start date"). The modal remains open. No cycle is created.
+
+#### Test: Create cycle validates start and end dates are required
+- **Initial state**: Create cycle modal is open.
+- **Action**: User enters "Sprint 5" in Name but does not set start or end dates, and clicks "Create".
+- **Expected**: Validation error messages appear for both date fields (e.g., "Start date is required", "End date is required"). The modal remains open. No cycle is created.
+
+#### Test: Cancel button closes the create cycle modal without creating
+- **Initial state**: Create cycle modal is open. User has entered "Sprint 5" in the Name field.
+- **Action**: User clicks "Cancel".
+- **Expected**: The modal closes. No new cycle is added to the cycle list. The form data is discarded.
+
+#### Test: Only one cycle can be active at a time per team
+- **Initial state**: Team "Engineering" already has an active cycle "Sprint 2" (Jan 15–Jan 28). Create cycle modal is open.
+- **Action**: User creates a new cycle "Sprint 5" with dates overlapping or within the active period.
+- **Expected**: Either the system prevents setting the new cycle as active while another is active (showing an appropriate message), or the new cycle is created as inactive. Only one cycle at a time has the "active" highlight in the cycle list.
+
+#### Test: Creating a cycle persists after page refresh
+- **Initial state**: User has just created "Sprint 5" via the create cycle modal.
+- **Action**: User refreshes the page.
+- **Expected**: The cycle list still shows "Sprint 5" with the correct name, date range, and issue count of 0. The cycle was persisted to the database.
+
+#### Test: Create cycle modal can be opened, cancelled, and reopened
+- **Initial state**: User is on `/team/eng-1/cycles`.
+- **Action**: User clicks "New Cycle", enters "Sprint X" in the Name field, clicks "Cancel". Then user clicks "New Cycle" again.
+- **Expected**: The modal opens fresh with empty fields on the second open. No data from the previous attempt is retained. The modal functions correctly for creating a new cycle.
+
+### BurndownChart
+
+#### Test: Burndown chart renders as a bar chart showing issues completed per day
+- **Initial state**: User views cycle detail for "Sprint 2" (Jan 15–Jan 28). Issues were completed on various days: Jan 15 (1 issue), Jan 17 (2 issues), Jan 20 (1 issue).
+- **Expected**: A bar chart is displayed with the x-axis showing dates within the cycle range (Jan 15–Jan 28) and the y-axis showing the number of issues completed. Bars appear for Jan 15 (height 1), Jan 17 (height 2), Jan 20 (height 1). Days with no completions show no bar or a zero-height bar.
+
+#### Test: Burndown chart shows correct date range matching the cycle
+- **Initial state**: User views cycle detail for "Sprint 2" (Jan 15–Jan 28).
+- **Expected**: The chart x-axis spans exactly from Jan 15 to Jan 28, matching the cycle's start and end dates. No dates outside this range are shown.
+
+#### Test: Burndown chart updates when an issue is marked as done
+- **Initial state**: User is viewing cycle detail for "Sprint 2". The burndown chart shows 3 issues completed so far. Today is Jan 22.
+- **Action**: User changes an issue's status from "In Progress" to "Done".
+- **Expected**: The burndown chart updates to show an additional completion for today (Jan 22). The bar for today increases by 1. The total completions reflected in the chart match the updated progress stats.
+
+#### Test: Burndown chart shows empty state for cycle with no completed issues
+- **Initial state**: User views cycle detail for a new cycle "Sprint 4" with 5 issues, all in "Todo" or "Backlog" status.
+- **Expected**: The burndown chart renders with the correct date range but all bars at zero height (or an empty chart with a message like "No issues completed yet"). The chart axes and labels are still visible.
+
+#### Test: Burndown chart has readable axis labels and chart title
+- **Initial state**: User views cycle detail for "Sprint 2" with completions on multiple days.
+- **Expected**: The chart has a visible title or section heading (e.g., "Burndown" or "Issues Completed per Day"). The x-axis shows date labels that are readable (not overlapping). The y-axis shows integer values for issue counts. The chart uses appropriate spacing and sizing.
+
+#### Test: Burndown chart bar heights are proportional to issue counts
+- **Initial state**: User views cycle detail for a cycle where Jan 15 had 1 completion, Jan 16 had 4 completions, and Jan 17 had 2 completions.
+- **Expected**: The bar for Jan 16 is visibly taller than Jan 17, which is visibly taller than Jan 15. The relative heights accurately represent the completion counts (4:2:1 ratio).
+
+#### Test: Burndown chart handles a cycle spanning a long date range
+- **Initial state**: User views cycle detail for a cycle spanning 4 weeks (28 days) with completions spread across different days.
+- **Expected**: The chart renders all 28 days on the x-axis without visual overflow. Date labels may be abbreviated or rotated to fit. All bars are visible and correctly positioned. The chart remains readable and scrollable if necessary.
 
 ## Projects Page (`/projects`)
 

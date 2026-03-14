@@ -3,18 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageActiveCycle: Decide on components, add sections to docs/tests.md",
-        "PlanComponentCycleList: Add test entries for CycleList",
-        "PlanComponentCycleDetail: Add test entries for CycleDetail",
-        "PlanComponentCreateCycle: Add test entries for CreateCycle",
-        "PlanComponentBurndownChart: Add test entries for BurndownChart"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageProjects: Decide on components, add sections to docs/tests.md",
         "PlanComponentProjectCard: Add test entries for ProjectCard",
         "PlanComponentProjectFilters: Add test entries for ProjectFilters",
@@ -136,9 +124,11 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageCreateIssueModal: Decide on components, add sections to docs/tests.md",
-      "PlanComponentCreateIssueForm: Add test entries for CreateIssueForm",
-      "PlanComponentCreateIssueActions: Add test entries for CreateIssueActions"
+      "PlanPageActiveCycle: Decide on components, add sections to docs/tests.md",
+      "PlanComponentCycleList: Add test entries for CycleList",
+      "PlanComponentCycleDetail: Add test entries for CycleDetail",
+      "PlanComponentCreateCycle: Add test entries for CreateCycle",
+      "PlanComponentBurndownChart: Add test entries for BurndownChart"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"
