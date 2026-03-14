@@ -1,0 +1,20 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  padding: 24px;
+}
+
+@media (max-width: 640px) {
+  .login-page {
+    padding: 12px;
+  }
+}
+
+.login-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
