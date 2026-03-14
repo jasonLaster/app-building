@@ -182,8 +182,8 @@ pkill -f "netlify|vite" 2>/dev/null || true
 fuser -k 8888/tcp 2>/dev/null || true
 ```
 ```bash
-# Step 2: Verify env vars
-grep NEON_PROJECT_ID .env || echo "ERROR: NEON_PROJECT_ID not set"
+# Step 2: Verify branch secrets
+list-secrets | grep NEON_PROJECT_ID || echo "ERROR: NEON_PROJECT_ID not set"
 ```
 ```bash
 # Step 3: Verify Replay browser

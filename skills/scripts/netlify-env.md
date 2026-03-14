@@ -36,7 +36,7 @@ exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s -X PATCH \
 
 - `NETLIFY_AUTH_TOKEN`: API authentication token (accessed via `exec-secrets`).
 - `NETLIFY_ACCOUNT_SLUG`: The Netlify account slug (accessed via `exec-secrets`).
-- `NETLIFY_SITE_ID`: The site to set the variable on (from `.env`, passed as query parameter).
+- `NETLIFY_SITE_ID`: The site to set the variable on (branch secret, accessed via `exec-secrets`).
 
 ### Verify an environment variable
 
@@ -48,7 +48,7 @@ exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s \
 
 ### Canonical workflow
 
-1. Read the value from `.env` (or `deployment.txt`).
+1. Read the value via `exec-secrets` (all deployment values are branch secrets).
 2. Set via `curl -X POST` (for new variables) or `curl -X PATCH` (for existing ones).
 3. Verify via `curl -X GET` to confirm the value was set correctly.
 

@@ -14,22 +14,22 @@ EOF
 
 ## Deployment
 
-Before running the deploy script, check whether the app has been deployed before by reading
-`deployment.txt`. If it exists, you MUST populate `.env` with the existing resource IDs so
-the script reuses them. See `skills/scripts/deploy.md` § "Populating `.env` for
-Redeployments" for the exact steps.
+Before running the deploy script, run `list-secrets` to check whether the app has been
+deployed before. If `NEON_PROJECT_ID`, `DATABASE_URL`, and `NETLIFY_SITE_ID` exist as
+branch secrets, the deploy script will reuse existing resources.
+
+If `NEON_PROJECT_ID` exists but `DATABASE_URL` does not, the old connection string was
+leaked. You MUST reset the database password and store a fresh one. See
+`skills/scripts/deploy.md` § "Redeployments" for the exact steps.
 
 Ensure the locale workaround is in place — the deploy script must prefix Netlify CLI commands
 with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/deploy.md` §
 "Locale Workaround". Also verify dependencies are installed: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
 
 Pre-deployment checklist:
-1. Verify required variables are available:
-   - `DATABASE_URL` in `.env` (populated from `deployment.txt` or newly created)
-   - `NEON_API_KEY` — accessed via `exec-secrets` (not directly in the environment)
-   - `NETLIFY_AUTH_TOKEN` — accessed via `exec-secrets` (not directly in the environment)
-   - `NETLIFY_SITE_ID` in `.env` if redeploying (populated from `deployment.txt`)
-   - `RECORD_REPLAY_API_KEY` — accessed via `exec-secrets` (for deployment test recordings)
+1. Verify required secrets are available (run `list-secrets`):
+   - `NEON_API_KEY`, `NETLIFY_AUTH_TOKEN`, `RECORD_REPLAY_API_KEY` — global secrets
+   - `DATABASE_URL`, `NEON_PROJECT_ID`, `NETLIFY_SITE_ID` — branch secrets (if redeploying)
 2. Verify the DB has been seeded with production data (the deploy script handles first-run seeding).
 3. Ensure the deploy script runs fully non-interactively — no CLI prompts that hang in CI.
 4. Ensure `public/_redirects` exists with `/* /index.html 200` for SPA routing. Without this,
@@ -40,8 +40,7 @@ full script specification. The script handles database creation/sync, Netlify si
 creation/update, and writes the deployed URL to `deployment.txt`.
 
 After the first deploy, you MUST set `DATABASE_URL` on the Netlify site so that production
-Netlify Functions can connect to the database. The deploy script writes it to `.env` but does
-NOT push it to Netlify automatically.
+Netlify Functions can connect to the database. Access it via `exec-secrets DATABASE_URL`.
 
 Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
 flag does not work reliably. See `skills/scripts/netlify-env.md` for the exact API commands.

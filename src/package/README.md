@@ -77,7 +77,7 @@ exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- netlify deploy --prod
 
 The secrets server spawns the command with the requested secrets in its environment and **redacts all secret values** from the output.
 
-The agent can also run `list-secrets` to see which secrets are available.
+The agent can also run `list-secrets` to see which secrets are available, and `set-branch-secret` to store new branch-level secrets (e.g., `DATABASE_URL` created at deploy time). The server rejects values that have already appeared in logs.
 
 ## Exported API
 
@@ -152,6 +152,7 @@ The agent can also run `list-secrets` to see which secrets are available.
 | `getInfisicalConfig(envVars)` | Extract `InfisicalConfig` from env vars and log in. Requires `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET`, `INFISICAL_PROJECT_ID`, `INFISICAL_ENVIRONMENT`. |
 | `fetchGlobalSecrets(config)` | Fetch secrets from the `/global/` path. |
 | `fetchBranchSecrets(config, branch)` | Fetch secrets from `/branches/<branch>/`. |
+| `createBranchSecret(config, branch, name, value)` | Create or update a secret in `/branches/<branch>/`. |
 | `fetchInfisicalSecrets(config, path)` | Raw fetch from any Infisical folder path. |
 
 **Types:** `InfisicalConfig`

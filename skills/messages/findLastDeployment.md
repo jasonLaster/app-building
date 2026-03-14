@@ -15,7 +15,6 @@ Read `apps/<AppName>/deployment.txt`. This file is written by the deploy script 
 contains key=value pairs:
 
 - `url` — the production URL of the deployed app.
-- `site_id` — the Netlify site ID.
 - `deployed_at` — ISO 8601 timestamp of the last deployment.
 
 ## Responding

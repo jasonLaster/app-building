@@ -42,9 +42,27 @@ If neither method finds a URL, the app has not been deployed yet. In this case:
 - **For production-URL journey tests**: Deploy the app first using `npm run deploy` from the
   app directory, then re-check step 1.
 
+### 3. Check `deployment.txt`
+
+```bash
+cat apps/<AppName>/deployment.txt 2>/dev/null
+```
+
+If it exists, it contains `url` and `deployed_at`. The `url` field is the deployed
+production URL.
+
+### 4. If not deployed
+
+If none of the above methods find a URL, the app has not been deployed yet. In this case:
+
+- **For journey tests**: Use `npm run test` (local dev server mode) instead. The test script
+  starts its own dev server and creates ephemeral Neon branches. Do not spend time deploying
+  just to run tests.
+- **For production-URL journey tests**: Deploy the app first using `npm run deploy` from the
+  app directory, then re-check step 1.
+
 ## Important
 
-- `deployment.txt` does NOT exist as a convention. Do not search for it.
 - Do not run more than 3 commands searching for a deployment URL. If the above steps don't
   find it, the app is not deployed.
 - After deploying, the URL is stored in `.netlify/state.json` automatically by `netlify link`.

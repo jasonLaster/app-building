@@ -99,8 +99,8 @@ or test execution.
 - **SSL mode**: Always include `?sslmode=require` in the connection URL. Neon requires SSL.
 - **Scripts require explicit connection string**: `scripts/schema.ts` and `scripts/seed-db.ts`
   require an explicit `"postgresql://..."` argument. They fail silently or with confusing
-  errors when no connection string is passed. Always invoke them with the DATABASE_URL:
+  errors when no connection string is passed. Always invoke them via `exec-secrets`:
   ```bash
-  npx tsx scripts/schema.ts "$(grep DATABASE_URL .env | cut -d= -f2-)"
-  npx tsx scripts/seed-db.ts "$(grep DATABASE_URL .env | cut -d= -f2-)"
+  exec-secrets DATABASE_URL -- npx tsx scripts/schema.ts "$DATABASE_URL"
+  exec-secrets DATABASE_URL -- npx tsx scripts/seed-db.ts "$DATABASE_URL"
   ```

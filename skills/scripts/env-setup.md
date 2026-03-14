@@ -3,12 +3,14 @@
 ## Purpose
 
 Documents environment prerequisites that must be in place before running app scripts
-(test, deploy, check). Many command failures stem from missing environment variables or
-locale configuration — verify these before running scripts.
+(test, deploy, check). Many command failures stem from missing secrets or locale
+configuration — verify these before running scripts.
 
-## Required Environment Variables
+## Required Secrets
 
-### Container-level (accessed via `exec-secrets`, NOT directly in the environment)
+All secrets are accessed via `exec-secrets`. Run `list-secrets` to see what's available.
+
+### Global secrets (set up once, shared across all branches)
 
 | Variable | Used by |
 |---|---|
@@ -17,34 +19,18 @@ locale configuration — verify these before running scripts.
 | `NETLIFY_AUTH_TOKEN` | deploy (Netlify CLI authentication) |
 | `NETLIFY_ACCOUNT_SLUG` | deploy (Netlify site creation) |
 
-These secrets are NOT set in the environment. Use `exec-secrets` to make them available
-to any command that needs them. See the Secrets section in `AGENTS.md` for usage.
+### Branch secrets (created at deploy time via `set-branch-secret`)
 
-### Branch-level (stored as branch secrets via `set-branch-secret`)
+| Variable | Used by |
+|---|---|
+| `NEON_PROJECT_ID` | test, deploy |
+| `DATABASE_URL` | test, deploy |
+| `NETLIFY_SITE_ID` | deploy |
 
-| Variable | Used by | How to get |
-|---|---|---|
-| `NEON_PROJECT_ID` | test, deploy | Created by deploy script, stored via `set-branch-secret` |
-| `DATABASE_URL` | test, deploy | Created by deploy script, stored via `set-branch-secret` |
-| `NETLIFY_SITE_ID` | deploy | Created by deploy script, stored via `set-branch-secret` |
+These are stored in Infisical and loaded automatically at container startup.
 
-These are stored in Infisical as branch secrets and loaded automatically at container
-startup. Access them via `exec-secrets` just like container-level secrets:
-
-```bash
-exec-secrets DATABASE_URL -- npx tsx scripts/schema.ts "$DATABASE_URL"
-```
-
-### Verifying secrets
-
-Use `list-secrets` to verify which secrets are available:
-
-```bash
-list-secrets
-```
-
-All secrets (both container-level and branch-level) are accessed via `exec-secrets`.
-They are NOT set in the environment directly.
+If `NEON_PROJECT_ID` exists but `DATABASE_URL` does not, the old connection string was
+leaked. You must reset the database password. See `skills/scripts/deploy.md` § "Redeployments".
 
 ## Locale Configuration
 

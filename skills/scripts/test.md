@@ -96,13 +96,12 @@ every individual test file wastes significant time.
 - **Secrets** (accessed via `exec-secrets`, not directly in the environment):
   - `NEON_API_KEY` (required): For Neon branch management.
   - `RECORD_REPLAY_API_KEY` (required): For Replay recording uploads.
-  - `NEON_PROJECT_ID` (required): Read from `.env`. The Neon project to branch from.
-  - `DATABASE_URL` (required): Read from `.env`. The main branch connection string used as
+  - `NEON_PROJECT_ID` (required): Branch secret. The Neon project to branch from.
+  - `DATABASE_URL` (required): Branch secret. The main branch connection string used as
     template for ephemeral branches.
   - `REPLAY_CLI` (optional): Override the Replay CLI command (default: `replayio`, assumed
     globally installed). Useful for pointing at a local build or alternate installation.
 - **Files**:
-  - `.env`: Project configuration (Neon project ID, database URL, etc.).
   - `~/.replay/recordings.log`: Replay recording metadata (read after test run).
 
 ## Outputs

@@ -41,14 +41,14 @@ Before running `netlify deploy`:
 - [ ] `vite build` succeeds (check `logs/deploy.log`)
 - [ ] Required env vars are set on Netlify (`DATABASE_URL`, etc.) — use
   `skills/scripts/netlify-env.md` for the REST API approach
-- [ ] Site ID in `.env` is clean (no embedded ANSI escape sequences)
+- [ ] Site ID (branch secret `NETLIFY_SITE_ID`) is correct
 - [ ] `LC_ALL=C` is set to prevent locale errors
 
 ## Common Issues
 
-- **ANSI-corrupted site ID**: If `.env` contains escape codes in `NETLIFY_SITE_ID`,
+- **ANSI-corrupted site ID**: If `NETLIFY_SITE_ID` contains escape codes,
   subsequent `curl` and `netlify` commands fail silently. Re-extract the clean ID from
-  `deployment.txt` or the Netlify dashboard.
+  the Netlify dashboard and store it with `set-branch-secret`.
 - **502 on first deploy**: Usually caused by missing environment variables on the Netlify
   site. Set them via the REST API before deploying (see `skills/scripts/netlify-env.md`).
 

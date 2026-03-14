@@ -3,9 +3,9 @@
 ## Purpose
 
 Creates and/or syncs the production Neon database and creates and/or updates the Netlify site.
-This is the single command for deploying the app to production. All project information
-(database URL, Netlify site ID, etc.) is persisted in `.env` so subsequent runs reuse existing
-resources.
+This is the single command for deploying the app to production. Deployment resources
+(`DATABASE_URL`, `NEON_PROJECT_ID`, `NETLIFY_SITE_ID`) are stored as branch secrets.
+`deployment.txt` only contains the public URL and timestamp.
 
 ## Usage
 
@@ -17,9 +17,9 @@ resources.
 
 ### Database setup (first run)
 
-1. Check `.env` for an existing `NEON_PROJECT_ID`. If not present:
+1. Check branch secrets (`list-secrets`) for an existing `NEON_PROJECT_ID`. If not present:
    a. Create a new Neon project via the Neon API.
-   b. Write `NEON_PROJECT_ID` and `DATABASE_URL` to `.env`.
+   b. Store `NEON_PROJECT_ID` and `DATABASE_URL` as branch secrets via `set-branch-secret`.
 
 ### Database schema sync (every run)
 
@@ -36,33 +36,30 @@ resources.
 
 ### Netlify site setup (first run)
 
-5. Check `.env` for an existing `NETLIFY_SITE_ID`. If not present:
+5. Check branch secrets (`list-secrets`) for an existing `NETLIFY_SITE_ID`. If not present:
    a. Create a new Netlify site via `netlify sites:create`.
-   b. Write `NETLIFY_SITE_ID` to `.env`.
+   b. Store `NETLIFY_SITE_ID` as a branch secret via `set-branch-secret`.
 
 ### Build and deploy (every run)
 
 6. Build the app (`vite build`). Pipe build output to the log file.
 7. Deploy to Netlify (`netlify deploy --prod`). Pipe deploy output to the log file.
-8. Write the deployed URL, `site_id`, `neon_project_id`, and `database_url` to the top of `deployment.txt`
-   (overwriting the previous resource block but preserving any deployment history entries below).
+8. Write the deployed `url` and `deployed_at` to the top of `deployment.txt` (overwriting
+   the previous resource block but preserving any deployment history entries below).
 9. Print a one-line summary to stdout:
    - Success: `Deployed to <url>`
    - Failure: `Deploy failed (build|netlify) — see logs/deploy.log`
 
 ## Storing Deployment Secrets
 
-When the deploy script creates new resources (Neon project, Netlify site), it produces
-secret values like `DATABASE_URL`, `NEON_PROJECT_ID`, and `NETLIFY_SITE_ID`. These must
-be stored as branch secrets using `set-branch-secret` so they persist across container
-restarts and are never committed to git.
+When the deploy script creates new resources (Neon project, Netlify site), store all three
+values as branch secrets via `set-branch-secret`: `NEON_PROJECT_ID`, `DATABASE_URL`, and
+`NETLIFY_SITE_ID`. These are never written to `deployment.txt` or `.env`.
 
-**Important:** Write API responses to files first, then extract values and pipe to
-`set-branch-secret`. Never echo or print secret values — they will be detected in logs
-and the set call will fail.
+Write API responses to files first, then extract values and pipe to `set-branch-secret`:
 
 ```bash
-# Example: after creating a Neon project, extract and store the project ID and DATABASE_URL
+# Example: after creating a Neon project
 exec-secrets NEON_API_KEY -- bash -c 'curl -s -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
   -d "{\"project\":{\"name\":\"my-app\"}}" \
@@ -71,25 +68,44 @@ python3 -c "import json; print(json.load(open('/tmp/neon-resp.json'))['project']
 python3 -c "import json; r=json.load(open('/tmp/neon-resp.json')); print(r['connection_uris'][0]['connection_uri'])" | set-branch-secret DATABASE_URL
 ```
 
-After storing, these secrets are immediately available via `exec-secrets` and `list-secrets`.
+## Redeployments
 
-## Populating `.env` for Redeployments
+On redeployment, check `list-secrets` for existing `NEON_PROJECT_ID`, `DATABASE_URL`, and
+`NETLIFY_SITE_ID`. If all three exist, the deploy script can reuse the existing resources.
 
-`.env` is gitignored and will not exist in a fresh environment. If the app has been
-deployed before, the deploy script should check for existing branch secrets (via
-`list-secrets`) and `deployment.txt` to reuse existing resources.
+If `NEON_PROJECT_ID` exists as a branch secret but `DATABASE_URL` does not, the old
+connection string was leaked (previously committed in `deployment.txt`). You MUST reset
+the database password and store a fresh connection string:
 
-Read `deployment.txt` (committed to git) to get all previously stored deployment
-values (`site_id`, `neon_project_id`, `database_url`). Write them to `.env`:
+```bash
+# 1. Get branches
+exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c 'curl -s \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches" > /tmp/branches.json'
 
+# 2. Extract main branch ID
+BRANCH_ID=$(python3 -c "import json; bs=json.load(open('/tmp/branches.json'))['branches']; print(next(b['id'] for b in bs if b.get('primary',False) or b['name']=='main'))")
+
+# 3. Reset password
+exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c "curl -s -X POST \
+  -H 'Authorization: Bearer \$NEON_API_KEY' \
+  'https://console.neon.tech/api/v2/projects/\$NEON_PROJECT_ID/branches/$BRANCH_ID/roles/neondb_owner/reset_password' > /tmp/reset.json"
+
+# 4. Get endpoint host
+exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c "curl -s \
+  -H 'Authorization: Bearer \$NEON_API_KEY' \
+  'https://console.neon.tech/api/v2/projects/\$NEON_PROJECT_ID/endpoints' > /tmp/endpoints.json"
+
+# 5. Store fresh DATABASE_URL
+python3 -c "
+import json
+pw = json.load(open('/tmp/reset.json'))['role']['password']
+host = json.load(open('/tmp/endpoints.json'))['endpoints'][0]['host']
+print(f'postgresql://neondb_owner:{pw}@{host}/neondb?sslmode=require')
+" | set-branch-secret DATABASE_URL
 ```
-NETLIFY_SITE_ID=<site_id from deployment.txt>
-NEON_PROJECT_ID=<neon_project_id from deployment.txt>
-DATABASE_URL=<database_url from deployment.txt>
-```
 
-If `.env` is missing these values the script will create **new** resources, which means
-a new URL and an empty database. Always check `deployment.txt` first.
+If none of the three branch secrets exist, the script creates new resources.
 
 ## Inputs
 
@@ -97,24 +113,23 @@ a new URL and an empty database. Always check `deployment.txt` first.
   - `NEON_API_KEY` (required): For Neon project/database management.
   - `NETLIFY_AUTH_TOKEN` (required): For Netlify CLI authentication.
   - `NETLIFY_ACCOUNT_SLUG` (required): For Netlify site creation.
+  - `NEON_PROJECT_ID`, `DATABASE_URL`, `NETLIFY_SITE_ID` (branch secrets): Created on
+    first deploy, reused on subsequent deploys.
   The deploy script (or `npm run deploy`) must be invoked via `exec-secrets`:
-  `exec-secrets NEON_API_KEY NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- npm run deploy`
+  `exec-secrets NEON_API_KEY NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG DATABASE_URL NEON_PROJECT_ID NETLIFY_SITE_ID -- npm run deploy`
 - **Files**:
-  - `.env`: Read for existing project info (`NEON_PROJECT_ID`, `DATABASE_URL`,
-    `NETLIFY_SITE_ID`). Written to on first run.
-  - `deployment.txt`: Resource block at the top contains `site_id`, `neon_project_id`, and
-    `database_url` from the last deployment (committed to git). Use this to populate `.env`
-    when deploying in a fresh environment. Deployment history entries follow below.
+  - `deployment.txt`: Contains `url` and `deployed_at` from the last deployment
+    (committed to git). Deployment history entries follow below.
 
 ## Outputs
 
 - **stdout**: One-line summary only.
 - **`logs/deploy.log`**: Full build and deploy output. Overwritten each run.
-- **`.env`**: Updated with `NEON_PROJECT_ID`, `DATABASE_URL`, `NETLIFY_SITE_ID` if created.
-- **`deployment.txt`**: Resource block at the top is updated with the current deployed URL,
-  `site_id`, `neon_project_id`, and `database_url`. Deployment history entries below the
-  resource block are preserved. The deployment skill appends a new history entry after
-  each successful deploy.
+- **Branch secrets**: `DATABASE_URL`, `NEON_PROJECT_ID`, `NETLIFY_SITE_ID` stored via
+  `set-branch-secret` if created.
+- **`deployment.txt`**: Updated with the deployed `url` and `deployed_at`. Deployment
+  history entries below the resource block are preserved. The deployment skill appends
+  a new history entry after each successful deploy.
 - **Side effects**:
   - Creates Neon project (first run only).
   - Syncs production database schema (every run).
@@ -173,25 +188,9 @@ for the working REST API approach.
 
 1. **Check existing env vars**: Use the Netlify REST API or `LC_ALL=C npx netlify env:list --json --site $NETLIFY_SITE_ID`
 2. **Set `DATABASE_URL`**: See `skills/scripts/netlify-env.md` for the REST API command.
-   The deploy script writes `DATABASE_URL` to `.env` but does NOT automatically set it on Netlify.
-   You must set it manually after the first deploy.
+   Use `exec-secrets DATABASE_URL` to access the value when setting it on Netlify.
 3. **Run the deployment test** (`npx playwright test --config playwright.deployment.config.ts`)
    to confirm the production app can load data and perform writes.
-
-## Exporting `.env` for Shell Commands
-
-`source .env` does NOT export variables — they are only available in the current shell, not in
-subprocesses or `curl` commands. When you need `.env` values in shell commands, use:
-
-```bash
-export $(grep -v '^#' .env | xargs)
-```
-
-This exports all non-comment lines as environment variables accessible to subprocesses.
-
-**Note**: This only applies to app-level variables in `.env` (like `DATABASE_URL`,
-`NEON_PROJECT_ID`, `NETLIFY_SITE_ID`). Container-level secrets (`NEON_API_KEY`,
-`NETLIFY_AUTH_TOKEN`, etc.) are accessed via `exec-secrets`, not `.env`.
 
 ## Locale Workaround
 
@@ -209,7 +208,7 @@ subprocesses.
 
 **ANSI code contamination**: `LC_ALL=C` also prevents ANSI escape codes from appearing in
 CLI output. Without it, extracting URLs or site IDs from `netlify deploy` output may capture
-embedded escape sequences that corrupt `.env` values and break subsequent `curl` calls. See
+embedded escape sequences that corrupt parsed values and break subsequent `curl` calls. See
 `skills/scripts/deploy-troubleshooting.md` for details.
 
 ## Netlify CLI Troubleshooting
@@ -232,8 +231,8 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   so the token is available to the subprocess.
 - **"Site not found" errors on deploy**: If `netlify deploy` fails with a site-not-found error,
   run `npx netlify link --id $NETLIFY_SITE_ID` before deploying. This writes the site ID to
-  `.netlify/state.json`, which the CLI reads to identify the target site. The site ID can be
-  found in `.env` (`NETLIFY_SITE_ID`) or `deployment.txt` (`site_id`).
+  `.netlify/state.json`, which the CLI reads to identify the target site. The site ID is
+  available as a branch secret via `exec-secrets NETLIFY_SITE_ID`.
 
 All Netlify CLI commands in the deploy script should use `LC_ALL=C` and pipe output to the
 log file rather than inheriting stdio.
@@ -249,7 +248,7 @@ module resolution issues with `@neondatabase/serverless`:
 npx tsx scripts/schema.ts
 
 # This works reliably:
-npx tsx -e "import { initSchema } from './scripts/schema.ts'; await initSchema(process.env.DATABASE_URL!);"
+exec-secrets DATABASE_URL -- npx tsx -e "import { initSchema } from './scripts/schema.ts'; await initSchema(process.env.DATABASE_URL!);"
 ```
 
 The deploy script handles this internally, but if you need to run schema operations manually
@@ -292,7 +291,5 @@ curl -s ... | node -e "process.stdin.on('data',d=>console.log(JSON.parse(d).key)
   curl -s -o /dev/null -w "%{http_code}" <deployed-url>
   ```
 - Do NOT inherit stdio from subprocesses. Pipe all subprocess output to `logs/deploy.log`.
-- Read/write `.env` using `fs` — parse as key=value lines, append new entries, don't
-  clobber existing values.
 - Production builds must use `sourcemap: true`, `minify: false`, and the React development
   bundle (see `vite.config.ts` settings) so Replay recordings show readable source.

@@ -160,8 +160,7 @@ is required — do NOT skip or reorder steps.
 - NEVER skip the bug writeup before fixing code.
 - NEVER stop or cancel a Replay recording upload. Wait for it to complete.
 - Always test against the live deployed URL, not localhost.
-- If the deployed app requires authentication, check the app's seed data or `.env` for test
-  credentials.
+- If the deployed app requires authentication, check the app's seed data for test credentials.
 - Continue through the entire journey even if a problem is found early — there may be
   multiple issues.
 - When running Playwright journey tests, use `--workers=1` to prevent shared mutable state

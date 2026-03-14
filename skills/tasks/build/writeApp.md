@@ -60,7 +60,8 @@ For Neon database setup during app creation, follow `skills/scripts/neon-setup.m
 - `NEON_API_KEY` is accessed via `exec-secrets` — it is NOT available directly in the environment.
 - Wrap any command that needs the API key with `exec-secrets`:
   `exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" ...`
-- After creating a project, save the `NEON_PROJECT_ID` and `DATABASE_URL` to `.env`.
+- After creating a project, store `NEON_PROJECT_ID` and `DATABASE_URL` as branch secrets
+  via `set-branch-secret`.
 - See `skills/scripts/env-setup.md` for the full list of required environment variables.
 
 ## Required Configuration Files
@@ -111,7 +112,7 @@ the test and deploy scripts (see `skills/scripts/test.md` and `skills/scripts/de
 **Requirements for `initSchema`**:
 
 - Exported function that accepts a database URL string and returns a Promise. It must NOT read
-  `DATABASE_URL` from the environment or `.env` — the caller passes the URL.
+  `DATABASE_URL` on its own — the caller passes the URL as an argument.
 - Must use `CREATE TABLE IF NOT EXISTS` for all tables, making it idempotent and safe to re-run.
 - Must create all tables, indices, and constraints needed by the app.
 - When a new table or column is added to the app, it MUST be added to `initSchema`. There must be

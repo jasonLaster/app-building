@@ -56,14 +56,15 @@ If free space is below 1GB, run the disk cleanup procedure in `skills/scripts/di
 before proceeding. Disk exhaustion (0 bytes free) causes cascading failures: dev server crashes,
 Replay browser deletion, and npm install failures.
 
-### 2. Verify `NEON_PROJECT_ID` in `.env`
+### 2. Verify `NEON_PROJECT_ID` is available
 
 ```bash
-grep NEON_PROJECT_ID .env
+list-secrets | grep NEON_PROJECT_ID
 ```
 
-The test script requires `NEON_PROJECT_ID` for creating ephemeral Neon branches. If missing,
-check `deployment.txt` for the project ID and populate `.env`. See `skills/scripts/env-setup.md`.
+The test script requires `NEON_PROJECT_ID` for creating ephemeral Neon branches. It must
+be set as a branch secret. Also verify `DATABASE_URL` is available. See
+`skills/scripts/env-setup.md`.
 
 ### 3. Verify Replay browser
 
@@ -94,10 +95,11 @@ packages. This is the standard approach for `npm install` in this ecosystem.
 
 ## Pre-Deploy Preflight
 
-### 1. Populate `.env` from `deployment.txt`
+### 1. Verify branch secrets
 
-If `.env` is missing or incomplete, read `deployment.txt` for `site_id`, `neon_project_id`,
-and `database_url`. See `skills/scripts/deploy.md` § "Populating `.env` for Redeployments".
+Run `list-secrets` and confirm `NEON_PROJECT_ID`, `DATABASE_URL`, and `NETLIFY_SITE_ID`
+are set. If `NEON_PROJECT_ID` exists but `DATABASE_URL` does not, you must reset the
+database password. See `skills/scripts/deploy.md` § "Redeployments".
 
 ### 2. Secrets are accessed via `exec-secrets`
 
