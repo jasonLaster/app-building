@@ -58,6 +58,42 @@ export const fetchMyIssues = createAsyncThunk(
   }
 );
 
+export interface CreateIssuePayload {
+  teamId: string;
+  title: string;
+  description: string;
+  status: string;
+  priority: string;
+  assigneeId: string | null;
+  labelIds: string[];
+  projectId: string | null;
+  cycleId: string | null;
+  dueDate: string | null;
+  parentId: string | null;
+}
+
+export const createIssue = createAsyncThunk(
+  'issues/createIssue',
+  async (payload: CreateIssuePayload, { getState, rejectWithValue }) => {
+    const state = getState() as { auth: { token: string | null } };
+    const token = state.auth.token;
+    if (!token) return rejectWithValue('No token');
+    const response = await fetch('/api/create-issue', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      return rejectWithValue('Failed to create issue');
+    }
+    const data = await response.json();
+    return data.issue as Issue;
+  }
+);
+
 export const updateIssueStatus = createAsyncThunk(
   'issues/updateIssueStatus',
   async ({ issueId, status }: { issueId: string; status: string }, { getState, rejectWithValue }) => {
@@ -99,6 +135,9 @@ const issuesSlice = createSlice({
       .addCase(fetchMyIssues.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(createIssue.fulfilled, (state, action) => {
+        state.myIssues.unshift(action.payload);
       })
       .addCase(updateIssueStatus.fulfilled, (state, action) => {
         const { issueId, status } = action.payload;
