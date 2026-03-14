@@ -3,9 +3,154 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+        "PlanPageLogin: Decide on components, add sections to docs/tests.md",
+        "PlanComponentLoginForm: Add test entries for LoginForm",
+        "PlanComponentSignUpForm: Add test entries for SignUpForm"
       ],
-      "timestamp": "2026-03-14T18:21:40.864Z",
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageNavigation: Decide on components, add sections to docs/tests.md",
+        "PlanComponentSidebar: Add test entries for Sidebar",
+        "PlanComponentSidebarCollapse: Add test entries for SidebarCollapse",
+        "PlanComponentKeyboardShortcuts: Add test entries for KeyboardShortcuts"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageMyIssues: Decide on components, add sections to docs/tests.md",
+        "PlanComponentMyIssuesList: Add test entries for MyIssuesList",
+        "PlanComponentIssueRow: Add test entries for IssueRow",
+        "PlanComponentFiltersToolbar: Add test entries for FiltersToolbar"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageInbox: Decide on components, add sections to docs/tests.md",
+        "PlanComponentNotificationList: Add test entries for NotificationList",
+        "PlanComponentNotificationRow: Add test entries for NotificationRow"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageTeamIssues: Decide on components, add sections to docs/tests.md",
+        "PlanComponentTeamIssuesList: Add test entries for TeamIssuesList",
+        "PlanComponentBulkActions: Add test entries for BulkActions",
+        "PlanComponentGroupBySort: Add test entries for GroupBySort",
+        "PlanComponentTeamFilters: Add test entries for TeamFilters"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageIssueDetail: Decide on components, add sections to docs/tests.md",
+        "PlanComponentIssueHeader: Add test entries for IssueHeader",
+        "PlanComponentIssueDescription: Add test entries for IssueDescription",
+        "PlanComponentActivityComments: Add test entries for ActivityComments",
+        "PlanComponentIssueSidebar: Add test entries for IssueSidebar",
+        "PlanComponentSubIssues: Add test entries for SubIssues"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageCreateIssueModal: Decide on components, add sections to docs/tests.md",
+        "PlanComponentCreateIssueForm: Add test entries for CreateIssueForm",
+        "PlanComponentCreateIssueActions: Add test entries for CreateIssueActions"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageActiveCycle: Decide on components, add sections to docs/tests.md",
+        "PlanComponentCycleList: Add test entries for CycleList",
+        "PlanComponentCycleDetail: Add test entries for CycleDetail",
+        "PlanComponentCreateCycle: Add test entries for CreateCycle",
+        "PlanComponentBurndownChart: Add test entries for BurndownChart"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageProjects: Decide on components, add sections to docs/tests.md",
+        "PlanComponentProjectCard: Add test entries for ProjectCard",
+        "PlanComponentProjectFilters: Add test entries for ProjectFilters",
+        "PlanComponentCreateProjectModal: Add test entries for CreateProjectModal"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageProjectDetail: Decide on components, add sections to docs/tests.md",
+        "PlanComponentProjectHeader: Add test entries for ProjectHeader",
+        "PlanComponentProjectIssuesTab: Add test entries for ProjectIssuesTab",
+        "PlanComponentProjectOverviewTab: Add test entries for ProjectOverviewTab"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageMembers: Decide on components, add sections to docs/tests.md",
+        "PlanComponentMemberList: Add test entries for MemberList",
+        "PlanComponentInviteMemberModal: Add test entries for InviteMemberModal",
+        "PlanComponentMemberActions: Add test entries for MemberActions"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageTeams: Decide on components, add sections to docs/tests.md",
+        "PlanComponentTeamCard: Add test entries for TeamCard",
+        "PlanComponentCreateTeamModal: Add test entries for CreateTeamModal",
+        "PlanComponentTeamSettings: Add test entries for TeamSettings"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageLabels: Decide on components, add sections to docs/tests.md",
+        "PlanComponentLabelList: Add test entries for LabelList",
+        "PlanComponentCreateLabel: Add test entries for CreateLabel",
+        "PlanComponentEditDeleteLabel: Add test entries for EditDeleteLabel"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageSettings: Decide on components, add sections to docs/tests.md",
+        "PlanComponentWorkspaceSettings: Add test entries for WorkspaceSettings"
+      ],
+      "timestamp": "2026-03-14T18:22:34.151Z",
       "app": "LinearClone"
     },
     {
@@ -68,9 +213,9 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "Unpack: Write test specification"
+      "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
     ],
-    "timestamp": "2026-03-14T18:21:07.448Z",
+    "timestamp": "2026-03-14T18:21:40.864Z",
     "app": "LinearClone"
   }
 }
