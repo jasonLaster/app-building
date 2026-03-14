@@ -1,0 +1,161 @@
+.create-label {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.create-label-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.create-label-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.create-label-field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.create-label-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create-label-preview-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.create-label-input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.create-label-input:focus {
+  border-color: var(--color-accent);
+}
+
+.create-label-input-error {
+  border-color: #ef4444 !important;
+}
+
+.create-label-error {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+.create-label-color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.create-label-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.create-label-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.create-label-swatch:hover {
+  transform: scale(1.15);
+}
+
+.create-label-swatch-selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.create-label-custom-hex {
+  display: flex;
+  align-items: center;
+}
+
+.create-label-hex-input {
+  width: 120px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 12px;
+  font-family: monospace;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.create-label-hex-input:focus {
+  border-color: var(--color-accent);
+}
+
+.create-label-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.create-label-cancel-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.create-label-cancel-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.create-label-submit-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.create-label-submit-btn:hover {
+  opacity: 0.9;
+}
+
+.create-label-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

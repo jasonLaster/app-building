@@ -1,0 +1,221 @@
+.label-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 100px;
+  gap: 12px;
+  padding: 10px 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 150ms ease;
+}
+
+.label-row:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.label-row:last-child {
+  border-bottom: none;
+}
+
+.label-row-editing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin: 4px 0;
+}
+
+.label-row-editing:hover {
+  background-color: var(--color-bg-surface);
+}
+
+.label-row-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.label-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.label-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-row-count {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.label-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.label-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.label-action-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.label-action-btn-delete:hover {
+  color: #ef4444;
+}
+
+.label-row-edit-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-row-edit-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-edit-input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.label-edit-input:focus {
+  border-color: var(--color-accent);
+}
+
+.label-edit-input-error {
+  border-color: #ef4444 !important;
+}
+
+.label-edit-error {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+.label-edit-color-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.label-edit-presets {
+  display: flex;
+  gap: 5px;
+}
+
+.label-edit-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+
+.label-edit-swatch:hover {
+  transform: scale(1.15);
+}
+
+.label-edit-swatch-selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.label-edit-hex-input {
+  width: 100px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 12px;
+  font-family: monospace;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.label-edit-hex-input:focus {
+  border-color: var(--color-accent);
+}
+
+.label-row-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.label-edit-cancel-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.label-edit-cancel-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.label-edit-save-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.label-edit-save-btn:hover {
+  opacity: 0.9;
+}
+
+.label-edit-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

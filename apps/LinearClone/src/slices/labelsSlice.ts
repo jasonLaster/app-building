@@ -4,6 +4,7 @@ export interface Label {
   id: string;
   name: string;
   color: string;
+  issue_count: number;
 }
 
 interface LabelsState {
@@ -35,6 +36,73 @@ export const fetchLabels = createAsyncThunk(
   }
 );
 
+export const createLabel = createAsyncThunk(
+  'labels/createLabel',
+  async (payload: { name: string; color: string }, { getState, rejectWithValue }) => {
+    const state = getState() as { auth: { token: string | null } };
+    const token = state.auth.token;
+    if (!token) return rejectWithValue('No token');
+    const response = await fetch('/api/labels', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const data = await response.json();
+      return rejectWithValue(data.error || 'Failed to create label');
+    }
+    const data = await response.json();
+    return data.label as Label;
+  }
+);
+
+export const updateLabel = createAsyncThunk(
+  'labels/updateLabel',
+  async (payload: { id: string; name: string; color: string }, { getState, rejectWithValue }) => {
+    const state = getState() as { auth: { token: string | null } };
+    const token = state.auth.token;
+    if (!token) return rejectWithValue('No token');
+    const response = await fetch('/api/labels', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const data = await response.json();
+      return rejectWithValue(data.error || 'Failed to update label');
+    }
+    const data = await response.json();
+    return data.label as Label;
+  }
+);
+
+export const deleteLabel = createAsyncThunk(
+  'labels/deleteLabel',
+  async (id: string, { getState, rejectWithValue }) => {
+    const state = getState() as { auth: { token: string | null } };
+    const token = state.auth.token;
+    if (!token) return rejectWithValue('No token');
+    const response = await fetch('/api/labels', {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    });
+    if (!response.ok) {
+      return rejectWithValue('Failed to delete label');
+    }
+    return id;
+  }
+);
+
 const labelsSlice = createSlice({
   name: 'labels',
   initialState,
@@ -54,6 +122,18 @@ const labelsSlice = createSlice({
       .addCase(fetchLabels.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
+      })
+      .addCase(createLabel.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      })
+      .addCase(updateLabel.fulfilled, (state, action) => {
+        const index = state.items.findIndex((l) => l.id === action.payload.id);
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+      .addCase(deleteLabel.fulfilled, (state, action) => {
+        state.items = state.items.filter((l) => l.id !== action.payload);
       });
   },
 });
