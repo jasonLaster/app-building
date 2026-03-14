@@ -198,6 +198,9 @@ export function startSecretsServer(opts: SecretsServerOptions, log: (msg: string
 
       if (missing.length > 0) {
         log(`exec-secrets: unknown secrets: ${missing.join(", ")}`);
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: `Unknown secrets: ${missing.join(", ")}. Run list-secrets to see available secrets.` }));
+        return;
       }
       log(`exec-secrets: ${body.cmd.join(" ")} (secrets: ${(body.secrets ?? []).join(", ")})`);
 

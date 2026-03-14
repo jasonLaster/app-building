@@ -107,15 +107,15 @@ exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c 'curl -s \
 # Extract main branch ID
 BRANCH_ID=$(python3 -c "import json; bs=json.load(open('/tmp/branches.json'))['branches']; print(next(b['id'] for b in bs if b.get('primary',False) or b['name']=='main'))")
 
-# Reset password
-exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c "curl -s -X POST \
-  -H 'Authorization: Bearer \$NEON_API_KEY' \
-  'https://console.neon.tech/api/v2/projects/\$NEON_PROJECT_ID/branches/$BRANCH_ID/roles/neondb_owner/reset_password' > /tmp/reset.json"
+# Reset password (use single quotes for bash -c to avoid escaping issues)
+exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c 'curl -s -X POST \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/branches/'"$BRANCH_ID"'/roles/neondb_owner/reset_password" > /tmp/reset.json'
 
 # Get endpoint host
-exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c "curl -s \
-  -H 'Authorization: Bearer \$NEON_API_KEY' \
-  'https://console.neon.tech/api/v2/projects/\$NEON_PROJECT_ID/endpoints' > /tmp/endpoints.json"
+exec-secrets NEON_API_KEY NEON_PROJECT_ID -- bash -c 'curl -s \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  "https://console.neon.tech/api/v2/projects/$NEON_PROJECT_ID/endpoints" > /tmp/endpoints.json'
 
 # Store fresh DATABASE_URL
 python3 -c "

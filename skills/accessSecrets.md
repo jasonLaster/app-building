@@ -67,3 +67,6 @@ After storing, the secret is immediately available via `exec-secrets` and `list-
 - Always use `exec-secrets` to wrap any command that needs secret values.
 - If a command needs multiple secrets, list them all before `--`.
 - For complex commands that use shell expansion of secret vars, wrap in `bash -c '...'`.
+- **Always use single quotes** for `bash -c` arguments so that `$SECRET_NAME` is passed
+  literally to bash (which expands it from the exec-secrets env). Double quotes with `\$`
+  cause auth failures due to escaping issues.
