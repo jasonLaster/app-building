@@ -3,9 +3,163 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "Unpack: Write the app"
+        "WriteComponentLoginForm: Write the LoginForm component",
+        "WriteComponentSignUpForm: Write the SignUpForm component",
+        "WritePageLogin: Write the Login page",
+        "WritePageSignUp: Write the SignUp page"
       ],
-      "timestamp": "2026-03-14T18:21:07.448Z",
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentSidebar: Write the Sidebar component with collapsible team sections and workspace sections",
+        "WriteComponentSidebarCollapse: Write the SidebarCollapse toggle for icon-only mode",
+        "WriteComponentKeyboardShortcuts: Write the KeyboardShortcuts handler component"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentIssueRow: Write the IssueRow component with priority, status, labels, assignee, and clickable title",
+        "WriteComponentFiltersToolbar: Write the FiltersToolbar component with multi-select Status, Priority, and Label filters",
+        "WriteComponentMyIssuesList: Write the MyIssuesList component with status grouping and collapsible groups",
+        "WritePageMyIssues: Write the My Issues page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentNotificationRow: Write the NotificationRow component with type icons, timestamps, and archive button",
+        "WriteComponentNotificationList: Write the NotificationList component with read/unread distinction",
+        "WritePageInbox: Write the Inbox page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentBulkActions: Write the BulkActions toolbar for multi-issue status, priority, assignee, and label changes",
+        "WriteComponentGroupBySort: Write the GroupBySort controls for grouping and sorting issues",
+        "WriteComponentTeamFilters: Write the TeamFilters toolbar with Status, Priority, Assignee, Label, Project, and Cycle filters",
+        "WriteComponentTeamIssuesList: Write the TeamIssuesList component",
+        "WritePageTeamIssues: Write the Team Issues page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentCreateIssueForm: Write the CreateIssueForm with all fields (team, title, description, status, priority, assignee, labels, project, cycle, due date, parent)",
+        "WriteComponentCreateIssueActions: Write the CreateIssueActions with create and cancel buttons",
+        "WriteComponentCreateIssueModal: Write the CreateIssueModal wrapper"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentIssueHeader: Write the IssueHeader with inline-editable title and status selector",
+        "WriteComponentIssueDescription: Write the IssueDescription with markdown support and inline editing",
+        "WriteComponentSubIssues: Write the SubIssues section with child issue list and add button",
+        "WriteComponentActivityComments: Write the ActivityComments section with tab toggle, activity history, and comment input",
+        "WriteComponentIssueSidebar: Write the IssueSidebar with all property fields (status, priority, assignee, labels, project, cycle, due date)",
+        "WritePageIssueDetail: Write the Issue Detail page with two-panel layout"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentCycleList: Write the CycleList component with progress bars and active highlight",
+        "WriteComponentCycleDetail: Write the CycleDetail view with progress stats and issue list",
+        "WriteComponentCreateCycle: Write the CreateCycle modal with name and date fields",
+        "WriteComponentBurndownChart: Write the BurndownChart bar chart component",
+        "WritePageActiveCycle: Write the Active Cycle page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentProjectCard: Write the ProjectCard with status badge, lead, target date, progress bar, and team icons",
+        "WriteComponentProjectFilters: Write the ProjectFilters toolbar with Status, Lead, and Team filters",
+        "WriteComponentCreateProjectModal: Write the CreateProjectModal with all fields",
+        "WritePageProjects: Write the Projects page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentProjectHeader: Write the ProjectHeader with inline-editable name, status, target date, lead, and progress bar",
+        "WriteComponentProjectIssuesTab: Write the ProjectIssuesTab with issues grouped by team and bulk actions",
+        "WriteComponentProjectOverviewTab: Write the ProjectOverviewTab with description, milestones, and key metrics",
+        "WritePageProjectDetail: Write the Project Detail page with tabs"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentMemberList: Write the MemberList component with avatar, name, email, role, and team badges",
+        "WriteComponentInviteMemberModal: Write the InviteMemberModal with email field and validation",
+        "WriteComponentMemberActions: Write the MemberActions with role change dropdown and remove with confirmation",
+        "WritePageMembers: Write the Members page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentTeamCard: Write the TeamCard with name, prefix, member count, and active cycle",
+        "WriteComponentCreateTeamModal: Write the CreateTeamModal with name, identifier prefix, and description fields",
+        "WriteComponentTeamSettings: Write the TeamSettings view with inline editing and member management",
+        "WritePageTeams: Write the Teams Management page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentLabelList: Write the LabelList component with colored dots, names, and issue counts",
+        "WriteComponentCreateLabel: Write the CreateLabel form with name field and color picker",
+        "WriteComponentEditDeleteLabel: Write the EditDeleteLabel with inline editing and delete confirmation",
+        "WritePageLabels: Write the Labels page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "WriteComponentWorkspaceSettings: Write the WorkspaceSettings component with workspace name and default team fields",
+        "WritePageSettings: Write the Settings page"
+      ],
+      "timestamp": "2026-03-14T18:57:06.538Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "SetupApp: Setup the app",
+        "DesignDatabase: Design the database"
+      ],
+      "timestamp": "2026-03-14T18:56:37.640Z",
       "app": "LinearClone"
     },
     {
@@ -50,9 +204,9 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/writeShared.md",
+    "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "Unpack: Write app shared code"
+      "Unpack: Write the app"
     ],
     "timestamp": "2026-03-14T18:21:07.448Z",
     "app": "LinearClone"
