@@ -1,21 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
-        "WriteTestDealsDisplay: Write test for DealsSection displays deal cards on Explore page",
-        "WriteTestDealsCardContent: Write test for DealsSection deal card shows destination dates price and savings",
-        "WriteTestDealsClick: Write test for DealsSection clicking a deal card initiates a search",
-        "WriteTestDealsOriginChange: Write test for DealsSection updates when origin airport changes",
-        "WriteTestDealsLoading: Write test for DealsSection shows loading state while fetching deals",
-        "WriteTestDealsEmpty: Write test for DealsSection shows empty state when no deals available",
-        "WriteTestDealsGrid: Write test for DealsSection displays multiple deal cards in grid or row layout",
-        "WriteTestDealsSavings: Write test for DealsSection savings percentage is calculated correctly"
-      ],
-      "timestamp": "2026-03-14T19:26:12.594Z",
-      "app": "GoogleFlights"
-    },
-    {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
         "Unpack: Do an initial production deployment"
@@ -43,26 +28,14 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestDestMapDisplay: Write test for DestinationMap displays interactive map on Explore page",
-      "WriteTestDestMapOriginSelector: Write test for DestinationMap shows origin airport selector",
-      "WriteTestDestMapChangeOrigin: Write test for DestinationMap changing origin updates displayed destinations",
-      "WriteTestDestMapMarkers: Write test for DestinationMap displays destination markers with prices",
-      "WriteTestDestMapClickMarker: Write test for DestinationMap clicking a destination marker initiates a search",
-      "WriteTestDestMapHoverTooltip: Write test for DestinationMap hover on destination marker shows tooltip",
-      "WriteTestDestMapZoomPan: Write test for DestinationMap zoom and pan interaction",
-      "WriteTestDestMapLoading: Write test for DestinationMap shows loading state while fetching destinations",
-      "WriteTestDestMapEmpty: Write test for DestinationMap shows empty state when no destinations available",
-      "WriteTestDestMapRepeated: Write test for DestinationMap origin can be changed repeatedly",
-      "WriteTestFlexDatesGrid: Write test for FlexibleDatesGrid displays calendar-style grid with prices",
-      "WriteTestFlexDatesColors: Write test for FlexibleDatesGrid cells are color-coded by price level",
-      "WriteTestFlexDatesWeekend: Write test for FlexibleDatesGrid date range selector Weekend trips",
-      "WriteTestFlexDates1Week: Write test for FlexibleDatesGrid date range selector 1 week",
-      "WriteTestFlexDates2Weeks: Write test for FlexibleDatesGrid date range selector 2 weeks",
-      "WriteTestFlexDatesClick: Write test for FlexibleDatesGrid clicking a date cell initiates a search",
-      "WriteTestFlexDatesLoading: Write test for FlexibleDatesGrid shows loading state while fetching price data",
-      "WriteTestFlexDatesOriginChange: Write test for FlexibleDatesGrid updates when origin changes",
-      "WriteTestFlexDatesToggle: Write test for FlexibleDatesGrid date range selector can be toggled repeatedly",
-      "WriteTestFlexDatesEmpty: Write test for FlexibleDatesGrid shows empty state when no prices available"
+      "WriteTestDealsDisplay: Write test for DealsSection displays deal cards on Explore page",
+      "WriteTestDealsCardContent: Write test for DealsSection deal card shows destination dates price and savings",
+      "WriteTestDealsClick: Write test for DealsSection clicking a deal card initiates a search",
+      "WriteTestDealsOriginChange: Write test for DealsSection updates when origin airport changes",
+      "WriteTestDealsLoading: Write test for DealsSection shows loading state while fetching deals",
+      "WriteTestDealsEmpty: Write test for DealsSection shows empty state when no deals available",
+      "WriteTestDealsGrid: Write test for DealsSection displays multiple deal cards in grid or row layout",
+      "WriteTestDealsSavings: Write test for DealsSection savings percentage is calculated correctly"
     ],
     "timestamp": "2026-03-14T19:26:12.594Z",
     "app": "GoogleFlights"
