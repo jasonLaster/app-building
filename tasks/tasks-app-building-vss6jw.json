@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/add-listing-form-advanced.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:45:21.187Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/add-listing-form.spec.ts"
       ],
       "timestamp": "2026-03-14T21:45:21.187Z",
@@ -236,9 +228,9 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "Unpack: Get all tests passing"
+      "FixTests: tests/add-listing-form-advanced.spec.ts"
     ],
-    "timestamp": "2026-03-14T18:32:06.248Z",
+    "timestamp": "2026-03-14T21:45:21.187Z",
     "app": "AirbnbClone"
   }
 }

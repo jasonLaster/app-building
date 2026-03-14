@@ -1,0 +1,776 @@
+{
+  "config": {
+    "configFile": "/repo/apps/AirbnbClone/playwright.config.ts",
+    "rootDir": "/repo/apps/AirbnbClone/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/repo/apps/AirbnbClone/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/repo/apps/AirbnbClone/tests",
+        "testIgnore": [
+          "**/deployment.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "/repo/apps/AirbnbClone/node_modules/@replayio/playwright/dist/reporter.js",
+        {
+          "upload": false
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": {
+      "command": "npx netlify dev --port 8888 --functions ./netlify/functions",
+      "port": 8888,
+      "timeout": 30000,
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "add-listing-form-advanced.spec.ts",
+      "file": "add-listing-form-advanced.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Add Listing Form - Steps 6-7 and Form Behavior",
+          "file": "add-listing-form-advanced.spec.ts",
+          "line": 90,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Step 6 — Entering pricing information",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 96,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/97e0cdd7-1fcf-4391-8e5b-9097f39b500a"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5449,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:29.016Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 96,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-469a32327b4d296b7420",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 95,
+              "column": 3
+            },
+            {
+              "title": "Step 6 — Validation requires price per night",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 117,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/45e0db04-c7a8-43fe-8f13-fa012da1310b"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3585,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:34.635Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 117,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-7214f60342e258e37fc4",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 116,
+              "column": 3
+            },
+            {
+              "title": "Step 7 — Review and publish page displayed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 139,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/b9af962d-f024-4cf9-9e3c-0c01911da436"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3627,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:38.234Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 139,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-7b945e0ba798536a831d",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 138,
+              "column": 3
+            },
+            {
+              "title": "Step 7 — Review page shows all entered data correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 167,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/9a0ee9a7-4698-448e-807e-43021c85fd86"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4122,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:41.875Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 167,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-5dbfc7b37e0e25002977",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 166,
+              "column": 3
+            },
+            {
+              "title": "Publishing a new listing creates the property",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 234,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/6ff170a4-dc34-4aab-a3d4-9c6e5dce8e68"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5577,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:46.013Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 234,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-43d4aaf893124b67b450",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 233,
+              "column": 3
+            },
+            {
+              "title": "Back button navigates to the previous step",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 264,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/10b0987c-4d5e-4248-84ee-e87cdb40b194"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3224,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:51.604Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 264,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-7bcc014f3546da0b3ab0",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 263,
+              "column": 3
+            },
+            {
+              "title": "Cancel button closes the form without saving",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 285,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/ef8dc51d-5e26-4940-8f94-e03614e3b4c7"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3629,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:54.843Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 285,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-09308a644b27bdfb4a22",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 284,
+              "column": 3
+            },
+            {
+              "title": "Confirming cancel discards the listing form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 306,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/bfadf3e0-fe7b-4b15-b7af-ddb3217aeb0e"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3254,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:56:58.486Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 306,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-e71e273a128b7df7e76a",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 305,
+              "column": 3
+            },
+            {
+              "title": "Dismissing cancel keeps the form open",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 326,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/a402939d-abc4-40c4-960b-e2f765047e06"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3335,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:57:01.754Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 326,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-8c3c6e2adc5117b3d55a",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 325,
+              "column": 3
+            },
+            {
+              "title": "Step indicator shows correct progress throughout the form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 350,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/bcc320ed-71dc-4830-8ebd-dfd5b0cb497a"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3902,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:57:05.108Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 350,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-b9048846c8cc723a5be3",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 349,
+              "column": 3
+            },
+            {
+              "title": "Data persistence across steps when navigating back and forth",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 386,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/e2b16b84-2bb9-4ebe-9e7b-049a74295107"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3793,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:57:09.028Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 386,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-daad6ded52e8724e994a",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 385,
+              "column": 3
+            },
+            {
+              "title": "Add Listing form works correctly on repeated use",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                        "line": 440,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/a1fe8bc8-1c7f-4865-b726-439e7e30dab8"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 7466,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T21:57:12.836Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/add-listing-form-advanced.spec.ts",
+                            "line": 440,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "34733d3d8fe7c7ce0ec0-9bca17abcbede7a83a21",
+              "file": "add-listing-form-advanced.spec.ts",
+              "line": 439,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-14T21:56:22.616Z",
+    "duration": 57918.927,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

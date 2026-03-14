@@ -1,5 +1,5 @@
 import { PlaywrightTestConfig } from '@playwright/test'
-import { replayDevices, replayReporter } from '@replayio/playwright'
+import { devices as replayDevices, replayReporter } from '@replayio/playwright'
 
 const config: PlaywrightTestConfig = {
   testDir: './tests',

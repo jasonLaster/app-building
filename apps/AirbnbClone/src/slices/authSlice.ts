@@ -17,8 +17,25 @@ interface AuthState {
   error: string | null
 }
 
+function loadUserFromStorage(): User | null {
+  try {
+    const stored = localStorage.getItem('currentUser')
+    return stored ? JSON.parse(stored) : null
+  } catch {
+    return null
+  }
+}
+
+function saveUserToStorage(user: User | null) {
+  if (user) {
+    localStorage.setItem('currentUser', JSON.stringify(user))
+  } else {
+    localStorage.removeItem('currentUser')
+  }
+}
+
 const initialState: AuthState = {
-  currentUser: null,
+  currentUser: loadUserFromStorage(),
   loading: false,
   error: null,
 }
@@ -96,6 +113,7 @@ const authSlice = createSlice({
     logout(state) {
       state.currentUser = null
       state.error = null
+      saveUserToStorage(null)
     },
     clearError(state) {
       state.error = null
@@ -111,6 +129,7 @@ const authSlice = createSlice({
         state.loading = false
         state.currentUser = action.payload
         state.error = null
+        saveUserToStorage(action.payload)
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false
@@ -124,6 +143,7 @@ const authSlice = createSlice({
         state.loading = false
         state.currentUser = action.payload
         state.error = null
+        saveUserToStorage(action.payload)
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false
@@ -131,9 +151,11 @@ const authSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.currentUser = action.payload
+        saveUserToStorage(action.payload)
       })
       .addCase(becomeHost.fulfilled, (state, action) => {
         state.currentUser = action.payload
+        saveUserToStorage(action.payload)
       })
   },
 })
