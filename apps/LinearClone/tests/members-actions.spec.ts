@@ -125,4 +125,185 @@ test.describe('MemberActions', () => {
     // Admin option should not have the active class
     await expect(page.getByTestId(`member-role-option-admin-${bob.id}`)).not.toHaveClass(/member-actions-role-option-active/);
   });
+
+  test('Role dropdown can be used multiple times in sequence', async ({ page, baseURL }) => {
+    const { members } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    const bob = members.find((m) => m.email === 'bob@acme.com')!;
+    await expect(page.getByTestId(`member-row-${bob.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Verify Bob starts as Member
+    await expect(page.getByTestId(`member-role-badge-${bob.id}`)).toHaveText('Member');
+
+    // First change: Member -> Admin
+    await page.getByTestId(`member-role-dropdown-btn-${bob.id}`).click();
+    await expect(page.getByTestId(`member-role-dropdown-${bob.id}`)).toBeVisible({ timeout: 10000 });
+    await page.getByTestId(`member-role-option-admin-${bob.id}`).click();
+    await expect(page.getByTestId(`member-role-badge-${bob.id}`)).toHaveText('Admin', { timeout: 10000 });
+
+    // Second change: Admin -> Member
+    await page.getByTestId(`member-role-dropdown-btn-${bob.id}`).click();
+    await expect(page.getByTestId(`member-role-dropdown-${bob.id}`)).toBeVisible({ timeout: 10000 });
+    await page.getByTestId(`member-role-option-member-${bob.id}`).click();
+    await expect(page.getByTestId(`member-role-badge-${bob.id}`)).toHaveText('Member', { timeout: 10000 });
+
+    // Verify persistence
+    await page.reload();
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+    await expect(page.getByTestId(`member-role-badge-${bob.id}`)).toHaveText('Member', { timeout: 10000 });
+  });
+
+  test('Remove member button shows confirmation dialog', async ({ page, baseURL }) => {
+    const { members } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    const carol = members.find((m) => m.email === 'carol@acme.com')!;
+    await expect(page.getByTestId(`member-row-${carol.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Click remove button for Carol
+    await page.getByTestId(`member-remove-btn-${carol.id}`).click();
+
+    // Verify confirmation dialog appears
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Verify dialog contains Carol's name
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).toContainText('Carol Davis');
+
+    // Verify Confirm and Cancel buttons are present
+    await expect(page.getByTestId(`member-remove-confirm-btn-${carol.id}`)).toBeVisible();
+    await expect(page.getByTestId(`member-remove-confirm-cancel-${carol.id}`)).toBeVisible();
+
+    // Verify Carol is NOT yet removed
+    await expect(page.getByTestId(`member-row-${carol.id}`)).toBeVisible();
+  });
+
+  test('Confirm member removal deletes the member', async ({ page, baseURL }) => {
+    const { members } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    const carol = members.find((m) => m.email === 'carol@acme.com')!;
+    await expect(page.getByTestId(`member-row-${carol.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Capture initial member count
+    const initialCount = await page.locator('[data-testid^="member-row-"]').count();
+
+    // Click remove and confirm
+    await page.getByTestId(`member-remove-btn-${carol.id}`).click();
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).toBeVisible({ timeout: 10000 });
+    await page.getByTestId(`member-remove-confirm-btn-${carol.id}`).click();
+
+    // Verify dialog closes and Carol is removed
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).not.toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId(`member-row-${carol.id}`)).not.toBeVisible({ timeout: 10000 });
+
+    // Verify member count decreased by 1
+    await expect(page.locator('[data-testid^="member-row-"]')).toHaveCount(initialCount - 1, { timeout: 10000 });
+
+    // Verify persistence
+    await page.reload();
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+    await expect(page.getByTestId(`member-row-${carol.id}`)).not.toBeVisible({ timeout: 10000 });
+  });
+
+  test('Cancel member removal keeps the member', async ({ page, baseURL }) => {
+    const { members } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    const carol = members.find((m) => m.email === 'carol@acme.com')!;
+    await expect(page.getByTestId(`member-row-${carol.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Click remove button
+    await page.getByTestId(`member-remove-btn-${carol.id}`).click();
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Click cancel
+    await page.getByTestId(`member-remove-confirm-cancel-${carol.id}`).click();
+
+    // Verify dialog closes
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).not.toBeVisible({ timeout: 10000 });
+
+    // Verify Carol is still in the list
+    await expect(page.getByTestId(`member-row-${carol.id}`)).toBeVisible();
+    await expect(page.getByTestId(`member-name-${carol.id}`)).toHaveText('Carol Davis');
+  });
+
+  test('Cannot remove yourself from the workspace', async ({ page, baseURL }) => {
+    const { members, currentUserId } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    // The current user is Alice (admin)
+    const alice = members.find((m) => m.id === currentUserId)!;
+    await expect(page.getByTestId(`member-row-${alice.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Verify the remove button is NOT shown for the current user
+    await expect(page.getByTestId(`member-remove-btn-${alice.id}`)).not.toBeVisible();
+  });
+
+  test('Cannot change your own role (or last Admin cannot be demoted)', async ({ page, baseURL }) => {
+    const { members, currentUserId } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    // Alice is the only Admin
+    const alice = members.find((m) => m.id === currentUserId)!;
+    await expect(page.getByTestId(`member-row-${alice.id}`)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId(`member-role-badge-${alice.id}`)).toHaveText('Admin');
+
+    // Verify the role dropdown button is disabled for the last admin
+    await expect(page.getByTestId(`member-role-dropdown-btn-${alice.id}`)).toBeDisabled();
+  });
+
+  test("Removed member's issues remain assigned but member is gone from selectors", async ({ page, baseURL }) => {
+    test.slow();
+    const { token, members } = await authenticatePage(page, baseURL!);
+    await page.goto('/settings/members');
+    await expect(page.getByTestId('members-page')).toBeVisible({ timeout: 30000 });
+
+    const carol = members.find((m) => m.email === 'carol@acme.com')!;
+    await expect(page.getByTestId(`member-row-${carol.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Remove Carol via UI
+    await page.getByTestId(`member-remove-btn-${carol.id}`).click();
+    await expect(page.getByTestId(`member-remove-confirm-dialog-${carol.id}`)).toBeVisible({ timeout: 10000 });
+    await page.getByTestId(`member-remove-confirm-btn-${carol.id}`).click();
+    await expect(page.getByTestId(`member-row-${carol.id}`)).not.toBeVisible({ timeout: 10000 });
+
+    // Carol was assigned to "Optimize database queries for issue list" (Engineering issue #4)
+    // Fetch team issues to find Carol's issue
+    const teamsResponse = await fetch(`${baseURL}/api/teams`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const teamsData = await teamsResponse.json();
+    const engTeam = teamsData.teams.find((t: { name: string }) => t.name === 'Engineering');
+
+    const issuesResponse = await fetch(`${baseURL}/api/team-issues?teamId=${engTeam.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const issuesData = await issuesResponse.json();
+
+    // Find the issue that was assigned to Carol (assignee_id still points to Carol's UUID)
+    const carolIssue = issuesData.issues.find(
+      (i: { title: string }) => i.title === 'Optimize database queries for issue list'
+    );
+    expect(carolIssue).toBeTruthy();
+    // The issue still exists and retains its assignee_id
+    expect(carolIssue.assigneeId).toBe(carol.id);
+
+    // Navigate to the issue detail page
+    await page.goto(`/issue/${carolIssue.id}`);
+    await expect(page.getByTestId('issue-detail-page')).toBeVisible({ timeout: 30000 });
+
+    // Open the assignee selector dropdown
+    await page.getByTestId('sidebar-assignee-btn').click();
+    await expect(page.getByTestId('sidebar-assignee-dropdown')).toBeVisible({ timeout: 10000 });
+
+    // Verify Carol is NOT in the assignee options
+    await expect(page.getByTestId(`sidebar-assignee-option-${carol.id}`)).not.toBeVisible();
+  });
 });
