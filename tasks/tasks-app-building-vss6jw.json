@@ -5,6 +5,14 @@
       "subtasks": [
         "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
       ],
+      "timestamp": "2026-03-14T18:35:40.879Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+      ],
       "timestamp": "2026-03-14T18:32:43.514Z",
       "app": "AirbnbClone"
     },
