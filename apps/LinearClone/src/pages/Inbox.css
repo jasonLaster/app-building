@@ -1,0 +1,29 @@
+.inbox-page {
+  padding: 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 640px) {
+  .inbox-page {
+    padding: 12px;
+  }
+}
+
+.inbox-header {
+  margin-bottom: 4px;
+}
+
+.inbox-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.inbox-title-count {
+  margin-left: 8px;
+  color: var(--color-text-tertiary);
+  font-weight: 400;
+  font-size: 16px;
+}

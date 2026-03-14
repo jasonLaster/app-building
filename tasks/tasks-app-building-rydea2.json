@@ -3,16 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentNotificationRow: Write the NotificationRow component with type icons, timestamps, and archive button",
-        "WriteComponentNotificationList: Write the NotificationList component with read/unread distinction",
-        "WritePageInbox: Write the Inbox page"
-      ],
-      "timestamp": "2026-03-14T18:57:06.538Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentBulkActions: Write the BulkActions toolbar for multi-issue status, priority, assignee, and label changes",
         "WriteComponentGroupBySort: Write the GroupBySort controls for grouping and sorting issues",
         "WriteComponentTeamFilters: Write the TeamFilters toolbar with Status, Priority, Assignee, Label, Project, and Cycle filters",
@@ -174,10 +164,9 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentIssueRow: Write the IssueRow component with priority, status, labels, assignee, and clickable title",
-      "WriteComponentFiltersToolbar: Write the FiltersToolbar component with multi-select Status, Priority, and Label filters",
-      "WriteComponentMyIssuesList: Write the MyIssuesList component with status grouping and collapsible groups",
-      "WritePageMyIssues: Write the My Issues page"
+      "WriteComponentNotificationRow: Write the NotificationRow component with type icons, timestamps, and archive button",
+      "WriteComponentNotificationList: Write the NotificationList component with read/unread distinction",
+      "WritePageInbox: Write the Inbox page"
     ],
     "timestamp": "2026-03-14T18:57:06.538Z",
     "app": "LinearClone"
