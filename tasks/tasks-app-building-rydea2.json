@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentProjectHeader: Write the ProjectHeader with inline-editable name, status, target date, lead, and progress bar",
-        "WriteComponentProjectIssuesTab: Write the ProjectIssuesTab with issues grouped by team and bulk actions",
-        "WriteComponentProjectOverviewTab: Write the ProjectOverviewTab with description, milestones, and key metrics",
-        "WritePageProjectDetail: Write the Project Detail page with tabs"
-      ],
-      "timestamp": "2026-03-14T18:57:06.538Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentMemberList: Write the MemberList component with avatar, name, email, role, and team badges",
         "WriteComponentInviteMemberModal: Write the InviteMemberModal with email field and validation",
         "WriteComponentMemberActions: Write the MemberActions with role change dropdown and remove with confirmation",
@@ -106,10 +95,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentProjectCard: Write the ProjectCard with status badge, lead, target date, progress bar, and team icons",
-      "WriteComponentProjectFilters: Write the ProjectFilters toolbar with Status, Lead, and Team filters",
-      "WriteComponentCreateProjectModal: Write the CreateProjectModal with all fields",
-      "WritePageProjects: Write the Projects page"
+      "WriteComponentProjectHeader: Write the ProjectHeader with inline-editable name, status, target date, lead, and progress bar",
+      "WriteComponentProjectIssuesTab: Write the ProjectIssuesTab with issues grouped by team and bulk actions",
+      "WriteComponentProjectOverviewTab: Write the ProjectOverviewTab with description, milestones, and key metrics",
+      "WritePageProjectDetail: Write the Project Detail page with tabs"
     ],
     "timestamp": "2026-03-14T18:57:06.538Z",
     "app": "LinearClone"

@@ -1,0 +1,412 @@
+.project-overview-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.project-overview-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.project-overview-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-overview-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.project-overview-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.project-overview-add-btn:hover {
+  background-color: var(--color-bg-hover);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-text-primary);
+}
+
+/* Description */
+.project-overview-desc-display {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  min-height: 60px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  transition: border-color 150ms ease;
+}
+
+.project-overview-desc-display:hover {
+  border-color: var(--color-border);
+}
+
+.project-overview-desc-placeholder {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.project-overview-desc-rendered h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+}
+
+.project-overview-desc-rendered h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 6px;
+}
+
+.project-overview-desc-rendered ul {
+  margin: 4px 0;
+  padding-left: 20px;
+}
+
+.project-overview-desc-rendered li {
+  margin: 2px 0;
+}
+
+.project-overview-desc-rendered strong {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.project-overview-desc-edit {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-overview-desc-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.project-overview-desc-textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Milestones */
+.project-overview-milestones-empty {
+  padding: 16px;
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+}
+
+.project-overview-milestones-empty p {
+  margin: 0;
+}
+
+.project-overview-milestones-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.project-overview-milestone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 150ms ease;
+}
+
+.project-overview-milestone:last-child {
+  border-bottom: none;
+}
+
+.project-overview-milestone:hover {
+  background-color: var(--color-bg-surface);
+}
+
+.project-overview-milestone-completed {
+  opacity: 0.7;
+}
+
+.project-overview-milestone-check {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.project-overview-milestone-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.project-overview-milestone-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.project-overview-milestone-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+
+.project-overview-milestone-name:hover {
+  color: var(--color-accent);
+}
+
+.project-overview-milestone-name-done {
+  text-decoration: line-through;
+  color: var(--color-text-tertiary);
+}
+
+.project-overview-milestone-date {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.project-overview-milestone-delete-btn {
+  flex-shrink: 0;
+  padding: 4px;
+  border: none;
+  background: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 150ms ease, color 150ms ease;
+}
+
+.project-overview-milestone:hover .project-overview-milestone-delete-btn {
+  opacity: 1;
+}
+
+.project-overview-milestone-delete-btn:hover {
+  color: var(--color-status-cancelled);
+}
+
+/* Milestone form */
+.project-overview-milestone-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.project-overview-milestone-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.project-overview-milestone-name-input {
+  padding: 5px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  outline: none;
+  flex: 1;
+  min-width: 120px;
+}
+
+.project-overview-milestone-name-input:focus {
+  border-color: var(--color-accent);
+}
+
+.project-overview-milestone-date-input {
+  padding: 4px 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  outline: none;
+}
+
+.project-overview-milestone-date-input:focus {
+  border-color: var(--color-accent);
+}
+
+.project-overview-milestone-form-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.project-overview-milestone-save-btn {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.project-overview-milestone-save-btn:hover {
+  opacity: 0.9;
+}
+
+.project-overview-milestone-cancel-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.project-overview-milestone-cancel-btn:hover {
+  background-color: var(--color-bg-hover);
+}
+
+/* Delete dialog */
+.project-overview-delete-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-overview-delete-dialog {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.project-overview-delete-dialog p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+
+.project-overview-delete-dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.project-overview-delete-confirm-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.project-overview-delete-confirm-btn:hover {
+  opacity: 0.9;
+}
+
+.project-overview-delete-cancel-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.project-overview-delete-cancel-btn:hover {
+  background-color: var(--color-bg-hover);
+}
+
+/* Key Metrics */
+.project-overview-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.project-overview-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 12px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.project-overview-metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.project-overview-metric-green {
+  color: #22c55e;
+}
+
+.project-overview-metric-accent {
+  color: var(--color-accent);
+}
+
+.project-overview-metric-label {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}

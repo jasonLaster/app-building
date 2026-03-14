@@ -1,0 +1,401 @@
+.project-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.project-header-name-row {
+  display: flex;
+  align-items: center;
+}
+
+.project-header-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 150ms ease;
+}
+
+.project-header-name:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.project-header-name-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.project-header-name-input {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background: none;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  padding: 2px 4px;
+  outline: none;
+  width: 100%;
+}
+
+.project-header-name-input-error {
+  border-color: var(--color-status-cancelled);
+}
+
+.project-header-name-error {
+  font-size: 12px;
+  color: var(--color-status-cancelled);
+}
+
+.project-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Status badge */
+.project-header-status-wrapper {
+  position: relative;
+  z-index: 10;
+}
+
+.project-header-status-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 10px;
+  border: 1px solid;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+  background: none;
+}
+
+.project-header-status-badge:hover {
+  opacity: 0.8;
+}
+
+.project-header-badge-planned {
+  background-color: rgba(156, 163, 175, 0.15);
+  color: #9ca3af;
+  border-color: rgba(156, 163, 175, 0.3);
+}
+
+.project-header-badge-in-progress {
+  background-color: rgba(94, 106, 210, 0.15);
+  color: var(--color-accent);
+  border-color: rgba(94, 106, 210, 0.3);
+}
+
+.project-header-badge-completed {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.project-header-badge-cancelled {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.project-header-status-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 4px;
+}
+
+.project-header-status-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.project-header-status-option:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.project-header-status-option-active {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.project-header-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.project-header-status-dot.project-header-badge-planned {
+  background-color: #9ca3af;
+}
+
+.project-header-status-dot.project-header-badge-in-progress {
+  background-color: var(--color-accent);
+}
+
+.project-header-status-dot.project-header-badge-completed {
+  background-color: #22c55e;
+}
+
+.project-header-status-dot.project-header-badge-cancelled {
+  background-color: #ef4444;
+}
+
+/* Progress */
+.project-header-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.project-header-progress-bar {
+  flex: 1;
+  height: 6px;
+  background-color: var(--color-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.project-header-progress-fill {
+  height: 100%;
+  background-color: var(--color-accent);
+  border-radius: 3px;
+  transition: width 300ms ease;
+}
+
+.project-header-progress-complete {
+  background-color: #22c55e;
+}
+
+.project-header-progress-text {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Date */
+.project-header-date-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.project-header-date-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 150ms ease;
+}
+
+.project-header-date-btn:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.project-header-date-btn svg {
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.project-header-date-edit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.project-header-date-input {
+  font-size: 13px;
+  padding: 3px 6px;
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.project-header-date-clear {
+  font-size: 11px;
+  padding: 2px 6px;
+  border: none;
+  background: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 150ms ease;
+}
+
+.project-header-date-clear:hover {
+  color: var(--color-status-cancelled);
+}
+
+/* Lead */
+.project-header-lead-wrapper {
+  position: relative;
+  z-index: 10;
+}
+
+.project-header-lead-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 150ms ease;
+}
+
+.project-header-lead-btn:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.project-header-lead-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.project-header-lead-avatar-empty {
+  background-color: var(--color-border);
+  color: var(--color-text-tertiary);
+}
+
+.project-header-lead-name {
+  color: var(--color-text-secondary);
+}
+
+.project-header-no-lead {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+.project-header-lead-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 220px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 4px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.project-header-lead-search {
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  outline: none;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.project-header-lead-search::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.project-header-lead-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.project-header-lead-option:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.project-header-lead-option-active {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+/* Tabs */
+.project-header-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-header-tab {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 150ms ease, border-color 150ms ease;
+  margin-bottom: -1px;
+}
+
+.project-header-tab:hover {
+  color: var(--color-text-secondary);
+}
+
+.project-header-tab-active {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-accent);
+}
