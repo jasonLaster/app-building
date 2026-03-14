@@ -108,7 +108,7 @@ export async function seedDatabase(databaseUrl: string): Promise<void> {
       'b2222222-2222-2222-2222-222222222222',
       'a1111111-1111-1111-1111-111111111111',
       'Beachfront Villa with Private Pool',
-      'Wake up to ocean views in this stunning beachfront villa. Features a private infinity pool, outdoor dining area, and direct beach access. Perfect for families or groups looking for a luxury getaway.',
+      'Wake up to ocean views in this stunning beachfront villa. Features a private infinity pool, outdoor dining area, and direct beach access. Perfect for families or groups looking for a luxury getaway. The villa is situated on a pristine stretch of coastline with crystal-clear waters and white sandy beaches. Enjoy breathtaking sunsets from the expansive terrace while sipping your favorite drinks.',
       'Villa',
       450,
       150,

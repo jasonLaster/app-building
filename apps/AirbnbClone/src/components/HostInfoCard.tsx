@@ -14,7 +14,7 @@ export default function HostInfoCard({ property }: HostInfoCardProps) {
   const listingCount = property.host_listing_count || 0
 
   return (
-    <div data-testid="host-info-card" className="py-6">
+    <div id="host-info-card" data-testid="host-info-card" className="py-6">
       <h2 className="text-lg font-semibold text-text mb-4">Meet your host</h2>
       <div className="flex items-start gap-4">
         <div className="shrink-0">

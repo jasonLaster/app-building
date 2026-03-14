@@ -13,7 +13,9 @@ export default async (request: Request, _context: Context) => {
     const result = await sql`
       SELECT p.*,
         u.name as host_name, u.avatar_url as host_avatar, u.bio as host_bio, u.created_at as host_since,
-        (SELECT count(*)::int FROM properties WHERE host_id = p.host_id AND is_active = true) as host_listing_count
+        (SELECT count(*)::int FROM properties WHERE host_id = p.host_id AND is_active = true) as host_listing_count,
+        (SELECT COALESCE(AVG(r.rating)::numeric(10,1), 0) FROM reviews r WHERE r.property_id = p.id) as avg_rating,
+        (SELECT count(*)::int FROM reviews r WHERE r.property_id = p.id) as review_count
       FROM properties p
       JOIN users u ON u.id = p.host_id
       WHERE p.id = ${propertyId}

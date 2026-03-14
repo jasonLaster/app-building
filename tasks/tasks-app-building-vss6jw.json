@@ -3,31 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestImageGalleryMainAndThumbnails: Write test for Image gallery displays main large image and smaller thumbnails",
-        "WriteTestImageGallerySingleImage: Write test for Image gallery displays single image when property has only one image",
-        "WriteTestImageGalleryPlaceholder: Write test for Image gallery displays placeholder when property has no images",
-        "WriteTestClickThumbnailMakesMain: Write test for Clicking a thumbnail image makes it the main displayed image",
-        "WriteTestClickThumbnailsRepeatedUse: Write test for Clicking thumbnails is functional on repeated use",
-        "WriteTestImageGalleryCaptions: Write test for Image gallery shows image captions when available",
-        "WriteTestPropertyHeaderDisplays: Write test for Property header displays title, location, rating summary, and host info",
-        "WriteTestPropertyHeaderNewNoReviews: Write test for Property header shows New when property has no reviews",
-        "WriteTestClickReviewCountScrolls: Write test for Clicking review count scrolls to or navigates to reviews section",
-        "WriteTestPropertyHeaderHostAvatar: Write test for Property header displays host avatar as clickable element",
-        "WriteTestPropertyInfoDisplaysDetails: Write test for Property info section displays all property details",
-        "WriteTestPropertyInfoCheckInOutTimes: Write test for Property info section displays check-in and check-out times",
-        "WriteTestPropertyInfoSingularPlural: Write test for Property info section handles singular and plural labels correctly",
-        "WriteTestPropertyDescriptionFull: Write test for Property description displays full description text",
-        "WriteTestLongDescriptionShowMore: Write test for Long description shows a Show more toggle",
-        "WriteTestClickShowMoreExpands: Write test for Clicking Show more expands the full description",
-        "WriteTestClickShowLessCollapses: Write test for Clicking Show less collapses the description back",
-        "WriteTestShowMoreLessRepeatedUse: Write test for Show more/less toggle is functional on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestAmenitiesListGrouped: Write test for Amenities list displays amenities grouped by category with icons",
         "WriteTestAmenitiesListOnlyActiveCategories: Write test for Amenities list only shows categories that have amenities",
         "WriteTestAmenitiesListShowAll: Write test for Amenities list shows Show all amenities when there are many amenities",
@@ -323,15 +298,24 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestPaginationControlsDisplayed: Write test for Pagination controls are displayed when results exceed one page",
-      "WriteTestPaginationControlsHidden: Write test for Pagination controls are hidden when all results fit on one page",
-      "WriteTestClickNextPage: Write test for Clicking Next page loads the next set of properties",
-      "WriteTestClickPreviousPage: Write test for Clicking Previous page loads the previous set of properties",
-      "WriteTestClickSpecificPageNumber: Write test for Clicking a specific page number navigates to that page",
-      "WriteTestNextButtonDisabledLastPage: Write test for Next button is disabled on the last page",
-      "WriteTestPreviousButtonDisabledFirstPage: Write test for Previous button is disabled on the first page",
-      "WriteTestApplyingFiltersResetsPagination: Write test for Applying filters resets pagination to page 1",
-      "WriteTestPaginationRepeatedUse: Write test for Pagination is functional on repeated use"
+      "WriteTestImageGalleryMainAndThumbnails: Write test for Image gallery displays main large image and smaller thumbnails",
+      "WriteTestImageGallerySingleImage: Write test for Image gallery displays single image when property has only one image",
+      "WriteTestImageGalleryPlaceholder: Write test for Image gallery displays placeholder when property has no images",
+      "WriteTestClickThumbnailMakesMain: Write test for Clicking a thumbnail image makes it the main displayed image",
+      "WriteTestClickThumbnailsRepeatedUse: Write test for Clicking thumbnails is functional on repeated use",
+      "WriteTestImageGalleryCaptions: Write test for Image gallery shows image captions when available",
+      "WriteTestPropertyHeaderDisplays: Write test for Property header displays title, location, rating summary, and host info",
+      "WriteTestPropertyHeaderNewNoReviews: Write test for Property header shows New when property has no reviews",
+      "WriteTestClickReviewCountScrolls: Write test for Clicking review count scrolls to or navigates to reviews section",
+      "WriteTestPropertyHeaderHostAvatar: Write test for Property header displays host avatar as clickable element",
+      "WriteTestPropertyInfoDisplaysDetails: Write test for Property info section displays all property details",
+      "WriteTestPropertyInfoCheckInOutTimes: Write test for Property info section displays check-in and check-out times",
+      "WriteTestPropertyInfoSingularPlural: Write test for Property info section handles singular and plural labels correctly",
+      "WriteTestPropertyDescriptionFull: Write test for Property description displays full description text",
+      "WriteTestLongDescriptionShowMore: Write test for Long description shows a Show more toggle",
+      "WriteTestClickShowMoreExpands: Write test for Clicking Show more expands the full description",
+      "WriteTestClickShowLessCollapses: Write test for Clicking Show less collapses the description back",
+      "WriteTestShowMoreLessRepeatedUse: Write test for Show more/less toggle is functional on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"

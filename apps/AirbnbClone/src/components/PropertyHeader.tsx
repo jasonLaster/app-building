@@ -39,20 +39,24 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
           <span className="text-text-secondary">New</span>
         )}
         <span className="text-text-secondary">·</span>
-        <div className="flex items-center gap-2">
+        <button data-testid="host-info" className="flex items-center gap-2 cursor-pointer" onClick={() => {
+          const el = document.getElementById('host-info-card')
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }}>
           {property.host_avatar ? (
             <img
+              data-testid="host-avatar"
               src={property.host_avatar}
               alt={property.host_name || 'Host'}
               className="w-6 h-6 rounded-full object-cover"
             />
           ) : (
-            <div className="w-6 h-6 rounded-full bg-bg-secondary flex items-center justify-center text-xs font-semibold text-text-secondary">
+            <div data-testid="host-avatar" className="w-6 h-6 rounded-full bg-bg-secondary flex items-center justify-center text-xs font-semibold text-text-secondary">
               {property.host_name?.charAt(0) || 'H'}
             </div>
           )}
           <span className="text-text-secondary">Hosted by <span className="font-medium text-text">{property.host_name}</span></span>
-        </div>
+        </button>
       </div>
     </div>
   )
