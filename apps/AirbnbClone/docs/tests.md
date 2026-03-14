@@ -360,6 +360,245 @@
 
 <!-- Components: ImageGallery, PropertyHeader, PropertyInfo, PropertyDescription, AmenitiesList, BookingCard, ReviewsSection, HostInfoCard -->
 
+### Component: ImageGallery
+
+#### Test: Image gallery displays main large image and smaller thumbnails
+- **Initial state:** User navigates to `/properties/:id` for a property with 5 images.
+- **Expected:** The image gallery shows a grid layout with the first image (lowest display_order) displayed as a large main image, and the remaining images displayed as smaller thumbnails alongside or below it. All images have rounded corners.
+
+#### Test: Image gallery displays single image when property has only one image
+- **Initial state:** User navigates to a property detail page for a property with exactly 1 image.
+- **Expected:** The single image is displayed as the main large image. No thumbnail grid is shown.
+
+#### Test: Image gallery displays placeholder when property has no images
+- **Initial state:** User navigates to a property detail page for a property with no images.
+- **Expected:** A placeholder image or "No images available" message is displayed in the gallery area.
+
+#### Test: Clicking a thumbnail image makes it the main displayed image
+- **Initial state:** User is on a property detail page with 5 images. The first image is displayed as the main image.
+- **Action:** User clicks on the third thumbnail image.
+- **Expected:** The third image becomes the main large image. The previously main image moves to the thumbnail grid.
+
+#### Test: Clicking thumbnails is functional on repeated use
+- **Initial state:** User is on a property detail page with multiple images.
+- **Action:** User clicks the second thumbnail, then the fourth thumbnail, then the first thumbnail.
+- **Expected:** Each click updates the main image to the clicked thumbnail. The final state shows the first thumbnail as the main image.
+
+#### Test: Image gallery shows image captions when available
+- **Initial state:** User navigates to a property detail page. The property has images with caption text set.
+- **Expected:** Captions are displayed below or overlaying their respective images.
+
+### Component: PropertyHeader
+
+#### Test: Property header displays title, location, rating summary, and host info
+- **Initial state:** User navigates to `/properties/:id` for a property with title "Luxury Villa in Bali", city "Ubud", country "Indonesia", an average rating of 4.7 from 23 reviews, hosted by "Jane Host" with an avatar.
+- **Expected:** The property header shows the title "Luxury Villa in Bali", location "Ubud, Indonesia", a star icon with "4.7" and "(23 reviews)", and the host name "Jane Host" with their avatar image.
+
+#### Test: Property header shows "New" when property has no reviews
+- **Initial state:** User navigates to a property detail page for a property with no reviews.
+- **Expected:** The rating summary area shows "New" or no rating display instead of a numeric rating and review count.
+
+#### Test: Clicking review count scrolls to or navigates to reviews section
+- **Initial state:** User is on a property detail page with reviews.
+- **Action:** User clicks the "(23 reviews)" link in the property header.
+- **Expected:** The page scrolls down to the ReviewsSection on the same page.
+
+#### Test: Property header displays host avatar as clickable element
+- **Initial state:** User is on a property detail page. The host has an avatar_url set.
+- **Expected:** The host's avatar image is displayed as a small circular image next to the host name. The host name is displayed next to the avatar.
+
+### Component: PropertyInfo
+
+#### Test: Property info section displays all property details
+- **Initial state:** User navigates to `/properties/:id` for a property with property_type "Villa", max_guests 6, bedrooms 3, beds 4, bathrooms 2.
+- **Expected:** The property info section displays: "Villa" as the property type, "6 guests", "3 bedrooms", "4 beds", and "2 bathrooms". Each detail has an appropriate icon.
+
+#### Test: Property info section displays check-in and check-out times
+- **Initial state:** User navigates to a property detail page for a property with check_in_time "15:00" and check_out_time "11:00".
+- **Expected:** The property info section shows check-in time as "3:00 PM" (or "15:00") and check-out time as "11:00 AM" (or "11:00").
+
+#### Test: Property info section handles singular and plural labels correctly
+- **Initial state:** User navigates to a property detail page for a property with max_guests 1, bedrooms 1, beds 1, bathrooms 1.
+- **Expected:** Labels display in singular form: "1 guest", "1 bedroom", "1 bed", "1 bathroom" (not "1 guests", etc.).
+
+### Component: PropertyDescription
+
+#### Test: Property description displays full description text
+- **Initial state:** User navigates to `/properties/:id` for a property with a multi-paragraph description.
+- **Expected:** The full property description text is displayed in a readable format with proper paragraph breaks.
+
+#### Test: Long description shows a "Show more" toggle
+- **Initial state:** User navigates to a property detail page for a property with a very long description (multiple paragraphs).
+- **Expected:** The description is initially truncated after a reasonable length with a "Show more" link/button visible at the bottom.
+
+#### Test: Clicking "Show more" expands the full description
+- **Initial state:** User is on a property detail page with a truncated description and a visible "Show more" link.
+- **Action:** User clicks the "Show more" link.
+- **Expected:** The full description expands to show all text. The link changes to "Show less".
+
+#### Test: Clicking "Show less" collapses the description back
+- **Initial state:** User is on a property detail page with the description fully expanded and a "Show less" link visible.
+- **Action:** User clicks the "Show less" link.
+- **Expected:** The description collapses back to the truncated view with "Show more" visible again.
+
+#### Test: Show more/less toggle is functional on repeated use
+- **Initial state:** User is on a property detail page with a long description.
+- **Action:** User clicks "Show more", then "Show less", then "Show more" again.
+- **Expected:** Each click correctly toggles between the truncated and expanded states. The final state shows the full description.
+
+### Component: AmenitiesList
+
+#### Test: Amenities list displays amenities grouped by category with icons
+- **Initial state:** User navigates to `/properties/:id` for a property with amenities including "WiFi" (Essentials), "Pool" (Features), "Smoke Detector" (Safety), "Near Beach" (Location).
+- **Expected:** The amenities are displayed in groups with category headings: "Essentials", "Features", "Safety", "Location". Each amenity is shown with its icon and name.
+
+#### Test: Amenities list only shows categories that have amenities
+- **Initial state:** User navigates to a property detail page. The property has amenities only in "Essentials" and "Features" categories (none in "Safety" or "Location").
+- **Expected:** Only the "Essentials" and "Features" category groups are displayed. Empty categories are not shown.
+
+#### Test: Amenities list shows "Show all amenities" when there are many amenities
+- **Initial state:** User navigates to a property detail page for a property with more than 10 amenities.
+- **Expected:** An initial subset of amenities is displayed with a "Show all X amenities" button at the bottom (where X is the total count).
+
+#### Test: Clicking "Show all amenities" reveals the complete list
+- **Initial state:** User is on a property detail page with many amenities and a "Show all X amenities" button visible.
+- **Action:** User clicks "Show all X amenities".
+- **Expected:** All amenities are displayed, grouped by category. The button changes to "Show less" or disappears.
+
+#### Test: Amenities list displays message when property has no amenities
+- **Initial state:** User navigates to a property detail page for a property with no amenities.
+- **Expected:** A message like "No amenities listed" is displayed, or the amenities section is not shown.
+
+### Component: BookingCard
+
+#### Test: Booking card displays price per night
+- **Initial state:** User navigates to `/properties/:id` for a property with price_per_night $150.
+- **Expected:** The booking card (sticky sidebar on desktop) shows "$150 / night" prominently at the top.
+
+#### Test: Booking card displays check-in and check-out date pickers
+- **Initial state:** User is on a property detail page.
+- **Expected:** The booking card contains a check-in date picker and a check-out date picker. Both are initially empty or show placeholder text.
+
+#### Test: Booking card displays guest count selector
+- **Initial state:** User is on a property detail page for a property with max_guests 6.
+- **Expected:** The booking card contains a guest count selector. The selector enforces a minimum of 1 and a maximum of 6 (the property's max_guests value).
+
+#### Test: Selecting dates and guests shows price breakdown
+- **Initial state:** User is on a property detail page for a property with price_per_night $150 and cleaning_fee $75.
+- **Action:** User selects check-in "2026-05-01" and check-out "2026-05-04" (3 nights) and sets guests to 2.
+- **Expected:** The booking card displays a price breakdown: "$150 x 3 nights = $450", "Cleaning fee: $75", "Total: $525". The breakdown appears after both dates are selected.
+
+#### Test: Price breakdown updates when dates change
+- **Initial state:** User is on a property detail page with check-in "2026-05-01" and check-out "2026-05-04" selected (3 nights).
+- **Action:** User changes the check-out date to "2026-05-06" (5 nights).
+- **Expected:** The price breakdown updates to reflect 5 nights: "$150 x 5 nights = $750", "Cleaning fee: $75", "Total: $825".
+
+#### Test: Reserve button creates a booking when logged in
+- **Initial state:** User is logged in, on a property detail page for another user's property. Check-in "2026-05-01", check-out "2026-05-04", and 2 guests are selected.
+- **Action:** User clicks the "Reserve" button.
+- **Expected:** The app calls `POST /api/bookings` with the property_id, check_in, check_out, num_guests, and total_price. A success message is displayed (e.g., "Booking confirmed!") and the user is redirected to the My Trips page (`/trips`), or a confirmation is shown on the same page.
+
+#### Test: Reserve button is disabled when dates are not selected
+- **Initial state:** User is logged in and on a property detail page. No dates have been selected.
+- **Expected:** The "Reserve" button is disabled/grayed out and not clickable. A hint message like "Select dates to book" may be displayed.
+
+#### Test: Reserve button prompts login when user is not logged in
+- **Initial state:** User is not logged in and is on a property detail page with valid dates and guests selected.
+- **Action:** User clicks the "Reserve" button.
+- **Expected:** The user is redirected to the login page (`/login`). Alternatively, a message like "Please log in to book" is displayed.
+
+#### Test: Reserve button is disabled for host's own property
+- **Initial state:** User is logged in as the host of the current property. Dates and guests are selected.
+- **Expected:** The "Reserve" button is disabled or hidden. A message like "You cannot book your own property" is displayed.
+
+#### Test: Check-in date picker prevents selecting past dates
+- **Initial state:** User is on a property detail page.
+- **Action:** User opens the check-in date picker.
+- **Expected:** Dates before today are disabled/grayed out and cannot be selected.
+
+#### Test: Check-out date must be after check-in date
+- **Initial state:** User is on a property detail page and has selected check-in "2026-05-01".
+- **Action:** User opens the check-out date picker.
+- **Expected:** Dates on or before "2026-05-01" are disabled/grayed out. Only dates after the check-in date are selectable.
+
+#### Test: Guest count cannot exceed property max_guests
+- **Initial state:** User is on a property detail page for a property with max_guests 4.
+- **Action:** User tries to set the guest count higher than 4.
+- **Expected:** The guest count selector prevents selecting more than 4 guests. The maximum is capped at 4.
+
+#### Test: Guest count minimum is 1
+- **Initial state:** User is on a property detail page.
+- **Action:** User interacts with the guest count selector.
+- **Expected:** The minimum selectable value is 1. The user cannot set guests to 0 or a negative number.
+
+#### Test: Reserve button shows error for unavailable dates
+- **Initial state:** User is logged in and on a property detail page. The property has an existing confirmed booking for "2026-05-01" to "2026-05-04".
+- **Action:** User selects overlapping dates (e.g., check-in "2026-05-02", check-out "2026-05-06") and clicks "Reserve".
+- **Expected:** An error message is displayed (e.g., "Property is not available for the selected dates"). The booking is not created.
+
+#### Test: Booking card is sticky on desktop viewport
+- **Initial state:** User is on a property detail page on a desktop viewport.
+- **Action:** User scrolls down the page past the booking card's initial position.
+- **Expected:** The booking card remains visible in a sticky sidebar position as the user scrolls through the property description, amenities, and reviews.
+
+#### Test: Booking card date pickers and guest selector are functional on repeated use
+- **Initial state:** User is on a property detail page.
+- **Action:** User selects check-in "2026-05-01" and check-out "2026-05-04", then changes check-in to "2026-06-01" and check-out to "2026-06-05", then changes guest count from 2 to 4 and back to 2.
+- **Expected:** Each change correctly updates the price breakdown. The final state shows "2026-06-01" to "2026-06-05" with 2 guests.
+
+### Component: ReviewsSection
+
+#### Test: Reviews section displays average ratings by category
+- **Initial state:** User navigates to `/properties/:id` for a property with multiple reviews. The average ratings are: cleanliness 4.5, accuracy 4.2, communication 4.8, location 4.6, value 4.0.
+- **Expected:** The reviews section shows a summary with average ratings for each category: "Cleanliness: 4.5", "Accuracy: 4.2", "Communication: 4.8", "Location: 4.6", "Value: 4.0". Each rating is displayed with a star icon or progress bar. An overall average rating is also displayed.
+
+#### Test: Reviews section displays overall average rating and total review count
+- **Initial state:** User navigates to a property detail page with 15 reviews and an overall average rating of 4.3.
+- **Expected:** The reviews section header shows a star icon with "4.3" and "15 reviews" (or similar format like "4.3 · 15 reviews").
+
+#### Test: Reviews section displays individual review cards
+- **Initial state:** User navigates to a property detail page with reviews. A review exists from guest "Alice" dated "2026-01-15" with rating 5 and comment "Amazing place, loved every minute!".
+- **Expected:** An individual review card is displayed showing the guest name "Alice", the date "January 2026" (or similar formatted date), a star rating of 5, and the comment text "Amazing place, loved every minute!".
+
+#### Test: Review cards display guest avatar or initial
+- **Initial state:** User navigates to a property detail page with reviews. A reviewer has an avatar_url set, another reviewer does not.
+- **Expected:** Review cards show the guest's avatar image when available. When no avatar is set, a placeholder (e.g., first initial in a circle) is displayed.
+
+#### Test: Reviews section shows message when property has no reviews
+- **Initial state:** User navigates to a property detail page for a property with no reviews.
+- **Expected:** The reviews section displays a message like "No reviews yet" instead of an empty review list. Category average ratings are not shown.
+
+#### Test: Reviews section handles pagination or "Show more" for many reviews
+- **Initial state:** User navigates to a property detail page with more than 6 reviews.
+- **Expected:** An initial subset of reviews is displayed (e.g., 6 reviews). A "Show all X reviews" button is visible at the bottom (where X is the total count).
+
+#### Test: Clicking "Show all reviews" reveals all review cards
+- **Initial state:** User is on a property detail page with more than 6 reviews and a "Show all X reviews" button visible.
+- **Action:** User clicks "Show all X reviews".
+- **Expected:** All review cards are displayed. The button disappears or changes to "Show less".
+
+#### Test: Reviews are ordered by most recent first
+- **Initial state:** User navigates to a property detail page with multiple reviews created on different dates.
+- **Expected:** Review cards are displayed in reverse chronological order, with the most recently created review appearing first.
+
+### Component: HostInfoCard
+
+#### Test: Host info card displays host name, avatar, bio, and member since date
+- **Initial state:** User navigates to `/properties/:id`. The property host has name "Jane Host", an avatar_url, bio "Superhostess who loves sharing her properties", and created_at "2023-06-15".
+- **Expected:** The host info card displays: the host's avatar image, name "Jane Host", bio text "Superhostess who loves sharing her properties", and "Member since June 2023" (formatted from created_at).
+
+#### Test: Host info card displays number of listings
+- **Initial state:** User navigates to a property detail page. The host has 5 active property listings.
+- **Expected:** The host info card shows "5 listings" (or similar format like "5 properties").
+
+#### Test: Host info card shows placeholder avatar when host has no avatar
+- **Initial state:** User navigates to a property detail page. The host has avatar_url set to null.
+- **Expected:** A placeholder avatar (e.g., first initial in a circle or a generic person icon) is displayed instead of a broken image.
+
+#### Test: Host info card displays correctly when host has no bio
+- **Initial state:** User navigates to a property detail page. The host has bio set to null.
+- **Expected:** The host info card displays the host name, avatar, and member since date. The bio area is either not shown or displays a default message. No empty or broken layout.
+
 ## Page: My Trips (`/trips`)
 
 <!-- Components: TripsTabs, TripCard, CancelBookingDialog -->
