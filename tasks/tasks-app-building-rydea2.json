@@ -3,9 +3,9 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "Unpack: Write test specification"
+        "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
       ],
-      "timestamp": "2026-03-14T18:21:07.448Z",
+      "timestamp": "2026-03-14T18:21:40.864Z",
       "app": "LinearClone"
     },
     {
@@ -66,9 +66,11 @@
     }
   ],
   "current": {
-    "skill": "",
-    "subtasks": [],
-    "timestamp": "2026-03-14T18:19:25.935Z",
-    "prompt": "Build me a linear clone"
+    "skill": "skills/tasks/build/testSpec.md",
+    "subtasks": [
+      "Unpack: Write test specification"
+    ],
+    "timestamp": "2026-03-14T18:21:07.448Z",
+    "app": "LinearClone"
   }
 }
