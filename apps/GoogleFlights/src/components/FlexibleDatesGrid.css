@@ -1,0 +1,182 @@
+.flexible-dates-grid {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px var(--color-shadow);
+  padding: 24px;
+}
+
+.flexible-dates-grid__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.flexible-dates-grid__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.flexible-dates-grid__range-selector {
+  display: flex;
+  gap: 4px;
+  background: var(--color-background);
+  border-radius: var(--radius-full);
+  padding: 2px;
+}
+
+.flexible-dates-grid__range-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.flexible-dates-grid__range-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.flexible-dates-grid__range-btn--active {
+  background: var(--color-surface);
+  color: var(--color-primary);
+  box-shadow: 0 1px 3px var(--color-shadow);
+  font-weight: 600;
+}
+
+.flexible-dates-grid__legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.flexible-dates-grid__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flexible-dates-grid__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.flexible-dates-grid__legend-dot--cheap {
+  background: var(--color-success);
+}
+
+.flexible-dates-grid__legend-dot--moderate {
+  background: var(--color-warning);
+}
+
+.flexible-dates-grid__legend-dot--expensive {
+  background: var(--color-error);
+}
+
+.flexible-dates-grid__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.flexible-dates-grid__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-light);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  text-align: center;
+}
+
+.flexible-dates-grid__cell:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.flexible-dates-grid__cell:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.flexible-dates-grid__cell--cheap {
+  background: #E6F4EA;
+  border-color: #CEEAD6;
+}
+
+.flexible-dates-grid__cell--moderate {
+  background: #FEF7E0;
+  border-color: #FEEFC3;
+}
+
+.flexible-dates-grid__cell--expensive {
+  background: #FCE8E6;
+  border-color: #F5C6C2;
+}
+
+.flexible-dates-grid__cell--none {
+  background: var(--color-background);
+  border-color: var(--color-border-light);
+}
+
+.flexible-dates-grid__cell-day {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+}
+
+.flexible-dates-grid__cell-date {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.flexible-dates-grid__cell-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-top: 2px;
+}
+
+.flexible-dates-grid__loading {
+  padding: 16px 0;
+}
+
+.flexible-dates-grid__skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.flexible-dates-grid__skeleton-cell {
+  height: 72px;
+  border-radius: var(--radius-sm);
+  background: var(--color-border-light);
+  animation: dates-pulse 1.5s infinite;
+}
+
+@keyframes dates-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.flexible-dates-grid__empty {
+  text-align: center;
+  padding: 40px 16px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}

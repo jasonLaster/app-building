@@ -3,6 +3,7 @@ import searchReducer from './slices/searchSlice'
 import flightsReducer from './slices/flightsSlice'
 import bookingReducer from './slices/bookingSlice'
 import tripsReducer from './slices/tripsSlice'
+import exploreReducer from './slices/exploreSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     flights: flightsReducer,
     booking: bookingReducer,
     trips: tripsReducer,
+    explore: exploreReducer,
   },
 })
 

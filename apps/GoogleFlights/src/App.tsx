@@ -4,6 +4,7 @@ import SearchPage from './pages/SearchPage'
 import SearchResultsPage from './pages/SearchResultsPage'
 import FlightDetailsPage from './pages/FlightDetailsPage'
 import MyTripsPage from './pages/MyTripsPage'
+import ExplorePage from './pages/ExplorePage'
 import './App.css'
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
           <Route path="/results" element={<SearchResultsPage />} />
           <Route path="/booking/:id" element={<FlightDetailsPage />} />
           <Route path="/trips" element={<MyTripsPage />} />
-          <Route path="/explore" element={<div>Explore (Coming Soon)</div>} />
+          <Route path="/explore" element={<ExplorePage />} />
         </Routes>
       </main>
     </div>
