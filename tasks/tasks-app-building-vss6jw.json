@@ -1,17 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
-        "PlanPageWriteReview: Decide on components, add sections to docs/tests.md",
-        "PlanComponentPropertyBookingContext: Add test entries for PropertyBookingContext",
-        "PlanComponentRatingSliders: Add test entries for RatingSliders",
-        "PlanComponentReviewForm: Add test entries for ReviewForm"
-      ],
-      "timestamp": "2026-03-14T18:52:08.860Z",
-      "app": "AirbnbClone"
-    },
-    {
       "skill": "skills/tasks/build/writeShared.md",
       "subtasks": [
         "Unpack: Write app shared code"
@@ -71,10 +60,10 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageUserProfile: Decide on components, add sections to docs/tests.md",
-      "PlanComponentProfileForm: Add test entries for ProfileForm",
-      "PlanComponentBecomeHostButton: Add test entries for BecomeHostButton",
-      "PlanComponentUserReviewsList: Add test entries for UserReviewsList"
+      "PlanPageWriteReview: Decide on components, add sections to docs/tests.md",
+      "PlanComponentPropertyBookingContext: Add test entries for PropertyBookingContext",
+      "PlanComponentRatingSliders: Add test entries for RatingSliders",
+      "PlanComponentReviewForm: Add test entries for ReviewForm"
     ],
     "timestamp": "2026-03-14T18:52:08.860Z",
     "app": "AirbnbClone"
