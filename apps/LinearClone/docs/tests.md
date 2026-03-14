@@ -490,7 +490,105 @@
 
 ## Inbox Page (`/inbox`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: NotificationList, NotificationRow
+
+### NotificationList
+
+#### Test: Inbox page renders with list of notifications
+- **Initial state**: User is authenticated, has 3 notifications (1 assignment, 1 issue update, 1 mention)
+- **Expected**: The page displays a header "Inbox" at the top. All 3 notifications are listed in reverse chronological order (newest first). Each notification is a distinct row.
+
+#### Test: Inbox page shows empty state when no notifications
+- **Initial state**: User is authenticated, has no notifications
+- **Expected**: The page displays a friendly empty state message with an icon (e.g., "No notifications yet" or "You're all caught up!") instead of an empty list.
+
+#### Test: Inbox shows unread notifications visually distinct from read
+- **Initial state**: User is authenticated, has 2 unread notifications and 1 read notification
+- **Expected**: Unread notifications appear with bold text and a left border accent (using the primary accent color `#5e6ad2`). Read notifications appear with normal weight text and no left border accent.
+
+#### Test: Inbox page shows notification count in header
+- **Initial state**: User is authenticated, has 5 unread notifications
+- **Expected**: The inbox header or a badge near it indicates the number of unread notifications (e.g., "Inbox (5)" or a count badge).
+
+#### Test: Inbox notification list updates sidebar badge when notifications change
+- **Initial state**: User is authenticated, has 3 unread notifications, sidebar Inbox badge shows "3"
+- **Action**: User marks one notification as read on the inbox page
+- **Expected**: The sidebar Inbox badge updates to "2".
+
+#### Test: Inbox notifications are ordered by newest first
+- **Initial state**: User is authenticated, has notifications from 5 minutes ago, 1 hour ago, and 1 day ago
+- **Expected**: Notifications appear in order: 5 minutes ago (top), 1 hour ago (middle), 1 day ago (bottom).
+
+#### Test: Archiving a notification removes it from the list
+- **Initial state**: User is authenticated, has 3 notifications visible in the inbox
+- **Action**: User clicks the archive button/icon on the first notification
+- **Expected**: The notification is removed from the inbox list. The list now shows 2 notifications. The archived notification does not reappear.
+
+#### Test: Archiving multiple notifications works in sequence
+- **Initial state**: User is authenticated, has 3 notifications visible
+- **Action**: User archives the first notification, then archives what is now the first notification
+- **Expected**: Both notifications are removed. The list shows 1 remaining notification. The archive action works correctly on repeated use.
+
+#### Test: All notifications can be archived to reach empty state
+- **Initial state**: User is authenticated, has 2 notifications visible
+- **Action**: User archives both notifications one by one
+- **Expected**: After all notifications are archived, the empty state message is displayed. The sidebar Inbox badge disappears (no unread count).
+
+### NotificationRow
+
+#### Test: Notification row displays assignment notification correctly
+- **Initial state**: User is authenticated, has a notification for "Issue ENG-42 was assigned to you" created 5 minutes ago
+- **Expected**: The notification row displays: an assignment-type icon (e.g., user-plus or assign icon), issue identifier "ENG-42", description text "assigned to you" or similar, and relative timestamp "5m ago". The row is visually complete and well-formatted.
+
+#### Test: Notification row displays issue update notification correctly
+- **Initial state**: User is authenticated, has a notification for "Issue ENG-15 status changed to Done" on a subscribed issue, created 1 hour ago
+- **Expected**: The notification row displays: an update-type icon (e.g., refresh or edit icon), issue identifier "ENG-15", description "status changed to Done" or similar, and relative timestamp "1h ago".
+
+#### Test: Notification row displays mention notification correctly
+- **Initial state**: User is authenticated, has a notification for "You were mentioned in a comment on ENG-7" created 2 hours ago
+- **Expected**: The notification row displays: a mention-type icon (e.g., at-sign icon), issue identifier "ENG-7", description "mentioned you in a comment" or similar, and relative timestamp "2h ago".
+
+#### Test: Clicking an unread notification marks it as read
+- **Initial state**: User is authenticated, has an unread notification for issue ENG-42 (bold text, left border accent)
+- **Action**: User clicks on the notification row
+- **Expected**: The notification's visual style changes from unread (bold, left border accent) to read (normal weight, no left border accent). The change is persisted to the database. The sidebar Inbox badge count decrements by 1.
+
+#### Test: Clicking a read notification does not change its state
+- **Initial state**: User is authenticated, has a read notification (normal weight, no accent)
+- **Action**: User clicks on the notification row
+- **Expected**: The notification remains in its read visual state. No redundant database update is made.
+
+#### Test: Clicking a notification navigates to the related issue
+- **Initial state**: User is authenticated, has a notification for issue ENG-42
+- **Action**: User clicks on the notification row
+- **Expected**: User is navigated to `/issue/<issueId>` for issue ENG-42. The issue detail page loads showing ENG-42.
+
+#### Test: Notification row archive button is visible
+- **Initial state**: User is authenticated, has a notification visible in the inbox
+- **Expected**: Each notification row has an archive button/icon (e.g., an archive or x icon) visible on hover or always visible, allowing the user to archive the notification.
+
+#### Test: Notification row archive button archives without navigating
+- **Initial state**: User is authenticated, viewing the inbox with a notification for ENG-42
+- **Action**: User clicks the archive button on the ENG-42 notification row
+- **Expected**: The notification is archived and removed from the list. The user remains on the `/inbox` page — no navigation to the issue detail occurs. The archive action is persisted to the database.
+
+#### Test: Notification row shows correct icon per notification type
+- **Initial state**: User is authenticated, has one of each notification type: assignment, issue update, mention
+- **Expected**: Each notification type has a distinct, recognizable icon: assignment uses a user/assign icon, issue update uses a refresh/change icon, mention uses an at-sign/@-symbol icon. The icons are visually differentiated by shape or style.
+
+#### Test: Notification row displays relative timestamps that update
+- **Initial state**: User is authenticated, has a notification created "just now"
+- **Expected**: The timestamp shows "just now" or "1m ago" (relative format). Timestamps use relative format throughout (e.g., "5m ago", "1h ago", "2d ago") rather than absolute dates.
+
+#### Test: Marking notification as read then archiving works correctly
+- **Initial state**: User is authenticated, has an unread notification for ENG-42
+- **Action**: User clicks the notification to mark as read, then clicks the archive button on the same notification
+- **Expected**: The notification is first marked as read (visual change), then archived and removed from the list. Both actions succeed in sequence without conflict.
+
+#### Test: Notification row click and archive button have separate hit targets
+- **Initial state**: User is authenticated, has a notification in the inbox
+- **Action**: User clicks specifically on the archive button area of a notification row
+- **Expected**: Only the archive action fires — the notification is archived. The user does NOT navigate to the issue detail page. The click targets for "mark as read + navigate" and "archive" are clearly separated.
 
 ## Team Issues Page (`/team/:teamId/issues`)
 

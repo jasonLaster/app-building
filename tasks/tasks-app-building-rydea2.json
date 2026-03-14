@@ -3,16 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageInbox: Decide on components, add sections to docs/tests.md",
-        "PlanComponentNotificationList: Add test entries for NotificationList",
-        "PlanComponentNotificationRow: Add test entries for NotificationRow"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageTeamIssues: Decide on components, add sections to docs/tests.md",
         "PlanComponentTeamIssuesList: Add test entries for TeamIssuesList",
         "PlanComponentBulkActions: Add test entries for BulkActions",
@@ -181,10 +171,9 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageMyIssues: Decide on components, add sections to docs/tests.md",
-      "PlanComponentMyIssuesList: Add test entries for MyIssuesList",
-      "PlanComponentIssueRow: Add test entries for IssueRow",
-      "PlanComponentFiltersToolbar: Add test entries for FiltersToolbar"
+      "PlanPageInbox: Decide on components, add sections to docs/tests.md",
+      "PlanComponentNotificationList: Add test entries for NotificationList",
+      "PlanComponentNotificationRow: Add test entries for NotificationRow"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"
