@@ -3,33 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestProjectHeaderRenders: Write test for Project header renders all fields for an existing project",
-        "WriteTestProjectInlineEditName: Write test for Inline edit project name",
-        "WriteTestProjectInlineEditNameCancel: Write test for Inline edit project name — cancel edit",
-        "WriteTestProjectInlineEditNameValidation: Write test for Inline edit project name — validation rejects empty name",
-        "WriteTestProjectInlineEditStatusBadge: Write test for Inline edit status badge",
-        "WriteTestProjectChangeStatusDropdown: Write test for Change project status via inline dropdown",
-        "WriteTestProjectChangeStatusMultiple: Write test for Change project status multiple times in sequence",
-        "WriteTestProjectInlineEditTargetDate: Write test for Inline edit target date via date picker",
-        "WriteTestProjectChangeTargetDate: Write test for Change target date",
-        "WriteTestProjectClearTargetDate: Write test for Clear target date",
-        "WriteTestProjectInlineEditLead: Write test for Inline edit lead via searchable selector",
-        "WriteTestProjectChangeLead: Write test for Change project lead",
-        "WriteTestProjectSearchLeadFilters: Write test for Search lead selector filters results",
-        "WriteTestProjectRemoveLead: Write test for Remove project lead",
-        "WriteTestProjectProgressBarAccurate: Write test for Progress bar reflects issue completion accurately",
-        "WriteTestProjectProgressBar0: Write test for Progress bar shows 0% for project with no completed issues",
-        "WriteTestProjectProgressBar100: Write test for Progress bar shows 100% for fully completed project",
-        "WriteTestProjectProgressBarNoIssues: Write test for Progress bar handles project with no issues",
-        "WriteTestProjectHeaderTabs: Write test for Header displays tabs for Issues and Overview",
-        "WriteTestProjectOverviewTabSwitch: Write test for Clicking Overview tab switches to overview content"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestProjectIssuesTabSwitch: Write test for Clicking Issues tab switches back to issues content",
         "WriteTestProjectNavigateFromCard: Write test for Navigating to project detail page from project card",
         "WriteTestProjectIssuesGroupedByTeam: Write test for Issues tab displays all project issues grouped by team",
@@ -284,8 +257,26 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestCreateProjectLeadMultiple: Write test for Create project modal Lead selector can be used multiple times",
-      "WriteTestCreateProjectTeamsToggle: Write test for Create project modal Teams selector can be toggled multiple times"
+      "WriteTestProjectHeaderRenders: Write test for Project header renders all fields for an existing project",
+      "WriteTestProjectInlineEditName: Write test for Inline edit project name",
+      "WriteTestProjectInlineEditNameCancel: Write test for Inline edit project name — cancel edit",
+      "WriteTestProjectInlineEditNameValidation: Write test for Inline edit project name — validation rejects empty name",
+      "WriteTestProjectInlineEditStatusBadge: Write test for Inline edit status badge",
+      "WriteTestProjectChangeStatusDropdown: Write test for Change project status via inline dropdown",
+      "WriteTestProjectChangeStatusMultiple: Write test for Change project status multiple times in sequence",
+      "WriteTestProjectInlineEditTargetDate: Write test for Inline edit target date via date picker",
+      "WriteTestProjectChangeTargetDate: Write test for Change target date",
+      "WriteTestProjectClearTargetDate: Write test for Clear target date",
+      "WriteTestProjectInlineEditLead: Write test for Inline edit lead via searchable selector",
+      "WriteTestProjectChangeLead: Write test for Change project lead",
+      "WriteTestProjectSearchLeadFilters: Write test for Search lead selector filters results",
+      "WriteTestProjectRemoveLead: Write test for Remove project lead",
+      "WriteTestProjectProgressBarAccurate: Write test for Progress bar reflects issue completion accurately",
+      "WriteTestProjectProgressBar0: Write test for Progress bar shows 0% for project with no completed issues",
+      "WriteTestProjectProgressBar100: Write test for Progress bar shows 100% for fully completed project",
+      "WriteTestProjectProgressBarNoIssues: Write test for Progress bar handles project with no issues",
+      "WriteTestProjectHeaderTabs: Write test for Header displays tabs for Issues and Overview",
+      "WriteTestProjectOverviewTabSwitch: Write test for Clicking Overview tab switches to overview content"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
