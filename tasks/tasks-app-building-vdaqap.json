@@ -3,9 +3,10 @@
     {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "Unpack: Do an initial production deployment"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-14T18:21:13.050Z",
+      "timestamp": "2026-03-14T20:45:20.301Z",
       "app": "GoogleFlights"
     },
     {
@@ -26,18 +27,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/writeTests.md",
+    "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "WriteTestDealsDisplay: Write test for DealsSection displays deal cards on Explore page",
-      "WriteTestDealsCardContent: Write test for DealsSection deal card shows destination dates price and savings",
-      "WriteTestDealsClick: Write test for DealsSection clicking a deal card initiates a search",
-      "WriteTestDealsOriginChange: Write test for DealsSection updates when origin airport changes",
-      "WriteTestDealsLoading: Write test for DealsSection shows loading state while fetching deals",
-      "WriteTestDealsEmpty: Write test for DealsSection shows empty state when no deals available",
-      "WriteTestDealsGrid: Write test for DealsSection displays multiple deal cards in grid or row layout",
-      "WriteTestDealsSavings: Write test for DealsSection savings percentage is calculated correctly"
+      "Unpack: Do an initial production deployment"
     ],
-    "timestamp": "2026-03-14T19:26:12.594Z",
+    "timestamp": "2026-03-14T18:21:13.050Z",
     "app": "GoogleFlights"
   }
 }
