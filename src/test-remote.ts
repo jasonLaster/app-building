@@ -6,7 +6,7 @@
  */
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions, getInfisicalConfig, resolveContainerSecrets } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions, getInfisicalConfig } from "./package";
 import { startRemoteContainer, stopRemoteContainer } from "./remote-container";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -34,11 +34,16 @@ async function main() {
   const projectRoot = resolve(__dirname, "..");
   const orchestrationVars = loadDotEnv(projectRoot);
   const infisicalConfig = await getInfisicalConfig(orchestrationVars);
-  const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+
+  const containerEnvVars: Record<string, string> = {
+    INFISICAL_TOKEN: infisicalConfig.token,
+    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
+    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
+  };
 
   const config: ContainerConfig = {
     projectRoot,
-    envVars: containerSecrets,
+    envVars: containerEnvVars,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
     flyToken: orchestrationVars.FLY_API_TOKEN,
     flyApp: orchestrationVars.FLY_APP_NAME,

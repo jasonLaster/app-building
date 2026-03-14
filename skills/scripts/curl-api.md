@@ -3,7 +3,22 @@
 ## Purpose
 
 Standard patterns for making API calls with `curl` in shell scripts and one-off commands.
-Proper quoting prevents auth failures and silent errors.
+All secrets must be accessed via `exec-secrets` — they are NOT available directly in the
+environment.
+
+## Using `exec-secrets` with curl
+
+Wrap any `curl` command that uses secrets with `exec-secrets`:
+
+```bash
+# CORRECT — exec-secrets makes NEON_API_KEY available to the curl subprocess
+exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  "https://console.neon.tech/api/v2/projects"
+
+# WRONG — secret is not in the environment, $NEON_API_KEY will be empty
+curl -s -H "Authorization: Bearer $NEON_API_KEY" ...
+```
 
 ## Shell Quoting Rules
 
@@ -11,12 +26,12 @@ Proper quoting prevents auth failures and silent errors.
 
 ```bash
 # CORRECT — variable is expanded and properly quoted
-curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
   "https://console.neon.tech/api/v2/projects"
 
 # WRONG — single quotes prevent variable expansion
-curl -s -H 'Authorization: Bearer $NEON_API_KEY' ...
+exec-secrets NEON_API_KEY -- curl -s -H 'Authorization: Bearer $NEON_API_KEY' ...
 ```
 
 ### Use `--fail-with-body` for meaningful errors
@@ -25,7 +40,7 @@ Without `--fail-with-body`, `curl` returns the HTTP error page content on failur
 exits 0, making it hard to detect errors in scripts:
 
 ```bash
-curl -s --fail-with-body -H "Authorization: Bearer $NEON_API_KEY" \
+exec-secrets NEON_API_KEY -- curl -s --fail-with-body -H "Authorization: Bearer $NEON_API_KEY" \
   "https://console.neon.tech/api/v2/projects"
 ```
 
@@ -38,11 +53,11 @@ body (which often contains the error message).
 
 ```bash
 # List projects
-curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
   "https://console.neon.tech/api/v2/projects"
 
 # Create project
-curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"project":{"name":"my-app"}}' \
   "https://console.neon.tech/api/v2/projects"
@@ -52,15 +67,14 @@ curl -s -H "Authorization: Bearer $NEON_API_KEY" \
 
 ```bash
 # List site env vars
-curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+exec-secrets NETLIFY_AUTH_TOKEN -- curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/env"
 ```
 
 ## Troubleshooting
 
-- **401 Unauthorized**: Check that the variable is set (`echo ${NEON_API_KEY:0:5}...`)
-  and that you used double quotes, not single quotes, around the header value.
+- **401 Unauthorized**: Ensure you are using `exec-secrets` to wrap the command, and
+  that you used double quotes, not single quotes, around the header value.
 - **Empty output**: Add `-v` for verbose output to see the full request/response.
-- **Subshell variable not set**: If running inside `$()` or backticks, ensure the
-  variable was exported (`export NEON_API_KEY=...`), not just set with `source .env`.
-  Use `export $(grep -v '^#' .env | xargs)` to export `.env` values.
+- **Secret not available**: If the command is not wrapped with `exec-secrets`, the
+  secret variable will be empty. Always use `exec-secrets SECRET_NAME -- command`.

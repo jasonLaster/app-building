@@ -20,7 +20,8 @@ understand the persona, goals, and step-by-step actions for the journey.
   `npx netlify sites:list --json` instead. If the app is not deployed, use `npm run test`
   (local dev server mode) for journey tests unless the task specifically requires a deployed URL.
 - `UPLOADTHING_TOKEN` must be set in the environment (it is provided in the container).
-- `RECORD_REPLAY_API_KEY` must be set in the environment.
+- `RECORD_REPLAY_API_KEY` is accessed via `exec-secrets` — wrap any command that needs it
+  (e.g., `npx replayio upload`) with `exec-secrets RECORD_REPLAY_API_KEY -- <command>`.
 - Playwright MCP browser tools must be available (`browser_navigate`, `browser_click`, etc.).
 
 ## Procedure

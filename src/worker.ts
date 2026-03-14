@@ -103,10 +103,11 @@ function runAgent(
   cmd: CommandSpec,
   log: Logger,
   onEvent?: EventCallback,
+  agentEnv?: Record<string, string>,
 ): Promise<AgentResult> {
   return new Promise((resolve, reject) => {
     const child = spawn(cmd.bin, cmd.args, {
-      env: process.env,
+      env: agentEnv ?? process.env as Record<string, string>,
       stdio: ["ignore", "pipe", "pipe"],
     });
 
@@ -377,6 +378,7 @@ export async function processTask(
   commitFn?: (label: string) => void,
   pushBranch?: string,
   resumeSessionId?: string,
+  agentEnv?: Record<string, string>,
 ): Promise<TaskResult> {
   let retries = 0;
   let cost = 0;
@@ -401,7 +403,7 @@ export async function processTask(
     log(`Running ${cmd.bin}${sessionId && !task.command ? ` (resume ${sessionId.slice(0, 8)}...)` : ""}...`);
     let response: AgentResult;
     try {
-      response = await runAgent(cmd, log, onEvent);
+      response = await runAgent(cmd, log, onEvent, agentEnv);
     } catch (e: any) {
       if (interruptRequested) {
         log(`Task interrupted.`);

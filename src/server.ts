@@ -12,8 +12,10 @@ import {
   type EventCallback,
   type CommandSpec,
 } from "./worker";
-import { createBufferedLogger, archiveCurrentLog, redactSecrets } from "./log";
+import { createBufferedLogger, archiveCurrentLog } from "./log";
 import { formatLogLine, stripTimestamp } from "./format";
+import { fetchGlobalSecrets, type InfisicalConfig } from "./package/secrets";
+import { startSecretsServer, type SecretsStore } from "./secrets-server";
 
 // --- Configuration from env ---
 
@@ -27,9 +29,6 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? "";
 const INITIAL_PROMPT = process.env.INITIAL_PROMPT ?? "";
 const REPO_DIR = "/repo";
 const LOGS_DIR = resolve(REPO_DIR, "logs");
-
-// Set CONTAINER_MODE so log.ts loads secrets from env vars
-process.env.CONTAINER_MODE = "1";
 
 // --- OffsetBuffer ---
 
@@ -110,9 +109,42 @@ function postWebhook(type: string, data?: Record<string, unknown>): void {
   });
 }
 
+// --- Build a restricted environment for the agent process ---
+// The agent gets only non-secret system/container vars plus ANTHROPIC_API_KEY.
+// All other secrets must be accessed through exec-secrets.
+
+function buildAgentEnv(secrets: SecretsStore): Record<string, string> {
+  const env: Record<string, string> = {};
+
+  // System vars
+  for (const key of [
+    "PATH", "HOME", "USER", "SHELL", "TERM", "LANG", "LC_ALL",
+    "NODE_PATH", "NODE_ENV", "LD_LIBRARY_PATH", "PLAYWRIGHT_BROWSERS_PATH",
+  ]) {
+    if (process.env[key]) env[key] = process.env[key]!;
+  }
+
+  // Non-secret container vars
+  for (const key of [
+    "CLONE_BRANCH", "PUSH_BRANCH", "CONTAINER_NAME",
+    "GIT_AUTHOR_NAME", "GIT_AUTHOR_EMAIL",
+    "GIT_COMMITTER_NAME", "GIT_COMMITTER_EMAIL",
+    "DEBUG",
+  ]) {
+    if (process.env[key]) env[key] = process.env[key]!;
+  }
+
+  // ANTHROPIC_API_KEY is required for the claude CLI to function
+  if (secrets.ANTHROPIC_API_KEY) {
+    env.ANTHROPIC_API_KEY = secrets.ANTHROPIC_API_KEY;
+  }
+
+  return env;
+}
+
 // --- Default agent config ---
 
-function buildDefaultAgent(): CommandSpec {
+function buildDefaultAgent(secrets: SecretsStore): CommandSpec {
   const args: string[] = [];
   args.push("--model", "claude-opus-4-6");
   args.push("--dangerously-skip-permissions");
@@ -121,8 +153,7 @@ function buildDefaultAgent(): CommandSpec {
   const mcpServers: Record<string, object> = {
     playwright: { type: "http", url: "http://localhost:8931/mcp" },
   };
-  const replayKey = process.env.RECORD_REPLAY_API_KEY;
-  if (replayKey) {
+  if (secrets.RECORD_REPLAY_API_KEY) {
     mcpServers.replay = { type: "http", url: "https://dispatch.replay.io/nut/mcp" };
   }
   args.push("--mcp-config", JSON.stringify({ mcpServers }));
@@ -135,7 +166,7 @@ function buildDefaultAgent(): CommandSpec {
 let log: ReturnType<typeof createBufferedLogger>;
 
 const onEvent: EventCallback = (rawLine) => {
-  eventBuffer.append(redactSecrets(rawLine));
+  eventBuffer.append(rawLine);
   lastActivityAt = new Date().toISOString();
 };
 
@@ -167,27 +198,9 @@ function getQuery(url: string, key: string): string | null {
 }
 
 // --- Processing loop ---
-//
-// The container runs a single loop that processes tasks from the persistent
-// task queue file. All work — including incoming messages and INITIAL_PROMPT —
-// is converted to tasks before processing. This means:
-//
-// - On restart after a crash, the worker picks up remaining tasks from the
-//   last committed task file without re-processing completed work.
-// - The loop has a single code path for all work items.
-//
-// Shutdown is controlled by two mechanisms:
-//
-// 1. **Detach** (POST /detach): Sets `detachRequested`. The container continues
-//    processing any in-flight or queued tasks, then exits once the task queue
-//    is empty. This is the normal shutdown path.
-//
-// 2. **Stop** (POST /stop): Sets `stopRequested`. The container breaks out of
-//    the loop immediately (interrupting any running agent process), commits
-//    any remaining work, and exits. This is the forced shutdown path.
 
-async function processLoop(): Promise<void> {
-  const defaultAgent = buildDefaultAgent();
+async function processLoop(agentEnv: Record<string, string>, secrets: SecretsStore): Promise<void> {
+  const defaultAgent = buildDefaultAgent(secrets);
   // Track session ID across prompt tasks so interactive messages share context
   let promptSessionId: string | undefined;
 
@@ -219,6 +232,7 @@ async function processLoop(): Promise<void> {
         },
         PUSH_BRANCH,
         task.prompt ? promptSessionId : undefined,
+        agentEnv,
       );
       if (task.prompt && result.session_id) {
         promptSessionId = result.session_id;
@@ -369,13 +383,40 @@ async function main(): Promise<void> {
   startupLog(`Clone branch: ${CLONE_BRANCH}, Push branch: ${PUSH_BRANCH}`);
   startupLog(`Repo URL: ${REPO_URL || "(not set)"}`);
 
-  // Clone repo
   if (!REPO_URL) {
     startupLog("Fatal: REPO_URL environment variable is required");
     process.exit(1);
   }
 
-  const cloneUrl = toTokenUrl(REPO_URL, process.env.GITHUB_TOKEN);
+  // Fetch secrets from Infisical — the container only has Infisical credentials
+  // in its env, not the actual secrets.
+  const infisicalConfig: InfisicalConfig = {
+    token: process.env.INFISICAL_TOKEN ?? "",
+    projectId: process.env.INFISICAL_PROJECT_ID ?? "",
+    environment: process.env.INFISICAL_ENVIRONMENT ?? "",
+  };
+
+  if (!infisicalConfig.token || !infisicalConfig.projectId || !infisicalConfig.environment) {
+    startupLog("Fatal: INFISICAL_TOKEN, INFISICAL_PROJECT_ID, and INFISICAL_ENVIRONMENT are required");
+    process.exit(1);
+  }
+
+  startupLog("Fetching secrets from Infisical...");
+  let secrets: SecretsStore;
+  try {
+    secrets = await fetchGlobalSecrets(infisicalConfig);
+    startupLog(`Fetched ${Object.keys(secrets).length} secret(s).`);
+  } catch (e: any) {
+    startupLog(`Fatal: failed to fetch secrets: ${e.message}`);
+    process.exit(1);
+  }
+
+  // Start the secrets server — the agent uses exec-secrets to run commands
+  // that need secret values, and this server handles those requests.
+  await startSecretsServer(secrets, startupLog);
+
+  // Clone repo using GITHUB_TOKEN from the secrets store
+  const cloneUrl = toTokenUrl(REPO_URL, secrets.GITHUB_TOKEN);
   startupLog(`Cloning repo...`);
   try {
     cloneRepo(cloneUrl, CLONE_BRANCH, REPO_DIR);
@@ -408,8 +449,6 @@ async function main(): Promise<void> {
   absorbForeignTaskFiles(log);
 
   // Add INITIAL_PROMPT as a task only if there are no existing tasks.
-  // On restart after a crash, the cloned repo will have the last-pushed task
-  // file with remaining tasks, so INITIAL_PROMPT won't be re-added.
   if (INITIAL_PROMPT && getPendingTaskCount() === 0) {
     log("Adding initial prompt as task.");
     addPromptTask(INITIAL_PROMPT);
@@ -420,6 +459,9 @@ async function main(): Promise<void> {
   // Change working directory to repo
   process.chdir(REPO_DIR);
 
+  // Build restricted agent environment — no secrets except ANTHROPIC_API_KEY
+  const agentEnv = buildAgentEnv(secrets);
+
   // Start HTTP server
   server.listen(PORT, () => {
     log(`HTTP server listening on port ${PORT}`);
@@ -429,7 +471,7 @@ async function main(): Promise<void> {
   });
 
   // Start processing loop
-  processLoop();
+  processLoop(agentEnv, secrets);
 }
 
 main().catch((e) => {

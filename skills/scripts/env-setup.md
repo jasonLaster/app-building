@@ -8,7 +8,7 @@ locale configuration — verify these before running scripts.
 
 ## Required Environment Variables
 
-### Container-level (already set in the worker container)
+### Container-level (accessed via `exec-secrets`, NOT directly in the environment)
 
 | Variable | Used by |
 |---|---|
@@ -16,6 +16,9 @@ locale configuration — verify these before running scripts.
 | `RECORD_REPLAY_API_KEY` | test (Replay recording uploads) |
 | `NETLIFY_AUTH_TOKEN` | deploy (Netlify CLI authentication) |
 | `NETLIFY_ACCOUNT_SLUG` | deploy (Netlify site creation) |
+
+These secrets are NOT set in the environment. Use `exec-secrets` to make them available
+to any command that needs them. See the Secrets section in `AGENTS.md` for usage.
 
 ### App-level (in each app's `.env` file)
 
@@ -25,19 +28,18 @@ locale configuration — verify these before running scripts.
 | `DATABASE_URL` | test, deploy | From `deployment.txt` (`database_url`) or created by deploy script |
 | `NETLIFY_SITE_ID` | deploy | From `deployment.txt` (`site_id`) or created by deploy script |
 
-### Verifying environment variables
+### Verifying variables
 
-Before running tests or deploy, verify required variables are set:
+Before running tests or deploy, verify app-level variables are set in `.env`:
 
 ```bash
-# Container-level
-echo $NEON_API_KEY | head -c 5       # should show first chars
-echo $NETLIFY_AUTH_TOKEN | head -c 5  # should show first chars
-
 # App-level (from app directory)
 grep NEON_PROJECT_ID .env
 grep DATABASE_URL .env
 ```
+
+Container-level secrets (`NEON_API_KEY`, `NETLIFY_AUTH_TOKEN`, etc.) are accessed via
+`exec-secrets` and do not need manual verification — they are managed by the secrets server.
 
 If `.env` is missing but the app has been deployed before, populate it from `deployment.txt`.
 See `skills/scripts/deploy.md` § "Populating `.env` for Redeployments".

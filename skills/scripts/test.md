@@ -93,7 +93,7 @@ every individual test file wastes significant time.
 ## Inputs
 
 - **Required argument**: Test file path (e.g., `tests/auth.spec.ts`).
-- **Environment variables**:
+- **Secrets** (accessed via `exec-secrets`, not directly in the environment):
   - `NEON_API_KEY` (required): For Neon branch management.
   - `RECORD_REPLAY_API_KEY` (required): For Replay recording uploads.
   - `NEON_PROJECT_ID` (required): Read from `.env`. The Neon project to branch from.
@@ -203,7 +203,10 @@ For guidance on writing robust tests that work with this test script, see:
   the captured output to the log file.
 - Use the JSON reporter (`test-results/results.json`) to parse pass/fail counts for the
   summary line.
-- The `RECORD_REPLAY_API_KEY` env var is already set in the container.
+- `RECORD_REPLAY_API_KEY` and `NEON_API_KEY` are accessed via `exec-secrets` — the test
+  script (or the `npm run test` wrapper) must be invoked through `exec-secrets` so these
+  secrets are available to the subprocess. For example:
+  `exec-secrets NEON_API_KEY RECORD_REPLAY_API_KEY -- npm run test tests/auth.spec.ts`
 - Reset the database between tests by truncating all app tables and re-running the seed script.
   This ensures each test starts with a clean, known dataset. Use `truncateAndSeed` (truncate
   all tables then seed) rather than just `seedDatabase` — Neon branches inherit data from their

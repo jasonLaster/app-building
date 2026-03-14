@@ -24,12 +24,12 @@ with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/dep
 "Locale Workaround". Also verify dependencies are installed: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
 
 Pre-deployment checklist:
-1. Verify required environment variables are set:
+1. Verify required variables are available:
    - `DATABASE_URL` in `.env` (populated from `deployment.txt` or newly created)
-   - `NEON_API_KEY` in the container environment (`echo $NEON_API_KEY | head -c 5`)
-   - `NETLIFY_AUTH_TOKEN` in the container environment (`echo $NETLIFY_AUTH_TOKEN | head -c 5`)
+   - `NEON_API_KEY` — accessed via `exec-secrets` (not directly in the environment)
+   - `NETLIFY_AUTH_TOKEN` — accessed via `exec-secrets` (not directly in the environment)
    - `NETLIFY_SITE_ID` in `.env` if redeploying (populated from `deployment.txt`)
-   - `RECORD_REPLAY_API_KEY` in the container environment (for deployment test recordings)
+   - `RECORD_REPLAY_API_KEY` — accessed via `exec-secrets` (for deployment test recordings)
 2. Verify the DB has been seeded with production data (the deploy script handles first-run seeding).
 3. Ensure the deploy script runs fully non-interactively — no CLI prompts that hang in CI.
 4. Ensure `public/_redirects` exists with `/* /index.html 200` for SPA routing. Without this,
@@ -167,7 +167,8 @@ To diagnose and fix:
 
 1. **Check account-level env vars:**
    ```bash
-   curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+   exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s \
+     -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
      "https://api.netlify.com/api/v1/accounts/$NETLIFY_ACCOUNT_SLUG/env" | python3 -c "
    import sys, json
    for v in json.load(sys.stdin):

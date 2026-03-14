@@ -57,10 +57,9 @@ for files that don't exist yet — create them. In particular:
 
 For Neon database setup during app creation, follow `skills/scripts/neon-setup.md`. Key points:
 
-- `NEON_API_KEY` is available as a container-level environment variable.
-- Use `$NEON_API_KEY` directly in curl headers (shell expansion). Do not use `printenv` in a subshell.
-- **If authentication fails**, the variable may contain a trailing newline. Capture it via
-  `printf` first: `NEON_KEY=$(printf '%s' "$NEON_API_KEY")` then use `$NEON_KEY` in curl headers.
+- `NEON_API_KEY` is accessed via `exec-secrets` — it is NOT available directly in the environment.
+- Wrap any command that needs the API key with `exec-secrets`:
+  `exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" ...`
 - After creating a project, save the `NEON_PROJECT_ID` and `DATABASE_URL` to `.env`.
 - See `skills/scripts/env-setup.md` for the full list of required environment variables.
 

@@ -103,22 +103,42 @@ Each task object must have `skill` and `subtasks`. `app` is optional.
   Do NOT continue working on the newly queued tasks.
 - Adding tasks to the queue is NOT the same as doing those tasks. Add them and stop.
 
-## Tech Stack
+## Secrets
 
-- **Vite** for build tooling
-- **TypeScript** for all source code (strict mode)
-- **React 18** for UI (single-page application)
-- **Redux** for client side state management
-- **shadcn/ui** for components
-- **Neon** for database backend (Postgres).
-- **Netlify Functions** for any backend/serverless functions. Place functions in `netlify/functions/`. Use `netlify dev` for local development.
-- **File Storage** use UploadThing with the provided token for any file storage.
+When you are running in a container you do **not** have direct access to secrets
+(API keys, tokens, etc.) in your environment.
 
-## Database
+All secrets are managed by the container's secrets server. To run any command that needs
+a secret, use `exec-secrets`:
 
-All database accesses must happen in backend Netlify functions. Netlify functions should be focused
-and operate on specific parts of the database corresponding to the needs of one or more specific
-frontend components.
+```bash
+exec-secrets <SECRET_NAME> [SECRET_NAME2 ...] -- <command> [args...]
+```
+
+Examples:
+
+```bash
+# Neon API call
+exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+  "https://console.neon.tech/api/v2/projects"
+
+# Netlify deploy
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- netlify deploy --prod
+
+# Multiple secrets
+exec-secrets NEON_API_KEY NETLIFY_AUTH_TOKEN -- bash -c 'echo "neon: $NEON_API_KEY" && echo "netlify: $NETLIFY_AUTH_TOKEN"'
+```
+
+The secrets server spawns your command with the requested secrets in its environment,
+and redacts secret values from all output.
+
+To see which secrets are available, run `list-secrets`.
+
+**Rules:**
+- Never try to read secrets from environment variables directly — they are not set.
+- Always use `exec-secrets` to wrap any command that needs secret values.
+- If a command needs multiple secrets, list them all before `--`.
+- For complex commands that use shell expansion of secret vars, wrap in `bash -c '...'`.
 
 ## Running Tests
 

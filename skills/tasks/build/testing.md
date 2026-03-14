@@ -42,7 +42,9 @@ You MUST read these skill files before testing.
 https://raw.githubusercontent.com/replayio/skills/refs/heads/main/skills/replay-cli/SKILL.md
 https://raw.githubusercontent.com/replayio/skills/refs/heads/main/skills/replay-mcp/SKILL.md
 
-RECORD_REPLAY_API_KEY is already set in the environment for using the Replay CLI.
+RECORD_REPLAY_API_KEY is accessed via `exec-secrets` — it is NOT directly in the environment.
+When running tests or the Replay CLI, wrap the command with `exec-secrets`:
+`exec-secrets RECORD_REPLAY_API_KEY NEON_API_KEY -- npm run test tests/<file>.spec.ts`
 
 ## Replay.io Playwright Installation and Configuration
 
@@ -77,8 +79,10 @@ ls ~/.replay/runtimes/chrome-linux/chrome
 
 ### 3. API key
 
-`RECORD_REPLAY_API_KEY` must be set in the environment. It is already available in this
-container. The Playwright config passes it to the reporter via:
+`RECORD_REPLAY_API_KEY` must be available in the environment when tests run. It is accessed
+via `exec-secrets` (not directly set in the container). When running tests, wrap the command
+with `exec-secrets RECORD_REPLAY_API_KEY NEON_API_KEY -- ...` so the secret is available
+to the subprocess. The Playwright config passes it to the reporter via:
 
 ```ts
 apiKey: process.env.REPLAY_API_KEY ?? process.env.RECORD_REPLAY_API_KEY

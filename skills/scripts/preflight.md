@@ -99,11 +99,9 @@ packages. This is the standard approach for `npm install` in this ecosystem.
 If `.env` is missing or incomplete, read `deployment.txt` for `site_id`, `neon_project_id`,
 and `database_url`. See `skills/scripts/deploy.md` § "Populating `.env` for Redeployments".
 
-### 2. Verify container-level env vars
+### 2. Secrets are accessed via `exec-secrets`
 
-```bash
-echo $NEON_API_KEY | head -c 5
-echo $NETLIFY_AUTH_TOKEN | head -c 5
-```
-
-See `skills/scripts/env-setup.md` for the full list of required variables.
+Container-level secrets (`NEON_API_KEY`, `NETLIFY_AUTH_TOKEN`, `RECORD_REPLAY_API_KEY`,
+`NETLIFY_ACCOUNT_SLUG`) are NOT directly in the environment. They are accessed via
+`exec-secrets` when running commands that need them. No manual verification is needed —
+the secrets server manages them. See the Secrets section in `AGENTS.md` for usage.

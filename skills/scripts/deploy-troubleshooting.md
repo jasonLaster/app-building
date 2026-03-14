@@ -70,7 +70,7 @@ If you see 404 errors when testing deployed functions, check whether the URL use
    directly with `curl`. This is more reliable than the CLI in container environments:
    ```bash
    # Deploy using the REST API (zip dist/ first, then POST)
-   curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+   exec-secrets NETLIFY_AUTH_TOKEN -- curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
      -H "Content-Type: application/zip" \
      --data-binary @dist.zip \
      "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys"
@@ -98,7 +98,7 @@ When CLI and file-upload API deploys fail with 401, use a tar.gz archive upload 
 cd dist && tar -czf ../deploy.tar.gz . && cd ..
 
 # Create a deploy with the archive
-curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+exec-secrets NETLIFY_AUTH_TOKEN -- curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   -H "Content-Type: application/gzip" \
   --data-binary @deploy.tar.gz \
   "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/deploys" \
@@ -114,7 +114,7 @@ If function deploys also fail (functions cannot be uploaded via tar.gz), use the
 Snippets API to inject JavaScript that intercepts API calls as a workaround:
 
 ```bash
-curl -s -X POST -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+exec-secrets NETLIFY_AUTH_TOKEN -- curl -s -X POST -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   "https://api.netlify.com/api/v1/sites/$NETLIFY_SITE_ID/snippets" \
   -d '{"title":"api-proxy","general":"<script>/* interceptor code */</script>","general_position":"head"}'

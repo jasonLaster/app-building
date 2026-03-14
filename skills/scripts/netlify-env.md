@@ -8,12 +8,15 @@ instead.
 
 ## Usage
 
-Use `curl` to call the Netlify API directly. This is more reliable than the CLI.
+Use `curl` to call the Netlify API directly. This is more reliable than the CLI. All
+commands must be wrapped with `exec-secrets` since `NETLIFY_AUTH_TOKEN` and
+`NETLIFY_ACCOUNT_SLUG` are not directly in the environment.
 
 ### Set an environment variable
 
 ```bash
-curl -s -X POST "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env?site_id=${NETLIFY_SITE_ID}" \
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s -X POST \
+  "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env?site_id=${NETLIFY_SITE_ID}" \
   -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '[{"key":"DATABASE_URL","values":[{"value":"'"$DATABASE_URL"'","context":"all"}]}]'
@@ -22,22 +25,24 @@ curl -s -X POST "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}
 ### Update an existing environment variable
 
 ```bash
-curl -s -X PATCH "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env/DATABASE_URL?site_id=${NETLIFY_SITE_ID}" \
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s -X PATCH \
+  "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env/DATABASE_URL?site_id=${NETLIFY_SITE_ID}" \
   -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"value":"'"$DATABASE_URL"'","context":"all"}'
 ```
 
-## Required Environment Variables
+## Required Secrets
 
-- `NETLIFY_AUTH_TOKEN`: API authentication token.
-- `NETLIFY_ACCOUNT_SLUG`: The Netlify account slug (used in the API path).
-- `NETLIFY_SITE_ID`: The site to set the variable on (passed as query parameter).
+- `NETLIFY_AUTH_TOKEN`: API authentication token (accessed via `exec-secrets`).
+- `NETLIFY_ACCOUNT_SLUG`: The Netlify account slug (accessed via `exec-secrets`).
+- `NETLIFY_SITE_ID`: The site to set the variable on (from `.env`, passed as query parameter).
 
 ### Verify an environment variable
 
 ```bash
-curl -s "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env/DATABASE_URL?site_id=${NETLIFY_SITE_ID}" \
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s \
+  "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env/DATABASE_URL?site_id=${NETLIFY_SITE_ID}" \
   -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN"
 ```
 

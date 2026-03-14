@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { Command } from "commander";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor, getInfisicalConfig, resolveContainerSecrets } from "./package";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor, getInfisicalConfig } from "./package";
 import { startRemoteContainer } from "./remote-container";
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
 import { formatEvent } from "./format";
@@ -279,11 +279,19 @@ async function main(): Promise<void> {
   const projectRoot = resolve(__dirname, "..");
   const orchestrationVars = loadDotEnv(projectRoot);
   const infisicalConfig = await getInfisicalConfig(orchestrationVars);
-  const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+
+  // Only pass Infisical credentials to the container — not actual secrets.
+  // The container fetches secrets from Infisical at startup and manages them
+  // via the secrets server. The agent never has direct access to secrets.
+  const containerEnvVars: Record<string, string> = {
+    INFISICAL_TOKEN: infisicalConfig.token,
+    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
+    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
+  };
 
   const config: ContainerConfig = {
     projectRoot,
-    envVars: containerSecrets,
+    envVars: containerEnvVars,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
     flyToken: orchestrationVars.FLY_API_TOKEN,
     flyApp: orchestrationVars.FLY_APP_NAME,

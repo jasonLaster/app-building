@@ -1,20 +1,4 @@
-import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 const INFISICAL_API_BASE = "https://app.infisical.com";
-
-/** Keys listed in src/package/.env.example that must be present in container secrets. */
-function getRequiredSecretKeys(): string[] {
-  const examplePath = resolve(__dirname, ".env.example");
-  return readFileSync(examplePath, "utf-8")
-    .split("\n")
-    .map((l) => l.split("#")[0].trim())
-    .filter((l) => l && l.includes("="))
-    .map((l) => l.split("=")[0].trim());
-}
 
 export interface InfisicalConfig {
   token: string;
@@ -108,31 +92,6 @@ export async function fetchBranchSecrets(
   branch: string,
 ): Promise<Record<string, string>> {
   return fetchInfisicalSecrets(config, `/branches/${branch}/`);
-}
-
-/**
- * Resolve the full set of secrets to inject into a container:
- * global build secrets + Infisical config vars (so the container can fetch branch secrets).
- * Throws if any required secret from .env.example is missing.
- */
-export async function resolveContainerSecrets(
-  config: InfisicalConfig,
-): Promise<Record<string, string>> {
-  const globals = await fetchGlobalSecrets(config);
-  const secrets: Record<string, string> = {
-    ...globals,
-    INFISICAL_TOKEN: config.token,
-    INFISICAL_PROJECT_ID: config.projectId,
-    INFISICAL_ENVIRONMENT: config.environment,
-  };
-
-  const required = getRequiredSecretKeys();
-  const missing = required.filter((k) => !secrets[k]);
-  if (missing.length > 0) {
-    throw new Error(`Missing required secrets in Infisical /global/: ${missing.join(", ")}`);
-  }
-
-  return secrets;
 }
 
 /**

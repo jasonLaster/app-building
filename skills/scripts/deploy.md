@@ -70,10 +70,12 @@ a new URL and an empty database. Always check `deployment.txt` first.
 
 ## Inputs
 
-- **Environment variables**:
+- **Secrets** (accessed via `exec-secrets`, not directly in the environment):
   - `NEON_API_KEY` (required): For Neon project/database management.
   - `NETLIFY_AUTH_TOKEN` (required): For Netlify CLI authentication.
   - `NETLIFY_ACCOUNT_SLUG` (required): For Netlify site creation.
+  The deploy script (or `npm run deploy`) must be invoked via `exec-secrets`:
+  `exec-secrets NEON_API_KEY NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- npm run deploy`
 - **Files**:
   - `.env`: Read for existing project info (`NEON_PROJECT_ID`, `DATABASE_URL`,
     `NETLIFY_SITE_ID`). Written to on first run.
@@ -125,7 +127,8 @@ wrong database. To check and fix:
 
 ```bash
 # Check account-level env vars
-curl -s -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s \
+  -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   "https://api.netlify.com/api/v1/accounts/$NETLIFY_ACCOUNT_SLUG/env" | python3 -c "
 import sys, json
 for v in json.load(sys.stdin):
@@ -134,7 +137,8 @@ for v in json.load(sys.stdin):
 
 # If DATABASE_URL exists at account level, delete or override it at site level
 # Use context "production" (not "all") when setting site-level overrides
-curl -s -X PATCH -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s -X PATCH \
+  -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   "https://api.netlify.com/api/v1/accounts/$NETLIFY_ACCOUNT_SLUG/env/DATABASE_URL" \
   -d '{"context":"production","value":"<correct-database-url>"}'
@@ -162,6 +166,10 @@ export $(grep -v '^#' .env | xargs)
 
 This exports all non-comment lines as environment variables accessible to subprocesses.
 
+**Note**: This only applies to app-level variables in `.env` (like `DATABASE_URL`,
+`NEON_PROJECT_ID`, `NETLIFY_SITE_ID`). Container-level secrets (`NEON_API_KEY`,
+`NETLIFY_AUTH_TOKEN`, etc.) are accessed via `exec-secrets`, not `.env`.
+
 ## Locale Workaround
 
 The Netlify CLI requires a valid locale. In containers that lack `en_US.UTF-8`, CLI commands
@@ -169,8 +177,8 @@ The Netlify CLI requires a valid locale. In containers that lack `en_US.UTF-8`, 
 commands with `LC_ALL=C` to avoid this:
 
 ```bash
-LC_ALL=C npx netlify deploy --prod --dir dist --functions ./netlify/functions
-LC_ALL=C npx netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- bash -c 'LC_ALL=C npx netlify deploy --prod --dir dist --functions ./netlify/functions'
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- bash -c 'LC_ALL=C npx netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG'
 ```
 
 The deploy script should set `LC_ALL=C` in the environment before spawning Netlify CLI
@@ -197,8 +205,8 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   shells. The deploy script must NEVER produce interactive prompts. Always pass required
   arguments explicitly (e.g., `--name <site-name>` or `--site <site-id>`). Test the script
   end-to-end in a non-interactive shell before considering it complete.
-- **Authentication errors**: Verify `NETLIFY_AUTH_TOKEN` is set:
-  `echo $NETLIFY_AUTH_TOKEN | head -c 5`
+- **Authentication errors**: Ensure the command is wrapped with `exec-secrets NETLIFY_AUTH_TOKEN -- ...`
+  so the token is available to the subprocess.
 - **"Site not found" errors on deploy**: If `netlify deploy` fails with a site-not-found error,
   run `npx netlify link --id $NETLIFY_SITE_ID` before deploying. This writes the site ID to
   `.netlify/state.json`, which the CLI reads to identify the target site. The site ID can be
@@ -241,7 +249,7 @@ curl -s ... | node -e "process.stdin.on('data',d=>console.log(JSON.parse(d).key)
 - Use the Neon REST API (`https://console.neon.tech/api/v2/...`) with `NEON_API_KEY` for
   project creation. Example:
   ```bash
-  curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+  exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"project":{"name":"my-app"}}' \
     https://console.neon.tech/api/v2/projects
@@ -252,8 +260,8 @@ curl -s ... | node -e "process.stdin.on('data',d=>console.log(JSON.parse(d).key)
   node --input-type=module -e "import { neon } from '@neondatabase/serverless'; const sql = neon('...'); const r = await sql\`SELECT 1\`; console.log(r);"
   ```
   Do NOT use `require()` with ESM-only packages — it will fail.
-- Use `netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG` for site creation.
-- Use `netlify deploy --prod --dir dist --functions ./netlify/functions` for deployment.
+- Use `exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- netlify sites:create --account-slug $NETLIFY_ACCOUNT_SLUG` for site creation.
+- Use `exec-secrets NETLIFY_AUTH_TOKEN -- netlify deploy --prod --dir dist --functions ./netlify/functions` for deployment.
   If available, use `--json` to get machine-readable output that avoids ANSI escape code
   parsing issues.
 - After deployment, verify the site URL returns 200 before proceeding to tests:

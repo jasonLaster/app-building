@@ -19,7 +19,8 @@ will return 500 errors.
 Set it using the Netlify REST API (see `skills/scripts/netlify-env.md`):
 
 ```bash
-curl -s -X POST "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env?site_id=${NETLIFY_SITE_ID}" \
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- curl -s -X POST \
+  "https://api.netlify.com/api/v1/accounts/${NETLIFY_ACCOUNT_SLUG}/env?site_id=${NETLIFY_SITE_ID}" \
   -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '[{"key":"DATABASE_URL","values":[{"value":"'"$DATABASE_URL"'","context":"all"}]}]'
