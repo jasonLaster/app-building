@@ -30,6 +30,7 @@ export default function CreateIssueModal() {
   const navigate = useNavigate();
   const params = useParams<{ teamId?: string }>();
   const { createIssueModalOpen, createIssueDefaultParentId, createIssueDefaultTeamId } = useSelector((state: RootState) => state.ui);
+  const { workspace } = useSelector((state: RootState) => state.workspace);
 
   const [formData, setFormData] = useState<CreateIssueFormData>({ ...INITIAL_FORM_DATA });
   const [titleError, setTitleError] = useState<string | null>(null);
@@ -150,7 +151,7 @@ export default function CreateIssueModal() {
           <>
             <div className="cim-body">
               <CreateIssueForm
-                defaultTeamId={params.teamId}
+                defaultTeamId={params.teamId || workspace?.default_team_id || undefined}
                 formData={formData}
                 onFormChange={setFormData}
                 titleError={titleError}

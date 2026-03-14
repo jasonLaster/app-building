@@ -1,0 +1,144 @@
+.ws-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ws-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ws-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ws-input {
+  padding: 8px 10px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  outline: none;
+  max-width: 400px;
+  transition: border-color 150ms ease;
+}
+
+.ws-input:focus {
+  border-color: var(--color-accent);
+}
+
+.ws-input-error {
+  border-color: #ef4444;
+}
+
+.ws-field-error {
+  font-size: 11px;
+  color: #ef4444;
+}
+
+.ws-dropdown-wrapper {
+  position: relative;
+  max-width: 400px;
+}
+
+.ws-select-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 10px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 150ms ease;
+}
+
+.ws-select-btn:hover {
+  border-color: var(--color-text-tertiary);
+}
+
+.ws-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.ws-dropdown-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 100ms ease;
+}
+
+.ws-dropdown-option:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.ws-dropdown-option-active {
+  background-color: rgba(94, 106, 210, 0.1);
+  color: var(--color-accent);
+}
+
+.ws-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ws-save-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.ws-save-btn:hover {
+  opacity: 0.9;
+}
+
+.ws-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ws-success {
+  font-size: 13px;
+  color: #22c55e;
+  font-weight: 500;
+}

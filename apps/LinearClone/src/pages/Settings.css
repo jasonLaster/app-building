@@ -1,0 +1,29 @@
+.settings-page {
+  padding: 24px;
+}
+
+@media (max-width: 640px) {
+  .settings-page {
+    padding: 12px;
+  }
+}
+
+.settings-header {
+  margin-bottom: 24px;
+}
+
+.settings-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.settings-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}

@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentWorkspaceSettings: Write the WorkspaceSettings component with workspace name and default team fields",
-        "WritePageSettings: Write the Settings page"
-      ],
-      "timestamp": "2026-03-14T18:57:06.538Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "SetupApp: Setup the app",
         "DesignDatabase: Design the database"
       ],
@@ -62,10 +53,8 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentLabelList: Write the LabelList component with colored dots, names, and issue counts",
-      "WriteComponentCreateLabel: Write the CreateLabel form with name field and color picker",
-      "WriteComponentEditDeleteLabel: Write the EditDeleteLabel with inline editing and delete confirmation",
-      "WritePageLabels: Write the Labels page"
+      "WriteComponentWorkspaceSettings: Write the WorkspaceSettings component with workspace name and default team fields",
+      "WritePageSettings: Write the Settings page"
     ],
     "timestamp": "2026-03-14T18:57:06.538Z",
     "app": "LinearClone"
