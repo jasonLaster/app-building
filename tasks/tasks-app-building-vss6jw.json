@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeShared.md",
-      "subtasks": [
-        "Unpack: Write app shared code"
-      ],
-      "timestamp": "2026-03-14T18:32:06.248Z",
-      "app": "AirbnbClone"
-    },
-    {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
         "Unpack: Write the app"
@@ -58,14 +50,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/testSpec.md",
+    "skill": "skills/tasks/build/writeShared.md",
     "subtasks": [
-      "PlanPageWriteReview: Decide on components, add sections to docs/tests.md",
-      "PlanComponentPropertyBookingContext: Add test entries for PropertyBookingContext",
-      "PlanComponentRatingSliders: Add test entries for RatingSliders",
-      "PlanComponentReviewForm: Add test entries for ReviewForm"
+      "Unpack: Write app shared code"
     ],
-    "timestamp": "2026-03-14T18:52:08.860Z",
+    "timestamp": "2026-03-14T18:32:06.248Z",
     "app": "AirbnbClone"
   }
 }
