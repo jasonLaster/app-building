@@ -1,0 +1,23 @@
+.search-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 40px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: background 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.search-button:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 2px 8px var(--color-shadow-hover);
+}
+
+.search-button__icon {
+  font-size: 18px;
+}

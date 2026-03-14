@@ -1,0 +1,107 @@
+.passenger-selector {
+  position: relative;
+}
+
+.passenger-selector__trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  background: transparent;
+  transition: background 0.15s;
+}
+
+.passenger-selector__trigger:hover {
+  background: var(--color-background);
+}
+
+.passenger-selector__icon {
+  font-size: 16px;
+}
+
+.passenger-selector__arrow {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+}
+
+.passenger-selector__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+  min-width: 280px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px var(--color-shadow);
+  padding: 16px;
+  margin-top: 4px;
+}
+
+.passenger-selector__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.passenger-selector__row + .passenger-selector__row {
+  border-top: 1px solid var(--color-border-light);
+}
+
+.passenger-selector__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.passenger-selector__category {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.passenger-selector__age {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.passenger-selector__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.passenger-selector__btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  font-size: 16px;
+  color: var(--color-primary);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.passenger-selector__btn:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.passenger-selector__btn:disabled {
+  color: var(--color-border);
+  border-color: var(--color-border-light);
+  cursor: not-allowed;
+}
+
+.passenger-selector__count {
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 20px;
+  text-align: center;
+  color: var(--color-text-primary);
+}
