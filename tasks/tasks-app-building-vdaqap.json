@@ -1,15 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
-        "SetupApp: Setup the app",
-        "DesignDatabase: Design the database"
-      ],
-      "timestamp": "2026-03-14T18:35:47.582Z",
-      "app": "GoogleFlights"
-    },
-    {
       "skill": "skills/tasks/writeScript.md",
       "subtasks": [
         "Unpack: Implement package scripts"
@@ -53,12 +44,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentDestinationMap: Write the DestinationMap component",
-      "WriteComponentFlexibleDatesGrid: Write the FlexibleDatesGrid component",
-      "WriteComponentDealsSection: Write the DealsSection component",
-      "WritePageExplore: Write the Explore page"
+      "SetupApp: Setup the app",
+      "DesignDatabase: Design the database"
     ],
-    "timestamp": "2026-03-14T18:35:59.821Z",
+    "timestamp": "2026-03-14T18:35:47.582Z",
     "app": "GoogleFlights"
   }
 }
