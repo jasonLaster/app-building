@@ -149,6 +149,7 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 
 | Export | Description |
 |---|---|
+| `infisicalLogin(clientId, clientSecret)` | Log in via Universal Auth, returns a short-lived access token. |
 | `getInfisicalConfig(envVars)` | Extract `InfisicalConfig` from env vars and log in. Requires `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET`, `INFISICAL_PROJECT_ID`, `INFISICAL_ENVIRONMENT`. |
 | `fetchGlobalSecrets(config)` | Fetch secrets from the `/global/` path. |
 | `fetchBranchSecrets(config, branch)` | Fetch secrets from `/branches/<branch>/`. |

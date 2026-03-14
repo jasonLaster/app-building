@@ -86,6 +86,26 @@ git history to discover these — create them directly using the patterns below:
 - **`scripts/deploy.ts`** — Production deployment script
 - **`.eslintrc.cjs`** or **`eslint.config.*`** — ESLint configuration
 - **`netlify/functions/db.ts`** — Shared `getSql()` database helper
+- **`.env.example`** — Lists the environment variables the app requires (see below)
+
+## `.env.example`
+
+Apps do not have a `.env` file — all secrets are branch secrets accessed via `exec-secrets`.
+However, each app must have a `.env.example` that lists the environment variables the app
+needs at runtime (e.g., on Netlify). The deploy script reads this file to know which branch
+secrets to set on the Netlify site.
+
+At minimum, include `DATABASE_URL`. If the app uses additional services, add those too.
+Run `list-secrets` to see what secrets are currently available.
+
+Example `.env.example`:
+```
+DATABASE_URL=
+UPLOADTHING_TOKEN=
+```
+
+Do not put actual values in `.env.example` — it is committed to git. It is only a manifest
+of required variable names.
 
 ## Reference Apps
 
