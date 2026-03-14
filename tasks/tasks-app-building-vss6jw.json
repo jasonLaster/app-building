@@ -3,9 +3,225 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "Unpack: Get all tests passing"
+        "FixTests: tests/add-listing-form-advanced.spec.ts"
       ],
-      "timestamp": "2026-03-14T18:32:06.248Z",
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/add-listing-form.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/amenities-list.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/auth.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/booking-card.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/category-filter.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/favorite-button.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/filters-panel.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/host-dashboard-auth-stats.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/host-dashboard-bookings-actions.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/host-dashboard-bookings.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/host-dashboard-listings.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/host-info-card.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/image-gallery.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-trips-cancel-dialog.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-trips-cards.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-trips-review-order.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-trips-tabs.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/pagination.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/profile-form.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/profile-host-reviews.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/property-detail.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/property-grid.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/reviews-section.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/search.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/write-review-context.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/write-review-form.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/write-review-sliders.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:45:21.187Z",
       "app": "AirbnbClone"
     },
     {
@@ -18,12 +234,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/deployment.md",
+    "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "DoDeploy: Deploy the app to production",
-      "TestDeploy: Test the deployed app"
+      "Unpack: Get all tests passing"
     ],
-    "timestamp": "2026-03-14T21:30:31.173Z",
+    "timestamp": "2026-03-14T18:32:06.248Z",
     "app": "AirbnbClone"
   }
 }
