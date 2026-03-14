@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/writeScript.md",
-      "subtasks": [
-        "Unpack: Implement package scripts"
-      ],
-      "timestamp": "2026-03-14T18:21:13.050Z",
-      "app": "GoogleFlights"
-    },
-    {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
         "Unpack: Write Playwright tests"
@@ -42,12 +34,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/writeApp.md",
+    "skill": "skills/tasks/writeScript.md",
     "subtasks": [
-      "SetupApp: Setup the app",
-      "DesignDatabase: Design the database"
+      "Unpack: Implement package scripts"
     ],
-    "timestamp": "2026-03-14T18:35:47.582Z",
+    "timestamp": "2026-03-14T18:21:13.050Z",
     "app": "GoogleFlights"
   }
 }
