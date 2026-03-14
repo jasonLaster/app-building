@@ -1,0 +1,36 @@
+Created branch: test-run-1773530696753 (br-twilight-star-ahj5xa5m)
+Test DB URL: postgresql://neondb_owner:***@ep-winter-star-ahpowd2c.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:5753) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"2defe8a9-4805-44ee-b884-de374e09b7df","duration":0,"result":"passed","title":""}
+{"id":"95be84a1-9788-45ee-af78-6bfbff41ea73","duration":0,"result":"passed","title":""}
+{"id":"75b099ec-29a3-4763-9958-6a8e6c112fda","duration":0,"result":"passed","title":""}
+{"id":"2402cdeb-dee9-4da8-ab8b-56216ec961e6","duration":0,"result":"passed","title":""}
+{"id":"44148467-b542-4ea7-ba48-0aaf67e4c9ad","duration":0,"result":"passed","title":""}
+{"id":"07b0607f-007c-4914-9b06-b6c57b2cd6cd","duration":0,"result":"failed","title":""}
+{"id":"271eeb67-199b-45fd-b89c-86b2bc9dc922","duration":0,"result":"failed","title":""}
+{"id":"69bf77bf-fc5b-47dc-aa56-d0a3b963bb90","duration":0,"result":"passed","title":""}
+{"id":"392ed3b8-59d7-4d12-8943-cdadc0d328eb","duration":0,"result":"passed","title":""}
+{"id":"396efa8d-4dff-4b64-a742-aa1bc549c3c2","duration":0,"result":"passed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: 07b0607f-007c-4914-9b06-b6c57b2cd6cd
+⠙ Initializing…
+Uploading recordings...
+   07b0607f…  Dismissing deactivation dialog keeps property acti…  53s ago  16.9s   
+
+Uploaded recordings
+ ✘  07b0607f…  Dismissing deactivation dialog keeps property acti…  54s ago  16.9s  (failed) 
+
+

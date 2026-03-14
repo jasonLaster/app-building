@@ -5,6 +5,8 @@ const PROP_LOFT = 'b1111111-1111-1111-1111-111111111111'
 const PROP_VILLA = 'b2222222-2222-2222-2222-222222222222'
 const PROP_TOWNHOUSE = 'b5555555-5555-5555-5555-555555555555'
 
+const BASE = 'http://localhost:8888'
+
 async function loginAsHost(page: import('@playwright/test').Page) {
   await page.goto('/login')
   await page.getByTestId('login-email-input').fill('sarah@example.com')
@@ -19,6 +21,12 @@ async function goToHostDashboard(page: import('@playwright/test').Page) {
 }
 
 test.describe('Host Dashboard - Listings Tab', () => {
+  test.beforeEach(async ({ request }) => {
+    // Reset all properties to active state before each test
+    await request.put(`${BASE}/api/properties/${PROP_LOFT}`, { data: { is_active: true } })
+    await request.put(`${BASE}/api/properties/${PROP_VILLA}`, { data: { is_active: true } })
+    await request.put(`${BASE}/api/properties/${PROP_TOWNHOUSE}`, { data: { is_active: true } })
+  })
   test('Listings tab displays host\'s properties in a grid', async ({ page }) => {
     await goToHostDashboard(page)
 

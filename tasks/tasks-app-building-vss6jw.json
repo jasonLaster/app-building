@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/host-dashboard-listings.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:45:21.187Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/host-info-card.spec.ts"
       ],
       "timestamp": "2026-03-14T21:45:21.187Z",
@@ -148,7 +140,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/host-dashboard-bookings.spec.ts"
+      "FixTests: tests/host-dashboard-listings.spec.ts"
     ],
     "timestamp": "2026-03-14T21:45:21.187Z",
     "app": "AirbnbClone"
