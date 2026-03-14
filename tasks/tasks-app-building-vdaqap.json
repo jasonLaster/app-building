@@ -3,30 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestPassengerDefault: Write test for PassengerCountSelector displays default 1 Adult",
-        "WriteTestPassengerDropdown: Write test for PassengerCountSelector opens dropdown with passenger categories",
-        "WriteTestPassengerIncrementAdult: Write test for PassengerCountSelector increments adult count",
-        "WriteTestPassengerDecrementAdultMin: Write test for PassengerCountSelector decrements adult count with minimum of 1",
-        "WriteTestPassengerChildren: Write test for PassengerCountSelector increments and decrements children",
-        "WriteTestPassengerInfants: Write test for PassengerCountSelector increments and decrements infants",
-        "WriteTestPassengerInfantsMax: Write test for PassengerCountSelector prevents infants exceeding adults",
-        "WriteTestPassengerCloseRetain: Write test for PassengerCountSelector closes dropdown and retains values",
-        "WriteTestPassengerRepeated: Write test for PassengerCountSelector can be used repeatedly",
-        "WriteTestSearchButtonDisplayed: Write test for SearchButton is displayed with prominent styling",
-        "WriteTestSearchButtonNavigates: Write test for SearchButton navigates to results page with valid inputs",
-        "WriteTestSearchButtonNoOrigin: Write test for SearchButton shows validation error when origin is missing",
-        "WriteTestSearchButtonNoDestination: Write test for SearchButton shows validation error when destination is missing",
-        "WriteTestSearchButtonNoDeparture: Write test for SearchButton shows validation error when departure date is missing",
-        "WriteTestSearchButtonNoReturn: Write test for SearchButton shows validation error when return date is missing for round trip",
-        "WriteTestSearchButtonOneWay: Write test for SearchButton works for One way trip without return date",
-        "WriteTestSearchButtonSavesRecent: Write test for SearchButton saves search to recent searches"
-      ],
-      "timestamp": "2026-03-14T19:26:12.594Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestAirportOriginPlaceholder: Write test for AirportAutocomplete origin field shows placeholder text",
         "WriteTestAirportDestPlaceholder: Write test for AirportAutocomplete destination field shows placeholder text",
         "WriteTestAirportSuggestionsName: Write test for AirportAutocomplete shows suggestions when typing airport name",
@@ -310,20 +286,23 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestTripTypeSelectorDefault: Write test for TripTypeSelector displays default Round trip selection",
-      "WriteTestTripTypeSelectorDropdown: Write test for TripTypeSelector opens dropdown and shows all options",
-      "WriteTestTripTypeSelectorOneWay: Write test for TripTypeSelector selects One way and hides return date",
-      "WriteTestTripTypeSelectorMultiCity: Write test for TripTypeSelector selects Multi-city option",
-      "WriteTestTripTypeSelectorSwitchBack: Write test for TripTypeSelector switches back to Round trip from One way",
-      "WriteTestTripTypeSelectorClickOutside: Write test for TripTypeSelector closes dropdown when clicking outside",
-      "WriteTestTripTypeSelectorSequential: Write test for TripTypeSelector can be used multiple times in sequence",
-      "WriteTestCabinClassDefault: Write test for CabinClassSelector displays default Economy",
-      "WriteTestCabinClassDropdown: Write test for CabinClassSelector opens dropdown showing all cabin classes",
-      "WriteTestCabinClassBusiness: Write test for CabinClassSelector selects Business class",
-      "WriteTestCabinClassPremiumEconomy: Write test for CabinClassSelector selects Premium Economy class",
-      "WriteTestCabinClassFirst: Write test for CabinClassSelector selects First class",
-      "WriteTestCabinClassClickOutside: Write test for CabinClassSelector closes dropdown when clicking outside",
-      "WriteTestCabinClassMultipleChanges: Write test for CabinClassSelector can be changed multiple times"
+      "WriteTestPassengerDefault: Write test for PassengerCountSelector displays default 1 Adult",
+      "WriteTestPassengerDropdown: Write test for PassengerCountSelector opens dropdown with passenger categories",
+      "WriteTestPassengerIncrementAdult: Write test for PassengerCountSelector increments adult count",
+      "WriteTestPassengerDecrementAdultMin: Write test for PassengerCountSelector decrements adult count with minimum of 1",
+      "WriteTestPassengerChildren: Write test for PassengerCountSelector increments and decrements children",
+      "WriteTestPassengerInfants: Write test for PassengerCountSelector increments and decrements infants",
+      "WriteTestPassengerInfantsMax: Write test for PassengerCountSelector prevents infants exceeding adults",
+      "WriteTestPassengerCloseRetain: Write test for PassengerCountSelector closes dropdown and retains values",
+      "WriteTestPassengerRepeated: Write test for PassengerCountSelector can be used repeatedly",
+      "WriteTestSearchButtonDisplayed: Write test for SearchButton is displayed with prominent styling",
+      "WriteTestSearchButtonNavigates: Write test for SearchButton navigates to results page with valid inputs",
+      "WriteTestSearchButtonNoOrigin: Write test for SearchButton shows validation error when origin is missing",
+      "WriteTestSearchButtonNoDestination: Write test for SearchButton shows validation error when destination is missing",
+      "WriteTestSearchButtonNoDeparture: Write test for SearchButton shows validation error when departure date is missing",
+      "WriteTestSearchButtonNoReturn: Write test for SearchButton shows validation error when return date is missing for round trip",
+      "WriteTestSearchButtonOneWay: Write test for SearchButton works for One way trip without return date",
+      "WriteTestSearchButtonSavesRecent: Write test for SearchButton saves search to recent searches"
     ],
     "timestamp": "2026-03-14T19:26:12.594Z",
     "app": "GoogleFlights"
