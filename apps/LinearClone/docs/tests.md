@@ -934,7 +934,292 @@
 
 ## Issue Detail Page (`/issue/:issueId`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: IssueHeader, IssueDescription, SubIssues, ActivityComments, IssueSidebar
+
+### IssueHeader
+
+#### Test: Issue header renders identifier and title
+- **Initial state**: User navigates to `/issue/:issueId` for an existing issue with identifier "ENG-42" and title "Fix login bug"
+- **Expected**: The header displays the issue identifier "ENG-42" and the title "Fix login bug" in large font. The identifier is non-editable. The status selector is visible below the title showing the current status with its icon and color.
+
+#### Test: Inline edit issue title
+- **Initial state**: User is on the issue detail page for issue "ENG-42" with title "Fix login bug"
+- **Action**: User clicks on the title text "Fix login bug"
+- **Expected**: The title becomes an editable text input pre-filled with "Fix login bug". The input is focused and ready for editing.
+
+#### Test: Save edited issue title
+- **Initial state**: User has clicked the title and it is in edit mode, showing "Fix login bug"
+- **Action**: User clears the field, types "Fix authentication bug", and presses Enter (or clicks away to blur)
+- **Expected**: The title updates to "Fix authentication bug". The change is persisted to the database. The title returns to display mode. An activity entry is created recording the title change.
+
+#### Test: Cancel title edit on Escape
+- **Initial state**: User has clicked the title and it is in edit mode, showing "Fix login bug"
+- **Action**: User types some characters, then presses Escape
+- **Expected**: The title reverts to the original "Fix login bug" without saving. The field returns to display mode.
+
+#### Test: Title edit validates non-empty
+- **Initial state**: User has clicked the title and it is in edit mode
+- **Action**: User clears the title field completely and presses Enter
+- **Expected**: A validation error is shown (e.g., red border or tooltip) indicating the title cannot be empty. The original title is preserved.
+
+#### Test: Inline status selector displays current status
+- **Initial state**: User is on the issue detail page for an issue with status "In Progress"
+- **Expected**: The status selector below the title shows a half-circle icon in yellow and the text "In Progress".
+
+#### Test: Change status via inline selector
+- **Initial state**: User is on the issue detail page for an issue with status "Todo"
+- **Action**: User clicks the status selector
+- **Expected**: A dropdown appears showing all statuses (Backlog, Todo, In Progress, In Review, Done, Cancelled) each with their respective icon and color.
+
+#### Test: Select new status from dropdown
+- **Initial state**: The status dropdown is open, current status is "Todo"
+- **Action**: User clicks "In Progress" in the dropdown
+- **Expected**: The dropdown closes. The status selector updates to show the half-circle icon in yellow with text "In Progress". The change is persisted to the database. An activity entry is created recording the status change from "Todo" to "In Progress". A notification is created for subscribers of this issue.
+
+#### Test: Status dropdown closes on outside click
+- **Initial state**: The status dropdown is open
+- **Action**: User clicks outside the dropdown
+- **Expected**: The dropdown closes without changing the status.
+
+#### Test: Issue detail page shows correct layout with left and right panels
+- **Initial state**: User navigates to `/issue/:issueId` for an existing issue
+- **Expected**: The page displays a two-panel layout: the left panel (~70% width) contains the issue header, description, sub-issues, and activity/comments sections. The right panel (~30% width) contains the sidebar with issue properties.
+
+### IssueDescription
+
+#### Test: Description renders markdown content
+- **Initial state**: User is on the issue detail page for an issue with a markdown description containing headings, bold text, code blocks, and bullet lists
+- **Expected**: The description area renders the markdown as formatted HTML — headings are styled, bold text is bold, code blocks have monospace font with background, and bullet lists are properly indented.
+
+#### Test: Description shows placeholder when empty
+- **Initial state**: User is on the issue detail page for an issue with no description
+- **Expected**: The description area shows a placeholder text (e.g., "Add a description...") in muted/gray text, indicating it is clickable to add content.
+
+#### Test: Click to edit description
+- **Initial state**: User is on the issue detail page with a description "This is a bug in the login flow"
+- **Action**: User clicks on the description text
+- **Expected**: The description changes to an editable rich text area (supporting markdown) pre-filled with the existing markdown content. The editor is focused and ready for editing.
+
+#### Test: Save edited description
+- **Initial state**: User has clicked the description and it is in edit mode showing "This is a bug in the login flow"
+- **Action**: User changes the text to "This is a critical bug in the authentication flow that affects all users" and clicks outside the editor (or presses a save shortcut)
+- **Expected**: The description updates to show the new rendered markdown. The change is persisted to the database. An activity entry is created recording the description change.
+
+#### Test: Description supports markdown formatting
+- **Initial state**: User has clicked the description and it is in edit mode
+- **Action**: User types "## Steps to reproduce\n1. Go to login\n2. Enter invalid password\n3. **Error message** is missing" and saves
+- **Expected**: The rendered description shows "Steps to reproduce" as a heading, a numbered list with three items, and "Error message" in bold.
+
+#### Test: Cancel description edit on Escape
+- **Initial state**: User has clicked the description and it is in edit mode
+- **Action**: User makes changes to the text and presses Escape
+- **Expected**: The description reverts to its original content without saving. The editor returns to display mode.
+
+#### Test: Edit description multiple times in sequence
+- **Initial state**: User is on the issue detail page with a description
+- **Action**: User clicks the description, edits it, saves, then clicks it again to edit a second time
+- **Expected**: The second edit works correctly — the editor opens with the updated content from the first edit, and subsequent saves persist correctly.
+
+### SubIssues
+
+#### Test: Sub-issues section renders with heading and add button
+- **Initial state**: User is on the issue detail page for a parent issue with no sub-issues
+- **Expected**: The sub-issues section is visible below the description with a heading "Sub-issues" and an "Add sub-issue" button. When there are no sub-issues, a message like "No sub-issues" is displayed.
+
+#### Test: Sub-issues list displays child issues
+- **Initial state**: A parent issue "ENG-10" has two sub-issues: "ENG-11" (title: "Design login form", status: "Done") and "ENG-12" (title: "Implement validation", status: "In Progress")
+- **Expected**: The sub-issues section displays both child issues in a list. Each sub-issue row shows the issue identifier (e.g., "ENG-11"), title (clickable), status icon with color, and priority icon. "ENG-11" shows a green check-circle (Done) and "ENG-12" shows a yellow half-circle (In Progress).
+
+#### Test: Click sub-issue navigates to its detail page
+- **Initial state**: Parent issue "ENG-10" has sub-issue "ENG-11" displayed in the list
+- **Action**: User clicks on the title "Design login form" of sub-issue "ENG-11"
+- **Expected**: User is navigated to `/issue/ENG-11` (the detail page for the sub-issue). The sub-issue detail page loads showing its full details including a reference to its parent issue.
+
+#### Test: Add sub-issue button opens create issue modal
+- **Initial state**: User is on the issue detail page for issue "ENG-10"
+- **Action**: User clicks the "Add sub-issue" button
+- **Expected**: The create issue modal opens with the parent issue field pre-filled with "ENG-10". The team selector defaults to the same team as the parent issue. All other fields are in their default state.
+
+#### Test: Newly created sub-issue appears in the list
+- **Initial state**: User clicked "Add sub-issue", the create issue modal is open with parent set to "ENG-10"
+- **Action**: User fills in title "Write unit tests", sets status to "Todo", and clicks "Create Issue"
+- **Expected**: The modal closes. The new sub-issue (e.g., "ENG-13 Write unit tests") appears in the sub-issues list with a gray circle (Todo) status icon. The sub-issue is persisted with its parent reference.
+
+#### Test: Sub-issue status icon updates when status changes
+- **Initial state**: Sub-issue "ENG-12" has status "In Progress" (yellow half-circle) and is displayed in the parent's sub-issues list
+- **Action**: User navigates to "ENG-12", changes its status to "Done", and navigates back to the parent issue
+- **Expected**: The sub-issue "ENG-12" now shows a green check-circle (Done) icon in the parent's sub-issues list.
+
+#### Test: Multiple sub-issues display in correct order
+- **Initial state**: Parent issue has 4 sub-issues created in order: ENG-11, ENG-12, ENG-13, ENG-14
+- **Expected**: All 4 sub-issues are displayed in the list in a consistent order (e.g., by creation date or identifier).
+
+### ActivityComments
+
+#### Test: Activity/Comments section renders with tab toggle
+- **Initial state**: User is on the issue detail page, scrolled to the bottom of the left panel
+- **Expected**: The Activity/Comments section is visible with two tab buttons: "Activity" and "Comments". One tab is active (visually highlighted). A comment input box with a "Comment" button is visible at the bottom.
+
+#### Test: Activity tab shows chronological history
+- **Initial state**: An issue has had its status changed from "Backlog" to "Todo", then assignee changed from unassigned to "Alice", then priority changed from "No Priority" to "High"
+- **Action**: User clicks the "Activity" tab
+- **Expected**: The activity tab displays three chronological entries: (1) status change from Backlog to Todo with timestamp and actor name, (2) assignee change to Alice with timestamp and actor name, (3) priority change to High with timestamp and actor name. Each entry shows the actor's avatar, their name, a description of the change, and a relative timestamp. Entries are ordered oldest first (top) to newest (bottom).
+
+#### Test: Comments tab shows user comments
+- **Initial state**: An issue has two comments: one by "Alice" saying "I'll look into this" posted 2 hours ago, and one by "Bob" saying "Found the root cause" posted 1 hour ago
+- **Action**: User clicks the "Comments" tab
+- **Expected**: Two comments are displayed, each showing the author's avatar, name, relative timestamp (e.g., "2h ago", "1h ago"), and the comment content. Comments are ordered oldest first.
+
+#### Test: Add a new comment
+- **Initial state**: User is on the issue detail page with the comments section visible. The comment input box is empty.
+- **Action**: User types "This should be fixed in the next sprint" in the comment input and clicks the "Comment" button
+- **Expected**: The new comment appears at the bottom of the comments list showing the current user's avatar, name, "just now" as the timestamp, and the comment text "This should be fixed in the next sprint". The comment input is cleared. The comment is persisted to the database. A notification is created for subscribers of this issue.
+
+#### Test: Comment button is disabled when input is empty
+- **Initial state**: User is on the issue detail page, the comment input box is empty
+- **Expected**: The "Comment" button is disabled (grayed out, not clickable).
+
+#### Test: Comment button enables when text is entered
+- **Initial state**: User is on the issue detail page, the comment input box is empty and the button is disabled
+- **Action**: User types "Test comment" in the comment input
+- **Expected**: The "Comment" button becomes enabled (visually active, clickable).
+
+#### Test: Submit comment via Enter key
+- **Initial state**: User has typed "Quick fix needed" in the comment input
+- **Action**: User presses Enter (or Ctrl+Enter / Cmd+Enter depending on implementation)
+- **Expected**: The comment is submitted and appears in the comments list. The input is cleared.
+
+#### Test: Switch between Activity and Comments tabs
+- **Initial state**: User is on the "Comments" tab viewing comments
+- **Action**: User clicks the "Activity" tab
+- **Expected**: The view switches to show activity history entries. The "Activity" tab is now visually highlighted and "Comments" tab is not. Clicking "Comments" again switches back to the comments view with all comments still visible.
+
+#### Test: Activity tab updates when issue properties change
+- **Initial state**: User is on the issue detail page with the "Activity" tab selected, showing 2 existing activity entries
+- **Action**: User changes the issue status from "Todo" to "In Progress" via the status selector
+- **Expected**: A new activity entry appears at the bottom of the activity list showing "changed status from Todo to In Progress" with the current user's name, avatar, and "just now" timestamp. The total count is now 3 entries.
+
+#### Test: Add multiple comments in sequence
+- **Initial state**: User is on the issue detail page with the Comments tab active
+- **Action**: User types "First comment" and clicks "Comment", then types "Second comment" and clicks "Comment"
+- **Expected**: Both comments appear in the list in order. The input clears after each submission. Both comments are persisted correctly.
+
+#### Test: Comment displays long text properly
+- **Initial state**: User is on the issue detail page
+- **Action**: User types a long comment (multiple paragraphs) and submits it
+- **Expected**: The comment is displayed with proper text wrapping and paragraph spacing. No content is truncated or overflows the container.
+
+### IssueSidebar
+
+#### Test: Sidebar renders all property fields
+- **Initial state**: User is on the issue detail page for an issue with status "In Progress", priority "High", assignee "Alice", labels ["Bug", "Frontend"], project "Auth Rewrite", cycle "Sprint 3", due date "2026-04-01"
+- **Expected**: The right sidebar displays all property fields: Status showing "In Progress" with half-circle yellow icon, Priority showing "High" with orange arrow-up icon, Assignee showing "Alice" with avatar, Labels showing "Bug" and "Frontend" as colored badges, Project showing "Auth Rewrite", Cycle showing "Sprint 3", Due Date showing "Apr 1, 2026", Created timestamp (read-only), and Updated timestamp (read-only).
+
+#### Test: Change status via sidebar dropdown
+- **Initial state**: Issue has status "Todo". User is on the issue detail page.
+- **Action**: User clicks the Status field in the sidebar
+- **Expected**: A dropdown appears listing all statuses (Backlog, Todo, In Progress, In Review, Done, Cancelled) with their respective icons and colors.
+
+#### Test: Select new status in sidebar
+- **Initial state**: The status dropdown is open in the sidebar, current status is "Todo"
+- **Action**: User clicks "Done"
+- **Expected**: The dropdown closes. Status updates to "Done" with a green check-circle icon. The change is persisted. An activity entry is created. The inline status selector in the header also updates to "Done".
+
+#### Test: Change priority via sidebar dropdown
+- **Initial state**: Issue has priority "Medium". User is on the issue detail page.
+- **Action**: User clicks the Priority field in the sidebar
+- **Expected**: A dropdown appears listing all priorities (Urgent, High, Medium, Low, No Priority) with their respective icons and colors.
+
+#### Test: Select new priority in sidebar
+- **Initial state**: The priority dropdown is open, current priority is "Medium"
+- **Action**: User clicks "Urgent"
+- **Expected**: The dropdown closes. Priority updates to "Urgent" with a red alert-triangle icon. The change is persisted. An activity entry is created recording the priority change from "Medium" to "Urgent".
+
+#### Test: Change assignee via searchable selector
+- **Initial state**: Issue is unassigned. The workspace has members "Alice", "Bob", and "Charlie".
+- **Action**: User clicks the Assignee field in the sidebar
+- **Expected**: A searchable dropdown appears showing all workspace members with their avatars and names.
+
+#### Test: Search and select assignee
+- **Initial state**: The assignee dropdown is open showing all members
+- **Action**: User types "Ali" in the search field
+- **Expected**: The list filters to show only "Alice". User clicks "Alice".
+- **Action**: User clicks "Alice"
+- **Expected**: The dropdown closes. Assignee updates to show Alice's avatar and name. The change is persisted. An activity entry is created. A notification is sent to Alice that she was assigned to this issue.
+
+#### Test: Remove assignee
+- **Initial state**: Issue is assigned to "Alice"
+- **Action**: User clicks the Assignee field, then clicks an "Unassign" or clear option
+- **Expected**: The assignee is removed. The field shows as unassigned (e.g., "No assignee" or empty avatar placeholder). The change is persisted. An activity entry is created.
+
+#### Test: Add labels via multi-select picker
+- **Initial state**: Issue has no labels. Available labels include "Bug" (red), "Feature" (green), "Improvement" (blue).
+- **Action**: User clicks the Labels field in the sidebar
+- **Expected**: A multi-select dropdown appears showing all available labels with their colored dots and names. No labels are checked.
+
+#### Test: Select multiple labels
+- **Initial state**: The labels picker is open, no labels selected
+- **Action**: User clicks "Bug", then clicks "Frontend"
+- **Expected**: Both "Bug" and "Frontend" are checked in the dropdown. The sidebar field updates to show both labels as colored badges. The changes are persisted. Activity entries are created for each label addition.
+
+#### Test: Remove a label
+- **Initial state**: Issue has labels "Bug" and "Frontend". The labels picker is open.
+- **Action**: User unchecks "Bug"
+- **Expected**: "Bug" is removed from the issue. Only "Frontend" badge remains in the sidebar. The change is persisted. An activity entry is created recording the label removal.
+
+#### Test: Change project via searchable selector
+- **Initial state**: Issue has no project assigned. Available projects include "Auth Rewrite", "Performance Optimization", "Mobile App".
+- **Action**: User clicks the Project field in the sidebar
+- **Expected**: A searchable dropdown appears listing available projects.
+
+#### Test: Search and select project
+- **Initial state**: The project dropdown is open
+- **Action**: User types "Auth" in the search field, then clicks "Auth Rewrite"
+- **Expected**: The dropdown closes. Project updates to show "Auth Rewrite". The change is persisted. An activity entry is created.
+
+#### Test: Remove project assignment
+- **Initial state**: Issue is assigned to project "Auth Rewrite"
+- **Action**: User clicks the Project field, then clicks a "Remove" or clear option
+- **Expected**: The project is unassigned. The field shows as empty (e.g., "No project"). The change is persisted. An activity entry is created.
+
+#### Test: Change cycle via dropdown
+- **Initial state**: Issue belongs to team "Engineering" which has cycles "Sprint 2" (completed), "Sprint 3" (active), "Sprint 4" (upcoming). Issue has no cycle assigned.
+- **Action**: User clicks the Cycle field in the sidebar
+- **Expected**: A dropdown appears showing available cycles for the team: "Sprint 2", "Sprint 3", "Sprint 4" with their date ranges.
+
+#### Test: Select cycle
+- **Initial state**: The cycle dropdown is open
+- **Action**: User clicks "Sprint 3"
+- **Expected**: The dropdown closes. Cycle updates to show "Sprint 3". The change is persisted. An activity entry is created.
+
+#### Test: Change due date via date picker
+- **Initial state**: Issue has no due date set
+- **Action**: User clicks the Due Date field in the sidebar
+- **Expected**: A date picker opens allowing the user to select a date.
+
+#### Test: Select due date
+- **Initial state**: The date picker is open
+- **Action**: User selects April 15, 2026
+- **Expected**: The date picker closes. Due Date updates to show "Apr 15, 2026". The change is persisted. An activity entry is created.
+
+#### Test: Clear due date
+- **Initial state**: Issue has due date "Apr 15, 2026"
+- **Action**: User clicks the Due Date field and clicks a "Clear" or remove option
+- **Expected**: The due date is removed. The field shows as empty (e.g., "No due date"). The change is persisted. An activity entry is created.
+
+#### Test: Created and Updated timestamps are read-only
+- **Initial state**: User is on the issue detail page. The issue was created on "Mar 10, 2026" and last updated "Mar 14, 2026".
+- **Expected**: The Created field shows "Mar 10, 2026" (or relative time like "4 days ago") and the Updated field shows "Mar 14, 2026" (or "today"). Both fields are not clickable/editable — they have no hover cursor change or click handler.
+
+#### Test: Sidebar dropdowns close on outside click
+- **Initial state**: The priority dropdown is open in the sidebar
+- **Action**: User clicks outside the dropdown (e.g., on the description area)
+- **Expected**: The dropdown closes without changing the priority value.
+
+#### Test: Use assignee selector multiple times in sequence
+- **Initial state**: Issue is assigned to "Alice"
+- **Action**: User clicks the Assignee field, selects "Bob", then immediately clicks the Assignee field again and selects "Charlie"
+- **Expected**: The assignee correctly updates to "Charlie" after the second selection. Both changes create separate activity entries. The search input resets between uses.
 
 ## Create Issue Modal
 
