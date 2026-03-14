@@ -3,10 +3,9 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "SetupApp: Setup the app",
-        "DesignDatabase: Design the database"
+        "WriteComponentSidebar: Write the Sidebar navigation component and update App.tsx layout"
       ],
-      "timestamp": "2026-03-14T19:01:05.404Z",
+      "timestamp": "2026-03-14T19:50:36.858Z",
       "app": "AirbnbClone"
     },
     {
@@ -53,12 +52,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentRatingSliders: Write the RatingSliders component",
-      "WriteComponentPropertyBookingContext: Write the PropertyBookingContext component",
-      "WriteComponentReviewForm: Write the ReviewForm component",
-      "WritePageWriteReview: Write the Write Review page"
+      "SetupApp: Setup the app",
+      "DesignDatabase: Design the database"
     ],
-    "timestamp": "2026-03-14T19:01:21.956Z",
+    "timestamp": "2026-03-14T19:01:05.404Z",
     "app": "AirbnbClone"
   }
 }
