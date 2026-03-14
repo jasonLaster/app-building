@@ -3,22 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestPaginationControlsDisplayed: Write test for Pagination controls are displayed when results exceed one page",
-        "WriteTestPaginationControlsHidden: Write test for Pagination controls are hidden when all results fit on one page",
-        "WriteTestClickNextPage: Write test for Clicking Next page loads the next set of properties",
-        "WriteTestClickPreviousPage: Write test for Clicking Previous page loads the previous set of properties",
-        "WriteTestClickSpecificPageNumber: Write test for Clicking a specific page number navigates to that page",
-        "WriteTestNextButtonDisabledLastPage: Write test for Next button is disabled on the last page",
-        "WriteTestPreviousButtonDisabledFirstPage: Write test for Previous button is disabled on the first page",
-        "WriteTestApplyingFiltersResetsPagination: Write test for Applying filters resets pagination to page 1",
-        "WriteTestPaginationRepeatedUse: Write test for Pagination is functional on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestImageGalleryMainAndThumbnails: Write test for Image gallery displays main large image and smaller thumbnails",
         "WriteTestImageGallerySingleImage: Write test for Image gallery displays single image when property has only one image",
         "WriteTestImageGalleryPlaceholder: Write test for Image gallery displays placeholder when property has no images",
@@ -339,19 +323,15 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestFiltersPanelHiddenByDefault: Write test for Filters panel is hidden by default with a visible toggle button",
-      "WriteTestClickFiltersButtonOpens: Write test for Clicking the Filters button opens the filters panel",
-      "WriteTestClickFiltersButtonCloses: Write test for Clicking the Filters button again closes the filters panel",
-      "WriteTestPriceRangeSlider: Write test for Price range slider filters properties by price per night",
-      "WriteTestBedroomsMinFilter: Write test for Bedrooms minimum filter works correctly",
-      "WriteTestBedsMinFilter: Write test for Beds minimum filter works correctly",
-      "WriteTestBathroomsMinFilter: Write test for Bathrooms minimum filter works correctly",
-      "WriteTestAmenityCheckboxes: Write test for Amenity checkboxes filter properties by selected amenities",
-      "WriteTestAmenityCheckboxesGrouped: Write test for Amenity checkboxes are grouped by category",
-      "WriteTestMultipleFiltersANDLogic: Write test for Multiple filters combine with AND logic",
-      "WriteTestFiltersCombineWithSearchAndCategory: Write test for Filters combine with search bar and category filter",
-      "WriteTestResettingFilters: Write test for Resetting filters shows all properties",
-      "WriteTestFiltersPanelRepeatedUse: Write test for Filters panel controls are functional on repeated use"
+      "WriteTestPaginationControlsDisplayed: Write test for Pagination controls are displayed when results exceed one page",
+      "WriteTestPaginationControlsHidden: Write test for Pagination controls are hidden when all results fit on one page",
+      "WriteTestClickNextPage: Write test for Clicking Next page loads the next set of properties",
+      "WriteTestClickPreviousPage: Write test for Clicking Previous page loads the previous set of properties",
+      "WriteTestClickSpecificPageNumber: Write test for Clicking a specific page number navigates to that page",
+      "WriteTestNextButtonDisabledLastPage: Write test for Next button is disabled on the last page",
+      "WriteTestPreviousButtonDisabledFirstPage: Write test for Previous button is disabled on the first page",
+      "WriteTestApplyingFiltersResetsPagination: Write test for Applying filters resets pagination to page 1",
+      "WriteTestPaginationRepeatedUse: Write test for Pagination is functional on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
