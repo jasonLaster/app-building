@@ -1,15 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
-        "SetupApp: Setup the app",
-        "DesignDatabase: Design the database"
-      ],
-      "timestamp": "2026-03-14T18:56:37.640Z",
-      "app": "LinearClone"
-    },
-    {
       "skill": "skills/tasks/writeScript.md",
       "subtasks": [
         "Unpack: Implement package scripts"
@@ -53,10 +44,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentWorkspaceSettings: Write the WorkspaceSettings component with workspace name and default team fields",
-      "WritePageSettings: Write the Settings page"
+      "SetupApp: Setup the app",
+      "DesignDatabase: Design the database"
     ],
-    "timestamp": "2026-03-14T18:57:06.538Z",
+    "timestamp": "2026-03-14T18:56:37.640Z",
     "app": "LinearClone"
   }
 }

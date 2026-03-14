@@ -83,7 +83,7 @@ export default async function handler(req: Request, _context: Context) {
 
     // Fetch labels for all project issues
     const issueIds = issues.map((i) => String(i.id));
-    let issueLabelsMap = new Map<string, Array<{ id: string; name: string; color: string }>>();
+    const issueLabelsMap = new Map<string, Array<{ id: string; name: string; color: string }>>();
     if (issueIds.length > 0) {
       const allLabels = await sql`
         SELECT il.issue_id, l.id, l.name, l.color

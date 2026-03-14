@@ -5,7 +5,6 @@ import type { Issue } from '../slices/issuesSlice';
 import {
   toggleProjectIssueSelection,
   clearProjectIssueSelection,
-  updateProjectIssueStatus,
   bulkUpdateProjectIssues,
 } from '../slices/projectDetailSlice';
 import IssueRow from './IssueRow';

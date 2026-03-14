@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '../store';
-import { updateWorkspace, fetchWorkspace } from '../slices/workspaceSlice';
+import { updateWorkspace } from '../slices/workspaceSlice';
 import { fetchTeams } from '../slices/teamsSlice';
 import './WorkspaceSettings.css';
 
@@ -99,10 +99,6 @@ export default function WorkspaceSettings() {
   }
 
   const selectedTeam = teams.find((t) => t.id === selectedTeamId);
-
-  const hasChanges =
-    nameValue.trim() !== (workspace?.name || '') ||
-    selectedTeamId !== (workspace?.default_team_id ?? null);
 
   return (
     <div className="ws-settings" data-testid="workspace-settings">

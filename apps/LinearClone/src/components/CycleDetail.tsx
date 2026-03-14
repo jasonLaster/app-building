@@ -9,7 +9,6 @@ import {
   selectCycleGroupIssues,
   clearCycleSelection,
 } from '../slices/cyclesSlice';
-import { updateIssueStatus } from '../slices/issuesSlice';
 import { bulkUpdateIssues } from '../slices/teamIssuesSlice';
 import IssueRow from './IssueRow';
 import { STATUS_ORDER, STATUS_CONFIG, StatusIcon, PriorityIcon, PRIORITY_CONFIG } from './IssueRow';
@@ -78,10 +77,6 @@ const STATUS_LABELS: Record<string, string> = {
   backlog: 'Backlog', todo: 'Todo', in_progress: 'In Progress',
   in_review: 'In Review', done: 'Done', cancelled: 'Cancelled',
 };
-const PRIORITY_LABELS: Record<string, string> = {
-  urgent: 'Urgent', high: 'High', medium: 'Medium', low: 'Low', none: 'No Priority',
-};
-
 export default function CycleDetail() {
   const dispatch = useDispatch<AppDispatch>();
   const {
