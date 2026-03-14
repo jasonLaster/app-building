@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageProjectDetail: Decide on components, add sections to docs/tests.md",
-        "PlanComponentProjectHeader: Add test entries for ProjectHeader",
-        "PlanComponentProjectIssuesTab: Add test entries for ProjectIssuesTab",
-        "PlanComponentProjectOverviewTab: Add test entries for ProjectOverviewTab"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageMembers: Decide on components, add sections to docs/tests.md",
         "PlanComponentMemberList: Add test entries for MemberList",
         "PlanComponentInviteMemberModal: Add test entries for InviteMemberModal",
@@ -113,10 +102,10 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageProjects: Decide on components, add sections to docs/tests.md",
-      "PlanComponentProjectCard: Add test entries for ProjectCard",
-      "PlanComponentProjectFilters: Add test entries for ProjectFilters",
-      "PlanComponentCreateProjectModal: Add test entries for CreateProjectModal"
+      "PlanPageProjectDetail: Decide on components, add sections to docs/tests.md",
+      "PlanComponentProjectHeader: Add test entries for ProjectHeader",
+      "PlanComponentProjectIssuesTab: Add test entries for ProjectIssuesTab",
+      "PlanComponentProjectOverviewTab: Add test entries for ProjectOverviewTab"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"

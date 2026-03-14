@@ -1822,7 +1822,286 @@
 
 ## Project Detail Page (`/project/:projectId`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: ProjectHeader, ProjectIssuesTab, ProjectOverviewTab
+
+### ProjectHeader
+
+#### Test: Project header renders all fields for an existing project
+- **Initial state**: User is authenticated, viewing `/project/1`. Project "Auth Rewrite" exists with status "In Progress", lead "Jane Doe", target date 2026-04-15, and 10 issues (6 completed).
+- **Expected**: The header displays the project name "Auth Rewrite" as an inline-editable text field. A status badge shows "In Progress" with appropriate styling. A progress bar shows 60% completion (6/10 issues). The target date "Apr 15, 2026" is displayed and inline-editable. The lead shows "Jane Doe" with avatar and is inline-editable.
+
+#### Test: Inline edit project name
+- **Initial state**: User is viewing `/project/1`. Project name is "Auth Rewrite".
+- **Action**: User clicks on the project name text, clears it, types "Auth Rewrite v2", and presses Enter or clicks away to confirm.
+- **Expected**: The project name updates to "Auth Rewrite v2". The change is persisted to the database. An activity entry is created recording the name change.
+
+#### Test: Inline edit project name — cancel edit
+- **Initial state**: User is viewing `/project/1`. Project name is "Auth Rewrite".
+- **Action**: User clicks on the project name, types "Draft Name", then presses Escape.
+- **Expected**: The project name reverts to "Auth Rewrite". No change is persisted.
+
+#### Test: Inline edit project name — validation rejects empty name
+- **Initial state**: User is viewing `/project/1`. Project name is "Auth Rewrite".
+- **Action**: User clicks on the project name, clears the field entirely, and presses Enter.
+- **Expected**: A validation error is shown (e.g., "Name is required"). The project name remains "Auth Rewrite". No change is persisted.
+
+#### Test: Inline edit status badge
+- **Initial state**: User is viewing `/project/1`. Project status is "Planned".
+- **Action**: User clicks the status badge.
+- **Expected**: A dropdown opens showing all project statuses: "Planned", "In Progress", "Completed", "Cancelled". Each option has distinct styling/color.
+
+#### Test: Change project status via inline dropdown
+- **Initial state**: User is viewing `/project/1`. Project status is "Planned". Status dropdown is open.
+- **Action**: User selects "In Progress" from the dropdown.
+- **Expected**: The status badge updates to "In Progress" with appropriate color styling. The dropdown closes. The change is persisted to the database. An activity entry is created recording the status change from "Planned" to "In Progress".
+
+#### Test: Change project status multiple times in sequence
+- **Initial state**: User is viewing `/project/1`. Project status is "Planned".
+- **Action**: User clicks the status badge, selects "In Progress". Then clicks the status badge again and selects "Completed".
+- **Expected**: After first change, status shows "In Progress". After second change, status shows "Completed". Both changes are persisted. Two separate activity entries are created (one for each change). The progress bar and status badge update correctly each time.
+
+#### Test: Inline edit target date via date picker
+- **Initial state**: User is viewing `/project/1`. Target date is "Apr 15, 2026".
+- **Action**: User clicks the target date field.
+- **Expected**: A date picker opens showing the current target date pre-selected.
+
+#### Test: Change target date
+- **Initial state**: User is viewing `/project/1`. Target date date picker is open.
+- **Action**: User selects "May 1, 2026" from the date picker.
+- **Expected**: The target date updates to "May 1, 2026". The date picker closes. The change is persisted. An activity entry is created recording the target date change.
+
+#### Test: Clear target date
+- **Initial state**: User is viewing `/project/1`. Target date is "Apr 15, 2026".
+- **Action**: User clicks the target date field and clicks a "Clear" or remove option.
+- **Expected**: The target date is removed, displaying a placeholder like "No target date". The change is persisted. An activity entry is created.
+
+#### Test: Inline edit lead via searchable selector
+- **Initial state**: User is viewing `/project/1`. Lead is "Jane Doe". Workspace members include "Jane Doe", "Alice Smith", "Bob Jones".
+- **Action**: User clicks on the lead field.
+- **Expected**: A searchable dropdown opens listing all workspace members with avatars and names. "Jane Doe" is shown as currently selected.
+
+#### Test: Change project lead
+- **Initial state**: User is viewing `/project/1`. Lead selector is open.
+- **Action**: User types "Ali" in the search field, then selects "Alice Smith".
+- **Expected**: The lead updates to "Alice Smith" with her avatar. The dropdown closes. The change is persisted. An activity entry is created recording the lead change from "Jane Doe" to "Alice Smith".
+
+#### Test: Search lead selector filters results
+- **Initial state**: User is viewing `/project/1`. Lead selector is open. Members: "Jane Doe", "Alice Smith", "Bob Jones".
+- **Action**: User types "bob" in the search field.
+- **Expected**: Only "Bob Jones" appears in the filtered results. Other members are hidden.
+
+#### Test: Remove project lead
+- **Initial state**: User is viewing `/project/1`. Lead is "Jane Doe".
+- **Action**: User clicks the lead field and selects a "Remove" or "Unassign" option.
+- **Expected**: The lead is cleared, showing a placeholder like "No lead". The change is persisted. An activity entry is created.
+
+#### Test: Progress bar reflects issue completion accurately
+- **Initial state**: User is viewing `/project/1`. Project has 10 issues total: 6 Done, 1 Cancelled, 3 In Progress.
+- **Expected**: The progress bar shows 60% filled (6 completed out of 10 total). A text label or tooltip shows "6 of 10 issues completed" or similar.
+
+#### Test: Progress bar shows 0% for project with no completed issues
+- **Initial state**: User is viewing a project with 5 issues, none completed.
+- **Expected**: The progress bar shows 0% filled. Text indicates "0 of 5 issues completed" or similar.
+
+#### Test: Progress bar shows 100% for fully completed project
+- **Initial state**: User is viewing a project with 4 issues, all with status "Done".
+- **Expected**: The progress bar shows 100% filled with a fully colored bar.
+
+#### Test: Progress bar handles project with no issues
+- **Initial state**: User is viewing a project with 0 issues.
+- **Expected**: The progress bar shows 0% or an empty state. No division-by-zero errors occur.
+
+#### Test: Header displays tabs for Issues and Overview
+- **Initial state**: User is viewing `/project/1`.
+- **Expected**: Below the header fields, two tabs are visible: "Issues" and "Overview". The "Issues" tab is active/selected by default.
+
+#### Test: Clicking Overview tab switches to overview content
+- **Initial state**: User is viewing `/project/1` with the "Issues" tab active.
+- **Action**: User clicks the "Overview" tab.
+- **Expected**: The "Overview" tab becomes active/highlighted. The content area below switches to show the overview content (description, milestones, key metrics). The "Issues" tab is no longer highlighted.
+
+#### Test: Clicking Issues tab switches back to issues content
+- **Initial state**: User is viewing `/project/1` with the "Overview" tab active.
+- **Action**: User clicks the "Issues" tab.
+- **Expected**: The "Issues" tab becomes active/highlighted. The content area switches to show the project issues list. The "Overview" tab is no longer highlighted.
+
+#### Test: Navigating to project detail page from project card
+- **Initial state**: User is on `/projects`. Project "Auth Rewrite" exists.
+- **Action**: User clicks on the "Auth Rewrite" project card/name.
+- **Expected**: User is navigated to `/project/1` (or the correct project ID). The ProjectHeader displays "Auth Rewrite" with all its fields.
+
+### ProjectIssuesTab
+
+#### Test: Issues tab displays all project issues grouped by team
+- **Initial state**: User is viewing `/project/1` with the "Issues" tab active. Project "Auth Rewrite" has issues from teams "Engineering" (3 issues) and "Design" (2 issues).
+- **Expected**: Issues are grouped under team name headers: "Engineering" showing 3 issues and "Design" showing 2 issues. Each team header shows the team name and issue count.
+
+#### Test: Issue rows display standard issue information
+- **Initial state**: User is viewing `/project/1`, Issues tab. An issue exists: identifier "ENG-42", title "Fix login bug", status "In Progress" (half-circle yellow icon), priority "High" (orange arrow-up icon), assignee "Alice" with avatar, labels "Bug" (colored badge), due date "Apr 1, 2026".
+- **Expected**: The issue row displays: priority icon (orange arrow-up), identifier "ENG-42", title "Fix login bug" (clickable), status icon (yellow half-circle), label badge "Bug", assignee avatar for Alice, and due date "Apr 1, 2026".
+
+#### Test: Clicking issue title navigates to issue detail
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issue "ENG-42" is displayed.
+- **Action**: User clicks on the title "Fix login bug" for issue ENG-42.
+- **Expected**: User is navigated to `/issue/ENG-42` (or the appropriate issue detail URL). The Issue Detail page opens showing the full issue view.
+
+#### Test: Clicking status icon on issue row changes status
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issue "ENG-42" has status "Todo" (gray circle icon).
+- **Action**: User clicks the status icon on the issue row.
+- **Expected**: A dropdown opens showing all status options: Backlog, Todo, In Progress, In Review, Done, Cancelled — each with its distinct icon and color.
+
+#### Test: Change issue status from issue row
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issue status dropdown is open for "ENG-42" (currently "Todo").
+- **Action**: User selects "In Progress" from the dropdown.
+- **Expected**: The status icon updates to the yellow half-circle "In Progress" icon. The dropdown closes. The change is persisted. The project progress bar in the header updates if the status changed to/from Done.
+
+#### Test: Issues tab shows empty state when project has no issues
+- **Initial state**: User is viewing a project that has 0 issues, with the Issues tab active.
+- **Expected**: A friendly empty state message is displayed (e.g., "No issues in this project yet.") with an appropriate icon.
+
+#### Test: Team groups are collapsible
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issues are grouped by teams "Engineering" and "Design".
+- **Action**: User clicks the "Engineering" team header.
+- **Expected**: The Engineering group collapses, hiding its issues. The Design group remains expanded. Clicking the Engineering header again expands it back.
+
+#### Test: Issue checkboxes enable bulk selection
+- **Initial state**: User is viewing `/project/1`, Issues tab. Multiple issues are displayed.
+- **Action**: User clicks the checkbox on issue "ENG-42" and "ENG-43".
+- **Expected**: Both issues are visually selected (highlighted row or checked checkbox). A bulk actions toolbar appears at the top showing the count of selected issues (e.g., "2 selected").
+
+#### Test: Bulk action — change status for multiple issues
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issues "ENG-42" and "ENG-43" are selected via checkboxes. Bulk actions toolbar is visible.
+- **Action**: User clicks the "Status" bulk action button and selects "Done".
+- **Expected**: Both issues update their status to "Done" with green check-circle icons. The changes are persisted. The project progress bar in the header updates to reflect the new completion count. Activity entries are created for each issue.
+
+#### Test: Bulk action — change priority for multiple issues
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issues "ENG-42" and "ENG-43" are selected. Bulk actions toolbar is visible.
+- **Action**: User clicks the "Priority" bulk action button and selects "Urgent".
+- **Expected**: Both issues update their priority to "Urgent" with red alert-triangle icons. The changes are persisted.
+
+#### Test: Bulk action — change assignee for multiple issues
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issues "ENG-42" and "ENG-43" are selected. Bulk actions toolbar is visible.
+- **Action**: User clicks the "Assignee" bulk action button and selects "Bob Jones".
+- **Expected**: Both issues update their assignee to "Bob Jones". The changes are persisted.
+
+#### Test: Bulk action — change label for multiple issues
+- **Initial state**: User is viewing `/project/1`, Issues tab. Issues "ENG-42" and "ENG-43" are selected. Bulk actions toolbar is visible.
+- **Action**: User clicks the "Label" bulk action button and selects "Feature".
+- **Expected**: Both issues have the "Feature" label added. The changes are persisted.
+
+#### Test: Deselect all clears bulk selection
+- **Initial state**: User is viewing `/project/1`, Issues tab. 2 issues are selected and bulk toolbar is showing.
+- **Action**: User clicks a "Deselect all" button or unchecks both checkboxes.
+- **Expected**: All issue selections are cleared. The bulk actions toolbar disappears.
+
+#### Test: Changing status to Done updates project progress bar
+- **Initial state**: User is viewing `/project/1` with 10 issues, 5 completed. Progress bar shows 50%.
+- **Action**: User clicks the status icon on an issue currently marked "In Progress" and selects "Done".
+- **Expected**: The progress bar updates to 60% (6/10). The issue row shows the green check-circle Done icon.
+
+#### Test: Issues tab shows issue count per team group
+- **Initial state**: User is viewing `/project/1`, Issues tab. "Engineering" has 5 issues, "Design" has 3 issues.
+- **Expected**: The "Engineering" group header shows "(5)" or similar count. The "Design" group header shows "(3)" or similar count.
+
+### ProjectOverviewTab
+
+#### Test: Overview tab renders description, milestones, and key metrics sections
+- **Initial state**: User is viewing `/project/1` with the "Overview" tab active. Project "Auth Rewrite" has a description "Rewrite the authentication system to support OAuth and SSO", 2 milestones, and key metrics.
+- **Expected**: The overview displays three sections: a "Description" section showing the project description text, a "Milestones" section listing milestones, and a "Key Metrics" section showing project statistics.
+
+#### Test: Description is inline editable
+- **Initial state**: User is viewing `/project/1`, Overview tab. Description is "Rewrite the authentication system".
+- **Action**: User clicks on the description text area.
+- **Expected**: The description becomes editable (rich text area or markdown-supporting text area). The current description text is shown and editable.
+
+#### Test: Edit and save description
+- **Initial state**: User is viewing `/project/1`, Overview tab. Description field is in edit mode.
+- **Action**: User clears the description, types "Updated auth system with OAuth2 and SAML support", and clicks away or presses a save action.
+- **Expected**: The description updates to "Updated auth system with OAuth2 and SAML support". The change is persisted to the database. An activity entry is created recording the description change.
+
+#### Test: Description supports markdown rendering
+- **Initial state**: User is viewing `/project/1`, Overview tab. Description contains markdown: "## Goals\n- Support OAuth\n- Support SSO\n\n**Priority**: High".
+- **Expected**: The description renders the markdown: "Goals" as a heading, bullet points for "Support OAuth" and "Support SSO", and "Priority" in bold.
+
+#### Test: Cancel description edit reverts changes
+- **Initial state**: User is viewing `/project/1`, Overview tab. Description is "Original description".
+- **Action**: User clicks the description to edit, types "Changed text", then presses Escape.
+- **Expected**: The description reverts to "Original description". No change is persisted.
+
+#### Test: Description shows placeholder when empty
+- **Initial state**: User is viewing `/project/1`, Overview tab. Project has no description.
+- **Expected**: A placeholder text is shown (e.g., "Add a description...") indicating the field is editable.
+
+#### Test: Milestones section displays existing milestones
+- **Initial state**: User is viewing `/project/1`, Overview tab. Project has milestones: "Alpha Release" (target date Mar 15, 2026, completed) and "Beta Release" (target date Apr 1, 2026, not completed).
+- **Expected**: The milestones section shows both milestones. "Alpha Release" shows its target date and a completed indicator (checkmark or strikethrough). "Beta Release" shows its target date and an incomplete indicator.
+
+#### Test: Add a new milestone
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestones section is visible.
+- **Action**: User clicks an "Add Milestone" button.
+- **Expected**: An inline form or input appears with fields for milestone name and target date. A "Save" and "Cancel" button are visible.
+
+#### Test: Save a new milestone
+- **Initial state**: User is viewing `/project/1`, Overview tab. Add milestone form is visible.
+- **Action**: User enters "GA Release" as the milestone name, selects "May 15, 2026" as the target date, and clicks "Save".
+- **Expected**: The new milestone "GA Release" appears in the milestones list with target date "May 15, 2026" and an incomplete status. The change is persisted. An activity entry is created.
+
+#### Test: Cancel adding a new milestone
+- **Initial state**: User is viewing `/project/1`, Overview tab. Add milestone form is visible with "Draft" entered.
+- **Action**: User clicks "Cancel".
+- **Expected**: The form disappears. No new milestone is added. The milestones list remains unchanged.
+
+#### Test: Toggle milestone completion status
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestone "Beta Release" is not completed.
+- **Action**: User clicks the completion checkbox or toggle for "Beta Release".
+- **Expected**: "Beta Release" is marked as completed with a checkmark or completed styling. The change is persisted. An activity entry is created.
+
+#### Test: Toggle milestone back to incomplete
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestone "Alpha Release" is marked as completed.
+- **Action**: User clicks the completion checkbox or toggle for "Alpha Release".
+- **Expected**: "Alpha Release" is marked as incomplete. The completed styling is removed. The change is persisted.
+
+#### Test: Delete a milestone with confirmation
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestone "Alpha Release" exists.
+- **Action**: User clicks a delete button on the "Alpha Release" milestone.
+- **Expected**: A confirmation dialog appears (e.g., "Are you sure you want to delete this milestone?"). The milestone is not yet deleted.
+
+#### Test: Confirm milestone deletion
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestone delete confirmation dialog is showing for "Alpha Release".
+- **Action**: User clicks "Confirm" or "Delete" in the dialog.
+- **Expected**: "Alpha Release" is removed from the milestones list. The change is persisted. An activity entry is created.
+
+#### Test: Cancel milestone deletion
+- **Initial state**: Milestone delete confirmation dialog is showing for "Alpha Release".
+- **Action**: User clicks "Cancel" in the dialog.
+- **Expected**: The dialog closes. "Alpha Release" remains in the milestones list unchanged.
+
+#### Test: Edit milestone name inline
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestone "Beta Release" exists.
+- **Action**: User clicks on the milestone name "Beta Release", changes it to "Public Beta", and confirms.
+- **Expected**: The milestone name updates to "Public Beta". The change is persisted.
+
+#### Test: Edit milestone target date
+- **Initial state**: User is viewing `/project/1`, Overview tab. Milestone "Beta Release" has target date "Apr 1, 2026".
+- **Action**: User clicks the target date for "Beta Release" and selects "Apr 15, 2026".
+- **Expected**: The target date updates to "Apr 15, 2026". The change is persisted.
+
+#### Test: Milestones section shows empty state when no milestones
+- **Initial state**: User is viewing `/project/1`, Overview tab. Project has no milestones.
+- **Expected**: A friendly empty state message is shown (e.g., "No milestones yet. Add one to track progress.") with an "Add Milestone" button.
+
+#### Test: Key metrics section displays project statistics
+- **Initial state**: User is viewing `/project/1`, Overview tab. Project has 10 total issues: 6 Done, 1 In Progress, 2 Todo, 1 Backlog.
+- **Expected**: The key metrics section displays: total issues (10), completed issues (6), in-progress issues (1), remaining issues (4 — Todo + Backlog + In Progress), and completion percentage (60%).
+
+#### Test: Key metrics update when issue statuses change
+- **Initial state**: User is viewing `/project/1`, Overview tab showing 6/10 completed (60%). User switches to Issues tab.
+- **Action**: User changes an issue from "In Progress" to "Done" on the Issues tab, then switches back to the Overview tab.
+- **Expected**: Key metrics now show 7/10 completed (70%). The completed count increased by 1 and the remaining count decreased by 1.
+
+#### Test: Key metrics handle project with zero issues
+- **Initial state**: User is viewing a project with 0 issues, Overview tab.
+- **Expected**: Key metrics show: total issues 0, completed 0, remaining 0, completion percentage 0% or "N/A". No errors occur.
 
 ## Members Page (`/settings/members`)
 
