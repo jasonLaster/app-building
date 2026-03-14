@@ -2105,7 +2105,141 @@
 
 ## Members Page (`/settings/members`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: MemberList, InviteMemberModal, MemberActions
+
+### MemberList
+
+#### Test: Members page renders with list of all workspace members
+- **Initial state**: Workspace has 3 members: Alice (Admin, Engineering team), Bob (Member, Engineering and Design teams), Carol (Member, Design team). User navigates to `/settings/members`.
+- **Expected**: A list/table is displayed showing all 3 members. Each row shows the member's avatar, name, email, role badge (Admin or Member), and team badges. The "Invite Member" button is visible at the top of the page. The page title reads "Members".
+
+#### Test: Member row displays avatar, name, email, role, and team badges
+- **Initial state**: Workspace has a member named "Alice Smith" with email "alice@example.com", role "Admin", belonging to "Engineering" and "Design" teams. User is on `/settings/members`.
+- **Expected**: Alice's row displays her avatar (initials or image), full name "Alice Smith", email "alice@example.com", an "Admin" role badge, and two team badges showing "Engineering" and "Design".
+
+#### Test: Members list shows correct role badges with visual distinction
+- **Initial state**: Workspace has members with Admin and Member roles. User is on `/settings/members`.
+- **Expected**: Admin role badges are visually distinct from Member role badges (different color or styling). Admin badges clearly indicate elevated privileges.
+
+#### Test: Members list shows team badges for each member
+- **Initial state**: Workspace has a member belonging to 3 teams (Engineering, Design, QA). User is on `/settings/members`.
+- **Expected**: The member's row displays 3 team badges, one for each team. Each badge shows the team name.
+
+#### Test: Members list shows member with no teams
+- **Initial state**: Workspace has a member who does not belong to any teams. User is on `/settings/members`.
+- **Expected**: The member's row is displayed without any team badges. No error or placeholder is shown in the teams column.
+
+#### Test: Members page shows empty state when no members exist
+- **Initial state**: Workspace has only the current user (no other members). User is on `/settings/members`.
+- **Expected**: The list shows only the current user. A friendly message or the invite button is prominently displayed to encourage adding members.
+
+#### Test: Members list updates after inviting a new member
+- **Initial state**: Workspace has 2 members. User is on `/settings/members`.
+- **Action**: User invites a new member via the Invite Member modal (enters "newuser@example.com" and submits)
+- **Expected**: The members list now shows 3 members including the newly invited member. The new member appears with their email and a default "Member" role.
+
+#### Test: Members list updates after removing a member
+- **Initial state**: Workspace has 3 members. User is on `/settings/members`.
+- **Action**: User removes one member via the remove action (confirms removal in the confirmation dialog)
+- **Expected**: The members list now shows 2 members. The removed member is no longer visible in the list.
+
+### InviteMemberModal
+
+#### Test: Invite Member button opens invite modal
+- **Initial state**: User is on `/settings/members`.
+- **Action**: User clicks the "Invite Member" button
+- **Expected**: A modal dialog opens with a title (e.g., "Invite Member"), an email input field, a "Send Invite" (or "Invite") button, and a "Cancel" button. The modal has a backdrop overlay.
+
+#### Test: Invite member with valid email
+- **Initial state**: User has the Invite Member modal open. Workspace has 2 existing members.
+- **Action**: User enters "newcolleague@example.com" in the email field and clicks "Send Invite"
+- **Expected**: The modal closes. A success message is shown (e.g., "Invitation sent" or the member appears in the list). The new member appears in the members list with email "newcolleague@example.com", role "Member", and no team badges.
+
+#### Test: Invite member with invalid email format
+- **Initial state**: User has the Invite Member modal open.
+- **Action**: User enters "not-an-email" in the email field and clicks "Send Invite"
+- **Expected**: A validation error is displayed (e.g., "Please enter a valid email address"). The modal remains open. No member is added.
+
+#### Test: Invite member with empty email field
+- **Initial state**: User has the Invite Member modal open.
+- **Action**: User clicks "Send Invite" without entering an email
+- **Expected**: A validation error is displayed indicating the email field is required. The modal remains open.
+
+#### Test: Invite member with already existing email
+- **Initial state**: User has the Invite Member modal open. A member with email "existing@example.com" already exists in the workspace.
+- **Action**: User enters "existing@example.com" in the email field and clicks "Send Invite"
+- **Expected**: An error message is shown (e.g., "This email is already a member of the workspace"). The modal remains open. No duplicate member is created.
+
+#### Test: Cancel invite member modal
+- **Initial state**: User has the Invite Member modal open and has typed "someone@example.com" in the email field.
+- **Action**: User clicks the "Cancel" button
+- **Expected**: The modal closes. No new member is added to the workspace. The members list remains unchanged.
+
+#### Test: Close invite modal by clicking backdrop
+- **Initial state**: User has the Invite Member modal open.
+- **Action**: User clicks outside the modal (on the backdrop overlay)
+- **Expected**: The modal closes without sending an invite.
+
+#### Test: Invite modal email field can be submitted via Enter key
+- **Initial state**: User has the Invite Member modal open and has entered "newuser@example.com" in the email field.
+- **Action**: User presses Enter while focused on the email field
+- **Expected**: The form is submitted, same behavior as clicking "Send Invite". The new member is added if the email is valid.
+
+#### Test: Invite member modal can be opened multiple times in sequence
+- **Initial state**: User is on `/settings/members`.
+- **Action**: User clicks "Invite Member", enters "first@example.com", clicks "Send Invite". Then clicks "Invite Member" again, enters "second@example.com", clicks "Send Invite".
+- **Expected**: Both members are added to the workspace. The members list shows both new members. The modal opens cleanly with an empty email field the second time (no residual data from the first invite).
+
+### MemberActions
+
+#### Test: Change member role from Member to Admin
+- **Initial state**: Workspace has a member "Bob" with role "Member". Current user is an Admin. User is on `/settings/members`.
+- **Action**: User clicks the role dropdown for Bob and selects "Admin"
+- **Expected**: Bob's role is updated to "Admin". The role badge in Bob's row changes to "Admin" with the Admin styling. The change is persisted (reloading the page still shows Admin).
+
+#### Test: Change member role from Admin to Member
+- **Initial state**: Workspace has a member "Alice" with role "Admin". Current user is an Admin. User is on `/settings/members`.
+- **Action**: User clicks the role dropdown for Alice and selects "Member"
+- **Expected**: Alice's role is updated to "Member". The role badge in Alice's row changes to "Member" with the Member styling.
+
+#### Test: Role dropdown displays available roles
+- **Initial state**: User is on `/settings/members`. A member row is visible.
+- **Action**: User clicks the role dropdown for a member
+- **Expected**: A dropdown menu appears showing the available roles: "Admin" and "Member". The currently assigned role is visually indicated (checked, highlighted, or selected).
+
+#### Test: Role dropdown can be used multiple times in sequence
+- **Initial state**: User is on `/settings/members`. A member "Bob" has role "Member".
+- **Action**: User changes Bob's role to "Admin" via the dropdown. Then user changes Bob's role back to "Member" via the dropdown again.
+- **Expected**: Bob's role first changes to "Admin", then back to "Member". Both changes are persisted correctly. The dropdown works correctly on the second use.
+
+#### Test: Remove member button shows confirmation dialog
+- **Initial state**: User is on `/settings/members`. Workspace has a member "Carol".
+- **Action**: User clicks the remove/delete button for Carol
+- **Expected**: A confirmation dialog appears asking the user to confirm the removal (e.g., "Are you sure you want to remove Carol from the workspace?"). The dialog has "Confirm" (or "Remove") and "Cancel" buttons. The member is NOT removed yet.
+
+#### Test: Confirm member removal deletes the member
+- **Initial state**: User is on `/settings/members`. The removal confirmation dialog is open for member "Carol". Workspace has 3 members.
+- **Action**: User clicks "Confirm" (or "Remove") in the confirmation dialog
+- **Expected**: The dialog closes. Carol is removed from the workspace. The members list now shows 2 members. Carol no longer appears in the list. The removal is persisted.
+
+#### Test: Cancel member removal keeps the member
+- **Initial state**: User is on `/settings/members`. The removal confirmation dialog is open for member "Carol".
+- **Action**: User clicks "Cancel" in the confirmation dialog
+- **Expected**: The dialog closes. Carol remains in the members list. No changes are made.
+
+#### Test: Cannot remove yourself from the workspace
+- **Initial state**: User is on `/settings/members`. The current user's row is visible.
+- **Expected**: The remove button is either not shown or is disabled for the current user's own row. The user cannot remove themselves from the workspace.
+
+#### Test: Cannot change your own role (or last Admin cannot be demoted)
+- **Initial state**: User is on `/settings/members`. The current user is the only Admin in the workspace.
+- **Action**: User attempts to change their own role to "Member"
+- **Expected**: Either the role dropdown is disabled for the current user's own row, or an error is shown (e.g., "Cannot demote the last Admin"). The workspace must always have at least one Admin.
+
+#### Test: Removed member's issues remain assigned but member is gone from selectors
+- **Initial state**: Workspace has a member "Carol" who is assigned to 2 issues. User is on `/settings/members`.
+- **Action**: User removes Carol (clicks remove, confirms in dialog)
+- **Expected**: Carol is removed from the members list. The issues previously assigned to Carol retain their data but Carol no longer appears as a selectable assignee in issue forms or selectors.
 
 ## Teams Management Page (`/settings/teams`)
 
