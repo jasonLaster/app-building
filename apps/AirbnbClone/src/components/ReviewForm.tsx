@@ -12,12 +12,12 @@ interface ReviewFormProps {
 }
 
 const DEFAULT_RATINGS: Ratings = {
-  rating: 3,
-  cleanliness: 3,
-  accuracy: 3,
-  communication: 3,
-  location: 3,
-  value: 3,
+  rating: 0,
+  cleanliness: 0,
+  accuracy: 0,
+  communication: 0,
+  location: 0,
+  value: 0,
 }
 
 export default function ReviewForm({ booking }: ReviewFormProps) {
@@ -30,10 +30,18 @@ export default function ReviewForm({ booking }: ReviewFormProps) {
   const [comment, setComment] = useState('')
   const [validationError, setValidationError] = useState<string | null>(null)
 
+  const allUnset = Object.values(ratings).every(v => v === 0)
+  const anyUnset = Object.values(ratings).some(v => v === 0)
+
   const handleSubmit = async () => {
     if (!currentUser) return
 
     setValidationError(null)
+
+    if (anyUnset) {
+      setValidationError('Please rate all categories')
+      return
+    }
 
     const result = await dispatch(
       submitReview({
@@ -84,7 +92,7 @@ export default function ReviewForm({ booking }: ReviewFormProps) {
         <button
           data-testid="submit-review-button"
           onClick={handleSubmit}
-          disabled={submitting}
+          disabled={submitting || allUnset}
           className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {submitting ? 'Submitting...' : 'Submit Review'}

@@ -38,7 +38,7 @@ test.describe('Write Review - RatingSliders', () => {
     const sliders = page.getByTestId('rating-sliders')
     await expect(sliders).toBeVisible()
 
-    // Verify all six sliders exist with correct labels and default value of 3
+    // Verify all six sliders exist with correct labels and default value of 0 (Not rated)
     const categories = [
       { key: 'rating', label: 'Overall' },
       { key: 'cleanliness', label: 'Cleanliness' },
@@ -53,12 +53,12 @@ test.describe('Write Review - RatingSliders', () => {
       await expect(sliderSection).toBeVisible()
       await expect(sliderSection).toContainText(label)
 
-      // Default value should be 3
+      // Default value should be 0 (Not rated)
       const valueDisplay = page.getByTestId(`rating-value-${key}`)
-      await expect(valueDisplay).toHaveText('3')
+      await expect(valueDisplay).toHaveText('Not rated')
 
       const input = page.getByTestId(`rating-input-${key}`)
-      await expect(input).toHaveValue('3')
+      await expect(input).toHaveValue('0')
     }
   })
 
@@ -70,12 +70,12 @@ test.describe('Write Review - RatingSliders', () => {
     await expect(page.getByTestId('rating-value-rating')).toHaveText('5')
     await expect(page.getByTestId('rating-input-rating')).toHaveValue('5')
 
-    // Other sliders remain at default
-    await expect(page.getByTestId('rating-value-cleanliness')).toHaveText('3')
-    await expect(page.getByTestId('rating-value-accuracy')).toHaveText('3')
-    await expect(page.getByTestId('rating-value-communication')).toHaveText('3')
-    await expect(page.getByTestId('rating-value-location')).toHaveText('3')
-    await expect(page.getByTestId('rating-value-value')).toHaveText('3')
+    // Other sliders remain at default (Not rated)
+    await expect(page.getByTestId('rating-value-cleanliness')).toHaveText('Not rated')
+    await expect(page.getByTestId('rating-value-accuracy')).toHaveText('Not rated')
+    await expect(page.getByTestId('rating-value-communication')).toHaveText('Not rated')
+    await expect(page.getByTestId('rating-value-location')).toHaveText('Not rated')
+    await expect(page.getByTestId('rating-value-value')).toHaveText('Not rated')
   })
 
   test('Adjust cleanliness rating slider', async ({ page }) => {
@@ -129,7 +129,7 @@ test.describe('Write Review - RatingSliders', () => {
     const ratingInput = page.getByTestId('rating-input-rating')
 
     // Verify min and max attributes
-    await expect(ratingInput).toHaveAttribute('min', '1')
+    await expect(ratingInput).toHaveAttribute('min', '0')
     await expect(ratingInput).toHaveAttribute('max', '5')
     await expect(ratingInput).toHaveAttribute('step', '1')
 
