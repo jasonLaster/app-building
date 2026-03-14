@@ -3,26 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestTeamCheckboxesVisible: Write test for Issue row checkboxes are visible and unchecked by default",
-        "WriteTestTeamCheckboxSelects: Write test for Clicking a checkbox selects an issue",
-        "WriteTestTeamCheckboxDeselects: Write test for Clicking a checked checkbox deselects the issue",
-        "WriteTestTeamMultipleSelect: Write test for Multiple issues can be selected via checkboxes",
-        "WriteTestBulkToolbarAppears: Write test for Bulk action toolbar appears when issues are selected",
-        "WriteTestBulkToolbarDisappears: Write test for Bulk action toolbar disappears when all issues are deselected",
-        "WriteTestBulkStatusChange: Write test for Bulk status change updates all selected issues",
-        "WriteTestBulkPriorityChange: Write test for Bulk priority change updates all selected issues",
-        "WriteTestBulkAssigneeChange: Write test for Bulk assignee change updates all selected issues",
-        "WriteTestBulkLabelChange: Write test for Bulk label change updates all selected issues",
-        "WriteTestBulkActionsMultipleTimes: Write test for Bulk actions can be performed multiple times in sequence",
-        "WriteTestSelectAllInGroup: Write test for Select all checkbox in group header selects all issues in that group",
-        "WriteTestDeselectAllInGroup: Write test for Deselect all via group header checkbox"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestGroupByControlDefault: Write test for Group by control renders with default Status selected",
         "WriteTestGroupByDropdownOptions: Write test for Group by dropdown shows all grouping options",
         "WriteTestGroupByPriority: Write test for Group by Priority groups issues under priority headers",
@@ -617,25 +597,19 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestTeamIssuesHeader: Write test for Team Issues page renders with header showing team name",
-      "WriteTestTeamIssuesGroupedByStatus: Write test for Team Issues page shows issues grouped by status (default)",
-      "WriteTestTeamIssuesShowsAll: Write test for Team Issues page shows all team issues, not just current user's",
-      "WriteTestTeamIssuesEmptyState: Write test for Team Issues page shows empty state when team has no issues",
-      "WriteTestTeamIssueRowFields: Write test for Issue row displays all required fields including checkbox and team prefix",
-      "WriteTestTeamIssueRowTitleNavigates: Write test for Issue row title is clickable and navigates to issue detail",
-      "WriteTestTeamIssueRowStatusClickable: Write test for Issue row status icon is clickable to change status",
-      "WriteTestTeamIssueStatusChangePersists: Write test for Changing status via issue row status dropdown persists and moves issue between groups",
-      "WriteTestTeamIssueStatusMultipleTimes: Write test for Issue row status dropdown can be used multiple times",
-      "WriteTestTeamStatusGroupCollapsible: Write test for Status group headers are collapsible",
-      "WriteTestTeamStatusGroupCollapseMultiple: Write test for Status group collapse toggles multiple times",
-      "WriteTestTeamMultipleGroupsIndependent: Write test for Multiple status groups can be independently collapsed",
-      "WriteTestTeamIssueRowPriority: Write test for Issue row displays priority icon with correct color",
-      "WriteTestTeamIssueRowLabels: Write test for Issue row displays labels as colored badges",
-      "WriteTestTeamIssueRowAssignee: Write test for Issue row shows assignee avatar",
-      "WriteTestTeamIssueRowHidesOptional: Write test for Issue row hides optional fields when not set",
-      "WriteTestNewIssueButtonOpensModal: Write test for New Issue button opens create issue modal with team pre-selected",
-      "WriteTestNewIssueButtonAppearance: Write test for New Issue button text and icon appearance",
-      "WriteTestNewIssueAppearsInList: Write test for Newly created issue appears in the list"
+      "WriteTestTeamCheckboxesVisible: Write test for Issue row checkboxes are visible and unchecked by default",
+      "WriteTestTeamCheckboxSelects: Write test for Clicking a checkbox selects an issue",
+      "WriteTestTeamCheckboxDeselects: Write test for Clicking a checked checkbox deselects the issue",
+      "WriteTestTeamMultipleSelect: Write test for Multiple issues can be selected via checkboxes",
+      "WriteTestBulkToolbarAppears: Write test for Bulk action toolbar appears when issues are selected",
+      "WriteTestBulkToolbarDisappears: Write test for Bulk action toolbar disappears when all issues are deselected",
+      "WriteTestBulkStatusChange: Write test for Bulk status change updates all selected issues",
+      "WriteTestBulkPriorityChange: Write test for Bulk priority change updates all selected issues",
+      "WriteTestBulkAssigneeChange: Write test for Bulk assignee change updates all selected issues",
+      "WriteTestBulkLabelChange: Write test for Bulk label change updates all selected issues",
+      "WriteTestBulkActionsMultipleTimes: Write test for Bulk actions can be performed multiple times in sequence",
+      "WriteTestSelectAllInGroup: Write test for Select all checkbox in group header selects all issues in that group",
+      "WriteTestDeselectAllInGroup: Write test for Deselect all via group header checkbox"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
