@@ -85,6 +85,9 @@ function FlightResultCard({ flight }: FlightResultCardProps) {
           <span className="flight-card__airline-name" data-testid={`flight-card-airline-${flight.id}`}>
             {flight.airline_name}
           </span>
+          <span className="flight-card__flight-number" data-testid={`flight-card-flightnum-${flight.id}`}>
+            {flight.flight_number}
+          </span>
         </div>
 
         <div className="flight-card__times">

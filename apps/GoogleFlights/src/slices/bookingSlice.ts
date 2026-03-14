@@ -41,6 +41,8 @@ export interface BookingFlightDetail {
 interface BookingState {
   flight: BookingFlightDetail | null
   legs: FlightLeg[]
+  returnFlight: BookingFlightDetail | null
+  returnLegs: FlightLeg[]
   loading: boolean
   error: string | null
   passengers: PassengerInfo[]
@@ -54,6 +56,8 @@ interface BookingState {
 const initialState: BookingState = {
   flight: null,
   legs: [],
+  returnFlight: null,
+  returnLegs: [],
   loading: false,
   error: null,
   passengers: [],
@@ -74,6 +78,21 @@ export const fetchFlightForBooking = createAsyncThunk(
     const res = await fetch(`/api/bookings?${qs}`)
     if (!res.ok) {
       throw new Error('Failed to fetch flight details')
+    }
+    return res.json() as Promise<{ flight: BookingFlightDetail; legs: FlightLeg[] }>
+  }
+)
+
+export const fetchReturnFlightForBooking = createAsyncThunk(
+  'booking/fetchReturnFlightForBooking',
+  async (params: { flightId: string; cabinClass: string }) => {
+    const qs = new URLSearchParams({
+      flightId: params.flightId,
+      cabinClass: params.cabinClass,
+    })
+    const res = await fetch(`/api/bookings?${qs}`)
+    if (!res.ok) {
+      throw new Error('Failed to fetch return flight details')
     }
     return res.json() as Promise<{ flight: BookingFlightDetail; legs: FlightLeg[] }>
   }
@@ -158,6 +177,8 @@ const bookingSlice = createSlice({
     resetBooking(state) {
       state.flight = null
       state.legs = []
+      state.returnFlight = null
+      state.returnLegs = []
       state.loading = false
       state.error = null
       state.passengers = []
@@ -182,6 +203,14 @@ const bookingSlice = createSlice({
       .addCase(fetchFlightForBooking.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || 'Failed to load flight details'
+      })
+      .addCase(fetchReturnFlightForBooking.fulfilled, (state, action) => {
+        state.returnFlight = action.payload.flight
+        state.returnLegs = action.payload.legs
+      })
+      .addCase(fetchReturnFlightForBooking.rejected, (state) => {
+        state.returnFlight = null
+        state.returnLegs = []
       })
       .addCase(createBooking.pending, (state) => {
         state.bookingInProgress = true

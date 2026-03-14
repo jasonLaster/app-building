@@ -3,26 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestFlightSummaryOutbound: Write test for FlightSummary displays full outbound itinerary",
-        "WriteTestFlightSummaryRoundTrip: Write test for FlightSummary displays outbound and return flights for round trip",
-        "WriteTestFlightSummaryConnecting: Write test for FlightSummary displays connecting flight with multiple legs",
-        "WriteTestFlightSummaryTotalDuration: Write test for FlightSummary shows total duration and stops count",
-        "WriteTestFlightSummaryOvernight: Write test for FlightSummary shows overnight arrival indicator",
-        "WriteTestFlightSummaryAmenities: Write test for FlightSummary shows aircraft type and amenities",
-        "WriteTestFlightSummaryBaggage: Write test for FlightSummary shows baggage allowance",
-        "WriteTestPriceBreakdownBase: Write test for PriceBreakdown displays base fare per passenger",
-        "WriteTestPriceBreakdownTaxes: Write test for PriceBreakdown displays taxes and fees",
-        "WriteTestPriceBreakdownTotal: Write test for PriceBreakdown displays total price",
-        "WriteTestPriceBreakdownMixed: Write test for PriceBreakdown shows per-passenger-type pricing for mixed group",
-        "WriteTestPriceBreakdownRoundTrip: Write test for PriceBreakdown updates for round-trip flights",
-        "WriteTestPriceBreakdownCabin: Write test for PriceBreakdown reflects selected cabin class pricing"
-      ],
-      "timestamp": "2026-03-14T19:26:12.594Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestPassengerFormCount: Write test for PassengerForm displays correct number of passenger forms",
         "WriteTestPassengerFormContact: Write test for PassengerForm shows primary passenger contact fields",
         "WriteTestPassengerFormNameInput: Write test for PassengerForm first name and last name input",
@@ -165,26 +145,19 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestFilterCombined: Write test for FilterSidebar combining multiple filters",
-      "WriteTestFilterRepeated: Write test for FilterSidebar filters can be used repeatedly",
-      "WriteTestFlightCardAirline: Write test for FlightResultCard displays airline info",
-      "WriteTestFlightCardTimes: Write test for FlightResultCard displays departure and arrival times",
-      "WriteTestFlightCardDuration: Write test for FlightResultCard displays flight duration",
-      "WriteTestFlightCardStops: Write test for FlightResultCard displays stops and layover info",
-      "WriteTestFlightCardPrice: Write test for FlightResultCard displays price prominently",
-      "WriteTestFlightCardCO2: Write test for FlightResultCard displays CO2 emissions",
-      "WriteTestFlightCardExpand: Write test for FlightResultCard expand to show details",
-      "WriteTestFlightCardCollapse: Write test for FlightResultCard collapse details",
-      "WriteTestFlightCardLegs: Write test for FlightResultCard details show leg-by-leg breakdown",
-      "WriteTestFlightCardAmenities: Write test for FlightResultCard details show amenities icons",
-      "WriteTestFlightCardBaggage: Write test for FlightResultCard details show baggage allowance",
-      "WriteTestFlightCardOvernight: Write test for FlightResultCard overnight flight shows plus 1 day indicator",
-      "WriteTestFlightCardSelect: Write test for FlightResultCard clicking Select navigates to booking page",
-      "WriteTestFlightCardMultiExpand: Write test for FlightResultCard expand and collapse multiple cards",
-      "WriteTestPaginationLoadMore: Write test for Pagination Load more button is displayed at bottom of results",
-      "WriteTestPaginationAppend: Write test for Pagination loading more results appends to list",
-      "WriteTestPaginationHidden: Write test for Pagination button hidden when all results loaded",
-      "WriteTestPaginationPreserveFilters: Write test for Pagination preserves filters when loading more"
+      "WriteTestFlightSummaryOutbound: Write test for FlightSummary displays full outbound itinerary",
+      "WriteTestFlightSummaryRoundTrip: Write test for FlightSummary displays outbound and return flights for round trip",
+      "WriteTestFlightSummaryConnecting: Write test for FlightSummary displays connecting flight with multiple legs",
+      "WriteTestFlightSummaryTotalDuration: Write test for FlightSummary shows total duration and stops count",
+      "WriteTestFlightSummaryOvernight: Write test for FlightSummary shows overnight arrival indicator",
+      "WriteTestFlightSummaryAmenities: Write test for FlightSummary shows aircraft type and amenities",
+      "WriteTestFlightSummaryBaggage: Write test for FlightSummary shows baggage allowance",
+      "WriteTestPriceBreakdownBase: Write test for PriceBreakdown displays base fare per passenger",
+      "WriteTestPriceBreakdownTaxes: Write test for PriceBreakdown displays taxes and fees",
+      "WriteTestPriceBreakdownTotal: Write test for PriceBreakdown displays total price",
+      "WriteTestPriceBreakdownMixed: Write test for PriceBreakdown shows per-passenger-type pricing for mixed group",
+      "WriteTestPriceBreakdownRoundTrip: Write test for PriceBreakdown updates for round-trip flights",
+      "WriteTestPriceBreakdownCabin: Write test for PriceBreakdown reflects selected cabin class pricing"
     ],
     "timestamp": "2026-03-14T19:26:12.594Z",
     "app": "GoogleFlights"

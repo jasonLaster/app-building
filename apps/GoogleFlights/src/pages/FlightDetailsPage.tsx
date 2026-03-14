@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState, AppDispatch } from '../store'
-import { fetchFlightForBooking, initializePassengers, resetBooking } from '../slices/bookingSlice'
+import { fetchFlightForBooking, fetchReturnFlightForBooking, initializePassengers, resetBooking } from '../slices/bookingSlice'
 import FlightSummary from '../components/FlightSummary'
 import PriceBreakdown from '../components/PriceBreakdown'
 import PassengerForm from '../components/PassengerForm'
@@ -19,8 +19,9 @@ function FlightDetailsPage() {
   const adults = parseInt(searchParams.get('adults') || '1', 10)
   const children = parseInt(searchParams.get('children') || '0', 10)
   const infants = parseInt(searchParams.get('infants') || '0', 10)
+  const returnFlightId = searchParams.get('returnFlight') || null
 
-  const { flight, legs, loading, error, bookingComplete } = useSelector(
+  const { flight, legs, returnFlight, returnLegs, loading, error, bookingComplete } = useSelector(
     (state: RootState) => state.booking
   )
 
@@ -28,9 +29,12 @@ function FlightDetailsPage() {
     if (id) {
       dispatch(resetBooking())
       dispatch(fetchFlightForBooking({ flightId: id, cabinClass }))
+      if (returnFlightId) {
+        dispatch(fetchReturnFlightForBooking({ flightId: returnFlightId, cabinClass }))
+      }
       dispatch(initializePassengers({ adults, children, infants }))
     }
-  }, [id, cabinClass, adults, children, infants, dispatch])
+  }, [id, returnFlightId, cabinClass, adults, children, infants, dispatch])
 
   if (loading) {
     return (
@@ -65,11 +69,15 @@ function FlightDetailsPage() {
   const adultBaseFare = flight.base_price_cents
   const childBaseFare = Math.round(flight.base_price_cents * 0.75)
   const infantBaseFare = Math.round(flight.base_price_cents * 0.1)
+  const returnAdultBase = returnFlight ? returnFlight.base_price_cents : 0
+  const returnChildBase = returnFlight ? Math.round(returnFlight.base_price_cents * 0.75) : 0
+  const returnInfantBase = returnFlight ? Math.round(returnFlight.base_price_cents * 0.1) : 0
   const totalTaxes = flight.taxes_cents * (adults + children)
+    + (returnFlight ? returnFlight.taxes_cents * (adults + children) : 0)
   const totalPriceCents =
-    adultBaseFare * adults +
-    childBaseFare * children +
-    infantBaseFare * infants +
+    (adultBaseFare + returnAdultBase) * adults +
+    (childBaseFare + returnChildBase) * children +
+    (infantBaseFare + returnInfantBase) * infants +
     totalTaxes
 
   return (
@@ -95,6 +103,16 @@ function FlightDetailsPage() {
             />
           </div>
 
+          {returnFlight && (
+            <div className="flight-details-page__section" data-testid="return-flight-section">
+              <FlightSummary
+                flight={returnFlight}
+                legs={returnLegs}
+                label={`Return · ${returnFlight.origin_code} → ${returnFlight.dest_code}`}
+              />
+            </div>
+          )}
+
           <div className="flight-details-page__section">
             <PassengerForm />
           </div>
@@ -105,12 +123,14 @@ function FlightDetailsPage() {
             <PriceBreakdown
               flight={flight}
               passengers={{ adults, children, infants }}
+              returnFlight={returnFlight}
             />
           </div>
 
           <div className="flight-details-page__section">
             <BookingAction
               flightId={flight.id}
+              returnFlightId={returnFlightId || undefined}
               cabinClass={cabinClass}
               totalPriceCents={totalPriceCents}
             />
