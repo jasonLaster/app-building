@@ -3,6 +3,7 @@ import { getExecutablePath } from '@replayio/playwright'
 
 export default defineConfig({
   testDir: './tests',
+  testIgnore: ['**/deployment.spec.ts'],
   timeout: 60000,
   expect: { timeout: 10000 },
   fullyParallel: false,

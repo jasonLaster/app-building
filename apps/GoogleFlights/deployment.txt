@@ -1,0 +1,16 @@
+url=https://google-flights-1773521195043.netlify.app
+site_id=1518b512-d72f-496d-85ec-00704cbf699d
+neon_project_id=rough-firefly-06431753
+database_url=postgresql://neondb_owner:npg_lFq34TIxYSep@ep-young-river-ah7ghdzq.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+--- Deployment 2026-03-14 ---
+Changes:
+- Initial production deployment of Google Flights app
+- Flight search with origin/destination airports, date pickers, passenger/cabin selectors
+- Search results with filtering (stops, airlines, price, duration) and pagination
+- Flight booking flow with passenger forms, price breakdown, and confirmation
+- My Trips page with upcoming/past/cancelled tabs and booking management
+- Explore page with destination map, flexible dates grid, and deals section
+- Popular destinations and recent searches on home page
+- Tracked price routes functionality
+- Full backend with Netlify Functions and Neon Postgres database

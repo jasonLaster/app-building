@@ -1,0 +1,117 @@
+Syncing schema...
+Schema synced
+Creating Netlify site...
+
+Project Created
+
+Admin URL:  https://app.netlify.com/projects/google-flights-1773521195043
+URL:        https://google-flights-1773521195043.netlify.app
+Project ID: 1518b512-d72f-496d-85ec-00704cbf699d
+
+✔ Linked to google-flights-1773521195043
+
+Created Netlify site: 1518b512-d72f-496d-85ec-00704cbf699d
+Building app...
+=== Build Output ===
+vite v6.4.1 building for production...
+transforming...
+✓ 117 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.46 kB │ gzip:   0.30 kB
+dist/assets/index-CKF_h_QT.css     64.05 kB │ gzip:   8.23 kB
+dist/assets/index-CRp2jcLm.js   1,369.02 kB │ gzip: 235.26 kB │ map: 2,653.54 kB
+✓ built in 1.55s
+
+Deploying to Netlify...
+=== Deploy Output ===
+​
+Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+​
+❯ Version
+  @netlify/build 35.8.8
+​
+❯ Flags
+  accountId: 67db64f88522edc0da7e6ec8
+  deployId: 69b5c933c7ca6e122e4cf3bb
+​
+❯ Current directory
+  /repo/apps/GoogleFlights
+​
+❯ Config file
+  /repo/apps/GoogleFlights/netlify.toml
+​
+❯ Context
+  production
+​
+build.command from netlify.toml                               
+────────────────────────────────────────────────────────────────
+​
+$ npm run build
+
+> google-flights@1.0.0 build
+> vite build
+
+vite v6.4.1 building for production...
+transforming...
+✓ 117 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.46 kB │ gzip:   0.30 kB
+dist/assets/index-CKF_h_QT.css     64.05 kB │ gzip:   8.23 kB
+dist/assets/index-CRp2jcLm.js   1,369.02 kB │ gzip: 235.26 kB │ map: 2,653.54 kB
+✓ built in 1.47s
+​
+(build.command completed in 1.6s)
+​
+Functions bundling                                            
+────────────────────────────────────────────────────────────────
+​
+Packaging Functions from netlify/functions directory:
+ - airports.ts
+ - bookings.ts
+ - db.ts
+ - explore-dates.ts
+ - explore-deals.ts
+ - explore-destinations.ts
+ - flight-legs.ts
+ - my-bookings.ts
+ - popular-destinations.ts
+ - recent-searches.ts
+ - search-flights.ts
+ - tracked-routes.ts
+​
+​
+(Functions bundling completed in 775ms)
+
+Deploying to Netlify
+────────────────────────────────────────────────────────────────
+
+Deploy path:        /repo/apps/GoogleFlights/dist
+Functions path:     /repo/apps/GoogleFlights/netlify/functions
+Configuration path: /repo/apps/GoogleFlights/netlify.toml
+
+​
+Netlify Build Complete                                        
+────────────────────────────────────────────────────────────────
+​
+(Netlify Build completed in 23.7s)
+
+🚀 Deploy complete
+────────────────────────────────────────────────────────────────
+
+╭────────────────────── ⬥  Production deploy is live ⬥  ───────────────────────╮
+│                                                                              │
+│                         Deployed to production URL:                          │
+│               https://google-flights-1773521195043.netlify.app               │
+│                                                                              │
+│   Unique deploy URL: https://69b5c933c7ca6e122e4cf3bb--google-flights-1773   │
+│                            521195043.netlify.app                             │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Build logs:         https://app.netlify.com/projects/google-flights-1773521195043/deploys/69b5c933c7ca6e122e4cf3bb
+Function logs:      https://app.netlify.com/projects/google-flights-1773521195043/logs/functions
+Edge function Logs: https://app.netlify.com/projects/google-flights-1773521195043/logs/edge-functions
+

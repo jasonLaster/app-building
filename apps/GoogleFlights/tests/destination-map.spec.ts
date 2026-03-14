@@ -53,7 +53,7 @@ test.describe('DestinationMap', () => {
     expect(laxCount).toBeGreaterThan(0)
 
     // Get the first marker's testid for LAX results
-    const firstLaxMarkerId = await markers.first().getAttribute('data-testid')
+    const _firstLaxMarkerId = await markers.first().getAttribute('data-testid')
 
     // Change origin to SFO
     await selectOrigin(page, 'SFO', 'SFO')

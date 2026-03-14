@@ -87,7 +87,7 @@ test.describe('DealsSection', () => {
     const destCode = firstTestId!.replace('deal-card-', '')
 
     // Get the dates from the card to verify URL params later
-    const datesText = await page.getByTestId(`deal-dates-${destCode}`).textContent()
+    const _datesText = await page.getByTestId(`deal-dates-${destCode}`).textContent()
 
     // Click the deal card
     await dealCards.first().click()
@@ -114,7 +114,7 @@ test.describe('DealsSection', () => {
 
     // Note a deal card from LAX results
     const laxFirstTestId = await dealCards.first().getAttribute('data-testid')
-    const laxDestCode = laxFirstTestId!.replace('deal-card-', '')
+    const _laxDestCode = laxFirstTestId!.replace('deal-card-', '')
 
     // Change origin to SFO
     await selectOrigin(page, 'SFO', 'SFO')

@@ -193,7 +193,7 @@ test.describe('FlexibleDatesGrid', () => {
     // Get initial cell prices
     const dateCells = page.locator('[data-testid^="date-cell-"]')
     await expect(dateCells.first()).toBeVisible({ timeout: 10000 })
-    const initialCount = await dateCells.count()
+    const _initialCount = await dateCells.count()
 
     // Change to SFO
     await selectOrigin(page, 'SFO', 'SFO')
