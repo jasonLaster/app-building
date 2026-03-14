@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageLogin: Decide on components, add sections to docs/tests.md",
-        "PlanComponentAuthToggle: Add test entries for AuthToggle",
-        "PlanComponentLoginForm: Add test entries for LoginForm",
-        "PlanComponentRegisterForm: Add test entries for RegisterForm"
-      ],
-      "timestamp": "2026-03-14T18:52:08.860Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageHomeSearch: Decide on components, add sections to docs/tests.md",
         "PlanComponentSearchBar: Add test entries for SearchBar",
         "PlanComponentCategoryFilter: Add test entries for CategoryFilter",
@@ -147,9 +136,12 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+      "PlanPageLogin: Decide on components, add sections to docs/tests.md",
+      "PlanComponentAuthToggle: Add test entries for AuthToggle",
+      "PlanComponentLoginForm: Add test entries for LoginForm",
+      "PlanComponentRegisterForm: Add test entries for RegisterForm"
     ],
-    "timestamp": "2026-03-14T18:32:43.514Z",
+    "timestamp": "2026-03-14T18:52:08.860Z",
     "app": "AirbnbClone"
   }
 }
