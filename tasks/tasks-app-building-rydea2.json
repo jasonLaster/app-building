@@ -3,33 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestCreateModalRendersFields: Write test for Create issue modal renders with all form fields",
-        "WriteTestModalOpensFromNewIssue: Write test for Modal opens from New Issue button on team issues page",
-        "WriteTestModalOpensFromShortcutC: Write test for Modal opens from keyboard shortcut C",
-        "WriteTestTeamSelectorDefaultsCurrent: Write test for Team selector defaults to current team context",
-        "WriteTestTeamSelectorChanges: Write test for Team selector allows changing team",
-        "WriteTestTitleRequired: Write test for Title field is required",
-        "WriteTestTitleAcceptsText: Write test for Title field accepts text input",
-        "WriteTestDescriptionSupportsMarkdown: Write test for Description field supports markdown text entry",
-        "WriteTestStatusDefaultsBacklog: Write test for Status dropdown defaults to Backlog",
-        "WriteTestStatusDropdownOptions: Write test for Status dropdown shows all status options with icons",
-        "WriteTestStatusDropdownSelect: Write test for Status dropdown allows selecting a different status",
-        "WriteTestPriorityDefaultsNone: Write test for Priority dropdown defaults to No Priority",
-        "WriteTestPriorityDropdownOptions: Write test for Priority dropdown shows all priority options with icons",
-        "WriteTestPriorityDropdownSelect: Write test for Priority dropdown allows selecting a priority",
-        "WriteTestAssigneeSearchable: Write test for Assignee selector is searchable",
-        "WriteTestAssigneeSelectMember: Write test for Assignee selector allows selecting a member",
-        "WriteTestLabelsMultiSelect: Write test for Labels multi-select allows selecting multiple labels",
-        "WriteTestLabelsRemoveSelected: Write test for Labels multi-select allows removing a selected label",
-        "WriteTestProjectSearchable: Write test for Project selector is searchable",
-        "WriteTestProjectSelectProject: Write test for Project selector allows selecting a project"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestCycleDropdownShowsCycles: Write test for Cycle dropdown shows team's available cycles",
         "WriteTestCycleDropdownSelect: Write test for Cycle dropdown allows selecting a cycle",
         "WriteTestCycleDropdownUpdatesOnTeamChange: Write test for Cycle dropdown updates when team is changed",
@@ -461,8 +434,26 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestSidebarDropdownsCloseOutside: Write test for Sidebar dropdowns close on outside click",
-      "WriteTestSidebarAssigneeMultipleTimes: Write test for Use assignee selector multiple times in sequence"
+      "WriteTestCreateModalRendersFields: Write test for Create issue modal renders with all form fields",
+      "WriteTestModalOpensFromNewIssue: Write test for Modal opens from New Issue button on team issues page",
+      "WriteTestModalOpensFromShortcutC: Write test for Modal opens from keyboard shortcut C",
+      "WriteTestTeamSelectorDefaultsCurrent: Write test for Team selector defaults to current team context",
+      "WriteTestTeamSelectorChanges: Write test for Team selector allows changing team",
+      "WriteTestTitleRequired: Write test for Title field is required",
+      "WriteTestTitleAcceptsText: Write test for Title field accepts text input",
+      "WriteTestDescriptionSupportsMarkdown: Write test for Description field supports markdown text entry",
+      "WriteTestStatusDefaultsBacklog: Write test for Status dropdown defaults to Backlog",
+      "WriteTestStatusDropdownOptions: Write test for Status dropdown shows all status options with icons",
+      "WriteTestStatusDropdownSelect: Write test for Status dropdown allows selecting a different status",
+      "WriteTestPriorityDefaultsNone: Write test for Priority dropdown defaults to No Priority",
+      "WriteTestPriorityDropdownOptions: Write test for Priority dropdown shows all priority options with icons",
+      "WriteTestPriorityDropdownSelect: Write test for Priority dropdown allows selecting a priority",
+      "WriteTestAssigneeSearchable: Write test for Assignee selector is searchable",
+      "WriteTestAssigneeSelectMember: Write test for Assignee selector allows selecting a member",
+      "WriteTestLabelsMultiSelect: Write test for Labels multi-select allows selecting multiple labels",
+      "WriteTestLabelsRemoveSelected: Write test for Labels multi-select allows removing a selected label",
+      "WriteTestProjectSearchable: Write test for Project selector is searchable",
+      "WriteTestProjectSelectProject: Write test for Project selector allows selecting a project"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
