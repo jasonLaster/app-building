@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/favorite-button.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:45:21.187Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/filters-panel.spec.ts"
       ],
       "timestamp": "2026-03-14T21:45:21.187Z",
@@ -188,7 +180,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/category-filter.spec.ts"
+      "FixTests: tests/favorite-button.spec.ts"
     ],
     "timestamp": "2026-03-14T21:45:21.187Z",
     "app": "AirbnbClone"

@@ -8,7 +8,34 @@ async function loginAs(page: import('@playwright/test').Page, email: string) {
   await expect(page).toHaveURL('/', { timeout: 30000 })
 }
 
+const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+
+// Properties that should be in Emma's favorites (seed state)
+const EMMA_FAVORITED = [
+  'b2222222-2222-2222-2222-222222222222',
+  'b3333333-3333-3333-3333-333333333333',
+]
+
+// Properties used in tests that should NOT be in Emma's favorites (seed state)
+const EMMA_NOT_FAVORITED = [
+  'b1111111-1111-1111-1111-111111111111',
+  'b4444444-4444-4444-4444-444444444444',
+  'b5555555-5555-5555-5555-555555555555',
+]
+
 test.describe('Home Page - FavoriteButton', () => {
+  // Reset Emma's favorites to seed state before each test
+  test.beforeEach(async ({ request }) => {
+    for (const propertyId of EMMA_FAVORITED) {
+      await request.post('/api/favorites', {
+        data: { user_id: EMMA_ID, property_id: propertyId },
+      })
+    }
+    for (const propertyId of EMMA_NOT_FAVORITED) {
+      await request.delete(`/api/favorites/${propertyId}?user_id=${EMMA_ID}`)
+    }
+  })
+
   test('Favorite button shows outline heart when property is not favorited', async ({ page }) => {
     // Log in as Emma (favorites: b2222222, b3333333 — NOT b1111111)
     await loginAs(page, 'emma@example.com')
