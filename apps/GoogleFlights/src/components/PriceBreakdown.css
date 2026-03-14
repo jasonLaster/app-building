@@ -1,0 +1,83 @@
+.price-breakdown {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.price-breakdown__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.price-breakdown__cabin {
+  font-size: 14px;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.price-breakdown__items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.price-breakdown__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.price-breakdown__item-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.price-breakdown__type {
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+
+.price-breakdown__per-person {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+.price-breakdown__item-amount {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.price-breakdown__note {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  font-style: italic;
+  padding-top: 4px;
+}
+
+.price-breakdown__total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 2px solid var(--color-border);
+}
+
+.price-breakdown__total-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.price-breakdown__total-amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+}

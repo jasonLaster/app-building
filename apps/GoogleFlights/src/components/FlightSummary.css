@@ -1,0 +1,229 @@
+.flight-summary {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 3px var(--color-shadow);
+}
+
+.flight-summary__label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flight-summary__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.flight-summary__route {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flight-summary__route-code {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.flight-summary__route-arrow {
+  font-size: 20px;
+  color: var(--color-text-tertiary);
+}
+
+.flight-summary__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.flight-summary__meta-sep {
+  color: var(--color-text-tertiary);
+}
+
+.flight-summary__legs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.flight-summary__layover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.flight-summary__layover-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: var(--color-background);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-light);
+}
+
+.flight-summary__leg {
+  padding: 16px 0;
+}
+
+.flight-summary__leg-airline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.flight-summary__airline-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.flight-summary__airline-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.flight-summary__airline-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.flight-summary__flight-number {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.flight-summary__aircraft {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+.flight-summary__leg-timeline {
+  padding-left: 16px;
+  position: relative;
+}
+
+.flight-summary__timeline-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+}
+
+.flight-summary__timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  background: var(--color-surface);
+  flex-shrink: 0;
+  margin-top: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.flight-summary__timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.flight-summary__leg-time {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.flight-summary__day-indicator {
+  font-size: 11px;
+  color: var(--color-error);
+  font-weight: 500;
+  margin-left: 4px;
+  vertical-align: super;
+}
+
+.flight-summary__leg-airport {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.flight-summary__terminal {
+  color: var(--color-text-tertiary);
+}
+
+.flight-summary__timeline-line {
+  display: flex;
+  align-items: center;
+  padding: 8px 0 8px 4px;
+  margin-left: 0;
+  border-left: 2px solid var(--color-border-light);
+  margin-left: 4px;
+  padding-left: 20px;
+}
+
+.flight-summary__leg-duration {
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+.flight-summary__amenities {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-border-light);
+  margin-top: 8px;
+}
+
+.flight-summary__amenity {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.flight-summary__baggage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.flight-summary__baggage-icon {
+  font-size: 16px;
+}
+
+.flight-summary__overnight-note {
+  font-size: 13px;
+  color: var(--color-error);
+  padding: 8px 0;
+  font-weight: 500;
+}

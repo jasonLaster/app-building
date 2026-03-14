@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import type { RootState, AppDispatch } from '../store'
 import type { FlightResult, FlightLeg } from '../slices/flightsSlice'
 import { fetchFlightLegs } from '../slices/flightsSlice'
@@ -46,10 +46,12 @@ function getDayDiff(dep: string, arr: string): number {
 function FlightResultCard({ flight }: FlightResultCardProps) {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [expanded, setExpanded] = useState(false)
 
   const legs = useSelector((state: RootState) => state.flights.expandedLegs[flight.id])
   const legsLoading = useSelector((state: RootState) => state.flights.expandedLegsLoading[flight.id])
+  const passengers = useSelector((state: RootState) => state.search.passengers)
 
   function handleToggleExpand() {
     if (!expanded && !legs && !legsLoading) {
@@ -60,7 +62,8 @@ function FlightResultCard({ flight }: FlightResultCardProps) {
 
   function handleSelect(e: React.MouseEvent) {
     e.stopPropagation()
-    navigate(`/booking/${flight.id}`)
+    const cabinClass = searchParams.get('cabinClass') || 'economy'
+    navigate(`/booking/${flight.id}?cabin=${encodeURIComponent(cabinClass)}&adults=${passengers.adults}&children=${passengers.children}&infants=${passengers.infants}`)
   }
 
   const dayDiff = getDayDiff(flight.departure_time, flight.arrival_time)
