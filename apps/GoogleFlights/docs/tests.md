@@ -781,7 +781,199 @@
 - PassengerForm
 - BookingAction
 
-_(Test entries to be added by PlanPage tasks)_
+### FlightSummary
+
+#### Test: FlightSummary displays full outbound itinerary
+- **Components**: FlightSummary
+- **Initial state**: User selected a one-way flight (LAX → JFK, nonstop, 5h 30m, Delta DL100) from search results
+- **Action**: User observes the Flight Details / Booking page
+- **Expected**: The FlightSummary shows the outbound itinerary with airline name and logo (colored circle with "DL" initials), flight number "DL100", departure airport "LAX" with terminal info, arrival airport "JFK" with terminal info, departure time, arrival time, and total duration "5h 30m". A timeline visualization connects departure and arrival.
+
+#### Test: FlightSummary displays outbound and return flights for round trip
+- **Components**: FlightSummary
+- **Initial state**: User selected a round-trip flight (LAX → JFK outbound, JFK → LAX return) from search results
+- **Action**: User observes the FlightSummary section
+- **Expected**: Two separate flight sections are displayed — one labeled for the outbound journey (LAX → JFK) and one for the return journey (JFK → LAX). Each section shows its own airline, flight number, times, duration, and timeline visualization.
+
+#### Test: FlightSummary displays connecting flight with multiple legs
+- **Components**: FlightSummary
+- **Initial state**: User selected a connecting flight (LAX → DFW → JFK, 1 stop) from search results
+- **Action**: User observes the FlightSummary section
+- **Expected**: The itinerary displays both legs in order: Leg 1 (LAX → DFW) with its airline, flight number, departure/arrival times, terminal info, and duration; then a layover indicator showing layover duration and airport (e.g., "2h 15m layover at DFW"); then Leg 2 (DFW → JFK) with its details. The timeline visualization shows the full journey with the layover marked.
+
+#### Test: FlightSummary shows total duration and stops count
+- **Components**: FlightSummary
+- **Initial state**: User selected a 1-stop flight with total duration 8h 45m
+- **Action**: User observes the FlightSummary header area
+- **Expected**: A summary line displays the total journey duration "8h 45m" and the number of stops "1 stop". For nonstop flights, it shows "Nonstop".
+
+#### Test: FlightSummary shows overnight arrival indicator
+- **Components**: FlightSummary
+- **Initial state**: User selected a flight that arrives the next day (departs 11:00 PM, arrives 6:00 AM +1)
+- **Action**: User observes the arrival time in FlightSummary
+- **Expected**: The arrival time displays a "+1" indicator next to it, signaling the flight arrives the following day.
+
+#### Test: FlightSummary shows aircraft type and amenities
+- **Components**: FlightSummary
+- **Initial state**: User selected a flight with aircraft_type "Boeing 737-800", has_wifi=true, has_power=true, has_entertainment=false
+- **Action**: User observes the flight leg details in FlightSummary
+- **Expected**: The aircraft type "Boeing 737-800" is displayed. Amenity icons are shown: Wi-Fi icon (present), power outlet icon (present). Entertainment icon is not shown or shown as unavailable.
+
+#### Test: FlightSummary shows baggage allowance
+- **Components**: FlightSummary
+- **Initial state**: User selected a flight and the booking page is loaded
+- **Action**: User observes the FlightSummary details
+- **Expected**: Baggage allowance information is displayed for the selected cabin class (e.g., "1 carry-on bag, 1 checked bag included" for economy).
+
+### PriceBreakdown
+
+#### Test: PriceBreakdown displays base fare per passenger
+- **Components**: PriceBreakdown
+- **Initial state**: User selected a flight for 1 adult in economy class, base fare $250, taxes $45
+- **Action**: User observes the PriceBreakdown section
+- **Expected**: The breakdown shows a line item "Base fare" with "$250" for 1 adult. The line item is labeled with the passenger type "Adult × 1".
+
+#### Test: PriceBreakdown displays taxes and fees
+- **Components**: PriceBreakdown
+- **Initial state**: User selected a flight with taxes_cents = 4500
+- **Action**: User observes the PriceBreakdown section
+- **Expected**: A "Taxes and fees" line item shows "$45.00". The taxes are listed as a separate line from the base fare.
+
+#### Test: PriceBreakdown displays total price
+- **Components**: PriceBreakdown
+- **Initial state**: User selected a flight with base fare $250 and taxes $45
+- **Action**: User observes the PriceBreakdown section
+- **Expected**: A prominently displayed "Total" line shows "$295.00". It is visually distinct (bold, larger font, or separated by a divider) from the individual line items.
+
+#### Test: PriceBreakdown shows per-passenger-type pricing for mixed group
+- **Components**: PriceBreakdown
+- **Initial state**: User searched with 2 adults, 1 child, 1 infant and selected a flight
+- **Action**: User observes the PriceBreakdown section
+- **Expected**: The breakdown shows separate line items for each passenger type: "Adult × 2" with the per-adult base fare and subtotal, "Child × 1" with the child base fare, "Infant × 1" with the infant base fare. Taxes and fees are shown. The grand total sums all passengers.
+
+#### Test: PriceBreakdown updates for round-trip flights
+- **Components**: PriceBreakdown
+- **Initial state**: User selected a round-trip flight (outbound + return)
+- **Action**: User observes the PriceBreakdown section
+- **Expected**: The breakdown includes pricing for both the outbound and return flights. The total reflects the combined cost of both directions plus all taxes and fees.
+
+#### Test: PriceBreakdown reflects selected cabin class pricing
+- **Components**: PriceBreakdown
+- **Initial state**: User searched for Business class and selected a flight
+- **Action**: User observes the PriceBreakdown section
+- **Expected**: The cabin class "Business" is indicated in the breakdown. The base fare reflects the business class pricing (higher than economy). The total price matches the business class total_price_cents from the database.
+
+### PassengerForm
+
+#### Test: PassengerForm displays correct number of passenger forms
+- **Components**: PassengerForm
+- **Initial state**: User searched with 2 adults and 1 child, then selected a flight
+- **Action**: User observes the PassengerForm section
+- **Expected**: Three separate passenger sub-forms are displayed, labeled "Passenger 1 (Adult)", "Passenger 2 (Adult)", and "Passenger 3 (Child)". Each form has fields for first name, last name, date of birth, and gender.
+
+#### Test: PassengerForm shows primary passenger contact fields
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded with 2 adults
+- **Action**: User observes Passenger 1 form
+- **Expected**: Passenger 1 (primary passenger) has additional fields for email address and phone number that are not present on the other passenger forms.
+
+#### Test: PassengerForm first name and last name input
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, passenger forms are empty
+- **Action**: User types "John" in the first name field and "Doe" in the last name field of Passenger 1
+- **Expected**: The first name field displays "John" and the last name field displays "Doe". The input is reflected in the form state.
+
+#### Test: PassengerForm date of birth picker
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, Passenger 1 form visible
+- **Action**: User clicks the date of birth field and selects a date (e.g., January 15, 1990)
+- **Expected**: A date picker opens. After selecting the date, the field displays "01/15/1990" (or equivalent formatted date). The date picker closes.
+
+#### Test: PassengerForm gender dropdown
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, Passenger 1 form visible
+- **Action**: User clicks the gender dropdown
+- **Expected**: A dropdown opens with options (e.g., "Male", "Female", "Other", "Prefer not to say"). Selecting an option updates the field and closes the dropdown.
+
+#### Test: PassengerForm email validation
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, Passenger 1 form visible
+- **Action**: User types "invalid-email" in the email field and attempts to submit
+- **Expected**: A validation error appears on the email field indicating an invalid email format (e.g., "Please enter a valid email address"). The form does not submit.
+
+#### Test: PassengerForm email accepts valid input
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, Passenger 1 form visible
+- **Action**: User types "john.doe@example.com" in the email field
+- **Expected**: The email field displays "john.doe@example.com" with no validation errors.
+
+#### Test: PassengerForm phone number input
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, Passenger 1 form visible
+- **Action**: User types "+1 555-123-4567" in the phone number field
+- **Expected**: The phone number field accepts and displays the input. No validation error is shown.
+
+#### Test: PassengerForm required field validation
+- **Components**: PassengerForm, BookingAction
+- **Initial state**: Booking page loaded, all passenger forms are empty
+- **Action**: User clicks the "Book Flight" button without filling in any fields
+- **Expected**: Validation errors appear on all required fields (first name, last name, date of birth, gender for each passenger; email and phone for primary passenger). The booking is not submitted. Error messages indicate which fields are required.
+
+#### Test: PassengerForm infant passenger form
+- **Components**: PassengerForm
+- **Initial state**: User searched with 1 adult, 1 infant and selected a flight
+- **Action**: User observes the passenger forms
+- **Expected**: Two forms are displayed: "Passenger 1 (Adult)" with contact fields, and "Passenger 2 (Infant)" with first name, last name, date of birth, and gender but no email/phone fields.
+
+#### Test: PassengerForm can be filled and edited multiple times
+- **Components**: PassengerForm
+- **Initial state**: Booking page loaded, passenger form is empty
+- **Action**: User fills in first name "John", then changes it to "Jane", interacts with date of birth picker, then returns to first name and changes it to "Alex"
+- **Expected**: Each edit is correctly reflected in the form. The final state shows "Alex" in the first name field. Other fields retain their entered values between edits.
+
+### BookingAction
+
+#### Test: BookingAction displays "Book Flight" button
+- **Components**: BookingAction
+- **Initial state**: Booking page loaded with flight selected
+- **Action**: User observes the BookingAction section
+- **Expected**: A prominent "Book Flight" button is displayed. The button text reads "Book Flight" and is styled as a primary action button (blue background, white text).
+
+#### Test: BookingAction successfully books a flight
+- **Components**: BookingAction, PassengerForm, PriceBreakdown
+- **Initial state**: All passenger forms are filled out correctly (Passenger 1: John Doe, john@example.com, +1 555-123-4567, DOB 1990-01-15, Male)
+- **Action**: User clicks the "Book Flight" button
+- **Expected**: The booking is saved to the database. A confirmation message is displayed with a unique booking reference number (e.g., "Booking confirmed! Reference: ABC123"). The bookings table has a new row with status "confirmed", the correct flight_id, session_id, cabin_class, and total_price_cents. The booking_passengers table has corresponding passenger records.
+
+#### Test: BookingAction shows booking reference number
+- **Components**: BookingAction
+- **Initial state**: User has just successfully booked a flight
+- **Action**: User observes the confirmation
+- **Expected**: A booking reference number is prominently displayed (e.g., "Your booking reference: GF-ABC123"). The reference is unique and can be used to identify the booking in the My Trips page.
+
+#### Test: BookingAction prevents double booking
+- **Components**: BookingAction
+- **Initial state**: User has just successfully booked a flight and sees the confirmation
+- **Action**: User attempts to click "Book Flight" again (e.g., via browser back or re-clicking)
+- **Expected**: The button is either disabled after successful booking, or the system prevents duplicate bookings. No second booking is created in the database.
+
+#### Test: BookingAction shows loading state during submission
+- **Components**: BookingAction
+- **Initial state**: All passenger forms filled, user clicks "Book Flight"
+- **Action**: User observes the button during submission
+- **Expected**: The button shows a loading indicator (spinner or "Booking..." text) while the request is being processed. The button is disabled during this time to prevent multiple clicks.
+
+#### Test: BookingAction booking appears in My Trips
+- **Components**: BookingAction, TripCard
+- **Initial state**: User has just successfully booked a flight (LAX → JFK, Mar 25, Delta DL100, $295)
+- **Action**: User navigates to the My Trips page
+- **Expected**: The "Upcoming" tab shows the newly booked trip with route "LAX → JFK", date "Mar 25", airline "Delta", status badge "Confirmed", price "$295", and the booking reference number.
+
+#### Test: BookingAction handles booking error gracefully
+- **Components**: BookingAction
+- **Initial state**: All passenger forms filled, but a network or server error occurs during booking
+- **Action**: User clicks "Book Flight" and the request fails
+- **Expected**: An error message is displayed (e.g., "Booking failed. Please try again."). The form data is preserved so the user does not need to re-enter information. The "Book Flight" button becomes clickable again.
 
 ## Page: My Trips
 
