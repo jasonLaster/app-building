@@ -75,20 +75,20 @@
   },
   "suites": [
     {
-      "title": "image-gallery.spec.ts",
-      "file": "image-gallery.spec.ts",
+      "title": "my-trips-cancel-dialog.spec.ts",
+      "file": "my-trips-cancel-dialog.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Property Detail - ImageGallery",
-          "file": "image-gallery.spec.ts",
-          "line": 8,
+          "title": "My Trips - CancelBookingDialog",
+          "file": "my-trips-cancel-dialog.spec.ts",
+          "line": 10,
           "column": 6,
           "specs": [
             {
-              "title": "Image gallery displays main large image and smaller thumbnails",
+              "title": "Clicking Cancel button opens confirmation dialog",
               "ok": true,
               "tags": [],
               "tests": [
@@ -97,7 +97,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/bc019cbe-f285-447f-85e7-160fead44b5e"
+                      "description": "https://app.replay.io/recording/7f66003a-92c0-468b-b57f-acae95cc990c"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -108,12 +108,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3117,
+                      "duration": 4407,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:35:58.953Z",
+                      "startTime": "2026-03-14T23:48:25.570Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -121,13 +121,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "8f0d378bd1d999f0bae0-b3e718f955aa3dac8421",
-              "file": "image-gallery.spec.ts",
-              "line": 9,
+              "id": "dd61595c25e1ab8cf7ce-7728af7d5fae9c6d6c77",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 11,
               "column": 3
             },
             {
-              "title": "Image gallery displays single image when property has only one image",
+              "title": "Dismissing cancellation dialog keeps booking unchanged",
               "ok": true,
               "tags": [],
               "tests": [
@@ -136,7 +136,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/299c7b4c-e821-40c0-bef9-cfb0f09c6ad0"
+                      "description": "https://app.replay.io/recording/c11712dd-2300-43f7-825e-de6128182606"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -147,12 +147,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2289,
+                      "duration": 2255,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:36:02.229Z",
+                      "startTime": "2026-03-14T23:48:30.124Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -160,13 +160,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "8f0d378bd1d999f0bae0-e80bf0197ae4f2f94508",
-              "file": "image-gallery.spec.ts",
-              "line": 25,
+              "id": "dd61595c25e1ab8cf7ce-0adffcfbf6a13161567d",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 31,
               "column": 3
             },
             {
-              "title": "Image gallery displays placeholder when property has no images",
+              "title": "Closing the dialog via overlay click keeps booking unchanged",
               "ok": true,
               "tags": [],
               "tests": [
@@ -175,7 +175,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/58ecfa17-f7cc-49dd-9fbc-c29ed0784939"
+                      "description": "https://app.replay.io/recording/4c8ae87e-426c-4bb9-ba47-00e13ddea74a"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -186,12 +186,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2321,
+                      "duration": 2239,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:36:04.537Z",
+                      "startTime": "2026-03-14T23:48:32.395Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -199,13 +199,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "8f0d378bd1d999f0bae0-1d1145ff712c397219e6",
-              "file": "image-gallery.spec.ts",
-              "line": 51,
+              "id": "dd61595c25e1ab8cf7ce-7547bd6fbc2a2574b3c8",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 54,
               "column": 3
             },
             {
-              "title": "Clicking a thumbnail image makes it the main displayed image",
+              "title": "Cancel dialog shows property and date context",
               "ok": true,
               "tags": [],
               "tests": [
@@ -214,7 +214,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/e8166c70-6172-4795-8ccd-8a62b05b5f0c"
+                      "description": "https://app.replay.io/recording/da2ff5d6-0409-4755-b28b-90ba12cb4786"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -225,12 +225,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1412,
+                      "duration": 2167,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:36:06.872Z",
+                      "startTime": "2026-03-14T23:48:34.648Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -238,22 +238,30 @@
                   "status": "expected"
                 }
               ],
-              "id": "8f0d378bd1d999f0bae0-643a6421fb5d7a7327e9",
-              "file": "image-gallery.spec.ts",
-              "line": 74,
+              "id": "dd61595c25e1ab8cf7ce-d3c238f099f8b615ec20",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 79,
               "column": 3
             },
             {
-              "title": "Clicking thumbnails is functional on repeated use",
+              "title": "Cancel dialog is functional on repeated use",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 180000,
                   "annotations": [
                     {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/my-trips-cancel-dialog.spec.ts",
+                        "line": 102,
+                        "column": 10
+                      }
+                    },
+                    {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/922622d2-5724-4568-b146-8eb6ac0e8b9b"
+                      "description": "https://app.replay.io/recording/268dcc48-6b79-4068-a1eb-60dd5f53e2b4"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -264,26 +272,35 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1549,
+                      "duration": 3142,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:36:08.297Z",
-                      "annotations": [],
+                      "startTime": "2026-03-14T23:48:36.828Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/my-trips-cancel-dialog.spec.ts",
+                            "line": 102,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "8f0d378bd1d999f0bae0-b9737d203252e3b4d896",
-              "file": "image-gallery.spec.ts",
-              "line": 98,
+              "id": "dd61595c25e1ab8cf7ce-0957e105a6ce2640f361",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 101,
               "column": 3
             },
             {
-              "title": "Image gallery shows image captions when available",
+              "title": "Confirming cancellation updates booking status to cancelled",
               "ok": true,
               "tags": [],
               "tests": [
@@ -292,7 +309,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/4dd922ac-f853-48e9-9d00-ac64ca4a3eda"
+                      "description": "https://app.replay.io/recording/06a9e98b-1046-4603-92ee-e59bd47e082f"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -303,12 +320,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1398,
+                      "duration": 3164,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:36:09.859Z",
+                      "startTime": "2026-03-14T23:48:39.982Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -316,9 +333,48 @@
                   "status": "expected"
                 }
               ],
-              "id": "8f0d378bd1d999f0bae0-16401df4958dc8df63f9",
-              "file": "image-gallery.spec.ts",
-              "line": 123,
+              "id": "dd61595c25e1ab8cf7ce-5c29274d155b5a48bdb9",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 135,
+              "column": 3
+            },
+            {
+              "title": "After cancellation, booking moves from Upcoming to Cancelled tab",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/9698ec16-45e1-4343-b0c1-4423b8ccc25d"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2628,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T23:48:43.159Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "dd61595c25e1ab8cf7ce-803d546fbbc4be4c034d",
+              "file": "my-trips-cancel-dialog.spec.ts",
+              "line": 160,
               "column": 3
             }
           ]
@@ -328,9 +384,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-14T23:35:53.496Z",
-    "duration": 17965.466,
-    "expected": 6,
+    "startTime": "2026-03-14T23:48:20.120Z",
+    "duration": 25856.657,
+    "expected": 7,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

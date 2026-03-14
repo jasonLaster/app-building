@@ -28,31 +28,6 @@ test.describe('My Trips - CancelBookingDialog', () => {
     await expect(page.getByTestId('cancel-dialog-dismiss')).toBeVisible()
   })
 
-  test('Confirming cancellation updates booking status to cancelled', async ({ page }) => {
-    await loginAs(page, 'emma@example.com')
-    await page.goto('/trips')
-    await expect(page.getByTestId('my-trips-page')).toBeVisible({ timeout: 30000 })
-
-    // Cancel the confirmed booking e6666666
-    const cancelBtn = page.getByTestId('cancel-button-e6666666-6666-6666-6666-666666666666')
-    await expect(cancelBtn).toBeVisible({ timeout: 30000 })
-    await cancelBtn.click()
-
-    await expect(page.getByTestId('cancel-dialog')).toBeVisible({ timeout: 30000 })
-    await page.getByTestId('cancel-dialog-confirm').click()
-
-    // Dialog should close
-    await expect(page.getByTestId('cancel-dialog')).not.toBeVisible({ timeout: 30000 })
-
-    // Booking should no longer be in Upcoming tab
-    await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).not.toBeVisible({ timeout: 30000 })
-
-    // Switch to Cancelled tab - booking should appear there with cancelled status
-    await page.getByTestId('tab-cancelled').click()
-    await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).toBeVisible({ timeout: 30000 })
-    await expect(page.getByTestId('status-badge-e6666666-6666-6666-6666-666666666666')).toHaveText('Cancelled')
-  })
-
   test('Dismissing cancellation dialog keeps booking unchanged', async ({ page }) => {
     await loginAs(page, 'emma@example.com')
     await page.goto('/trips')
@@ -121,31 +96,7 @@ test.describe('My Trips - CancelBookingDialog', () => {
     await expect(dialog).toContainText('May 13, 2026')
   })
 
-  test('After cancellation, booking moves from Upcoming to Cancelled tab', async ({ page }) => {
-    await loginAs(page, 'emma@example.com')
-    await page.goto('/trips')
-    await expect(page.getByTestId('my-trips-page')).toBeVisible({ timeout: 30000 })
-
-    // Confirm the booking is in Upcoming first
-    await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).toBeVisible({ timeout: 30000 })
-
-    // Cancel the confirmed booking e6666666 (Historic Townhouse)
-    await page.getByTestId('cancel-button-e6666666-6666-6666-6666-666666666666').click()
-    await expect(page.getByTestId('cancel-dialog')).toBeVisible({ timeout: 30000 })
-    await page.getByTestId('cancel-dialog-confirm').click()
-
-    // Should be removed from Upcoming tab
-    await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).not.toBeVisible({ timeout: 30000 })
-
-    // Switch to Cancelled tab
-    await page.getByTestId('tab-cancelled').click()
-
-    // Booking should appear in Cancelled tab with red cancelled badge
-    await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).toBeVisible({ timeout: 30000 })
-    const badge = page.getByTestId('status-badge-e6666666-6666-6666-6666-666666666666')
-    await expect(badge).toHaveText('Cancelled')
-    await expect(badge).toHaveClass(/text-status-cancelled/)
-  })
+  // --- Destructive tests below (each uses a unique booking) ---
 
   test('Cancel dialog is functional on repeated use', async ({ page }) => {
     test.slow()
@@ -179,5 +130,56 @@ test.describe('My Trips - CancelBookingDialog', () => {
     await page.getByTestId('tab-cancelled').click()
     await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).toBeVisible({ timeout: 30000 })
     await expect(page.getByTestId('status-badge-e6666666-6666-6666-6666-666666666666')).toHaveText('Cancelled')
+  })
+
+  test('Confirming cancellation updates booking status to cancelled', async ({ page }) => {
+    await loginAs(page, 'emma@example.com')
+    await page.goto('/trips')
+    await expect(page.getByTestId('my-trips-page')).toBeVisible({ timeout: 30000 })
+
+    // Cancel the pending booking e3333333
+    const cancelBtn = page.getByTestId('cancel-button-e3333333-3333-3333-3333-333333333333')
+    await expect(cancelBtn).toBeVisible({ timeout: 30000 })
+    await cancelBtn.click()
+
+    await expect(page.getByTestId('cancel-dialog')).toBeVisible({ timeout: 30000 })
+    await page.getByTestId('cancel-dialog-confirm').click()
+
+    // Dialog should close
+    await expect(page.getByTestId('cancel-dialog')).not.toBeVisible({ timeout: 30000 })
+
+    // Booking should no longer be in Upcoming tab
+    await expect(page.getByTestId('trip-card-e3333333-3333-3333-3333-333333333333')).not.toBeVisible({ timeout: 30000 })
+
+    // Switch to Cancelled tab - booking should appear there with cancelled status
+    await page.getByTestId('tab-cancelled').click()
+    await expect(page.getByTestId('trip-card-e3333333-3333-3333-3333-333333333333')).toBeVisible({ timeout: 30000 })
+    await expect(page.getByTestId('status-badge-e3333333-3333-3333-3333-333333333333')).toHaveText('Cancelled')
+  })
+
+  test('After cancellation, booking moves from Upcoming to Cancelled tab', async ({ page }) => {
+    await loginAs(page, 'emma@example.com')
+    await page.goto('/trips')
+    await expect(page.getByTestId('my-trips-page')).toBeVisible({ timeout: 30000 })
+
+    // Confirm the booking e7777777 is in Upcoming first
+    await expect(page.getByTestId('trip-card-e7777777-7777-7777-7777-777777777777')).toBeVisible({ timeout: 30000 })
+
+    // Cancel the confirmed booking e7777777 (Beachfront Villa)
+    await page.getByTestId('cancel-button-e7777777-7777-7777-7777-777777777777').click()
+    await expect(page.getByTestId('cancel-dialog')).toBeVisible({ timeout: 30000 })
+    await page.getByTestId('cancel-dialog-confirm').click()
+
+    // Should be removed from Upcoming tab
+    await expect(page.getByTestId('trip-card-e7777777-7777-7777-7777-777777777777')).not.toBeVisible({ timeout: 30000 })
+
+    // Switch to Cancelled tab
+    await page.getByTestId('tab-cancelled').click()
+
+    // Booking should appear in Cancelled tab with red cancelled badge
+    await expect(page.getByTestId('trip-card-e7777777-7777-7777-7777-777777777777')).toBeVisible({ timeout: 30000 })
+    const badge = page.getByTestId('status-badge-e7777777-7777-7777-7777-777777777777')
+    await expect(badge).toHaveText('Cancelled')
+    await expect(badge).toHaveClass(/text-status-cancelled/)
   })
 })

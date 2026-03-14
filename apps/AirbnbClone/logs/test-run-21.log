@@ -1,0 +1,33 @@
+Created branch: test-run-1773531735447 (br-damp-frog-ahz2z2zb)
+Test DB URL: postgresql://neondb_owner:***@ep-lingering-tree-ahik6ztn.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:10654) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"66bde64a-f8c6-4085-9afa-656f003a9932","duration":0,"result":"passed","title":""}
+{"id":"c7b2c973-8b51-4da9-860f-c1cf86170ad3","duration":0,"result":"passed","title":""}
+{"id":"d09c5873-3806-4f10-bcc5-e9832f6ea986","duration":0,"result":"passed","title":""}
+{"id":"226e5969-b971-43ac-b060-4ddac8bfb132","duration":0,"result":"failed","title":""}
+{"id":"ef8313ea-d2e1-42d6-9c4f-687bbe5c03c4","duration":0,"result":"passed","title":""}
+{"id":"75d6125b-5af5-4a3c-a90a-f1f81ddc4bad","duration":0,"result":"failed","title":""}
+{"id":"d0e89fdb-97be-4adc-9fd9-32594eac2437","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: 226e5969-b971-43ac-b060-4ddac8bfb132
+⠙ Initializing…
+Uploading recordings...
+   226e5969…  Closing the dialog via overlay click keeps booking…  1m ago  31.5s   
+
+Uploaded recordings
+ ✘  226e5969…  Closing the dialog via overlay click keeps booking…  1m ago  31.5s  (failed) 
+
+
