@@ -8,10 +8,11 @@ interface DatePickerProps {
   minDate?: string | null
   error?: string
   testIdPrefix: string
+  initiallyOpen?: boolean
 }
 
-function DatePicker({ value, onChange, placeholder, minDate, error, testIdPrefix }: DatePickerProps) {
-  const [isOpen, setIsOpen] = useState(false)
+function DatePicker({ value, onChange, placeholder, minDate, error, testIdPrefix, initiallyOpen }: DatePickerProps) {
+  const [isOpen, setIsOpen] = useState(initiallyOpen ?? false)
   const [viewDate, setViewDate] = useState(() => {
     if (value) return new Date(value + 'T00:00:00')
     return new Date()

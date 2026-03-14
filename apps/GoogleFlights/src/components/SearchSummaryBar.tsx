@@ -32,6 +32,18 @@ interface SearchSummaryBarProps {
   }) => void
 }
 
+function ApplyButton({ onClick, testId }: { onClick: () => void; testId: string }) {
+  return (
+    <button
+      className="search-summary-bar__apply-btn"
+      onClick={onClick}
+      data-testid={testId}
+    >
+      Done
+    </button>
+  )
+}
+
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr + 'T00:00:00')
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
@@ -169,6 +181,7 @@ function SearchSummaryBar({
                 onChange={handleDepartureDateSelect}
                 placeholder="Departure"
                 testIdPrefix="summary-departure"
+                initiallyOpen
               />
             </div>
           )}
@@ -180,6 +193,7 @@ function SearchSummaryBar({
                 placeholder="Return"
                 minDate={departureDate}
                 testIdPrefix="summary-return"
+                initiallyOpen
               />
             </div>
           )}
@@ -203,6 +217,7 @@ function SearchSummaryBar({
                   placeholder="Return"
                   minDate={departureDate}
                   testIdPrefix="summary-return"
+                  initiallyOpen
                 />
               </div>
             )}
@@ -223,6 +238,17 @@ function SearchSummaryBar({
           {editing === 'passengers' && (
             <div className="search-summary-bar__editor search-summary-bar__editor--wide" data-testid="summary-passengers-editor">
               <PassengerCountSelector />
+              <ApplyButton
+                testId="summary-passengers-done"
+                onClick={() => {
+                  onSearch({
+                    adults: searchState.passengers.adults,
+                    children: searchState.passengers.children,
+                    infants: searchState.passengers.infants,
+                  })
+                  setEditing(null)
+                }}
+              />
             </div>
           )}
         </div>
@@ -239,6 +265,13 @@ function SearchSummaryBar({
           {editing === 'cabinClass' && (
             <div className="search-summary-bar__editor" data-testid="summary-cabin-editor">
               <CabinClassSelector />
+              <ApplyButton
+                testId="summary-cabin-done"
+                onClick={() => {
+                  onSearch({ cabinClass: searchState.cabinClass })
+                  setEditing(null)
+                }}
+              />
             </div>
           )}
         </div>

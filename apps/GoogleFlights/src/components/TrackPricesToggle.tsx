@@ -40,7 +40,7 @@ function TrackPricesToggle({ originCode, destCode, departureDate, returnDate, ca
         <span className="track-prices__icon">
           {isTracked ? '🔔' : '🔕'}
         </span>
-        <span className="track-prices__label">
+        <span className="track-prices__label" data-testid="track-prices-label">
           {isTracked ? 'Tracking prices' : 'Track prices'}
         </span>
         <span className={`track-prices__indicator ${isTracked ? 'track-prices__indicator--on' : ''}`}>
