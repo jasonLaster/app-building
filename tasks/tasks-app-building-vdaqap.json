@@ -1,17 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
-        "PlanPageExplore: Decide on components, add sections to docs/tests.md",
-        "PlanComponentDestinationMap: Add test entries for DestinationMap",
-        "PlanComponentFlexibleDatesGrid: Add test entries for FlexibleDatesGrid",
-        "PlanComponentDealsSection: Add test entries for DealsSection"
-      ],
-      "timestamp": "2026-03-14T18:22:32.754Z",
-      "app": "GoogleFlights"
-    },
-    {
       "skill": "skills/tasks/build/writeShared.md",
       "subtasks": [
         "Unpack: Write app shared code"
@@ -71,11 +60,10 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageMyTrips: Decide on components, add sections to docs/tests.md",
-      "PlanComponentTripsTabs: Add test entries for TripsTabs",
-      "PlanComponentTripCard: Add test entries for TripCard",
-      "PlanComponentTrackedRouteCard: Add test entries for TrackedRouteCard",
-      "PlanComponentCancelBookingModal: Add test entries for CancelBookingModal"
+      "PlanPageExplore: Decide on components, add sections to docs/tests.md",
+      "PlanComponentDestinationMap: Add test entries for DestinationMap",
+      "PlanComponentFlexibleDatesGrid: Add test entries for FlexibleDatesGrid",
+      "PlanComponentDealsSection: Add test entries for DealsSection"
     ],
     "timestamp": "2026-03-14T18:22:32.754Z",
     "app": "GoogleFlights"

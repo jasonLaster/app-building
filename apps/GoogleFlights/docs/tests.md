@@ -1226,4 +1226,188 @@
 - FlexibleDatesGrid
 - DealsSection
 
-_(Test entries to be added by PlanPage tasks)_
+### DestinationMap
+
+#### Test: DestinationMap displays interactive map on Explore page
+- **Components**: DestinationMap
+- **Initial state**: User navigates to the Explore page
+- **Action**: User observes the map area
+- **Expected**: An interactive map is displayed showing a world/regional view. The map is centered based on the selected origin airport. The map supports zoom and pan interactions.
+
+#### Test: DestinationMap shows origin airport selector
+- **Components**: DestinationMap
+- **Initial state**: Explore page loads
+- **Action**: User observes the origin selector above or within the map
+- **Expected**: An origin airport selector is displayed (autocomplete input similar to the Search page). It defaults to a preferred/nearest airport or prompts the user to select one.
+
+#### Test: DestinationMap changing origin updates displayed destinations
+- **Components**: DestinationMap
+- **Initial state**: Explore page loaded with an origin selected (e.g., LAX)
+- **Action**: User changes the origin to a different airport (e.g., JFK) using the autocomplete selector
+- **Expected**: The map re-centers on the new origin. Destination markers update to show destinations available from JFK with their lowest prices. Previously shown LAX destinations are replaced.
+
+#### Test: DestinationMap displays destination markers with prices
+- **Components**: DestinationMap
+- **Initial state**: Explore page loaded with origin selected (e.g., LAX)
+- **Action**: User observes the map markers
+- **Expected**: Multiple destination markers are shown on the map. Each marker displays the destination city/airport and the lowest available price (e.g., "$199"). Markers are positioned at the correct geographic location of the destination airport.
+
+#### Test: DestinationMap clicking a destination marker initiates a search
+- **Components**: DestinationMap
+- **Initial state**: Explore page with destinations displayed on the map from origin LAX
+- **Action**: User clicks on a destination marker (e.g., "Tokyo $450")
+- **Expected**: The app navigates to the Search Results page with origin set to LAX, destination set to the clicked airport (NRT/HND), and default dates pre-filled. Results are displayed for that route.
+
+#### Test: DestinationMap hover on destination marker shows tooltip
+- **Components**: DestinationMap
+- **Initial state**: Explore page with destinations displayed on the map
+- **Action**: User hovers over a destination marker
+- **Expected**: A tooltip or popup appears showing additional details: destination city name, airport code, lowest price, and airline offering that price.
+
+#### Test: DestinationMap zoom and pan interaction
+- **Components**: DestinationMap
+- **Initial state**: Explore page with map displayed
+- **Action**: User zooms in on a region (e.g., Europe) using scroll or zoom controls
+- **Expected**: The map zooms in smoothly. Destination markers in the zoomed region become more spread out and easier to click. Markers outside the visible area are not shown or are clustered.
+
+#### Test: DestinationMap shows loading state while fetching destinations
+- **Components**: DestinationMap
+- **Initial state**: User changes the origin airport
+- **Action**: Destinations are being fetched from the backend
+- **Expected**: A loading indicator is shown on or near the map while destination data is being fetched. Once loaded, markers appear on the map.
+
+#### Test: DestinationMap shows empty state when no destinations available
+- **Components**: DestinationMap
+- **Initial state**: Explore page loaded with an origin that has no available flights
+- **Action**: User observes the map
+- **Expected**: The map is displayed but with no destination markers. A message is shown indicating no destinations are currently available from this origin (e.g., "No destinations found from this airport").
+
+#### Test: DestinationMap origin can be changed repeatedly
+- **Components**: DestinationMap
+- **Initial state**: Explore page loaded with origin set to LAX
+- **Action**: User changes origin to JFK, observes results, then changes to LHR, observes results, then changes back to LAX
+- **Expected**: Each origin change updates the map correctly with new destinations and prices. The map works correctly on each subsequent change without stale data or errors.
+
+### FlexibleDatesGrid
+
+#### Test: FlexibleDatesGrid displays calendar-style grid with prices
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page loaded with an origin airport selected
+- **Action**: User scrolls down to the Flexible Dates section
+- **Expected**: A calendar-style grid is displayed showing departure dates as rows/columns. Each cell shows the lowest flight price for that departure date. The grid covers the upcoming weeks/months.
+
+#### Test: FlexibleDatesGrid cells are color-coded by price level
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page with flexible dates grid visible
+- **Action**: User observes the grid cell colors
+- **Expected**: Cells are color-coded: green for cheap prices, yellow for moderate prices, and red for expensive prices. The color coding provides a visual at-a-glance comparison of prices across dates.
+
+#### Test: FlexibleDatesGrid date range selector — Weekend trips
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page with flexible dates grid visible
+- **Action**: User selects "Weekend trips" from the date range selector
+- **Expected**: The grid updates to show prices specifically for weekend departure/return combinations (e.g., Friday–Sunday or Saturday–Monday). Cell prices reflect round-trip costs for weekend durations.
+
+#### Test: FlexibleDatesGrid date range selector — 1 week
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page with "Weekend trips" selected
+- **Action**: User selects "1 week" from the date range selector
+- **Expected**: The grid updates to show prices for 1-week trip durations. Each cell shows the lowest price for a round-trip departing on that date and returning 7 days later.
+
+#### Test: FlexibleDatesGrid date range selector — 2 weeks
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page with "1 week" selected
+- **Action**: User selects "2 weeks" from the date range selector
+- **Expected**: The grid updates to show prices for 2-week trip durations. Each cell shows the lowest price for a round-trip departing on that date and returning 14 days later.
+
+#### Test: FlexibleDatesGrid clicking a date cell initiates a search
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page with grid displayed, "1 week" selected, origin is LAX
+- **Action**: User clicks on a specific date cell (e.g., March 20 showing "$250")
+- **Expected**: The app navigates to the Search Results page with origin set to LAX, departure date set to March 20, return date set to March 27 (1 week later), and results displayed for that search.
+
+#### Test: FlexibleDatesGrid shows loading state while fetching price data
+- **Components**: FlexibleDatesGrid
+- **Initial state**: User changes origin airport or date range
+- **Action**: Price data is being fetched
+- **Expected**: The grid shows a loading skeleton or spinner while price data is being fetched. Once loaded, the grid populates with prices and color coding.
+
+#### Test: FlexibleDatesGrid updates when origin changes
+- **Components**: FlexibleDatesGrid, DestinationMap
+- **Initial state**: Explore page with origin LAX and flexible dates grid showing prices
+- **Action**: User changes the origin airport to JFK
+- **Expected**: The flexible dates grid reloads and displays updated prices for flights from JFK. The color coding adjusts to the new price distribution.
+
+#### Test: FlexibleDatesGrid date range selector can be toggled repeatedly
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page with grid visible, "Weekend trips" selected
+- **Action**: User switches to "1 week", then "2 weeks", then back to "Weekend trips"
+- **Expected**: Each selection updates the grid correctly with appropriate prices and color coding. The grid responds correctly on every toggle without stale data.
+
+#### Test: FlexibleDatesGrid shows empty state when no prices available
+- **Components**: FlexibleDatesGrid
+- **Initial state**: Explore page loaded with origin that has very limited flights
+- **Action**: User observes the grid
+- **Expected**: Cells with no available flights show a dash or "N/A" instead of a price. They are not color-coded or are displayed in a neutral/gray color to indicate no data.
+
+### DealsSection
+
+#### Test: DealsSection displays deal cards on Explore page
+- **Components**: DealsSection
+- **Initial state**: Explore page loaded with an origin airport selected
+- **Action**: User scrolls down to the Deals section
+- **Expected**: A section titled "Deals" (or similar) is displayed containing multiple deal cards. Each card shows a flight deal from the selected origin airport.
+
+#### Test: DealsSection deal card shows destination, dates, price, and savings
+- **Components**: DealsSection
+- **Initial state**: Explore page with deals visible
+- **Action**: User observes a deal card
+- **Expected**: Each deal card displays: destination city and airport code, travel dates, the deal price (prominently displayed), and percentage savings compared to the average price (e.g., "25% less than usual"). The card also shows a colored gradient or image placeholder for the destination.
+
+#### Test: DealsSection clicking a deal card initiates a search
+- **Components**: DealsSection
+- **Initial state**: Explore page with deals visible, origin is LAX
+- **Action**: User clicks on a deal card showing "Paris CDG — $399 — Mar 15–22"
+- **Expected**: The app navigates to the Search Results page with origin set to LAX, destination set to CDG, departure date Mar 15, return date Mar 22, and results displayed for that route.
+
+#### Test: DealsSection updates when origin airport changes
+- **Components**: DealsSection, DestinationMap
+- **Initial state**: Explore page with origin LAX showing deals
+- **Action**: User changes the origin airport to SFO
+- **Expected**: The deals section reloads and displays updated deals from SFO. The previous LAX deals are replaced with SFO-specific deals showing different destinations, prices, and savings percentages.
+
+#### Test: DealsSection shows loading state while fetching deals
+- **Components**: DealsSection
+- **Initial state**: User changes the origin airport
+- **Action**: Deal data is being fetched from the backend
+- **Expected**: Loading skeletons or a spinner are shown in the deals section while data is being fetched. Once loaded, deal cards appear with complete information.
+
+#### Test: DealsSection shows empty state when no deals available
+- **Components**: DealsSection
+- **Initial state**: Explore page loaded with an origin that has no current deals
+- **Action**: User observes the deals section
+- **Expected**: A message is displayed indicating no deals are currently available from this airport (e.g., "No deals available from this airport right now"). No empty or broken cards are shown.
+
+#### Test: DealsSection displays multiple deal cards in grid or row layout
+- **Components**: DealsSection
+- **Initial state**: Explore page with deals available
+- **Action**: User observes the deals layout
+- **Expected**: Multiple deal cards are displayed in a responsive grid or horizontal row layout. Cards are evenly spaced with consistent sizing. The layout adapts to the viewport width.
+
+#### Test: DealsSection deal cards have hover effect
+- **Components**: DealsSection
+- **Initial state**: Explore page with deal cards visible
+- **Action**: User hovers over a deal card
+- **Expected**: The card shows a visual hover effect (e.g., subtle shadow increase, slight elevation, or border highlight) indicating it is clickable.
+
+#### Test: DealsSection savings percentage is calculated correctly
+- **Components**: DealsSection
+- **Initial state**: Explore page with deals visible
+- **Action**: User observes the savings percentage on a deal card
+- **Expected**: The percentage savings is displayed as a positive value (e.g., "30% less than usual") with a visual indicator (e.g., green text or a down arrow). The percentage reflects the discount compared to the average price for that route.
+
+#### Test: DealsSection can be refreshed by changing origin repeatedly
+- **Components**: DealsSection
+- **Initial state**: Explore page with origin LAX and deals displayed
+- **Action**: User changes origin to JFK, observes deals, then changes to LHR, observes deals, then changes back to LAX
+- **Expected**: Each origin change correctly loads new deals specific to that airport. The deals section works correctly on each subsequent change without stale data or rendering issues.
