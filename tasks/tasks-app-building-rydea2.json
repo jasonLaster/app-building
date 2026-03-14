@@ -3,31 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestCycleListRenders: Write test for Cycle list renders all team cycles with name, date range, progress bar, and issue count",
-        "WriteTestActiveCycleHighlighted: Write test for Active cycle is visually highlighted in the list",
-        "WriteTestClickCycleNavigates: Write test for Clicking a cycle navigates to cycle detail view",
-        "WriteTestCycleListEmptyState: Write test for Cycle list shows empty state when team has no cycles",
-        "WriteTestCycleProgressBarAccurate: Write test for Cycle list progress bar accurately reflects issue completion percentage",
-        "WriteTestCycleListUpdatesOnCreate: Write test for Cycle list updates when a new cycle is created",
-        "WriteTestClickDifferentCycleSwitches: Write test for Clicking a different cycle after viewing one switches the detail view",
-        "WriteTestCycleDetailRendersNameDate: Write test for Cycle detail view renders cycle name and date range",
-        "WriteTestCycleDetailProgressStats: Write test for Cycle detail shows progress stats (total, completed, in progress, remaining)",
-        "WriteTestCycleDetailProgressBar: Write test for Cycle detail shows progress bar with correct completion percentage",
-        "WriteTestCycleDetailIssueList: Write test for Cycle detail displays filtered issue list matching Team Issues layout",
-        "WriteTestCycleDetailClickIssueNavigates: Write test for Clicking an issue in cycle detail navigates to issue detail page",
-        "WriteTestCycleDetailGrouping: Write test for Cycle detail issue list supports grouping by status, priority, assignee",
-        "WriteTestCycleDetailSorting: Write test for Cycle detail issue list supports sorting",
-        "WriteTestCycleDetailFiltering: Write test for Cycle detail issue list supports filtering",
-        "WriteTestCycleDetailBulkActions: Write test for Cycle detail issue list supports bulk actions",
-        "WriteTestCycleDetailStatsUpdateOnStatusChange: Write test for Cycle detail progress stats update when an issue status changes",
-        "WriteTestCycleDetailNoIssues: Write test for Cycle detail renders correctly for a cycle with no issues"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestNewCycleButton: Write test for New Cycle button is visible on the cycles page",
         "WriteTestNewCycleOpensModal: Write test for Clicking New Cycle opens create cycle modal with correct fields",
         "WriteTestCreateCycleAllFields: Write test for Successfully creating a cycle with all fields filled",
@@ -396,10 +371,24 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestCreateButtonDisabledDuringSubmit: Write test for Create Issue button is disabled during submission",
-      "WriteTestClickOutsideClosesModal: Write test for Clicking outside the modal closes it",
-      "WriteTestEscapeClosesModal: Write test for Pressing Escape closes the modal",
-      "WriteTestCreateMultipleInSequence: Write test for Creating multiple issues in sequence works correctly"
+      "WriteTestCycleListRenders: Write test for Cycle list renders all team cycles with name, date range, progress bar, and issue count",
+      "WriteTestActiveCycleHighlighted: Write test for Active cycle is visually highlighted in the list",
+      "WriteTestClickCycleNavigates: Write test for Clicking a cycle navigates to cycle detail view",
+      "WriteTestCycleListEmptyState: Write test for Cycle list shows empty state when team has no cycles",
+      "WriteTestCycleProgressBarAccurate: Write test for Cycle list progress bar accurately reflects issue completion percentage",
+      "WriteTestCycleListUpdatesOnCreate: Write test for Cycle list updates when a new cycle is created",
+      "WriteTestClickDifferentCycleSwitches: Write test for Clicking a different cycle after viewing one switches the detail view",
+      "WriteTestCycleDetailRendersNameDate: Write test for Cycle detail view renders cycle name and date range",
+      "WriteTestCycleDetailProgressStats: Write test for Cycle detail shows progress stats (total, completed, in progress, remaining)",
+      "WriteTestCycleDetailProgressBar: Write test for Cycle detail shows progress bar with correct completion percentage",
+      "WriteTestCycleDetailIssueList: Write test for Cycle detail displays filtered issue list matching Team Issues layout",
+      "WriteTestCycleDetailClickIssueNavigates: Write test for Clicking an issue in cycle detail navigates to issue detail page",
+      "WriteTestCycleDetailGrouping: Write test for Cycle detail issue list supports grouping by status, priority, assignee",
+      "WriteTestCycleDetailSorting: Write test for Cycle detail issue list supports sorting",
+      "WriteTestCycleDetailFiltering: Write test for Cycle detail issue list supports filtering",
+      "WriteTestCycleDetailBulkActions: Write test for Cycle detail issue list supports bulk actions",
+      "WriteTestCycleDetailStatsUpdateOnStatusChange: Write test for Cycle detail progress stats update when an issue status changes",
+      "WriteTestCycleDetailNoIssues: Write test for Cycle detail renders correctly for a cycle with no issues"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
