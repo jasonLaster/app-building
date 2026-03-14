@@ -3,9 +3,88 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+        "PlanPageLogin: Decide on components, add sections to docs/tests.md",
+        "PlanComponentAuthToggle: Add test entries for AuthToggle",
+        "PlanComponentLoginForm: Add test entries for LoginForm",
+        "PlanComponentRegisterForm: Add test entries for RegisterForm"
       ],
-      "timestamp": "2026-03-14T18:32:43.514Z",
+      "timestamp": "2026-03-14T18:52:08.860Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageHomeSearch: Decide on components, add sections to docs/tests.md",
+        "PlanComponentSearchBar: Add test entries for SearchBar",
+        "PlanComponentCategoryFilter: Add test entries for CategoryFilter",
+        "PlanComponentPropertyGrid: Add test entries for PropertyGrid",
+        "PlanComponentPropertyCard: Add test entries for PropertyCard",
+        "PlanComponentFavoriteButton: Add test entries for FavoriteButton",
+        "PlanComponentFiltersPanel: Add test entries for FiltersPanel",
+        "PlanComponentPagination: Add test entries for Pagination"
+      ],
+      "timestamp": "2026-03-14T18:52:08.860Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPagePropertyDetail: Decide on components, add sections to docs/tests.md",
+        "PlanComponentImageGallery: Add test entries for ImageGallery",
+        "PlanComponentPropertyHeader: Add test entries for PropertyHeader",
+        "PlanComponentPropertyInfo: Add test entries for PropertyInfo",
+        "PlanComponentPropertyDescription: Add test entries for PropertyDescription",
+        "PlanComponentAmenitiesList: Add test entries for AmenitiesList",
+        "PlanComponentBookingCard: Add test entries for BookingCard",
+        "PlanComponentReviewsSection: Add test entries for ReviewsSection",
+        "PlanComponentHostInfoCard: Add test entries for HostInfoCard"
+      ],
+      "timestamp": "2026-03-14T18:52:08.860Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageMyTrips: Decide on components, add sections to docs/tests.md",
+        "PlanComponentTripsTabs: Add test entries for TripsTabs",
+        "PlanComponentTripCard: Add test entries for TripCard",
+        "PlanComponentCancelBookingDialog: Add test entries for CancelBookingDialog"
+      ],
+      "timestamp": "2026-03-14T18:52:08.860Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageHostDashboard: Decide on components, add sections to docs/tests.md",
+        "PlanComponentStatsOverview: Add test entries for StatsOverview",
+        "PlanComponentListingsTab: Add test entries for ListingsTab",
+        "PlanComponentBookingsTab: Add test entries for BookingsTab",
+        "PlanComponentAddListingForm: Add test entries for AddListingForm"
+      ],
+      "timestamp": "2026-03-14T18:52:08.860Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageUserProfile: Decide on components, add sections to docs/tests.md",
+        "PlanComponentProfileForm: Add test entries for ProfileForm",
+        "PlanComponentBecomeHostButton: Add test entries for BecomeHostButton",
+        "PlanComponentUserReviewsList: Add test entries for UserReviewsList"
+      ],
+      "timestamp": "2026-03-14T18:52:08.860Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageWriteReview: Decide on components, add sections to docs/tests.md",
+        "PlanComponentPropertyBookingContext: Add test entries for PropertyBookingContext",
+        "PlanComponentRatingSliders: Add test entries for RatingSliders",
+        "PlanComponentReviewForm: Add test entries for ReviewForm"
+      ],
+      "timestamp": "2026-03-14T18:52:08.860Z",
       "app": "AirbnbClone"
     },
     {
@@ -68,12 +147,9 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageWriteReview: Decide on components, add sections to docs/tests.md for Write Review page",
-      "PlanComponentReviewForm: Add test entries for ReviewForm",
-      "PlanComponentRatingSliders: Add test entries for RatingSliders",
-      "PlanComponentPropertyBookingContext: Add test entries for PropertyBookingContext"
+      "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
     ],
-    "timestamp": "2026-03-14T18:36:37.633Z",
+    "timestamp": "2026-03-14T18:32:43.514Z",
     "app": "AirbnbClone"
   }
 }
