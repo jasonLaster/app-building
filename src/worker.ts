@@ -417,6 +417,17 @@ export async function processTask(
       continue;
     }
 
+    // Check interrupt after agent completes — the agent may emit a result
+    // event before exiting from SIGINT, causing runAgent to resolve rather
+    // than reject.
+    if (interruptRequested) {
+      log(`Task interrupted.`);
+      interruptRequested = false;
+      commitFn?.("Interrupted");
+      clearCurrentTask(log);
+      return { success: false, cost };
+    }
+
     if (pushBranch) {
       try {
         ensureBranch(pushBranch, log);
