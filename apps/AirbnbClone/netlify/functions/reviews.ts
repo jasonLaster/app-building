@@ -47,9 +47,10 @@ export default async (request: Request, _context: Context) => {
       location: number
       value: number
       comment?: string | null
+      created_at?: string | null
     }
 
-    const { booking_id, property_id, guest_id, rating, cleanliness, accuracy, communication, location, value, comment } = body
+    const { booking_id, property_id, guest_id, rating, cleanliness, accuracy, communication, location, value, comment, created_at } = body
 
     if (!booking_id || !property_id || !guest_id || !rating) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400, headers })
@@ -62,7 +63,7 @@ export default async (request: Request, _context: Context) => {
 
     const result = await sql`
       INSERT INTO reviews (id, booking_id, property_id, guest_id, rating, cleanliness, accuracy, communication, location, value, comment, created_at)
-      VALUES (gen_random_uuid(), ${booking_id}, ${property_id}, ${guest_id}, ${rating}, ${cleanliness}, ${accuracy}, ${communication}, ${location}, ${value}, ${comment || null}, now())
+      VALUES (gen_random_uuid(), ${booking_id}, ${property_id}, ${guest_id}, ${rating}, ${cleanliness}, ${accuracy}, ${communication}, ${location}, ${value}, ${comment || null}, ${created_at || new Date().toISOString()})
       RETURNING *
     `
     const review = result[0]

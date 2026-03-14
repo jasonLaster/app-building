@@ -3,16 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestReviewsListDetails: Write test for Reviews list shows review details correctly",
-        "WriteTestReviewsListUpdatesAfterNew: Write test for Reviews list updates after writing a new review",
-        "WriteTestReviewsListChronologicalOrder: Write test for Reviews list shows multiple reviews in chronological order"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestPropertyBookingContextDisplays: Write test for Property info displays for the booking being reviewed",
         "WriteTestPropertyBookingContextGuestCount: Write test for Property booking context shows guest count",
         "WriteTestPropertyBookingContextTotalPrice: Write test for Property booking context shows total price paid",
@@ -83,26 +73,9 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestProfilePageRequiresLogin: Write test for Profile page requires login",
-      "WriteTestProfilePageDisplaysUserInfo: Write test for Profile page displays current user info",
-      "WriteTestEditNameField: Write test for Edit name field inline",
-      "WriteTestEditBioField: Write test for Edit bio field inline",
-      "WriteTestEditPhoneField: Write test for Edit phone field inline",
-      "WriteTestEditAvatarURLField: Write test for Edit avatar URL field inline",
-      "WriteTestSaveEmptyNameValidation: Write test for Save with empty name shows validation error",
-      "WriteTestSaveInvalidAvatarURL: Write test for Save with invalid avatar URL shows validation error",
-      "WriteTestProfileFormRepeatedEdits: Write test for Profile form fields are functional on repeated edits",
-      "WriteTestEmailFieldReadOnly: Write test for Email field is displayed but not editable",
-      "WriteTestProfileUpdatePersists: Write test for Profile update persists across navigation",
-      "WriteTestBecomeHostButtonVisible: Write test for Become a Host button is visible for non-host users",
-      "WriteTestBecomeHostButtonHidden: Write test for Become a Host button is hidden for existing hosts",
-      "WriteTestClickBecomeHost: Write test for Clicking Become a Host sets user as host",
-      "WriteTestCancelBecomeHostDialog: Write test for Cancel Become a Host confirmation dialog",
-      "WriteTestBecomeHostButtonAppearance: Write test for Become a Host button appearance",
-      "WriteTestReviewsListDisplaysReviews: Write test for Reviews list displays user's written reviews",
-      "WriteTestReviewsListEmptyState: Write test for Reviews list shows empty state for user with no reviews",
-      "WriteTestReviewCardStarDisplay: Write test for Review card shows rating with star display",
-      "WriteTestReviewCardLinksToProperty: Write test for Review card links to the reviewed property"
+      "WriteTestReviewsListDetails: Write test for Reviews list shows review details correctly",
+      "WriteTestReviewsListUpdatesAfterNew: Write test for Reviews list updates after writing a new review",
+      "WriteTestReviewsListChronologicalOrder: Write test for Reviews list shows multiple reviews in chronological order"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
