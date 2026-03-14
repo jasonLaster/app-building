@@ -4,9 +4,6 @@ import { test, expect } from '@playwright/test'
 const PROPERTY_LOFT = 'b1111111-1111-1111-1111-111111111111'
 // b3333333: Cabin, $200/night, $50 cleaning, 6 max guests, host: Mike (a2222222)
 const PROPERTY_CABIN = 'b3333333-3333-3333-3333-333333333333'
-// b4444444: Apartment, $120/night, $40 cleaning, 2 max guests, host: Mike (a2222222)
-const PROPERTY_APT = 'b4444444-4444-4444-4444-444444444444'
-
 // Guest user: Emma Wilson (a3333333)
 const GUEST_EMAIL = 'emma@example.com'
 // Host user: Sarah Chen (a1111111) — owns b1111111
@@ -300,6 +297,51 @@ test.describe('Property Detail - BookingCard', () => {
     const errorMsg = page.getByTestId('booking-error')
     await expect(errorMsg).toBeVisible({ timeout: 30000 })
     await expect(errorMsg).toContainText('not available')
+  })
+
+  test('Booking card date pickers and guest selector are functional on repeated use', async ({ page }) => {
+    // b1111111: $150/night, $75 cleaning fee, 4 max guests
+    await page.goto(`/properties/${PROPERTY_LOFT}`)
+
+    const card = page.getByTestId('booking-card')
+    await expect(card).toBeVisible({ timeout: 30000 })
+
+    const checkin = page.getByTestId('booking-checkin')
+    const checkout = page.getByTestId('booking-checkout')
+    const guestsSelect = page.getByTestId('booking-guests')
+    const breakdown = page.getByTestId('price-breakdown')
+
+    // First selection: 2026-05-01 to 2026-05-04 (3 nights), 2 guests
+    await checkin.fill('2026-05-01')
+    await checkout.fill('2026-05-04')
+    await guestsSelect.selectOption('2')
+
+    // $150 x 3 = $450 + $75 = $525
+    await expect(breakdown).toContainText('$150 x 3 nights')
+    await expect(breakdown).toContainText('$525')
+
+    // Change dates: 2026-06-01 to 2026-06-05 (4 nights)
+    await checkin.fill('2026-06-01')
+    await checkout.fill('2026-06-05')
+
+    // $150 x 4 = $600 + $75 = $675
+    await expect(breakdown).toContainText('$150 x 4 nights')
+    await expect(breakdown).toContainText('$675')
+
+    // Change guests: 2 -> 4 -> 2
+    await guestsSelect.selectOption('4')
+    await expect(guestsSelect).toHaveValue('4')
+    await guestsSelect.selectOption('2')
+    await expect(guestsSelect).toHaveValue('2')
+
+    // Price breakdown should still be correct after guest changes
+    await expect(breakdown).toContainText('$150 x 4 nights')
+    await expect(breakdown).toContainText('$675')
+
+    // Final state verification
+    await expect(checkin).toHaveValue('2026-06-01')
+    await expect(checkout).toHaveValue('2026-06-05')
+    await expect(guestsSelect).toHaveValue('2')
   })
 
   test('Booking card is sticky on desktop viewport', async ({ page }) => {

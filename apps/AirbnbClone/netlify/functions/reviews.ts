@@ -72,5 +72,19 @@ export default async (request: Request, _context: Context) => {
     return new Response(JSON.stringify(review), { status: 201, headers })
   }
 
+  if (request.method === 'DELETE') {
+    const segments = url.pathname.split('/').filter(Boolean)
+    const reviewId = segments[2]
+    if (!reviewId) {
+      return new Response(JSON.stringify({ error: 'Review ID is required' }), { status: 400, headers })
+    }
+    const result = await sql`DELETE FROM reviews WHERE id = ${reviewId} RETURNING *`
+    const review = result[0]
+    if (!review) {
+      return new Response(JSON.stringify({ error: 'Review not found' }), { status: 404, headers })
+    }
+    return new Response(JSON.stringify(review), { status: 200, headers })
+  }
+
   return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405, headers })
 }

@@ -3,26 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestBookingCardRepeatedUse: Write test for Booking card date pickers and guest selector are functional on repeated use",
-        "WriteTestReviewsSectionAverageRatings: Write test for Reviews section displays average ratings by category",
-        "WriteTestReviewsSectionOverallAverage: Write test for Reviews section displays overall average rating and total review count",
-        "WriteTestReviewsSectionIndividualCards: Write test for Reviews section displays individual review cards",
-        "WriteTestReviewCardsGuestAvatar: Write test for Review cards display guest avatar or initial",
-        "WriteTestReviewsSectionNoReviews: Write test for Reviews section shows message when property has no reviews",
-        "WriteTestReviewsSectionPagination: Write test for Reviews section handles pagination or Show more for many reviews",
-        "WriteTestClickShowAllReviews: Write test for Clicking Show all reviews reveals all review cards",
-        "WriteTestReviewsOrderedByRecent: Write test for Reviews are ordered by most recent first",
-        "WriteTestHostInfoCardDisplays: Write test for Host info card displays host name, avatar, bio, and member since date",
-        "WriteTestHostInfoCardListings: Write test for Host info card displays number of listings",
-        "WriteTestHostInfoCardPlaceholderAvatar: Write test for Host info card shows placeholder avatar when host has no avatar",
-        "WriteTestHostInfoCardNoBio: Write test for Host info card displays correctly when host has no bio"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestMyTripsRequiresLogin: Write test for My Trips page requires login",
         "WriteTestMyTripsDefaultsToUpcoming: Write test for My Trips page defaults to Upcoming tab",
         "WriteTestUpcomingTabShowsPendingConfirmed: Write test for Upcoming tab shows pending and confirmed future bookings",
@@ -271,26 +251,19 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestAmenitiesListGrouped: Write test for Amenities list displays amenities grouped by category with icons",
-      "WriteTestAmenitiesListOnlyActiveCategories: Write test for Amenities list only shows categories that have amenities",
-      "WriteTestAmenitiesListShowAll: Write test for Amenities list shows Show all amenities when there are many amenities",
-      "WriteTestClickShowAllAmenities: Write test for Clicking Show all amenities reveals the complete list",
-      "WriteTestAmenitiesListNoAmenities: Write test for Amenities list displays message when property has no amenities",
-      "WriteTestBookingCardPricePerNight: Write test for Booking card displays price per night",
-      "WriteTestBookingCardDatePickers: Write test for Booking card displays check-in and check-out date pickers",
-      "WriteTestBookingCardGuestCountSelector: Write test for Booking card displays guest count selector",
-      "WriteTestBookingCardPriceBreakdown: Write test for Selecting dates and guests shows price breakdown",
-      "WriteTestBookingCardPriceBreakdownUpdates: Write test for Price breakdown updates when dates change",
-      "WriteTestReserveButtonCreatesBooking: Write test for Reserve button creates a booking when logged in",
-      "WriteTestReserveButtonDisabledNoDates: Write test for Reserve button is disabled when dates are not selected",
-      "WriteTestReserveButtonPromptsLogin: Write test for Reserve button prompts login when user is not logged in",
-      "WriteTestReserveButtonDisabledOwnProperty: Write test for Reserve button is disabled for host's own property",
-      "WriteTestBookingCheckInPreventsPassDates: Write test for Check-in date picker prevents selecting past dates",
-      "WriteTestBookingCheckOutAfterCheckIn: Write test for Check-out date must be after check-in date",
-      "WriteTestGuestCountCannotExceedMax: Write test for Guest count cannot exceed property max_guests",
-      "WriteTestBookingGuestCountMin1: Write test for Guest count minimum is 1",
-      "WriteTestReserveButtonUnavailableDates: Write test for Reserve button shows error for unavailable dates",
-      "WriteTestBookingCardSticky: Write test for Booking card is sticky on desktop viewport"
+      "WriteTestBookingCardRepeatedUse: Write test for Booking card date pickers and guest selector are functional on repeated use",
+      "WriteTestReviewsSectionAverageRatings: Write test for Reviews section displays average ratings by category",
+      "WriteTestReviewsSectionOverallAverage: Write test for Reviews section displays overall average rating and total review count",
+      "WriteTestReviewsSectionIndividualCards: Write test for Reviews section displays individual review cards",
+      "WriteTestReviewCardsGuestAvatar: Write test for Review cards display guest avatar or initial",
+      "WriteTestReviewsSectionNoReviews: Write test for Reviews section shows message when property has no reviews",
+      "WriteTestReviewsSectionPagination: Write test for Reviews section handles pagination or Show more for many reviews",
+      "WriteTestClickShowAllReviews: Write test for Clicking Show all reviews reveals all review cards",
+      "WriteTestReviewsOrderedByRecent: Write test for Reviews are ordered by most recent first",
+      "WriteTestHostInfoCardDisplays: Write test for Host info card displays host name, avatar, bio, and member since date",
+      "WriteTestHostInfoCardListings: Write test for Host info card displays number of listings",
+      "WriteTestHostInfoCardPlaceholderAvatar: Write test for Host info card shows placeholder avatar when host has no avatar",
+      "WriteTestHostInfoCardNoBio: Write test for Host info card displays correctly when host has no bio"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
