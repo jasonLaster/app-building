@@ -3,16 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageCreateIssueModal: Decide on components, add sections to docs/tests.md",
-        "PlanComponentCreateIssueForm: Add test entries for CreateIssueForm",
-        "PlanComponentCreateIssueActions: Add test entries for CreateIssueActions"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageActiveCycle: Decide on components, add sections to docs/tests.md",
         "PlanComponentCycleList: Add test entries for CycleList",
         "PlanComponentCycleDetail: Add test entries for CycleDetail",
@@ -146,12 +136,9 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageIssueDetail: Decide on components, add sections to docs/tests.md",
-      "PlanComponentIssueHeader: Add test entries for IssueHeader",
-      "PlanComponentIssueDescription: Add test entries for IssueDescription",
-      "PlanComponentActivityComments: Add test entries for ActivityComments",
-      "PlanComponentIssueSidebar: Add test entries for IssueSidebar",
-      "PlanComponentSubIssues: Add test entries for SubIssues"
+      "PlanPageCreateIssueModal: Decide on components, add sections to docs/tests.md",
+      "PlanComponentCreateIssueForm: Add test entries for CreateIssueForm",
+      "PlanComponentCreateIssueActions: Add test entries for CreateIssueActions"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"

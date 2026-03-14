@@ -1223,7 +1223,225 @@
 
 ## Create Issue Modal
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: CreateIssueForm, CreateIssueActions
+
+### CreateIssueForm
+
+#### Test: Create issue modal renders with all form fields
+- **Initial state**: User is on Team Issues page for team "Engineering"
+- **Expected**: Modal displays: Team selector dropdown, Title text input, Description text area, Status dropdown, Priority dropdown, Assignee searchable selector, Labels multi-select, Project searchable selector, Cycle dropdown, Due date picker, and Parent issue searchable selector. All fields are visible and properly labeled.
+
+#### Test: Modal opens from New Issue button on team issues page
+- **Initial state**: User is on `/team/:teamId/issues` for team "Engineering"
+- **Action**: User clicks the "New Issue" button
+- **Expected**: The create issue modal opens as an overlay. The Team selector is pre-selected to "Engineering". The Title input is focused.
+
+#### Test: Modal opens from keyboard shortcut C
+- **Initial state**: User is on `/my-issues`, no input fields are focused
+- **Action**: User presses "C" key
+- **Expected**: The create issue modal opens as an overlay.
+
+#### Test: Team selector defaults to current team context
+- **Initial state**: User opens create issue modal from team "Design" issues page
+- **Expected**: The Team selector dropdown shows "Design" as the selected value.
+
+#### Test: Team selector allows changing team
+- **Initial state**: Create issue modal is open with team "Engineering" pre-selected. Teams "Engineering" and "Design" exist.
+- **Action**: User clicks the Team selector dropdown and selects "Design"
+- **Expected**: Team selector now shows "Design". The Cycle dropdown updates to show "Design" team's cycles instead of "Engineering" team's cycles.
+
+#### Test: Title field is required
+- **Initial state**: Create issue modal is open
+- **Action**: User leaves the Title field empty and attempts to submit
+- **Expected**: A validation error appears indicating that title is required. The issue is not created.
+
+#### Test: Title field accepts text input
+- **Initial state**: Create issue modal is open
+- **Action**: User types "Implement user authentication" in the Title field
+- **Expected**: The Title field displays "Implement user authentication".
+
+#### Test: Description field supports markdown text entry
+- **Initial state**: Create issue modal is open
+- **Action**: User types "## Overview\nThis issue covers the auth flow" in the Description text area
+- **Expected**: The Description field accepts and displays the markdown text.
+
+#### Test: Status dropdown defaults to Backlog
+- **Initial state**: Create issue modal is open
+- **Expected**: The Status dropdown shows "Backlog" with a dotted circle icon in gray as the default selected value.
+
+#### Test: Status dropdown shows all status options with icons
+- **Initial state**: Create issue modal is open
+- **Action**: User clicks the Status dropdown
+- **Expected**: Dropdown shows all statuses: Backlog (dotted circle, gray), Todo (circle, gray), In Progress (half circle, yellow), In Review (three-quarter circle, blue), Done (check circle, green), Cancelled (x-circle, red).
+
+#### Test: Status dropdown allows selecting a different status
+- **Initial state**: Create issue modal is open, Status shows "Backlog"
+- **Action**: User clicks Status dropdown and selects "Todo"
+- **Expected**: Status dropdown now shows "Todo" with circle icon in gray.
+
+#### Test: Priority dropdown defaults to No Priority
+- **Initial state**: Create issue modal is open
+- **Expected**: The Priority dropdown shows "No Priority" with dots-horizontal icon in gray as the default value.
+
+#### Test: Priority dropdown shows all priority options with icons
+- **Initial state**: Create issue modal is open
+- **Action**: User clicks the Priority dropdown
+- **Expected**: Dropdown shows: Urgent (alert-triangle, red), High (arrow-up, orange), Medium (minus, yellow), Low (arrow-down, blue), No Priority (dots-horizontal, gray).
+
+#### Test: Priority dropdown allows selecting a priority
+- **Initial state**: Create issue modal is open, Priority shows "No Priority"
+- **Action**: User clicks Priority dropdown and selects "High"
+- **Expected**: Priority dropdown now shows "High" with arrow-up icon in orange.
+
+#### Test: Assignee selector is searchable
+- **Initial state**: Create issue modal is open. Workspace has members "Alice Smith", "Bob Jones", "Carol Lee".
+- **Action**: User clicks the Assignee selector and types "Ali"
+- **Expected**: The selector filters to show only "Alice Smith" with her avatar.
+
+#### Test: Assignee selector allows selecting a member
+- **Initial state**: Create issue modal is open, Assignee field is empty
+- **Action**: User clicks the Assignee selector, types "Bob", and clicks "Bob Jones"
+- **Expected**: Assignee field shows "Bob Jones" with his avatar.
+
+#### Test: Labels multi-select allows selecting multiple labels
+- **Initial state**: Create issue modal is open. Labels "Bug", "Feature", "Improvement" exist.
+- **Action**: User clicks Labels selector, selects "Bug", then selects "Feature"
+- **Expected**: Both "Bug" and "Feature" appear as colored badges in the Labels field.
+
+#### Test: Labels multi-select allows removing a selected label
+- **Initial state**: Create issue modal is open with "Bug" and "Feature" labels selected
+- **Action**: User clicks the remove button on the "Bug" label badge
+- **Expected**: Only "Feature" remains selected in the Labels field.
+
+#### Test: Project selector is searchable
+- **Initial state**: Create issue modal is open. Projects "API Redesign", "Mobile App", "Dashboard" exist.
+- **Action**: User clicks the Project selector and types "API"
+- **Expected**: The selector filters to show only "API Redesign".
+
+#### Test: Project selector allows selecting a project
+- **Initial state**: Create issue modal is open, Project field is empty
+- **Action**: User clicks the Project selector and selects "Mobile App"
+- **Expected**: Project field shows "Mobile App".
+
+#### Test: Cycle dropdown shows team's available cycles
+- **Initial state**: Create issue modal is open with team "Engineering" selected. Team has cycles "Sprint 10" (active) and "Sprint 11" (upcoming).
+- **Action**: User clicks the Cycle dropdown
+- **Expected**: Dropdown shows "Sprint 10" and "Sprint 11". The active cycle is indicated.
+
+#### Test: Cycle dropdown allows selecting a cycle
+- **Initial state**: Create issue modal is open, Cycle field is empty
+- **Action**: User clicks the Cycle dropdown and selects "Sprint 10"
+- **Expected**: Cycle field shows "Sprint 10".
+
+#### Test: Cycle dropdown updates when team is changed
+- **Initial state**: Create issue modal is open with team "Engineering" selected showing its cycles
+- **Action**: User changes team to "Design" via the Team selector
+- **Expected**: The Cycle dropdown clears its selection and now shows "Design" team's cycles instead of "Engineering" cycles.
+
+#### Test: Due date picker allows selecting a date
+- **Initial state**: Create issue modal is open, Due date field is empty
+- **Action**: User clicks the Due date picker and selects a date (e.g., March 25, 2026)
+- **Expected**: Due date field shows "Mar 25, 2026".
+
+#### Test: Due date picker allows clearing the date
+- **Initial state**: Create issue modal is open with due date "Mar 25, 2026" set
+- **Action**: User clicks the clear button on the Due date field
+- **Expected**: Due date field is empty again.
+
+#### Test: Parent issue selector is searchable
+- **Initial state**: Create issue modal is open. Issues "ENG-1: Setup project", "ENG-2: Design database" exist.
+- **Action**: User clicks the Parent issue selector and types "Setup"
+- **Expected**: The selector filters to show "ENG-1: Setup project".
+
+#### Test: Parent issue selector allows selecting a parent
+- **Initial state**: Create issue modal is open, Parent issue field is empty
+- **Action**: User clicks the Parent issue selector and selects "ENG-1: Setup project"
+- **Expected**: Parent issue field shows "ENG-1: Setup project".
+
+#### Test: Assignee selector can be used multiple times
+- **Initial state**: Create issue modal is open with "Alice Smith" selected as assignee
+- **Action**: User clicks the Assignee selector, clears the selection, types "Bob", selects "Bob Jones", then repeats to select "Carol Lee"
+- **Expected**: Assignee field shows "Carol Lee" after the final selection. Each selection correctly replaces the previous one.
+
+#### Test: Labels selector can be used multiple times in sequence
+- **Initial state**: Create issue modal is open with no labels selected
+- **Action**: User selects "Bug" label, then opens the selector again and adds "Feature", then opens again and removes "Bug" and adds "Improvement"
+- **Expected**: Labels field shows "Feature" and "Improvement" as colored badges.
+
+#### Test: Status dropdown can be changed multiple times
+- **Initial state**: Create issue modal is open with Status "Backlog"
+- **Action**: User changes status to "Todo", then changes it to "In Progress", then back to "Backlog"
+- **Expected**: Status shows "Backlog" after the final change. Each intermediate state was correctly displayed.
+
+### CreateIssueActions
+
+#### Test: Create Issue button is visible and styled
+- **Initial state**: Create issue modal is open
+- **Expected**: A "Create Issue" button is visible at the bottom of the modal with primary styling (accent color background).
+
+#### Test: Cancel button is visible
+- **Initial state**: Create issue modal is open
+- **Expected**: A "Cancel" button is visible at the bottom of the modal alongside the "Create Issue" button.
+
+#### Test: Cancel button closes the modal
+- **Initial state**: Create issue modal is open
+- **Action**: User clicks the "Cancel" button
+- **Expected**: The modal closes. No issue is created. The user returns to the previous page view.
+
+#### Test: Cancel button discards form data
+- **Initial state**: Create issue modal is open. User has entered title "Draft issue" and selected priority "High".
+- **Action**: User clicks "Cancel", then opens the create issue modal again
+- **Expected**: The modal opens with all fields reset to defaults (empty title, Backlog status, No Priority). The previously entered data is not retained.
+
+#### Test: Create Issue button submits the form with all fields
+- **Initial state**: Create issue modal is open. User has filled in: Title "Implement OAuth", Description "Add OAuth support", Status "Todo", Priority "High", Assignee "Alice Smith", Labels "Feature", Project "API Redesign", Cycle "Sprint 10", Due date "Mar 25, 2026".
+- **Action**: User clicks "Create Issue"
+- **Expected**: The issue is created with all specified field values. A brief confirmation showing the new issue identifier (e.g., "ENG-43") is displayed. The modal closes and the user is navigated to the issues list.
+
+#### Test: Create Issue with only required fields
+- **Initial state**: Create issue modal is open with team "Engineering" selected
+- **Action**: User enters title "Quick bug fix" and clicks "Create Issue"
+- **Expected**: The issue is created with title "Quick bug fix", status "Backlog", priority "No Priority", and no assignee/labels/project/cycle/due date. The new issue identifier is briefly shown. The modal closes.
+
+#### Test: Created issue appears in the team issues list
+- **Initial state**: User is on Team Issues page for "Engineering". The page shows existing issues.
+- **Action**: User clicks "New Issue", enters title "New feature request", sets status to "Todo", and clicks "Create Issue"
+- **Expected**: After modal closes, the Team Issues list updates to include "New feature request" under the "Todo" status group with the correct issue identifier (e.g., "ENG-44").
+
+#### Test: Created issue with parent appears as sub-issue
+- **Initial state**: Create issue modal is open. Issue "ENG-1: Setup project" exists.
+- **Action**: User enters title "Write unit tests", selects "ENG-1: Setup project" as parent issue, and clicks "Create Issue"
+- **Expected**: The issue is created. When navigating to "ENG-1: Setup project" detail page, "Write unit tests" appears in the sub-issues section.
+
+#### Test: Created issue generates activity history entry
+- **Initial state**: Create issue modal is open
+- **Action**: User creates an issue with title "Track history" and clicks "Create Issue"
+- **Expected**: When viewing the new issue's detail page, the Activity tab shows an initial "created this issue" entry with the current user's name and timestamp.
+
+#### Test: Created issue generates inbox notification for assignee
+- **Initial state**: Create issue modal is open. Current user is "Alice Smith".
+- **Action**: User creates an issue with title "Review PR", assigns it to "Bob Jones", and clicks "Create Issue"
+- **Expected**: When Bob Jones checks their inbox, a notification appears: "Alice Smith assigned you to [issue identifier]: Review PR" with the correct timestamp. The inbox badge count increases.
+
+#### Test: Create Issue button is disabled during submission
+- **Initial state**: Create issue modal is open with valid data entered
+- **Action**: User clicks "Create Issue"
+- **Expected**: The "Create Issue" button becomes disabled (to prevent duplicate submissions) while the request is processing. It re-enables after the operation completes (success or failure).
+
+#### Test: Clicking outside the modal closes it
+- **Initial state**: Create issue modal is open
+- **Action**: User clicks on the overlay area outside the modal
+- **Expected**: The modal closes without creating an issue.
+
+#### Test: Pressing Escape closes the modal
+- **Initial state**: Create issue modal is open
+- **Action**: User presses the Escape key
+- **Expected**: The modal closes without creating an issue.
+
+#### Test: Creating multiple issues in sequence works correctly
+- **Initial state**: User is on Team Issues page for "Engineering"
+- **Action**: User creates issue "First task" via the modal, then opens the modal again and creates "Second task"
+- **Expected**: Both issues appear in the team issues list with sequential identifiers (e.g., "ENG-43", "ENG-44"). The modal resets correctly between creations.
 
 ## Active Cycle Page (`/team/:teamId/cycles`)
 
