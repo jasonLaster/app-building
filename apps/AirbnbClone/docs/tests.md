@@ -214,8 +214,6 @@
 
 ### Component: FavoriteButton
 
-### Component: FavoriteButton
-
 #### Test: Favorite button shows outline heart when property is not favorited
 - **Initial state:** User is logged in and on the home page. The property is not in the user's favorites.
 - **Expected:** The property card displays a heart icon with an outline (unfilled) style in the top-right corner of the card image.
