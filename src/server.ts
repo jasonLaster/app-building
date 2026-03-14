@@ -14,8 +14,8 @@ import {
 } from "./worker";
 import { createBufferedLogger, archiveCurrentLog } from "./log";
 import { formatLogLine, stripTimestamp } from "./format";
-import { fetchGlobalSecrets, fetchBranchSecrets, type InfisicalConfig } from "./package/secrets";
-import { startSecretsServer, type SecretsStore } from "./secrets-server";
+import { fetchGlobalSecrets, type InfisicalConfig } from "./package/secrets";
+import { startSecretsServer } from "./secrets-server";
 
 // --- Configuration from env ---
 
@@ -113,7 +113,7 @@ function postWebhook(type: string, data?: Record<string, unknown>): void {
 // The agent gets only non-secret system/container vars plus ANTHROPIC_API_KEY.
 // All other secrets must be accessed through exec-secrets.
 
-function buildAgentEnv(secrets: SecretsStore): Record<string, string> {
+function buildAgentEnv(secrets: Record<string, string>): Record<string, string> {
   const env: Record<string, string> = {};
 
   // System vars
@@ -144,7 +144,7 @@ function buildAgentEnv(secrets: SecretsStore): Record<string, string> {
 
 // --- Default agent config ---
 
-function buildDefaultAgent(secrets: SecretsStore): CommandSpec {
+function buildDefaultAgent(secrets: Record<string, string>): CommandSpec {
   const args: string[] = [];
   args.push("--model", "claude-opus-4-6");
   args.push("--dangerously-skip-permissions");
@@ -199,7 +199,7 @@ function getQuery(url: string, key: string): string | null {
 
 // --- Processing loop ---
 
-async function processLoop(agentEnv: Record<string, string>, secrets: SecretsStore): Promise<void> {
+async function processLoop(agentEnv: Record<string, string>, secrets: Record<string, string>): Promise<void> {
   const defaultAgent = buildDefaultAgent(secrets);
   // Track session ID across prompt tasks so interactive messages share context
   let promptSessionId: string | undefined;
@@ -397,8 +397,10 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  startupLog("Fetching secrets from Infisical...");
-  let secrets: SecretsStore;
+  // Fetch global secrets once for startup needs (clone token, agent env, MCP config).
+  // The secrets server fetches live from Infisical on every request — no caching.
+  startupLog("Fetching global secrets from Infisical...");
+  let secrets: Record<string, string>;
   try {
     secrets = await fetchGlobalSecrets(infisicalConfig);
     startupLog(`Fetched ${Object.keys(secrets).length} global secret(s).`);
@@ -407,21 +409,9 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  // Fetch branch secrets and merge into store
-  try {
-    const branchSecrets = await fetchBranchSecrets(infisicalConfig, PUSH_BRANCH);
-    const count = Object.keys(branchSecrets).length;
-    Object.assign(secrets, branchSecrets);
-    startupLog(`Fetched ${count} branch secret(s) from Infisical.`);
-  } catch (e: any) {
-    startupLog(`Warning: failed to fetch branch secrets: ${e.message}`);
-  }
-
-  // Start the secrets server — the agent uses exec-secrets to run commands
-  // that need secret values, and this server handles those requests.
+  // Start the secrets server — fetches from Infisical on every request
   await startSecretsServer(
     {
-      store: secrets,
       infisicalConfig,
       branch: PUSH_BRANCH,
       logsDir: LOGS_DIR,
