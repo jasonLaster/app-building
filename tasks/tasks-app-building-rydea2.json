@@ -3,30 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestGroupByControlDefault: Write test for Group by control renders with default Status selected",
-        "WriteTestGroupByDropdownOptions: Write test for Group by dropdown shows all grouping options",
-        "WriteTestGroupByPriority: Write test for Group by Priority groups issues under priority headers",
-        "WriteTestGroupByAssignee: Write test for Group by Assignee groups issues under assignee headers",
-        "WriteTestGroupByProject: Write test for Group by Project groups issues under project headers",
-        "WriteTestGroupByLabel: Write test for Group by Label groups issues under label headers",
-        "WriteTestGroupByNone: Write test for Group by None shows a flat list",
-        "WriteTestGroupBySwitchReRenders: Write test for Switching group by option re-renders immediately",
-        "WriteTestGroupByMultipleTimes: Write test for Group by can be changed multiple times",
-        "WriteTestSortByControlDefault: Write test for Sort by control renders with default option",
-        "WriteTestSortByDropdownOptions: Write test for Sort by dropdown shows all sorting options",
-        "WriteTestSortByPriority: Write test for Sort by Priority orders issues by priority level",
-        "WriteTestSortByCreatedDate: Write test for Sort by Created date orders issues by creation time",
-        "WriteTestSortByUpdatedDate: Write test for Sort by Updated date orders issues by last update time",
-        "WriteTestSortByStatus: Write test for Sort by Status orders issues by status progression",
-        "WriteTestSortWorksWithinGroups: Write test for Sort works correctly within groups",
-        "WriteTestSortByMultipleTimes: Write test for Sort by can be changed multiple times"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestTeamFiltersToolbar: Write test for Team filters toolbar renders with all filter options",
         "WriteTestTeamStatusFilterDropdown: Write test for Status filter dropdown shows all statuses with icons",
         "WriteTestTeamStatusFilterFilters: Write test for Status filter filters issues by selected statuses",
@@ -597,19 +573,23 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestTeamCheckboxesVisible: Write test for Issue row checkboxes are visible and unchecked by default",
-      "WriteTestTeamCheckboxSelects: Write test for Clicking a checkbox selects an issue",
-      "WriteTestTeamCheckboxDeselects: Write test for Clicking a checked checkbox deselects the issue",
-      "WriteTestTeamMultipleSelect: Write test for Multiple issues can be selected via checkboxes",
-      "WriteTestBulkToolbarAppears: Write test for Bulk action toolbar appears when issues are selected",
-      "WriteTestBulkToolbarDisappears: Write test for Bulk action toolbar disappears when all issues are deselected",
-      "WriteTestBulkStatusChange: Write test for Bulk status change updates all selected issues",
-      "WriteTestBulkPriorityChange: Write test for Bulk priority change updates all selected issues",
-      "WriteTestBulkAssigneeChange: Write test for Bulk assignee change updates all selected issues",
-      "WriteTestBulkLabelChange: Write test for Bulk label change updates all selected issues",
-      "WriteTestBulkActionsMultipleTimes: Write test for Bulk actions can be performed multiple times in sequence",
-      "WriteTestSelectAllInGroup: Write test for Select all checkbox in group header selects all issues in that group",
-      "WriteTestDeselectAllInGroup: Write test for Deselect all via group header checkbox"
+      "WriteTestGroupByControlDefault: Write test for Group by control renders with default Status selected",
+      "WriteTestGroupByDropdownOptions: Write test for Group by dropdown shows all grouping options",
+      "WriteTestGroupByPriority: Write test for Group by Priority groups issues under priority headers",
+      "WriteTestGroupByAssignee: Write test for Group by Assignee groups issues under assignee headers",
+      "WriteTestGroupByProject: Write test for Group by Project groups issues under project headers",
+      "WriteTestGroupByLabel: Write test for Group by Label groups issues under label headers",
+      "WriteTestGroupByNone: Write test for Group by None shows a flat list",
+      "WriteTestGroupBySwitchReRenders: Write test for Switching group by option re-renders immediately",
+      "WriteTestGroupByMultipleTimes: Write test for Group by can be changed multiple times",
+      "WriteTestSortByControlDefault: Write test for Sort by control renders with default option",
+      "WriteTestSortByDropdownOptions: Write test for Sort by dropdown shows all sorting options",
+      "WriteTestSortByPriority: Write test for Sort by Priority orders issues by priority level",
+      "WriteTestSortByCreatedDate: Write test for Sort by Created date orders issues by creation time",
+      "WriteTestSortByUpdatedDate: Write test for Sort by Updated date orders issues by last update time",
+      "WriteTestSortByStatus: Write test for Sort by Status orders issues by status progression",
+      "WriteTestSortWorksWithinGroups: Write test for Sort works correctly within groups",
+      "WriteTestSortByMultipleTimes: Write test for Sort by can be changed multiple times"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
