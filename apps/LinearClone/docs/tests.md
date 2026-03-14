@@ -2463,7 +2463,172 @@
 
 ## Labels Page (`/settings/labels`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: LabelList, CreateLabel, EditDeleteLabel
+
+### LabelList
+
+#### Test: Labels page renders with list of all labels
+- **Initial state**: Workspace has 3 labels: "Bug" (red), "Feature" (blue), "Improvement" (green). User navigates to `/settings/labels`.
+- **Expected**: The page displays a list of 3 labels. Each label row shows a colored dot matching the label's color, the label name, and the issue count using that label. A "Create Label" button is visible at the top of the page. The page title indicates "Labels".
+
+#### Test: Label row displays colored dot matching label color
+- **Initial state**: Workspace has a label "Bug" with color red (#ef4444). User is on `/settings/labels`.
+- **Expected**: The "Bug" label row displays a circular colored dot with the exact red color (#ef4444) next to the label name.
+
+#### Test: Label row displays issue count for each label
+- **Initial state**: Workspace has label "Bug" used by 5 issues, label "Feature" used by 12 issues, and label "Docs" used by 0 issues. User is on `/settings/labels`.
+- **Expected**: The "Bug" row shows count "5", the "Feature" row shows count "12", and the "Docs" row shows count "0". The count is clearly visible next to or below the label name.
+
+#### Test: Labels page shows empty state when no labels exist
+- **Initial state**: Workspace has no labels. User navigates to `/settings/labels`.
+- **Expected**: An empty state message is displayed (e.g., "No labels yet. Create your first label to get started.") with an icon. The "Create Label" button is still visible.
+
+#### Test: Each label row has edit and delete action buttons
+- **Initial state**: Workspace has 2 labels. User is on `/settings/labels`.
+- **Expected**: Each label row displays an edit button (pencil/edit icon) and a delete button (trash/delete icon). The buttons are visible on the row (or appear on hover).
+
+#### Test: Labels list updates after creating a new label
+- **Initial state**: Workspace has 2 labels. User is on `/settings/labels`.
+- **Action**: User creates a new label "Enhancement" with color purple via the Create Label form
+- **Expected**: The labels list now shows 3 labels, including the newly created "Enhancement" label with a purple dot and issue count of 0. The new label appears in the list without requiring a page reload.
+
+#### Test: Labels list updates after deleting a label
+- **Initial state**: Workspace has 3 labels: "Bug", "Feature", "Improvement". User is on `/settings/labels`.
+- **Action**: User deletes the "Improvement" label (clicks delete, confirms)
+- **Expected**: The labels list now shows 2 labels. "Improvement" is no longer in the list. The remaining labels "Bug" and "Feature" are still displayed correctly.
+
+#### Test: Labels list updates after editing a label
+- **Initial state**: Workspace has label "Bug" with red color. User is on `/settings/labels`.
+- **Action**: User edits "Bug" label, changing name to "Defect" and color to orange
+- **Expected**: The labels list now shows "Defect" with an orange colored dot instead of "Bug" with red. The issue count remains unchanged.
+
+#### Test: Label issue count reflects actual usage across issues
+- **Initial state**: Workspace has label "Bug" used by 3 issues. User is on `/settings/labels`.
+- **Action**: User navigates to an issue, adds the "Bug" label to it, then navigates back to `/settings/labels`
+- **Expected**: The "Bug" label now shows issue count of 4, reflecting the newly tagged issue.
+
+### CreateLabel
+
+#### Test: Create Label button opens the create label form
+- **Initial state**: User is on `/settings/labels`.
+- **Action**: User clicks the "Create Label" button
+- **Expected**: A create label form (inline or modal) appears with a name text input field, a color picker section showing preset color options and a custom hex input, and "Create" and "Cancel" buttons.
+
+#### Test: Successfully create a new label with preset color
+- **Initial state**: User is on `/settings/labels`. The create label form is open. Workspace has 2 existing labels.
+- **Action**: User types "Bug" in the name field, selects the red preset color, and clicks "Create"
+- **Expected**: The form closes. A new "Bug" label with red color appears in the labels list. The list now shows 3 labels. The new label has issue count 0.
+
+#### Test: Successfully create a new label with custom hex color
+- **Initial state**: User is on `/settings/labels`. The create label form is open.
+- **Action**: User types "Custom Category" in the name field, enters "#ff6b2e" in the custom hex color input, and clicks "Create"
+- **Expected**: The form closes. A new "Custom Category" label appears in the labels list with the exact custom color (#ff6b2e) displayed as its colored dot.
+
+#### Test: Create label form validates required name field
+- **Initial state**: User is on `/settings/labels`. The create label form is open.
+- **Action**: User leaves the name field empty and clicks "Create"
+- **Expected**: A validation error is shown indicating the name is required (e.g., "Label name is required"). The label is not created. The form remains open.
+
+#### Test: Create label form prevents duplicate label names
+- **Initial state**: Workspace has a label named "Bug". The create label form is open.
+- **Action**: User types "Bug" in the name field, selects a color, and clicks "Create"
+- **Expected**: An error message is displayed (e.g., "A label with this name already exists"). The label is not created. The form remains open.
+
+#### Test: Cancel button closes create label form without creating
+- **Initial state**: User is on `/settings/labels`. The create label form is open. User has typed "Draft Label" in the name field.
+- **Action**: User clicks "Cancel"
+- **Expected**: The form closes. No new label is created. The labels list remains unchanged. If the user opens the form again, the name field is empty (form state is reset).
+
+#### Test: Color picker shows preset color options
+- **Initial state**: User is on `/settings/labels`. The create label form is open.
+- **Expected**: The color picker displays a set of preset color swatches (e.g., red, orange, yellow, green, blue, purple, pink, gray). Each swatch is clickable. A custom hex input field is also available.
+
+#### Test: Selecting a preset color updates the color preview
+- **Initial state**: User is on `/settings/labels`. The create label form is open.
+- **Action**: User clicks the blue preset color swatch
+- **Expected**: The selected color swatch is visually highlighted (e.g., ring/border). A color preview (colored dot or swatch) updates to show the selected blue color. The custom hex input shows the blue hex value.
+
+#### Test: Custom hex input validates hex color format
+- **Initial state**: User is on `/settings/labels`. The create label form is open.
+- **Action**: User types "notacolor" in the custom hex input and clicks "Create" with a valid name
+- **Expected**: A validation error is shown for the color field (e.g., "Invalid color format"). The label is not created.
+
+#### Test: Create label form can be used multiple times in sequence
+- **Initial state**: Workspace has 1 label. User is on `/settings/labels`.
+- **Action**: User creates label "Bug" (red) via the form, then opens the form again and creates label "Feature" (blue)
+- **Expected**: Both labels are created successfully. The labels list shows 3 labels total. The form resets correctly between uses — the second time the form opens, name field is empty and no color is pre-selected.
+
+### EditDeleteLabel
+
+#### Test: Clicking edit button on a label enters inline edit mode
+- **Initial state**: Workspace has label "Bug" (red). User is on `/settings/labels`.
+- **Action**: User clicks the edit button on the "Bug" label row
+- **Expected**: The label row transforms into an inline edit mode. The name field becomes an editable text input pre-filled with "Bug". The color picker appears showing the current red color as selected. "Save" and "Cancel" buttons appear on the row.
+
+#### Test: Successfully edit label name via inline edit
+- **Initial state**: Workspace has label "Bug" (red) used by 3 issues. User is on `/settings/labels`. The "Bug" label is in inline edit mode.
+- **Action**: User clears the name field, types "Defect", and clicks "Save"
+- **Expected**: The label row exits edit mode. The label now shows "Defect" with the same red color. The issue count remains 3. Issues that had the "Bug" label now show "Defect" as their label.
+
+#### Test: Successfully edit label color via inline edit
+- **Initial state**: Workspace has label "Bug" (red). User is on `/settings/labels`. The "Bug" label is in inline edit mode.
+- **Action**: User selects the blue preset color and clicks "Save"
+- **Expected**: The label row exits edit mode. The label now shows "Bug" with a blue colored dot. The color change is reflected anywhere the label appears (e.g., issue rows, issue detail label badges).
+
+#### Test: Edit both label name and color simultaneously
+- **Initial state**: Workspace has label "Bug" (red). User is on `/settings/labels`. The "Bug" label is in inline edit mode.
+- **Action**: User changes the name to "Critical Bug", selects orange color, and clicks "Save"
+- **Expected**: The label row exits edit mode. The label now shows "Critical Bug" with an orange colored dot.
+
+#### Test: Cancel inline edit reverts changes
+- **Initial state**: Workspace has label "Bug" (red). User is on `/settings/labels`. The "Bug" label is in inline edit mode.
+- **Action**: User changes name to "Something Else", selects blue color, then clicks "Cancel"
+- **Expected**: The label row exits edit mode. The label still shows "Bug" with red color. No changes are saved.
+
+#### Test: Edit label validates required name field
+- **Initial state**: Workspace has label "Bug" (red). The "Bug" label is in inline edit mode.
+- **Action**: User clears the name field completely and clicks "Save"
+- **Expected**: A validation error is shown (e.g., "Label name is required"). The edit mode remains active. The label is not saved with an empty name.
+
+#### Test: Edit label prevents duplicate label names
+- **Initial state**: Workspace has labels "Bug" (red) and "Feature" (blue). The "Bug" label is in inline edit mode.
+- **Action**: User changes the name to "Feature" and clicks "Save"
+- **Expected**: An error message is shown (e.g., "A label with this name already exists"). The edit mode remains active. The label name is not changed.
+
+#### Test: Edit label with custom hex color
+- **Initial state**: Workspace has label "Bug" (red). The "Bug" label is in inline edit mode.
+- **Action**: User enters "#22c55e" in the custom hex color input and clicks "Save"
+- **Expected**: The label row exits edit mode. The label "Bug" now displays a green colored dot matching #22c55e.
+
+#### Test: Clicking delete button shows confirmation dialog
+- **Initial state**: Workspace has label "Bug" (red) used by 5 issues. User is on `/settings/labels`.
+- **Action**: User clicks the delete button on the "Bug" label row
+- **Expected**: A confirmation dialog appears (e.g., "Are you sure you want to delete the label 'Bug'? This label is used by 5 issues."). The dialog has "Confirm" (or "Delete") and "Cancel" buttons. The label is NOT deleted yet.
+
+#### Test: Confirm delete removes the label
+- **Initial state**: Workspace has 3 labels including "Bug" (red) used by 5 issues. The delete confirmation dialog for "Bug" is open.
+- **Action**: User clicks "Confirm" (or "Delete") in the confirmation dialog
+- **Expected**: The label "Bug" is deleted. The labels list now shows 2 labels. The 5 issues that had the "Bug" label no longer have it (the label is removed from their label list). The label filter dropdowns on issue pages no longer include "Bug".
+
+#### Test: Cancel delete keeps the label
+- **Initial state**: Workspace has label "Bug" (red). The delete confirmation dialog for "Bug" is open.
+- **Action**: User clicks "Cancel" in the confirmation dialog
+- **Expected**: The dialog closes. The "Bug" label is not deleted. The labels list remains unchanged.
+
+#### Test: Delete label used by zero issues
+- **Initial state**: Workspace has label "Archived" (gray) with 0 issues. User is on `/settings/labels`.
+- **Action**: User clicks delete on "Archived", confirmation dialog shows (e.g., "Are you sure you want to delete the label 'Archived'?"), user confirms
+- **Expected**: The label is deleted. The labels list no longer includes "Archived". No issues are affected since the label was unused.
+
+#### Test: Only one label can be in edit mode at a time
+- **Initial state**: Workspace has labels "Bug" (red) and "Feature" (blue). User is on `/settings/labels`. "Bug" is currently in inline edit mode.
+- **Action**: User clicks the edit button on "Feature"
+- **Expected**: "Bug" exits edit mode without saving changes. "Feature" enters inline edit mode. Only one label row is editable at a time.
+
+#### Test: Edit mode is exited when delete is clicked on same label
+- **Initial state**: Workspace has label "Bug" (red) in inline edit mode. User has changed name to "Defect" but not saved.
+- **Action**: User clicks the delete button on the "Bug" row
+- **Expected**: The inline edit mode is exited (unsaved changes are discarded). The delete confirmation dialog appears for "Bug" (the original name, not the unsaved "Defect").
 
 ## Settings Page (`/settings`)
 

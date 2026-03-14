@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageLabels: Decide on components, add sections to docs/tests.md",
-        "PlanComponentLabelList: Add test entries for LabelList",
-        "PlanComponentCreateLabel: Add test entries for CreateLabel",
-        "PlanComponentEditDeleteLabel: Add test entries for EditDeleteLabel"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageSettings: Decide on components, add sections to docs/tests.md",
         "PlanComponentWorkspaceSettings: Add test entries for WorkspaceSettings"
       ],
@@ -80,10 +69,10 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageTeams: Decide on components, add sections to docs/tests.md",
-      "PlanComponentTeamCard: Add test entries for TeamCard",
-      "PlanComponentCreateTeamModal: Add test entries for CreateTeamModal",
-      "PlanComponentTeamSettings: Add test entries for TeamSettings"
+      "PlanPageLabels: Decide on components, add sections to docs/tests.md",
+      "PlanComponentLabelList: Add test entries for LabelList",
+      "PlanComponentCreateLabel: Add test entries for CreateLabel",
+      "PlanComponentEditDeleteLabel: Add test entries for EditDeleteLabel"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"
