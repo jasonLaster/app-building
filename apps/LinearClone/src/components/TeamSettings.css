@@ -1,0 +1,419 @@
+.team-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ts-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+.ts-top-bar {
+  display: flex;
+  align-items: center;
+}
+
+.ts-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.ts-back-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.ts-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ts-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ts-field-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ts-field-value {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+}
+
+.ts-field-clickable {
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.ts-field-clickable:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.ts-edit-icon {
+  color: var(--color-text-tertiary);
+  opacity: 0;
+  flex-shrink: 0;
+  transition: opacity 150ms ease;
+}
+
+.ts-field-clickable:hover .ts-edit-icon {
+  opacity: 1;
+}
+
+.ts-field-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ts-input {
+  padding: 6px 8px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  outline: none;
+}
+
+.ts-input-error {
+  border-color: #ef4444;
+}
+
+.ts-textarea {
+  padding: 6px 8px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.ts-field-error {
+  font-size: 11px;
+  color: #ef4444;
+}
+
+.ts-placeholder {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+
+/* Members Section */
+.ts-members-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.ts-members-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ts-members-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.ts-add-member-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.ts-add-member-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.ts-add-member-dropdown {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ts-add-member-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 100ms ease;
+}
+
+.ts-add-member-option:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.ts-add-member-empty {
+  padding: 12px;
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+}
+
+.ts-member-option-name {
+  font-weight: 500;
+}
+
+.ts-member-option-email {
+  color: var(--color-text-tertiary);
+  font-size: 12px;
+}
+
+.ts-members-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 0;
+  gap: 8px;
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+}
+
+.ts-members-empty p {
+  margin: 0;
+}
+
+.ts-members-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-member-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 100ms ease;
+}
+
+.ts-member-row:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.ts-member-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ts-member-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ts-member-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-member-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.ts-member-email {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+}
+
+.ts-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 150ms ease, background-color 150ms ease, color 150ms ease;
+}
+
+.ts-member-row:hover .ts-remove-btn {
+  opacity: 1;
+}
+
+.ts-remove-btn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.ts-member-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ts-confirm-text {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.ts-confirm-btn {
+  padding: 3px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ts-cancel-confirm-btn {
+  padding: 3px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Danger Zone */
+.ts-danger-zone {
+  border-top: 1px solid var(--color-border);
+  padding-top: 20px;
+}
+
+.ts-delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  background: none;
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.ts-delete-btn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.ts-delete-confirm {
+  background-color: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.ts-delete-confirm-text {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  margin: 0 0 12px;
+}
+
+.ts-delete-confirm-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ts-delete-confirm-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.ts-delete-confirm-btn:hover {
+  opacity: 0.9;
+}
+
+.ts-delete-cancel-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ts-delete-cancel-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
