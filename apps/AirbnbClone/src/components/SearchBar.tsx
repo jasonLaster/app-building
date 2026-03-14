@@ -17,6 +17,13 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
 
   const today = new Date().toISOString().split('T')[0]
 
+  const checkOutMin = (() => {
+    if (!checkIn) return today
+    const d = new Date(checkIn + 'T00:00:00')
+    d.setDate(d.getDate() + 1)
+    return d.toISOString().split('T')[0]
+  })()
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onSearch({ city, checkIn, checkOut, guests })
@@ -67,7 +74,7 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
           data-testid="search-checkout"
           type="date"
           value={checkOut}
-          min={checkIn || today}
+          min={checkOutMin}
           onChange={(e) => setCheckOut(e.target.value)}
           className="rounded-full px-3 py-2 text-sm text-text outline-none bg-transparent"
         />
