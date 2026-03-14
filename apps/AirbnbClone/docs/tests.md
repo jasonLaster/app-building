@@ -603,6 +603,149 @@
 
 <!-- Components: TripsTabs, TripCard, CancelBookingDialog -->
 
+### Component: TripsTabs
+
+#### Test: My Trips page requires login
+- **Initial state:** User is not logged in.
+- **Action:** User navigates to `/trips`.
+- **Expected:** The user is redirected to the login page (`/login`). The My Trips page content is not displayed.
+
+#### Test: My Trips page defaults to Upcoming tab
+- **Initial state:** User is logged in and navigates to `/trips`.
+- **Expected:** The page displays three tabs: "Upcoming", "Past", and "Cancelled". The "Upcoming" tab is selected/highlighted by default. The content area shows upcoming trips (bookings with status "pending" or "confirmed" and check_in date >= today).
+
+#### Test: Upcoming tab shows pending and confirmed future bookings
+- **Initial state:** User is logged in with bookings: a confirmed booking checking in next week, a pending booking checking in next month, a completed booking from last month, and a cancelled booking.
+- **Action:** User is on the "Upcoming" tab.
+- **Expected:** Only the confirmed and pending future bookings are displayed. Completed and cancelled bookings are not shown in this tab.
+
+#### Test: Switching to Past tab shows completed bookings
+- **Initial state:** User is logged in and on the My Trips page with the "Upcoming" tab selected. The user has completed bookings.
+- **Action:** User clicks the "Past" tab.
+- **Expected:** The "Past" tab becomes selected/highlighted. The content area updates to show only bookings with status "completed". Upcoming and cancelled bookings are not shown.
+
+#### Test: Switching to Cancelled tab shows cancelled bookings
+- **Initial state:** User is logged in and on the My Trips page with the "Upcoming" tab selected. The user has cancelled bookings.
+- **Action:** User clicks the "Cancelled" tab.
+- **Expected:** The "Cancelled" tab becomes selected/highlighted. The content area updates to show only bookings with status "cancelled". Upcoming and completed bookings are not shown.
+
+#### Test: Switching back to Upcoming tab from another tab
+- **Initial state:** User is on the My Trips page with the "Past" tab selected.
+- **Action:** User clicks the "Upcoming" tab.
+- **Expected:** The "Upcoming" tab becomes selected/highlighted. The content area updates to show upcoming bookings again.
+
+#### Test: Tab shows empty state when no bookings exist for that category
+- **Initial state:** User is logged in with no completed bookings.
+- **Action:** User clicks the "Past" tab.
+- **Expected:** The "Past" tab content area displays a message like "No past trips" or "You don't have any past trips yet." instead of an empty list.
+
+#### Test: Upcoming tab empty state message
+- **Initial state:** User is logged in with no pending or confirmed future bookings.
+- **Action:** User views the "Upcoming" tab (default).
+- **Expected:** The tab content area displays a message like "No upcoming trips" with a suggestion to browse properties (e.g., a link to the home page).
+
+#### Test: Cancelled tab empty state message
+- **Initial state:** User is logged in with no cancelled bookings.
+- **Action:** User clicks the "Cancelled" tab.
+- **Expected:** The tab content area displays a message like "No cancelled trips."
+
+#### Test: Tabs are functional on repeated use
+- **Initial state:** User is logged in and on the My Trips page.
+- **Action:** User clicks "Past", then "Cancelled", then "Upcoming", then "Past" again.
+- **Expected:** Each click correctly updates the selected tab highlight and displays the correct set of bookings. The final state shows the "Past" tab selected with completed bookings displayed.
+
+### Component: TripCard
+
+#### Test: Trip card displays all required information
+- **Initial state:** User is logged in and on the My Trips page. A booking exists for property "Beach House" in "Malibu" with check_in "2026-05-01", check_out "2026-05-05", status "confirmed", and total_price $800. The property has an image.
+- **Expected:** The trip card displays: the property's main image, property title "Beach House", city "Malibu", dates "May 1 – May 5, 2026" (or similar formatted date range), a status badge showing "Confirmed" in green, and the total price "$800".
+
+#### Test: Trip card displays correct status badge colors
+- **Initial state:** User is logged in and on the My Trips page. Bookings exist with different statuses.
+- **Expected:** Status badges use the correct colors: "Pending" badge in yellow, "Confirmed" badge in green, "Cancelled" badge in red, "Completed" badge in blue.
+
+#### Test: Trip card shows property image or placeholder
+- **Initial state:** User is logged in and on the My Trips page. One booking has a property with images, another has a property with no images.
+- **Expected:** The trip card for the property with images shows the main property image. The trip card for the property without images shows a placeholder image.
+
+#### Test: Clicking trip card navigates to booking details
+- **Initial state:** User is logged in and on the My Trips page. A trip card is displayed for a booking with id "booking-123".
+- **Action:** User clicks on the trip card (not the cancel or review button).
+- **Expected:** The app navigates to a booking detail view showing full booking information including property details, dates, guest count, price breakdown, and special requests.
+
+#### Test: Cancel button appears on pending bookings
+- **Initial state:** User is logged in and on the "Upcoming" tab. A booking with status "pending" is displayed.
+- **Expected:** The trip card shows a "Cancel" button (or cancel icon button) that is clickable.
+
+#### Test: Cancel button appears on confirmed bookings
+- **Initial state:** User is logged in and on the "Upcoming" tab. A booking with status "confirmed" is displayed.
+- **Expected:** The trip card shows a "Cancel" button that is clickable.
+
+#### Test: Cancel button does not appear on completed bookings
+- **Initial state:** User is logged in and on the "Past" tab. A booking with status "completed" is displayed.
+- **Expected:** The trip card does not show a "Cancel" button.
+
+#### Test: Cancel button does not appear on already cancelled bookings
+- **Initial state:** User is logged in and on the "Cancelled" tab. A booking with status "cancelled" is displayed.
+- **Expected:** The trip card does not show a "Cancel" button.
+
+#### Test: Write Review button appears on completed bookings without a review
+- **Initial state:** User is logged in and on the "Past" tab. A booking with status "completed" exists that does not have an associated review.
+- **Expected:** The trip card shows a "Write Review" button that is clickable.
+
+#### Test: Write Review button does not appear on completed bookings that already have a review
+- **Initial state:** User is logged in and on the "Past" tab. A completed booking exists that already has an associated review.
+- **Expected:** The trip card does not show a "Write Review" button. Instead, it may show "Reviewed" text or a checkmark indicating a review was already submitted.
+
+#### Test: Clicking Write Review button navigates to review page
+- **Initial state:** User is logged in and on the "Past" tab. A completed booking with id "booking-456" has no review.
+- **Action:** User clicks the "Write Review" button on that trip card.
+- **Expected:** The app navigates to `/trips/booking-456/review` (the Write Review page).
+
+#### Test: Write Review button does not appear on pending, confirmed, or cancelled bookings
+- **Initial state:** User is logged in. Bookings exist with statuses "pending", "confirmed", and "cancelled".
+- **Expected:** None of these trip cards display a "Write Review" button. The button only appears for "completed" bookings.
+
+#### Test: Trip cards are ordered by check-in date
+- **Initial state:** User is logged in and on the "Upcoming" tab. Multiple upcoming bookings exist with different check-in dates.
+- **Expected:** Trip cards are displayed in chronological order by check-in date, with the soonest upcoming trip first.
+
+### Component: CancelBookingDialog
+
+#### Test: Clicking Cancel button opens confirmation dialog
+- **Initial state:** User is logged in and on the "Upcoming" tab. A booking with status "confirmed" is displayed with a "Cancel" button.
+- **Action:** User clicks the "Cancel" button on the trip card.
+- **Expected:** A confirmation dialog/modal appears asking the user to confirm the cancellation. The dialog displays text like "Are you sure you want to cancel this booking?" with the property name and dates for context. Two buttons are visible: "Confirm Cancel" (or "Yes, Cancel") and "Keep Booking" (or "No, Go Back").
+
+#### Test: Confirming cancellation updates booking status to cancelled
+- **Initial state:** The cancellation confirmation dialog is open for a confirmed booking.
+- **Action:** User clicks the "Confirm Cancel" (or "Yes, Cancel") button.
+- **Expected:** The app calls `PUT /api/bookings/:id` with status "cancelled". The dialog closes. The trip card is removed from the "Upcoming" tab (or its status badge updates to "Cancelled" in red). A success message is displayed (e.g., "Booking cancelled successfully"). The booking now appears in the "Cancelled" tab.
+
+#### Test: Dismissing cancellation dialog keeps booking unchanged
+- **Initial state:** The cancellation confirmation dialog is open for a pending booking.
+- **Action:** User clicks the "Keep Booking" (or "No, Go Back") button.
+- **Expected:** The dialog closes. The booking remains in its original status (pending). No API call is made. The trip card is unchanged.
+
+#### Test: Closing the dialog via overlay click keeps booking unchanged
+- **Initial state:** The cancellation confirmation dialog is open.
+- **Action:** User clicks outside the dialog (on the overlay/backdrop).
+- **Expected:** The dialog closes without making any changes to the booking.
+
+#### Test: Cancel dialog shows property and date context
+- **Initial state:** User clicks "Cancel" on a trip card for property "Mountain Cabin" with dates "June 10 – June 15, 2026".
+- **Expected:** The confirmation dialog displays the property name "Mountain Cabin" and the booking dates "June 10 – June 15, 2026" so the user can confirm they are cancelling the correct booking.
+
+#### Test: After cancellation, booking moves from Upcoming to Cancelled tab
+- **Initial state:** User is on the "Upcoming" tab with a confirmed booking for "Beach House".
+- **Action:** User clicks "Cancel" on the "Beach House" trip card, then confirms the cancellation in the dialog.
+- **Expected:** The "Beach House" trip card is removed from the "Upcoming" tab. User switches to the "Cancelled" tab and sees the "Beach House" booking with a red "Cancelled" status badge.
+
+#### Test: Cancel dialog is functional on repeated use
+- **Initial state:** User is on the "Upcoming" tab with two cancellable bookings.
+- **Action:** User clicks "Cancel" on the first booking, dismisses the dialog (clicks "Keep Booking"), then clicks "Cancel" on the second booking and confirms the cancellation.
+- **Expected:** The first booking remains unchanged in the "Upcoming" tab. The second booking is cancelled and moves to the "Cancelled" tab. Each dialog open/close cycle works correctly.
+
 ## Page: Host Dashboard (`/hosting`)
 
 <!-- Components: StatsOverview, ListingsTab, BookingsTab, AddListingForm -->
