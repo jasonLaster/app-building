@@ -205,6 +205,42 @@ test.describe('TripCard', () => {
     await expect(cancelBtn).toHaveCount(0)
   })
 
+  test('TripCard displays round-trip with return flight info', async ({ page }) => {
+    await setupSeedSession(page)
+
+    // Wait for upcoming list
+    await expect(page.getByTestId('trips-upcoming-list')).toBeVisible({ timeout: 15000 })
+
+    // Find the round-trip booking GF-SORT01 (LAX→JFK Mar 25, return Mar 30)
+    const card = findTripCardByRef(page, 'trips-upcoming-list', 'GF-SORT01')
+    await expect(card).toBeVisible({ timeout: 10000 })
+
+    // Verify route
+    const routeEl = card.locator('[data-testid^="trip-card-route-"]')
+    await expect(routeEl).toContainText('LAX')
+    await expect(routeEl).toContainText('JFK')
+    await expect(routeEl).toContainText('→')
+
+    // Verify both departure and return dates
+    const datesEl = card.locator('[data-testid^="trip-card-dates-"]')
+    await expect(datesEl).toContainText('Mar 25')
+    await expect(datesEl).toContainText('Mar 30')
+    await expect(datesEl).toContainText('–')
+
+    // Verify booking details are displayed
+    await expect(card).toContainText('American Airlines')
+    await expect(card).toContainText('AA960')
+
+    const priceEl = card.locator('[data-testid^="trip-card-price-"]')
+    await expect(priceEl).toContainText('$')
+
+    const statusEl = card.locator('[data-testid^="trip-card-status-"]')
+    await expect(statusEl).toHaveText('Confirmed')
+
+    const refEl = card.locator('[data-testid^="trip-card-ref-"]')
+    await expect(refEl).toHaveText('GF-SORT01')
+  })
+
   test('TripCard displays one-way trip correctly', async ({ page }) => {
     await setupSeedSession(page)
 

@@ -68,6 +68,14 @@ function TrackedRouteCard({ route, onUntrack, isUntracking }: TrackedRouteCardPr
             <span className="tracked-route-card__price-label">Lowest price</span>
             <span className="tracked-route-card__price-value">
               {formatPrice(route.lowest_price_cents)}
+              {route.price_trend_percent != null && route.price_trend_percent !== 0 && (
+                <span
+                  className={`tracked-route-card__trend ${route.price_trend_percent > 0 ? 'tracked-route-card__trend--up' : 'tracked-route-card__trend--down'}`}
+                  data-testid={`tracked-route-trend-${route.id}`}
+                >
+                  {route.price_trend_percent > 0 ? '↑' : '↓'} {route.price_trend_percent > 0 ? '+' : ''}{route.price_trend_percent}%
+                </span>
+              )}
             </span>
           </div>
         )}

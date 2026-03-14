@@ -391,8 +391,23 @@ export async function truncateAndSeed(databaseUrl: string) {
   }
 
   // Tracked routes
-  await sql`INSERT INTO tracked_routes (session_id, origin_airport_id, destination_airport_id, departure_date_start, departure_date_end, cabin_class)
-    VALUES (${sessionId}, ${laxId}, ${lhrId}, '2026-04-15', '2026-04-30', 'economy')`
+  const nrtId = airportMap.get('NRT')!
+  const cdgId = airportMap.get('CDG')!
+
+  // LAX→LHR: lowest economy price is AA800 = $599 base → 68885 total cents
+  // initial_price_cents = 61504 → trend = +12%
+  await sql`INSERT INTO tracked_routes (session_id, origin_airport_id, destination_airport_id, departure_date_start, departure_date_end, cabin_class, initial_price_cents)
+    VALUES (${sessionId}, ${laxId}, ${lhrId}, '2026-04-01', '2026-04-15', 'economy', 61504)`
+
+  // SFO→NRT: lowest economy price is UA800 = $749 base → 86135 total cents
+  // initial_price_cents = 93625 → trend = -8%
+  await sql`INSERT INTO tracked_routes (session_id, origin_airport_id, destination_airport_id, departure_date_start, departure_date_end, cabin_class, initial_price_cents)
+    VALUES (${sessionId}, ${sfoId}, ${nrtId}, '2026-04-10', '2026-04-25', 'economy', 93625)`
+
+  // JFK→CDG: lowest economy price is AF100 = $499 base → 57385 total cents
+  // initial_price_cents = 57385 → trend = 0% (no trend)
+  await sql`INSERT INTO tracked_routes (session_id, origin_airport_id, destination_airport_id, departure_date_start, departure_date_end, cabin_class, initial_price_cents)
+    VALUES (${sessionId}, ${jfkId}, ${cdgId}, '2026-05-01', '2026-05-15', 'economy', 57385)`
 }
 
 // CLI entry point

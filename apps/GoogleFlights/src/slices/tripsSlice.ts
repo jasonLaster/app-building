@@ -36,6 +36,7 @@ export interface TrackedRoute {
   dest_code: string
   dest_city: string
   lowest_price_cents: number | null
+  price_trend_percent: number | null
 }
 
 export type TripsTab = 'upcoming' | 'past' | 'tracked'

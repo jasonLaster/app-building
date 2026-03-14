@@ -113,3 +113,18 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.tracked-route-card__trend {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tracked-route-card__trend--up {
+  color: var(--color-error, #d32f2f);
+}
+
+.tracked-route-card__trend--down {
+  color: var(--color-success, #2e7d32);
+}

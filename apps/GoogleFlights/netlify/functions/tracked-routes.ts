@@ -30,11 +30,12 @@ export default async (request: Request, _context: Context) => {
       return Response.json({ tracked: result.length > 0, id: result[0]?.id || null })
     }
 
-    // Get all tracked routes with lowest current price
+    // Get all tracked routes with lowest current price and trend
     const routes = await sql`
       SELECT tr.id, tr.departure_date_start, tr.departure_date_end, tr.cabin_class, tr.created_at,
              oa.iata_code as origin_code, oa.city as origin_city,
              da.iata_code as dest_code, da.city as dest_city,
+             tr.initial_price_cents,
              (
                SELECT MIN(p.total_price_cents)
                FROM flights f2
@@ -49,7 +50,16 @@ export default async (request: Request, _context: Context) => {
       WHERE s.session_token = ${session}
       ORDER BY tr.created_at DESC
     `
-    return Response.json(routes)
+    const enriched = routes.map((r: Record<string, unknown>) => {
+      const lowest = r.lowest_price_cents as number | null
+      const initial = r.initial_price_cents as number | null
+      let price_trend_percent: number | null = null
+      if (initial && lowest && initial > 0) {
+        price_trend_percent = Math.round(((lowest - initial) / initial) * 100)
+      }
+      return { ...r, price_trend_percent }
+    })
+    return Response.json(enriched)
   }
 
   if (request.method === 'POST') {
@@ -86,12 +96,23 @@ export default async (request: Request, _context: Context) => {
       return Response.json({ error: 'Airport not found' }, { status: 400 })
     }
 
+    const cabinClass = body.cabinClass || 'economy'
+    // Compute initial lowest price at tracking time
+    const priceRows = await sql`
+      SELECT MIN(p.total_price_cents) as lowest
+      FROM flights f
+      JOIN prices p ON p.flight_id = f.id AND p.cabin_class = ${cabinClass}
+      WHERE f.origin_airport_id = ${originId}
+        AND f.destination_airport_id = ${destId}
+    `
+    const initialPrice = priceRows[0]?.lowest as number | null
+
     await sql`
       INSERT INTO tracked_routes (id, session_id, origin_airport_id, destination_airport_id,
-        departure_date_start, departure_date_end, cabin_class)
+        departure_date_start, departure_date_end, cabin_class, initial_price_cents)
       VALUES (gen_random_uuid(), ${sessionId}, ${originId}, ${destId},
         ${body.departureDateStart || null}, ${body.departureDateEnd || null},
-        ${body.cabinClass || 'economy'})
+        ${cabinClass}, ${initialPrice})
     `
 
     return Response.json({ success: true })

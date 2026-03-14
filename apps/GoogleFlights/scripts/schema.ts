@@ -136,6 +136,7 @@ export async function initSchema(databaseUrl: string) {
       departure_date_start DATE,
       departure_date_end DATE,
       cabin_class TEXT DEFAULT 'economy',
+      initial_price_cents INTEGER,
       created_at TIMESTAMP DEFAULT now()
     )
   `
