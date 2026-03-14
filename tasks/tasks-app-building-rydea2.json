@@ -3,18 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageTeamIssues: Decide on components, add sections to docs/tests.md",
-        "PlanComponentTeamIssuesList: Add test entries for TeamIssuesList",
-        "PlanComponentBulkActions: Add test entries for BulkActions",
-        "PlanComponentGroupBySort: Add test entries for GroupBySort",
-        "PlanComponentTeamFilters: Add test entries for TeamFilters"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageIssueDetail: Decide on components, add sections to docs/tests.md",
         "PlanComponentIssueHeader: Add test entries for IssueHeader",
         "PlanComponentIssueDescription: Add test entries for IssueDescription",
@@ -171,9 +159,11 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPageInbox: Decide on components, add sections to docs/tests.md",
-      "PlanComponentNotificationList: Add test entries for NotificationList",
-      "PlanComponentNotificationRow: Add test entries for NotificationRow"
+      "PlanPageTeamIssues: Decide on components, add sections to docs/tests.md",
+      "PlanComponentTeamIssuesList: Add test entries for TeamIssuesList",
+      "PlanComponentBulkActions: Add test entries for BulkActions",
+      "PlanComponentGroupBySort: Add test entries for GroupBySort",
+      "PlanComponentTeamFilters: Add test entries for TeamFilters"
     ],
     "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"

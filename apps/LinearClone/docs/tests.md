@@ -592,7 +592,345 @@
 
 ## Team Issues Page (`/team/:teamId/issues`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: TeamIssuesList, BulkActions, GroupBySort, TeamFilters
+
+### TeamIssuesList
+
+#### Test: Team Issues page renders with header showing team name
+- **Initial state**: User is authenticated, navigates to `/team/eng-1/issues` for team "Engineering"
+- **Expected**: The page displays a header with the team name "Engineering" and an "Issues" label. A "New Issue" button is visible in the header area.
+
+#### Test: Team Issues page shows issues grouped by status (default)
+- **Initial state**: User is authenticated, "Engineering" team has issues in Backlog (3), In Progress (2), Done (1)
+- **Expected**: Issues are grouped under status headers. Each group header shows the status icon, status name, and issue count in parentheses. Groups appear in status order: Backlog, Todo, In Progress, In Review, Done, Cancelled. Empty status groups are not displayed.
+
+#### Test: Team Issues page shows all team issues, not just current user's
+- **Initial state**: User "Alice" is authenticated, "Engineering" team has issues: ENG-1 (assigned to Alice), ENG-2 (assigned to Bob), ENG-3 (unassigned)
+- **Expected**: All three issues (ENG-1, ENG-2, ENG-3) are visible on the team issues page.
+
+#### Test: Team Issues page shows empty state when team has no issues
+- **Initial state**: User is authenticated, "Engineering" team has no issues
+- **Expected**: A friendly empty state message with an icon is displayed (e.g., "No issues yet. Create your first issue to get started.") and the "New Issue" button is visible.
+
+#### Test: Issue row displays all required fields including checkbox and team prefix
+- **Initial state**: User is authenticated, viewing team issues. Issue ENG-42 exists with title "Fix login bug", status "In Progress", priority "High", labels ["Bug"], assignee "Jane Doe" (with avatar), due date "2026-03-20", project "Auth Rewrite".
+- **Expected**: The issue row displays: a checkbox for bulk selection (unchecked), High priority icon (orange arrow-up), identifier "ENG-42" with team prefix, title "Fix login bug", In Progress status icon (yellow half circle), "Bug" label as a small colored badge, assignee avatar, due date "Mar 20", and project name "Auth Rewrite".
+
+#### Test: Issue row title is clickable and navigates to issue detail
+- **Initial state**: User is authenticated, viewing team issues with issue ENG-42
+- **Action**: User clicks on the title "Fix login bug" in the issue row
+- **Expected**: User is navigated to `/issue/<issueId>` for issue ENG-42.
+
+#### Test: Issue row status icon is clickable to change status
+- **Initial state**: User is authenticated, viewing team issues. Issue ENG-42 has status "Todo".
+- **Action**: User clicks the status icon on the ENG-42 issue row
+- **Expected**: A dropdown/popover appears showing all available statuses (Backlog, Todo, In Progress, In Review, Done, Cancelled) with their respective icons and colors.
+
+#### Test: Changing status via issue row status dropdown persists and moves issue between groups
+- **Initial state**: User is authenticated, viewing team issues grouped by status. "Todo" group has ENG-42. "In Progress" group has 1 issue.
+- **Action**: User clicks the status icon on ENG-42, selects "In Progress" from the dropdown
+- **Expected**: The dropdown closes. ENG-42 moves from the "Todo" group to the "In Progress" group. Group counts update accordingly. The change is persisted to the database.
+
+#### Test: Issue row status dropdown can be used multiple times
+- **Initial state**: User is authenticated, issue ENG-42 has status "Todo"
+- **Action**: User clicks status icon, changes to "In Progress", then clicks status icon again, changes to "Done"
+- **Expected**: Both status changes work correctly. The issue ends up in the "Done" group with a green check circle icon. Each dropdown opens and closes cleanly.
+
+#### Test: Status group headers are collapsible
+- **Initial state**: User is authenticated, "In Progress" group is expanded with 2 issues
+- **Action**: User clicks the "In Progress" group header
+- **Expected**: The group collapses, hiding all issues within it. The group header remains visible with a collapse indicator (e.g., chevron rotates). Clicking again expands the group back.
+
+#### Test: Status group collapse toggles multiple times
+- **Initial state**: User is authenticated, "Backlog" group is expanded with 3 issues
+- **Action**: User clicks the "Backlog" header to collapse, clicks it again to expand, then collapses once more
+- **Expected**: Each click toggles correctly. After three clicks, the group is collapsed and its issues are hidden. The count in parentheses remains accurate.
+
+#### Test: Multiple status groups can be independently collapsed
+- **Initial state**: User is authenticated, has issues in Backlog, In Progress, and Done groups, all expanded
+- **Action**: User collapses the "Backlog" group, then collapses the "Done" group
+- **Expected**: "Backlog" and "Done" groups are collapsed while "In Progress" remains expanded showing its issues.
+
+#### Test: Issue row displays priority icon with correct color
+- **Initial state**: User is authenticated, viewing team issues with issues at different priorities
+- **Expected**: Urgent shows red alert-triangle icon, High shows orange arrow-up, Medium shows yellow minus, Low shows blue arrow-down, No Priority shows gray dots-horizontal.
+
+#### Test: Issue row displays labels as colored badges
+- **Initial state**: User is authenticated, issue ENG-42 has labels "Bug" (red) and "Frontend" (blue)
+- **Expected**: Both labels are shown as small colored badges in the issue row, each with the label's color and name text.
+
+#### Test: Issue row shows assignee avatar
+- **Initial state**: User is authenticated, issue ENG-42 is assigned to "Jane Doe" who has an avatar
+- **Expected**: The issue row shows Jane Doe's avatar as a small circular image. If no avatar, shows initials.
+
+#### Test: Issue row hides optional fields when not set
+- **Initial state**: User is authenticated, issue ENG-43 has no labels, no due date, no project, no assignee
+- **Expected**: The issue row does not show empty placeholders for labels, due date, project, or assignee. Only the present fields (checkbox, priority, identifier, title, status) are shown.
+
+#### Test: New Issue button opens create issue modal with team pre-selected
+- **Initial state**: User is authenticated, viewing `/team/eng-1/issues` for team "Engineering"
+- **Action**: User clicks the "New Issue" button
+- **Expected**: The create issue modal opens with the team selector pre-set to "Engineering". The title field is focused.
+
+#### Test: New Issue button text and icon appearance
+- **Initial state**: User is authenticated, viewing team issues page
+- **Expected**: The "New Issue" button is visible with text "New Issue" and displays appropriately (e.g., with a plus icon). The button uses the primary accent style.
+
+#### Test: Newly created issue appears in the list
+- **Initial state**: User is authenticated, viewing team issues for "Engineering" with 3 issues
+- **Action**: User clicks "New Issue", fills in the title "New feature request" with status "Backlog", and submits the form
+- **Expected**: The modal closes. The new issue appears in the "Backlog" group with the next sequential identifier (e.g., ENG-44). The group count updates.
+
+### BulkActions
+
+#### Test: Issue row checkboxes are visible and unchecked by default
+- **Initial state**: User is authenticated, viewing team issues with 5 issues
+- **Expected**: Each issue row has a checkbox on the left side. All checkboxes are unchecked by default.
+
+#### Test: Clicking a checkbox selects an issue
+- **Initial state**: User is authenticated, viewing team issues with ENG-42 unchecked
+- **Action**: User clicks the checkbox on ENG-42
+- **Expected**: The checkbox becomes checked. The issue row has a selected visual style (e.g., highlighted background). A bulk action toolbar appears at the top or bottom of the list.
+
+#### Test: Clicking a checked checkbox deselects the issue
+- **Initial state**: User is authenticated, ENG-42 checkbox is checked, bulk action toolbar is visible
+- **Action**: User clicks the checkbox on ENG-42 again
+- **Expected**: The checkbox becomes unchecked. The selected visual style is removed from the row. If no other issues are selected, the bulk action toolbar disappears.
+
+#### Test: Multiple issues can be selected via checkboxes
+- **Initial state**: User is authenticated, viewing team issues with ENG-42, ENG-43, ENG-44
+- **Action**: User clicks checkboxes on ENG-42 and ENG-44
+- **Expected**: Both ENG-42 and ENG-44 are checked with selected visual style. ENG-43 remains unchecked. The bulk action toolbar shows "2 selected" or similar count indicator.
+
+#### Test: Bulk action toolbar appears when issues are selected
+- **Initial state**: User is authenticated, no issues selected, no bulk action toolbar visible
+- **Action**: User clicks the checkbox on ENG-42
+- **Expected**: A bulk action toolbar appears showing the selection count ("1 selected") and action buttons for: Status change, Priority change, Assignee change, and Label change.
+
+#### Test: Bulk action toolbar disappears when all issues are deselected
+- **Initial state**: User is authenticated, ENG-42 is selected, bulk action toolbar is visible
+- **Action**: User unchecks ENG-42
+- **Expected**: The bulk action toolbar disappears. No action buttons are visible.
+
+#### Test: Bulk status change updates all selected issues
+- **Initial state**: User is authenticated, ENG-42 (status "Todo") and ENG-43 (status "Backlog") are selected via checkboxes
+- **Action**: User clicks the "Status" action in the bulk toolbar, selects "In Progress" from the dropdown
+- **Expected**: Both ENG-42 and ENG-43 are updated to "In Progress" status. They move to the "In Progress" group. The changes are persisted to the database. The checkboxes are deselected and the bulk toolbar disappears.
+
+#### Test: Bulk priority change updates all selected issues
+- **Initial state**: User is authenticated, ENG-42 (priority "Low") and ENG-43 (priority "Medium") are selected
+- **Action**: User clicks the "Priority" action in the bulk toolbar, selects "High" from the dropdown
+- **Expected**: Both issues are updated to "High" priority. The priority icons change to orange arrow-up on both rows. Changes are persisted to the database.
+
+#### Test: Bulk assignee change updates all selected issues
+- **Initial state**: User is authenticated, ENG-42 (assigned to Alice) and ENG-43 (unassigned) are selected
+- **Action**: User clicks the "Assignee" action in the bulk toolbar, selects "Bob" from the member selector
+- **Expected**: Both issues are now assigned to Bob. The assignee avatars update on both rows. Changes are persisted to the database.
+
+#### Test: Bulk label change updates all selected issues
+- **Initial state**: User is authenticated, ENG-42 (no labels) and ENG-43 (label "Bug") are selected
+- **Action**: User clicks the "Label" action in the bulk toolbar, selects "Feature" from the label picker
+- **Expected**: Both issues now have the "Feature" label. ENG-43 retains its existing "Bug" label and also gains "Feature". Label badges update on both rows. Changes are persisted.
+
+#### Test: Bulk actions can be performed multiple times in sequence
+- **Initial state**: User is authenticated, viewing team issues with multiple issues
+- **Action**: User selects ENG-42 and ENG-43, bulk-changes status to "In Progress", then selects ENG-44 and ENG-45, bulk-changes priority to "High"
+- **Expected**: Both bulk actions complete successfully. The first pair is in "In Progress" status, the second pair has "High" priority. The bulk toolbar appears and disappears correctly each time.
+
+#### Test: Select all checkbox in group header selects all issues in that group
+- **Initial state**: User is authenticated, "Backlog" group has 3 issues, none selected
+- **Action**: User clicks a "select all" checkbox in the "Backlog" group header
+- **Expected**: All 3 issues in the Backlog group are selected (checkboxes checked, selected visual style). The bulk toolbar shows "3 selected". Issues in other groups remain unselected.
+
+#### Test: Deselect all via group header checkbox
+- **Initial state**: User is authenticated, all 3 issues in "Backlog" group are selected via group header checkbox
+- **Action**: User clicks the group header checkbox again
+- **Expected**: All 3 issues are deselected. If no other issues are selected, the bulk toolbar disappears.
+
+### GroupBySort
+
+#### Test: Group by control renders with default "Status" selected
+- **Initial state**: User is authenticated, viewing team issues page
+- **Expected**: A "Group by" control/dropdown is visible in the toolbar area. It shows "Status" as the currently selected grouping option.
+
+#### Test: Group by dropdown shows all grouping options
+- **Initial state**: User is authenticated, viewing team issues page
+- **Action**: User clicks the "Group by" control
+- **Expected**: A dropdown opens showing options: Status, Priority, Assignee, Project, Label, None. Each option is clickable.
+
+#### Test: Group by Priority groups issues under priority headers
+- **Initial state**: User is authenticated, team has issues with priorities: Urgent (1), High (2), Medium (1), Low (1), No Priority (1)
+- **Action**: User selects "Priority" from the Group by dropdown
+- **Expected**: Issues are regrouped under priority headers: Urgent, High, Medium, Low, No Priority. Each header shows the priority icon, name, and count. Empty priority groups are not shown.
+
+#### Test: Group by Assignee groups issues under assignee headers
+- **Initial state**: User is authenticated, team has issues assigned to Alice (2), Bob (1), and unassigned (1)
+- **Action**: User selects "Assignee" from the Group by dropdown
+- **Expected**: Issues are grouped under assignee name headers with their avatars. An "Unassigned" group shows issues with no assignee. Each header shows the assignee avatar, name, and issue count.
+
+#### Test: Group by Project groups issues under project headers
+- **Initial state**: User is authenticated, team has issues in project "Auth Rewrite" (2), "Dashboard v2" (1), and no project (1)
+- **Action**: User selects "Project" from the Group by dropdown
+- **Expected**: Issues are grouped under project name headers. A "No Project" group shows unassigned issues. Each header shows the project name and issue count.
+
+#### Test: Group by Label groups issues under label headers
+- **Initial state**: User is authenticated, team has issues with labels "Bug" (2), "Feature" (1), and no labels (1)
+- **Action**: User selects "Label" from the Group by dropdown
+- **Expected**: Issues are grouped under label name headers with colored dots. A "No Label" group shows unlabeled issues. Issues with multiple labels appear under each applicable label group.
+
+#### Test: Group by None shows a flat list
+- **Initial state**: User is authenticated, team has 6 issues in various statuses
+- **Action**: User selects "None" from the Group by dropdown
+- **Expected**: All issues are displayed in a flat list without any group headers. Issues are shown in the current sort order.
+
+#### Test: Switching group by option re-renders immediately
+- **Initial state**: User is authenticated, issues are grouped by Status
+- **Action**: User changes Group by from "Status" to "Priority"
+- **Expected**: The issue list immediately re-renders with priority-based grouping. No page reload is needed. The transition is smooth.
+
+#### Test: Group by can be changed multiple times
+- **Initial state**: User is authenticated, viewing team issues
+- **Action**: User selects "Priority" grouping, then "Assignee", then back to "Status"
+- **Expected**: Each change correctly re-groups the issues. After returning to "Status", the view matches the original default grouping.
+
+#### Test: Sort by control renders with default option
+- **Initial state**: User is authenticated, viewing team issues page
+- **Expected**: A "Sort by" control/dropdown is visible in the toolbar area, showing the current sort option.
+
+#### Test: Sort by dropdown shows all sorting options
+- **Initial state**: User is authenticated, viewing team issues page
+- **Action**: User clicks the "Sort by" control
+- **Expected**: A dropdown opens showing options: Priority, Created date, Updated date, Status. Each option is clickable.
+
+#### Test: Sort by Priority orders issues by priority level
+- **Initial state**: User is authenticated, team has issues with mixed priorities within status groups
+- **Action**: User selects "Priority" from the Sort by dropdown
+- **Expected**: Within each group, issues are ordered by priority: Urgent first, then High, Medium, Low, No Priority last.
+
+#### Test: Sort by Created date orders issues by creation time
+- **Initial state**: User is authenticated, team has issues created at different times
+- **Action**: User selects "Created date" from the Sort by dropdown
+- **Expected**: Within each group, issues are ordered by creation date (newest first).
+
+#### Test: Sort by Updated date orders issues by last update time
+- **Initial state**: User is authenticated, team has issues updated at different times
+- **Action**: User selects "Updated date" from the Sort by dropdown
+- **Expected**: Within each group, issues are ordered by last update time (most recently updated first).
+
+#### Test: Sort by Status orders issues by status progression
+- **Initial state**: User is authenticated, group by is set to "None" (flat list)
+- **Action**: User selects "Status" from the Sort by dropdown
+- **Expected**: Issues are ordered by status progression: Backlog, Todo, In Progress, In Review, Done, Cancelled.
+
+#### Test: Sort works correctly within groups
+- **Initial state**: User is authenticated, grouped by Status, "In Progress" group has 3 issues with different priorities
+- **Action**: User selects "Priority" from Sort by
+- **Expected**: The 3 issues within the "In Progress" group are reordered by priority (Urgent first, No Priority last). Other groups are similarly sorted.
+
+#### Test: Sort by can be changed multiple times
+- **Initial state**: User is authenticated, viewing team issues
+- **Action**: User sorts by "Priority", then by "Created date", then by "Updated date"
+- **Expected**: Each sort change correctly reorders issues within their groups. The sort control updates to reflect the current selection.
+
+### TeamFilters
+
+#### Test: Team filters toolbar renders with all filter options
+- **Initial state**: User is authenticated, viewing `/team/eng-1/issues`
+- **Expected**: A toolbar at the top of the issue list displays filter controls: "Status", "Priority", "Assignee", "Label", "Project", and "Cycle" filters. Each shows as a button/chip that can be clicked to open a dropdown.
+
+#### Test: Status filter dropdown shows all statuses with icons
+- **Initial state**: User is authenticated, viewing team issues
+- **Action**: User clicks the "Status" filter button
+- **Expected**: A multi-select dropdown opens showing all statuses: Backlog (dotted circle, gray), Todo (circle, gray), In Progress (half circle, yellow), In Review (three-quarter circle, blue), Done (check circle, green), Cancelled (x-circle, red). Each option has a checkbox.
+
+#### Test: Status filter filters issues by selected statuses
+- **Initial state**: User is authenticated, team has issues in Backlog (3), In Progress (2), Done (1)
+- **Action**: User opens the Status filter and selects only "In Progress"
+- **Expected**: Only the "In Progress" group is displayed with its 2 issues. Backlog and Done groups are hidden. The Status filter button shows a visual indicator that a filter is active.
+
+#### Test: Priority filter dropdown shows all priorities with icons
+- **Initial state**: User is authenticated, viewing team issues
+- **Action**: User clicks the "Priority" filter button
+- **Expected**: A multi-select dropdown opens showing: Urgent (alert-triangle, red), High (arrow-up, orange), Medium (minus, yellow), Low (arrow-down, blue), No Priority (dots-horizontal, gray). Each option has a checkbox.
+
+#### Test: Priority filter filters issues by selected priorities
+- **Initial state**: User is authenticated, team has issues with priorities High (2), Medium (1), Low (1)
+- **Action**: User opens Priority filter and selects "High"
+- **Expected**: Only issues with High priority are displayed across all status groups. Issues with Medium and Low priority are hidden.
+
+#### Test: Assignee filter dropdown shows all team members
+- **Initial state**: User is authenticated, team "Engineering" has members Alice, Bob, and Charlie
+- **Action**: User clicks the "Assignee" filter button
+- **Expected**: A multi-select dropdown opens showing all team members with their avatars and names: Alice, Bob, Charlie, and an "Unassigned" option. Each option has a checkbox.
+
+#### Test: Assignee filter filters issues by selected assignees
+- **Initial state**: User is authenticated, team has issues: ENG-1 (Alice), ENG-2 (Bob), ENG-3 (Alice), ENG-4 (unassigned)
+- **Action**: User opens Assignee filter and selects "Alice"
+- **Expected**: Only issues assigned to Alice are shown (ENG-1 and ENG-3). Issues assigned to Bob and unassigned issues are hidden.
+
+#### Test: Label filter dropdown shows all available labels
+- **Initial state**: User is authenticated, workspace has labels "Bug" (red), "Feature" (green), "Improvement" (blue)
+- **Action**: User clicks the "Label" filter button
+- **Expected**: A multi-select dropdown opens showing all workspace labels with their colored dots and names. Each option has a checkbox.
+
+#### Test: Label filter filters issues by selected labels
+- **Initial state**: User is authenticated, team has issues: ENG-1 (labeled "Bug"), ENG-2 (labeled "Feature"), ENG-3 (labeled "Bug", "Feature")
+- **Action**: User opens Label filter and selects "Bug"
+- **Expected**: Only issues with the "Bug" label are shown (ENG-1 and ENG-3). ENG-2 is hidden.
+
+#### Test: Project filter dropdown shows all team projects
+- **Initial state**: User is authenticated, team has projects "Auth Rewrite" and "Dashboard v2"
+- **Action**: User clicks the "Project" filter button
+- **Expected**: A multi-select dropdown opens showing "Auth Rewrite", "Dashboard v2", and a "No Project" option. Each has a checkbox.
+
+#### Test: Project filter filters issues by selected projects
+- **Initial state**: User is authenticated, team has issues: ENG-1 (project "Auth Rewrite"), ENG-2 (project "Dashboard v2"), ENG-3 (no project)
+- **Action**: User opens Project filter and selects "Auth Rewrite"
+- **Expected**: Only ENG-1 is shown. ENG-2 and ENG-3 are hidden.
+
+#### Test: Cycle filter dropdown shows team cycles
+- **Initial state**: User is authenticated, team has cycles "Sprint 1" (active), "Sprint 2" (upcoming)
+- **Action**: User clicks the "Cycle" filter button
+- **Expected**: A multi-select dropdown opens showing "Sprint 1", "Sprint 2", and a "No Cycle" option. The active cycle is visually indicated. Each option has a checkbox.
+
+#### Test: Cycle filter filters issues by selected cycle
+- **Initial state**: User is authenticated, team has issues: ENG-1 (in "Sprint 1"), ENG-2 (in "Sprint 1"), ENG-3 (no cycle)
+- **Action**: User opens Cycle filter and selects "Sprint 1"
+- **Expected**: Only issues in Sprint 1 are shown (ENG-1 and ENG-2). ENG-3 is hidden.
+
+#### Test: Multiple filters combine with AND logic
+- **Initial state**: User is authenticated, team has issues: ENG-1 (High priority, Bug label, In Progress), ENG-2 (High priority, Feature label, In Progress), ENG-3 (Low priority, Bug label, Backlog)
+- **Action**: User selects "High" in Priority filter and "Bug" in Label filter
+- **Expected**: Only ENG-1 is shown (matches both High priority AND Bug label). ENG-2 and ENG-3 are hidden.
+
+#### Test: Clearing a filter restores all issues
+- **Initial state**: User has Status filter set to "In Progress" only, showing 2 issues out of 6 total
+- **Action**: User opens Status filter and deselects "In Progress" (or clicks a "Clear" option)
+- **Expected**: All 6 issues are shown again across all status groups, same as the unfiltered view.
+
+#### Test: Filter state shows active filter indicators
+- **Initial state**: User is authenticated, no filters applied
+- **Action**: User selects "High" in Priority filter
+- **Expected**: The Priority filter button shows a visual indicator that it is active (e.g., highlighted background, badge showing "1", or different styling). Other filter buttons remain in their default/inactive state.
+
+#### Test: Filters can be used repeatedly after clearing
+- **Initial state**: User is authenticated with multiple issues at various statuses and priorities
+- **Action**: User applies Priority filter for "High", clears it, then applies Assignee filter for "Alice", clears it, then applies Status filter for "Done"
+- **Expected**: Each filter application and clearing works correctly. After the final action, only "Done" issues are shown. All filter controls remain responsive and functional through multiple interactions.
+
+#### Test: Filters work correctly with grouping options
+- **Initial state**: User is authenticated, issues grouped by Priority, Assignee filter set to "Alice"
+- **Expected**: Only Alice's issues are shown, grouped under their respective priority headers. Empty priority groups (where Alice has no issues) are not displayed.
+
+#### Test: Filters persist while navigating within the page
+- **Initial state**: User has Status filter set to "In Progress", viewing filtered results
+- **Action**: User clicks an issue title to view detail, then navigates back to `/team/eng-1/issues`
+- **Expected**: The filters are still applied showing only "In Progress" issues. The filter state is preserved across navigation.
+
+#### Test: Assignee filter allows multi-select
+- **Initial state**: User is authenticated, team has issues assigned to Alice (2), Bob (1), Charlie (1)
+- **Action**: User opens Assignee filter, checks "Alice" and "Bob"
+- **Expected**: Issues assigned to Alice and Bob are shown. Charlie's issues are hidden. The filter button indicates 2 assignees selected.
 
 ## Issue Detail Page (`/issue/:issueId`)
 
