@@ -352,6 +352,108 @@ test.describe('CreateIssueModalActions', () => {
     await expect(activityEntries).toHaveCount(1, { timeout: 30000 });
   });
 
+  test('Create Issue button is disabled during submission', async ({ page, baseURL }) => {
+    test.slow();
+    await loginAndOpenCreateModal(page, baseURL!);
+
+    const uniqueTitle = `Disabled btn test ${Date.now()}`;
+    await page.getByTestId('create-issue-title-input').fill(uniqueTitle);
+
+    const submitBtn = page.getByTestId('create-issue-submit-btn');
+
+    // Click Create Issue
+    await submitBtn.click();
+
+    // The button should become disabled while submitting
+    await expect(submitBtn).toBeDisabled({ timeout: 10000 });
+    await expect(submitBtn).toContainText('Creating...');
+
+    // After submission completes, wait for success or the modal to close
+    await expect(page.getByTestId('create-issue-success')).toBeVisible({ timeout: 30000 });
+    await expect(page.getByTestId('create-issue-modal')).toHaveCount(0, { timeout: 30000 });
+  });
+
+  test('Clicking outside the modal closes it', async ({ page, baseURL }) => {
+    await loginAndOpenCreateModal(page, baseURL!);
+
+    // Click on the overlay (outside the modal)
+    const overlay = page.getByTestId('create-issue-modal-overlay');
+    // Click the overlay at position near the edge to ensure it's outside the modal
+    await overlay.click({ position: { x: 10, y: 10 } });
+
+    // Verify the modal closes without creating an issue
+    await expect(page.getByTestId('create-issue-modal')).toHaveCount(0, { timeout: 10000 });
+
+    // Verify we're still on the team issues page
+    await expect(page.getByTestId('team-issues-page')).toBeVisible();
+  });
+
+  test('Pressing Escape closes the modal', async ({ page, baseURL }) => {
+    await loginAndOpenCreateModal(page, baseURL!);
+
+    // Press the Escape key
+    await page.keyboard.press('Escape');
+
+    // Verify the modal closes without creating an issue
+    await expect(page.getByTestId('create-issue-modal')).toHaveCount(0, { timeout: 10000 });
+
+    // Verify we're still on the team issues page
+    await expect(page.getByTestId('team-issues-page')).toBeVisible();
+  });
+
+  test('Creating multiple issues in sequence works correctly', async ({ page, baseURL }) => {
+    test.slow();
+    const { token, team } = await loginAndNavigateToTeamIssues(page, baseURL!);
+
+    const firstTitle = `First task ${Date.now()}`;
+    const secondTitle = `Second task ${Date.now()}`;
+
+    // Create first issue
+    await page.getByTestId('new-issue-btn').click();
+    await expect(page.getByTestId('create-issue-modal')).toBeVisible({ timeout: 30000 });
+    await page.getByTestId('create-issue-title-input').fill(firstTitle);
+    await page.getByTestId('create-issue-submit-btn').click();
+
+    // Wait for success and capture identifier
+    await expect(page.getByTestId('create-issue-success')).toBeVisible({ timeout: 30000 });
+    const firstSuccessText = await page.getByTestId('create-issue-success').textContent();
+    const firstIdentifierMatch = firstSuccessText?.match(/(ENG-\d+)/);
+    const firstIdentifier = firstIdentifierMatch ? firstIdentifierMatch[1] : '';
+    expect(firstIdentifier).toBeTruthy();
+
+    // Wait for modal to close
+    await expect(page.getByTestId('create-issue-modal')).toHaveCount(0, { timeout: 30000 });
+
+    // Create second issue
+    await page.getByTestId('new-issue-btn').click();
+    await expect(page.getByTestId('create-issue-modal')).toBeVisible({ timeout: 30000 });
+
+    // Verify the modal has reset - title should be empty
+    await expect(page.getByTestId('create-issue-title-input')).toHaveValue('');
+
+    await page.getByTestId('create-issue-title-input').fill(secondTitle);
+    await page.getByTestId('create-issue-submit-btn').click();
+
+    // Wait for success and capture identifier
+    await expect(page.getByTestId('create-issue-success')).toBeVisible({ timeout: 30000 });
+    const secondSuccessText = await page.getByTestId('create-issue-success').textContent();
+    const secondIdentifierMatch = secondSuccessText?.match(/(ENG-\d+)/);
+    const secondIdentifier = secondIdentifierMatch ? secondIdentifierMatch[1] : '';
+    expect(secondIdentifier).toBeTruthy();
+
+    // Verify sequential identifiers
+    const firstNum = parseInt(firstIdentifier.replace('ENG-', ''));
+    const secondNum = parseInt(secondIdentifier.replace('ENG-', ''));
+    expect(secondNum).toBe(firstNum + 1);
+
+    // Wait for modal to close
+    await expect(page.getByTestId('create-issue-modal')).toHaveCount(0, { timeout: 30000 });
+
+    // Verify both issues appear in the team issues list
+    await expect(page.getByTestId('team-issues-list')).toContainText(firstTitle, { timeout: 30000 });
+    await expect(page.getByTestId('team-issues-list')).toContainText(secondTitle, { timeout: 30000 });
+  });
+
   test('Created issue generates inbox notification for assignee', async ({ page, baseURL }) => {
     test.slow();
 

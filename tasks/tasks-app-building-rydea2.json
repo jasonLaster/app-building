@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestCreateButtonDisabledDuringSubmit: Write test for Create Issue button is disabled during submission",
-        "WriteTestClickOutsideClosesModal: Write test for Clicking outside the modal closes it",
-        "WriteTestEscapeClosesModal: Write test for Pressing Escape closes the modal",
-        "WriteTestCreateMultipleInSequence: Write test for Creating multiple issues in sequence works correctly"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestCycleListRenders: Write test for Cycle list renders all team cycles with name, date range, progress bar, and issue count",
         "WriteTestActiveCycleHighlighted: Write test for Active cycle is visually highlighted in the list",
         "WriteTestClickCycleNavigates: Write test for Clicking a cycle navigates to cycle detail view",
@@ -407,26 +396,10 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestCycleDropdownShowsCycles: Write test for Cycle dropdown shows team's available cycles",
-      "WriteTestCycleDropdownSelect: Write test for Cycle dropdown allows selecting a cycle",
-      "WriteTestCycleDropdownUpdatesOnTeamChange: Write test for Cycle dropdown updates when team is changed",
-      "WriteTestDueDatePicker: Write test for Due date picker allows selecting a date",
-      "WriteTestDueDateClear: Write test for Due date picker allows clearing the date",
-      "WriteTestParentIssueSearchable: Write test for Parent issue selector is searchable",
-      "WriteTestParentIssueSelect: Write test for Parent issue selector allows selecting a parent",
-      "WriteTestAssigneeMultipleTimes: Write test for Assignee selector can be used multiple times",
-      "WriteTestLabelsMultipleTimes: Write test for Labels selector can be used multiple times in sequence",
-      "WriteTestStatusMultipleTimes: Write test for Status dropdown can be changed multiple times",
-      "WriteTestCreateButtonVisible: Write test for Create Issue button is visible and styled",
-      "WriteTestCancelButtonVisible: Write test for Cancel button is visible",
-      "WriteTestCancelClosesModal: Write test for Cancel button closes the modal",
-      "WriteTestCancelDiscardsData: Write test for Cancel button discards form data",
-      "WriteTestCreateSubmitsAllFields: Write test for Create Issue button submits the form with all fields",
-      "WriteTestCreateRequiredFieldsOnly: Write test for Create Issue with only required fields",
-      "WriteTestCreatedIssueAppearsInList: Write test for Created issue appears in the team issues list",
-      "WriteTestCreatedIssueParentSubIssue: Write test for Created issue with parent appears as sub-issue",
-      "WriteTestCreatedIssueActivityEntry: Write test for Created issue generates activity history entry",
-      "WriteTestCreatedIssueInboxNotification: Write test for Created issue generates inbox notification for assignee"
+      "WriteTestCreateButtonDisabledDuringSubmit: Write test for Create Issue button is disabled during submission",
+      "WriteTestClickOutsideClosesModal: Write test for Clicking outside the modal closes it",
+      "WriteTestEscapeClosesModal: Write test for Pressing Escape closes the modal",
+      "WriteTestCreateMultipleInSequence: Write test for Creating multiple issues in sequence works correctly"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
