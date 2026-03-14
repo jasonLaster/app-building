@@ -1,0 +1,126 @@
+.filters-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.filters-toolbar-filter {
+  position: relative;
+}
+
+.filters-toolbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  white-space: nowrap;
+}
+
+.filters-toolbar-btn:hover {
+  background-color: var(--color-bg-surface);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-text-primary);
+}
+
+.filters-toolbar-btn-active {
+  background-color: rgba(94, 106, 210, 0.1);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filters-toolbar-btn-active:hover {
+  background-color: rgba(94, 106, 210, 0.15);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filters-toolbar-badge {
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0 5px;
+  border-radius: 8px;
+  min-width: 16px;
+  text-align: center;
+  line-height: 16px;
+}
+
+.filters-toolbar-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 50;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 4px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.filters-toolbar-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.filters-toolbar-option:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.filters-toolbar-option-checked {
+  color: var(--color-text-primary);
+}
+
+.filters-toolbar-checkbox {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.filters-toolbar-option-checked .filters-toolbar-checkbox {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.filters-toolbar-label-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.filters-toolbar-empty {
+  padding: 8px 12px;
+  color: var(--color-text-tertiary);
+  font-size: 12px;
+}

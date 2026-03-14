@@ -1,0 +1,82 @@
+.my-issues-list-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+.my-issues-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+  gap: 12px;
+}
+
+.my-issues-list-empty p {
+  margin: 0;
+}
+
+.my-issues-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-issues-group {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.my-issues-group:last-child {
+  border-bottom: none;
+}
+
+.my-issues-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.my-issues-group-header:hover {
+  background-color: var(--color-bg-surface);
+}
+
+.my-issues-group-chevron {
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  opacity: 0.5;
+}
+
+.my-issues-group-chevron-expanded {
+  transform: rotate(90deg);
+}
+
+.my-issues-group-label {
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.my-issues-group-count {
+  color: var(--color-text-tertiary);
+  font-weight: 400;
+}
+
+.my-issues-group-items {
+  border-top: 1px solid var(--color-border);
+}
