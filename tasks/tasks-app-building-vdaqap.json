@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/cabin-class-selector.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:03:06.948Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/cancel-booking-modal.spec.ts"
       ],
       "timestamp": "2026-03-14T21:03:06.948Z",
@@ -204,7 +196,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/booking-action.spec.ts"
+      "FixTests: tests/cabin-class-selector.spec.ts"
     ],
     "timestamp": "2026-03-14T21:03:06.948Z",
     "app": "GoogleFlights"
