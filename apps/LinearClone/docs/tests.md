@@ -327,7 +327,166 @@
 
 ## My Issues Page (`/my-issues`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: MyIssuesList, IssueRow, FiltersToolbar
+
+### MyIssuesList
+
+#### Test: My Issues page renders with issues grouped by status
+- **Initial state**: User is authenticated, has issues assigned in statuses: Backlog (2 issues), In Progress (1 issue), Done (1 issue)
+- **Expected**: The page displays issues grouped under status headers. Each group header shows the status icon, status name, and issue count in parentheses. Groups appear in status order: Backlog, Todo, In Progress, In Review, Done, Cancelled. Empty status groups are not displayed.
+
+#### Test: My Issues page shows empty state when no issues assigned
+- **Initial state**: User is authenticated, has no issues assigned to them
+- **Expected**: The page displays a friendly empty state message with an icon (e.g., "No issues assigned to you yet") instead of an empty list.
+
+#### Test: Status group is collapsible
+- **Initial state**: User is authenticated, has issues in "In Progress" status, the group is expanded
+- **Action**: User clicks the "In Progress" group header
+- **Expected**: The group collapses, hiding all issues within it. The group header remains visible with a collapse indicator (e.g., chevron rotates). Clicking again expands the group back.
+
+#### Test: Status group collapse toggles multiple times
+- **Initial state**: User is authenticated, "Backlog" group is expanded with 2 issues
+- **Action**: User clicks the "Backlog" header to collapse, clicks it again to expand, then collapses once more
+- **Expected**: Each click toggles correctly. After three clicks, the group is collapsed and its issues are hidden. The count in parentheses remains accurate.
+
+#### Test: Multiple status groups can be independently collapsed
+- **Initial state**: User is authenticated, has issues in Backlog, In Progress, and Done groups, all expanded
+- **Action**: User collapses the "Backlog" group, then collapses the "Done" group
+- **Expected**: "Backlog" and "Done" groups are collapsed while "In Progress" remains expanded showing its issues.
+
+#### Test: My Issues page only shows issues assigned to current user
+- **Initial state**: User "Alice" is authenticated. Issue ENG-1 is assigned to Alice, Issue ENG-2 is assigned to "Bob", Issue ENG-3 is unassigned.
+- **Expected**: Only ENG-1 appears on Alice's My Issues page. ENG-2 and ENG-3 do not appear.
+
+#### Test: My Issues page updates when issue is assigned to user
+- **Initial state**: User is authenticated, viewing `/my-issues` with 2 issues
+- **Action**: Another user assigns a new issue to the current user (or user creates an issue assigned to themselves via the create modal)
+- **Expected**: The new issue appears in the appropriate status group on the My Issues page without requiring a manual refresh.
+
+#### Test: My Issues page title and header are displayed
+- **Initial state**: User is authenticated, navigates to `/my-issues`
+- **Expected**: The page shows a header/title "My Issues" at the top of the main content area, clearly identifying the current page.
+
+### IssueRow
+
+#### Test: Issue row displays all required fields
+- **Initial state**: User is authenticated, viewing My Issues. Issue ENG-42 exists with title "Fix login bug", status "In Progress", priority "High", labels ["Bug"], assignee avatar, due date "2026-03-20", project "Auth Rewrite".
+- **Expected**: The issue row displays: High priority icon (orange arrow-up), identifier "ENG-42", title "Fix login bug", In Progress status icon (yellow half circle), "Bug" label as a small colored badge, assignee avatar, due date "Mar 20", and project name "Auth Rewrite".
+
+#### Test: Issue row title is clickable and navigates to issue detail
+- **Initial state**: User is authenticated, viewing My Issues with issue ENG-42
+- **Action**: User clicks on the title "Fix login bug" in the issue row
+- **Expected**: User is navigated to `/issue/<issueId>` for issue ENG-42. The issue detail page loads.
+
+#### Test: Issue row status icon is clickable to change status
+- **Initial state**: User is authenticated, viewing My Issues. Issue ENG-42 has status "Todo" (circle icon, gray).
+- **Action**: User clicks the status icon on the ENG-42 issue row
+- **Expected**: A dropdown/popover appears showing all available statuses (Backlog, Todo, In Progress, In Review, Done, Cancelled) with their respective icons and colors.
+
+#### Test: Changing status via issue row status dropdown persists
+- **Initial state**: User is authenticated, viewing My Issues. Issue ENG-42 has status "Todo". User has clicked the status icon and the dropdown is open.
+- **Action**: User selects "In Progress" from the status dropdown
+- **Expected**: The dropdown closes. The issue row now shows the In Progress icon (yellow half circle). The issue moves from the "Todo" group to the "In Progress" group. The change is persisted to the database.
+
+#### Test: Issue row status change updates group membership
+- **Initial state**: User is authenticated, "Todo" group has 3 issues including ENG-42, "In Progress" group has 1 issue
+- **Action**: User changes ENG-42's status from "Todo" to "In Progress" via the status icon dropdown
+- **Expected**: ENG-42 moves from the "Todo" group to the "In Progress" group. "Todo" group now shows count of 2, "In Progress" shows count of 2.
+
+#### Test: Issue row status dropdown can be used multiple times
+- **Initial state**: User is authenticated, issue ENG-42 has status "Todo"
+- **Action**: User clicks status icon, changes to "In Progress", then clicks status icon again, changes to "Done"
+- **Expected**: Both status changes work correctly. The issue ends up in the "Done" group with a green check circle icon. Each dropdown opens and closes cleanly.
+
+#### Test: Issue row displays priority icon with correct color
+- **Initial state**: User is authenticated, viewing My Issues with issues at different priorities
+- **Expected**: Urgent shows red alert-triangle icon, High shows orange arrow-up, Medium shows yellow minus, Low shows blue arrow-down, No Priority shows gray dots-horizontal.
+
+#### Test: Issue row displays labels as colored badges
+- **Initial state**: User is authenticated, issue ENG-42 has labels "Bug" (red) and "Frontend" (blue)
+- **Expected**: Both labels are shown as small colored badges in the issue row, each with the label's color and name text.
+
+#### Test: Issue row shows assignee avatar
+- **Initial state**: User is authenticated, issue ENG-42 is assigned to "Jane Doe" who has an avatar
+- **Expected**: The issue row shows Jane Doe's avatar as a small circular image. If no avatar, shows initials.
+
+#### Test: Issue row shows due date
+- **Initial state**: User is authenticated, issue ENG-42 has a due date of 2026-03-20
+- **Expected**: The issue row displays the due date in a short format (e.g., "Mar 20").
+
+#### Test: Issue row shows project name when assigned
+- **Initial state**: User is authenticated, issue ENG-42 is assigned to project "Auth Rewrite"
+- **Expected**: The project name "Auth Rewrite" is displayed in the issue row.
+
+#### Test: Issue row hides optional fields when not set
+- **Initial state**: User is authenticated, issue ENG-43 has no labels, no due date, no project
+- **Expected**: The issue row does not show empty placeholders for labels, due date, or project. Only the present fields (priority, identifier, title, status, assignee) are shown.
+
+### FiltersToolbar
+
+#### Test: Filters toolbar renders with Status, Priority, and Label filters
+- **Initial state**: User is authenticated, viewing `/my-issues`
+- **Expected**: A toolbar at the top of the issue list displays three filter controls: "Status" dropdown, "Priority" dropdown, and "Label" dropdown. Each shows as a button/chip that can be clicked to open a multi-select dropdown.
+
+#### Test: Status filter dropdown shows all statuses with icons
+- **Initial state**: User is authenticated, viewing `/my-issues`
+- **Action**: User clicks the "Status" filter button
+- **Expected**: A multi-select dropdown opens showing all statuses: Backlog (dotted circle, gray), Todo (circle, gray), In Progress (half circle, yellow), In Review (three-quarter circle, blue), Done (check circle, green), Cancelled (x-circle, red). Each option has a checkbox.
+
+#### Test: Status filter filters issues by selected statuses
+- **Initial state**: User is authenticated, has issues in Backlog (2), In Progress (1), Done (1)
+- **Action**: User opens the Status filter and selects only "In Progress"
+- **Expected**: Only the "In Progress" group is displayed with its 1 issue. Backlog and Done groups are hidden. The Status filter button shows a visual indicator that a filter is active (e.g., highlighted, badge count "1").
+
+#### Test: Status filter allows multi-select
+- **Initial state**: User is authenticated, has issues in Backlog (2), In Progress (1), Done (1)
+- **Action**: User opens Status filter, checks "In Progress" and "Done"
+- **Expected**: Both "In Progress" and "Done" groups are displayed. "Backlog" group is hidden. The filter button indicates 2 statuses selected.
+
+#### Test: Priority filter dropdown shows all priorities with icons
+- **Initial state**: User is authenticated, viewing `/my-issues`
+- **Action**: User clicks the "Priority" filter button
+- **Expected**: A multi-select dropdown opens showing: Urgent (alert-triangle, red), High (arrow-up, orange), Medium (minus, yellow), Low (arrow-down, blue), No Priority (dots-horizontal, gray). Each option has a checkbox.
+
+#### Test: Priority filter filters issues by selected priorities
+- **Initial state**: User is authenticated, has issues with priorities High (2), Medium (1), Low (1)
+- **Action**: User opens Priority filter and selects "High"
+- **Expected**: Only issues with High priority are displayed across all status groups. Issues with Medium and Low priority are hidden.
+
+#### Test: Label filter dropdown shows all available labels
+- **Initial state**: User is authenticated, workspace has labels "Bug" (red), "Feature" (green), "Improvement" (blue)
+- **Action**: User clicks the "Label" filter button
+- **Expected**: A multi-select dropdown opens showing all workspace labels with their colored dots and names. Each option has a checkbox.
+
+#### Test: Label filter filters issues by selected labels
+- **Initial state**: User is authenticated, has 3 issues: ENG-1 (labeled "Bug"), ENG-2 (labeled "Feature"), ENG-3 (labeled "Bug", "Feature")
+- **Action**: User opens Label filter and selects "Bug"
+- **Expected**: Only issues with the "Bug" label are shown (ENG-1 and ENG-3). ENG-2 is hidden.
+
+#### Test: Multiple filters combine with AND logic
+- **Initial state**: User is authenticated, has issues: ENG-1 (High priority, Bug label, In Progress), ENG-2 (High priority, Feature label, In Progress), ENG-3 (Low priority, Bug label, Backlog)
+- **Action**: User selects "High" in Priority filter and "Bug" in Label filter
+- **Expected**: Only ENG-1 is shown (it matches both High priority AND Bug label). ENG-2 and ENG-3 are hidden.
+
+#### Test: Clearing a filter restores all issues
+- **Initial state**: User has Status filter set to "In Progress" only, showing 1 issue
+- **Action**: User opens Status filter and deselects "In Progress" (or clicks a "Clear" option)
+- **Expected**: All issues are shown again across all status groups, same as the unfiltered view.
+
+#### Test: Filters can be used repeatedly after clearing
+- **Initial state**: User is authenticated with multiple issues at various statuses and priorities
+- **Action**: User applies Priority filter for "High", clears it, then applies Priority filter for "Low", clears it, then applies Status filter for "Done"
+- **Expected**: Each filter application and clearing works correctly. After the final action, only "Done" issues are shown. Filters remain responsive and functional through multiple interactions.
+
+#### Test: Filter state shows active filter indicators
+- **Initial state**: User is authenticated, no filters applied
+- **Action**: User selects "High" in Priority filter
+- **Expected**: The Priority filter button shows a visual indicator that it is active (e.g., highlighted background, badge showing "1", or different styling). Status and Label filter buttons remain in their default/inactive state.
+
+#### Test: Filters persist while navigating within the page
+- **Initial state**: User has Status filter set to "In Progress", viewing filtered results
+- **Action**: User clicks an issue title to view detail, then navigates back to `/my-issues`
+- **Expected**: The filters are still applied showing only "In Progress" issues. The filter state is preserved across navigation.
 
 ## Inbox Page (`/inbox`)
 
