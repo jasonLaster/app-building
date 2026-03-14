@@ -5,7 +5,8 @@ export default async (request: Request, _context: Context) => {
   const sql = getSql()
   const url = new URL(request.url)
   const segments = url.pathname.split('/').filter(Boolean)
-  const propertyId = segments[3] // /.netlify/functions/properties/:id
+  const propIdx = segments.indexOf('properties')
+  const propertyId = propIdx >= 0 ? segments[propIdx + 1] : undefined
 
   const headers = { 'Content-Type': 'application/json' }
 

@@ -5,7 +5,8 @@ export default async (request: Request, _context: Context) => {
   const sql = getSql()
   const url = new URL(request.url)
   const segments = url.pathname.split('/').filter(Boolean)
-  const bookingId = segments[3]
+  const funcIdx = segments.indexOf('bookings')
+  const bookingId = funcIdx >= 0 ? segments[funcIdx + 1] : undefined
 
   const headers = { 'Content-Type': 'application/json' }
 

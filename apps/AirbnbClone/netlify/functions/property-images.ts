@@ -5,7 +5,8 @@ export default async (request: Request, _context: Context) => {
   const sql = getSql()
   const url = new URL(request.url)
   const segments = url.pathname.split('/').filter(Boolean)
-  const imageId = segments[3]
+  const funcIdx = segments.indexOf('property-images')
+  const imageId = funcIdx >= 0 ? segments[funcIdx + 1] : undefined
   const headers = { 'Content-Type': 'application/json' }
 
   if (request.method === 'POST') {

@@ -8,6 +8,9 @@ interface AmenitiesListProps {
 
 const INITIAL_SHOW = 10
 
+// Priority amenities shown first within their category
+const PRIORITY_AMENITIES = ['wifi', 'kitchen', 'pool', 'air conditioning', 'heating', 'tv', 'smoke alarm', 'beachfront']
+
 const iconMap: Record<string, React.ReactNode> = {
   wifi: <Wifi size={20} />,
   parking: <Car size={20} />,
@@ -52,18 +55,45 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
   const categories = Array.from(new Set(amenities.map((a) => a.category)))
   const grouped = categories.map((cat) => ({
     category: cat,
-    items: amenities.filter((a) => a.category === cat),
+    items: amenities.filter((a) => a.category === cat).sort((a, b) => {
+      const aPri = PRIORITY_AMENITIES.indexOf(a.name.toLowerCase())
+      const bPri = PRIORITY_AMENITIES.indexOf(b.name.toLowerCase())
+      if (aPri !== -1 && bPri !== -1) return aPri - bPri
+      if (aPri !== -1) return -1
+      if (bPri !== -1) return 1
+      return a.name.localeCompare(b.name)
+    }),
   }))
 
-  const displayAmenities = showAll ? amenities : amenities.slice(0, INITIAL_SHOW)
-  const displayCategories = showAll
-    ? grouped
-    : grouped
+  let displayAmenities: Amenity[]
+  if (showAll || amenities.length <= INITIAL_SHOW) {
+    displayAmenities = amenities
+  } else {
+    // Distribute slots proportionally across categories so all are represented
+    const selected = new Set<Amenity>()
+    // First pass: give each category a proportional share
+    let remaining = INITIAL_SHOW
+    for (const g of grouped) {
+      const share = Math.max(1, Math.round((g.items.length / amenities.length) * INITIAL_SHOW))
+      const take = Math.min(share, g.items.length, remaining)
+      for (let i = 0; i < take; i++) {
+        selected.add(g.items[i]!)
+      }
+      remaining = INITIAL_SHOW - selected.size
+    }
+    // Fill any remaining slots
+    for (const a of amenities) {
+      if (selected.size >= INITIAL_SHOW) break
+      selected.add(a)
+    }
+    displayAmenities = amenities.filter((a) => selected.has(a))
+  }
+  const displayCategories = (showAll ? grouped : grouped
         .map((g) => ({
           ...g,
           items: g.items.filter((a) => displayAmenities.includes(a)),
         }))
-        .filter((g) => g.items.length > 0)
+        .filter((g) => g.items.length > 0))
 
   return (
     <div data-testid="amenities-list" className="py-6 border-b border-border">

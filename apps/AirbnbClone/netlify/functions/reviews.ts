@@ -75,7 +75,8 @@ export default async (request: Request, _context: Context) => {
 
   if (request.method === 'DELETE') {
     const segments = url.pathname.split('/').filter(Boolean)
-    const reviewId = segments[3]
+    const revIdx = segments.indexOf('reviews')
+    const reviewId = revIdx >= 0 ? segments[revIdx + 1] : undefined
     if (!reviewId) {
       return new Response(JSON.stringify({ error: 'Review ID is required' }), { status: 400, headers })
     }
