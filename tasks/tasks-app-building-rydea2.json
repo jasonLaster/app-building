@@ -3,9 +3,10 @@
     {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "Unpack: Do an initial production deployment"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-14T18:21:07.448Z",
+      "timestamp": "2026-03-14T23:29:37.099Z",
       "app": "LinearClone"
     },
     {
@@ -26,20 +27,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/writeTests.md",
+    "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "WriteTestSettingsPageRenders: Write test for Settings page renders workspace name and default team fields",
-      "WriteTestEditWorkspaceName: Write test for Edit workspace name inline",
-      "WriteTestWorkspaceNameNotEmpty: Write test for Workspace name cannot be saved as empty",
-      "WriteTestWorkspaceNamePersists: Write test for Edit workspace name and verify persistence after navigation",
-      "WriteTestChangeDefaultTeam: Write test for Change default team for new issues",
-      "WriteTestDefaultTeamDropdown: Write test for Default team dropdown lists all available teams",
-      "WriteTestDefaultTeamAffectsCreation: Write test for Change default team and verify it affects issue creation",
-      "WriteTestSettingsAccessibleFromSidebar: Write test for Settings page is accessible from sidebar navigation",
-      "WriteTestWorkspaceNameEditCancel: Write test for Workspace name edit can be cancelled",
-      "WriteTestSettingsHeadingLayout: Write test for Settings page shows appropriate heading and layout"
+      "Unpack: Do an initial production deployment"
     ],
-    "timestamp": "2026-03-14T21:01:56.774Z",
+    "timestamp": "2026-03-14T18:21:07.448Z",
     "app": "LinearClone"
   }
 }
