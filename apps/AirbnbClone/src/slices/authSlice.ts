@@ -55,6 +55,40 @@ export const registerUser = createAsyncThunk(
   }
 )
 
+export const updateUser = createAsyncThunk(
+  'auth/updateUser',
+  async (
+    { id, ...fields }: { id: string; name?: string; bio?: string | null; phone?: string | null; avatar_url?: string | null },
+    { rejectWithValue }
+  ) => {
+    const response = await fetch(`/api/users/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(fields),
+    })
+    const data = await response.json()
+    if (!response.ok) {
+      return rejectWithValue(data.error || 'Update failed')
+    }
+    return data as User
+  }
+)
+
+export const becomeHost = createAsyncThunk(
+  'auth/becomeHost',
+  async (userId: string, { rejectWithValue }) => {
+    const response = await fetch(`/api/users/${userId}/become-host`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    const data = await response.json()
+    if (!response.ok) {
+      return rejectWithValue(data.error || 'Failed to become host')
+    }
+    return data as User
+  }
+)
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -94,6 +128,12 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload as string
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload
+      })
+      .addCase(becomeHost.fulfilled, (state, action) => {
+        state.currentUser = action.payload
       })
   },
 })

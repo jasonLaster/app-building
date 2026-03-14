@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentProfileForm: Write the ProfileForm component",
-        "WriteComponentBecomeHostButton: Write the BecomeHostButton component",
-        "WriteComponentUserReviewsList: Write the UserReviewsList component",
-        "WritePageUserProfile: Write the User Profile page"
-      ],
-      "timestamp": "2026-03-14T19:01:21.956Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentRatingSliders: Write the RatingSliders component",
         "WriteComponentPropertyBookingContext: Write the PropertyBookingContext component",
         "WriteComponentReviewForm: Write the ReviewForm component",
@@ -75,11 +64,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentStatsOverview: Write the StatsOverview component",
-      "WriteComponentListingsTab: Write the ListingsTab component",
-      "WriteComponentBookingsTab: Write the BookingsTab component",
-      "WriteComponentAddListingForm: Write the AddListingForm component",
-      "WritePageHostDashboard: Write the Host Dashboard page"
+      "WriteComponentProfileForm: Write the ProfileForm component",
+      "WriteComponentBecomeHostButton: Write the BecomeHostButton component",
+      "WriteComponentUserReviewsList: Write the UserReviewsList component",
+      "WritePageUserProfile: Write the User Profile page"
     ],
     "timestamp": "2026-03-14T19:01:21.956Z",
     "app": "AirbnbClone"

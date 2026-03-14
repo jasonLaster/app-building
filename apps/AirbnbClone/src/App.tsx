@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import PropertyDetail from './pages/PropertyDetail'
 import MyTrips from './pages/MyTrips'
 import HostDashboard from './pages/HostDashboard'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/properties/:id" element={<PropertyDetail />} />
       <Route path="/trips" element={<MyTrips />} />
       <Route path="/hosting" element={<HostDashboard />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   )
 }
