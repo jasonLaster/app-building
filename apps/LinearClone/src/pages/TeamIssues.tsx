@@ -74,7 +74,7 @@ export default function TeamIssues() {
   }, [teamIssues, selectedStatuses, selectedPriorities, selectedAssignees, selectedLabels, selectedProjects, selectedCycles]);
 
   function handleNewIssue() {
-    dispatch(openCreateIssueModal());
+    dispatch(openCreateIssueModal({ teamId }));
   }
 
   return (

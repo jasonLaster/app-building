@@ -276,6 +276,7 @@ export default function TeamIssuesList({ issues, loading }: TeamIssuesListProps)
               <button
                 className="team-issues-group-toggle"
                 onClick={() => toggleGroup(group.key)}
+                data-testid={`team-issue-group-toggle-${group.key}`}
               >
                 <svg
                   className={`team-issues-group-chevron ${isCollapsed ? '' : 'team-issues-group-chevron-expanded'}`}

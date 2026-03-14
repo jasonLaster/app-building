@@ -3,32 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestTeamIssuesHeader: Write test for Team Issues page renders with header showing team name",
-        "WriteTestTeamIssuesGroupedByStatus: Write test for Team Issues page shows issues grouped by status (default)",
-        "WriteTestTeamIssuesShowsAll: Write test for Team Issues page shows all team issues, not just current user's",
-        "WriteTestTeamIssuesEmptyState: Write test for Team Issues page shows empty state when team has no issues",
-        "WriteTestTeamIssueRowFields: Write test for Issue row displays all required fields including checkbox and team prefix",
-        "WriteTestTeamIssueRowTitleNavigates: Write test for Issue row title is clickable and navigates to issue detail",
-        "WriteTestTeamIssueRowStatusClickable: Write test for Issue row status icon is clickable to change status",
-        "WriteTestTeamIssueStatusChangePersists: Write test for Changing status via issue row status dropdown persists and moves issue between groups",
-        "WriteTestTeamIssueStatusMultipleTimes: Write test for Issue row status dropdown can be used multiple times",
-        "WriteTestTeamStatusGroupCollapsible: Write test for Status group headers are collapsible",
-        "WriteTestTeamStatusGroupCollapseMultiple: Write test for Status group collapse toggles multiple times",
-        "WriteTestTeamMultipleGroupsIndependent: Write test for Multiple status groups can be independently collapsed",
-        "WriteTestTeamIssueRowPriority: Write test for Issue row displays priority icon with correct color",
-        "WriteTestTeamIssueRowLabels: Write test for Issue row displays labels as colored badges",
-        "WriteTestTeamIssueRowAssignee: Write test for Issue row shows assignee avatar",
-        "WriteTestTeamIssueRowHidesOptional: Write test for Issue row hides optional fields when not set",
-        "WriteTestNewIssueButtonOpensModal: Write test for New Issue button opens create issue modal with team pre-selected",
-        "WriteTestNewIssueButtonAppearance: Write test for New Issue button text and icon appearance",
-        "WriteTestNewIssueAppearsInList: Write test for Newly created issue appears in the list"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestTeamCheckboxesVisible: Write test for Issue row checkboxes are visible and unchecked by default",
         "WriteTestTeamCheckboxSelects: Write test for Clicking a checkbox selects an issue",
         "WriteTestTeamCheckboxDeselects: Write test for Clicking a checked checkbox deselects the issue",
@@ -643,7 +617,25 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestNotificationSeparateTargets: Write test for Notification row click and archive button have separate hit targets"
+      "WriteTestTeamIssuesHeader: Write test for Team Issues page renders with header showing team name",
+      "WriteTestTeamIssuesGroupedByStatus: Write test for Team Issues page shows issues grouped by status (default)",
+      "WriteTestTeamIssuesShowsAll: Write test for Team Issues page shows all team issues, not just current user's",
+      "WriteTestTeamIssuesEmptyState: Write test for Team Issues page shows empty state when team has no issues",
+      "WriteTestTeamIssueRowFields: Write test for Issue row displays all required fields including checkbox and team prefix",
+      "WriteTestTeamIssueRowTitleNavigates: Write test for Issue row title is clickable and navigates to issue detail",
+      "WriteTestTeamIssueRowStatusClickable: Write test for Issue row status icon is clickable to change status",
+      "WriteTestTeamIssueStatusChangePersists: Write test for Changing status via issue row status dropdown persists and moves issue between groups",
+      "WriteTestTeamIssueStatusMultipleTimes: Write test for Issue row status dropdown can be used multiple times",
+      "WriteTestTeamStatusGroupCollapsible: Write test for Status group headers are collapsible",
+      "WriteTestTeamStatusGroupCollapseMultiple: Write test for Status group collapse toggles multiple times",
+      "WriteTestTeamMultipleGroupsIndependent: Write test for Multiple status groups can be independently collapsed",
+      "WriteTestTeamIssueRowPriority: Write test for Issue row displays priority icon with correct color",
+      "WriteTestTeamIssueRowLabels: Write test for Issue row displays labels as colored badges",
+      "WriteTestTeamIssueRowAssignee: Write test for Issue row shows assignee avatar",
+      "WriteTestTeamIssueRowHidesOptional: Write test for Issue row hides optional fields when not set",
+      "WriteTestNewIssueButtonOpensModal: Write test for New Issue button opens create issue modal with team pre-selected",
+      "WriteTestNewIssueButtonAppearance: Write test for New Issue button text and icon appearance",
+      "WriteTestNewIssueAppearsInList: Write test for Newly created issue appears in the list"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
