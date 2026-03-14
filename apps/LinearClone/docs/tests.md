@@ -1616,7 +1616,209 @@
 
 ## Projects Page (`/projects`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: ProjectCard, ProjectFilters, CreateProjectModal
+
+### ProjectCard
+
+#### Test: Project card displays project name as clickable link
+- **Initial state**: User is authenticated, viewing `/projects`. A project "Auth Rewrite" exists.
+- **Expected**: The project card displays the project name "Auth Rewrite" as clickable text.
+- **Action**: User clicks the project name "Auth Rewrite"
+- **Expected**: User is navigated to `/project/<projectId>` for the "Auth Rewrite" project.
+
+#### Test: Project card displays status badge with correct styling
+- **Initial state**: User is authenticated, viewing `/projects`. Projects exist with statuses: "Planned", "In Progress", "Completed", "Cancelled".
+- **Expected**: Each project card shows a status badge with the project's current status text. Each status has a visually distinct style (e.g., different background color or border color per status). "Planned" badge is visually different from "In Progress", "Completed", and "Cancelled".
+
+#### Test: Project card displays lead with avatar and name
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Auth Rewrite" has lead "Jane Doe" with an avatar.
+- **Expected**: The project card shows Jane Doe's avatar (small circular image) and name "Jane Doe" as the project lead. If no avatar is set, initials are shown instead.
+
+#### Test: Project card displays target date
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Auth Rewrite" has a target date of 2026-04-15.
+- **Expected**: The project card displays the target date in a readable format (e.g., "Apr 15, 2026" or "Apr 15").
+
+#### Test: Project card displays progress bar based on issue completion
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Auth Rewrite" has 10 total issues, 6 completed.
+- **Expected**: The project card shows a progress bar filled to 60%. The progress bar visually indicates the ratio of completed issues to total issues. A text label or tooltip shows "6/10" or "60%".
+
+#### Test: Project card progress bar shows 0% when no issues completed
+- **Initial state**: User is authenticated, viewing `/projects`. Project "New Feature" has 5 total issues, 0 completed.
+- **Expected**: The progress bar is empty (0% filled). The display shows "0/5" or "0%".
+
+#### Test: Project card progress bar shows 100% when all issues completed
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Bug Fixes" has 3 total issues, 3 completed.
+- **Expected**: The progress bar is fully filled (100%). The display shows "3/3" or "100%". The progress bar may use a distinct color (e.g., green) to indicate completion.
+
+#### Test: Project card displays team icons for participating teams
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Auth Rewrite" has issues from teams "Engineering" and "Design".
+- **Expected**: The project card shows small icons or avatars representing the "Engineering" and "Design" teams, indicating which teams have issues in this project.
+
+#### Test: Project card displays correctly with no lead assigned
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Research Spike" has no lead assigned.
+- **Expected**: The project card either shows a placeholder (e.g., "No lead" or an empty avatar placeholder) or omits the lead field. The card does not break or show an error.
+
+#### Test: Project card displays correctly with no target date
+- **Initial state**: User is authenticated, viewing `/projects`. Project "Research Spike" has no target date set.
+- **Expected**: The project card either shows "No target date" or omits the target date field. The card layout remains intact.
+
+#### Test: Project card displays correctly with no issues
+- **Initial state**: User is authenticated, viewing `/projects`. Project "New Initiative" has 0 issues.
+- **Expected**: The progress bar shows 0% or is empty. The card does not show an error or division-by-zero artifact. Team icons section is empty or hidden.
+
+#### Test: Projects page shows empty state when no projects exist
+- **Initial state**: User is authenticated, viewing `/projects`. No projects exist in the workspace.
+- **Expected**: A friendly empty state message is displayed with an icon (e.g., "No projects yet. Create your first project to get started.") instead of an empty grid/list.
+
+#### Test: Projects page lists all projects across all teams
+- **Initial state**: User is authenticated, viewing `/projects`. 3 projects exist: "Auth Rewrite" (Engineering), "Mobile App" (Design), "API v2" (Engineering + Design).
+- **Expected**: All 3 project cards are displayed on the page. Projects from all teams are shown regardless of team membership.
+
+#### Test: Projects page header and Create Project button are displayed
+- **Initial state**: User is authenticated, viewing `/projects`
+- **Expected**: The page shows a header/title "Projects" at the top. A "Create Project" button is visible in the header area.
+
+### ProjectFilters
+
+#### Test: Filters toolbar renders with Status, Lead, and Team filters
+- **Initial state**: User is authenticated, viewing `/projects`
+- **Expected**: A toolbar at the top of the project list displays three filter controls: "Status" dropdown, "Lead" dropdown, and "Team" dropdown. Each shows as a button/chip that can be clicked to open a dropdown.
+
+#### Test: Status filter dropdown shows all project statuses
+- **Initial state**: User is authenticated, viewing `/projects`
+- **Action**: User clicks the "Status" filter button
+- **Expected**: A dropdown opens showing all project statuses: Planned, In Progress, Completed, Cancelled. Each option has a checkbox for multi-select.
+
+#### Test: Status filter filters projects by selected status
+- **Initial state**: User is authenticated, viewing `/projects`. Projects exist: "Auth Rewrite" (In Progress), "Mobile App" (Planned), "Bug Fixes" (Completed).
+- **Action**: User opens Status filter and selects "In Progress"
+- **Expected**: Only "Auth Rewrite" is displayed. "Mobile App" and "Bug Fixes" are hidden. The Status filter button shows a visual indicator that a filter is active.
+
+#### Test: Status filter allows multi-select
+- **Initial state**: User is authenticated, viewing `/projects`. Projects exist with statuses: Planned (1), In Progress (1), Completed (1).
+- **Action**: User opens Status filter and checks "Planned" and "In Progress"
+- **Expected**: Projects with "Planned" and "In Progress" statuses are shown. "Completed" project is hidden. The filter button indicates 2 statuses selected.
+
+#### Test: Lead filter dropdown shows all workspace members
+- **Initial state**: User is authenticated, viewing `/projects`. Workspace has members "Alice", "Bob", "Charlie".
+- **Action**: User clicks the "Lead" filter button
+- **Expected**: A dropdown opens showing all workspace members with their avatars and names. Each option has a checkbox. A searchable input may be present to filter the member list.
+
+#### Test: Lead filter filters projects by selected lead
+- **Initial state**: User is authenticated, viewing `/projects`. "Auth Rewrite" has lead "Alice", "Mobile App" has lead "Bob", "API v2" has no lead.
+- **Action**: User opens Lead filter and selects "Alice"
+- **Expected**: Only "Auth Rewrite" is displayed. "Mobile App" and "API v2" are hidden. The Lead filter button shows an active indicator.
+
+#### Test: Team filter dropdown shows all teams
+- **Initial state**: User is authenticated, viewing `/projects`. Workspace has teams "Engineering" and "Design".
+- **Action**: User clicks the "Team" filter button
+- **Expected**: A dropdown opens showing all teams with their names. Each option has a checkbox.
+
+#### Test: Team filter filters projects by selected team
+- **Initial state**: User is authenticated, viewing `/projects`. "Auth Rewrite" has issues from Engineering only, "Mobile App" has issues from Design only, "API v2" has issues from both Engineering and Design.
+- **Action**: User opens Team filter and selects "Engineering"
+- **Expected**: "Auth Rewrite" and "API v2" are shown (both have Engineering team issues). "Mobile App" is hidden.
+
+#### Test: Multiple filters combine with AND logic
+- **Initial state**: User is authenticated, viewing `/projects`. "Auth Rewrite" (In Progress, lead Alice, Engineering), "Mobile App" (In Progress, lead Bob, Design), "API v2" (Planned, lead Alice, Engineering).
+- **Action**: User selects "In Progress" in Status filter and "Alice" in Lead filter
+- **Expected**: Only "Auth Rewrite" is shown (matches both In Progress status AND lead Alice). "Mobile App" and "API v2" are hidden.
+
+#### Test: Clearing a filter restores all projects
+- **Initial state**: User has Status filter set to "In Progress", showing 1 project
+- **Action**: User opens Status filter and deselects "In Progress" (or clicks a "Clear" option)
+- **Expected**: All projects are shown again, same as the unfiltered view.
+
+#### Test: Filters can be used repeatedly after clearing
+- **Initial state**: User is authenticated with multiple projects
+- **Action**: User applies Status filter for "Planned", clears it, applies Lead filter for "Alice", clears it, then applies Team filter for "Design"
+- **Expected**: Each filter application and clearing works correctly. After the final action, only projects with Design team issues are shown. Filters remain responsive through multiple interactions.
+
+#### Test: Filter state shows active filter indicators
+- **Initial state**: User is authenticated, no filters applied
+- **Action**: User selects "In Progress" in Status filter
+- **Expected**: The Status filter button shows a visual indicator that it is active (e.g., highlighted background, badge, or different styling). Lead and Team filter buttons remain in their default/inactive state.
+
+### CreateProjectModal
+
+#### Test: Create Project button opens the create project modal
+- **Initial state**: User is authenticated, viewing `/projects`, no modal is open
+- **Action**: User clicks the "Create Project" button
+- **Expected**: A modal dialog opens with the title "Create Project" or similar. The modal overlays the page with a backdrop. The Name field is focused.
+
+#### Test: Create project modal renders all required fields
+- **Initial state**: User is authenticated, create project modal is open
+- **Expected**: The modal displays the following fields: Name (text input, required), Description (text area), Status (dropdown), Lead (searchable member selector), Target date (date picker), Teams (multi-select). "Create Project" and "Cancel" buttons are visible at the bottom.
+
+#### Test: Create project modal Status dropdown shows all project statuses
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User clicks the Status dropdown
+- **Expected**: Dropdown shows options: Planned, In Progress, Completed, Cancelled. A default status is pre-selected (e.g., "Planned").
+
+#### Test: Create project modal Lead selector is searchable
+- **Initial state**: User is authenticated, create project modal is open. Workspace has members "Alice", "Bob", "Charlie".
+- **Action**: User clicks the Lead selector and types "Ali"
+- **Expected**: The member list filters to show only "Alice". User can select "Alice" as the lead. The selected lead shows their avatar and name.
+
+#### Test: Create project modal Target date uses a date picker
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User clicks the Target date field
+- **Expected**: A date picker opens allowing the user to select a date. After selecting a date (e.g., April 15, 2026), the field displays the selected date.
+
+#### Test: Create project modal Teams selector allows multi-select
+- **Initial state**: User is authenticated, create project modal is open. Workspace has teams "Engineering" and "Design".
+- **Action**: User clicks the Teams selector, checks "Engineering" and "Design"
+- **Expected**: Both teams are selected and shown as chips/badges in the Teams field. The user can deselect a team by clicking its chip or unchecking it in the dropdown.
+
+#### Test: Successful project creation with all fields
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User enters "New Feature" in Name, "Build the new feature" in Description, selects "In Progress" status, selects "Alice" as lead, picks target date "2026-05-01", selects teams "Engineering" and "Design", clicks "Create Project"
+- **Expected**: The modal closes. The new project "New Feature" appears in the project list with all the specified attributes (status badge "In Progress", lead "Alice", target date, progress bar at 0%, team icons for Engineering and Design). The project is persisted to the database.
+
+#### Test: Successful project creation with only required fields
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User enters "Quick Spike" in Name, leaves all optional fields empty/default, clicks "Create Project"
+- **Expected**: The modal closes. The project "Quick Spike" appears in the project list with the default status, no lead, no target date, and no teams. The project card handles missing optional fields gracefully.
+
+#### Test: Create project modal validates name is required
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User leaves the Name field empty and clicks "Create Project"
+- **Expected**: A validation error is shown for the Name field (e.g., "Name is required"). The modal remains open. No project is created.
+
+#### Test: Cancel button closes create project modal without creating
+- **Initial state**: User is authenticated, create project modal is open. User has entered "Draft Project" in Name.
+- **Action**: User clicks the "Cancel" button
+- **Expected**: The modal closes. No project named "Draft Project" is created. The project list remains unchanged.
+
+#### Test: Create project modal can be closed by clicking backdrop
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User clicks the backdrop/overlay area outside the modal
+- **Expected**: The modal closes. No project is created.
+
+#### Test: Create project modal can be closed with Escape key
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User presses the Escape key
+- **Expected**: The modal closes. No project is created.
+
+#### Test: Creating a project and then opening modal again resets fields
+- **Initial state**: User is authenticated, has just created a project via the modal
+- **Action**: User clicks "Create Project" button again to open the modal
+- **Expected**: All fields are reset to their defaults (Name is empty, Description is empty, Status is default, Lead is unset, Target date is unset, Teams is unset). No data from the previous creation persists in the form.
+
+#### Test: Created project appears immediately in the project list
+- **Initial state**: User is authenticated, viewing `/projects` with 2 existing projects
+- **Action**: User creates a new project "API v3" via the create project modal
+- **Expected**: The project list now shows 3 projects, including the newly created "API v3". The new project appears without requiring a page refresh.
+
+#### Test: Create project modal Lead selector can be used multiple times
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User selects "Alice" as lead, then clicks the lead selector again and changes to "Bob"
+- **Expected**: The lead is updated to "Bob". The selector works correctly on repeated use. Only one lead can be selected at a time.
+
+#### Test: Create project modal Teams selector can be toggled multiple times
+- **Initial state**: User is authenticated, create project modal is open
+- **Action**: User selects "Engineering", then also selects "Design", then deselects "Engineering"
+- **Expected**: Only "Design" remains selected. The multi-select works correctly through multiple toggle interactions.
 
 ## Project Detail Page (`/project/:projectId`)
 
