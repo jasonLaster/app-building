@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentAuthToggle: Write the AuthToggle component",
-        "WriteComponentLoginForm: Write the LoginForm component",
-        "WriteComponentRegisterForm: Write the RegisterForm component",
-        "WritePageLogin: Write the Login / Register page"
-      ],
-      "timestamp": "2026-03-14T19:01:21.956Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentSearchBar: Write the SearchBar component",
         "WriteComponentCategoryFilter: Write the CategoryFilter component",
         "WriteComponentPropertyCard: Write the PropertyCard component",
@@ -140,9 +129,12 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "Unpack: Write the app"
+      "WriteComponentAuthToggle: Write the AuthToggle component",
+      "WriteComponentLoginForm: Write the LoginForm component",
+      "WriteComponentRegisterForm: Write the RegisterForm component",
+      "WritePageLogin: Write the Login / Register page"
     ],
-    "timestamp": "2026-03-14T18:32:06.248Z",
+    "timestamp": "2026-03-14T19:01:21.956Z",
     "app": "AirbnbClone"
   }
 }
