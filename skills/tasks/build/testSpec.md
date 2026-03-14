@@ -38,7 +38,6 @@ EOF
 The test spec must be written in docs/tests.md. This file is organized by page, with one or more test entries for the page.
 
 - The test entries must match the app spec as closely as possible.
-- If there are image URLs in the app spec, you MUST download them, read them from disk, and follow them carefully.
 - Use behavior driven development to formulate test entries: describe the initial conditions of the app's state, the action the user takes, and the changes to the app that should occur afterwards.
 - Test entries must all have titles.
 - Test entries must be grouped by page in the app.
@@ -46,6 +45,14 @@ The test spec must be written in docs/tests.md. This file is organized by page, 
 - Every interactive element (buttons etc) in the component must be tested. There must be a comment in the JSX next to every interactive element with the titles of the tests that exercise it.
 - The test must verify that the interactive element actually works and does what the user expects. For example, clicking a button must do something, and text added to forms must be reflected in the app state afterwards.
 - Adding extra necessary features beyond the app spec may be needed for a complete, functional app (e.g. create/delete buttons, navigation, form validation).
+
+You might be provided with screenshots of the app you need to build in several different ways.
+Watch for these and if present you MUST get the screenshots and follow them carefully.
+Screenshots must be downloaded to disk and then read from directly.
+
+- The app spec might directly contain app mockup URLs.
+- The app spec might contain Replay recordings. Inspect these and use the screenshot tool to get image URLs to use.
+- The app spec might contain links to Playwright traces. Download these and unzip them to get the screenshots to examine.
 
 ## Directives
 

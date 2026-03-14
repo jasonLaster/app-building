@@ -62,9 +62,8 @@ COPY --chown=agent:agent package.json .env.example ./
 RUN npm install --production
 COPY --chown=agent:agent src/ ./src/
 COPY --chown=agent:agent scripts/ ./scripts/
-RUN chmod +x scripts/exec-secrets scripts/list-secrets
 
-# Make exec-secrets available in PATH for the agent
+# Make exec-secrets and list-secrets available in PATH for the agent
 ENV PATH="/app-building/scripts:${PATH}"
 
 EXPOSE 3000
