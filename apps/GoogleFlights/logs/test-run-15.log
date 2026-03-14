@@ -1,0 +1,15 @@
+Creating branch: test-run-1773524933250
+Branch DB URL: postgresql://neondb_owner:***@ep-cool-smoke-ahizdi5r.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify dev for functions...
+Functions process exited with code: 1
+Functions output at timeout:
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+⬥ Could not acquire required 'port': '9888'
+
+Cleaned up test branch

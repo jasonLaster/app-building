@@ -16,4 +16,12 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': '"development"',
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9999',
+        changeOrigin: true,
+      },
+    },
+  },
 })

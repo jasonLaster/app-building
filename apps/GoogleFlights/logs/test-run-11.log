@@ -1,0 +1,548 @@
+Creating branch: test-run-1773523732881
+Branch DB URL: postgresql://neondb_owner:***@ep-broad-frog-ahgs9hny.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify dev...
+Server ready
+Running: npx playwright test tests/airport-autocomplete.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 11 tests using 1 worker
+
+  ✘   1 [replay-chromium] › tests/airport-autocomplete.spec.ts:9:3 › AirportAutocomplete › AirportAutocomplete origin field shows placeholder text (1ms)
+  ✘   2 [replay-chromium] › tests/airport-autocomplete.spec.ts:16:3 › AirportAutocomplete › AirportAutocomplete destination field shows placeholder text (1ms)
+  ✘   3 [replay-chromium] › tests/airport-autocomplete.spec.ts:23:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing airport name (1ms)
+  ✘   4 [replay-chromium] › tests/airport-autocomplete.spec.ts:37:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing IATA code (1ms)
+  ✘   5 [replay-chromium] › tests/airport-autocomplete.spec.ts:51:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing city name (1ms)
+  ✘   6 [replay-chromium] › tests/airport-autocomplete.spec.ts:65:3 › AirportAutocomplete › AirportAutocomplete selects a suggestion and populates the field (2ms)
+  ✘   7 [replay-chromium] › tests/airport-autocomplete.spec.ts:79:3 › AirportAutocomplete › AirportAutocomplete swap button exchanges origin and destination (1ms)
+  ✘   8 [replay-chromium] › tests/airport-autocomplete.spec.ts:104:3 › AirportAutocomplete › AirportAutocomplete swap button works with empty fields (1ms)
+  ✘   9 [replay-chromium] › tests/airport-autocomplete.spec.ts:124:3 › AirportAutocomplete › AirportAutocomplete clears field and shows new suggestions (1ms)
+  ✘  10 [replay-chromium] › tests/airport-autocomplete.spec.ts:146:3 › AirportAutocomplete › AirportAutocomplete shows no results for invalid query (1ms)
+  ✘  11 [replay-chromium] › tests/airport-autocomplete.spec.ts:159:3 › AirportAutocomplete › AirportAutocomplete destination works after using origin (1ms)
+
+
+  1) [replay-chromium] › tests/airport-autocomplete.spec.ts:9:3 › AirportAutocomplete › AirportAutocomplete origin field shows placeholder text 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-ClY9dz --remote-debugging-pipe --no-startup-window
+    <launched> pid=24533
+    [pid=24533][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24533][err] 
+    [pid=24533][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24533][err] To fix this, you can:
+    [pid=24533][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24533][err]   2. Install multi-arch libraries in this container.
+    [pid=24533][err] 
+    [pid=24533][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24533][err] 
+    [pid=24533][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-ClY9dz --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24533[22m
+    [2m  - [pid=24533][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24533][err][22m
+    [2m  - [pid=24533][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24533][err] To fix this, you can:[22m
+    [2m  - [pid=24533][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24533][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24533][err][22m
+    [2m  - [pid=24533][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24533][err][22m
+    [2m  - [pid=24533][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24533] <gracefully close start>[22m
+    [2m  - [pid=24533] <kill>[22m
+    [2m  - [pid=24533] <will force kill>[22m
+    [2m  - [pid=24533] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24533] starting temporary directories cleanup[22m
+    [2m  - [pid=24533] finished temporary directories cleanup[22m
+    [2m  - [pid=24533] <gracefully close end>[22m
+
+
+  2) [replay-chromium] › tests/airport-autocomplete.spec.ts:16:3 › AirportAutocomplete › AirportAutocomplete destination field shows placeholder text 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-VDm0S7 --remote-debugging-pipe --no-startup-window
+    <launched> pid=24547
+    [pid=24547][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24547][err] 
+    [pid=24547][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24547][err] To fix this, you can:
+    [pid=24547][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24547][err]   2. Install multi-arch libraries in this container.
+    [pid=24547][err] 
+    [pid=24547][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24547][err] 
+    [pid=24547][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-VDm0S7 --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24547[22m
+    [2m  - [pid=24547][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24547][err][22m
+    [2m  - [pid=24547][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24547][err] To fix this, you can:[22m
+    [2m  - [pid=24547][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24547][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24547][err][22m
+    [2m  - [pid=24547][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24547][err][22m
+    [2m  - [pid=24547][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24547] <gracefully close start>[22m
+    [2m  - [pid=24547] <kill>[22m
+    [2m  - [pid=24547] <will force kill>[22m
+    [2m  - [pid=24547] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24547] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24547] starting temporary directories cleanup[22m
+    [2m  - [pid=24547] finished temporary directories cleanup[22m
+    [2m  - [pid=24547] <gracefully close end>[22m
+
+
+  3) [replay-chromium] › tests/airport-autocomplete.spec.ts:23:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing airport name 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-4z3EJd --remote-debugging-pipe --no-startup-window
+    <launched> pid=24561
+    [pid=24561][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24561][err] 
+    [pid=24561][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24561][err] To fix this, you can:
+    [pid=24561][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24561][err]   2. Install multi-arch libraries in this container.
+    [pid=24561][err] 
+    [pid=24561][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24561][err] 
+    [pid=24561][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-4z3EJd --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24561[22m
+    [2m  - [pid=24561][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24561][err][22m
+    [2m  - [pid=24561][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24561][err] To fix this, you can:[22m
+    [2m  - [pid=24561][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24561][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24561][err][22m
+    [2m  - [pid=24561][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24561][err][22m
+    [2m  - [pid=24561][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24561] <gracefully close start>[22m
+    [2m  - [pid=24561] <kill>[22m
+    [2m  - [pid=24561] <will force kill>[22m
+    [2m  - [pid=24561] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24561] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24561] starting temporary directories cleanup[22m
+    [2m  - [pid=24561] finished temporary directories cleanup[22m
+    [2m  - [pid=24561] <gracefully close end>[22m
+
+
+  4) [replay-chromium] › tests/airport-autocomplete.spec.ts:37:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing IATA code 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-DdQ5dy --remote-debugging-pipe --no-startup-window
+    <launched> pid=24575
+    [pid=24575][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24575][err] 
+    [pid=24575][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24575][err] To fix this, you can:
+    [pid=24575][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24575][err]   2. Install multi-arch libraries in this container.
+    [pid=24575][err] 
+    [pid=24575][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24575][err] 
+    [pid=24575][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-DdQ5dy --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24575[22m
+    [2m  - [pid=24575][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24575][err][22m
+    [2m  - [pid=24575][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24575][err] To fix this, you can:[22m
+    [2m  - [pid=24575][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24575][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24575][err][22m
+    [2m  - [pid=24575][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24575][err][22m
+    [2m  - [pid=24575][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24575] <gracefully close start>[22m
+    [2m  - [pid=24575] <kill>[22m
+    [2m  - [pid=24575] <will force kill>[22m
+    [2m  - [pid=24575] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24575] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24575] starting temporary directories cleanup[22m
+    [2m  - [pid=24575] finished temporary directories cleanup[22m
+    [2m  - [pid=24575] <gracefully close end>[22m
+
+
+  5) [replay-chromium] › tests/airport-autocomplete.spec.ts:51:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing city name 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-HQKhue --remote-debugging-pipe --no-startup-window
+    <launched> pid=24589
+    [pid=24589][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24589][err] 
+    [pid=24589][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24589][err] To fix this, you can:
+    [pid=24589][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24589][err]   2. Install multi-arch libraries in this container.
+    [pid=24589][err] 
+    [pid=24589][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24589][err] 
+    [pid=24589][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-HQKhue --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24589[22m
+    [2m  - [pid=24589][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24589][err][22m
+    [2m  - [pid=24589][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24589][err] To fix this, you can:[22m
+    [2m  - [pid=24589][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24589][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24589][err][22m
+    [2m  - [pid=24589][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24589][err][22m
+    [2m  - [pid=24589][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24589] <gracefully close start>[22m
+    [2m  - [pid=24589] <kill>[22m
+    [2m  - [pid=24589] <will force kill>[22m
+    [2m  - [pid=24589] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24589] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24589] starting temporary directories cleanup[22m
+    [2m  - [pid=24589] finished temporary directories cleanup[22m
+    [2m  - [pid=24589] <gracefully close end>[22m
+
+
+  6) [replay-chromium] › tests/airport-autocomplete.spec.ts:65:3 › AirportAutocomplete › AirportAutocomplete selects a suggestion and populates the field 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-L88CTx --remote-debugging-pipe --no-startup-window
+    <launched> pid=24603
+    [pid=24603][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24603][err] 
+    [pid=24603][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24603][err] To fix this, you can:
+    [pid=24603][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24603][err]   2. Install multi-arch libraries in this container.
+    [pid=24603][err] 
+    [pid=24603][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24603][err] 
+    [pid=24603][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-L88CTx --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24603[22m
+    [2m  - [pid=24603][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24603][err][22m
+    [2m  - [pid=24603][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24603][err] To fix this, you can:[22m
+    [2m  - [pid=24603][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24603][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24603][err][22m
+    [2m  - [pid=24603][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24603][err][22m
+    [2m  - [pid=24603][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24603] <gracefully close start>[22m
+    [2m  - [pid=24603] <kill>[22m
+    [2m  - [pid=24603] <will force kill>[22m
+    [2m  - [pid=24603] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24603] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24603] starting temporary directories cleanup[22m
+    [2m  - [pid=24603] finished temporary directories cleanup[22m
+    [2m  - [pid=24603] <gracefully close end>[22m
+
+
+  7) [replay-chromium] › tests/airport-autocomplete.spec.ts:79:3 › AirportAutocomplete › AirportAutocomplete swap button exchanges origin and destination 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-DQsvU1 --remote-debugging-pipe --no-startup-window
+    <launched> pid=24617
+    [pid=24617][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24617][err] 
+    [pid=24617][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24617][err] To fix this, you can:
+    [pid=24617][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24617][err]   2. Install multi-arch libraries in this container.
+    [pid=24617][err] 
+    [pid=24617][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24617][err] 
+    [pid=24617][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-DQsvU1 --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24617[22m
+    [2m  - [pid=24617][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24617][err][22m
+    [2m  - [pid=24617][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24617][err] To fix this, you can:[22m
+    [2m  - [pid=24617][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24617][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24617][err][22m
+    [2m  - [pid=24617][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24617][err][22m
+    [2m  - [pid=24617][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24617] <gracefully close start>[22m
+    [2m  - [pid=24617] <kill>[22m
+    [2m  - [pid=24617] <will force kill>[22m
+    [2m  - [pid=24617] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24617] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24617] starting temporary directories cleanup[22m
+    [2m  - [pid=24617] finished temporary directories cleanup[22m
+    [2m  - [pid=24617] <gracefully close end>[22m
+
+
+  8) [replay-chromium] › tests/airport-autocomplete.spec.ts:104:3 › AirportAutocomplete › AirportAutocomplete swap button works with empty fields 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-dbx5OT --remote-debugging-pipe --no-startup-window
+    <launched> pid=24631
+    [pid=24631][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24631][err] 
+    [pid=24631][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24631][err] To fix this, you can:
+    [pid=24631][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24631][err]   2. Install multi-arch libraries in this container.
+    [pid=24631][err] 
+    [pid=24631][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24631][err] 
+    [pid=24631][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-dbx5OT --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24631[22m
+    [2m  - [pid=24631][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24631][err][22m
+    [2m  - [pid=24631][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24631][err] To fix this, you can:[22m
+    [2m  - [pid=24631][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24631][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24631][err][22m
+    [2m  - [pid=24631][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24631][err][22m
+    [2m  - [pid=24631][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24631] <gracefully close start>[22m
+    [2m  - [pid=24631] <kill>[22m
+    [2m  - [pid=24631] <will force kill>[22m
+    [2m  - [pid=24631] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24631] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24631] starting temporary directories cleanup[22m
+    [2m  - [pid=24631] finished temporary directories cleanup[22m
+    [2m  - [pid=24631] <gracefully close end>[22m
+
+
+  9) [replay-chromium] › tests/airport-autocomplete.spec.ts:124:3 › AirportAutocomplete › AirportAutocomplete clears field and shows new suggestions 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-Y7D1Y6 --remote-debugging-pipe --no-startup-window
+    <launched> pid=24645
+    [pid=24645][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24645][err] 
+    [pid=24645][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24645][err] To fix this, you can:
+    [pid=24645][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24645][err]   2. Install multi-arch libraries in this container.
+    [pid=24645][err] 
+    [pid=24645][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24645][err] 
+    [pid=24645][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-Y7D1Y6 --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24645[22m
+    [2m  - [pid=24645][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24645][err][22m
+    [2m  - [pid=24645][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24645][err] To fix this, you can:[22m
+    [2m  - [pid=24645][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24645][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24645][err][22m
+    [2m  - [pid=24645][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24645][err][22m
+    [2m  - [pid=24645][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24645] <gracefully close start>[22m
+    [2m  - [pid=24645] <kill>[22m
+    [2m  - [pid=24645] <will force kill>[22m
+    [2m  - [pid=24645] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24645] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24645] starting temporary directories cleanup[22m
+    [2m  - [pid=24645] finished temporary directories cleanup[22m
+    [2m  - [pid=24645] <gracefully close end>[22m
+
+
+  10) [replay-chromium] › tests/airport-autocomplete.spec.ts:146:3 › AirportAutocomplete › AirportAutocomplete shows no results for invalid query 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-eUI75g --remote-debugging-pipe --no-startup-window
+    <launched> pid=24659
+    [pid=24659][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24659][err] 
+    [pid=24659][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24659][err] To fix this, you can:
+    [pid=24659][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24659][err]   2. Install multi-arch libraries in this container.
+    [pid=24659][err] 
+    [pid=24659][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24659][err] 
+    [pid=24659][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-eUI75g --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24659[22m
+    [2m  - [pid=24659][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24659][err][22m
+    [2m  - [pid=24659][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24659][err] To fix this, you can:[22m
+    [2m  - [pid=24659][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24659][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24659][err][22m
+    [2m  - [pid=24659][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24659][err][22m
+    [2m  - [pid=24659][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24659] <gracefully close start>[22m
+    [2m  - [pid=24659] <kill>[22m
+    [2m  - [pid=24659] <will force kill>[22m
+    [2m  - [pid=24659] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24659] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24659] starting temporary directories cleanup[22m
+    [2m  - [pid=24659] finished temporary directories cleanup[22m
+    [2m  - [pid=24659] <gracefully close end>[22m
+
+
+  11) [replay-chromium] › tests/airport-autocomplete.spec.ts:159:3 › AirportAutocomplete › AirportAutocomplete destination works after using origin 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-t0WCfL --remote-debugging-pipe --no-startup-window
+    <launched> pid=24673
+    [pid=24673][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=24673][err] 
+    [pid=24673][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=24673][err] To fix this, you can:
+    [pid=24673][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=24673][err]   2. Install multi-arch libraries in this container.
+    [pid=24673][err] 
+    [pid=24673][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=24673][err] 
+    [pid=24673][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-t0WCfL --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=24673[22m
+    [2m  - [pid=24673][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=24673][err][22m
+    [2m  - [pid=24673][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=24673][err] To fix this, you can:[22m
+    [2m  - [pid=24673][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=24673][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=24673][err][22m
+    [2m  - [pid=24673][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=24673][err][22m
+    [2m  - [pid=24673][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=24673] <gracefully close start>[22m
+    [2m  - [pid=24673] <kill>[22m
+    [2m  - [pid=24673] <will force kill>[22m
+    [2m  - [pid=24673] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=24673] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=24673] starting temporary directories cleanup[22m
+    [2m  - [pid=24673] finished temporary directories cleanup[22m
+    [2m  - [pid=24673] <gracefully close end>[22m
+
+
+  11 failed
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:9:3 › AirportAutocomplete › AirportAutocomplete origin field shows placeholder text 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:16:3 › AirportAutocomplete › AirportAutocomplete destination field shows placeholder text 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:23:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing airport name 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:37:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing IATA code 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:51:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing city name 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:65:3 › AirportAutocomplete › AirportAutocomplete selects a suggestion and populates the field 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:79:3 › AirportAutocomplete › AirportAutocomplete swap button exchanges origin and destination 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:104:3 › AirportAutocomplete › AirportAutocomplete swap button works with empty fields 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:124:3 › AirportAutocomplete › AirportAutocomplete clears field and shows new suggestions 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:146:3 › AirportAutocomplete › AirportAutocomplete shows no results for invalid query 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:159:3 › AirportAutocomplete › AirportAutocomplete destination works after using origin 
+
+(node:24507) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24520) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24534) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24548) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24562) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24576) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24590) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24604) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24618) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24632) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24646) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:24660) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+=== Server Output ===
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+⬥ Setting up local dev server
+
+⬥ Starting framework dev server
+⠋ Waiting for framework dev server to be ready on port 5173
+[1G
+> google-flights@1.0.0 dev
+> vite --host 127.0.0.1 --port 5173 --strictPort
+
+⠙ Waiting for framework dev server to be ready on port 5173
+[1G
+  VITE v6.4.1  ready in 119 ms
+
+⠹ Waiting for framework dev server to be ready on port 5173
+[1G  ➜  Local:   http://127.0.0.1:5173/
+⠸ Waiting for framework dev server to be ready on port 5173
+✔ framework dev server ready on port 5173
+⬥ Edge functions are disabled. Run without the --internal-disable-edge-functions flag to enable them.
+
+   ╭─────────────────────── ⬥  ────────────────────────╮
+   │                                                   │
+   │   Local dev server ready: http://localhost:8888   │
+   │                                                   │
+   ╰───────────────────────────────────────────────────╯
+
+⬥ Loaded function db
+⬥ Loaded function search-flights
+⬥ Loaded function tracked-routes
+⬥ Loaded function bookings
+⬥ Loaded function my-bookings
+⬥ Loaded function recent-searches
+⬥ Loaded function airports
+⬥ Loaded function popular-destinations
+⬥ Loaded function explore-dates
+⬥ Loaded function explore-destinations
+⬥ Loaded function explore-deals
+⬥ Loaded function flight-legs
+(node:24390) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Server process exited with code: null
+Cleaned up test branch

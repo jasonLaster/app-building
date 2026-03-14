@@ -67,7 +67,10 @@ async function neonApi(method: string, path: string, body?: unknown) {
 async function main() {
   // Step 1: Kill stale processes
   try { execSync('pkill -f "netlify dev" 2>/dev/null || true', { stdio: 'ignore' }) } catch { /* ignore */ }
-  try { execSync('pkill -f "vite" 2>/dev/null || true', { stdio: 'ignore' }) } catch { /* ignore */ }
+  try { execSync('pkill -f "functions-server" 2>/dev/null || true', { stdio: 'ignore' }) } catch { /* ignore */ }
+  try { execSync('pkill -f "node.*vite" 2>/dev/null || true', { stdio: 'ignore' }) } catch { /* ignore */ }
+  // Wait for ports to be released
+  await new Promise(r => setTimeout(r, 1000))
 
   // Step 2: Clean up stale Neon test branches
   const branchesRes = await neonApi('GET', `/projects/${NEON_PROJECT_ID}/branches`) as { branches?: { id: string; name: string }[] }
@@ -128,21 +131,59 @@ async function main() {
     await truncateAndSeed(testDbUrl)
     log('Database seeded')
 
-    // Step 5: Start netlify dev
-    log('Starting netlify dev...')
-    const serverProc = spawn('npx', ['netlify', 'dev', '--port', '8888', '--functions', './netlify/functions'], {
+    // Step 5a: Start custom functions server
+    log('Starting functions server...')
+    const functionsProc = spawn('npx', ['tsx', 'scripts/functions-server.ts', '9999'], {
       cwd: appDir,
-      env: { ...process.env, DATABASE_URL: testDbUrl, LC_ALL: 'C' },
+      env: { ...process.env, DATABASE_URL: testDbUrl },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    })
+
+    let functionsOutput = ''
+    functionsProc.stdout.on('data', (d: Buffer) => {
+      functionsOutput += d.toString()
+      log('[functions] ' + d.toString().trim())
+    })
+    functionsProc.stderr.on('data', (d: Buffer) => { functionsOutput += d.toString() })
+    functionsProc.on('error', (e: Error) => { log('Functions process error: ' + e.message) })
+    functionsProc.on('exit', (code: number | null) => { log('Functions process exited with code: ' + code) })
+
+    // Wait for functions server
+    await new Promise<void>((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        log('Functions output at timeout:\n' + functionsOutput)
+        reject(new Error('Functions server start timeout'))
+      }, 30000)
+      const check = setInterval(async () => {
+        if (functionsOutput.includes('Functions server ready')) {
+          clearInterval(check)
+          clearTimeout(timeout)
+          resolve()
+        }
+      }, 200)
+    })
+    log('Functions server ready')
+
+    // Step 5b: Start vite dev server (proxies /api to functions server on 9999)
+    log('Starting vite dev server...')
+    const serverProc = spawn('npx', ['vite', '--host', '127.0.0.1', '--port', '8888', '--strictPort'], {
+      cwd: appDir,
+      env: { ...process.env, DATABASE_URL: testDbUrl },
       stdio: ['ignore', 'pipe', 'pipe'],
     })
 
     let serverOutput = ''
     serverProc.stdout.on('data', (d: Buffer) => { serverOutput += d.toString() })
     serverProc.stderr.on('data', (d: Buffer) => { serverOutput += d.toString() })
+    serverProc.on('error', (e: Error) => { log('Server process error: ' + e.message) })
+    serverProc.on('exit', (code: number | null) => { log('Server process exited with code: ' + code) })
 
-    // Wait for server to be ready
+    // Wait for vite to be ready
     await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Server start timeout')), 30000)
+      const timeout = setTimeout(() => {
+        log('Server output at timeout:\n' + serverOutput)
+        reject(new Error('Server start timeout'))
+      }, 30000)
       const check = setInterval(async () => {
         try {
           const res = await fetch('http://localhost:8888', { signal: AbortSignal.timeout(2000) })
@@ -152,7 +193,7 @@ async function main() {
             resolve()
           }
         } catch { /* not ready yet */ }
-      }, 1000)
+      }, 500)
     })
 
     log('Server ready')
@@ -265,6 +306,7 @@ async function main() {
 
     // Clean up server
     serverProc.kill('SIGTERM')
+    functionsProc.kill('SIGTERM')
 
     // Step 10: Print summary
     writeFileSync(logPath, logContent)

@@ -1,0 +1,19 @@
+Creating branch: test-run-1773525195104
+Branch DB URL: postgresql://neondb_owner:***@ep-spring-sun-ahmu7gd6.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify dev for functions...
+Functions process exited with code: 1
+Functions output at timeout:
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+⬥ Setting up local dev server
+
+⬥ Starting framework dev server
+⠋ Waiting for framework dev server to be ready on port 19999
+⬥ "node -e "require('http').createServer((q,r)=>{r.end()}).listen(19999)"" exited with code 0. Shutting down Netlify Dev server
+
+Cleaned up test branch

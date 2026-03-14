@@ -1,0 +1,295 @@
+Creating branch: test-run-1773525566405
+Branch DB URL: postgresql://neondb_owner:***@ep-purple-block-ahtyo5w7.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify dev...
+Server ready
+Running: npx playwright test tests/airport-autocomplete.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 11 tests using 1 worker
+
+  ✓   1 [replay-chromium] › tests/airport-autocomplete.spec.ts:9:3 › AirportAutocomplete › AirportAutocomplete origin field shows placeholder text (573ms)
+  ✓   2 [replay-chromium] › tests/airport-autocomplete.spec.ts:16:3 › AirportAutocomplete › AirportAutocomplete destination field shows placeholder text (322ms)
+  ✘   3 [replay-chromium] › tests/airport-autocomplete.spec.ts:23:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing airport name (10.3s)
+  ✘   4 [replay-chromium] › tests/airport-autocomplete.spec.ts:37:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing IATA code (10.5s)
+  ✘   5 [replay-chromium] › tests/airport-autocomplete.spec.ts:51:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing city name (10.4s)
+  ✘   6 [replay-chromium] › tests/airport-autocomplete.spec.ts:65:3 › AirportAutocomplete › AirportAutocomplete selects a suggestion and populates the field (10.5s)
+  ✘   7 [replay-chromium] › tests/airport-autocomplete.spec.ts:79:3 › AirportAutocomplete › AirportAutocomplete swap button exchanges origin and destination (10.3s)
+  ✘   8 [replay-chromium] › tests/airport-autocomplete.spec.ts:104:3 › AirportAutocomplete › AirportAutocomplete swap button works with empty fields (10.4s)
+  ✘   9 [replay-chromium] › tests/airport-autocomplete.spec.ts:124:3 › AirportAutocomplete › AirportAutocomplete clears field and shows new suggestions (10.4s)
+  ✘  10 [replay-chromium] › tests/airport-autocomplete.spec.ts:146:3 › AirportAutocomplete › AirportAutocomplete shows no results for invalid query (10.3s)
+  ✘  11 [replay-chromium] › tests/airport-autocomplete.spec.ts:159:3 › AirportAutocomplete › AirportAutocomplete destination works after using origin (10.4s)
+
+
+  1) [replay-chromium] › tests/airport-autocomplete.spec.ts:23:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing airport name 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      27 |
+      28 |     const dropdown = page.getByTestId('origin-dropdown')
+    > 29 |     await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                            ^
+      30 |
+      31 |     const laxSuggestion = page.getByTestId('origin-suggestion-LAX')
+      32 |     await expect(laxSuggestion).toBeVisible()
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:29:28
+
+    Error Context: test-results/airport-autocomplete-Airpo-a898f-ns-when-typing-airport-name-replay-chromium/error-context.md
+
+  2) [replay-chromium] › tests/airport-autocomplete.spec.ts:37:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing IATA code 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      41 |
+      42 |     const dropdown = page.getByTestId('origin-dropdown')
+    > 43 |     await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                            ^
+      44 |
+      45 |     const jfkSuggestion = page.getByTestId('origin-suggestion-JFK')
+      46 |     await expect(jfkSuggestion).toBeVisible()
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:43:28
+
+    Error Context: test-results/airport-autocomplete-Airpo-9fb85-tions-when-typing-IATA-code-replay-chromium/error-context.md
+
+  3) [replay-chromium] › tests/airport-autocomplete.spec.ts:51:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing city name 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('destination-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('destination-dropdown')[22m
+
+
+      55 |
+      56 |     const dropdown = page.getByTestId('destination-dropdown')
+    > 57 |     await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                            ^
+      58 |
+      59 |     const lhrSuggestion = page.getByTestId('destination-suggestion-LHR')
+      60 |     await expect(lhrSuggestion).toBeVisible()
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:57:28
+
+    Error Context: test-results/airport-autocomplete-Airpo-00cb5-tions-when-typing-city-name-replay-chromium/error-context.md
+
+  4) [replay-chromium] › tests/airport-autocomplete.spec.ts:65:3 › AirportAutocomplete › AirportAutocomplete selects a suggestion and populates the field 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      69 |
+      70 |     const dropdown = page.getByTestId('origin-dropdown')
+    > 71 |     await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                            ^
+      72 |
+      73 |     await page.getByTestId('origin-suggestion-LAX').click()
+      74 |
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:71:28
+
+    Error Context: test-results/airport-autocomplete-Airpo-e7068-ion-and-populates-the-field-replay-chromium/error-context.md
+
+  5) [replay-chromium] › tests/airport-autocomplete.spec.ts:79:3 › AirportAutocomplete › AirportAutocomplete swap button exchanges origin and destination 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      82 |     await originInput.click()
+      83 |     await originInput.fill('LAX')
+    > 84 |     await expect(page.getByTestId('origin-dropdown')).toBeVisible({ timeout: 10000 })
+         |                                                       ^
+      85 |     await page.getByTestId('origin-suggestion-LAX').click()
+      86 |     await expect(originInput).toHaveValue('Los Angeles (LAX)')
+      87 |
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:84:55
+
+    Error Context: test-results/airport-autocomplete-Airpo-d457d-nges-origin-and-destination-replay-chromium/error-context.md
+
+  6) [replay-chromium] › tests/airport-autocomplete.spec.ts:104:3 › AirportAutocomplete › AirportAutocomplete swap button works with empty fields 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      107 |     await originInput.click()
+      108 |     await originInput.fill('LAX')
+    > 109 |     await expect(page.getByTestId('origin-dropdown')).toBeVisible({ timeout: 10000 })
+          |                                                       ^
+      110 |     await page.getByTestId('origin-suggestion-LAX').click()
+      111 |     await expect(originInput).toHaveValue('Los Angeles (LAX)')
+      112 |
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:109:55
+
+    Error Context: test-results/airport-autocomplete-Airpo-3bc78-ton-works-with-empty-fields-replay-chromium/error-context.md
+
+  7) [replay-chromium] › tests/airport-autocomplete.spec.ts:124:3 › AirportAutocomplete › AirportAutocomplete clears field and shows new suggestions 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      127 |     await originInput.click()
+      128 |     await originInput.fill('LAX')
+    > 129 |     await expect(page.getByTestId('origin-dropdown')).toBeVisible({ timeout: 10000 })
+          |                                                       ^
+      130 |     await page.getByTestId('origin-suggestion-LAX').click()
+      131 |     await expect(originInput).toHaveValue('Los Angeles (LAX)')
+      132 |
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:129:55
+
+    Error Context: test-results/airport-autocomplete-Airpo-d9b6d-d-and-shows-new-suggestions-replay-chromium/error-context.md
+
+  8) [replay-chromium] › tests/airport-autocomplete.spec.ts:146:3 › AirportAutocomplete › AirportAutocomplete shows no results for invalid query 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      150 |
+      151 |     const dropdown = page.getByTestId('origin-dropdown')
+    > 152 |     await expect(dropdown).toBeVisible({ timeout: 10000 })
+          |                            ^
+      153 |
+      154 |     const noResults = page.getByTestId('origin-no-results')
+      155 |     await expect(noResults).toBeVisible()
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:152:28
+
+    Error Context: test-results/airport-autocomplete-Airpo-6cbe8-o-results-for-invalid-query-replay-chromium/error-context.md
+
+  9) [replay-chromium] › tests/airport-autocomplete.spec.ts:159:3 › AirportAutocomplete › AirportAutocomplete destination works after using origin 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('origin-dropdown')[22m
+
+
+      162 |     await originInput.click()
+      163 |     await originInput.fill('LAX')
+    > 164 |     await expect(page.getByTestId('origin-dropdown')).toBeVisible({ timeout: 10000 })
+          |                                                       ^
+      165 |     await page.getByTestId('origin-suggestion-LAX').click()
+      166 |     await expect(originInput).toHaveValue('Los Angeles (LAX)')
+      167 |
+        at /repo/apps/GoogleFlights/tests/airport-autocomplete.spec.ts:164:55
+
+    Error Context: test-results/airport-autocomplete-Airpo-11ad7-on-works-after-using-origin-replay-chromium/error-context.md
+
+  9 failed
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:23:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing airport name 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:37:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing IATA code 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:51:3 › AirportAutocomplete › AirportAutocomplete shows suggestions when typing city name 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:65:3 › AirportAutocomplete › AirportAutocomplete selects a suggestion and populates the field 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:79:3 › AirportAutocomplete › AirportAutocomplete swap button exchanges origin and destination 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:104:3 › AirportAutocomplete › AirportAutocomplete swap button works with empty fields 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:124:3 › AirportAutocomplete › AirportAutocomplete clears field and shows new suggestions 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:146:3 › AirportAutocomplete › AirportAutocomplete shows no results for invalid query 
+    [replay-chromium] › tests/airport-autocomplete.spec.ts:159:3 › AirportAutocomplete › AirportAutocomplete destination works after using origin 
+  2 passed (1.7m)
+
+
+=== Server Output ===
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+⬥ Setting up local dev server
+
+⬥ Starting framework dev server
+⠋ Waiting for framework dev server to be ready on port 5173
+[1G
+> google-flights@1.0.0 dev
+> vite --host 127.0.0.1 --port 5173 --strictPort
+
+⠙ Waiting for framework dev server to be ready on port 5173
+[1G
+  VITE v6.4.1  ready in 120 ms
+
+⠹ Waiting for framework dev server to be ready on port 5173
+[1G⠸ Waiting for framework dev server to be ready on port 5173
+  ➜  Local:   http://127.0.0.1:5173/
+✔ framework dev server ready on port 5173
+⬥ Edge functions are disabled. Run without the --internal-disable-edge-functions flag to enable them.
+
+   ╭─────────────────────── ⬥  ────────────────────────╮
+   │                                                   │
+   │   Local dev server ready: http://localhost:8888   │
+   │                                                   │
+   ╰───────────────────────────────────────────────────╯
+
+
+Server process exited with code: null
+Cleaned up test branch

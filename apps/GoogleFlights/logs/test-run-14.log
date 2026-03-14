@@ -1,0 +1,431 @@
+Creating branch: test-run-1773524753340
+Branch DB URL: postgresql://neondb_owner:***@ep-muddy-feather-ah9b5ahl.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify functions server...
+Functions output at timeout:
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+
+   ╭─────────────────────── ⬥  ────────────────────────╮
+   │                                                   │
+   │   Local dev server ready: http://localhost:9888   │
+   │                                                   │
+   ╰───────────────────────────────────────────────────╯
+
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+⬥ Loaded function explore-deals
+⬥ Loaded function bookings
+⬥ Loaded function my-bookings
+⬥ Loaded function explore-dates
+⬥ Loaded function popular-destinations
+⬥ Loaded function explore-destinations
+⬥ Loaded function db
+⬥ Loaded function search-flights
+⬥ Loaded function airports
+⬥ Loaded function flight-legs
+⬥ Loaded function recent-searches
+⬥ Loaded function tracked-routes
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:35185
+Error: connect ECONNREFUSED 127.0.0.1:35185
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 391 ms.
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37567
+Error: connect ECONNREFUSED 127.0.0.1:37567
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 957 ms.
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:40709
+Error: connect ECONNREFUSED 127.0.0.1:40709
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 960 ms.
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43951
+Error: connect ECONNREFUSED 127.0.0.1:43951
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 328 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:33149
+Error: connect ECONNREFUSED 127.0.0.1:33149
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 432 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:46063
+Error: connect ECONNREFUSED 127.0.0.1:46063
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 328 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:39101
+Error: connect ECONNREFUSED 127.0.0.1:39101
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 360 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:34377
+Error: connect ECONNREFUSED 127.0.0.1:34377
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 339 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:45023
+Error: connect ECONNREFUSED 127.0.0.1:45023
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 360 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:36977
+Error: connect ECONNREFUSED 127.0.0.1:36977
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 344 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:34481
+Error: connect ECONNREFUSED 127.0.0.1:34481
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 357 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:33595
+Error: connect ECONNREFUSED 127.0.0.1:33595
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 376 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37069
+Error: connect ECONNREFUSED 127.0.0.1:37069
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 345 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:46597
+Error: connect ECONNREFUSED 127.0.0.1:46597
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 389 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43499
+Error: connect ECONNREFUSED 127.0.0.1:43499
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 349 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:46065
+Error: connect ECONNREFUSED 127.0.0.1:46065
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 360 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:34513
+Error: connect ECONNREFUSED 127.0.0.1:34513
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 371 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:41991
+Error: connect ECONNREFUSED 127.0.0.1:41991
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 375 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:41121
+Error: connect ECONNREFUSED 127.0.0.1:41121
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 354 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:44091
+Error: connect ECONNREFUSED 127.0.0.1:44091
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 354 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43991
+Error: connect ECONNREFUSED 127.0.0.1:43991
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 349 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43979
+Error: connect ECONNREFUSED 127.0.0.1:43979
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 582 ms.
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:39923
+Error: connect ECONNREFUSED 127.0.0.1:39923
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 430 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43195
+Error: connect ECONNREFUSED 127.0.0.1:43195
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 416 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:33731
+Error: connect ECONNREFUSED 127.0.0.1:33731
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 347 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:35785
+Error: connect ECONNREFUSED 127.0.0.1:35785
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 356 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:41057
+Error: connect ECONNREFUSED 127.0.0.1:41057
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 404 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37829
+Error: connect ECONNREFUSED 127.0.0.1:37829
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 354 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43021
+Error: connect ECONNREFUSED 127.0.0.1:43021
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 358 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:33893
+Error: connect ECONNREFUSED 127.0.0.1:33893
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 352 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:44173
+Error: connect ECONNREFUSED 127.0.0.1:44173
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 370 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43963
+Error: connect ECONNREFUSED 127.0.0.1:43963
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 347 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37825
+Error: connect ECONNREFUSED 127.0.0.1:37825
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 337 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:32847
+Error: connect ECONNREFUSED 127.0.0.1:32847
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 359 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:36237
+Error: connect ECONNREFUSED 127.0.0.1:36237
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 347 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:34153
+Error: connect ECONNREFUSED 127.0.0.1:34153
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 346 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:34049
+Error: connect ECONNREFUSED 127.0.0.1:34049
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 399 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37817
+Error: connect ECONNREFUSED 127.0.0.1:37817
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 327 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37703
+Error: connect ECONNREFUSED 127.0.0.1:37703
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 352 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:41369
+Error: connect ECONNREFUSED 127.0.0.1:41369
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 374 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:41481
+Error: connect ECONNREFUSED 127.0.0.1:41481
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 417 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:42007
+Error: connect ECONNREFUSED 127.0.0.1:42007
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 351 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:34689
+Error: connect ECONNREFUSED 127.0.0.1:34689
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 340 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:38539
+Error: connect ECONNREFUSED 127.0.0.1:38539
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 374 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:44001
+Error: connect ECONNREFUSED 127.0.0.1:44001
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 339 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:44259
+Error: connect ECONNREFUSED 127.0.0.1:44259
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 336 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:44549
+Error: connect ECONNREFUSED 127.0.0.1:44549
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 321 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:43137
+Error: connect ECONNREFUSED 127.0.0.1:43137
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 345 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:39011
+Error: connect ECONNREFUSED 127.0.0.1:39011
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 326 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:36183
+Error: connect ECONNREFUSED 127.0.0.1:36183
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 362 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:44087
+Error: connect ECONNREFUSED 127.0.0.1:44087
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 341 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37429
+Error: connect ECONNREFUSED 127.0.0.1:37429
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 348 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:37509
+Error: connect ECONNREFUSED 127.0.0.1:37509
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 433 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:32805
+Error: connect ECONNREFUSED 127.0.0.1:32805
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 364 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:46615
+Error: connect ECONNREFUSED 127.0.0.1:46615
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 344 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:40777
+Error: connect ECONNREFUSED 127.0.0.1:40777
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 335 ms.
+Request from ::ffff:127.0.0.1: GET /.netlify/functions/airports?q=test
+
+⬥ Function airports has returned an error: connect ECONNREFUSED 127.0.0.1:42407
+Error: connect ECONNREFUSED 127.0.0.1:42407
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+
+Response with status 500 in 343 ms.
+
+Cleaned up test branch

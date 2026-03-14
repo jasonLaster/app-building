@@ -1,0 +1,84 @@
+Creating branch: test-run-1773522953215
+Branch DB URL: postgresql://neondb_owner:***@ep-bold-sky-ahdl6vo0.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify dev...
+Server process exited with code: 1
+Server output at timeout:
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+⬥ Setting up local dev server
+
+⬥ Starting framework dev server
+⠋ Waiting for framework dev server to be ready on port 5173
+[1G⠙ Waiting for framework dev server to be ready on port 5173
+
+> google-flights@1.0.0 dev
+> vite
+
+[1G
+  VITE v6.4.1  ready in 110 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+⠹ Waiting for framework dev server to be ready on port 5173
+✖ Still waiting for server on port 5173 to be ready. Are you sure this is the correct port? Change this with the targetPort option in your netlify.toml.
+⬥ Netlify Dev could not start or connect to localhost:5173.
+⬥ Please make sure your framework server is running on port 5173
+⬥ If not, you can configure it using the targetPort option in your netlify.toml.
+​
+Internal error during "dev.command"                           
+────────────────────────────────────────────────────────────────
+​
+  Error message
+  Error: Timed out waiting for port '5173' to be open
+​
+  Error location
+  During dev.command
+      at startFrameworkServer (file:///usr/local/lib/node_modules/netlify-cli/dist/utils/framework-server.js:52:23)
+      at async devCommand (file:///usr/local/lib/node_modules/netlify-cli/dist/utils/run-build.js:63:31)
+      at async coreStep (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/get.js:31:13)
+      at async fireCoreStep (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/core_step.js:11:98)
+      at async tFireStep (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/time/main.js:19:63)
+      at async file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/run_step.js:65:329
+      at async pReduce.index (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/run_steps.js:12:400)
+      at async runSteps (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/run_steps.js:11:234)
+      at async runBuild (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/core/build.js:406:157)
+      at async initAndRunBuild (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/core/build.js:311:161)
+​
+  Resolved config
+  build:
+    base: /repo/apps/GoogleFlights
+    command: npm run build
+    commandOrigin: config
+    publish: /repo/apps/GoogleFlights/dist
+    publishOrigin: config
+  functionsDirectory: /repo/apps/GoogleFlights/netlify/functions
+  redirects:
+    - from: /api/*
+      status: 200
+      to: /.netlify/functions/:splat
+    - from: /*
+      status: 200
+      to: /index.html
+  redirectsOrigin: config
+ ›   Error: Could not start local development server
+
+Timed out waiting for port '5173' to be open
+
+Error: Timed out waiting for port '5173' to be open
+    at startFrameworkServer (file:///usr/local/lib/node_modules/netlify-cli/dist/utils/framework-server.js:52:23)
+    at async devCommand (file:///usr/local/lib/node_modules/netlify-cli/dist/utils/run-build.js:63:31)
+    at async coreStep (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/get.js:31:13)
+    at async fireCoreStep (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/core_step.js:11:98)
+    at async tFireStep (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/time/main.js:19:63)
+    at async file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/run_step.js:65:329
+    at async pReduce.index (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/run_steps.js:12:400)
+    at async runSteps (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/steps/run_steps.js:11:234)
+    at async runBuild (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/core/build.js:406:157)
+    at async initAndRunBuild (file:///usr/local/lib/node_modules/netlify-cli/node_modules/@netlify/build/lib/core/build.js:311:161)
+
+Cleaned up test branch

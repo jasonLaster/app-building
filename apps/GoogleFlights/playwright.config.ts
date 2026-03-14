@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test'
-import { getExecutablePath } from '@replayio/playwright'
 
 export default defineConfig({
   testDir: './tests',
@@ -13,9 +12,6 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:8888',
     trace: 'on-first-retry',
-    launchOptions: {
-      executablePath: getExecutablePath('chromium'),
-    },
   },
   projects: [
     {
@@ -24,9 +20,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npx netlify dev --port 8888 --functions ./netlify/functions',
+    command: 'npx vite --host 127.0.0.1 --port 8888 --strictPort',
     port: 8888,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
     timeout: 30000,
   },
 })

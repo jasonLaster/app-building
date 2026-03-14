@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/airport-autocomplete.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:03:06.948Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/booking-action.spec.ts"
       ],
       "timestamp": "2026-03-14T21:03:06.948Z",
@@ -220,9 +212,9 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "Unpack: Get all tests passing"
+      "FixTests: tests/airport-autocomplete.spec.ts"
     ],
-    "timestamp": "2026-03-14T18:21:13.050Z",
+    "timestamp": "2026-03-14T21:03:06.948Z",
     "app": "GoogleFlights"
   }
 }

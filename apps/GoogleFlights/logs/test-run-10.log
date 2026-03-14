@@ -1,0 +1,645 @@
+Creating branch: test-run-1773523574887
+Branch DB URL: postgresql://neondb_owner:***@ep-snowy-fire-ahn7kvce.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting netlify dev...
+Server process exited with code: 1
+Server output at timeout:
+⬥ Ignored general context env var: LC_ALL (defined in process)
+⬥ Ignored .env file env var: DATABASE_URL (defined in process)
+⬥ Injected .env file env vars: NEON_PROJECT_ID, NETLIFY_SITE_ID
+⬥ Setting up local dev server
+
+⬥ Starting framework dev server
+⠋ Waiting for framework dev server to be ready on port 5173
+[1G
+> google-flights@1.0.0 dev
+> vite --host 127.0.0.1 --port 5173 --strictPort
+
+⠙ Waiting for framework dev server to be ready on port 5173
+[1G⠹ Waiting for framework dev server to be ready on port 5173
+[1G⠸ Waiting for framework dev server to be ready on port 5173
+
+  VITE v6.4.1  ready in 115 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+✔ framework dev server ready on port 5173
+⠋ Setting up the Edge Functions environment. This may take a couple of minutes.
+
+   ╭─────────────────────── ⬥  ────────────────────────╮
+   │                                                   │
+   │   Local dev server ready: http://localhost:8888   │
+   │                                                   │
+   ╰───────────────────────────────────────────────────╯
+
+⬥ Loaded function db
+⬥ Loaded function explore-dates
+⬥ Loaded function bookings
+⬥ Loaded function my-bookings
+⬥ Loaded function tracked-routes
+⬥ Loaded function search-flights
+⬥ Loaded function popular-destinations
+⬥ Loaded function recent-searches
+⬥ Loaded function explore-destinations
+⬥ Loaded function airports
+⬥ Loaded function flight-legs
+⬥ Loaded function explore-deals
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+ ›   Error: Netlify CLI has terminated unexpectedly.
+
+Please report this problem with reproduction steps at https://ntl.fyi/cli-error including the error details below.
+
+Error: EACCES: permission denied, open '/home/agent/.config/netlify/deno-cli/deno'
+    at toError (file:///usr/local/lib/node_modules/netlify-cli/src/utils/command-helpers.ts:186:39)
+    at logAndThrowError (file:///usr/local/lib/node_modules/netlify-cli/src/utils/command-helpers.ts:193:15)
+    at prepareServer (file:///usr/local/lib/node_modules/netlify-cli/src/lib/edge-functions/proxy.ts:281:12)
+
+  System:
+    OS: Linux 6.17 Debian GNU/Linux 12 (bookworm) 12 (bookworm)
+    CPU: (12) arm64 unknown
+  Binaries:
+    Node: 22.22.1 - /usr/local/bin/node
+    Yarn: 1.22.22 - /usr/local/bin/yarn
+    npm: 10.9.4 - /usr/local/bin/npm
+  npmGlobalPackages:
+    netlify-cli: 24.2.0
+
+
+Cleaned up test branch
