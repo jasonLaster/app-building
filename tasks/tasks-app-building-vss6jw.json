@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentTripsTabs: Write the TripsTabs component",
-        "WriteComponentTripCard: Write the TripCard component",
-        "WriteComponentCancelBookingDialog: Write the CancelBookingDialog component",
-        "WritePageMyTrips: Write the My Trips page"
-      ],
-      "timestamp": "2026-03-14T19:01:21.956Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentStatsOverview: Write the StatsOverview component",
         "WriteComponentListingsTab: Write the ListingsTab component",
         "WriteComponentBookingsTab: Write the BookingsTab component",
@@ -98,15 +87,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentImageGallery: Write the ImageGallery component",
-      "WriteComponentPropertyHeader: Write the PropertyHeader component",
-      "WriteComponentPropertyInfo: Write the PropertyInfo component",
-      "WriteComponentPropertyDescription: Write the PropertyDescription component",
-      "WriteComponentAmenitiesList: Write the AmenitiesList component",
-      "WriteComponentBookingCard: Write the BookingCard component",
-      "WriteComponentReviewsSection: Write the ReviewsSection component",
-      "WriteComponentHostInfoCard: Write the HostInfoCard component",
-      "WritePagePropertyDetail: Write the Property Detail page"
+      "WriteComponentTripsTabs: Write the TripsTabs component",
+      "WriteComponentTripCard: Write the TripCard component",
+      "WriteComponentCancelBookingDialog: Write the CancelBookingDialog component",
+      "WritePageMyTrips: Write the My Trips page"
     ],
     "timestamp": "2026-03-14T19:01:21.956Z",
     "app": "AirbnbClone"

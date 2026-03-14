@@ -73,7 +73,8 @@ export default async (request: Request, _context: Context) => {
     const bookings = await sql`
       SELECT b.*,
         p.title as property_title, p.city as property_city, p.country as property_country,
-        (SELECT url FROM property_images pi WHERE pi.property_id = p.id ORDER BY pi.display_order ASC LIMIT 1) as property_image
+        (SELECT url FROM property_images pi WHERE pi.property_id = p.id ORDER BY pi.display_order ASC LIMIT 1) as property_image,
+        CASE WHEN EXISTS (SELECT 1 FROM reviews r WHERE r.booking_id = b.id) THEN true ELSE false END as has_review
       FROM bookings b
       JOIN properties p ON p.id = b.property_id
       WHERE b.guest_id = ${guestId}

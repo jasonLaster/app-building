@@ -15,6 +15,7 @@ export interface Booking {
   property_city?: string
   property_country?: string
   property_image?: string | null
+  has_review?: boolean
 }
 
 interface BookingsState {
@@ -55,6 +56,34 @@ export const createBooking = createAsyncThunk(
   }
 )
 
+export const fetchUserBookings = createAsyncThunk(
+  'bookings/fetchUserBookings',
+  async (guestId: string, { rejectWithValue }) => {
+    const response = await fetch(`/api/bookings?guest_id=${encodeURIComponent(guestId)}`)
+    const result = await response.json()
+    if (!response.ok) {
+      return rejectWithValue(result.error || 'Failed to fetch bookings')
+    }
+    return result as Booking[]
+  }
+)
+
+export const cancelBooking = createAsyncThunk(
+  'bookings/cancelBooking',
+  async (bookingId: string, { rejectWithValue }) => {
+    const response = await fetch(`/api/bookings/${bookingId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'cancelled' }),
+    })
+    const result = await response.json()
+    if (!response.ok) {
+      return rejectWithValue(result.error || 'Failed to cancel booking')
+    }
+    return result as Booking
+  }
+)
+
 const bookingsSlice = createSlice({
   name: 'bookings',
   initialState,
@@ -75,6 +104,32 @@ const bookingsSlice = createSlice({
       })
       .addCase(createBooking.rejected, (state, action) => {
         state.loading = false
+        state.error = action.payload as string
+      })
+      .addCase(fetchUserBookings.pending, (state) => {
+        if (state.items.length === 0) {
+          state.loading = true
+        }
+        state.error = null
+      })
+      .addCase(fetchUserBookings.fulfilled, (state, action) => {
+        state.loading = false
+        state.items = action.payload
+      })
+      .addCase(fetchUserBookings.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload as string
+      })
+      .addCase(cancelBooking.fulfilled, (state, action) => {
+        const index = state.items.findIndex((b) => b.id === action.payload.id)
+        if (index !== -1) {
+          const existing = state.items[index]
+          if (existing) {
+            state.items[index] = { ...existing, ...action.payload }
+          }
+        }
+      })
+      .addCase(cancelBooking.rejected, (state, action) => {
         state.error = action.payload as string
       })
   },
