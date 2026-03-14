@@ -3,27 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestSidebarSettingsNavigates: Write test for Sidebar Settings link navigates correctly",
-        "WriteTestSidebarHighlightsCurrent: Write test for Sidebar highlights current page link",
-        "WriteTestSidebarActiveHighlightUpdates: Write test for Sidebar active highlight updates on navigation",
-        "WriteTestSidebarPresentOnAllPages: Write test for Sidebar is present on all authenticated pages",
-        "WriteTestSidebarNotShownOnLogin: Write test for Sidebar is not shown on login page",
-        "WriteTestSidebarNotShownOnSignup: Write test for Sidebar is not shown on signup page",
-        "WriteTestSidebarCollapseToggleVisible: Write test for Sidebar collapse toggle button is visible",
-        "WriteTestSidebarCollapsesToIconOnly: Write test for Sidebar collapses to icon-only mode",
-        "WriteTestSidebarExpandsFromIconOnly: Write test for Sidebar expands from icon-only mode",
-        "WriteTestSidebarCollapseStatePersists: Write test for Sidebar collapse state persists across navigation",
-        "WriteTestSidebarIconsClickableCollapsed: Write test for Sidebar icons are still clickable in collapsed mode",
-        "WriteTestSidebarCollapseToggleMultiple: Write test for Sidebar collapse toggle works multiple times in sequence",
-        "WriteTestSidebarTeamSectionsCollapsed: Write test for Sidebar team sections visible in collapsed mode",
-        "WriteTestSidebarWorkspaceSectionCollapsed: Write test for Sidebar workspace section visible in collapsed mode"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestPressingCOpensModal: Write test for Pressing C opens create issue modal",
         "WriteTestPressingCNoModalInInput: Write test for Pressing C does not open modal when typing in input",
         "WriteTestGThenINavigates: Write test for G then I navigates to My Issues",
@@ -762,26 +741,20 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestSidebarRendersWorkspaceHeader: Write test for Sidebar renders workspace header",
-      "WriteTestSidebarWorkspaceNavigatesToHome: Write test for Sidebar workspace header navigates to home",
-      "WriteTestSidebarRendersMainNavLinks: Write test for Sidebar renders main navigation links",
-      "WriteTestSidebarMyIssuesNavigates: Write test for Sidebar My Issues link navigates correctly",
-      "WriteTestSidebarInboxNavigates: Write test for Sidebar Inbox link navigates correctly",
-      "WriteTestSidebarInboxUnreadBadge: Write test for Sidebar Inbox shows unread notification count badge",
-      "WriteTestSidebarInboxBadgeUpdates: Write test for Sidebar Inbox badge updates when notifications are read",
-      "WriteTestSidebarInboxNoBadge: Write test for Sidebar Inbox badge not shown when no unread notifications",
-      "WriteTestSidebarRendersTeamSections: Write test for Sidebar renders team sections",
-      "WriteTestSidebarTeamCollapsible: Write test for Sidebar team section is collapsible",
-      "WriteTestSidebarTeamCollapseMultiple: Write test for Sidebar team section collapse toggles multiple times",
-      "WriteTestSidebarTeamIssuesNavigates: Write test for Sidebar team Issues link navigates to team issues page",
-      "WriteTestSidebarActiveCycleNavigates: Write test for Sidebar team Active Cycle link navigates to cycles page",
-      "WriteTestSidebarProjectsNavigates: Write test for Sidebar team Projects link navigates to team projects",
-      "WriteTestSidebarViewsNavigates: Write test for Sidebar team Views link navigates to saved views",
-      "WriteTestSidebarRendersWorkspaceSection: Write test for Sidebar renders workspace section links",
-      "WriteTestSidebarAllProjectsNavigates: Write test for Sidebar All Projects link navigates correctly",
-      "WriteTestSidebarAllTeamsNavigates: Write test for Sidebar All Teams link navigates correctly",
-      "WriteTestSidebarMembersNavigates: Write test for Sidebar Members link navigates correctly",
-      "WriteTestSidebarLabelsNavigates: Write test for Sidebar Labels link navigates correctly"
+      "WriteTestSidebarSettingsNavigates: Write test for Sidebar Settings link navigates correctly",
+      "WriteTestSidebarHighlightsCurrent: Write test for Sidebar highlights current page link",
+      "WriteTestSidebarActiveHighlightUpdates: Write test for Sidebar active highlight updates on navigation",
+      "WriteTestSidebarPresentOnAllPages: Write test for Sidebar is present on all authenticated pages",
+      "WriteTestSidebarNotShownOnLogin: Write test for Sidebar is not shown on login page",
+      "WriteTestSidebarNotShownOnSignup: Write test for Sidebar is not shown on signup page",
+      "WriteTestSidebarCollapseToggleVisible: Write test for Sidebar collapse toggle button is visible",
+      "WriteTestSidebarCollapsesToIconOnly: Write test for Sidebar collapses to icon-only mode",
+      "WriteTestSidebarExpandsFromIconOnly: Write test for Sidebar expands from icon-only mode",
+      "WriteTestSidebarCollapseStatePersists: Write test for Sidebar collapse state persists across navigation",
+      "WriteTestSidebarIconsClickableCollapsed: Write test for Sidebar icons are still clickable in collapsed mode",
+      "WriteTestSidebarCollapseToggleMultiple: Write test for Sidebar collapse toggle works multiple times in sequence",
+      "WriteTestSidebarTeamSectionsCollapsed: Write test for Sidebar team sections visible in collapsed mode",
+      "WriteTestSidebarWorkspaceSectionCollapsed: Write test for Sidebar workspace section visible in collapsed mode"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
