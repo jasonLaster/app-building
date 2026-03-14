@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestNotificationSeparateTargets: Write test for Notification row click and archive button have separate hit targets"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestTeamIssuesHeader: Write test for Team Issues page renders with header showing team name",
         "WriteTestTeamIssuesGroupedByStatus: Write test for Team Issues page shows issues grouped by status (default)",
         "WriteTestTeamIssuesShowsAll: Write test for Team Issues page shows all team issues, not just current user's",
@@ -651,26 +643,7 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestInboxRendersList: Write test for Inbox page renders with list of notifications",
-      "WriteTestInboxEmptyState: Write test for Inbox page shows empty state when no notifications",
-      "WriteTestInboxUnreadDistinct: Write test for Inbox shows unread notifications visually distinct from read",
-      "WriteTestInboxCountHeader: Write test for Inbox page shows notification count in header",
-      "WriteTestInboxUpdatesSidebarBadge: Write test for Inbox notification list updates sidebar badge when notifications change",
-      "WriteTestInboxNewestFirst: Write test for Inbox notifications are ordered by newest first",
-      "WriteTestArchiveNotification: Write test for Archiving a notification removes it from the list",
-      "WriteTestArchiveMultiple: Write test for Archiving multiple notifications works in sequence",
-      "WriteTestArchiveAllEmpty: Write test for All notifications can be archived to reach empty state",
-      "WriteTestNotificationAssignment: Write test for Notification row displays assignment notification correctly",
-      "WriteTestNotificationIssueUpdate: Write test for Notification row displays issue update notification correctly",
-      "WriteTestNotificationMention: Write test for Notification row displays mention notification correctly",
-      "WriteTestClickUnreadMarksRead: Write test for Clicking an unread notification marks it as read",
-      "WriteTestClickReadNoChange: Write test for Clicking a read notification does not change its state",
-      "WriteTestClickNotificationNavigates: Write test for Clicking a notification navigates to the related issue",
-      "WriteTestArchiveButtonVisible: Write test for Notification row archive button is visible",
-      "WriteTestArchiveButtonNoNavigate: Write test for Notification row archive button archives without navigating",
-      "WriteTestNotificationIcon: Write test for Notification row shows correct icon per notification type",
-      "WriteTestNotificationTimestamps: Write test for Notification row displays relative timestamps that update",
-      "WriteTestMarkReadThenArchive: Write test for Marking notification as read then archiving works correctly"
+      "WriteTestNotificationSeparateTargets: Write test for Notification row click and archive button have separate hit targets"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"

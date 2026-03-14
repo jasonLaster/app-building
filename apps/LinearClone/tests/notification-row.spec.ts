@@ -296,6 +296,39 @@ test.describe('Notification Row', () => {
     }
   });
 
+  test('Notification row click and archive button have separate hit targets', async ({ page, baseURL }) => {
+    const token = await authenticatePage(page, baseURL!);
+    await page.goto('/inbox');
+    await expect(page.getByTestId('notification-list')).toBeVisible({ timeout: 30000 });
+
+    const notifications = await getNotifications(baseURL!, token);
+    expect(notifications.length).toBeGreaterThanOrEqual(2);
+
+    // Use one notification to test archive button isolation
+    const archiveNotif = notifications[0];
+    const archiveRow = page.getByTestId(`notification-row-${archiveNotif.id}`);
+    await expect(archiveRow).toBeVisible();
+
+    // Click specifically on the archive button
+    const archiveBtn = page.getByTestId(`notification-archive-btn-${archiveNotif.id}`);
+    await archiveBtn.click({ force: true });
+
+    // Should NOT navigate away from inbox — the archive button's stopPropagation prevents row click
+    await expect(page).toHaveURL(/\/inbox/, { timeout: 5000 });
+
+    // The notification should be removed from the list (archived)
+    await expect(page.getByTestId(`notification-row-${archiveNotif.id}`)).not.toBeVisible({ timeout: 15000 });
+
+    // Now use a different notification to test that row click DOES navigate
+    const clickNotif = notifications[1];
+    const clickRow = page.getByTestId(`notification-row-${clickNotif.id}`);
+    await expect(clickRow).toBeVisible();
+
+    // Click on the row body (not the archive button) — should navigate to issue detail
+    await clickRow.click();
+    await expect(page).toHaveURL(new RegExp(`/issue/${clickNotif.issue_id}`), { timeout: 30000 });
+  });
+
   test('Marking notification as read then archiving works correctly', async ({ page, baseURL }) => {
     const token = await authenticatePage(page, baseURL!);
     await page.goto('/inbox');
