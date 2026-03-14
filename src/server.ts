@@ -240,10 +240,6 @@ async function processLoop(agentEnv: Record<string, string>, secrets: SecretsSto
       totalCost += result.cost;
       tasksProcessed++;
       postWebhook("task.done", { skill: task.skill, subtasks: task.subtasks, prompt: task.prompt ?? null, cost: result.cost, totalCost, failed: !result.success, pendingTasks: getPendingTaskCount(), duration_ms: Date.now() - taskStartedAt });
-      if (!result.success) {
-        log(`Task failed. Stopping task processing. ${getPendingTaskCount()} task(s) remain in queue.`);
-        detachRequested = true;
-      }
       continue;
     }
 
@@ -428,6 +424,7 @@ async function main(): Promise<void> {
 
   // Now that /repo exists, initialize the logger
   log = createBufferedLogger(LOGS_DIR, CONTAINER_NAME, iteration, (line) => {
+    console.log(line);
     logBuffer.append(line);
     // Format log lines for webhook using the same logic as read-log
     const formatted = formatLogLine(stripTimestamp(line));
