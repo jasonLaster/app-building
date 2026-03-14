@@ -3,25 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestStep6EnteringPricing: Write test for Step 6 — Entering pricing information",
-        "WriteTestStep6Validation: Write test for Step 6 — Validation requires price per night",
-        "WriteTestStep7ReviewPage: Write test for Step 7 — Review and publish page displayed",
-        "WriteTestStep7ReviewShowsData: Write test for Step 7 — Review page shows all entered data correctly",
-        "WriteTestPublishNewListing: Write test for Publishing a new listing creates the property",
-        "WriteTestBackButtonPreviousStep: Write test for Back button navigates to the previous step",
-        "WriteTestCancelButtonClosesForm: Write test for Cancel button closes the form without saving",
-        "WriteTestConfirmCancelDiscardsForm: Write test for Confirming cancel discards the listing form",
-        "WriteTestDismissCancelKeepsForm: Write test for Dismissing cancel keeps the form open",
-        "WriteTestStepIndicatorProgress: Write test for Step indicator shows correct progress throughout the form",
-        "WriteTestDataPersistenceAcrossSteps: Write test for Data persistence across steps when navigating back and forth",
-        "WriteTestAddListingFormRepeatedUse: Write test for Add Listing form works correctly on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestProfilePageRequiresLogin: Write test for Profile page requires login",
         "WriteTestProfilePageDisplaysUserInfo: Write test for Profile page displays current user info",
         "WriteTestEditNameField: Write test for Edit name field inline",
@@ -129,26 +110,18 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestAddListingOpensForm: Write test for Clicking Add Listing button opens the multi-step form",
-      "WriteTestStep1PropertyTypeAndTitle: Write test for Step 1 — Property type selection and title input",
-      "WriteTestStep1SelectingTypeAndTitle: Write test for Step 1 — Selecting property type and entering title",
-      "WriteTestStep1Validation: Write test for Step 1 — Validation prevents proceeding without required fields",
-      "WriteTestStep2LocationFields: Write test for Step 2 — Location fields displayed",
-      "WriteTestStep2AddressAutocomplete: Write test for Step 2 — Address field uses autocomplete",
-      "WriteTestStep2AutocompletePopulatesFields: Write test for Step 2 — Address autocomplete populates related fields",
-      "WriteTestStep2Validation: Write test for Step 2 — Validation requires city and country",
-      "WriteTestStep3DetailsFields: Write test for Step 3 — Details fields displayed",
-      "WriteTestStep3SettingDetails: Write test for Step 3 — Setting property details",
-      "WriteTestStep3Validation: Write test for Step 3 — Validation requires all detail fields",
-      "WriteTestStep4AmenitiesDisplayed: Write test for Step 4 — Amenities selection displayed",
-      "WriteTestStep4SelectingAmenities: Write test for Step 4 — Selecting amenities",
-      "WriteTestStep4AmenitiesToggable: Write test for Step 4 — Amenities are toggleable",
-      "WriteTestStep5PhotoURLInput: Write test for Step 5 — Photo URL input displayed",
-      "WriteTestStep5AddingPhotoURL: Write test for Step 5 — Adding a photo URL",
-      "WriteTestStep5AddingMultiplePhotos: Write test for Step 5 — Adding multiple photo URLs",
-      "WriteTestStep5RemovingPhoto: Write test for Step 5 — Removing a photo",
-      "WriteTestStep5Validation: Write test for Step 5 — Validation requires at least one photo",
-      "WriteTestStep6PricingFields: Write test for Step 6 — Pricing fields displayed"
+      "WriteTestStep6EnteringPricing: Write test for Step 6 — Entering pricing information",
+      "WriteTestStep6Validation: Write test for Step 6 — Validation requires price per night",
+      "WriteTestStep7ReviewPage: Write test for Step 7 — Review and publish page displayed",
+      "WriteTestStep7ReviewShowsData: Write test for Step 7 — Review page shows all entered data correctly",
+      "WriteTestPublishNewListing: Write test for Publishing a new listing creates the property",
+      "WriteTestBackButtonPreviousStep: Write test for Back button navigates to the previous step",
+      "WriteTestCancelButtonClosesForm: Write test for Cancel button closes the form without saving",
+      "WriteTestConfirmCancelDiscardsForm: Write test for Confirming cancel discards the listing form",
+      "WriteTestDismissCancelKeepsForm: Write test for Dismissing cancel keeps the form open",
+      "WriteTestStepIndicatorProgress: Write test for Step indicator shows correct progress throughout the form",
+      "WriteTestDataPersistenceAcrossSteps: Write test for Data persistence across steps when navigating back and forth",
+      "WriteTestAddListingFormRepeatedUse: Write test for Add Listing form works correctly on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
