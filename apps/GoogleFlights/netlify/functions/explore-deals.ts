@@ -62,7 +62,14 @@ export default async (request: Request, _context: Context) => {
     const price = Math.round(Number(r.total_price_cents) / 100)
     const avgPrice = Math.round(Number(r.avg_price_cents) / 100)
     const savingsPercent = avgPrice > 0 ? Math.round(((avgPrice - price) / avgPrice) * 100) : 0
-    const depDate = String(r.departure_date).split('T')[0]!
+
+    // Parse departure_date - Neon may return Date object or string
+    let depDate: string
+    if (r.departure_date instanceof Date) {
+      depDate = r.departure_date.toISOString().split('T')[0]!
+    } else {
+      depDate = String(r.departure_date).split('T')[0]!
+    }
 
     // Compute return date (1 week later)
     const returnDate = new Date(depDate + 'T12:00:00')

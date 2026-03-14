@@ -1,0 +1,6 @@
+Deleting stale branch: test-run-1773528351784
+Creating branch: test-run-1773528355739
+Branch DB URL: postgresql://neondb_owner:***@ep-broad-forest-ah6qt5a5.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...

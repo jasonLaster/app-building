@@ -122,13 +122,39 @@ async function main() {
   let playwrightExit = 1
 
   try {
-    // Step 4: Initialize and seed
+    // Step 4: Initialize and seed (with retry for endpoint readiness)
     log('Initializing schema...')
-    await initSchema(testDbUrl)
+    for (let attempt = 1; attempt <= 5; attempt++) {
+      try {
+        await initSchema(testDbUrl)
+        break
+      } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e)
+        if (attempt < 5 && msg.includes('endpoint could not be found')) {
+          log(`Schema init attempt ${attempt} failed (endpoint not ready), retrying in 3s...`)
+          await new Promise(r => setTimeout(r, 3000))
+        } else {
+          throw e
+        }
+      }
+    }
     log('Schema initialized')
 
     log('Seeding database...')
-    await truncateAndSeed(testDbUrl)
+    for (let attempt = 1; attempt <= 5; attempt++) {
+      try {
+        await truncateAndSeed(testDbUrl)
+        break
+      } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e)
+        if (attempt < 5 && msg.includes('endpoint could not be found')) {
+          log(`Seed attempt ${attempt} failed (endpoint not ready), retrying in 3s...`)
+          await new Promise(r => setTimeout(r, 3000))
+        } else {
+          throw e
+        }
+      }
+    }
     log('Database seeded')
 
     // Step 5a: Start custom functions server

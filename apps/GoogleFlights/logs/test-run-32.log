@@ -1,0 +1,217 @@
+Creating branch: test-run-1773528167082
+Branch DB URL: postgresql://neondb_owner:***@ep-wild-bread-ahc2w983.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/deals-section.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 8 tests using 1 worker
+
+API responses: ["200 [{\"id\":\"1084071d-074c-41ca-9e30-50bf22342cb0\",\"destination_code\":\"JFK\",\"destination_city\":\"New York\",\"destination_country\":\"United States\",\"departure_date\":\"2026-04-05\",\"return_date\":\"2026-04-12\",\"price\":217,\"average_price\":314,\"savings_percent\":31,\"gradient\":\"linear-gradient(135deg, #667eea 0%, #764ba2 100%)\"},{\"id\":\"2a521820-dffa-4b83-bccb-36173e8c850d\",\"destination_code\":\"LHR\",\"destination_city\":\"London\",\"destination_country\":\"United Kingdom\",\"departure_date\":\"2026-04-01\",\"return_date\":\"2026-"]
+Console messages: ["[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 2a521820-dffa-4b83-bccb-36173e8c850d \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 2a521820-dffa-4b83-bccb-36173e8c850d \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 1084071d-074c-41ca-9e30-50bf22342cb0 \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)","[error] Warning: Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.%s 2a521820-dffa-4b83-bccb-36173e8c850d \n    at svg\n    at div\n    at DestinationMap (http://localhost:8888/src/components/DestinationMap.tsx:40:27)\n    at section\n    at div\n    at div\n    at ExplorePage (http://localhost:8888/src/pages/ExplorePage.tsx:34:20)\n    at RenderedRoute (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:6355:26)\n    at Routes (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7222:3)\n    at main\n    at div\n    at App\n    at Router (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:7152:13)\n    at BrowserRouter (http://localhost:8888/node_modules/.vite/deps/react-router-dom.js?v=62340aed:10363:3)\n    at Provider (http://localhost:8888/node_modules/.vite/deps/react-redux.js?v=62340aed:923:11)"]
+Deals section HTML (first 1000 chars): <h3 class="deals-section__title">Deals</h3><div class="deals-section__grid" data-testid="deals-grid"><button class="deals-section__card" data-testid="deal-card-JFK"><div class="deals-section__card-image" style="background: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);"><span class="deals-section__card-code">JFK</span></div><div class="deals-section__card-body"><div class="deals-section__card-destination"><span class="deals-section__card-city">New York</span><span class="deals-section__card-country">United States</span></div><div class="deals-section__card-dates" data-testid="deal-dates-JFK">Apr 5 – Apr 12</div><div class="deals-section__card-pricing"><span class="deals-section__card-price" data-testid="deal-price-JFK">$217</span><span class="deals-section__card-savings" data-testid="deal-savings-JFK">↓ 31% less than usual</span></div></div></button><button class="deals-section__card" data-testid="deal-card-LHR"><div class="deals-section__card-image" style="bac
+  ✓  1 [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page (4.3s)
+  ✘  2 [replay-chromium] › tests/deals-section.spec.ts:62:3 › DealsSection › DealsSection deal card shows destination dates price and savings (10.3s)
+  ✘  3 [replay-chromium] › tests/deals-section.spec.ts:100:3 › DealsSection › DealsSection clicking a deal card initiates a search (10.4s)
+  ✘  4 [replay-chromium] › tests/deals-section.spec.ts:129:3 › DealsSection › DealsSection updates when origin airport changes (10.3s)
+  ✘  5 [replay-chromium] › tests/deals-section.spec.ts:155:3 › DealsSection › DealsSection shows loading state while fetching deals (10.2s)
+  ✘  6 [replay-chromium] › tests/deals-section.spec.ts:173:3 › DealsSection › DealsSection shows empty state when no deals available (10.3s)
+  ✘  7 [replay-chromium] › tests/deals-section.spec.ts:187:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout (10.2s)
+  ✘  8 [replay-chromium] › tests/deals-section.spec.ts:205:3 › DealsSection › DealsSection savings percentage is calculated correctly (10.2s)
+
+
+  1) [replay-chromium] › tests/deals-section.spec.ts:62:3 › DealsSection › DealsSection deal card shows destination dates price and savings 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+       7 |   await input.fill(query)
+       8 |   const dropdown = page.getByTestId('explore-origin-dropdown')
+    >  9 |   await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                          ^
+      10 |   await page.getByTestId(`explore-origin-suggestion-${code}`).click()
+      11 |   await expect(dropdown).not.toBeVisible()
+      12 | }
+        at selectOrigin (/repo/apps/GoogleFlights/tests/deals-section.spec.ts:9:26)
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:63:5
+
+  2) [replay-chromium] › tests/deals-section.spec.ts:100:3 › DealsSection › DealsSection clicking a deal card initiates a search 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+       7 |   await input.fill(query)
+       8 |   const dropdown = page.getByTestId('explore-origin-dropdown')
+    >  9 |   await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                          ^
+      10 |   await page.getByTestId(`explore-origin-suggestion-${code}`).click()
+      11 |   await expect(dropdown).not.toBeVisible()
+      12 | }
+        at selectOrigin (/repo/apps/GoogleFlights/tests/deals-section.spec.ts:9:26)
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:101:5
+
+  3) [replay-chromium] › tests/deals-section.spec.ts:129:3 › DealsSection › DealsSection updates when origin airport changes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+       7 |   await input.fill(query)
+       8 |   const dropdown = page.getByTestId('explore-origin-dropdown')
+    >  9 |   await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                          ^
+      10 |   await page.getByTestId(`explore-origin-suggestion-${code}`).click()
+      11 |   await expect(dropdown).not.toBeVisible()
+      12 | }
+        at selectOrigin (/repo/apps/GoogleFlights/tests/deals-section.spec.ts:9:26)
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:131:5
+
+  4) [replay-chromium] › tests/deals-section.spec.ts:155:3 › DealsSection › DealsSection shows loading state while fetching deals 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+      159 |     await input.fill('LAX')
+      160 |     const dropdown = page.getByTestId('explore-origin-dropdown')
+    > 161 |     await expect(dropdown).toBeVisible({ timeout: 10000 })
+          |                            ^
+      162 |     await page.getByTestId('explore-origin-suggestion-LAX').click()
+      163 |
+      164 |     // After loading completes, deal cards should appear
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:161:28
+
+  5) [replay-chromium] › tests/deals-section.spec.ts:173:3 › DealsSection › DealsSection shows empty state when no deals available 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+       7 |   await input.fill(query)
+       8 |   const dropdown = page.getByTestId('explore-origin-dropdown')
+    >  9 |   await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                          ^
+      10 |   await page.getByTestId(`explore-origin-suggestion-${code}`).click()
+      11 |   await expect(dropdown).not.toBeVisible()
+      12 | }
+        at selectOrigin (/repo/apps/GoogleFlights/tests/deals-section.spec.ts:9:26)
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:175:5
+
+  6) [replay-chromium] › tests/deals-section.spec.ts:187:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+       7 |   await input.fill(query)
+       8 |   const dropdown = page.getByTestId('explore-origin-dropdown')
+    >  9 |   await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                          ^
+      10 |   await page.getByTestId(`explore-origin-suggestion-${code}`).click()
+      11 |   await expect(dropdown).not.toBeVisible()
+      12 | }
+        at selectOrigin (/repo/apps/GoogleFlights/tests/deals-section.spec.ts:9:26)
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:188:5
+
+  7) [replay-chromium] › tests/deals-section.spec.ts:205:3 › DealsSection › DealsSection savings percentage is calculated correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('explore-origin-dropdown')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('explore-origin-dropdown')[22m
+
+
+       7 |   await input.fill(query)
+       8 |   const dropdown = page.getByTestId('explore-origin-dropdown')
+    >  9 |   await expect(dropdown).toBeVisible({ timeout: 10000 })
+         |                          ^
+      10 |   await page.getByTestId(`explore-origin-suggestion-${code}`).click()
+      11 |   await expect(dropdown).not.toBeVisible()
+      12 | }
+        at selectOrigin (/repo/apps/GoogleFlights/tests/deals-section.spec.ts:9:26)
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:206:5
+
+  7 failed
+    [replay-chromium] › tests/deals-section.spec.ts:62:3 › DealsSection › DealsSection deal card shows destination dates price and savings 
+    [replay-chromium] › tests/deals-section.spec.ts:100:3 › DealsSection › DealsSection clicking a deal card initiates a search 
+    [replay-chromium] › tests/deals-section.spec.ts:129:3 › DealsSection › DealsSection updates when origin airport changes 
+    [replay-chromium] › tests/deals-section.spec.ts:155:3 › DealsSection › DealsSection shows loading state while fetching deals 
+    [replay-chromium] › tests/deals-section.spec.ts:173:3 › DealsSection › DealsSection shows empty state when no deals available 
+    [replay-chromium] › tests/deals-section.spec.ts:187:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout 
+    [replay-chromium] › tests/deals-section.spec.ts:205:3 › DealsSection › DealsSection savings percentage is calculated correctly 
+  1 passed (1.4m)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 117 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+[functions] [explore-deals] departure_date raw: "2026-04-05T00:00:00.000Z" object
+Server process exited with code: null
+Functions process exited with code: null

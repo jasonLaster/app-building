@@ -1,0 +1,565 @@
+Creating branch: test-run-1773527514378
+Branch DB URL: postgresql://neondb_owner:***@ep-icy-lab-ah2lgl72.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/deals-section.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 8 tests using 1 worker
+
+  ✘  1 [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page (1ms)
+  ✘  2 [replay-chromium] › tests/deals-section.spec.ts:40:3 › DealsSection › DealsSection deal card shows destination dates price and savings (2ms)
+  ✘  3 [replay-chromium] › tests/deals-section.spec.ts:78:3 › DealsSection › DealsSection clicking a deal card initiates a search (2ms)
+  ✘  4 [replay-chromium] › tests/deals-section.spec.ts:107:3 › DealsSection › DealsSection updates when origin airport changes (3ms)
+  ✘  5 [replay-chromium] › tests/deals-section.spec.ts:133:3 › DealsSection › DealsSection shows loading state while fetching deals (1ms)
+  ✘  6 [replay-chromium] › tests/deals-section.spec.ts:151:3 › DealsSection › DealsSection shows empty state when no deals available (1ms)
+  ✘  7 [replay-chromium] › tests/deals-section.spec.ts:165:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout (1ms)
+  ✘  8 [replay-chromium] › tests/deals-section.spec.ts:183:3 › DealsSection › DealsSection savings percentage is calculated correctly (1ms)
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+
+  1) [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-Pmoefn --remote-debugging-pipe --no-startup-window
+    <launched> pid=415827
+    [pid=415827][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415827][err] 
+    [pid=415827][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415827][err] To fix this, you can:
+    [pid=415827][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415827][err]   2. Install multi-arch libraries in this container.
+    [pid=415827][err] 
+    [pid=415827][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415827][err] 
+    [pid=415827][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-Pmoefn --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415827[22m
+    [2m  - [pid=415827][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415827][err][22m
+    [2m  - [pid=415827][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415827][err] To fix this, you can:[22m
+    [2m  - [pid=415827][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415827][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415827][err][22m
+    [2m  - [pid=415827][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415827][err][22m
+    [2m  - [pid=415827][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415827] <gracefully close start>[22m
+    [2m  - [pid=415827] <kill>[22m
+    [2m  - [pid=415827] <will force kill>[22m
+    [2m  - [pid=415827] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415827] starting temporary directories cleanup[22m
+    [2m  - [pid=415827] finished temporary directories cleanup[22m
+    [2m  - [pid=415827] <gracefully close end>[22m
+
+
+  2) [replay-chromium] › tests/deals-section.spec.ts:40:3 › DealsSection › DealsSection deal card shows destination dates price and savings 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-pWsMxG --remote-debugging-pipe --no-startup-window
+    <launched> pid=415841
+    [pid=415841][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415841][err] 
+    [pid=415841][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415841][err] To fix this, you can:
+    [pid=415841][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415841][err]   2. Install multi-arch libraries in this container.
+    [pid=415841][err] 
+    [pid=415841][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415841][err] 
+    [pid=415841][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-pWsMxG --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415841[22m
+    [2m  - [pid=415841][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415841][err][22m
+    [2m  - [pid=415841][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415841][err] To fix this, you can:[22m
+    [2m  - [pid=415841][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415841][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415841][err][22m
+    [2m  - [pid=415841][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415841][err][22m
+    [2m  - [pid=415841][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415841] <gracefully close start>[22m
+    [2m  - [pid=415841] <kill>[22m
+    [2m  - [pid=415841] <will force kill>[22m
+    [2m  - [pid=415841] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415841] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415841] starting temporary directories cleanup[22m
+    [2m  - [pid=415841] finished temporary directories cleanup[22m
+    [2m  - [pid=415841] <gracefully close end>[22m
+
+
+  3) [replay-chromium] › tests/deals-section.spec.ts:78:3 › DealsSection › DealsSection clicking a deal card initiates a search 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-bfzSep --remote-debugging-pipe --no-startup-window
+    <launched> pid=415855
+    [pid=415855][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415855][err] 
+    [pid=415855][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415855][err] To fix this, you can:
+    [pid=415855][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415855][err]   2. Install multi-arch libraries in this container.
+    [pid=415855][err] 
+    [pid=415855][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415855][err] 
+    [pid=415855][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-bfzSep --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415855[22m
+    [2m  - [pid=415855][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415855][err][22m
+    [2m  - [pid=415855][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415855][err] To fix this, you can:[22m
+    [2m  - [pid=415855][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415855][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415855][err][22m
+    [2m  - [pid=415855][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415855][err][22m
+    [2m  - [pid=415855][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415855] <gracefully close start>[22m
+    [2m  - [pid=415855] <kill>[22m
+    [2m  - [pid=415855] <will force kill>[22m
+    [2m  - [pid=415855] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415855] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415855] starting temporary directories cleanup[22m
+    [2m  - [pid=415855] finished temporary directories cleanup[22m
+    [2m  - [pid=415855] <gracefully close end>[22m
+
+
+  4) [replay-chromium] › tests/deals-section.spec.ts:107:3 › DealsSection › DealsSection updates when origin airport changes 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-FXAoxx --remote-debugging-pipe --no-startup-window
+    <launched> pid=415869
+    [pid=415869][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415869][err] 
+    [pid=415869][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415869][err] To fix this, you can:
+    [pid=415869][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415869][err]   2. Install multi-arch libraries in this container.
+    [pid=415869][err] 
+    [pid=415869][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415869][err] 
+    [pid=415869][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-FXAoxx --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415869[22m
+    [2m  - [pid=415869][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415869][err][22m
+    [2m  - [pid=415869][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415869][err] To fix this, you can:[22m
+    [2m  - [pid=415869][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415869][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415869][err][22m
+    [2m  - [pid=415869][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415869][err][22m
+    [2m  - [pid=415869][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415869] <gracefully close start>[22m
+    [2m  - [pid=415869] <kill>[22m
+    [2m  - [pid=415869] <will force kill>[22m
+    [2m  - [pid=415869] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415869] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415869] starting temporary directories cleanup[22m
+    [2m  - [pid=415869] finished temporary directories cleanup[22m
+    [2m  - [pid=415869] <gracefully close end>[22m
+
+
+  5) [replay-chromium] › tests/deals-section.spec.ts:133:3 › DealsSection › DealsSection shows loading state while fetching deals 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-5clrrN --remote-debugging-pipe --no-startup-window
+    <launched> pid=415883
+    [pid=415883][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415883][err] 
+    [pid=415883][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415883][err] To fix this, you can:
+    [pid=415883][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415883][err]   2. Install multi-arch libraries in this container.
+    [pid=415883][err] 
+    [pid=415883][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415883][err] 
+    [pid=415883][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-5clrrN --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415883[22m
+    [2m  - [pid=415883][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415883][err][22m
+    [2m  - [pid=415883][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415883][err] To fix this, you can:[22m
+    [2m  - [pid=415883][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415883][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415883][err][22m
+    [2m  - [pid=415883][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415883][err][22m
+    [2m  - [pid=415883][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415883] <gracefully close start>[22m
+    [2m  - [pid=415883] <kill>[22m
+    [2m  - [pid=415883] <will force kill>[22m
+    [2m  - [pid=415883] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415883] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415883] starting temporary directories cleanup[22m
+    [2m  - [pid=415883] finished temporary directories cleanup[22m
+    [2m  - [pid=415883] <gracefully close end>[22m
+
+
+  6) [replay-chromium] › tests/deals-section.spec.ts:151:3 › DealsSection › DealsSection shows empty state when no deals available 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-brBcob --remote-debugging-pipe --no-startup-window
+    <launched> pid=415897
+    [pid=415897][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415897][err] 
+    [pid=415897][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415897][err] To fix this, you can:
+    [pid=415897][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415897][err]   2. Install multi-arch libraries in this container.
+    [pid=415897][err] 
+    [pid=415897][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415897][err] 
+    [pid=415897][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-brBcob --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415897[22m
+    [2m  - [pid=415897][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415897][err][22m
+    [2m  - [pid=415897][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415897][err] To fix this, you can:[22m
+    [2m  - [pid=415897][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415897][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415897][err][22m
+    [2m  - [pid=415897][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415897][err][22m
+    [2m  - [pid=415897][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415897] <gracefully close start>[22m
+    [2m  - [pid=415897] <kill>[22m
+    [2m  - [pid=415897] <will force kill>[22m
+    [2m  - [pid=415897] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415897] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415897] starting temporary directories cleanup[22m
+    [2m  - [pid=415897] finished temporary directories cleanup[22m
+    [2m  - [pid=415897] <gracefully close end>[22m
+
+
+  7) [replay-chromium] › tests/deals-section.spec.ts:165:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-PZL6qt --remote-debugging-pipe --no-startup-window
+    <launched> pid=415911
+    [pid=415911][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415911][err] 
+    [pid=415911][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415911][err] To fix this, you can:
+    [pid=415911][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415911][err]   2. Install multi-arch libraries in this container.
+    [pid=415911][err] 
+    [pid=415911][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415911][err] 
+    [pid=415911][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-PZL6qt --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415911[22m
+    [2m  - [pid=415911][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415911][err][22m
+    [2m  - [pid=415911][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415911][err] To fix this, you can:[22m
+    [2m  - [pid=415911][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415911][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415911][err][22m
+    [2m  - [pid=415911][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415911][err][22m
+    [2m  - [pid=415911][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415911] <gracefully close start>[22m
+    [2m  - [pid=415911] <kill>[22m
+    [2m  - [pid=415911] <will force kill>[22m
+    [2m  - [pid=415911] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415911] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415911] starting temporary directories cleanup[22m
+    [2m  - [pid=415911] finished temporary directories cleanup[22m
+    [2m  - [pid=415911] <gracefully close end>[22m
+
+
+  8) [replay-chromium] › tests/deals-section.spec.ts:183:3 › DealsSection › DealsSection savings percentage is calculated correctly 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-N9zNrs --remote-debugging-pipe --no-startup-window
+    <launched> pid=415925
+    [pid=415925][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2
+    [pid=415925][err] 
+    [pid=415925][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.
+    [pid=415925][err] To fix this, you can:
+    [pid=415925][err]   1. Use an Intel (amd64) container to run this program; or
+    [pid=415925][err]   2. Install multi-arch libraries in this container.
+    [pid=415925][err] 
+    [pid=415925][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.
+    [pid=415925][err] 
+    [pid=415925][err] For more details and instructions, see https://orb.cx/multiarch
+    Call log:
+    [2m  - <launching> /home/agent/.replay/runtimes/chrome-linux/chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-N9zNrs --remote-debugging-pipe --no-startup-window[22m
+    [2m  - <launched> pid=415925[22m
+    [2m  - [pid=415925][err] OrbStack ERROR: Dynamic loader not found: /lib64/ld-linux-x86-64.so.2[22m
+    [2m  - [pid=415925][err][22m
+    [2m  - [pid=415925][err] This usually means that you're running an x86 program on an arm64 OS without multi-arch libraries.[22m
+    [2m  - [pid=415925][err] To fix this, you can:[22m
+    [2m  - [pid=415925][err]   1. Use an Intel (amd64) container to run this program; or[22m
+    [2m  - [pid=415925][err]   2. Install multi-arch libraries in this container.[22m
+    [2m  - [pid=415925][err][22m
+    [2m  - [pid=415925][err] This can also be caused by running a glibc executable in a musl distro (e.g. Alpine), or vice versa.[22m
+    [2m  - [pid=415925][err][22m
+    [2m  - [pid=415925][err] For more details and instructions, see https://orb.cx/multiarch[22m
+    [2m  - [pid=415925] <gracefully close start>[22m
+    [2m  - [pid=415925] <kill>[22m
+    [2m  - [pid=415925] <will force kill>[22m
+    [2m  - [pid=415925] exception while trying to kill process: Error: kill ESRCH[22m
+    [2m  - [pid=415925] <process did exit: exitCode=255, signal=null>[22m
+    [2m  - [pid=415925] starting temporary directories cleanup[22m
+    [2m  - [pid=415925] finished temporary directories cleanup[22m
+    [2m  - [pid=415925] <gracefully close end>[22m
+
+
+  8 failed
+    [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page 
+    [replay-chromium] › tests/deals-section.spec.ts:40:3 › DealsSection › DealsSection deal card shows destination dates price and savings 
+    [replay-chromium] › tests/deals-section.spec.ts:78:3 › DealsSection › DealsSection clicking a deal card initiates a search 
+    [replay-chromium] › tests/deals-section.spec.ts:107:3 › DealsSection › DealsSection updates when origin airport changes 
+    [replay-chromium] › tests/deals-section.spec.ts:133:3 › DealsSection › DealsSection shows loading state while fetching deals 
+    [replay-chromium] › tests/deals-section.spec.ts:151:3 › DealsSection › DealsSection shows empty state when no deals available 
+    [replay-chromium] › tests/deals-section.spec.ts:165:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout 
+    [replay-chromium] › tests/deals-section.spec.ts:183:3 › DealsSection › DealsSection savings percentage is calculated correctly 
+
+(node:415800) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:415814) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415828) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415842) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415856) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415870) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415884) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415898) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+(node:415912) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error in reporter AssertionError [ERR_ASSERTION]: Expected `executionId` to be set by `replay:test:start` attachment
+    at ReplayPlaywrightReporter._processAttachments (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:201:28)
+    at ReplayPlaywrightReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/@replayio/playwright/dist/reporter.js:228:48)
+    at ReporterV2Wrapper.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/reporterV2.js:74:31)
+    at /repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:38
+    at wrap (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:104:5)
+    at Multiplexer.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/multiplexer.js:57:7)
+    at InternalReporter.onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/reporters/internalReporter.js:75:31)
+    at JobDispatcher._reportTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:512:31)
+    at JobDispatcher._onTestEnd (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/dispatcher.js:275:10)
+    at WorkerHost.emit (node:events:519:28)
+    at ChildProcess.<anonymous> (/repo/apps/GoogleFlights/node_modules/playwright/lib/runner/processHost.js:97:16)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 137 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

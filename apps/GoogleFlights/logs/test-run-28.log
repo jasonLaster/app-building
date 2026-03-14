@@ -1,0 +1,209 @@
+Deleting stale branch: test-run-1773527162870
+Creating branch: test-run-1773527182425
+Branch DB URL: postgresql://neondb_owner:***@ep-jolly-snow-ahoy44j7.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/deals-section.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 8 tests using 1 worker
+
+  ✘  1 [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page (16.2s)
+  ✘  2 [replay-chromium] › tests/deals-section.spec.ts:40:3 › DealsSection › DealsSection deal card shows destination dates price and savings (16.2s)
+  ✘  3 [replay-chromium] › tests/deals-section.spec.ts:78:3 › DealsSection › DealsSection clicking a deal card initiates a search (16.1s)
+  ✘  4 [replay-chromium] › tests/deals-section.spec.ts:107:3 › DealsSection › DealsSection updates when origin airport changes (16.2s)
+  ✘  5 [replay-chromium] › tests/deals-section.spec.ts:133:3 › DealsSection › DealsSection shows loading state while fetching deals (16.1s)
+  ✓  6 [replay-chromium] › tests/deals-section.spec.ts:151:3 › DealsSection › DealsSection shows empty state when no deals available (1.5s)
+  ✘  7 [replay-chromium] › tests/deals-section.spec.ts:165:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout (15.6s)
+  ✘  8 [replay-chromium] › tests/deals-section.spec.ts:183:3 › DealsSection › DealsSection savings percentage is calculated correctly (16.2s)
+
+
+  1) [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="deal-card-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="deal-card-"]').first()[22m
+
+
+      31 |     // Wait for deal cards to appear
+      32 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+    > 33 |     await expect(dealCards.first()).toBeVisible({ timeout: 15000 })
+         |                                     ^
+      34 |
+      35 |     // Should have multiple deal cards
+      36 |     const count = await dealCards.count()
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:33:37
+
+  2) [replay-chromium] › tests/deals-section.spec.ts:40:3 › DealsSection › DealsSection deal card shows destination dates price and savings 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="deal-card-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="deal-card-"]').first()[22m
+
+
+      43 |     // Wait for deal cards to load
+      44 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+    > 45 |     await expect(dealCards.first()).toBeVisible({ timeout: 15000 })
+         |                                     ^
+      46 |
+      47 |     // Get the destination code from the first card's testid
+      48 |     const firstTestId = await dealCards.first().getAttribute('data-testid')
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:45:37
+
+  3) [replay-chromium] › tests/deals-section.spec.ts:78:3 › DealsSection › DealsSection clicking a deal card initiates a search 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="deal-card-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="deal-card-"]').first()[22m
+
+
+      81 |     // Wait for deal cards
+      82 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+    > 83 |     await expect(dealCards.first()).toBeVisible({ timeout: 15000 })
+         |                                     ^
+      84 |
+      85 |     // Get the destination code from the first card
+      86 |     const firstTestId = await dealCards.first().getAttribute('data-testid')
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:83:37
+
+  4) [replay-chromium] › tests/deals-section.spec.ts:107:3 › DealsSection › DealsSection updates when origin airport changes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="deal-card-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="deal-card-"]').first()[22m
+
+
+      111 |     // Wait for LAX deals to load
+      112 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+    > 113 |     await expect(dealCards.first()).toBeVisible({ timeout: 15000 })
+          |                                     ^
+      114 |
+      115 |     // Note a deal card from LAX results
+      116 |     const laxFirstTestId = await dealCards.first().getAttribute('data-testid')
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:113:37
+
+  5) [replay-chromium] › tests/deals-section.spec.ts:133:3 › DealsSection › DealsSection shows loading state while fetching deals 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="deal-card-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="deal-card-"]').first()[22m
+
+
+      142 |     // After loading completes, deal cards should appear
+      143 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+    > 144 |     await expect(dealCards.first()).toBeVisible({ timeout: 15000 })
+          |                                     ^
+      145 |
+      146 |     // Verify loading state is gone
+      147 |     const loadingState = page.getByTestId('deals-loading')
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:144:37
+
+  6) [replay-chromium] › tests/deals-section.spec.ts:165:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('deals-grid')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('deals-grid')[22m
+
+
+      168 |     // Wait for deals grid to appear
+      169 |     const dealsGrid = page.getByTestId('deals-grid')
+    > 170 |     await expect(dealsGrid).toBeVisible({ timeout: 15000 })
+          |                             ^
+      171 |
+      172 |     // Should have multiple deal cards
+      173 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:170:29
+
+  7) [replay-chromium] › tests/deals-section.spec.ts:183:3 › DealsSection › DealsSection savings percentage is calculated correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="deal-card-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="deal-card-"]').first()[22m
+
+
+      186 |     // Wait for deal cards
+      187 |     const dealCards = page.locator('[data-testid^="deal-card-"]')
+    > 188 |     await expect(dealCards.first()).toBeVisible({ timeout: 15000 })
+          |                                     ^
+      189 |
+      190 |     // Get the first card's destination code
+      191 |     const firstTestId = await dealCards.first().getAttribute('data-testid')
+        at /repo/apps/GoogleFlights/tests/deals-section.spec.ts:188:37
+
+  7 failed
+    [replay-chromium] › tests/deals-section.spec.ts:20:3 › DealsSection › DealsSection displays deal cards on Explore page 
+    [replay-chromium] › tests/deals-section.spec.ts:40:3 › DealsSection › DealsSection deal card shows destination dates price and savings 
+    [replay-chromium] › tests/deals-section.spec.ts:78:3 › DealsSection › DealsSection clicking a deal card initiates a search 
+    [replay-chromium] › tests/deals-section.spec.ts:107:3 › DealsSection › DealsSection updates when origin airport changes 
+    [replay-chromium] › tests/deals-section.spec.ts:133:3 › DealsSection › DealsSection shows loading state while fetching deals 
+    [replay-chromium] › tests/deals-section.spec.ts:165:3 › DealsSection › DealsSection displays multiple deal cards in grid or row layout 
+    [replay-chromium] › tests/deals-section.spec.ts:183:3 › DealsSection › DealsSection savings percentage is calculated correctly 
+  1 passed (2.0m)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 116 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

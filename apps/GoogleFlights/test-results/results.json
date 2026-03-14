@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "date-picker.spec.ts",
-      "file": "date-picker.spec.ts",
+      "title": "deals-section.spec.ts",
+      "file": "deals-section.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "DatePicker",
-          "file": "date-picker.spec.ts",
-          "line": 3,
+          "title": "DealsSection",
+          "file": "deals-section.spec.ts",
+          "line": 14,
           "column": 6,
           "specs": [
             {
-              "title": "DatePicker departure field shows placeholder",
+              "title": "DealsSection displays deal cards on Explore page",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 633,
+                      "duration": 1553,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:25.655Z",
+                      "startTime": "2026-03-14T22:47:14.448Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-54edb304d92cc5c7c868",
-              "file": "date-picker.spec.ts",
-              "line": 9,
+              "id": "82d3ab3de9d421682f5e-37bef202972539f4f19d",
+              "file": "deals-section.spec.ts",
+              "line": 20,
               "column": 3
             },
             {
-              "title": "DatePicker return field shows placeholder when Round trip",
+              "title": "DealsSection deal card shows destination dates price and savings",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 205,
+                      "duration": 754,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:26.335Z",
+                      "startTime": "2026-03-14T22:47:16.102Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-52a9d85b33f9ffb546aa",
-              "file": "date-picker.spec.ts",
-              "line": 15,
+              "id": "82d3ab3de9d421682f5e-6f9c5e103824e8287e85",
+              "file": "deals-section.spec.ts",
+              "line": 40,
               "column": 3
             },
             {
-              "title": "DatePicker opens calendar on departure field click",
+              "title": "DealsSection clicking a deal card initiates a search",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 210,
+                      "duration": 753,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:26.549Z",
+                      "startTime": "2026-03-14T22:47:16.863Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-7593d2bd034d25b888b5",
-              "file": "date-picker.spec.ts",
-              "line": 24,
+              "id": "82d3ab3de9d421682f5e-0bdf0628d99b9fd2b454",
+              "file": "deals-section.spec.ts",
+              "line": 78,
               "column": 3
             },
             {
-              "title": "DatePicker selects a departure date",
+              "title": "DealsSection updates when origin airport changes",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 245,
+                      "duration": 1281,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:26.767Z",
+                      "startTime": "2026-03-14T22:47:17.621Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-f09dcf8ddaca2656d130",
-              "file": "date-picker.spec.ts",
-              "line": 47,
+              "id": "82d3ab3de9d421682f5e-4417bd9c11d1bbb6920c",
+              "file": "deals-section.spec.ts",
+              "line": 107,
               "column": 3
             },
             {
-              "title": "DatePicker selects a return date after departure",
+              "title": "DealsSection shows loading state while fetching deals",
               "ok": true,
               "tags": [],
               "tests": [
@@ -231,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 371,
+                      "duration": 672,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:27.018Z",
+                      "startTime": "2026-03-14T22:47:18.909Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -244,13 +244,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-b87f95e4d0e52d51081b",
-              "file": "date-picker.spec.ts",
-              "line": 72,
+              "id": "82d3ab3de9d421682f5e-0a539f31a27345695e59",
+              "file": "deals-section.spec.ts",
+              "line": 133,
               "column": 3
             },
             {
-              "title": "DatePicker prevents selecting return date before departure",
+              "title": "DealsSection shows empty state when no deals available",
               "ok": true,
               "tags": [],
               "tests": [
@@ -265,12 +265,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 329,
+                      "duration": 636,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:27.396Z",
+                      "startTime": "2026-03-14T22:47:19.587Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -278,13 +278,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-9b6b9d54f82de62d4375",
-              "file": "date-picker.spec.ts",
-              "line": 110,
+              "id": "82d3ab3de9d421682f5e-c61e63e413291a6df7ca",
+              "file": "deals-section.spec.ts",
+              "line": 151,
               "column": 3
             },
             {
-              "title": "DatePicker navigates to next month",
+              "title": "DealsSection displays multiple deal cards in grid or row layout",
               "ok": true,
               "tags": [],
               "tests": [
@@ -299,12 +299,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 210,
+                      "duration": 690,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:27.730Z",
+                      "startTime": "2026-03-14T22:47:20.228Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -312,13 +312,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-02393822fd22c0e43877",
-              "file": "date-picker.spec.ts",
-              "line": 136,
+              "id": "82d3ab3de9d421682f5e-029310c32241beaa28e9",
+              "file": "deals-section.spec.ts",
+              "line": 165,
               "column": 3
             },
             {
-              "title": "DatePicker navigates to previous month not before current",
+              "title": "DealsSection savings percentage is calculated correctly",
               "ok": true,
               "tags": [],
               "tests": [
@@ -333,12 +333,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 265,
+                      "duration": 667,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T22:23:27.945Z",
+                      "startTime": "2026-03-14T22:47:20.924Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -346,111 +346,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "54e277610407c7c4e36d-f507d7ce2022f7f4ab88",
-              "file": "date-picker.spec.ts",
-              "line": 153,
-              "column": 3
-            },
-            {
-              "title": "DatePicker return field hidden when One way selected",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 258,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:23:28.214Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "54e277610407c7c4e36d-8a648840232b18493b20",
-              "file": "date-picker.spec.ts",
-              "line": 181,
-              "column": 3
-            },
-            {
-              "title": "DatePicker retains departure date when switching trip types",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 426,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:23:28.478Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "54e277610407c7c4e36d-c94dfac0d5555d37c175",
-              "file": "date-picker.spec.ts",
-              "line": 196,
-              "column": 3
-            },
-            {
-              "title": "DatePicker can be used repeatedly",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 328,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T22:23:28.911Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "54e277610407c7c4e36d-d581e6d4fb3f24e3f1d7",
-              "file": "date-picker.spec.ts",
-              "line": 228,
+              "id": "82d3ab3de9d421682f5e-4ffe2461c962df220755",
+              "file": "deals-section.spec.ts",
+              "line": 183,
               "column": 3
             }
           ]
@@ -460,9 +358,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-14T22:23:24.692Z",
-    "duration": 4579.277,
-    "expected": 11,
+    "startTime": "2026-03-14T22:47:13.804Z",
+    "duration": 7820.2480000000005,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

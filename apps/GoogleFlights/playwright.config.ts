@@ -8,6 +8,8 @@ export default defineConfig({
   fullyParallel: false,
   retries: 0,
   workers: 1,
+  actionTimeout: 15000,
+  navigationTimeout: 30000,
   reporter: [['list'], ['json', { outputFile: 'test-results/results.json' }]],
   use: {
     baseURL: 'http://localhost:8888',
