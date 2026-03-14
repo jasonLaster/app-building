@@ -3,26 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestEditLabelName: Write test for Successfully edit label name via inline edit",
-        "WriteTestEditLabelColor: Write test for Successfully edit label color via inline edit",
-        "WriteTestEditLabelNameAndColor: Write test for Edit both label name and color simultaneously",
-        "WriteTestCancelLabelEdit: Write test for Cancel inline edit reverts changes",
-        "WriteTestEditLabelNameRequired: Write test for Edit label validates required name field",
-        "WriteTestEditLabelNoDuplicateNames: Write test for Edit label prevents duplicate label names",
-        "WriteTestEditLabelCustomHex: Write test for Edit label with custom hex color",
-        "WriteTestDeleteLabelButton: Write test for Clicking delete button shows confirmation dialog",
-        "WriteTestConfirmDeleteLabel: Write test for Confirm delete removes the label",
-        "WriteTestCancelDeleteLabel: Write test for Cancel delete keeps the label",
-        "WriteTestDeleteLabelZeroIssues: Write test for Delete label used by zero issues",
-        "WriteTestOnlyOneLabelEditMode: Write test for Only one label can be in edit mode at a time",
-        "WriteTestEditModeExitOnDelete: Write test for Edit mode is exited when delete is clicked on same label"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestSettingsPageRenders: Write test for Settings page renders workspace name and default team fields",
         "WriteTestEditWorkspaceName: Write test for Edit workspace name inline",
         "WriteTestWorkspaceNameNotEmpty: Write test for Workspace name cannot be saved as empty",
@@ -65,26 +45,19 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestLabelsPageRendersList: Write test for Labels page renders with list of all labels",
-      "WriteTestLabelRowColorDot: Write test for Label row displays colored dot matching label color",
-      "WriteTestLabelRowIssueCount: Write test for Label row displays issue count for each label",
-      "WriteTestLabelsEmptyState: Write test for Labels page shows empty state when no labels exist",
-      "WriteTestLabelRowActions: Write test for Each label row has edit and delete action buttons",
-      "WriteTestLabelsUpdatesAfterCreate: Write test for Labels list updates after creating a new label",
-      "WriteTestLabelsUpdatesAfterDelete: Write test for Labels list updates after deleting a label",
-      "WriteTestLabelsUpdatesAfterEdit: Write test for Labels list updates after editing a label",
-      "WriteTestLabelIssueCountAccurate: Write test for Label issue count reflects actual usage across issues",
-      "WriteTestCreateLabelButtonOpens: Write test for Create Label button opens the create label form",
-      "WriteTestCreateLabelPresetColor: Write test for Successfully create a new label with preset color",
-      "WriteTestCreateLabelCustomHex: Write test for Successfully create a new label with custom hex color",
-      "WriteTestCreateLabelNameRequired: Write test for Create label form validates required name field",
-      "WriteTestCreateLabelNoDuplicateNames: Write test for Create label form prevents duplicate label names",
-      "WriteTestCancelCreateLabel: Write test for Cancel button closes create label form without creating",
-      "WriteTestColorPickerPresets: Write test for Color picker shows preset color options",
-      "WriteTestPresetColorUpdatesPreview: Write test for Selecting a preset color updates the color preview",
-      "WriteTestCustomHexValidation: Write test for Custom hex input validates hex color format",
-      "WriteTestCreateLabelMultipleTimes: Write test for Create label form can be used multiple times in sequence",
-      "WriteTestEditLabelButton: Write test for Clicking edit button on a label enters inline edit mode"
+      "WriteTestEditLabelName: Write test for Successfully edit label name via inline edit",
+      "WriteTestEditLabelColor: Write test for Successfully edit label color via inline edit",
+      "WriteTestEditLabelNameAndColor: Write test for Edit both label name and color simultaneously",
+      "WriteTestCancelLabelEdit: Write test for Cancel inline edit reverts changes",
+      "WriteTestEditLabelNameRequired: Write test for Edit label validates required name field",
+      "WriteTestEditLabelNoDuplicateNames: Write test for Edit label prevents duplicate label names",
+      "WriteTestEditLabelCustomHex: Write test for Edit label with custom hex color",
+      "WriteTestDeleteLabelButton: Write test for Clicking delete button shows confirmation dialog",
+      "WriteTestConfirmDeleteLabel: Write test for Confirm delete removes the label",
+      "WriteTestCancelDeleteLabel: Write test for Cancel delete keeps the label",
+      "WriteTestDeleteLabelZeroIssues: Write test for Delete label used by zero issues",
+      "WriteTestOnlyOneLabelEditMode: Write test for Only one label can be in edit mode at a time",
+      "WriteTestEditModeExitOnDelete: Write test for Edit mode is exited when delete is clicked on same label"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
