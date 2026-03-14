@@ -3,16 +3,6 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPageLogin: Decide on components, add sections to docs/tests.md",
-        "PlanComponentLoginForm: Add test entries for LoginForm",
-        "PlanComponentSignUpForm: Add test entries for SignUpForm"
-      ],
-      "timestamp": "2026-03-14T18:22:34.151Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testSpec.md",
-      "subtasks": [
         "PlanPageNavigation: Decide on components, add sections to docs/tests.md",
         "PlanComponentSidebar: Add test entries for Sidebar",
         "PlanComponentSidebarCollapse: Add test entries for SidebarCollapse",
@@ -213,9 +203,11 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+      "PlanPageLogin: Decide on components, add sections to docs/tests.md",
+      "PlanComponentLoginForm: Add test entries for LoginForm",
+      "PlanComponentSignUpForm: Add test entries for SignUpForm"
     ],
-    "timestamp": "2026-03-14T18:21:40.864Z",
+    "timestamp": "2026-03-14T18:22:34.151Z",
     "app": "LinearClone"
   }
 }
