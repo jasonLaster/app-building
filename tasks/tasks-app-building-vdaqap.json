@@ -3,9 +3,65 @@
     {
       "skill": "skills/tasks/build/testSpec.md",
       "subtasks": [
-        "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
+        "PlanPageSearchPage: Decide on components, add sections to docs/tests.md",
+        "PlanComponentTripTypeSelector: Add test entries for TripTypeSelector",
+        "PlanComponentPassengerCountSelector: Add test entries for PassengerCountSelector",
+        "PlanComponentCabinClassSelector: Add test entries for CabinClassSelector",
+        "PlanComponentAirportAutocomplete: Add test entries for AirportAutocomplete",
+        "PlanComponentDatePicker: Add test entries for DatePicker",
+        "PlanComponentSearchButton: Add test entries for SearchButton",
+        "PlanComponentRecentSearches: Add test entries for RecentSearches",
+        "PlanComponentPopularDestinations: Add test entries for PopularDestinations"
       ],
-      "timestamp": "2026-03-14T18:21:43.157Z",
+      "timestamp": "2026-03-14T18:22:32.754Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageSearchResults: Decide on components, add sections to docs/tests.md",
+        "PlanComponentSearchSummaryBar: Add test entries for SearchSummaryBar",
+        "PlanComponentFilterSidebar: Add test entries for FilterSidebar",
+        "PlanComponentFlightResultCard: Add test entries for FlightResultCard",
+        "PlanComponentTrackPricesToggle: Add test entries for TrackPricesToggle",
+        "PlanComponentPagination: Add test entries for Pagination"
+      ],
+      "timestamp": "2026-03-14T18:22:32.754Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageFlightDetailsBooking: Decide on components, add sections to docs/tests.md",
+        "PlanComponentFlightSummary: Add test entries for FlightSummary",
+        "PlanComponentPriceBreakdown: Add test entries for PriceBreakdown",
+        "PlanComponentPassengerForm: Add test entries for PassengerForm",
+        "PlanComponentBookingAction: Add test entries for BookingAction"
+      ],
+      "timestamp": "2026-03-14T18:22:32.754Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageMyTrips: Decide on components, add sections to docs/tests.md",
+        "PlanComponentTripsTabs: Add test entries for TripsTabs",
+        "PlanComponentTripCard: Add test entries for TripCard",
+        "PlanComponentTrackedRouteCard: Add test entries for TrackedRouteCard",
+        "PlanComponentCancelBookingModal: Add test entries for CancelBookingModal"
+      ],
+      "timestamp": "2026-03-14T18:22:32.754Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "PlanPageExplore: Decide on components, add sections to docs/tests.md",
+        "PlanComponentDestinationMap: Add test entries for DestinationMap",
+        "PlanComponentFlexibleDatesGrid: Add test entries for FlexibleDatesGrid",
+        "PlanComponentDealsSection: Add test entries for DealsSection"
+      ],
+      "timestamp": "2026-03-14T18:22:32.754Z",
       "app": "GoogleFlights"
     },
     {
@@ -68,9 +124,9 @@
   "current": {
     "skill": "skills/tasks/build/testSpec.md",
     "subtasks": [
-      "Unpack: Write test specification"
+      "PlanPages: Read the spec, decide on pages, and add PlanPage tasks for each page"
     ],
-    "timestamp": "2026-03-14T18:21:13.050Z",
+    "timestamp": "2026-03-14T18:21:43.157Z",
     "app": "GoogleFlights"
   }
 }
