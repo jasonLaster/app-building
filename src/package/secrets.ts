@@ -1,3 +1,12 @@
+/**
+ * Infisical secrets API.
+ *
+ * API versions used (per https://infisical.com/docs/api-reference):
+ *   - Auth:    POST /api/v1/auth/universal-auth/login
+ *   - Secrets: GET/POST/PATCH /api/v4/secrets[/{secretName}]
+ *   - Folders: POST /api/v2/folders
+ */
+
 const INFISICAL_API_BASE = "https://app.infisical.com";
 
 export interface InfisicalConfig {
@@ -6,9 +15,14 @@ export interface InfisicalConfig {
   environment: string;
 }
 
+// ---------------------------------------------------------------------------
+// Auth
+// ---------------------------------------------------------------------------
+
 /**
  * Log in to Infisical using Universal Auth (Client ID + Client Secret).
- * Returns a short-lived access token (default 30 day TTL).
+ * POST /api/v1/auth/universal-auth/login
+ * Returns a short-lived access token.
  */
 export async function infisicalLogin(
   clientId: string,
@@ -27,22 +41,20 @@ export async function infisicalLogin(
   return data.accessToken;
 }
 
-async function infisicalFetch(
-  path: string,
-  config: InfisicalConfig,
-): Promise<Response> {
-  const res = await fetch(`${INFISICAL_API_BASE}${path}`, {
-    headers: {
-      Authorization: `Bearer ${config.token}`,
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Infisical API GET ${path} → ${res.status}: ${body}`);
-  }
-  return res;
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function authHeaders(config: InfisicalConfig): Record<string, string> {
+  return {
+    Authorization: `Bearer ${config.token}`,
+    "Content-Type": "application/json",
+  };
 }
+
+// ---------------------------------------------------------------------------
+// Secrets — read
+// ---------------------------------------------------------------------------
 
 interface InfisicalSecret {
   secretKey: string;
@@ -55,18 +67,25 @@ interface InfisicalSecretsResponse {
 
 /**
  * Fetch secrets from an Infisical folder path.
- * Returns a key-value record of secret names to values.
+ * GET /api/v4/secrets?projectId=…&environment=…&secretPath=…
+ * Returns a key→value record.
  */
 export async function fetchInfisicalSecrets(
   config: InfisicalConfig,
   secretPath: string,
 ): Promise<Record<string, string>> {
   const params = new URLSearchParams({
-    workspaceId: config.projectId,
+    projectId: config.projectId,
     environment: config.environment,
     secretPath,
   });
-  const res = await infisicalFetch(`/api/v3/secrets/raw?${params}`, config);
+  const res = await fetch(`${INFISICAL_API_BASE}/api/v4/secrets?${params}`, {
+    headers: authHeaders(config),
+  });
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`Infisical GET secrets ${secretPath} → ${res.status}: ${body}`);
+  }
   const data = (await res.json()) as InfisicalSecretsResponse;
   const secrets: Record<string, string> = {};
   for (const s of data.secrets) {
@@ -94,9 +113,60 @@ export async function fetchBranchSecrets(
   return fetchInfisicalSecrets(config, `/branches/${branch}/`);
 }
 
+// ---------------------------------------------------------------------------
+// Folders
+// ---------------------------------------------------------------------------
+
+/**
+ * Ensure all folders in a path exist, creating any missing ones.
+ * POST /api/v2/folders  — body: { projectId, environment, name, path }
+ *
+ * Infisical requires folders to exist before secrets can be written into them.
+ * We walk each segment of the path and issue a create; a 400 response means
+ * the folder already exists (the docs list 400 for "Bad Request" which
+ * Infisical returns for duplicate folder names).
+ */
+async function ensureFolder(
+  config: InfisicalConfig,
+  folderPath: string,
+): Promise<void> {
+  const segments = folderPath.split("/").filter(Boolean);
+  let parentPath = "/";
+
+  for (const segment of segments) {
+    const res = await fetch(`${INFISICAL_API_BASE}/api/v2/folders`, {
+      method: "POST",
+      headers: authHeaders(config),
+      body: JSON.stringify({
+        projectId: config.projectId,
+        environment: config.environment,
+        name: segment,
+        path: parentPath,
+      }),
+    });
+    // 200 = created. 400 = folder already exists (Infisical returns 400 for
+    // duplicate folder names under the same parent).
+    if (res.ok || res.status === 400) {
+      parentPath += segment + "/";
+      continue;
+    }
+    const text = await res.text().catch(() => "");
+    throw new Error(`Infisical create folder ${parentPath}${segment} → ${res.status}: ${text}`);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Secrets — write
+// ---------------------------------------------------------------------------
+
 /**
  * Create or update a branch secret in Infisical.
- * Uses POST to create, falls back to PATCH if it already exists.
+ * Creates the folder path if it doesn't exist yet.
+ *
+ *   POST  /api/v4/secrets/{name}   — create
+ *   PATCH /api/v4/secrets/{name}   — update (if secret already exists)
+ *
+ * Body: { projectId, environment, secretPath, secretValue, type }
  */
 export async function createBranchSecret(
   config: InfisicalConfig,
@@ -105,29 +175,26 @@ export async function createBranchSecret(
   value: string,
 ): Promise<void> {
   const secretPath = `/branches/${branch}/`;
-  const url = `${INFISICAL_API_BASE}/api/v3/secrets/raw/${encodeURIComponent(name)}`;
+  const url = `${INFISICAL_API_BASE}/api/v4/secrets/${encodeURIComponent(name)}`;
   const body = {
-    workspaceId: config.projectId,
+    projectId: config.projectId,
     environment: config.environment,
     secretPath,
     secretValue: value,
     type: "shared",
   };
-  const headers = {
-    Authorization: `Bearer ${config.token}`,
-    "Content-Type": "application/json",
-  };
+  const headers = authHeaders(config);
 
+  // --- Try POST (create) ---------------------------------------------------
   const res = await fetch(url, {
     method: "POST",
     headers,
     body: JSON.stringify(body),
   });
-
   if (res.ok) return;
 
-  // If conflict (already exists), try PATCH to update
-  if (res.status === 400 || res.status === 409) {
+  // Secret already exists → PATCH to update
+  if (res.status === 400) {
     const patchRes = await fetch(url, {
       method: "PATCH",
       headers,
@@ -138,9 +205,37 @@ export async function createBranchSecret(
     throw new Error(`Infisical PATCH ${name} → ${patchRes.status}: ${text}`);
   }
 
+  // Folder doesn't exist → create folders then retry POST
+  if (res.status === 404) {
+    await ensureFolder(config, secretPath);
+    const retryRes = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    if (retryRes.ok) return;
+    // Retry may 400 if another process created it concurrently → try PATCH
+    if (retryRes.status === 400) {
+      const patchRes = await fetch(url, {
+        method: "PATCH",
+        headers,
+        body: JSON.stringify(body),
+      });
+      if (patchRes.ok) return;
+      const text = await patchRes.text().catch(() => "");
+      throw new Error(`Infisical PATCH ${name} (after folder creation) → ${patchRes.status}: ${text}`);
+    }
+    const text = await retryRes.text().catch(() => "");
+    throw new Error(`Infisical POST ${name} (after folder creation) → ${retryRes.status}: ${text}`);
+  }
+
   const text = await res.text().catch(() => "");
   throw new Error(`Infisical POST ${name} → ${res.status}: ${text}`);
 }
+
+// ---------------------------------------------------------------------------
+// Config helper
+// ---------------------------------------------------------------------------
 
 /**
  * Extract Infisical config from environment variables and log in.
