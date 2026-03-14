@@ -1092,6 +1092,127 @@
 
 <!-- Components: ProfileForm, BecomeHostButton, UserReviewsList -->
 
+### Component: ProfileForm
+
+#### Test: Profile page requires login
+- **Initial state:** User is not logged in.
+- **Action:** User navigates to `/profile`.
+- **Expected:** The user is redirected to `/login`. The profile page is not displayed.
+
+#### Test: Profile page displays current user info
+- **Initial state:** User is logged in with name "Alice Smith", email "alice@example.com", bio "Love traveling!", phone "555-1234", avatar URL "https://example.com/avatar.jpg".
+- **Action:** User navigates to `/profile`.
+- **Expected:** The profile form displays the current values: name "Alice Smith", email "alice@example.com" (read-only), bio "Love traveling!", phone "555-1234", and avatar URL "https://example.com/avatar.jpg". The avatar image is displayed using the URL.
+
+#### Test: Edit name field inline
+- **Initial state:** User is logged in and on `/profile` with name "Alice Smith".
+- **Action:** User clicks the name field, clears it, types "Alice Johnson", and clicks the "Save" button.
+- **Expected:** A `PUT /api/users/:id` request is sent with the updated name. The name field displays "Alice Johnson". A success message (e.g., "Profile updated") is shown. The Redux user state is updated with the new name.
+
+#### Test: Edit bio field inline
+- **Initial state:** User is logged in and on `/profile` with bio "Love traveling!".
+- **Action:** User clicks the bio textarea, clears it, types "Digital nomad and foodie", and clicks "Save".
+- **Expected:** A `PUT /api/users/:id` request is sent with the updated bio. The bio field displays "Digital nomad and foodie". A success message is shown.
+
+#### Test: Edit phone field inline
+- **Initial state:** User is logged in and on `/profile` with phone "555-1234".
+- **Action:** User clicks the phone field, clears it, types "555-9876", and clicks "Save".
+- **Expected:** A `PUT /api/users/:id` request is sent with the updated phone. The phone field displays "555-9876". A success message is shown.
+
+#### Test: Edit avatar URL field inline
+- **Initial state:** User is logged in and on `/profile` with avatar URL "https://example.com/old-avatar.jpg".
+- **Action:** User clicks the avatar URL field, clears it, types "https://example.com/new-avatar.jpg", and clicks "Save".
+- **Expected:** A `PUT /api/users/:id` request is sent with the updated avatar URL. The avatar image preview updates to show the new image from "https://example.com/new-avatar.jpg". A success message is shown.
+
+#### Test: Save with empty name shows validation error
+- **Initial state:** User is logged in and on `/profile`.
+- **Action:** User clears the name field (leaving it empty) and clicks "Save".
+- **Expected:** A validation error message is displayed (e.g., "Name is required"). No API call is made. The name field is highlighted as invalid.
+
+#### Test: Save with invalid avatar URL shows validation error
+- **Initial state:** User is logged in and on `/profile`.
+- **Action:** User enters "not-a-url" in the avatar URL field and clicks "Save".
+- **Expected:** A validation error message is displayed (e.g., "Please enter a valid URL"). No API call is made.
+
+#### Test: Profile form fields are functional on repeated edits
+- **Initial state:** User is logged in and on `/profile` with name "Alice Smith".
+- **Action:** User changes the name to "Alice Johnson" and clicks "Save". After the success message, user changes the name again to "Alice Williams" and clicks "Save".
+- **Expected:** Both saves succeed with separate `PUT /api/users/:id` requests. After the second save, the name field displays "Alice Williams". Both updates are persisted.
+
+#### Test: Email field is displayed but not editable
+- **Initial state:** User is logged in and on `/profile` with email "alice@example.com".
+- **Action:** User views the profile form.
+- **Expected:** The email "alice@example.com" is displayed but the field is read-only / disabled and cannot be edited.
+
+#### Test: Profile update persists across navigation
+- **Initial state:** User is logged in and on `/profile` with bio "Old bio".
+- **Action:** User changes bio to "New bio", clicks "Save", then navigates to `/` (home page), then navigates back to `/profile`.
+- **Expected:** The bio field displays "New bio", confirming the change was persisted to the database and Redux state.
+
+### Component: BecomeHostButton
+
+#### Test: Become a Host button is visible for non-host users
+- **Initial state:** User is logged in with `is_host` set to `false`.
+- **Action:** User navigates to `/profile`.
+- **Expected:** A "Become a Host" button is visible on the profile page.
+
+#### Test: Become a Host button is hidden for existing hosts
+- **Initial state:** User is logged in with `is_host` set to `true`.
+- **Action:** User navigates to `/profile`.
+- **Expected:** The "Become a Host" button is NOT visible on the profile page.
+
+#### Test: Clicking Become a Host sets user as host
+- **Initial state:** User is logged in with `is_host` set to `false` and on `/profile`.
+- **Action:** User clicks the "Become a Host" button.
+- **Expected:** A confirmation dialog appears (e.g., "Are you sure you want to become a host?"). User confirms. A `POST /api/users/:id/become-host` request is sent. Upon success, the button disappears, a success message is shown (e.g., "You are now a host!"), and the Redux user state updates `is_host` to `true`. The "Hosting" link becomes available in the navigation sidebar.
+
+#### Test: Cancel Become a Host confirmation dialog
+- **Initial state:** User is logged in with `is_host` set to `false` and on `/profile`. The "Become a Host" button is visible.
+- **Action:** User clicks the "Become a Host" button, then clicks "Cancel" in the confirmation dialog.
+- **Expected:** The dialog closes. No API call is made. The "Become a Host" button remains visible. `is_host` remains `false`.
+
+#### Test: Become a Host button appearance
+- **Initial state:** User is logged in with `is_host` set to `false` and on `/profile`.
+- **Action:** User views the profile page.
+- **Expected:** The "Become a Host" button is styled with the coral/red accent color (#FF5A5F), has clear text reading "Become a Host", and is visually prominent on the page.
+
+### Component: UserReviewsList
+
+#### Test: Reviews list displays user's written reviews
+- **Initial state:** User is logged in and has written 3 reviews for different properties (e.g., "Cozy Cabin" rated 5, "City Apartment" rated 3, "Beach Villa" rated 4).
+- **Action:** User navigates to `/profile`.
+- **Expected:** A "My Reviews" section is visible showing all 3 reviews. Each review card displays: the property title, the overall rating (with filled/unfilled stars), the comment text, and the date the review was written.
+
+#### Test: Reviews list shows empty state for user with no reviews
+- **Initial state:** User is logged in but has not written any reviews.
+- **Action:** User navigates to `/profile`.
+- **Expected:** The "My Reviews" section displays an empty state message (e.g., "You haven't written any reviews yet") instead of review cards.
+
+#### Test: Review card shows rating with star display
+- **Initial state:** User is logged in and has written a review with overall rating 4 out of 5.
+- **Action:** User navigates to `/profile`.
+- **Expected:** The review card displays 4 filled stars and 1 unfilled star, matching the rating value.
+
+#### Test: Review card links to the reviewed property
+- **Initial state:** User is logged in and has written a review for property "Cozy Cabin" (property ID "abc-123").
+- **Action:** User clicks on the property title "Cozy Cabin" in a review card.
+- **Expected:** The user is navigated to `/properties/abc-123` (the property detail page for "Cozy Cabin").
+
+#### Test: Reviews list shows review details correctly
+- **Initial state:** User is logged in and has written a review with rating 5, comment "Amazing stay! The host was very welcoming.", for property "Beach Villa", dated "2026-01-15".
+- **Action:** User navigates to `/profile`.
+- **Expected:** The review card displays: property title "Beach Villa", 5 filled stars, comment text "Amazing stay! The host was very welcoming.", and date "Jan 15, 2026".
+
+#### Test: Reviews list updates after writing a new review
+- **Initial state:** User is logged in, on `/profile`, and has 2 existing reviews displayed.
+- **Action:** User navigates to a completed booking, writes a new review, submits it, then navigates back to `/profile`.
+- **Expected:** The "My Reviews" section now displays 3 reviews, including the newly written review with the correct property title, rating, and comment.
+
+#### Test: Reviews list shows multiple reviews in chronological order
+- **Initial state:** User is logged in and has written reviews on different dates: "Beach Villa" on 2026-01-15, "City Apartment" on 2026-02-10, "Cozy Cabin" on 2026-03-05.
+- **Action:** User navigates to `/profile`.
+- **Expected:** The reviews are displayed in reverse chronological order (newest first): "Cozy Cabin" (Mar 5, 2026), "City Apartment" (Feb 10, 2026), "Beach Villa" (Jan 15, 2026).
+
 ## Page: Write Review (`/trips/:bookingId/review`)
 
 <!-- Components: ReviewForm, RatingSliders, PropertyBookingContext -->
