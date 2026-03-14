@@ -2243,7 +2243,223 @@
 
 ## Teams Management Page (`/settings/teams`)
 
-<!-- Tests to be added by PlanPage task -->
+**Components**: TeamCard, CreateTeamModal, TeamSettings
+
+### TeamCard
+
+#### Test: Teams page renders with list of all teams as cards
+- **Initial state**: Workspace has 3 teams: "Engineering" (prefix ENG, 5 members, active cycle "Sprint 10"), "Design" (prefix DES, 3 members, no active cycle), "QA" (prefix QA, 2 members, active cycle "QA Cycle 4"). User navigates to `/settings/teams`.
+- **Expected**: The page displays 3 team cards. Each card shows the team name, identifier prefix, member count, and active cycle name (if any). A "Create Team" button is visible at the top of the page. The page title reads "Teams".
+
+#### Test: Team card displays team name prominently
+- **Initial state**: Workspace has a team named "Engineering". User is on `/settings/teams`.
+- **Expected**: The team card displays "Engineering" as the primary text, prominently styled (larger or bolder font than other card details).
+
+#### Test: Team card displays identifier prefix
+- **Initial state**: Workspace has a team with identifier prefix "ENG". User is on `/settings/teams`.
+- **Expected**: The team card shows the identifier prefix "ENG" clearly visible (e.g., as a badge or secondary text below the team name).
+
+#### Test: Team card displays member count
+- **Initial state**: Workspace has a team "Engineering" with 5 members. User is on `/settings/teams`.
+- **Expected**: The team card shows the member count as "5 members" (or similar text like "5" with a members icon).
+
+#### Test: Team card displays active cycle name when team has an active cycle
+- **Initial state**: Workspace has a team "Engineering" with an active cycle named "Sprint 10". User is on `/settings/teams`.
+- **Expected**: The team card shows the active cycle name "Sprint 10" (e.g., with a cycle icon or label like "Active: Sprint 10").
+
+#### Test: Team card displays no cycle indicator when team has no active cycle
+- **Initial state**: Workspace has a team "Design" with no active cycle. User is on `/settings/teams`.
+- **Expected**: The team card does not show a cycle name. Either a "No active cycle" message is displayed or the cycle section is absent. No error or empty artifact is shown.
+
+#### Test: Clicking a team card navigates to team settings
+- **Initial state**: Workspace has a team "Engineering". User is on `/settings/teams`.
+- **Action**: User clicks on the "Engineering" team card
+- **Expected**: The user is navigated to the team settings view for "Engineering", showing editable fields for team name, description, identifier, and a section for managing team members.
+
+#### Test: Teams page shows empty state when no teams exist
+- **Initial state**: Workspace has no teams. User navigates to `/settings/teams`.
+- **Expected**: A friendly empty state message is displayed (e.g., "No teams yet. Create your first team to get started." with an icon). The "Create Team" button is still visible.
+
+#### Test: Teams page updates after creating a new team
+- **Initial state**: Workspace has 2 teams. User is on `/settings/teams`.
+- **Action**: User creates a new team "QA" via the Create Team modal
+- **Expected**: The teams page now shows 3 team cards, including the newly created "QA" team with its identifier prefix, a member count of 0 (or 1 if the creator is auto-added), and no active cycle.
+
+#### Test: Teams page updates after deleting a team from team settings
+- **Initial state**: Workspace has 3 teams. User is on `/settings/teams`.
+- **Action**: User clicks on a team card, deletes the team from team settings, and returns to the teams page
+- **Expected**: The teams page now shows 2 team cards. The deleted team is no longer visible.
+
+### CreateTeamModal
+
+#### Test: Create Team button opens create team modal
+- **Initial state**: User is on `/settings/teams`.
+- **Action**: User clicks the "Create Team" button
+- **Expected**: A modal dialog opens with a title (e.g., "Create Team"), fields for Name (text input, required), Identifier prefix (text input, required, uppercase, 2-5 chars), and Description (text area, optional). "Create Team" and "Cancel" buttons are visible at the bottom. The modal has a backdrop overlay.
+
+#### Test: Create team modal Name field is required
+- **Initial state**: Create Team modal is open. Name field is empty.
+- **Action**: User fills in Identifier prefix "QA" and clicks "Create Team" without entering a Name
+- **Expected**: A validation error is displayed indicating the Name field is required. The modal remains open. No team is created.
+
+#### Test: Create team modal Identifier prefix is required
+- **Initial state**: Create Team modal is open. Identifier field is empty.
+- **Action**: User fills in Name "Quality Assurance" and clicks "Create Team" without entering an Identifier prefix
+- **Expected**: A validation error is displayed indicating the Identifier prefix is required. The modal remains open. No team is created.
+
+#### Test: Create team modal Identifier prefix must be uppercase
+- **Initial state**: Create Team modal is open.
+- **Action**: User types "eng" in the Identifier prefix field
+- **Expected**: The input is automatically converted to uppercase "ENG", or a validation error is shown indicating the prefix must be uppercase.
+
+#### Test: Create team modal Identifier prefix must be 2-5 characters
+- **Initial state**: Create Team modal is open.
+- **Action**: User enters "A" (1 char) in the Identifier prefix field and clicks "Create Team"
+- **Expected**: A validation error is shown indicating the prefix must be between 2 and 5 characters. The modal remains open.
+
+#### Test: Create team modal Identifier prefix rejects more than 5 characters
+- **Initial state**: Create Team modal is open.
+- **Action**: User enters "TOOLONG" (7 chars) in the Identifier prefix field and clicks "Create Team"
+- **Expected**: A validation error is shown indicating the prefix must be between 2 and 5 characters, or the input is limited to 5 characters. The modal remains open.
+
+#### Test: Create team modal Identifier prefix must be unique
+- **Initial state**: Create Team modal is open. A team with identifier prefix "ENG" already exists.
+- **Action**: User enters Name "Engineering 2", Identifier prefix "ENG", and clicks "Create Team"
+- **Expected**: An error message is shown indicating the identifier prefix is already in use (e.g., "A team with prefix 'ENG' already exists"). The modal remains open. No duplicate team is created.
+
+#### Test: Create team with all fields filled
+- **Initial state**: Create Team modal is open. Workspace has 2 existing teams.
+- **Action**: User enters Name "Quality Assurance", Identifier prefix "QA", Description "QA team for testing", and clicks "Create Team"
+- **Expected**: The modal closes. The teams page now shows the new "Quality Assurance" team card with prefix "QA", member count of 0 (or 1), and no active cycle. The team is persisted (reloading shows the team).
+
+#### Test: Create team with only required fields
+- **Initial state**: Create Team modal is open.
+- **Action**: User enters Name "DevOps", Identifier prefix "OPS", leaves Description empty, and clicks "Create Team"
+- **Expected**: The modal closes. The new "DevOps" team card appears on the teams page with prefix "OPS" and no description issue.
+
+#### Test: Cancel create team modal discards input
+- **Initial state**: Create Team modal is open. User has entered Name "Test Team", Identifier prefix "TT".
+- **Action**: User clicks the "Cancel" button
+- **Expected**: The modal closes. No new team is created. The teams list remains unchanged.
+
+#### Test: Close create team modal by clicking backdrop
+- **Initial state**: Create Team modal is open.
+- **Action**: User clicks outside the modal (on the backdrop overlay)
+- **Expected**: The modal closes without creating a team.
+
+#### Test: Create team modal form resets on reopen
+- **Initial state**: User is on `/settings/teams`. User previously opened the Create Team modal, entered some data, and cancelled.
+- **Action**: User clicks "Create Team" button again
+- **Expected**: The modal opens with all fields empty/reset. No residual data from the previous attempt is present.
+
+#### Test: Create team modal can be used multiple times in sequence
+- **Initial state**: User is on `/settings/teams`.
+- **Action**: User clicks "Create Team", enters Name "Team Alpha", prefix "ALPH", clicks "Create Team". Then clicks "Create Team" again, enters Name "Team Beta", prefix "BETA", clicks "Create Team".
+- **Expected**: Both teams are created. The teams page shows both new team cards. The modal opens cleanly with empty fields the second time.
+
+#### Test: Create team modal submits via Enter key
+- **Initial state**: Create Team modal is open. User has entered Name "QA Team" and Identifier prefix "QA".
+- **Action**: User presses Enter while focused on the form
+- **Expected**: The form is submitted, same behavior as clicking "Create Team". The team is created if all validations pass.
+
+### TeamSettings
+
+#### Test: Team settings page renders with editable fields
+- **Initial state**: Workspace has a team "Engineering" with prefix "ENG" and description "Core engineering team". User clicks the "Engineering" team card on `/settings/teams`.
+- **Expected**: The team settings view displays: Team name field showing "Engineering" (inline editable), Identifier prefix field showing "ENG" (inline editable), Description field showing "Core engineering team" (inline editable), and a "Team Members" section listing current members. A "Back" or navigation link to return to the teams list is visible. A "Delete Team" button is also present.
+
+#### Test: Inline edit team name
+- **Initial state**: User is on team settings for "Engineering".
+- **Action**: User clicks on the team name field, changes it from "Engineering" to "Platform Engineering", and confirms (blur or Enter)
+- **Expected**: The team name updates to "Platform Engineering". The change is persisted (reloading the page still shows "Platform Engineering"). The sidebar team section also reflects the updated name.
+
+#### Test: Inline edit team name with empty value rejected
+- **Initial state**: User is on team settings for "Engineering".
+- **Action**: User clicks on the team name field, clears the value, and attempts to confirm
+- **Expected**: A validation error is shown indicating the team name cannot be empty. The name reverts to "Engineering" or the error blocks the save.
+
+#### Test: Inline edit team identifier prefix
+- **Initial state**: User is on team settings for "Engineering" with prefix "ENG".
+- **Action**: User clicks on the identifier prefix field, changes it to "ENGR", and confirms
+- **Expected**: The identifier prefix updates to "ENGR". The change is persisted. Existing issues retain their original identifiers (e.g., "ENG-42" does not change), but new issues will use the new prefix "ENGR".
+
+#### Test: Inline edit team identifier prefix enforces uppercase and 2-5 char limit
+- **Initial state**: User is on team settings for "Engineering" with prefix "ENG".
+- **Action**: User clicks on the identifier prefix field and enters "a" (lowercase, 1 char)
+- **Expected**: The input is either auto-uppercased to "A" or rejected as lowercase. A validation error indicates the prefix must be 2-5 uppercase characters. The prefix reverts to "ENG" if the edit is not valid.
+
+#### Test: Inline edit team identifier prefix rejects duplicate prefix
+- **Initial state**: User is on team settings for "Engineering" with prefix "ENG". Another team "Design" has prefix "DES".
+- **Action**: User changes the identifier prefix from "ENG" to "DES" and confirms
+- **Expected**: An error is shown indicating the prefix "DES" is already in use by another team. The prefix reverts to "ENG" or the save is blocked.
+
+#### Test: Inline edit team description
+- **Initial state**: User is on team settings for "Engineering" with description "Core engineering team".
+- **Action**: User clicks on the description field, changes it to "Platform and infrastructure engineering", and confirms
+- **Expected**: The description updates to "Platform and infrastructure engineering". The change is persisted.
+
+#### Test: Inline edit team description can be cleared
+- **Initial state**: User is on team settings for "Engineering" with description "Core engineering team".
+- **Action**: User clicks on the description field, clears all text, and confirms
+- **Expected**: The description is cleared. The field shows a placeholder or empty state. No error is shown (description is optional).
+
+#### Test: Team members section lists all current team members
+- **Initial state**: Team "Engineering" has 3 members: Alice, Bob, Carol. User is on team settings for "Engineering".
+- **Expected**: The Team Members section displays a list of 3 members. Each member row shows their avatar and name. An "Add Member" button is visible.
+
+#### Test: Add member to team via team settings
+- **Initial state**: Team "Engineering" has 2 members. Workspace member "David" is not on this team. User is on team settings for "Engineering".
+- **Action**: User clicks "Add Member", selects "David" from the member selector, and confirms
+- **Expected**: David is added to the team. The Team Members section now shows 3 members including David. The team card on the teams page reflects the updated member count. David's member row on the Members page (`/settings/members`) now includes an "Engineering" team badge.
+
+#### Test: Add member selector shows only non-team members
+- **Initial state**: Team "Engineering" has members Alice and Bob. Workspace also has Carol and David who are not on this team. User is on team settings for "Engineering".
+- **Action**: User clicks "Add Member"
+- **Expected**: The member selector dropdown shows only Carol and David (members not already on the team). Alice and Bob are not shown in the dropdown since they are already team members.
+
+#### Test: Remove member from team via team settings
+- **Initial state**: Team "Engineering" has 3 members: Alice, Bob, Carol. User is on team settings for "Engineering".
+- **Action**: User clicks the remove button next to Carol's name in the Team Members list
+- **Expected**: A confirmation prompt appears (e.g., "Remove Carol from Engineering?"). User confirms. Carol is removed from the team members list. The section now shows 2 members. Carol remains a workspace member but is no longer on the "Engineering" team. The team card member count decreases.
+
+#### Test: Cancel remove member from team
+- **Initial state**: Team "Engineering" has 3 members. User is on team settings for "Engineering".
+- **Action**: User clicks the remove button next to a member's name, then clicks "Cancel" in the confirmation prompt
+- **Expected**: The member is not removed. The Team Members list still shows 3 members.
+
+#### Test: Team members section shows empty state when team has no members
+- **Initial state**: Team "QA" has no members. User is on team settings for "QA".
+- **Expected**: The Team Members section shows an empty state message (e.g., "No members yet. Add members to this team."). The "Add Member" button is visible.
+
+#### Test: Add member to team can be done multiple times in sequence
+- **Initial state**: Team "Engineering" has 1 member. Workspace has 3 other members (Bob, Carol, David). User is on team settings for "Engineering".
+- **Action**: User adds Bob via "Add Member", then adds Carol via "Add Member" again
+- **Expected**: Both Bob and Carol are added to the team. The Team Members section now shows 3 members. The "Add Member" selector correctly filters out already-added members each time.
+
+#### Test: Delete team button shows confirmation dialog
+- **Initial state**: User is on team settings for "Engineering".
+- **Action**: User clicks the "Delete Team" button
+- **Expected**: A confirmation dialog appears (e.g., "Are you sure you want to delete the team 'Engineering'? This action cannot be undone."). The dialog has "Confirm" (or "Delete") and "Cancel" buttons. The team is NOT deleted yet.
+
+#### Test: Confirm delete team removes the team and navigates back
+- **Initial state**: User is on team settings for "Engineering". The delete confirmation dialog is open. Workspace has 3 teams.
+- **Action**: User clicks "Confirm" (or "Delete") in the confirmation dialog
+- **Expected**: The team "Engineering" is deleted. The user is navigated back to `/settings/teams`. The teams page now shows 2 team cards. "Engineering" no longer appears. The sidebar no longer shows the "Engineering" team section. Issues that belonged to this team are handled gracefully (either reassigned or still accessible).
+
+#### Test: Cancel delete team keeps the team
+- **Initial state**: User is on team settings for "Engineering". The delete confirmation dialog is open.
+- **Action**: User clicks "Cancel" in the confirmation dialog
+- **Expected**: The dialog closes. The team "Engineering" is not deleted. The user remains on the team settings page.
+
+#### Test: Back navigation from team settings returns to teams list
+- **Initial state**: User is on team settings for "Engineering".
+- **Action**: User clicks the "Back" link or navigation button
+- **Expected**: The user is navigated back to `/settings/teams` showing the full list of team cards.
+
+#### Test: Team settings changes are reflected in sidebar navigation
+- **Initial state**: User is on team settings for "Engineering". The sidebar shows "Engineering" as a team section.
+- **Action**: User changes the team name from "Engineering" to "Platform"
+- **Expected**: The sidebar team section header updates from "Engineering" to "Platform" without requiring a page reload.
 
 ## Labels Page (`/settings/labels`)
 
