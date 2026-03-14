@@ -3,30 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestPassengerFormCount: Write test for PassengerForm displays correct number of passenger forms",
-        "WriteTestPassengerFormContact: Write test for PassengerForm shows primary passenger contact fields",
-        "WriteTestPassengerFormNameInput: Write test for PassengerForm first name and last name input",
-        "WriteTestPassengerFormDOB: Write test for PassengerForm date of birth picker",
-        "WriteTestPassengerFormGender: Write test for PassengerForm gender dropdown",
-        "WriteTestPassengerFormEmailValidation: Write test for PassengerForm email validation",
-        "WriteTestPassengerFormEmailValid: Write test for PassengerForm email accepts valid input",
-        "WriteTestPassengerFormPhone: Write test for PassengerForm phone number input",
-        "WriteTestPassengerFormRequired: Write test for PassengerForm required field validation",
-        "WriteTestPassengerFormInfant: Write test for PassengerForm infant passenger form",
-        "WriteTestPassengerFormEdit: Write test for PassengerForm can be filled and edited multiple times",
-        "WriteTestBookingActionButton: Write test for BookingAction displays Book Flight button",
-        "WriteTestBookingActionSuccess: Write test for BookingAction successfully books a flight",
-        "WriteTestBookingActionReference: Write test for BookingAction shows booking reference number",
-        "WriteTestBookingActionDoubleBook: Write test for BookingAction prevents double booking",
-        "WriteTestBookingActionLoading: Write test for BookingAction shows loading state during submission",
-        "WriteTestBookingActionMyTrips: Write test for BookingAction booking appears in My Trips"
-      ],
-      "timestamp": "2026-03-14T19:26:12.594Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestTripsTabsDisplay: Write test for TripsTabs displays three tabs",
         "WriteTestTripsTabsPast: Write test for TripsTabs switches to Past tab",
         "WriteTestTripsTabsTracked: Write test for TripsTabs switches to Tracked tab",
@@ -145,19 +121,23 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestFlightSummaryOutbound: Write test for FlightSummary displays full outbound itinerary",
-      "WriteTestFlightSummaryRoundTrip: Write test for FlightSummary displays outbound and return flights for round trip",
-      "WriteTestFlightSummaryConnecting: Write test for FlightSummary displays connecting flight with multiple legs",
-      "WriteTestFlightSummaryTotalDuration: Write test for FlightSummary shows total duration and stops count",
-      "WriteTestFlightSummaryOvernight: Write test for FlightSummary shows overnight arrival indicator",
-      "WriteTestFlightSummaryAmenities: Write test for FlightSummary shows aircraft type and amenities",
-      "WriteTestFlightSummaryBaggage: Write test for FlightSummary shows baggage allowance",
-      "WriteTestPriceBreakdownBase: Write test for PriceBreakdown displays base fare per passenger",
-      "WriteTestPriceBreakdownTaxes: Write test for PriceBreakdown displays taxes and fees",
-      "WriteTestPriceBreakdownTotal: Write test for PriceBreakdown displays total price",
-      "WriteTestPriceBreakdownMixed: Write test for PriceBreakdown shows per-passenger-type pricing for mixed group",
-      "WriteTestPriceBreakdownRoundTrip: Write test for PriceBreakdown updates for round-trip flights",
-      "WriteTestPriceBreakdownCabin: Write test for PriceBreakdown reflects selected cabin class pricing"
+      "WriteTestPassengerFormCount: Write test for PassengerForm displays correct number of passenger forms",
+      "WriteTestPassengerFormContact: Write test for PassengerForm shows primary passenger contact fields",
+      "WriteTestPassengerFormNameInput: Write test for PassengerForm first name and last name input",
+      "WriteTestPassengerFormDOB: Write test for PassengerForm date of birth picker",
+      "WriteTestPassengerFormGender: Write test for PassengerForm gender dropdown",
+      "WriteTestPassengerFormEmailValidation: Write test for PassengerForm email validation",
+      "WriteTestPassengerFormEmailValid: Write test for PassengerForm email accepts valid input",
+      "WriteTestPassengerFormPhone: Write test for PassengerForm phone number input",
+      "WriteTestPassengerFormRequired: Write test for PassengerForm required field validation",
+      "WriteTestPassengerFormInfant: Write test for PassengerForm infant passenger form",
+      "WriteTestPassengerFormEdit: Write test for PassengerForm can be filled and edited multiple times",
+      "WriteTestBookingActionButton: Write test for BookingAction displays Book Flight button",
+      "WriteTestBookingActionSuccess: Write test for BookingAction successfully books a flight",
+      "WriteTestBookingActionReference: Write test for BookingAction shows booking reference number",
+      "WriteTestBookingActionDoubleBook: Write test for BookingAction prevents double booking",
+      "WriteTestBookingActionLoading: Write test for BookingAction shows loading state during submission",
+      "WriteTestBookingActionMyTrips: Write test for BookingAction booking appears in My Trips"
     ],
     "timestamp": "2026-03-14T19:26:12.594Z",
     "app": "GoogleFlights"

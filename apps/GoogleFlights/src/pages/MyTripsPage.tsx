@@ -16,10 +16,10 @@ import CancelBookingModal from '../components/CancelBookingModal'
 import './MyTripsPage.css'
 
 function getSessionToken(): string {
-  let token = localStorage.getItem('session_token')
+  let token = localStorage.getItem('gf_session_token')
   if (!token) {
     token = crypto.randomUUID()
-    localStorage.setItem('session_token', token)
+    localStorage.setItem('gf_session_token', token)
   }
   return token
 }
