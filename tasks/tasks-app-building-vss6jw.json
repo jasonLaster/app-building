@@ -3,28 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestAuthPageDefaultsToLoginMode: Write test for Auth page defaults to login mode",
-        "WriteTestToggleFromLoginToRegisterMode: Write test for Toggle from login to register mode",
-        "WriteTestToggleFromRegisterBackToLoginMode: Write test for Toggle from register back to login mode",
-        "WriteTestTogglePreservesNoStaleInput: Write test for Toggle preserves no stale input between modes",
-        "WriteTestLoginWithValidEmail: Write test for Login with valid email redirects to home",
-        "WriteTestLoginWithEmptyEmail: Write test for Login with empty email shows validation error",
-        "WriteTestLoginWithInvalidEmailFormat: Write test for Login with invalid email format shows validation error",
-        "WriteTestLoginWithNonExistentEmail: Write test for Login with non-existent email shows error",
-        "WriteTestLoginFormRepeatedUse: Write test for Login form email input is functional on repeated use",
-        "WriteTestRegisterWithValidNameAndEmail: Write test for Register with valid name and email creates account and redirects to home",
-        "WriteTestRegisterWithEmptyName: Write test for Register with empty name shows validation error",
-        "WriteTestRegisterWithEmptyEmail: Write test for Register with empty email shows validation error",
-        "WriteTestRegisterWithInvalidEmailFormat: Write test for Register with invalid email format shows validation error",
-        "WriteTestRegisterWithExistingEmail: Write test for Register with already-existing email shows error",
-        "WriteTestRegisterFormRepeatedUse: Write test for Register form fields are functional on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestSearchBarDisplaysAllInputFields: Write test for Search bar displays all input fields on load",
         "WriteTestSearchByLocation: Write test for Search by location filters property results",
         "WriteTestSearchByDates: Write test for Search by check-in and check-out dates filters results",
@@ -427,9 +405,23 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "Unpack: Write Playwright tests"
+      "WriteTestAuthPageDefaultsToLoginMode: Write test for Auth page defaults to login mode",
+      "WriteTestToggleFromLoginToRegisterMode: Write test for Toggle from login to register mode",
+      "WriteTestToggleFromRegisterBackToLoginMode: Write test for Toggle from register back to login mode",
+      "WriteTestTogglePreservesNoStaleInput: Write test for Toggle preserves no stale input between modes",
+      "WriteTestLoginWithValidEmail: Write test for Login with valid email redirects to home",
+      "WriteTestLoginWithEmptyEmail: Write test for Login with empty email shows validation error",
+      "WriteTestLoginWithInvalidEmailFormat: Write test for Login with invalid email format shows validation error",
+      "WriteTestLoginWithNonExistentEmail: Write test for Login with non-existent email shows error",
+      "WriteTestLoginFormRepeatedUse: Write test for Login form email input is functional on repeated use",
+      "WriteTestRegisterWithValidNameAndEmail: Write test for Register with valid name and email creates account and redirects to home",
+      "WriteTestRegisterWithEmptyName: Write test for Register with empty name shows validation error",
+      "WriteTestRegisterWithEmptyEmail: Write test for Register with empty email shows validation error",
+      "WriteTestRegisterWithInvalidEmailFormat: Write test for Register with invalid email format shows validation error",
+      "WriteTestRegisterWithExistingEmail: Write test for Register with already-existing email shows error",
+      "WriteTestRegisterFormRepeatedUse: Write test for Register form fields are functional on repeated use"
     ],
-    "timestamp": "2026-03-14T18:32:06.248Z",
+    "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
   }
 }
