@@ -75,20 +75,20 @@
   },
   "suites": [
     {
-      "title": "host-info-card.spec.ts",
-      "file": "host-info-card.spec.ts",
+      "title": "image-gallery.spec.ts",
+      "file": "image-gallery.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Property Detail - HostInfoCard",
-          "file": "host-info-card.spec.ts",
-          "line": 12,
+          "title": "Property Detail - ImageGallery",
+          "file": "image-gallery.spec.ts",
+          "line": 8,
           "column": 6,
           "specs": [
             {
-              "title": "Host info card displays host name, avatar, bio, and member since date",
+              "title": "Image gallery displays main large image and smaller thumbnails",
               "ok": true,
               "tags": [],
               "tests": [
@@ -97,7 +97,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/297812aa-a464-4ce4-8ff0-13d5cefa11db"
+                      "description": "https://app.replay.io/recording/bc019cbe-f285-447f-85e7-160fead44b5e"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -108,12 +108,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3247,
+                      "duration": 3117,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:33:26.295Z",
+                      "startTime": "2026-03-14T23:35:58.953Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -121,13 +121,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b9c85aa47ec1a68277b1-8c3be11d13faf7c5f76e",
-              "file": "host-info-card.spec.ts",
-              "line": 13,
+              "id": "8f0d378bd1d999f0bae0-b3e718f955aa3dac8421",
+              "file": "image-gallery.spec.ts",
+              "line": 9,
               "column": 3
             },
             {
-              "title": "Host info card displays number of listings",
+              "title": "Image gallery displays single image when property has only one image",
               "ok": true,
               "tags": [],
               "tests": [
@@ -136,7 +136,163 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/45f77bd3-1338-4a22-84e7-b120cfb032bd"
+                      "description": "https://app.replay.io/recording/299c7b4c-e821-40c0-bef9-cfb0f09c6ad0"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2289,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T23:36:02.229Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-e80bf0197ae4f2f94508",
+              "file": "image-gallery.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "Image gallery displays placeholder when property has no images",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/58ecfa17-f7cc-49dd-9fbc-c29ed0784939"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2321,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T23:36:04.537Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-1d1145ff712c397219e6",
+              "file": "image-gallery.spec.ts",
+              "line": 51,
+              "column": 3
+            },
+            {
+              "title": "Clicking a thumbnail image makes it the main displayed image",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/e8166c70-6172-4795-8ccd-8a62b05b5f0c"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1412,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T23:36:06.872Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-643a6421fb5d7a7327e9",
+              "file": "image-gallery.spec.ts",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "Clicking thumbnails is functional on repeated use",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/922622d2-5724-4568-b146-8eb6ac0e8b9b"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1549,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-14T23:36:08.297Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-b9737d203252e3b4d896",
+              "file": "image-gallery.spec.ts",
+              "line": 98,
+              "column": 3
+            },
+            {
+              "title": "Image gallery shows image captions when available",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/4dd922ac-f853-48e9-9d00-ac64ca4a3eda"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -152,7 +308,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-14T23:33:29.710Z",
+                      "startTime": "2026-03-14T23:36:09.859Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -160,121 +316,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "b9c85aa47ec1a68277b1-fcd68c691d341eda7082",
-              "file": "host-info-card.spec.ts",
-              "line": 35,
-              "column": 3
-            },
-            {
-              "title": "Host info card shows placeholder avatar when host has no avatar",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
-                        "line": 46,
-                        "column": 10
-                      }
-                    },
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/aff071cc-e9f2-45d3-b552-901c0262c7cc"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3014,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:33:31.127Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
-                            "line": 46,
-                            "column": 10
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b9c85aa47ec1a68277b1-36d5060cc8103622d06d",
-              "file": "host-info-card.spec.ts",
-              "line": 45,
-              "column": 3
-            },
-            {
-              "title": "Host info card displays correctly when host has no bio",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
-                        "line": 73,
-                        "column": 10
-                      }
-                    },
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/457db050-bc35-4775-a617-fba08f7207f7"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 3052,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-14T23:33:34.159Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/host-info-card.spec.ts",
-                            "line": 73,
-                            "column": 10
-                          }
-                        }
-                      ],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "b9c85aa47ec1a68277b1-87e25baafd4b7e0d22d7",
-              "file": "host-info-card.spec.ts",
-              "line": 72,
+              "id": "8f0d378bd1d999f0bae0-16401df4958dc8df63f9",
+              "file": "image-gallery.spec.ts",
+              "line": 123,
               "column": 3
             }
           ]
@@ -284,9 +328,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-14T23:33:20.872Z",
-    "duration": 16542.623,
-    "expected": 4,
+    "startTime": "2026-03-14T23:35:53.496Z",
+    "duration": 17965.466,
+    "expected": 6,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
