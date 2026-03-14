@@ -1,0 +1,172 @@
+.member-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.member-actions-role-wrapper {
+  position: relative;
+}
+
+.member-actions-role-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.member-actions-role-btn:hover:not(:disabled) {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.member-actions-role-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.member-actions-role-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 60;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 4px;
+  min-width: 120px;
+}
+
+.member-actions-role-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.member-actions-role-option:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.member-actions-role-option-active {
+  color: var(--color-text-primary);
+}
+
+.member-actions-check {
+  color: var(--color-accent);
+}
+
+.member-actions-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.member-actions-remove-btn:hover:not(:disabled) {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.member-actions-remove-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.member-actions-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.member-actions-confirm-dialog {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.member-actions-confirm-text {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+
+.member-actions-confirm-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.member-actions-confirm-cancel {
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.member-actions-confirm-cancel:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.member-actions-confirm-remove {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.member-actions-confirm-remove:hover {
+  opacity: 0.9;
+}
+
+.member-actions-confirm-remove:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

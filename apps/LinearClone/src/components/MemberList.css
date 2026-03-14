@@ -1,0 +1,144 @@
+.member-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-list-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 100px 1.5fr 80px;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.member-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 100px 1.5fr 80px;
+  gap: 12px;
+  padding: 10px 12px;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color 150ms ease;
+}
+
+.member-row:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.member-row:last-child {
+  border-bottom: none;
+}
+
+.member-row-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.member-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.member-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-row-email {
+  min-width: 0;
+}
+
+.member-email {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-row-role {
+  display: flex;
+  align-items: center;
+}
+
+.member-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.member-role-badge-admin {
+  background-color: rgba(94, 106, 210, 0.15);
+  color: var(--color-accent);
+}
+
+.member-role-badge-member {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-secondary);
+}
+
+.member-row-teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-width: 0;
+}
+
+.member-team-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.member-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+}
+
+.member-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  gap: 12px;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+.member-list-empty p {
+  margin: 0;
+}

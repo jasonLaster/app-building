@@ -1,0 +1,51 @@
+.members-page {
+  padding: 24px;
+}
+
+@media (max-width: 640px) {
+  .members-page {
+    padding: 12px;
+  }
+}
+
+.members-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.members-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.members-invite-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.members-invite-btn:hover {
+  opacity: 0.9;
+}
+
+.members-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}

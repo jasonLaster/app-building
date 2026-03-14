@@ -1,0 +1,120 @@
+.invite-member-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.invite-member-modal {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.imm-header {
+  padding: 20px 24px 0;
+}
+
+.imm-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.imm-body {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.imm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.imm-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.imm-input {
+  padding: 8px 10px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-text-primary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.imm-input:focus {
+  border-color: var(--color-accent);
+}
+
+.imm-input-error {
+  border-color: #ef4444;
+}
+
+.imm-error {
+  font-size: 11px;
+  color: #ef4444;
+}
+
+.imm-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 0 24px 20px;
+}
+
+.imm-cancel-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.imm-cancel-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.imm-submit-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.imm-submit-btn:hover {
+  opacity: 0.9;
+}
+
+.imm-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
