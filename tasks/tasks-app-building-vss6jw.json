@@ -3,26 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestFiltersPanelHiddenByDefault: Write test for Filters panel is hidden by default with a visible toggle button",
-        "WriteTestClickFiltersButtonOpens: Write test for Clicking the Filters button opens the filters panel",
-        "WriteTestClickFiltersButtonCloses: Write test for Clicking the Filters button again closes the filters panel",
-        "WriteTestPriceRangeSlider: Write test for Price range slider filters properties by price per night",
-        "WriteTestBedroomsMinFilter: Write test for Bedrooms minimum filter works correctly",
-        "WriteTestBedsMinFilter: Write test for Beds minimum filter works correctly",
-        "WriteTestBathroomsMinFilter: Write test for Bathrooms minimum filter works correctly",
-        "WriteTestAmenityCheckboxes: Write test for Amenity checkboxes filter properties by selected amenities",
-        "WriteTestAmenityCheckboxesGrouped: Write test for Amenity checkboxes are grouped by category",
-        "WriteTestMultipleFiltersANDLogic: Write test for Multiple filters combine with AND logic",
-        "WriteTestFiltersCombineWithSearchAndCategory: Write test for Filters combine with search bar and category filter",
-        "WriteTestResettingFilters: Write test for Resetting filters shows all properties",
-        "WriteTestFiltersPanelRepeatedUse: Write test for Filters panel controls are functional on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestPaginationControlsDisplayed: Write test for Pagination controls are displayed when results exceed one page",
         "WriteTestPaginationControlsHidden: Write test for Pagination controls are hidden when all results fit on one page",
         "WriteTestClickNextPage: Write test for Clicking Next page loads the next set of properties",
@@ -359,21 +339,19 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestPropertyGridResponsiveLayout: Write test for Property grid displays properties in a responsive grid layout",
-      "WriteTestPropertyGridNoMatchMessage: Write test for Property grid shows message when no properties match filters",
-      "WriteTestPropertyGridLoadsFromAPI: Write test for Property grid loads and displays properties from API on initial page load",
-      "WriteTestPropertyCardDisplaysInfo: Write test for Property card displays all required information",
-      "WriteTestPropertyCardShowsImage: Write test for Property card shows property image",
-      "WriteTestClickPropertyCardNavigates: Write test for Clicking a property card navigates to property detail page",
-      "WriteTestPropertyCardTypeBadge: Write test for Property card displays property type badge",
-      "WriteTestPropertyCardAverageRating: Write test for Property card displays average rating with review count",
-      "WriteTestFavoriteButtonOutlineHeart: Write test for Favorite button shows outline heart when property is not favorited",
-      "WriteTestFavoriteButtonAddsToFavorites: Write test for Clicking favorite button on unfavorited property adds it to favorites",
-      "WriteTestFavoriteButtonRemovesFromFavorites: Write test for Clicking favorite button on favorited property removes it from favorites",
-      "WriteTestFavoriteButtonNoNavigation: Write test for Favorite button does not navigate to property detail page",
-      "WriteTestFavoriteButtonNotShownLoggedOut: Write test for Favorite button is not shown when user is not logged in",
-      "WriteTestFavoriteButtonCorrectState: Write test for Favorite button reflects correct state on page load",
-      "WriteTestFavoriteButtonRepeatedUse: Write test for Favorite button is functional on repeated use"
+      "WriteTestFiltersPanelHiddenByDefault: Write test for Filters panel is hidden by default with a visible toggle button",
+      "WriteTestClickFiltersButtonOpens: Write test for Clicking the Filters button opens the filters panel",
+      "WriteTestClickFiltersButtonCloses: Write test for Clicking the Filters button again closes the filters panel",
+      "WriteTestPriceRangeSlider: Write test for Price range slider filters properties by price per night",
+      "WriteTestBedroomsMinFilter: Write test for Bedrooms minimum filter works correctly",
+      "WriteTestBedsMinFilter: Write test for Beds minimum filter works correctly",
+      "WriteTestBathroomsMinFilter: Write test for Bathrooms minimum filter works correctly",
+      "WriteTestAmenityCheckboxes: Write test for Amenity checkboxes filter properties by selected amenities",
+      "WriteTestAmenityCheckboxesGrouped: Write test for Amenity checkboxes are grouped by category",
+      "WriteTestMultipleFiltersANDLogic: Write test for Multiple filters combine with AND logic",
+      "WriteTestFiltersCombineWithSearchAndCategory: Write test for Filters combine with search bar and category filter",
+      "WriteTestResettingFilters: Write test for Resetting filters shows all properties",
+      "WriteTestFiltersPanelRepeatedUse: Write test for Filters panel controls are functional on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
