@@ -1,0 +1,36 @@
+Cleaned up stale branch: test-run-1773527160171
+Created branch: test-run-1773527162870 (br-icy-snow-ahprpln4)
+Test DB URL: postgresql://neondb_owner:***@ep-rough-fog-ahrgduir.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:24885) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"7604261d-6095-4773-b610-9ff919787399","duration":0,"result":"passed","title":""}
+{"id":"759cd812-b1c2-4957-9804-79f36419614c","duration":0,"result":"failed","title":""}
+{"id":"b4368301-8ed3-4721-a04a-e28f0b5ffe55","duration":0,"result":"failed","title":""}
+{"id":"0e65e6a0-3c1c-4467-920c-71c639213ab1","duration":0,"result":"failed","title":""}
+{"id":"cd2b143e-9f7a-420c-9e45-53f4707dfcd9","duration":0,"result":"failed","title":""}
+{"id":"e9319b08-2d91-47ce-913d-3a8659a8c78e","duration":0,"result":"passed","title":""}
+{"id":"15c98c2a-4a83-4cbf-9827-65127a8a6784","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: 759cd812-b1c2-4957-9804-79f36419614c
+⠙ Initializing…
+Uploading recordings...
+   759cd812…  Clicking a category chip filters properties by tha…  2m ago  30.4s   
+
+Uploaded recordings
+ ✔  759cd812…  Clicking a category chip filters properties by tha…  2m ago  30.4s  (uploaded) 
+
+View recording at:
+https://app.replay.io/recording/759cd812-b1c2-4957-9804-79f36419614c
+

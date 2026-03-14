@@ -316,13 +316,16 @@ export async function seedDatabase(databaseUrl: string): Promise<void> {
 }
 
 // Allow running directly: npx tsx scripts/seed-db.ts <DATABASE_URL>
-const url = process.argv[2]
-if (url) {
-  truncateAndSeed(url).then(() => {
-    console.log('Database seeded successfully')
-    process.exit(0)
-  }).catch((err) => {
-    console.error('Seeding failed:', err)
-    process.exit(1)
-  })
+const isMain = process.argv[1] && import.meta.filename && process.argv[1] === import.meta.filename
+if (isMain) {
+  const url = process.argv[2]
+  if (url) {
+    truncateAndSeed(url).then(() => {
+      console.log('Database seeded successfully')
+      process.exit(0)
+    }).catch((err) => {
+      console.error('Seeding failed:', err)
+      process.exit(1)
+    })
+  }
 }

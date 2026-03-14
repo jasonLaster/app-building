@@ -126,13 +126,16 @@ export async function initSchema(databaseUrl: string): Promise<void> {
 }
 
 // Allow running directly: npx tsx scripts/schema.ts <DATABASE_URL>
-const url = process.argv[2]
-if (url) {
-  initSchema(url).then(() => {
-    console.log('Schema initialized successfully')
-    process.exit(0)
-  }).catch((err) => {
-    console.error('Schema initialization failed:', err)
-    process.exit(1)
-  })
+const isMain = process.argv[1] && import.meta.filename && process.argv[1] === import.meta.filename
+if (isMain) {
+  const url = process.argv[2]
+  if (url) {
+    initSchema(url).then(() => {
+      console.log('Schema initialized successfully')
+      process.exit(0)
+    }).catch((err) => {
+      console.error('Schema initialization failed:', err)
+      process.exit(1)
+    })
+  }
 }
