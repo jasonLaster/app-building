@@ -21,10 +21,19 @@ exec-secrets NEON_API_KEY -- curl -s -X POST "https://console.neon.tech/api/v2/p
 that need it with `exec-secrets NEON_API_KEY -- ...`. The `exec-secrets` tool spawns the
 command with the secret in its environment and redacts secret values from output.
 
-Extract the project ID from the response (`jq` is not available — use `python3`):
+**Storing results as branch secrets:** Write the API response to a file, then extract
+values and pipe to `set-branch-secret`. Never echo or print secret values to stdout.
 
 ```bash
-echo $RESPONSE | python3 -c "import sys,json; print(json.load(sys.stdin)['project']['id'])"
+# Create project and write response to file
+exec-secrets NEON_API_KEY -- bash -c 'curl -s -X POST "https://console.neon.tech/api/v2/projects" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{\"project\":{\"name\":\"<project-name>\"}}" > /tmp/neon-project.json'
+
+# Extract and store as branch secrets
+python3 -c "import json; print(json.load(open('/tmp/neon-project.json'))['project']['id'])" | set-branch-secret NEON_PROJECT_ID
+python3 -c "import json; print(json.load(open('/tmp/neon-project.json'))['connection_uris'][0]['connection_uri'])" | set-branch-secret DATABASE_URL
 ```
 
 ## Creating Branches

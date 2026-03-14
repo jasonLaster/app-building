@@ -50,11 +50,34 @@ resources.
    - Success: `Deployed to <url>`
    - Failure: `Deploy failed (build|netlify) — see logs/deploy.log`
 
+## Storing Deployment Secrets
+
+When the deploy script creates new resources (Neon project, Netlify site), it produces
+secret values like `DATABASE_URL`, `NEON_PROJECT_ID`, and `NETLIFY_SITE_ID`. These must
+be stored as branch secrets using `set-branch-secret` so they persist across container
+restarts and are never committed to git.
+
+**Important:** Write API responses to files first, then extract values and pipe to
+`set-branch-secret`. Never echo or print secret values — they will be detected in logs
+and the set call will fail.
+
+```bash
+# Example: after creating a Neon project, extract and store the project ID and DATABASE_URL
+exec-secrets NEON_API_KEY -- bash -c 'curl -s -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{\"project\":{\"name\":\"my-app\"}}" \
+  https://console.neon.tech/api/v2/projects > /tmp/neon-resp.json'
+python3 -c "import json; print(json.load(open('/tmp/neon-resp.json'))['project']['id'])" | set-branch-secret NEON_PROJECT_ID
+python3 -c "import json; r=json.load(open('/tmp/neon-resp.json')); print(r['connection_uris'][0]['connection_uri'])" | set-branch-secret DATABASE_URL
+```
+
+After storing, these secrets are immediately available via `exec-secrets` and `list-secrets`.
+
 ## Populating `.env` for Redeployments
 
 `.env` is gitignored and will not exist in a fresh environment. If the app has been
-deployed before, you MUST populate `.env` before running the script so it reuses the
-existing Netlify site and Neon database instead of creating new ones.
+deployed before, the deploy script should check for existing branch secrets (via
+`list-secrets`) and `deployment.txt` to reuse existing resources.
 
 Read `deployment.txt` (committed to git) to get all previously stored deployment
 values (`site_id`, `neon_project_id`, `database_url`). Write them to `.env`:

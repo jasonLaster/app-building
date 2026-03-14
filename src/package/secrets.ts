@@ -95,6 +95,54 @@ export async function fetchBranchSecrets(
 }
 
 /**
+ * Create or update a branch secret in Infisical.
+ * Uses POST to create, falls back to PATCH if it already exists.
+ */
+export async function createBranchSecret(
+  config: InfisicalConfig,
+  branch: string,
+  name: string,
+  value: string,
+): Promise<void> {
+  const secretPath = `/branches/${branch}/`;
+  const url = `${INFISICAL_API_BASE}/api/v3/secrets/raw/${encodeURIComponent(name)}`;
+  const body = {
+    workspaceId: config.projectId,
+    environment: config.environment,
+    secretPath,
+    secretValue: value,
+    type: "shared",
+  };
+  const headers = {
+    Authorization: `Bearer ${config.token}`,
+    "Content-Type": "application/json",
+  };
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+  });
+
+  if (res.ok) return;
+
+  // If conflict (already exists), try PATCH to update
+  if (res.status === 400 || res.status === 409) {
+    const patchRes = await fetch(url, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(body),
+    });
+    if (patchRes.ok) return;
+    const text = await patchRes.text().catch(() => "");
+    throw new Error(`Infisical PATCH ${name} → ${patchRes.status}: ${text}`);
+  }
+
+  const text = await res.text().catch(() => "");
+  throw new Error(`Infisical POST ${name} → ${res.status}: ${text}`);
+}
+
+/**
  * Extract Infisical config from environment variables and log in.
  * Reads INFISICAL_CLIENT_ID, INFISICAL_CLIENT_SECRET, INFISICAL_PROJECT_ID,
  * and INFISICAL_ENVIRONMENT from the env vars.

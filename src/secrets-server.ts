@@ -1,9 +1,23 @@
 import { createServer } from "http";
 import { spawn } from "child_process";
+import { existsSync, readFileSync, readdirSync } from "fs";
+import { join } from "path";
+import { createBranchSecret, type InfisicalConfig } from "./package/secrets";
 
 export const SECRETS_SERVER_PORT = 9119;
 
 export type SecretsStore = Record<string, string>;
+
+export interface SecretsServerOptions {
+  store: SecretsStore;
+  infisicalConfig: InfisicalConfig | null;
+  branch: string;
+  logsDir: string;
+  /** Returns all buffered event lines */
+  getEventLines: () => string[];
+  /** Returns all buffered log lines */
+  getLogLines: () => string[];
+}
 
 function redact(text: string, secretValues: string[]): string {
   let result = text;
@@ -15,23 +29,122 @@ function redact(text: string, secretValues: string[]): string {
   return result;
 }
 
-/**
- * Start an HTTP server on 127.0.0.1 that handles exec-secrets requests.
- * Each request specifies secret names and a command to run.
- * The server resolves secret values from the store, spawns the command
- * with those secrets in its environment, and streams redacted output back.
- */
-export function startSecretsServer(store: SecretsStore, log: (msg: string) => void): Promise<void> {
-  const allValues = Object.values(store).filter((v) => v.length > 0);
+/** Get current list of non-empty secret values for redaction. */
+function getAllValues(store: SecretsStore): string[] {
+  return Object.values(store).filter((v) => v.length > 0);
+}
 
+/**
+ * Check if a value appears in any logged output.
+ * Returns an error message if found, null if clean.
+ */
+function valueAppearsInLogs(value: string, opts: SecretsServerOptions): string | null {
+  // Check in-memory event buffer
+  for (const line of opts.getEventLines()) {
+    if (line.includes(value)) {
+      return "Value found in event log — it has already been leaked. Use file-based extraction instead.";
+    }
+  }
+
+  // Check in-memory log buffer
+  for (const line of opts.getLogLines()) {
+    if (line.includes(value)) {
+      return "Value found in worker log buffer — it has already been leaked. Use file-based extraction instead.";
+    }
+  }
+
+  // Check worker-current.log on disk
+  const currentLog = join(opts.logsDir, "worker-current.log");
+  if (existsSync(currentLog)) {
+    const content = readFileSync(currentLog, "utf-8");
+    if (content.includes(value)) {
+      return "Value found in worker-current.log — it has already been leaked. Use file-based extraction instead.";
+    }
+  }
+
+  // Check archived log files
+  if (existsSync(opts.logsDir)) {
+    for (const file of readdirSync(opts.logsDir)) {
+      if (file.startsWith("worker-") && file.endsWith(".log") && file !== "worker-current.log") {
+        const content = readFileSync(join(opts.logsDir, file), "utf-8");
+        if (content.includes(value)) {
+          return `Value found in ${file} — it has already been leaked. Use file-based extraction instead.`;
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Start an HTTP server on 127.0.0.1 that handles secrets requests.
+ *
+ * Endpoints:
+ *   GET  /list  — returns JSON array of secret names
+ *   POST /exec  — { secrets: string[], cmd: string[] } — run command with secrets, stream NDJSON
+ *   POST /set   — { name: string, value: string } — store a branch secret in Infisical
+ */
+export function startSecretsServer(opts: SecretsServerOptions, log: (msg: string) => void): Promise<void> {
   return new Promise((resolve) => {
     const server = createServer(async (req, res) => {
       if (req.method === "GET" && req.url === "/list") {
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(Object.keys(store)));
+        res.end(JSON.stringify(Object.keys(opts.store)));
         return;
       }
 
+      // --- POST /set ---
+      if (req.method === "POST" && req.url === "/set") {
+        const chunks: Buffer[] = [];
+        for await (const chunk of req) chunks.push(chunk as Buffer);
+
+        let body: { name: string; value: string };
+        try {
+          body = JSON.parse(Buffer.concat(chunks).toString());
+        } catch {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "invalid JSON" }));
+          return;
+        }
+
+        if (!body.name || typeof body.name !== "string" || !body.value || typeof body.value !== "string") {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "name (string) and value (string) are required" }));
+          return;
+        }
+
+        // Safety check: reject if value appears in any logs
+        const leakMessage = valueAppearsInLogs(body.value, opts);
+        if (leakMessage) {
+          log(`set-branch-secret: REJECTED ${body.name} — value found in logs`);
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: leakMessage }));
+          return;
+        }
+
+        // Store in Infisical if configured
+        if (opts.infisicalConfig) {
+          try {
+            await createBranchSecret(opts.infisicalConfig, opts.branch, body.name, body.value);
+          } catch (e: any) {
+            log(`set-branch-secret: Infisical error for ${body.name}: ${e.message}`);
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: `Failed to store in Infisical: ${e.message}` }));
+            return;
+          }
+        }
+
+        // Add to local store so future /exec and /list calls include it
+        opts.store[body.name] = body.value;
+
+        log(`set-branch-secret: stored ${body.name}`);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, name: body.name }));
+        return;
+      }
+
+      // --- POST /exec ---
       if (req.method !== "POST" || req.url !== "/exec") {
         res.writeHead(404);
         res.end();
@@ -76,7 +189,7 @@ export function startSecretsServer(store: SecretsStore, log: (msg: string) => vo
       // Add requested secrets
       const missing: string[] = [];
       for (const name of body.secrets ?? []) {
-        const value = store[name];
+        const value = opts.store[name];
         if (value) {
           env[name] = value;
         } else {
@@ -88,6 +201,9 @@ export function startSecretsServer(store: SecretsStore, log: (msg: string) => vo
         log(`exec-secrets: unknown secrets: ${missing.join(", ")}`);
       }
       log(`exec-secrets: ${body.cmd.join(" ")} (secrets: ${(body.secrets ?? []).join(", ")})`);
+
+      // Redact all current store values (including any added via /set)
+      const allValues = getAllValues(opts.store);
 
       res.writeHead(200, { "Content-Type": "application/x-ndjson" });
 

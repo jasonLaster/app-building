@@ -20,29 +20,31 @@ locale configuration — verify these before running scripts.
 These secrets are NOT set in the environment. Use `exec-secrets` to make them available
 to any command that needs them. See the Secrets section in `AGENTS.md` for usage.
 
-### App-level (in each app's `.env` file)
+### Branch-level (stored as branch secrets via `set-branch-secret`)
 
 | Variable | Used by | How to get |
 |---|---|---|
-| `NEON_PROJECT_ID` | test, deploy | From `deployment.txt` (`neon_project_id`) or created by deploy script |
-| `DATABASE_URL` | test, deploy | From `deployment.txt` (`database_url`) or created by deploy script |
-| `NETLIFY_SITE_ID` | deploy | From `deployment.txt` (`site_id`) or created by deploy script |
+| `NEON_PROJECT_ID` | test, deploy | Created by deploy script, stored via `set-branch-secret` |
+| `DATABASE_URL` | test, deploy | Created by deploy script, stored via `set-branch-secret` |
+| `NETLIFY_SITE_ID` | deploy | Created by deploy script, stored via `set-branch-secret` |
 
-### Verifying variables
-
-Before running tests or deploy, verify app-level variables are set in `.env`:
+These are stored in Infisical as branch secrets and loaded automatically at container
+startup. Access them via `exec-secrets` just like container-level secrets:
 
 ```bash
-# App-level (from app directory)
-grep NEON_PROJECT_ID .env
-grep DATABASE_URL .env
+exec-secrets DATABASE_URL -- npx tsx scripts/schema.ts "$DATABASE_URL"
 ```
 
-Container-level secrets (`NEON_API_KEY`, `NETLIFY_AUTH_TOKEN`, etc.) are accessed via
-`exec-secrets` and do not need manual verification — they are managed by the secrets server.
+### Verifying secrets
 
-If `.env` is missing but the app has been deployed before, populate it from `deployment.txt`.
-See `skills/scripts/deploy.md` § "Populating `.env` for Redeployments".
+Use `list-secrets` to verify which secrets are available:
+
+```bash
+list-secrets
+```
+
+All secrets (both container-level and branch-level) are accessed via `exec-secrets`.
+They are NOT set in the environment directly.
 
 ## Locale Configuration
 

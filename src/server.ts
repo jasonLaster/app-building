@@ -14,7 +14,7 @@ import {
 } from "./worker";
 import { createBufferedLogger, archiveCurrentLog } from "./log";
 import { formatLogLine, stripTimestamp } from "./format";
-import { fetchGlobalSecrets, type InfisicalConfig } from "./package/secrets";
+import { fetchGlobalSecrets, fetchBranchSecrets, type InfisicalConfig } from "./package/secrets";
 import { startSecretsServer, type SecretsStore } from "./secrets-server";
 
 // --- Configuration from env ---
@@ -401,15 +401,35 @@ async function main(): Promise<void> {
   let secrets: SecretsStore;
   try {
     secrets = await fetchGlobalSecrets(infisicalConfig);
-    startupLog(`Fetched ${Object.keys(secrets).length} secret(s).`);
+    startupLog(`Fetched ${Object.keys(secrets).length} global secret(s).`);
   } catch (e: any) {
     startupLog(`Fatal: failed to fetch secrets: ${e.message}`);
     process.exit(1);
   }
 
+  // Fetch branch secrets and merge into store
+  try {
+    const branchSecrets = await fetchBranchSecrets(infisicalConfig, PUSH_BRANCH);
+    const count = Object.keys(branchSecrets).length;
+    Object.assign(secrets, branchSecrets);
+    startupLog(`Fetched ${count} branch secret(s) from Infisical.`);
+  } catch (e: any) {
+    startupLog(`Warning: failed to fetch branch secrets: ${e.message}`);
+  }
+
   // Start the secrets server — the agent uses exec-secrets to run commands
   // that need secret values, and this server handles those requests.
-  await startSecretsServer(secrets, startupLog);
+  await startSecretsServer(
+    {
+      store: secrets,
+      infisicalConfig,
+      branch: PUSH_BRANCH,
+      logsDir: LOGS_DIR,
+      getEventLines: () => eventBuffer.since(0).items,
+      getLogLines: () => logBuffer.since(0).items,
+    },
+    startupLog,
+  );
 
   // Clone repo using GITHUB_TOKEN from the secrets store
   const cloneUrl = toTokenUrl(REPO_URL, secrets.GITHUB_TOKEN);
