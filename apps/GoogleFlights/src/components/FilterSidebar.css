@@ -1,0 +1,211 @@
+.filter-sidebar {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1px 3px var(--color-shadow);
+  padding: 20px;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.filter-sidebar__section {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.filter-sidebar__section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-sidebar__section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.filter-sidebar__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-text-primary);
+}
+
+.filter-sidebar__checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.filter-sidebar__time-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.filter-sidebar__time-range {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+/* Sort Dropdown */
+.filter-sidebar__sort {
+  position: relative;
+}
+
+.filter-sidebar__sort-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: 14px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.filter-sidebar__sort-button:hover {
+  border-color: var(--color-primary);
+}
+
+.filter-sidebar__sort-arrow {
+  transition: transform 0.2s;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.filter-sidebar__sort-arrow--open {
+  transform: rotate(180deg);
+}
+
+.filter-sidebar__sort-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px var(--color-shadow-hover);
+  overflow: hidden;
+}
+
+.filter-sidebar__sort-option {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.filter-sidebar__sort-option:hover {
+  background: var(--color-primary-light);
+}
+
+.filter-sidebar__sort-option--selected {
+  color: var(--color-primary);
+  font-weight: 500;
+  background: var(--color-primary-light);
+}
+
+/* Range Slider */
+.range-slider {
+  padding: 4px 0;
+}
+
+.range-slider__histogram {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+
+.range-slider__histogram-bar {
+  flex: 1;
+  background: var(--color-primary-light);
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+}
+
+.range-slider__labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+.range-slider__track {
+  position: relative;
+  height: 4px;
+  background: var(--color-border-light);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.range-slider__fill {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+.range-slider__handle {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border: 2px solid var(--color-surface);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  box-shadow: 0 1px 4px var(--color-shadow);
+  touch-action: none;
+  z-index: 2;
+}
+
+.range-slider__handle:active {
+  cursor: grabbing;
+  box-shadow: 0 2px 8px var(--color-shadow-hover);
+}
+
+.range-slider__handle:focus {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .filter-sidebar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .filter-sidebar__section {
+    flex: 1 1 200px;
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}

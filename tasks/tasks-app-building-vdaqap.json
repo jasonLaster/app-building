@@ -3,19 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentSearchSummaryBar: Write the SearchSummaryBar component",
-        "WriteComponentFilterSidebar: Write the FilterSidebar component",
-        "WriteComponentFlightResultCard: Write the FlightResultCard component",
-        "WriteComponentTrackPricesToggle: Write the TrackPricesToggle component",
-        "WriteComponentPagination: Write the Pagination component",
-        "WritePageSearchResults: Write the Search Results page"
-      ],
-      "timestamp": "2026-03-14T18:35:59.821Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentFlightSummary: Write the FlightSummary component",
         "WriteComponentPriceBreakdown: Write the PriceBreakdown component",
         "WriteComponentPassengerForm: Write the PassengerForm component",
@@ -101,16 +88,12 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentSidebar: Write the Sidebar navigation component",
-      "WriteComponentTripTypeSelector: Write the TripTypeSelector component",
-      "WriteComponentPassengerCountSelector: Write the PassengerCountSelector component",
-      "WriteComponentCabinClassSelector: Write the CabinClassSelector component",
-      "WriteComponentAirportAutocomplete: Write the AirportAutocomplete component",
-      "WriteComponentDatePicker: Write the DatePicker component",
-      "WriteComponentSearchButton: Write the SearchButton component",
-      "WriteComponentRecentSearches: Write the RecentSearches component",
-      "WriteComponentPopularDestinations: Write the PopularDestinations component",
-      "WritePageSearch: Write the Search page (Home)"
+      "WriteComponentSearchSummaryBar: Write the SearchSummaryBar component",
+      "WriteComponentFilterSidebar: Write the FilterSidebar component",
+      "WriteComponentFlightResultCard: Write the FlightResultCard component",
+      "WriteComponentTrackPricesToggle: Write the TrackPricesToggle component",
+      "WriteComponentPagination: Write the Pagination component",
+      "WritePageSearchResults: Write the Search Results page"
     ],
     "timestamp": "2026-03-14T18:35:59.821Z",
     "app": "GoogleFlights"
