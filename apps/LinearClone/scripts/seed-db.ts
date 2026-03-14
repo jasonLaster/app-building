@@ -172,6 +172,10 @@ export async function seedDatabase(databaseUrl: string) {
       INSERT INTO notifications (member_id, type, message, issue_id, read, archived)
       VALUES (${aliceId}, 'comment', 'Bob commented on ENG-2: Implement real-time notifications', ${notifIssueId}, false, false)
     `;
+    await sql`
+      INSERT INTO notifications (member_id, type, message, issue_id, read, archived)
+      VALUES (${aliceId}, 'mention', 'Carol mentioned you in ENG-2: Implement real-time notifications', ${notifIssueId}, false, false)
+    `;
   }
 
   console.log('Database seeded successfully');
