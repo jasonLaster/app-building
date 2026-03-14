@@ -3,23 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestLoginFormRenders: Write test for Login form renders with email and password fields",
-        "WriteTestSuccessfulLogin: Write test for Successful login with valid credentials",
-        "WriteTestLoginFailsInvalidEmail: Write test for Login fails with invalid email",
-        "WriteTestLoginFailsIncorrectPassword: Write test for Login fails with incorrect password",
-        "WriteTestLoginValidatesRequired: Write test for Login form validates required fields",
-        "WriteTestLoginValidatesEmailFormat: Write test for Login form validates email format",
-        "WriteTestNavigateToSignUp: Write test for Navigate to sign up page from login",
-        "WriteTestPasswordMasksInput: Write test for Password field masks input",
-        "WriteTestLoginSubmitViaEnter: Write test for Login form can be submitted via Enter key",
-        "WriteTestLoginRedirectsAuthenticated: Write test for Login redirects authenticated users"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestSignUpFormRenders: Write test for Sign up form renders with name, email, and password fields",
         "WriteTestSuccessfulAccountCreation: Write test for Successful account creation",
         "WriteTestSignUpFailsExistingEmail: Write test for Sign up fails with existing email",
@@ -823,9 +806,18 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "Unpack: Write Playwright tests"
+      "WriteTestLoginFormRenders: Write test for Login form renders with email and password fields",
+      "WriteTestSuccessfulLogin: Write test for Successful login with valid credentials",
+      "WriteTestLoginFailsInvalidEmail: Write test for Login fails with invalid email",
+      "WriteTestLoginFailsIncorrectPassword: Write test for Login fails with incorrect password",
+      "WriteTestLoginValidatesRequired: Write test for Login form validates required fields",
+      "WriteTestLoginValidatesEmailFormat: Write test for Login form validates email format",
+      "WriteTestNavigateToSignUp: Write test for Navigate to sign up page from login",
+      "WriteTestPasswordMasksInput: Write test for Password field masks input",
+      "WriteTestLoginSubmitViaEnter: Write test for Login form can be submitted via Enter key",
+      "WriteTestLoginRedirectsAuthenticated: Write test for Login redirects authenticated users"
     ],
-    "timestamp": "2026-03-14T18:21:07.448Z",
+    "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
   }
 }

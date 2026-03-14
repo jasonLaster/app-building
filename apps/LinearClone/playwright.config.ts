@@ -7,10 +7,9 @@ export default defineConfig({
   expect: {
     timeout: 10000,
   },
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: true,
   retries: 0,
-  workers: 1,
   reporter: [
     replayReporter({ upload: false }),
     ['json', { outputFile: 'test-results/results.json' }],
@@ -20,11 +19,5 @@ export default defineConfig({
     ...replayDevices['Replay Chromium'],
     baseURL: 'http://localhost:8888',
     actionTimeout: 15000,
-  },
-  webServer: {
-    command: 'npx netlify dev --port 8888 --functions ./netlify/functions',
-    port: 8888,
-    reuseExistingServer: false,
-    timeout: 30000,
   },
 });
