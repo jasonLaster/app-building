@@ -1,0 +1,74 @@
+{
+  "tasks": [
+    {
+      "skill": "skills/tasks/build/testSpec.md",
+      "subtasks": [
+        "Unpack: Write test specification"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeShared.md",
+      "subtasks": [
+        "Unpack: Write app shared code"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeApp.md",
+      "subtasks": [
+        "Unpack: Write the app"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/writeScript.md",
+      "subtasks": [
+        "Unpack: Implement package scripts"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/writeTests.md",
+      "subtasks": [
+        "Unpack: Write Playwright tests"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/deployment.md",
+      "subtasks": [
+        "Unpack: Do an initial production deployment"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "Unpack: Get all tests passing"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/deployment.md",
+      "subtasks": [
+        "Unpack: Deploy tested app to production"
+      ],
+      "timestamp": "2026-03-14T18:21:07.448Z",
+      "app": "LinearClone"
+    }
+  ],
+  "current": {
+    "skill": "",
+    "subtasks": [],
+    "timestamp": "2026-03-14T18:19:25.935Z",
+    "prompt": "Build me a linear clone"
+  }
+}
