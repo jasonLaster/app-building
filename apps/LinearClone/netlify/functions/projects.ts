@@ -178,6 +178,27 @@ export default async function handler(req: Request, _context: Context) {
       });
     }
 
+    if (req.method === 'DELETE') {
+      const url = new URL(req.url);
+      const projectId = url.searchParams.get('id');
+      if (!projectId) {
+        return new Response(JSON.stringify({ error: 'Project ID required' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      await sql`UPDATE issues SET project_id = NULL WHERE project_id = ${projectId}`;
+      await sql`DELETE FROM project_activity WHERE project_id = ${projectId}`;
+      await sql`DELETE FROM project_milestones WHERE project_id = ${projectId}`;
+      await sql`DELETE FROM projects WHERE id = ${projectId}`;
+
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
       status: 405,
       headers: { 'Content-Type': 'application/json' },
