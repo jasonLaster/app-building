@@ -3,33 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestTeamsPageRendersList: Write test for Teams page renders with list of all teams as cards",
-        "WriteTestTeamCardName: Write test for Team card displays team name prominently",
-        "WriteTestTeamCardPrefix: Write test for Team card displays identifier prefix",
-        "WriteTestTeamCardMemberCount: Write test for Team card displays member count",
-        "WriteTestTeamCardActiveCycle: Write test for Team card displays active cycle name when team has an active cycle",
-        "WriteTestTeamCardNoCycle: Write test for Team card displays no cycle indicator when team has no active cycle",
-        "WriteTestTeamCardNavigates: Write test for Clicking a team card navigates to team settings",
-        "WriteTestTeamsEmptyState: Write test for Teams page shows empty state when no teams exist",
-        "WriteTestTeamsUpdatesAfterCreate: Write test for Teams page updates after creating a new team",
-        "WriteTestTeamsUpdatesAfterDelete: Write test for Teams page updates after deleting a team from team settings",
-        "WriteTestCreateTeamButtonOpens: Write test for Create Team button opens create team modal",
-        "WriteTestCreateTeamNameRequired: Write test for Create team modal Name field is required",
-        "WriteTestCreateTeamPrefixRequired: Write test for Create team modal Identifier prefix is required",
-        "WriteTestCreateTeamPrefixUppercase: Write test for Create team modal Identifier prefix must be uppercase",
-        "WriteTestCreateTeamPrefix2To5: Write test for Create team modal Identifier prefix must be 2-5 characters",
-        "WriteTestCreateTeamPrefixRejects6: Write test for Create team modal Identifier prefix rejects more than 5 characters",
-        "WriteTestCreateTeamPrefixUnique: Write test for Create team modal Identifier prefix must be unique",
-        "WriteTestCreateTeamAllFields: Write test for Create team with all fields filled",
-        "WriteTestCreateTeamRequiredOnly: Write test for Create team with only required fields",
-        "WriteTestCancelCreateTeam: Write test for Cancel create team modal discards input"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestCloseCreateTeamBackdrop: Write test for Close create team modal by clicking backdrop",
         "WriteTestCreateTeamFormResets: Write test for Create team modal form resets on reopen",
         "WriteTestCreateTeamMultipleTimes: Write test for Create team modal can be used multiple times in sequence",
@@ -157,13 +130,26 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestRoleDropdownMultipleTimes: Write test for Role dropdown can be used multiple times in sequence",
-      "WriteTestRemoveMemberConfirmation: Write test for Remove member button shows confirmation dialog",
-      "WriteTestConfirmRemoveMember: Write test for Confirm member removal deletes the member",
-      "WriteTestCancelRemoveMember: Write test for Cancel member removal keeps the member",
-      "WriteTestCannotRemoveSelf: Write test for Cannot remove yourself from the workspace",
-      "WriteTestCannotChangeOwnRole: Write test for Cannot change your own role (or last Admin cannot be demoted)",
-      "WriteTestRemovedMemberIssuesRemain: Write test for Removed member's issues remain assigned but member is gone from selectors"
+      "WriteTestTeamsPageRendersList: Write test for Teams page renders with list of all teams as cards",
+      "WriteTestTeamCardName: Write test for Team card displays team name prominently",
+      "WriteTestTeamCardPrefix: Write test for Team card displays identifier prefix",
+      "WriteTestTeamCardMemberCount: Write test for Team card displays member count",
+      "WriteTestTeamCardActiveCycle: Write test for Team card displays active cycle name when team has an active cycle",
+      "WriteTestTeamCardNoCycle: Write test for Team card displays no cycle indicator when team has no active cycle",
+      "WriteTestTeamCardNavigates: Write test for Clicking a team card navigates to team settings",
+      "WriteTestTeamsEmptyState: Write test for Teams page shows empty state when no teams exist",
+      "WriteTestTeamsUpdatesAfterCreate: Write test for Teams page updates after creating a new team",
+      "WriteTestTeamsUpdatesAfterDelete: Write test for Teams page updates after deleting a team from team settings",
+      "WriteTestCreateTeamButtonOpens: Write test for Create Team button opens create team modal",
+      "WriteTestCreateTeamNameRequired: Write test for Create team modal Name field is required",
+      "WriteTestCreateTeamPrefixRequired: Write test for Create team modal Identifier prefix is required",
+      "WriteTestCreateTeamPrefixUppercase: Write test for Create team modal Identifier prefix must be uppercase",
+      "WriteTestCreateTeamPrefix2To5: Write test for Create team modal Identifier prefix must be 2-5 characters",
+      "WriteTestCreateTeamPrefixRejects6: Write test for Create team modal Identifier prefix rejects more than 5 characters",
+      "WriteTestCreateTeamPrefixUnique: Write test for Create team modal Identifier prefix must be unique",
+      "WriteTestCreateTeamAllFields: Write test for Create team with all fields filled",
+      "WriteTestCreateTeamRequiredOnly: Write test for Create team with only required fields",
+      "WriteTestCancelCreateTeam: Write test for Cancel create team modal discards input"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
