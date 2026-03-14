@@ -3,9 +3,10 @@
     {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "Unpack: Do an initial production deployment"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-14T18:32:06.248Z",
+      "timestamp": "2026-03-14T21:30:31.173Z",
       "app": "AirbnbClone"
     },
     {
@@ -26,23 +27,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/writeTests.md",
+    "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "WriteTestReviewFormCommentTextArea: Write test for Review form displays comment text area",
-      "WriteTestReviewFormSubmitButton: Write test for Submit button is visible",
-      "WriteTestTypeCommentInTextArea: Write test for Type a comment in the text area",
-      "WriteTestSubmitReviewAllRatingsAndComment: Write test for Submit review with all ratings and comment",
-      "WriteTestSubmittedReviewOnPropertyPage: Write test for Submitted review appears on property detail page",
-      "WriteTestSubmittedReviewOnProfilePage: Write test for Submitted review appears in user profile reviews list",
-      "WriteTestSubmitReviewNoComment: Write test for Submit review with ratings but no comment",
-      "WriteTestSubmitButtonDisabledNoRatings: Write test for Submit button is disabled when ratings are not set",
-      "WriteTestFormValidationAllRatingsRequired: Write test for Form validation prevents submission without all ratings",
-      "WriteTestWriteReviewButtonDisappearsAfterSubmit: Write test for Write Review button on My Trips disappears after submitting review",
-      "WriteTestNavigateBackWithoutSubmitting: Write test for Navigate back from review page without submitting",
-      "WriteTestCommentTextAreaMultiLine: Write test for Comment text area allows multi-line input",
-      "WriteTestRevisitReviewPageAfterSubmission: Write test for Re-visiting review page after submission shows already-reviewed state"
+      "Unpack: Do an initial production deployment"
     ],
-    "timestamp": "2026-03-14T19:58:39.600Z",
+    "timestamp": "2026-03-14T18:32:06.248Z",
     "app": "AirbnbClone"
   }
 }
