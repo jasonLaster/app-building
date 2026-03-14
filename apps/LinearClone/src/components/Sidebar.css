@@ -1,0 +1,205 @@
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  height: 100vh;
+  background-color: var(--color-bg);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: width 150ms ease, min-width 150ms ease;
+  position: relative;
+  z-index: 10;
+}
+
+.sidebar-collapsed {
+  width: 48px;
+  min-width: 48px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 12px 8px;
+  gap: 8px;
+}
+
+.sidebar-collapsed .sidebar-header {
+  padding: 12px 6px 8px;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-workspace-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar-workspace-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-workspace-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 0;
+}
+
+.sidebar-section {
+  padding: 4px 8px;
+}
+
+.sidebar-collapsed .sidebar-section {
+  padding: 4px;
+}
+
+.sidebar-section-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 8px 4px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  transition: background-color 150ms ease, color 150ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-collapsed .sidebar-link {
+  padding: 6px;
+  justify-content: center;
+}
+
+.sidebar-link:hover {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.sidebar-link-active {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.sidebar-link-nested {
+  padding-left: 28px;
+}
+
+.sidebar-collapsed .sidebar-link-nested {
+  padding-left: 6px;
+}
+
+.sidebar-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.sidebar-link:hover .sidebar-icon,
+.sidebar-link-active .sidebar-icon {
+  opacity: 1;
+}
+
+.sidebar-badge {
+  margin-left: auto;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 16px;
+}
+
+.sidebar-collapsed .sidebar-badge {
+  margin-left: 0;
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  font-size: 9px;
+  padding: 0 4px;
+  min-width: 14px;
+  line-height: 14px;
+}
+
+.sidebar-collapsed .sidebar-link {
+  position: relative;
+}
+
+.sidebar-team {
+  margin-bottom: 2px;
+}
+
+.sidebar-team-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.sidebar-collapsed .sidebar-team-header {
+  padding: 6px;
+  justify-content: center;
+}
+
+.sidebar-team-header:hover {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.sidebar-team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-chevron {
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+  opacity: 0.5;
+}
+
+.sidebar-chevron-expanded {
+  transform: rotate(90deg);
+}
+
+.sidebar-team-links {
+  padding-left: 0;
+}

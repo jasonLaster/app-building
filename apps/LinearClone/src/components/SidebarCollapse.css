@@ -1,0 +1,27 @@
+.sidebar-collapse-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 150ms ease, color 150ms ease;
+  flex-shrink: 0;
+}
+
+.sidebar-collapse-toggle:hover {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.sidebar-collapse-icon {
+  transition: transform 150ms ease;
+}
+
+.sidebar-collapse-icon-collapsed {
+  transform: rotate(180deg);
+}
