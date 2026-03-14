@@ -285,4 +285,217 @@ test.describe('ProjectFilters', () => {
     // Lead filter should show active indicator
     await expect(page.getByTestId('project-filter-badge-lead')).toBeVisible();
   });
+
+  test('Team filter dropdown shows all teams', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+    const { teams } = await getProjectsData(baseURL!, token);
+
+    await page.getByTestId('project-filter-btn-team').click();
+    await expect(page.getByTestId('project-filter-dropdown-team')).toBeVisible({ timeout: 10000 });
+
+    // Each team should appear with a checkbox option
+    for (const team of teams) {
+      const option = page.getByTestId(`project-filter-option-team-${team.id}`);
+      await expect(option).toBeVisible();
+      await expect(option).toContainText(team.name);
+    }
+
+    // Verify we have the expected 2 teams (Engineering, Design)
+    expect(teams.length).toBe(2);
+  });
+
+  test('Team filter filters projects by selected team', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+    const { teams } = await getProjectsData(baseURL!, token);
+
+    const engTeam = teams.find((t) => t.name === 'Engineering')!;
+    const desTeam = teams.find((t) => t.name === 'Design')!;
+
+    // Seed: V2 Launch has issues from both Engineering and Design.
+    // Create a project with issues only from Engineering.
+    const engOnlyProject = await createProjectViaApi(baseURL!, token, {
+      name: `Eng Only ${Date.now()}`,
+      status: 'planned',
+    });
+    await createIssueViaApi(baseURL!, token, {
+      teamId: engTeam.id,
+      title: `Eng Issue ${Date.now()}`,
+      status: 'todo',
+      priority: 'medium',
+      projectId: engOnlyProject.id,
+    });
+
+    // Create a project with issues only from Design.
+    const desOnlyProject = await createProjectViaApi(baseURL!, token, {
+      name: `Des Only ${Date.now()}`,
+      status: 'planned',
+    });
+    await createIssueViaApi(baseURL!, token, {
+      teamId: desTeam.id,
+      title: `Des Issue ${Date.now()}`,
+      status: 'todo',
+      priority: 'medium',
+      projectId: desOnlyProject.id,
+    });
+
+    await page.goto('/projects');
+    await expect(page.getByTestId('projects-page')).toBeVisible({ timeout: 30000 });
+
+    const { projects } = await getProjectsData(baseURL!, token);
+    const v2Launch = projects.find((p) => p.name === 'V2 Launch')!;
+
+    // Apply Engineering team filter
+    await page.getByTestId('project-filter-btn-team').click();
+    await page.getByTestId(`project-filter-option-team-${engTeam.id}`).click();
+
+    // V2 Launch (both teams) and Eng Only should be visible
+    await expect(page.getByTestId(`project-card-${v2Launch.id}`)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId(`project-card-${engOnlyProject.id}`)).toBeVisible();
+    // Des Only should be hidden
+    await expect(page.getByTestId(`project-card-${desOnlyProject.id}`)).toHaveCount(0);
+  });
+
+  test('Multiple filters combine with AND logic', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+    const { members } = await getProjectsData(baseURL!, token);
+
+    const alice = members.find((m) => m.name === 'Alice Johnson')!;
+    const bob = members.find((m) => m.name === 'Bob Smith')!;
+
+    // Seed: V2 Launch (in_progress, lead: Alice).
+    // Create: in_progress + lead Bob, planned + lead Alice
+    const bobInProgress = await createProjectViaApi(baseURL!, token, {
+      name: `Bob InProgress ${Date.now()}`,
+      status: 'in_progress',
+      leadId: bob.id,
+    });
+    const alicePlanned = await createProjectViaApi(baseURL!, token, {
+      name: `Alice Planned ${Date.now()}`,
+      status: 'planned',
+      leadId: alice.id,
+    });
+
+    await page.goto('/projects');
+    await expect(page.getByTestId('projects-page')).toBeVisible({ timeout: 30000 });
+
+    const { projects } = await getProjectsData(baseURL!, token);
+    const v2Launch = projects.find((p) => p.name === 'V2 Launch')!;
+
+    // Apply Status filter: In Progress
+    await page.getByTestId('project-filter-btn-status').click();
+    await page.getByTestId('project-filter-option-status-in_progress').click();
+    // Close status dropdown by clicking status button again
+    await page.getByTestId('project-filter-btn-status').click();
+
+    // Apply Lead filter: Alice
+    await page.getByTestId('project-filter-btn-lead').click();
+    await page.getByTestId(`project-filter-option-lead-${alice.id}`).click();
+
+    // Only V2 Launch matches both (in_progress AND lead Alice)
+    await expect(page.getByTestId(`project-card-${v2Launch.id}`)).toBeVisible({ timeout: 10000 });
+    await expect(page.getByTestId(`project-card-${bobInProgress.id}`)).toHaveCount(0);
+    await expect(page.getByTestId(`project-card-${alicePlanned.id}`)).toHaveCount(0);
+  });
+
+  test('Clearing a filter restores all projects', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+
+    // Create an extra project with different status
+    const planned = await createProjectViaApi(baseURL!, token, {
+      name: `Planned Clear ${Date.now()}`,
+      status: 'planned',
+    });
+
+    await page.goto('/projects');
+    await expect(page.getByTestId('projects-page')).toBeVisible({ timeout: 30000 });
+
+    const { projects } = await getProjectsData(baseURL!, token);
+    const initialCount = projects.length;
+
+    // Apply In Progress filter
+    await page.getByTestId('project-filter-btn-status').click();
+    await page.getByTestId('project-filter-option-status-in_progress').click();
+
+    // Planned project should be hidden
+    await expect(page.getByTestId(`project-card-${planned.id}`)).toHaveCount(0);
+
+    // Clear the filter by deselecting In Progress
+    await page.getByTestId('project-filter-option-status-in_progress').click();
+
+    // All projects should be visible again
+    for (const project of projects) {
+      await expect(page.getByTestId(`project-card-${project.id}`)).toBeVisible({ timeout: 10000 });
+    }
+  });
+
+  test('Filters can be used repeatedly after clearing', async ({ page, baseURL }) => {
+    const { token } = await loginAndGoToProjects(page, baseURL!);
+    const { teams } = await getProjectsData(baseURL!, token);
+
+    const desTeam = teams.find((t) => t.name === 'Design')!;
+
+    // Create projects with different statuses
+    const planned = await createProjectViaApi(baseURL!, token, {
+      name: `Planned Repeat ${Date.now()}`,
+      status: 'planned',
+    });
+    const completed = await createProjectViaApi(baseURL!, token, {
+      name: `Completed Repeat ${Date.now()}`,
+      status: 'completed',
+    });
+    // Create a Design-only project
+    const desProject = await createProjectViaApi(baseURL!, token, {
+      name: `Des Repeat ${Date.now()}`,
+      status: 'planned',
+    });
+    await createIssueViaApi(baseURL!, token, {
+      teamId: desTeam.id,
+      title: `Des Repeat Issue ${Date.now()}`,
+      status: 'todo',
+      priority: 'medium',
+      projectId: desProject.id,
+    });
+
+    await page.goto('/projects');
+    await expect(page.getByTestId('projects-page')).toBeVisible({ timeout: 30000 });
+
+    // 1st: Apply Status filter for Planned, then clear
+    await page.getByTestId('project-filter-btn-status').click();
+    await page.getByTestId('project-filter-option-status-planned').click();
+    await expect(page.getByTestId(`project-card-${planned.id}`)).toBeVisible({ timeout: 10000 });
+    // Clear
+    await page.getByTestId('project-filter-option-status-planned').click();
+
+    // 2nd: Apply Team filter for Design
+    await page.getByTestId('project-filter-btn-status').click(); // close status dropdown
+    await page.getByTestId('project-filter-btn-team').click();
+    await page.getByTestId(`project-filter-option-team-${desTeam.id}`).click();
+
+    // Design projects should be visible (V2 Launch has design issues too)
+    await expect(page.getByTestId(`project-card-${desProject.id}`)).toBeVisible({ timeout: 10000 });
+
+    // Filters remain responsive
+    await expect(page.getByTestId('project-filter-badge-team')).toBeVisible();
+  });
+
+  test('Filter state shows active filter indicators', async ({ page, baseURL }) => {
+    await loginAndGoToProjects(page, baseURL!);
+
+    // Initially no badges are visible
+    await expect(page.getByTestId('project-filter-badge-status')).toHaveCount(0);
+    await expect(page.getByTestId('project-filter-badge-lead')).toHaveCount(0);
+    await expect(page.getByTestId('project-filter-badge-team')).toHaveCount(0);
+
+    // Select In Progress in Status filter
+    await page.getByTestId('project-filter-btn-status').click();
+    await page.getByTestId('project-filter-option-status-in_progress').click();
+
+    // Status badge should show "1"
+    await expect(page.getByTestId('project-filter-badge-status')).toBeVisible();
+    await expect(page.getByTestId('project-filter-badge-status')).toHaveText('1');
+
+    // Lead and Team filter buttons should remain without badges
+    await expect(page.getByTestId('project-filter-badge-lead')).toHaveCount(0);
+    await expect(page.getByTestId('project-filter-badge-team')).toHaveCount(0);
+  });
 });
