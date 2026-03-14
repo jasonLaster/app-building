@@ -282,4 +282,117 @@ test.describe('Team Settings', () => {
     await expect(page.getByTestId('team-settings')).toBeVisible();
     await expect(page.getByTestId('team-settings-name-value')).toHaveText(/Engineering/);
   });
+
+  test('Confirm delete team removes the team and navigates back', async ({ page, baseURL }) => {
+    test.slow();
+    const data = await loginViaApi(baseURL!, 'alice@acme.com', 'password123');
+
+    // Create a third team so workspace has 3 teams
+    await fetch(`${baseURL}/api/teams`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${data.token}`,
+      },
+      body: JSON.stringify({ name: `TestTeam ${Date.now()}`, identifier: 'TST', description: '' }),
+    });
+
+    // Count initial teams
+    const initialTeams = await getTeams(baseURL!, data.token);
+    const initialCount = initialTeams.length;
+    expect(initialCount).toBeGreaterThanOrEqual(3);
+
+    // Navigate to ENG team settings
+    await page.goto('/login');
+    await page.evaluate((t) => localStorage.setItem('session_token', t), data.token);
+    await page.goto('/settings/teams');
+    await expect(page.getByTestId('teams-page')).toBeVisible({ timeout: 30000 });
+    await expect(page.getByTestId('teams-grid')).toBeVisible({ timeout: 30000 });
+
+    const engTeam = initialTeams.find((t: { identifier: string }) => t.identifier === 'ENG');
+    expect(engTeam).toBeTruthy();
+    await page.getByTestId(`team-card-${engTeam.id}`).click();
+    await expect(page.getByTestId('team-settings')).toBeVisible({ timeout: 30000 });
+
+    // Open delete confirmation and confirm
+    await page.getByTestId('team-settings-delete-btn').click();
+    await expect(page.getByTestId('team-settings-delete-confirm')).toBeVisible({ timeout: 10000 });
+    await page.getByTestId('team-settings-confirm-delete-btn').click();
+
+    // Should navigate back to /settings/teams
+    await expect(page.getByTestId('teams-grid')).toBeVisible({ timeout: 30000 });
+    await expect(page).toHaveURL(/\/settings\/teams/, { timeout: 30000 });
+
+    // Team count should be reduced by 1
+    await expect(page.locator('[data-testid^="team-card-"]')).toHaveCount(initialCount - 1, { timeout: 15000 });
+
+    // "Engineering" should no longer appear in the grid
+    await expect(
+      page.locator('[data-testid^="team-card-"]').filter({ hasText: /Engineering/ })
+    ).toHaveCount(0, { timeout: 15000 });
+
+    // Sidebar should no longer show the Engineering team section
+    await expect(page.getByTestId(`sidebar-team-${engTeam.id}`)).toHaveCount(0, { timeout: 15000 });
+  });
+
+  test('Cancel delete team keeps the team', async ({ page, baseURL }) => {
+    await loginAndNavigateToTeamSettings(page, baseURL!, 'ENG');
+
+    // Open delete confirmation dialog
+    await page.getByTestId('team-settings-delete-btn').click();
+    await expect(page.getByTestId('team-settings-delete-confirm')).toBeVisible({ timeout: 10000 });
+
+    // Click Cancel
+    await page.getByTestId('team-settings-cancel-delete-btn').click();
+
+    // Dialog should close
+    await expect(page.getByTestId('team-settings-delete-confirm')).toHaveCount(0, { timeout: 10000 });
+
+    // Team is not deleted — user remains on team settings page
+    await expect(page.getByTestId('team-settings')).toBeVisible();
+    await expect(page.getByTestId('team-settings-name-value')).toHaveText(/Engineering/);
+
+    // Verify the team still exists via API
+    const data = await loginViaApi(baseURL!, 'alice@acme.com', 'password123');
+    const teams = await getTeams(baseURL!, data.token);
+    const engTeam = teams.find((t: { name: string }) => t.name === 'Engineering');
+    expect(engTeam).toBeTruthy();
+  });
+
+  test('Back navigation from team settings returns to teams list', async ({ page, baseURL }) => {
+    await loginAndNavigateToTeamSettings(page, baseURL!, 'ENG');
+
+    // Click the Back button
+    await page.getByTestId('team-settings-back-btn').click();
+
+    // Should navigate back to /settings/teams with the teams grid visible
+    await expect(page).toHaveURL(/\/settings\/teams/, { timeout: 30000 });
+    await expect(page.getByTestId('teams-grid')).toBeVisible({ timeout: 30000 });
+
+    // Team cards should be present
+    await expect(page.locator('[data-testid^="team-card-"]')).toHaveCount(2, { timeout: 15000 });
+  });
+
+  test('Team settings changes are reflected in sidebar navigation', async ({ page, baseURL }) => {
+    test.slow();
+    const { token, team } = await loginAndNavigateToTeamSettings(page, baseURL!, 'ENG');
+
+    // Sidebar should show "Engineering" team section
+    await expect(page.getByTestId('sidebar')).toBeVisible({ timeout: 30000 });
+    const teamHeader = page.getByTestId(`sidebar-team-header-${team.id}`);
+    await expect(teamHeader).toContainText('Engineering', { timeout: 15000 });
+
+    // Change the team name to "Platform"
+    await page.getByTestId('team-settings-name-value').click();
+    const nameInput = page.getByTestId('team-settings-name-input');
+    await expect(nameInput).toBeVisible({ timeout: 10000 });
+    await nameInput.fill('Platform');
+    await nameInput.press('Enter');
+
+    // Verify the name updated in settings
+    await expect(page.getByTestId('team-settings-name-value')).toHaveText(/Platform/, { timeout: 15000 });
+
+    // Sidebar should now show "Platform" instead of "Engineering" without reload
+    await expect(teamHeader).toContainText('Platform', { timeout: 15000 });
+  });
 });

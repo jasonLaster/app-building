@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestConfirmDeleteTeam: Write test for Confirm delete team removes the team and navigates back",
-        "WriteTestCancelDeleteTeam: Write test for Cancel delete team keeps the team",
-        "WriteTestBackNavigationTeamSettings: Write test for Back navigation from team settings returns to teams list",
-        "WriteTestTeamSettingsReflectedInSidebar: Write test for Team settings changes are reflected in sidebar navigation"
-      ],
-      "timestamp": "2026-03-14T21:01:56.774Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestLabelsPageRendersList: Write test for Labels page renders with list of all labels",
         "WriteTestLabelRowColorDot: Write test for Label row displays colored dot matching label color",
         "WriteTestLabelRowIssueCount: Write test for Label row displays issue count for each label",
@@ -103,26 +92,10 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestCloseCreateTeamBackdrop: Write test for Close create team modal by clicking backdrop",
-      "WriteTestCreateTeamFormResets: Write test for Create team modal form resets on reopen",
-      "WriteTestCreateTeamMultipleTimes: Write test for Create team modal can be used multiple times in sequence",
-      "WriteTestCreateTeamSubmitEnter: Write test for Create team modal submits via Enter key",
-      "WriteTestTeamSettingsRenders: Write test for Team settings page renders with editable fields",
-      "WriteTestTeamSettingsEditName: Write test for Inline edit team name",
-      "WriteTestTeamSettingsEmptyNameRejected: Write test for Inline edit team name with empty value rejected",
-      "WriteTestTeamSettingsEditPrefix: Write test for Inline edit team identifier prefix",
-      "WriteTestTeamSettingsPrefixConstraints: Write test for Inline edit team identifier prefix enforces uppercase and 2-5 char limit",
-      "WriteTestTeamSettingsPrefixDuplicate: Write test for Inline edit team identifier prefix rejects duplicate prefix",
-      "WriteTestTeamSettingsEditDescription: Write test for Inline edit team description",
-      "WriteTestTeamSettingsClearDescription: Write test for Inline edit team description can be cleared",
-      "WriteTestTeamMembersSection: Write test for Team members section lists all current team members",
-      "WriteTestTeamAddMember: Write test for Add member to team via team settings",
-      "WriteTestTeamAddMemberShowsNonMembers: Write test for Add member selector shows only non-team members",
-      "WriteTestTeamRemoveMember: Write test for Remove member from team via team settings",
-      "WriteTestTeamCancelRemoveMember: Write test for Cancel remove member from team",
-      "WriteTestTeamMembersEmptyState: Write test for Team members section shows empty state when team has no members",
-      "WriteTestTeamAddMemberMultipleTimes: Write test for Add member to team can be done multiple times in sequence",
-      "WriteTestDeleteTeamConfirmation: Write test for Delete team button shows confirmation dialog"
+      "WriteTestConfirmDeleteTeam: Write test for Confirm delete team removes the team and navigates back",
+      "WriteTestCancelDeleteTeam: Write test for Cancel delete team keeps the team",
+      "WriteTestBackNavigationTeamSettings: Write test for Back navigation from team settings returns to teams list",
+      "WriteTestTeamSettingsReflectedInSidebar: Write test for Team settings changes are reflected in sidebar navigation"
     ],
     "timestamp": "2026-03-14T21:01:56.774Z",
     "app": "LinearClone"
