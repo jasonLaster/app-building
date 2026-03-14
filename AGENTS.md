@@ -111,6 +111,10 @@ and `set-branch-secret` to store new branch-level secrets. See `skills/accessSec
 
 ## Running Tests
 
+**NEVER run `playwright test` or `npx playwright` directly.** Always use `npm run test <file>`
+from the app directory, which handles Neon branch creation, seeding, Replay recording, and
+cleanup. Running playwright directly skips all of this and produces useless results.
+
 You MUST read `skills/tasks/build/testing.md` and precisely follow its instructions when running
 tests and debugging test failures.
 
