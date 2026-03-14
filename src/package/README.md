@@ -15,7 +15,6 @@ import {
   loadDotEnv,
   FileContainerRegistry,
   getInfisicalConfig,
-  resolveContainerSecrets,
   createMachine,
   destroyMachine,
   type ContainerConfig,
@@ -25,14 +24,22 @@ import {
   httpOptsFor,
 } from "@replayio/app-building";
 
-// Load orchestration vars from .env, then fetch build secrets from Infisical
+// Load orchestration vars from .env, then get Infisical credentials
 const orchestrationVars = loadDotEnv("/path/to/project");
-const infisicalConfig = getInfisicalConfig(orchestrationVars);
-const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+const infisicalConfig = await getInfisicalConfig(orchestrationVars);
+
+// Only pass Infisical credentials to the container — not actual secrets.
+// The container fetches secrets from Infisical at startup and manages them
+// via an internal secrets server. The agent never has direct access to secrets.
+const containerEnvVars: Record<string, string> = {
+  INFISICAL_TOKEN: infisicalConfig.token,
+  INFISICAL_PROJECT_ID: infisicalConfig.projectId,
+  INFISICAL_ENVIRONMENT: infisicalConfig.environment,
+};
 
 const config: ContainerConfig = {
   projectRoot: "/path/to/project",  // optional — only needed for local Docker operations
-  envVars: containerSecrets,
+  envVars: containerEnvVars,
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
   flyToken: orchestrationVars.FLY_API_TOKEN,
   flyApp: orchestrationVars.FLY_APP_NAME,
@@ -53,13 +60,32 @@ const alive = await config.registry.findAlive();
 await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
 ```
 
+## Secrets architecture
+
+Secrets are never passed directly to the container or agent. Instead:
+
+1. The orchestration host passes **Infisical credentials** (token, project ID, environment) to the container.
+2. At startup, the container fetches all secrets from Infisical and stores them in memory.
+3. A **secrets server** (`127.0.0.1:9119`) runs inside the container, accessible only locally.
+4. The agent process runs with a **restricted environment** — only `ANTHROPIC_API_KEY` (required for the Claude CLI) is present.
+5. When the agent needs to run a command that requires secrets, it uses `exec-secrets`:
+
+```bash
+exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" https://...
+exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- netlify deploy --prod
+```
+
+The secrets server spawns the command with the requested secrets in its environment and **redacts all secret values** from the output.
+
+The agent can also run `list-secrets` to see which secrets are available.
+
 ## Exported API
 
 ### Domain objects
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars` (build secrets from Infisical), `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`webhookSecret`/`detached`/`initialPrompt`/`localPort`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
+| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars` (Infisical credentials), `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`webhookSecret`/`detached`/`initialPrompt`/`localPort`/`absorbTasks`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
 | `FileContainerRegistry` | Built-in file-backed implementation of `ContainerRegistry`, backed by a `.jsonl` file. |
@@ -123,8 +149,7 @@ await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
 
 | Export | Description |
 |---|---|
-| `getInfisicalConfig(envVars)` | Extract `InfisicalConfig` from env vars. Returns `null` if any required var is missing (enables fallback to raw `.env`). |
-| `resolveContainerSecrets(config)` | Fetch global build secrets from Infisical and merge with Infisical config vars. Returns a `Record<string, string>` suitable for `ContainerConfig.envVars`. |
+| `getInfisicalConfig(envVars)` | Extract `InfisicalConfig` from env vars and log in. Requires `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET`, `INFISICAL_PROJECT_ID`, `INFISICAL_ENVIRONMENT`. |
 | `fetchGlobalSecrets(config)` | Fetch secrets from the `/global/` path. |
 | `fetchBranchSecrets(config, branch)` | Fetch secrets from `/branches/<branch>/`. |
 | `fetchInfisicalSecrets(config, path)` | Raw fetch from any Infisical folder path. |
@@ -135,13 +160,15 @@ await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
 
 ```ts
 const orchestrationVars = loadDotEnv(projectRoot);
-const infisicalConfig = getInfisicalConfig(orchestrationVars);
-const containerSecrets = infisicalConfig
-  ? await resolveContainerSecrets(infisicalConfig)
-  : orchestrationVars; // fallback for local dev without Infisical
+const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
+// Pass only Infisical credentials to the container
 const config: ContainerConfig = {
-  envVars: containerSecrets,
+  envVars: {
+    INFISICAL_TOKEN: infisicalConfig.token,
+    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
+    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
+  },
   flyToken: orchestrationVars.FLY_API_TOKEN,
   flyApp: orchestrationVars.FLY_APP_NAME,
   ...
@@ -185,6 +212,12 @@ A container stays running and accepts messages until it receives a **detach** or
 
 Without either signal, the container waits indefinitely for new messages — this is intentional
 so that interactive users can send follow-up messages at any time.
+
+### Task absorption
+
+Set `config.absorbTasks = true` to have the container absorb task files from other containers
+at startup. This is off by default. When enabled, the container scans `tasks/` for task files
+belonging to other containers, merges their tasks into its own queue, and deletes the foreign files.
 
 ## Webhooks
 
@@ -230,12 +263,15 @@ Every POST body has this shape:
 
 ```ts
 const orchestrationVars = loadDotEnv("/path/to/project");
-const infisicalConfig = getInfisicalConfig(orchestrationVars);
-const containerSecrets = await resolveContainerSecrets(infisicalConfig);
+const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
 const config: ContainerConfig = {
   projectRoot: "/path/to/project",
-  envVars: containerSecrets,
+  envVars: {
+    INFISICAL_TOKEN: infisicalConfig.token,
+    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
+    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
+  },
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
   webhookUrl: "https://example.com/hooks/container-events",
   webhookSecret: "your-webhook-secret",
