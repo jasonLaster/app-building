@@ -297,6 +297,16 @@ export async function truncateAndSeed(databaseUrl: string) {
   await createFlight('BA', 'BA500', 'LAX', 'LHR', '2026-04-01 20:00', '2026-04-02 14:30', 630, 'Boeing 777-300ER', true, true, true, 380, 649)
   await createFlight('AA', 'AA800', 'LAX', 'LHR', '2026-04-01 18:00', '2026-04-02 12:30', 630, 'Boeing 787-9', true, true, true, 370, 599)
 
+  // Past flights for trips testing
+  await createFlight('DL', 'DL950', 'LAX', 'JFK', '2026-02-01 08:00', '2026-02-01 16:30', 330, 'Boeing 757-200', true, true, true, 165, 249)
+
+  // Additional future flights for trips testing
+  await createFlight('AA', 'AA960', 'LAX', 'JFK', '2026-03-25 09:00', '2026-03-25 17:30', 330, 'Boeing 777-300ER', true, true, true, 180, 289)
+  await createFlight('AA', 'AA965', 'JFK', 'LAX', '2026-03-30 08:00', '2026-03-30 11:00', 360, 'Boeing 777-300ER', true, true, true, 180, 289)
+  await createFlight('DL', 'DL960', 'LAX', 'JFK', '2026-03-30 10:00', '2026-03-30 18:30', 330, 'Airbus A321neo', true, true, true, 165, 269)
+  await createFlight('UA', 'UA970', 'LAX', 'JFK', '2026-04-10 08:00', '2026-04-10 16:30', 330, 'Boeing 787-9', true, true, true, 150, 309)
+  await createFlight('AA', 'AA970', 'SFO', 'ORD', '2026-04-05 11:00', '2026-04-05 17:00', 270, 'Boeing 737-800', true, true, false, 140, 179)
+
   // Create a session for seed data
   await sql`INSERT INTO sessions (session_token) VALUES ('seed-session-token')`
   const sessionRows = await sql`SELECT id FROM sessions WHERE session_token = 'seed-session-token'`
@@ -328,6 +338,56 @@ export async function truncateAndSeed(databaseUrl: string) {
       await sql`INSERT INTO booking_passengers (booking_id, first_name, last_name, date_of_birth, gender, email, phone, passenger_type)
         VALUES (${booking.id}, 'John', 'Doe', '1990-05-15', 'male', 'john@example.com', '+1234567890', 'adult')`
     }
+  }
+
+  // Completed past booking
+  const pastFlightRows = await sql`SELECT id FROM flights WHERE flight_number = 'DL950' LIMIT 1`
+  const pastFlight = pastFlightRows[0]
+  if (pastFlight) {
+    await sql`INSERT INTO bookings (session_id, flight_id, booking_reference, cabin_class, total_price_cents, status)
+      VALUES (${sessionId}, ${pastFlight.id}, 'GF-PAST01', 'economy', 28635, 'completed')`
+  }
+
+  // Cancelled upcoming booking
+  const cancelFlightRows = await sql`SELECT id FROM flights WHERE flight_number = 'DL200' LIMIT 1`
+  const cancelFlight = cancelFlightRows[0]
+  if (cancelFlight) {
+    await sql`INSERT INTO bookings (session_id, flight_id, booking_reference, cabin_class, total_price_cents, status)
+      VALUES (${sessionId}, ${cancelFlight.id}, 'GF-CANC01', 'economy', 32085, 'cancelled')`
+  }
+
+  // Round-trip booking (LAX→JFK Mar 25, return JFK→LAX Mar 30)
+  const sortFlight1Rows = await sql`SELECT id FROM flights WHERE flight_number = 'AA960' LIMIT 1`
+  const returnFlight1Rows = await sql`SELECT id FROM flights WHERE flight_number = 'AA965' LIMIT 1`
+  const sortFlight1 = sortFlight1Rows[0]
+  const returnFlight1 = returnFlight1Rows[0]
+  if (sortFlight1) {
+    await sql`INSERT INTO bookings (session_id, flight_id, return_flight_id, booking_reference, cabin_class, total_price_cents, status)
+      VALUES (${sessionId}, ${sortFlight1.id}, ${returnFlight1?.id || null}, 'GF-SORT01', 'economy', 33235, 'confirmed')`
+  }
+
+  // Upcoming booking Mar 30
+  const sortFlight2Rows = await sql`SELECT id FROM flights WHERE flight_number = 'DL960' LIMIT 1`
+  const sortFlight2 = sortFlight2Rows[0]
+  if (sortFlight2) {
+    await sql`INSERT INTO bookings (session_id, flight_id, booking_reference, cabin_class, total_price_cents, status)
+      VALUES (${sessionId}, ${sortFlight2.id}, 'GF-SORT02', 'economy', 30935, 'confirmed')`
+  }
+
+  // Upcoming booking Apr 10
+  const sortFlight3Rows = await sql`SELECT id FROM flights WHERE flight_number = 'UA970' LIMIT 1`
+  const sortFlight3 = sortFlight3Rows[0]
+  if (sortFlight3) {
+    await sql`INSERT INTO bookings (session_id, flight_id, booking_reference, cabin_class, total_price_cents, status)
+      VALUES (${sessionId}, ${sortFlight3.id}, 'GF-SORT03', 'economy', 35535, 'confirmed')`
+  }
+
+  // One-way SFO→ORD Apr 5
+  const oneWayFlightRows = await sql`SELECT id FROM flights WHERE flight_number = 'AA970' LIMIT 1`
+  const oneWayFlight = oneWayFlightRows[0]
+  if (oneWayFlight) {
+    await sql`INSERT INTO bookings (session_id, flight_id, booking_reference, cabin_class, total_price_cents, status)
+      VALUES (${sessionId}, ${oneWayFlight.id}, 'GF-ONEW01', 'economy', 20585, 'confirmed')`
   }
 
   // Tracked routes
