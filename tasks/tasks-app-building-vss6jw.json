@@ -3,23 +3,6 @@
     {
       "skill": "skills/tasks/build/writeTests.md",
       "subtasks": [
-        "WriteTestClickWriteReviewNavigates: Write test for Clicking Write Review button navigates to review page",
-        "WriteTestWriteReviewNotOnOtherStatuses: Write test for Write Review button does not appear on pending, confirmed, or cancelled bookings",
-        "WriteTestTripCardsOrderedByCheckIn: Write test for Trip cards are ordered by check-in date",
-        "WriteTestCancelDialogOpens: Write test for Clicking Cancel button opens confirmation dialog",
-        "WriteTestConfirmCancellationUpdatesStatus: Write test for Confirming cancellation updates booking status to cancelled",
-        "WriteTestDismissCancelDialogKeepsBooking: Write test for Dismissing cancellation dialog keeps booking unchanged",
-        "WriteTestCloseDialogViaOverlay: Write test for Closing the dialog via overlay click keeps booking unchanged",
-        "WriteTestCancelDialogShowsContext: Write test for Cancel dialog shows property and date context",
-        "WriteTestAfterCancellationMoveToTab: Write test for After cancellation, booking moves from Upcoming to Cancelled tab",
-        "WriteTestCancelDialogRepeatedUse: Write test for Cancel dialog is functional on repeated use"
-      ],
-      "timestamp": "2026-03-14T19:58:39.600Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeTests.md",
-      "subtasks": [
         "WriteTestHostDashboardRequiresLogin: Write test for Host Dashboard requires login — redirects unauthenticated users",
         "WriteTestHostDashboardRequiresHost: Write test for Host Dashboard requires host status — shows upgrade prompt for non-hosts",
         "WriteTestStatsOverviewTotalListings: Write test for Stats overview displays total listings count",
@@ -224,26 +207,16 @@
   "current": {
     "skill": "skills/tasks/build/writeTests.md",
     "subtasks": [
-      "WriteTestMyTripsRequiresLogin: Write test for My Trips page requires login",
-      "WriteTestMyTripsDefaultsToUpcoming: Write test for My Trips page defaults to Upcoming tab",
-      "WriteTestUpcomingTabShowsPendingConfirmed: Write test for Upcoming tab shows pending and confirmed future bookings",
-      "WriteTestSwitchToPastTab: Write test for Switching to Past tab shows completed bookings",
-      "WriteTestSwitchToCancelledTab: Write test for Switching to Cancelled tab shows cancelled bookings",
-      "WriteTestSwitchBackToUpcomingTab: Write test for Switching back to Upcoming tab from another tab",
-      "WriteTestTabEmptyState: Write test for Tab shows empty state when no bookings exist for that category",
-      "WriteTestUpcomingTabEmptyState: Write test for Upcoming tab empty state message",
-      "WriteTestCancelledTabEmptyState: Write test for Cancelled tab empty state message",
-      "WriteTestTabsRepeatedUse: Write test for Tabs are functional on repeated use",
-      "WriteTestTripCardDisplaysInfo: Write test for Trip card displays all required information",
-      "WriteTestTripCardStatusBadgeColors: Write test for Trip card displays correct status badge colors",
-      "WriteTestTripCardShowsImage: Write test for Trip card shows property image or placeholder",
-      "WriteTestClickTripCardNavigates: Write test for Clicking trip card navigates to booking details",
-      "WriteTestCancelButtonPendingBookings: Write test for Cancel button appears on pending bookings",
-      "WriteTestCancelButtonConfirmedBookings: Write test for Cancel button appears on confirmed bookings",
-      "WriteTestCancelButtonNotOnCompleted: Write test for Cancel button does not appear on completed bookings",
-      "WriteTestCancelButtonNotOnCancelled: Write test for Cancel button does not appear on already cancelled bookings",
-      "WriteTestWriteReviewButtonOnCompleted: Write test for Write Review button appears on completed bookings without a review",
-      "WriteTestWriteReviewButtonNotOnReviewed: Write test for Write Review button does not appear on completed bookings that already have a review"
+      "WriteTestClickWriteReviewNavigates: Write test for Clicking Write Review button navigates to review page",
+      "WriteTestWriteReviewNotOnOtherStatuses: Write test for Write Review button does not appear on pending, confirmed, or cancelled bookings",
+      "WriteTestTripCardsOrderedByCheckIn: Write test for Trip cards are ordered by check-in date",
+      "WriteTestCancelDialogOpens: Write test for Clicking Cancel button opens confirmation dialog",
+      "WriteTestConfirmCancellationUpdatesStatus: Write test for Confirming cancellation updates booking status to cancelled",
+      "WriteTestDismissCancelDialogKeepsBooking: Write test for Dismissing cancellation dialog keeps booking unchanged",
+      "WriteTestCloseDialogViaOverlay: Write test for Closing the dialog via overlay click keeps booking unchanged",
+      "WriteTestCancelDialogShowsContext: Write test for Cancel dialog shows property and date context",
+      "WriteTestAfterCancellationMoveToTab: Write test for After cancellation, booking moves from Upcoming to Cancelled tab",
+      "WriteTestCancelDialogRepeatedUse: Write test for Cancel dialog is functional on repeated use"
     ],
     "timestamp": "2026-03-14T19:58:39.600Z",
     "app": "AirbnbClone"
