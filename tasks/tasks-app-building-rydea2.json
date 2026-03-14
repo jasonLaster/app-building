@@ -3,17 +3,6 @@
     {
       "skill": "skills/tasks/build/writeApp.md",
       "subtasks": [
-        "WriteComponentProjectCard: Write the ProjectCard with status badge, lead, target date, progress bar, and team icons",
-        "WriteComponentProjectFilters: Write the ProjectFilters toolbar with Status, Lead, and Team filters",
-        "WriteComponentCreateProjectModal: Write the CreateProjectModal with all fields",
-        "WritePageProjects: Write the Projects page"
-      ],
-      "timestamp": "2026-03-14T18:57:06.538Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/writeApp.md",
-      "subtasks": [
         "WriteComponentProjectHeader: Write the ProjectHeader with inline-editable name, status, target date, lead, and progress bar",
         "WriteComponentProjectIssuesTab: Write the ProjectIssuesTab with issues grouped by team and bulk actions",
         "WriteComponentProjectOverviewTab: Write the ProjectOverviewTab with description, milestones, and key metrics",
@@ -117,11 +106,10 @@
   "current": {
     "skill": "skills/tasks/build/writeApp.md",
     "subtasks": [
-      "WriteComponentCycleList: Write the CycleList component with progress bars and active highlight",
-      "WriteComponentCycleDetail: Write the CycleDetail view with progress stats and issue list",
-      "WriteComponentCreateCycle: Write the CreateCycle modal with name and date fields",
-      "WriteComponentBurndownChart: Write the BurndownChart bar chart component",
-      "WritePageActiveCycle: Write the Active Cycle page"
+      "WriteComponentProjectCard: Write the ProjectCard with status badge, lead, target date, progress bar, and team icons",
+      "WriteComponentProjectFilters: Write the ProjectFilters toolbar with Status, Lead, and Team filters",
+      "WriteComponentCreateProjectModal: Write the CreateProjectModal with all fields",
+      "WritePageProjects: Write the Projects page"
     ],
     "timestamp": "2026-03-14T18:57:06.538Z",
     "app": "LinearClone"
