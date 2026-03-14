@@ -3,9 +3,209 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "Unpack: Get all tests passing"
+        "FixTests: tests/airport-autocomplete.spec.ts"
       ],
-      "timestamp": "2026-03-14T18:21:13.050Z",
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/booking-action.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/cabin-class-selector.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/cancel-booking-modal.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/date-picker.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/deals-section.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/deployment.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/destination-map.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/filter-sidebar-combined.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/filter-sidebar.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/flexible-dates-grid.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/flight-result-card.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/flight-summary.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/pagination.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/passenger-count-selector.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/passenger-form.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/popular-destinations.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/price-breakdown.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/recent-searches.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/search-button.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/search-summary-bar.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/track-prices-toggle.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/tracked-route-card.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/trip-card.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/trip-type-selector.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
+      "app": "GoogleFlights"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/trips-tabs.spec.ts"
+      ],
+      "timestamp": "2026-03-14T21:03:06.948Z",
       "app": "GoogleFlights"
     },
     {
@@ -18,12 +218,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/deployment.md",
+    "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "DoDeploy: Deploy the app to production",
-      "TestDeploy: Test the deployed app"
+      "Unpack: Get all tests passing"
     ],
-    "timestamp": "2026-03-14T20:45:20.301Z",
+    "timestamp": "2026-03-14T18:21:13.050Z",
     "app": "GoogleFlights"
   }
 }
