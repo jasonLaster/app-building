@@ -35,6 +35,7 @@ async function dragSliderHandle(
 ) {
   const track = page.getByTestId(trackTestId)
   const handle = page.getByTestId(handleTestId)
+  await handle.scrollIntoViewIfNeeded()
   const trackBox = await track.boundingBox()
   const handleBox = await handle.boundingBox()
   if (!trackBox || !handleBox) throw new Error('Could not get bounding boxes')

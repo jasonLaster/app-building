@@ -1,0 +1,32 @@
+Creating branch: test-run-1773559625463
+Branch DB URL: postgresql://neondb_owner:***@ep-long-poetry-ahxyh1k7.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+Functions process exited with code: 1
+Functions output at timeout:
+Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::9999
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at <anonymous> (/repo/apps/GoogleFlights/scripts/functions-server.ts:78:8)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1976:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 9999
+}
+
+Node.js v22.22.1
+

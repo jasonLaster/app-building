@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "filter-sidebar-combined.spec.ts",
-      "file": "filter-sidebar-combined.spec.ts",
+      "title": "filter-sidebar.spec.ts",
+      "file": "filter-sidebar.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "FilterSidebar Combined",
-          "file": "filter-sidebar-combined.spec.ts",
-          "line": 27,
+          "title": "FilterSidebar",
+          "file": "filter-sidebar.spec.ts",
+          "line": 54,
           "column": 6,
           "specs": [
             {
-              "title": "FilterSidebar combining multiple filters",
+              "title": "FilterSidebar displays all filter sections",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 805,
+                      "duration": 1097,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:14:07.889Z",
+                      "startTime": "2026-03-15T07:36:26.260Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "b0abab48eec06911b082-b55f02b2a2380b6cb83d",
-              "file": "filter-sidebar-combined.spec.ts",
-              "line": 34,
+              "id": "ff5f70fe22aa3068995b-78a3748230ff66b0ad56",
+              "file": "filter-sidebar.spec.ts",
+              "line": 62,
               "column": 3
             },
             {
-              "title": "FilterSidebar filters can be used repeatedly",
+              "title": "FilterSidebar stops filter — check Nonstop",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 685,
+                      "duration": 536,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:14:09.592Z",
+                      "startTime": "2026-03-15T07:36:27.425Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,9 +142,621 @@
                   "status": "expected"
                 }
               ],
-              "id": "b0abab48eec06911b082-f01fd00fc2087eb71711",
-              "file": "filter-sidebar-combined.spec.ts",
-              "line": 58,
+              "id": "ff5f70fe22aa3068995b-2ec3693869a3d4d8e8fe",
+              "file": "filter-sidebar.spec.ts",
+              "line": 85,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar stops filter — check 1 stop",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 530,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:27.969Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-ad3fdc79823d5dabd371",
+              "file": "filter-sidebar.spec.ts",
+              "line": 104,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar stops filter — check multiple options",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 584,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:28.512Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-7f052edf6ffce13553ec",
+              "file": "filter-sidebar.spec.ts",
+              "line": 120,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar stops filter — uncheck to remove filter",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 579,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:29.105Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-4da75e215e290be84109",
+              "file": "filter-sidebar.spec.ts",
+              "line": 132,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar airlines filter shows airlines with flight counts",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 503,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:29.691Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-3694b4aca18c9bb3dd03",
+              "file": "filter-sidebar.spec.ts",
+              "line": 147,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar airlines filter — select specific airline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 508,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:30.201Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-93155af48bbe161c5f3b",
+              "file": "filter-sidebar.spec.ts",
+              "line": 167,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar airlines filter — select multiple airlines",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 548,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:30.715Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-b71ae3af88d5dc892588",
+              "file": "filter-sidebar.spec.ts",
+              "line": 183,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar price range slider displays histogram",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 512,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:31.271Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-d22f139d28040ae54222",
+              "file": "filter-sidebar.spec.ts",
+              "line": 195,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar price range slider filters results",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 734,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:31.792Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-1acb1123d4fbe8aa6af3",
+              "file": "filter-sidebar.spec.ts",
+              "line": 219,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar price range slider — adjust min price",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 740,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:32.536Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-680832d0d46416108dab",
+              "file": "filter-sidebar.spec.ts",
+              "line": 236,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar duration range slider filters results",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 684,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:33.284Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-8262065d66261c3277cb",
+              "file": "filter-sidebar.spec.ts",
+              "line": 248,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar departure time filter — Morning checkbox",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 483,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:33.975Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-52ff76a98d52845ae74f",
+              "file": "filter-sidebar.spec.ts",
+              "line": 260,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar departure time filter — multiple time periods",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 567,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:34.463Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-6ea4732f2b278851faee",
+              "file": "filter-sidebar.spec.ts",
+              "line": 271,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar departure time filter — arrival time checkboxes",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 520,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:35.039Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-4c1ad8f06c6016d3ad48",
+              "file": "filter-sidebar.spec.ts",
+              "line": 285,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar sort by dropdown — default \"Best\"",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 490,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:35.568Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-b1e8413fa868745868ff",
+              "file": "filter-sidebar.spec.ts",
+              "line": 296,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar sort by Price (lowest)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 612,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:36.068Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-c851bef5ea77e174056c",
+              "file": "filter-sidebar.spec.ts",
+              "line": 303,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar sort by Duration (shortest)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 596,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:36.689Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-8951f70e224bb2d9460d",
+              "file": "filter-sidebar.spec.ts",
+              "line": 333,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar sort by Departure time (earliest)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 585,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:37.291Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-4a8cdab134019158f0e6",
+              "file": "filter-sidebar.spec.ts",
+              "line": 364,
+              "column": 3
+            },
+            {
+              "title": "FilterSidebar sort by Arrival time (earliest)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 594,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:36:37.884Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ff5f70fe22aa3068995b-02bdcc25f067c126dd1a",
+              "file": "filter-sidebar.spec.ts",
+              "line": 381,
               "column": 3
             }
           ]
@@ -154,9 +766,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T07:14:07.388Z",
-    "duration": 2922.2,
-    "expected": 2,
+    "startTime": "2026-03-15T07:36:25.710Z",
+    "duration": 12806.655999999999,
+    "expected": 20,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
