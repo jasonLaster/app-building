@@ -124,7 +124,23 @@ test.describe('Write Review - PropertyBookingContext', () => {
   test('Error state when review already exists for booking', async ({ page }) => {
     await login(page, EMMA_EMAIL)
 
-    // e1111111 has a review in seed data — do NOT delete it
+    // Ensure a review exists for this booking (earlier tests may have deleted it)
+    await deleteAllReviewsForGuest(page, EMMA_ID)
+    await page.request.post('/api/reviews', {
+      data: {
+        booking_id: EMMA_COMPLETED_BOOKING,
+        property_id: EMMA_COMPLETED_PROPERTY,
+        guest_id: EMMA_ID,
+        rating: 5,
+        cleanliness: 5,
+        accuracy: 5,
+        communication: 5,
+        location: 5,
+        value: 4,
+        comment: 'Great stay!',
+      },
+    })
+
     await page.goto(`/trips/${EMMA_COMPLETED_BOOKING}/review`)
 
     const errorEl = page.getByTestId('review-page-error')
