@@ -3,11 +3,11 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "CheckTestSpecLoginRegister: Check testSpec.md directive violations in Login / Register test entries",
-        "CheckComponentsLoginRegister: Check writeApp.md directive violations in Login / Register components",
-        "CheckTestsLoginRegister: Check writeTests.md directive violations in Login / Register tests"
+        "FixViolation: Add beforeAll with truncateAndSeed and beforeEach cleanup helper to tests/auth.spec.ts, and add a complete e2e signup-signout-signin flow test",
+        "RunTests: Run tests/auth.spec.ts to verify fix",
+        "DocumentFix: Document the fix"
       ],
-      "timestamp": "2026-03-15T20:13:58.608Z",
+      "timestamp": "2026-03-15T20:18:13.846Z",
       "app": "AirbnbClone"
     },
     {
@@ -98,9 +98,11 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "Unpack: Check directive compliance"
+      "CheckTestSpecLoginRegister: Check testSpec.md directive violations in Login / Register test entries",
+      "CheckComponentsLoginRegister: Check writeApp.md directive violations in Login / Register components",
+      "CheckTestsLoginRegister: Check writeTests.md directive violations in Login / Register tests"
     ],
-    "timestamp": "2026-03-15T20:11:15.079Z",
+    "timestamp": "2026-03-15T20:13:58.608Z",
     "app": "AirbnbClone"
   }
 }
