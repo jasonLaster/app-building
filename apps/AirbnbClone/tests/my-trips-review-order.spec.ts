@@ -1,6 +1,12 @@
 import { test, expect } from '@playwright/test'
 
 async function loginAs(page: import('@playwright/test').Page, email: string) {
+  // Log out first if already logged in
+  const logoutBtn = page.getByTestId('sidebar-logout')
+  if (await logoutBtn.isVisible().catch(() => false)) {
+    await logoutBtn.click()
+    await expect(page).toHaveURL(/\/login/, { timeout: 30000 })
+  }
   await page.goto('/login')
   await page.getByTestId('login-email-input').fill(email)
   await page.getByTestId('login-submit-button').click()
@@ -57,25 +63,29 @@ test.describe('My Trips - Review & Ordering', () => {
   })
 
   test('Trip cards are ordered by check-in date', async ({ page }) => {
-    // Emma has two upcoming bookings:
-    // e3333333: check_in 2026-05-10 (Mountain Cabin)
-    // e6666666: check_in 2026-06-15 (Historic Townhouse)
-    // They should appear in chronological order: e3333333 first, then e6666666
+    // Emma has three upcoming bookings:
+    // e3333333: check_in 2026-05-10 (Mountain Cabin) - pending
+    // e6666666: check_in 2026-06-15 (Historic Townhouse) - confirmed
+    // e7777777: check_in 2026-07-01 (Beachfront Villa) - confirmed
+    // They should appear in chronological order
     await loginAs(page, 'emma@example.com')
     await page.goto('/trips')
     await expect(page.getByTestId('my-trips-page')).toBeVisible({ timeout: 30000 })
 
-    // Both cards should be visible in Upcoming tab
+    // All three cards should be visible in Upcoming tab
     await expect(page.getByTestId('trip-card-e3333333-3333-3333-3333-333333333333')).toBeVisible({ timeout: 30000 })
     await expect(page.getByTestId('trip-card-e6666666-6666-6666-6666-666666666666')).toBeVisible()
+    await expect(page.getByTestId('trip-card-e7777777-7777-7777-7777-777777777777')).toBeVisible()
 
     // Get all trip cards in the list and verify order
     const tripCards = page.getByTestId('trips-list').locator('[data-testid^="trip-card-"]')
-    await expect(tripCards).toHaveCount(2, { timeout: 30000 })
+    await expect(tripCards).toHaveCount(3, { timeout: 30000 })
 
-    // First card should be the earlier check-in (May 10 - Mountain Cabin)
+    // First card should be the earliest check-in (May 10 - Mountain Cabin)
     await expect(tripCards.nth(0)).toContainText('May 10, 2026')
-    // Second card should be the later check-in (Jun 15 - Historic Townhouse)
+    // Second card should be the next check-in (Jun 15 - Historic Townhouse)
     await expect(tripCards.nth(1)).toContainText('Jun 15, 2026')
+    // Third card should be the latest check-in (Jul 1 - Beachfront Villa)
+    await expect(tripCards.nth(2)).toContainText('Jul 1, 2026')
   })
 })

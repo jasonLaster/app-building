@@ -1,0 +1,238 @@
+{
+  "config": {
+    "configFile": "/repo/apps/AirbnbClone/playwright.config.ts",
+    "rootDir": "/repo/apps/AirbnbClone/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/repo/apps/AirbnbClone/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/repo/apps/AirbnbClone/tests",
+        "testIgnore": [
+          "**/deployment.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "/repo/apps/AirbnbClone/node_modules/@replayio/playwright/dist/reporter.js",
+        {
+          "upload": false
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": {
+      "command": "npx netlify dev --offline --port 8888 --functions ./netlify/functions",
+      "port": 8888,
+      "timeout": 30000,
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "my-trips-review-order.spec.ts",
+      "file": "my-trips-review-order.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "My Trips - Review & Ordering",
+          "file": "my-trips-review-order.spec.ts",
+          "line": 16,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Clicking Write Review button navigates to review page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/58c6d56d-4f28-49b4-be73-0258329ba343"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5015,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:12:44.729Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df5f8c8bafb644415130-86a6f77c99d05cb0cd03",
+              "file": "my-trips-review-order.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Write Review button does not appear on pending, confirmed, or cancelled bookings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/my-trips-review-order.spec.ts",
+                        "line": 42,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/8834dca3-6a1f-4ea4-a417-91ee16fd3253"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4014,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:12:49.900Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/my-trips-review-order.spec.ts",
+                            "line": 42,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df5f8c8bafb644415130-804d21098e8cd6680892",
+              "file": "my-trips-review-order.spec.ts",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "Trip cards are ordered by check-in date",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/863a66c0-b415-4a35-acec-0d1304df2d42"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2161,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:12:53.929Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df5f8c8bafb644415130-04c9026c98c1cbeecb65",
+              "file": "my-trips-review-order.spec.ts",
+              "line": 65,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-15T00:12:39.283Z",
+    "duration": 17012.721,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

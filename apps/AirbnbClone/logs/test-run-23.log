@@ -1,0 +1,29 @@
+Created branch: test-run-1773533387768 (br-still-bar-ah0bjq4z)
+Test DB URL: postgresql://neondb_owner:***@ep-empty-dew-ahty2jev.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:17978) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"b119388d-94e4-4bc9-a435-d64762a85d61","duration":0,"result":"passed","title":""}
+{"id":"5f8a8f5b-17ed-471e-907c-4bda00e2186b","duration":0,"result":"failed","title":""}
+{"id":"3e578a08-219f-4223-bf15-78e02ef9a76a","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: 5f8a8f5b-17ed-471e-907c-4bda00e2186b
+⠙ Initializing…
+Uploading recordings...
+   5f8a8f5b…  Write Review button does not appear on pending, co…  57s ago  17.2s   
+
+Uploaded recordings
+ ✘  5f8a8f5b…  Write Review button does not appear on pending, co…  57s ago  17.2s  (failed) 
+
+
