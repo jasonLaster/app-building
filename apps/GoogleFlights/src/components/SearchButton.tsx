@@ -10,7 +10,7 @@ function SearchButton() {
   const { origin, destination, departureDate, returnDate, tripType, passengers, cabinClass, sessionToken } =
     useSelector((state: RootState) => state.search)
 
-  function handleSearch() {
+  async function handleSearch() {
     const errors: Record<string, string> = {}
 
     if (!origin) errors['origin'] = 'Please select an origin airport'
@@ -23,8 +23,8 @@ function SearchButton() {
       return
     }
 
-    // Save recent search
-    dispatch(saveRecentSearch({
+    // Save recent search and wait for it to complete before navigating
+    await dispatch(saveRecentSearch({
       sessionToken,
       originCode: origin!.iata_code,
       destCode: destination!.iata_code,

@@ -1,0 +1,143 @@
+Creating branch: test-run-1773564777223
+Branch DB URL: postgresql://neondb_owner:***@ep-gentle-forest-ahpb9bri.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/recent-searches.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 5 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/recent-searches.spec.ts:95:3 › RecentSearches › RecentSearches shows empty state when no searches exist (592ms)
+  ✘  2 [replay-chromium] › tests/recent-searches.spec.ts:101:3 › RecentSearches › RecentSearches displays a recent search entry (11.3s)
+  ✘  3 [replay-chromium] › tests/recent-searches.spec.ts:124:3 › RecentSearches › RecentSearches clicking a recent search re-populates the form (11.6s)
+  ✘  4 [replay-chromium] › tests/recent-searches.spec.ts:156:3 › RecentSearches › RecentSearches displays multiple recent searches in order (14.2s)
+  ✘  5 [replay-chromium] › tests/recent-searches.spec.ts:216:3 › RecentSearches › RecentSearches updates after a new search (11.5s)
+
+
+  1) [replay-chromium] › tests/recent-searches.spec.ts:101:3 › RecentSearches › RecentSearches displays a recent search entry 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('recent-searches-list')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('recent-searches-list')[22m
+
+
+      116 |     // Verify recent search entry is displayed
+      117 |     const recentList = page.getByTestId('recent-searches-list')
+    > 118 |     await expect(recentList).toBeVisible({ timeout: 10000 })
+          |                              ^
+      119 |     await expect(recentList).toContainText('LAX')
+      120 |     await expect(recentList).toContainText('JFK')
+      121 |     await expect(recentList).toContainText('1 passenger')
+        at /repo/apps/GoogleFlights/tests/recent-searches.spec.ts:118:30
+
+    Error Context: test-results/recent-searches-RecentSear-98405-plays-a-recent-search-entry-replay-chromium/error-context.md
+
+  2) [replay-chromium] › tests/recent-searches.spec.ts:124:3 › RecentSearches › RecentSearches clicking a recent search re-populates the form 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('recent-searches-list')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('recent-searches-list')[22m
+
+
+      141 |     // Click the recent search entry
+      142 |     const recentList = page.getByTestId('recent-searches-list')
+    > 143 |     await expect(recentList).toBeVisible({ timeout: 10000 })
+          |                              ^
+      144 |     const recentItem = recentList.locator('button').first()
+      145 |     await recentItem.click()
+      146 |
+        at /repo/apps/GoogleFlights/tests/recent-searches.spec.ts:143:30
+
+    Error Context: test-results/recent-searches-RecentSear-c4003-earch-re-populates-the-form-replay-chromium/error-context.md
+
+  3) [replay-chromium] › tests/recent-searches.spec.ts:156:3 › RecentSearches › RecentSearches displays multiple recent searches in order 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByTestId('recent-searches-list').locator('button')
+    Expected: [32m3[39m
+    Received: [31m2[39m
+    Timeout:  10000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('recent-searches-list').locator('button')[22m
+    [2m    14 × locator resolved to 2 elements[22m
+    [2m       - unexpected value "2"[22m
+
+
+      204 |     // Should have 3 items
+      205 |     const items = recentList.locator('button')
+    > 206 |     await expect(items).toHaveCount(3, { timeout: 10000 })
+          |                         ^
+      207 |
+      208 |     // Most recent (LAX → LHR) should be first
+      209 |     await expect(items.nth(0)).toContainText('LHR')
+        at /repo/apps/GoogleFlights/tests/recent-searches.spec.ts:206:25
+
+    Error Context: test-results/recent-searches-RecentSear-d4f74-le-recent-searches-in-order-replay-chromium/error-context.md
+
+  4) [replay-chromium] › tests/recent-searches.spec.ts:216:3 › RecentSearches › RecentSearches updates after a new search 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('recent-searches-list')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('recent-searches-list')[22m
+
+
+      231 |     await expect(page.getByTestId('search-page')).toBeVisible({ timeout: 10000 })
+      232 |     const recentList = page.getByTestId('recent-searches-list')
+    > 233 |     await expect(recentList).toBeVisible({ timeout: 10000 })
+          |                              ^
+      234 |     await expect(recentList.locator('button')).toHaveCount(1, { timeout: 10000 })
+      235 |
+      236 |     // Search 2: SFO → ORD
+        at /repo/apps/GoogleFlights/tests/recent-searches.spec.ts:233:30
+
+    Error Context: test-results/recent-searches-RecentSear-8a4bd--updates-after-a-new-search-replay-chromium/error-context.md
+
+  4 failed
+    [replay-chromium] › tests/recent-searches.spec.ts:101:3 › RecentSearches › RecentSearches displays a recent search entry 
+    [replay-chromium] › tests/recent-searches.spec.ts:124:3 › RecentSearches › RecentSearches clicking a recent search re-populates the form 
+    [replay-chromium] › tests/recent-searches.spec.ts:156:3 › RecentSearches › RecentSearches displays multiple recent searches in order 
+    [replay-chromium] › tests/recent-searches.spec.ts:216:3 › RecentSearches › RecentSearches updates after a new search 
+  1 passed (51.3s)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 78 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

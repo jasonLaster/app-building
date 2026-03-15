@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "price-breakdown.spec.ts",
-      "file": "price-breakdown.spec.ts",
+      "title": "recent-searches.spec.ts",
+      "file": "recent-searches.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "PriceBreakdown",
-          "file": "price-breakdown.spec.ts",
-          "line": 84,
+          "title": "RecentSearches",
+          "file": "recent-searches.spec.ts",
+          "line": 85,
           "column": 6,
           "specs": [
             {
-              "title": "PriceBreakdown displays base fare per passenger",
+              "title": "RecentSearches shows empty state when no searches exist",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1543,
+                      "duration": 586,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:51:32.970Z",
+                      "startTime": "2026-03-15T08:56:55.965Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "0ae208e1ad724f78116a-c0a6cbf292ce459228d4",
-              "file": "price-breakdown.spec.ts",
-              "line": 85,
+              "id": "11ea01cac9abab13395b-c6033239af053255feab",
+              "file": "recent-searches.spec.ts",
+              "line": 95,
               "column": 3
             },
             {
-              "title": "PriceBreakdown displays taxes and fees",
+              "title": "RecentSearches displays a recent search entry",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 951,
+                      "duration": 2499,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:51:34.569Z",
+                      "startTime": "2026-03-15T08:56:56.597Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "0ae208e1ad724f78116a-45157b5ebb2ab9c53c8d",
-              "file": "price-breakdown.spec.ts",
+              "id": "11ea01cac9abab13395b-b32a657226eec4bd04ac",
+              "file": "recent-searches.spec.ts",
               "line": 101,
               "column": 3
             },
             {
-              "title": "PriceBreakdown displays total price",
+              "title": "RecentSearches clicking a recent search re-populates the form",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 962,
+                      "duration": 2664,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:51:35.532Z",
+                      "startTime": "2026-03-15T08:56:59.103Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,19 +176,28 @@
                   "status": "expected"
                 }
               ],
-              "id": "0ae208e1ad724f78116a-76ae9d30cd25053b86e3",
-              "file": "price-breakdown.spec.ts",
-              "line": 113,
+              "id": "11ea01cac9abab13395b-ce1eb19788cb534a9d49",
+              "file": "recent-searches.spec.ts",
+              "line": 124,
               "column": 3
             },
             {
-              "title": "PriceBreakdown shows per-passenger-type pricing for mixed group",
+              "title": "RecentSearches displays multiple recent searches in order",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
+                        "line": 157,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -197,32 +206,50 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 964,
+                      "duration": 5782,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:51:36.503Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T08:57:01.774Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
+                            "line": 157,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "0ae208e1ad724f78116a-e66818d835b085d8a232",
-              "file": "price-breakdown.spec.ts",
-              "line": 143,
+              "id": "11ea01cac9abab13395b-5d26cdbe21f5c6c58077",
+              "file": "recent-searches.spec.ts",
+              "line": 156,
               "column": 3
             },
             {
-              "title": "PriceBreakdown updates for round-trip flights",
+              "title": "RecentSearches updates after a new search",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
+                        "line": 217,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -231,56 +258,31 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1393,
+                      "duration": 4113,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:51:37.474Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T08:57:07.563Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
+                            "line": 217,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "0ae208e1ad724f78116a-727c8e45ddcbd813e473",
-              "file": "price-breakdown.spec.ts",
-              "line": 193,
-              "column": 3
-            },
-            {
-              "title": "PriceBreakdown reflects selected cabin class pricing",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1830,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T08:51:38.874Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "0ae208e1ad724f78116a-841167051e6612572413",
-              "file": "price-breakdown.spec.ts",
-              "line": 235,
+              "id": "11ea01cac9abab13395b-86660883ae9b40d78c3d",
+              "file": "recent-searches.spec.ts",
+              "line": 216,
               "column": 3
             }
           ]
@@ -290,9 +292,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T08:51:32.535Z",
-    "duration": 8210.09,
-    "expected": 6,
+    "startTime": "2026-03-15T08:56:55.532Z",
+    "duration": 16177.448,
+    "expected": 5,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
