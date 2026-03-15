@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "flexible-dates-grid.spec.ts",
-      "file": "flexible-dates-grid.spec.ts",
+      "title": "flight-result-card.spec.ts",
+      "file": "flight-result-card.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "FlexibleDatesGrid",
-          "file": "flexible-dates-grid.spec.ts",
-          "line": 14,
+          "title": "FlightResultCard",
+          "file": "flight-result-card.spec.ts",
+          "line": 26,
           "column": 6,
           "specs": [
             {
-              "title": "FlexibleDatesGrid displays calendar-style grid with prices",
+              "title": "FlightResultCard displays airline info",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1528,
+                      "duration": 1071,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:24.101Z",
+                      "startTime": "2026-03-15T07:51:48.342Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,251 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-01badc104988d145ab7d",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 20,
+              "id": "9cab501acf65004ffb05-637cd66ddab2b29b7ae5",
+              "file": "flight-result-card.spec.ts",
+              "line": 33,
               "column": 3
             },
             {
-              "title": "FlexibleDatesGrid cells are color-coded by price level",
+              "title": "FlightResultCard displays departure and arrival times",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 499,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:49.453Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-8c8e7e7d9a50ef89b2e3",
+              "file": "flight-result-card.spec.ts",
+              "line": 47,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard displays flight duration",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 517,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:49.962Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-6d0ab7970e4f41e7f480",
+              "file": "flight-result-card.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard displays stops and layover info",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 512,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:50.489Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-4f65e79d2eb2b010b838",
+              "file": "flight-result-card.spec.ts",
+              "line": 66,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard displays price prominently",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 480,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:51.014Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-8f6aa43bc988b91a2de5",
+              "file": "flight-result-card.spec.ts",
+              "line": 77,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard displays CO2 emissions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 499,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:51.507Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-01f5d7b42b81ab0c1e51",
+              "file": "flight-result-card.spec.ts",
+              "line": 84,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard expand to show details",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 537,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:52.024Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-adebef3546a5306c73e6",
+              "file": "flight-result-card.spec.ts",
+              "line": 90,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard collapse details",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 543,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T07:51:52.571Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9cab501acf65004ffb05-effca0a051dc93546bd0",
+              "file": "flight-result-card.spec.ts",
+              "line": 106,
+              "column": 3
+            },
+            {
+              "title": "FlightResultCard details show leg-by-leg breakdown",
               "ok": true,
               "tags": [],
               "tests": [
@@ -134,7 +372,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:25.672Z",
+                      "startTime": "2026-03-15T07:51:53.123Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +380,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-04df37fbe0c9cf70b5d8",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 45,
+              "id": "9cab501acf65004ffb05-b64b208d3bf86a348f8b",
+              "file": "flight-result-card.spec.ts",
+              "line": 120,
               "column": 3
             },
             {
-              "title": "FlexibleDatesGrid date range selector Weekend trips",
+              "title": "FlightResultCard details show amenities icons",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +401,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 723,
+                      "duration": 532,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:26.367Z",
+                      "startTime": "2026-03-15T07:51:53.819Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +414,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-8ba4c177c66146d45670",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 68,
+              "id": "9cab501acf65004ffb05-e65b22c15c33719aedb1",
+              "file": "flight-result-card.spec.ts",
+              "line": 152,
               "column": 3
             },
             {
-              "title": "FlexibleDatesGrid date range selector 1 week",
+              "title": "FlightResultCard details show baggage allowance",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +435,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 740,
+                      "duration": 525,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:27.100Z",
+                      "startTime": "2026-03-15T07:51:54.359Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,115 +448,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-b7a75d5903a46206f875",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 87,
-              "column": 3
-            },
-            {
-              "title": "FlexibleDatesGrid date range selector 2 weeks",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 839,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:48:27.848Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3b796d9c7fec48bb10a9-34f5bcf2cd00c47c4894",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 112,
-              "column": 3
-            },
-            {
-              "title": "FlexibleDatesGrid clicking a date cell initiates a search",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 789,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:48:28.694Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3b796d9c7fec48bb10a9-e696b56f34ab0d72a21a",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 138,
-              "column": 3
-            },
-            {
-              "title": "FlexibleDatesGrid shows loading state while fetching price data",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 636,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:48:29.493Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "3b796d9c7fec48bb10a9-d89cd6e59f966045bd64",
-              "file": "flexible-dates-grid.spec.ts",
+              "id": "9cab501acf65004ffb05-3a5bd0c0b4ef57458ec1",
+              "file": "flight-result-card.spec.ts",
               "line": 172,
               "column": 3
             },
             {
-              "title": "FlexibleDatesGrid updates when origin changes",
+              "title": "FlightResultCard overnight flight shows plus 1 day indicator",
               "ok": true,
               "tags": [],
               "tests": [
@@ -333,12 +469,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1556,
+                      "duration": 941,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:30.137Z",
+                      "startTime": "2026-03-15T07:51:54.891Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -346,13 +482,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-261a1e2a63c4b2d69619",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 186,
+              "id": "9cab501acf65004ffb05-953f54053b70a4cad6fd",
+              "file": "flight-result-card.spec.ts",
+              "line": 187,
               "column": 3
             },
             {
-              "title": "FlexibleDatesGrid date range selector can be toggled repeatedly",
+              "title": "FlightResultCard clicking Select navigates to booking page",
               "ok": true,
               "tags": [],
               "tests": [
@@ -367,12 +503,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1808,
+                      "duration": 540,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:31.705Z",
+                      "startTime": "2026-03-15T07:51:55.844Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -380,13 +516,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-d0d31309d315f35adb67",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 208,
+              "id": "9cab501acf65004ffb05-57bbdd3a25f9c1aa8034",
+              "file": "flight-result-card.spec.ts",
+              "line": 199,
               "column": 3
             },
             {
-              "title": "FlexibleDatesGrid shows empty state when no prices available",
+              "title": "FlightResultCard expand and collapse multiple cards",
               "ok": true,
               "tags": [],
               "tests": [
@@ -401,12 +537,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 122,
+                      "duration": 609,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:48:33.527Z",
+                      "startTime": "2026-03-15T07:51:56.393Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -414,9 +550,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "3b796d9c7fec48bb10a9-360e42c5717c309c5e21",
-              "file": "flexible-dates-grid.spec.ts",
-              "line": 242,
+              "id": "9cab501acf65004ffb05-7e5f0e7fc0cac29a123f",
+              "file": "flight-result-card.spec.ts",
+              "line": 216,
               "column": 3
             }
           ]
@@ -426,9 +562,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T07:48:23.669Z",
-    "duration": 10023.431,
-    "expected": 10,
+    "startTime": "2026-03-15T07:51:47.906Z",
+    "duration": 9126.319,
+    "expected": 14,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

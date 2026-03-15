@@ -1,0 +1,43 @@
+Creating branch: test-run-1773561052899
+Branch DB URL: postgresql://neondb_owner:***@ep-lively-cell-aho6hlzg.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/flight-result-card.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 14 tests using 1 worker
+
+  ✓   1 [replay-chromium] › tests/flight-result-card.spec.ts:33:3 › FlightResultCard › FlightResultCard displays airline info (1.1s)
+  ✓   2 [replay-chromium] › tests/flight-result-card.spec.ts:47:3 › FlightResultCard › FlightResultCard displays departure and arrival times (499ms)
+  ✓   3 [replay-chromium] › tests/flight-result-card.spec.ts:59:3 › FlightResultCard › FlightResultCard displays flight duration (517ms)
+  ✓   4 [replay-chromium] › tests/flight-result-card.spec.ts:66:3 › FlightResultCard › FlightResultCard displays stops and layover info (512ms)
+  ✓   5 [replay-chromium] › tests/flight-result-card.spec.ts:77:3 › FlightResultCard › FlightResultCard displays price prominently (480ms)
+  ✓   6 [replay-chromium] › tests/flight-result-card.spec.ts:84:3 › FlightResultCard › FlightResultCard displays CO2 emissions (499ms)
+  ✓   7 [replay-chromium] › tests/flight-result-card.spec.ts:90:3 › FlightResultCard › FlightResultCard expand to show details (537ms)
+  ✓   8 [replay-chromium] › tests/flight-result-card.spec.ts:106:3 › FlightResultCard › FlightResultCard collapse details (543ms)
+  ✓   9 [replay-chromium] › tests/flight-result-card.spec.ts:120:3 › FlightResultCard › FlightResultCard details show leg-by-leg breakdown (687ms)
+  ✓  10 [replay-chromium] › tests/flight-result-card.spec.ts:152:3 › FlightResultCard › FlightResultCard details show amenities icons (532ms)
+  ✓  11 [replay-chromium] › tests/flight-result-card.spec.ts:172:3 › FlightResultCard › FlightResultCard details show baggage allowance (525ms)
+  ✓  12 [replay-chromium] › tests/flight-result-card.spec.ts:187:3 › FlightResultCard › FlightResultCard overnight flight shows plus 1 day indicator (941ms)
+  ✓  13 [replay-chromium] › tests/flight-result-card.spec.ts:199:3 › FlightResultCard › FlightResultCard clicking Select navigates to booking page (540ms)
+  ✓  14 [replay-chromium] › tests/flight-result-card.spec.ts:216:3 › FlightResultCard › FlightResultCard expand and collapse multiple cards (609ms)
+
+  14 passed (9.1s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 77 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch
