@@ -1,0 +1,35 @@
+Created branch: test-run-1773533778235 (br-delicate-shape-ahuofeh2)
+Test DB URL: postgresql://neondb_owner:***@ep-snowy-dream-ah3j81vk.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:19781) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"a1580741-207f-41a4-be56-c7f43ef8cb29","duration":0,"result":"passed","title":""}
+{"id":"6bcdd56d-4c78-4727-ab91-782617ee1b97","duration":0,"result":"passed","title":""}
+{"id":"d28ae092-d161-48eb-a383-67af4a850a87","duration":0,"result":"passed","title":""}
+{"id":"0d6871b3-3e38-46d7-addb-cba13e35b175","duration":0,"result":"failed","title":""}
+{"id":"7e71b91d-4d67-4211-9e38-e6a8dce6270f","duration":0,"result":"failed","title":""}
+{"id":"889f05c0-cdbc-4cf3-b270-415136658b56","duration":0,"result":"passed","title":""}
+{"id":"588ae55e-a080-40f0-bfba-0c3f12a6ead3","duration":0,"result":"failed","title":""}
+{"id":"f5596a2a-91df-4761-96a5-3acee43a1995","duration":0,"result":"passed","title":""}
+{"id":"e222d787-388c-498c-9964-78e7e8e7aba1","duration":0,"result":"failed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: 0d6871b3-3e38-46d7-addb-cba13e35b175
+⠙ Initializing…
+Uploading recordings...
+   0d6871b3…  Clicking a specific page number navigates to that…  2m ago  16.1s   
+
+Uploaded recordings
+ ✘  0d6871b3…  Clicking a specific page number navigates to that…  2m ago  16.1s  (failed) 
+
+

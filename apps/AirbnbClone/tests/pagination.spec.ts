@@ -3,6 +3,24 @@ import { test, expect } from '@playwright/test'
 const HOST_ID = 'a1111111-1111-1111-1111-111111111111'
 const BASE_URL = 'http://localhost:8888'
 
+const SEED_PROPERTY_IDS = [
+  'b1111111-1111-1111-1111-111111111111',
+  'b2222222-2222-2222-2222-222222222222',
+  'b3333333-3333-3333-3333-333333333333',
+  'b4444444-4444-4444-4444-444444444444',
+  'b5555555-5555-5555-5555-555555555555',
+]
+
+async function cleanupTestProperties(): Promise<void> {
+  const res = await fetch(`${BASE_URL}/api/properties?limit=1000`)
+  const data = await res.json()
+  for (const prop of data.properties) {
+    if (!SEED_PROPERTY_IDS.includes(prop.id)) {
+      await fetch(`${BASE_URL}/api/properties/${prop.id}`, { method: 'DELETE' })
+    }
+  }
+}
+
 async function seedExtraProperties(count: number): Promise<void> {
   for (let i = 0; i < count; i++) {
     await fetch(`${BASE_URL}/api/properties`, {
@@ -29,6 +47,10 @@ async function seedExtraProperties(count: number): Promise<void> {
 }
 
 test.describe('Home Page - Pagination', () => {
+  test.beforeEach(async () => {
+    await cleanupTestProperties()
+  })
+
   test.describe('Multi-page tests', () => {
     // Seed has 5 properties, create 30 more for 35 total (3 pages of 12)
     test.beforeEach(async () => {
