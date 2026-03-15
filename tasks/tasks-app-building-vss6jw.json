@@ -1,12 +1,3 @@
 {
-  "tasks": [],
-  "current": {
-    "skill": "skills/tasks/deployment.md",
-    "subtasks": [
-      "DoDeploy: Deploy the app to production",
-      "TestDeploy: Test the deployed app"
-    ],
-    "timestamp": "2026-03-15T01:35:03.374Z",
-    "app": "AirbnbClone"
-  }
+  "tasks": []
 }
