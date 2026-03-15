@@ -2,6 +2,7 @@ import { execFileSync, spawn } from "child_process";
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
 import type { ContainerRegistry } from "./container-registry";
+import type { InfisicalConfig } from "./secrets";
 
 const IMAGE_NAME = "app-building";
 
@@ -21,7 +22,8 @@ export interface AgentState {
 
 export interface ContainerConfig {
   projectRoot?: string;
-  envVars: Record<string, string>;
+  /** Infisical credentials — required for all containers. */
+  infisical: InfisicalConfig;
   registry: ContainerRegistry;
   flyToken?: string;
   flyApp?: string;
@@ -109,9 +111,17 @@ function findFreePort(): number {
   return port;
 }
 
+function infisicalEnvVars(config: InfisicalConfig): Record<string, string> {
+  return {
+    INFISICAL_TOKEN: config.token,
+    INFISICAL_PROJECT_ID: config.projectId,
+    INFISICAL_ENVIRONMENT: config.environment,
+  };
+}
+
 function buildContainerEnv(
   repo: RepoOptions,
-  envVars: Record<string, string>,
+  infisical: InfisicalConfig,
   extra: Record<string, string> = {},
 ): Record<string, string> {
   const env: Record<string, string> = {
@@ -123,7 +133,7 @@ function buildContainerEnv(
     GIT_COMMITTER_NAME: "App Builder",
     GIT_COMMITTER_EMAIL: "app-builder@localhost",
     PLAYWRIGHT_BROWSERS_PATH: "/opt/playwright",
-    ...envVars,
+    ...infisicalEnvVars(infisical),
     ...extra,
   };
   if (process.env.DEBUG) {
@@ -143,7 +153,6 @@ export async function startContainer(
     webhookUrl: config.webhookUrl,
     detached: config.detached,
     initialPrompt: config.initialPrompt ? `${config.initialPrompt.slice(0, 100)}...` : undefined,
-    envVarKeys: Object.keys(config.envVars),
   });
   debugLog("startContainer repo:", repo);
 
@@ -163,7 +172,7 @@ export async function startContainer(
   if (config.detached) extra.DETACHED = "1";
   if (config.initialPrompt) extra.INITIAL_PROMPT = config.initialPrompt;
   if (config.absorbTasks) extra.ABSORB_TASKS = "1";
-  const containerEnv = buildContainerEnv(repo, config.envVars, extra);
+  const containerEnv = buildContainerEnv(repo, config.infisical, extra);
 
   // Build docker run args
   const args: string[] = ["run", "-d", "--rm", "--name", containerName];
@@ -255,6 +264,8 @@ export function spawnTestContainer(config: ContainerConfig): Promise<void> {
   const uniqueId = Math.random().toString(36).slice(2, 8);
   const containerName = `app-building-test-${uniqueId}`;
 
+  const infisicalVars = infisicalEnvVars(config.infisical);
+
   const args: string[] = ["run", "-it", "--rm", "--name", containerName];
   args.push("-v", `${config.projectRoot}:/repo`);
   args.push("-w", "/repo");
@@ -262,7 +273,7 @@ export function spawnTestContainer(config: ContainerConfig): Promise<void> {
   args.push("--user", `${process.getuid!()}:${process.getgid!()}`);
   args.push("--env", "HOME=/repo/.agent-home");
   args.push("--env", "PLAYWRIGHT_BROWSERS_PATH=/opt/playwright");
-  for (const [k, v] of Object.entries(config.envVars)) {
+  for (const [k, v] of Object.entries(infisicalVars)) {
     args.push("--env", `${k}=${v}`);
   }
   args.push(IMAGE_NAME, "bash");

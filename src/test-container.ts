@@ -10,15 +10,9 @@ const orchestrationVars = loadDotEnv(projectRoot);
 async function main() {
   const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
-  const containerEnvVars: Record<string, string> = {
-    INFISICAL_TOKEN: infisicalConfig.token,
-    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
-    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
-  };
-
   const config: ContainerConfig = {
     projectRoot,
-    envVars: containerEnvVars,
+    infisical: infisicalConfig,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
   };
 

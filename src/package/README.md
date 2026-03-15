@@ -28,18 +28,9 @@ import {
 const orchestrationVars = loadDotEnv("/path/to/project");
 const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
-// Only pass Infisical credentials to the container — not actual secrets.
-// The container fetches secrets from Infisical at startup and manages them
-// via an internal secrets server. The agent never has direct access to secrets.
-const containerEnvVars: Record<string, string> = {
-  INFISICAL_TOKEN: infisicalConfig.token,
-  INFISICAL_PROJECT_ID: infisicalConfig.projectId,
-  INFISICAL_ENVIRONMENT: infisicalConfig.environment,
-};
-
 const config: ContainerConfig = {
   projectRoot: "/path/to/project",  // optional — only needed for local Docker operations
-  envVars: containerEnvVars,
+  infisical: infisicalConfig,
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
   flyToken: orchestrationVars.FLY_API_TOKEN,
   flyApp: orchestrationVars.FLY_APP_NAME,
@@ -85,7 +76,7 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | Interface bundling all external state: optional `projectRoot` (only needed for local Docker operations), `envVars` (Infisical credentials), `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`webhookSecret`/`detached`/`initialPrompt`/`localPort`/`absorbTasks`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
+| `ContainerConfig` | Interface bundling all external state: `infisical` (required `InfisicalConfig`), optional `projectRoot` (only needed for local Docker operations), `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`webhookSecret`/`detached`/`initialPrompt`/`localPort`/`absorbTasks`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
 | `FileContainerRegistry` | Built-in file-backed implementation of `ContainerRegistry`, backed by a `.jsonl` file. |
@@ -164,13 +155,8 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 const orchestrationVars = loadDotEnv(projectRoot);
 const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
-// Pass only Infisical credentials to the container
 const config: ContainerConfig = {
-  envVars: {
-    INFISICAL_TOKEN: infisicalConfig.token,
-    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
-    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
-  },
+  infisical: infisicalConfig,
   flyToken: orchestrationVars.FLY_API_TOKEN,
   flyApp: orchestrationVars.FLY_APP_NAME,
   ...
@@ -269,11 +255,7 @@ const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
 const config: ContainerConfig = {
   projectRoot: "/path/to/project",
-  envVars: {
-    INFISICAL_TOKEN: infisicalConfig.token,
-    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
-    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
-  },
+  infisical: infisicalConfig,
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
   webhookUrl: "https://example.com/hooks/container-events",
   webhookSecret: "your-webhook-secret",

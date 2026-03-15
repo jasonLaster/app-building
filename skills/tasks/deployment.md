@@ -14,39 +14,37 @@ EOF
 
 ## Deployment
 
-Before running the deploy script, run `list-secrets` to check whether the app has been
-deployed before. If `NEON_PROJECT_ID`, `DATABASE_URL`, and `NETLIFY_SITE_ID` exist as
-branch secrets, the deploy script will reuse existing resources.
+### 1. Provision resources (first deploy only)
 
-If branch secrets are missing but `deployment.txt` has old-format resource info
-(`neon_project_id`, `site_id`, `database_url`), you must migrate to branch secrets.
-See `skills/scripts/deploy.md` § "Migrating from old deployment.txt format". **Do NOT
-copy `database_url` from `deployment.txt`** — it is leaked. You must reset the password.
+Before the first deploy, the agent must create the Neon project and Netlify site and
+store the results as branch secrets. Run `list-secrets` first — if `NEON_PROJECT_ID`,
+`DATABASE_URL`, and `NETLIFY_SITE_ID` already exist, skip to step 2.
 
-Ensure the locale workaround is in place — the deploy script must prefix Netlify CLI commands
-with `LC_ALL=C` to avoid locale errors in the container. See `skills/scripts/deploy.md` §
-"Locale Workaround". Also verify dependencies are installed: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
+If branch secrets are missing but `deployment.txt` has old-format resource info, migrate
+them. See `skills/scripts/deploy.md` § "Migrating from old deployment.txt format".
 
-Pre-deployment checklist:
-1. Verify required secrets are available (run `list-secrets`):
-   - `NEON_API_KEY`, `NETLIFY_AUTH_TOKEN`, `RECORD_REPLAY_API_KEY` — global secrets
-   - `DATABASE_URL`, `NEON_PROJECT_ID`, `NETLIFY_SITE_ID` — branch secrets (if redeploying)
-2. Verify the DB has been seeded with production data (the deploy script handles first-run seeding).
-3. Ensure the deploy script runs fully non-interactively — no CLI prompts that hang in CI.
-4. Ensure `public/_redirects` exists with `/* /index.html 200` for SPA routing. Without this,
-   Netlify returns 404 for client-side routes when users navigate directly or refresh.
+If no resources exist at all, create them following the instructions in
+`skills/scripts/deploy.md` § "Prerequisites — provisioning resources before first deploy".
 
-Then run `npm run deploy` from the app directory. See `skills/scripts/deploy.md` for the
-full script specification. The script handles database creation/sync, Netlify site
-creation/update, and writes the deployed URL to `deployment.txt`.
+Also store any app-specific secrets the app needs (check `.env.example` for the list).
 
-After the first deploy, you MUST set `DATABASE_URL` on the Netlify site so that production
-Netlify Functions can connect to the database. Access it via `exec-secrets DATABASE_URL`.
+After provisioning, read `scripts/deploy.ts` and confirm it reads `DATABASE_URL`,
+`NEON_PROJECT_ID`, and `NETLIFY_SITE_ID` from `process.env` (not from `.env` or
+`deployment.txt`). Fix the deploy script if it doesn't match.
 
-Use the Netlify REST API to set environment variables — the CLI `npx netlify env:set --site`
-flag does not work reliably. See `skills/scripts/netlify-env.md` for the exact API commands.
+### 2. Run the deploy
 
-See `skills/scripts/deploy.md` § "Post-Deploy Checklist" for the full list.
+```bash
+exec-secrets NEON_API_KEY NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG DATABASE_URL NEON_PROJECT_ID NETLIFY_SITE_ID -- npm run deploy
+```
+
+All 6 secrets are required. The deploy script does NOT create resources — it only
+syncs the schema, builds, and deploys to the existing Netlify site.
+
+Verify dependencies first: `ls node_modules/@neondatabase/serverless 2>/dev/null || npm install`.
+Ensure `public/_redirects` exists with `/* /index.html 200` for SPA routing.
+
+See `skills/scripts/deploy.md` for full details.
 
 After a successful deployment, you MUST append a deployment history entry to the end of
 `deployment.txt`. The entry must include the date and a summary of what changed:

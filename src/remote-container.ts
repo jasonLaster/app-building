@@ -1,9 +1,9 @@
 import {
   createMachine, waitForMachine, destroyMachine, listMachines,
-  type CreateMachineResult,
 } from "./package/fly";
 import { getImageRef } from "./package/image-ref";
 import type { AgentState, ContainerConfig, RepoOptions } from "./package/container";
+import type { InfisicalConfig } from "./package/secrets";
 
 function debugLog(...args: unknown[]): void {
   if (process.env.DEBUG) console.log("[container]", ...args);
@@ -11,7 +11,7 @@ function debugLog(...args: unknown[]): void {
 
 function buildContainerEnv(
   repo: RepoOptions,
-  envVars: Record<string, string>,
+  infisical: InfisicalConfig,
   extra: Record<string, string> = {},
 ): Record<string, string> {
   const env: Record<string, string> = {
@@ -23,7 +23,9 @@ function buildContainerEnv(
     GIT_COMMITTER_NAME: "App Builder",
     GIT_COMMITTER_EMAIL: "app-builder@localhost",
     PLAYWRIGHT_BROWSERS_PATH: "/opt/playwright",
-    ...envVars,
+    INFISICAL_TOKEN: infisical.token,
+    INFISICAL_PROJECT_ID: infisical.projectId,
+    INFISICAL_ENVIRONMENT: infisical.environment,
     ...extra,
   };
   if (process.env.DEBUG) {
@@ -43,7 +45,6 @@ export async function startRemoteContainer(
     webhookUrl: config.webhookUrl,
     detached: config.detached,
     initialPrompt: config.initialPrompt ? `${config.initialPrompt.slice(0, 100)}...` : undefined,
-    envVarKeys: Object.keys(config.envVars),
   });
   debugLog("startRemoteContainer repo:", repo);
 
@@ -65,7 +66,7 @@ export async function startRemoteContainer(
   if (config.detached) remoteExtra.DETACHED = "1";
   if (config.initialPrompt) remoteExtra.INITIAL_PROMPT = config.initialPrompt;
   if (config.absorbTasks) remoteExtra.ABSORB_TASKS = "1";
-  const containerEnv = buildContainerEnv(repo, config.envVars, remoteExtra);
+  const containerEnv = buildContainerEnv(repo, config.infisical, remoteExtra);
 
   // Log existing machines (but don't destroy — multiple containers may run concurrently)
   const existing = await listMachines(config.flyApp, config.flyToken);

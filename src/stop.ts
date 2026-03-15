@@ -78,7 +78,7 @@ async function main(): Promise<void> {
   const envVars = loadDotEnv(projectRoot);
   const config: ContainerConfig = {
     projectRoot,
-    envVars,
+    infisical: { token: "", projectId: "", environment: "" }, // not needed for stop
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
     flyToken: envVars.FLY_API_TOKEN,
     flyApp: envVars.FLY_APP_NAME,

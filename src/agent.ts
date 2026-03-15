@@ -280,18 +280,9 @@ async function main(): Promise<void> {
   const orchestrationVars = loadDotEnv(projectRoot);
   const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
-  // Only pass Infisical credentials to the container — not actual secrets.
-  // The container fetches secrets from Infisical at startup and manages them
-  // via the secrets server. The agent never has direct access to secrets.
-  const containerEnvVars: Record<string, string> = {
-    INFISICAL_TOKEN: infisicalConfig.token,
-    INFISICAL_PROJECT_ID: infisicalConfig.projectId,
-    INFISICAL_ENVIRONMENT: infisicalConfig.environment,
-  };
-
   const config: ContainerConfig = {
     projectRoot,
-    envVars: containerEnvVars,
+    infisical: infisicalConfig,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
     flyToken: orchestrationVars.FLY_API_TOKEN,
     flyApp: orchestrationVars.FLY_APP_NAME,
