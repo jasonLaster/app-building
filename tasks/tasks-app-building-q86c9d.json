@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/maintain/reviewBugReport.md",
-      "subtasks": [
-        "Unpack: Review fixed bug reports"
-      ],
-      "timestamp": "2026-03-15T20:11:15.079Z",
-      "app": "AirbnbClone"
-    },
-    {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
         "Unpack: Check directive compliance"
@@ -34,9 +26,9 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/maintain/fixBugReport.md",
+    "skill": "skills/tasks/maintain/reviewBugReport.md",
     "subtasks": [
-      "Unpack: Fix open bug reports"
+      "Unpack: Review fixed bug reports"
     ],
     "timestamp": "2026-03-15T20:11:15.079Z",
     "app": "AirbnbClone"
