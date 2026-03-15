@@ -3,16 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: Fix SearchBar placeholder to match test spec ('Where are you going?' instead of 'Search destinations')",
-        "FixViolation: Add beforeAll with truncateAndSeed to all 6 Home/Search test files (search.spec.ts, property-grid.spec.ts, favorite-button.spec.ts, category-filter.spec.ts, filters-panel.spec.ts, pagination.spec.ts)",
-        "RunTests: Run all Home/Search test files to verify fixes"
-      ],
-      "timestamp": "2026-03-15T20:50:34.978Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "CheckTestSpecPropertyDetail: Check testSpec.md directive violations in Property Detail test entries",
         "CheckComponentsPropertyDetail: Check writeApp.md directive violations in Property Detail components",
         "CheckTestsPropertyDetail: Check writeTests.md directive violations in Property Detail tests"
@@ -88,11 +78,11 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "CheckTestSpecHomeSearch: Check testSpec.md directive violations in Home / Search test entries",
-      "CheckComponentsHomeSearch: Check writeApp.md directive violations in Home / Search components",
-      "CheckTestsHomeSearch: Check writeTests.md directive violations in Home / Search tests"
+      "FixViolation: Fix SearchBar placeholder to match test spec ('Where are you going?' instead of 'Search destinations')",
+      "FixViolation: Add beforeAll with truncateAndSeed to all 6 Home/Search test files (search.spec.ts, property-grid.spec.ts, favorite-button.spec.ts, category-filter.spec.ts, filters-panel.spec.ts, pagination.spec.ts)",
+      "RunTests: Run all Home/Search test files to verify fixes"
     ],
-    "timestamp": "2026-03-15T20:13:58.608Z",
+    "timestamp": "2026-03-15T20:50:34.978Z",
     "app": "AirbnbClone"
   }
 }

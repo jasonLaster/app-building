@@ -1,0 +1,222 @@
+Created branch: test-run-1773608146976 (br-empty-rice-a6104vlh)
+Test DB URL: postgresql://neondb_owner:***@ep-morning-water-a64ja8kd.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/search.spec.ts:12:3 › Home Page - SearchBar › Search bar displays all input fields on load
+
+[1A[2K[2/10] tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results
+[1A[2K  1) tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      26 |   test('Search by location filters property results', async ({ page }) => {
+      27 |     await page.goto('/')
+    > 28 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      29 |
+      30 |     await page.getByTestId('search-location').fill('New York')
+      31 |     await page.getByTestId('search-button').click()
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:28:75
+
+    Error Context: test-results/search-Home-Page---SearchB-4a315-on-filters-property-results/error-context.md
+
+
+
+[1A[2K[3/10] tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results
+[1A[2K  2) tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      38 |   test('Search by check-in and check-out dates filters results', async ({ page }) => {
+      39 |     await page.goto('/')
+    > 40 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      41 |
+      42 |     await page.getByTestId('search-checkin').fill('2026-04-01')
+      43 |     await page.getByTestId('search-checkout').fill('2026-04-05')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:40:75
+
+    Error Context: test-results/search-Home-Page---SearchB-a5915-k-out-dates-filters-results/error-context.md
+
+
+
+[1A[2K[4/10] tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results
+[1A[2K  3) tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results ─────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      51 |   test('Search by guest count filters results', async ({ page }) => {
+      52 |     await page.goto('/')
+    > 53 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      54 |
+      55 |     await page.getByTestId('search-guests').fill('5')
+      56 |     await page.getByTestId('search-button').click()
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:53:75
+
+    Error Context: test-results/search-Home-Page---SearchB-95325-guest-count-filters-results/error-context.md
+
+
+
+[1A[2K[5/10] tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results
+[1A[2K  4) tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      63 |   test('Combined search with all fields filters results', async ({ page }) => {
+      64 |     await page.goto('/')
+    > 65 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      66 |
+      67 |     await page.getByTestId('search-location').fill('New York')
+      68 |     await page.getByTestId('search-checkin').fill('2026-05-10')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:65:75
+
+    Error Context: test-results/search-Home-Page---SearchB-c82f0--all-fields-filters-results/error-context.md
+
+
+
+[1A[2K[6/10] tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results
+[1A[2K  5) tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      79 |   test('Clearing search fields and re-searching shows all results', async ({ page }) => {
+      80 |     await page.goto('/')
+    > 81 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      82 |
+      83 |     const cards = page.locator('[data-testid^="property-card-"]')
+      84 |
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:81:75
+
+    Error Context: test-results/search-Home-Page---SearchB-78182-searching-shows-all-results/error-context.md
+
+
+
+[1A[2K[7/10] tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use
+[1A[2K  6) tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use ──
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+       97 |     test.slow()
+       98 |     await page.goto('/')
+    >  99 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+      100 |
+      101 |     const cards = page.locator('[data-testid^="property-card-"]')
+      102 |
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:99:75
+
+    Error Context: test-results/search-Home-Page---SearchB-1a9ad--functional-on-repeated-use/error-context.md
+
+
+
+[1A[2K[8/10] tests/search.spec.ts:118:3 › Home Page - SearchBar › Check-in date picker prevents selecting past dates
+[1A[2K[9/10] tests/search.spec.ts:126:3 › Home Page - SearchBar › Check-out date must be after check-in date
+[1A[2K[10/10] tests/search.spec.ts:136:3 › Home Page - SearchBar › Guest count selector enforces minimum of 1
+[1A[2K  6 failed
+    tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results 
+    tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results 
+    tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results ──────
+    tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results 
+    tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results 
+    tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use ───
+  4 passed (3.3m)
+
+(node:8211) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:8311) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:8238) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8437) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8523) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8610) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8696) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8782) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8867) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

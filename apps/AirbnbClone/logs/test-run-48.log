@@ -1,0 +1,244 @@
+Created branch: test-run-1773608679235 (br-spring-heart-a669as6d)
+Test DB URL: postgresql://neondb_owner:***@ep-round-dawn-a6ok3is8.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 7 tests using 1 worker
+
+
+[1A[2K[1/7] tests/favorite-button.spec.ts:47:3 › Home Page - FavoriteButton › Favorite button shows outline heart when property is not favorited
+
+[1A[2K  1) tests/favorite-button.spec.ts:47:3 › Home Page - FavoriteButton › Favorite button shows outline heart when property is not favorited 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      14 |   await page.getByTestId('login-email-input').fill(email)
+      15 |   await page.getByTestId('login-submit-button').click()
+    > 16 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                      ^
+      17 | }
+      18 |
+      19 | const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+        at loginAs (/repo/apps/AirbnbClone/tests/favorite-button.spec.ts:16:22)
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:49:5
+
+    Error Context: test-results/favorite-button-Home-Page--c20a6-n-property-is-not-favorited/error-context.md
+
+
+
+[1A[2K[2/7] tests/favorite-button.spec.ts:64:3 › Home Page - FavoriteButton › Clicking favorite button on unfavorited property adds it to favorites
+[1A[2K  2) tests/favorite-button.spec.ts:64:3 › Home Page - FavoriteButton › Clicking favorite button on unfavorited property adds it to favorites 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      14 |   await page.getByTestId('login-email-input').fill(email)
+      15 |   await page.getByTestId('login-submit-button').click()
+    > 16 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                      ^
+      17 | }
+      18 |
+      19 | const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+        at loginAs (/repo/apps/AirbnbClone/tests/favorite-button.spec.ts:16:22)
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:66:5
+
+    Error Context: test-results/favorite-button-Home-Page--3868b-operty-adds-it-to-favorites/error-context.md
+
+
+
+[1A[2K[3/7] tests/favorite-button.spec.ts:86:3 › Home Page - FavoriteButton › Clicking favorite button on favorited property removes it from favorites
+[1A[2K  3) tests/favorite-button.spec.ts:86:3 › Home Page - FavoriteButton › Clicking favorite button on favorited property removes it from favorites 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      14 |   await page.getByTestId('login-email-input').fill(email)
+      15 |   await page.getByTestId('login-submit-button').click()
+    > 16 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                      ^
+      17 | }
+      18 |
+      19 | const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+        at loginAs (/repo/apps/AirbnbClone/tests/favorite-button.spec.ts:16:22)
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:88:5
+
+    Error Context: test-results/favorite-button-Home-Page--9a9c8-y-removes-it-from-favorites/error-context.md
+
+
+
+[1A[2K[4/7] tests/favorite-button.spec.ts:108:3 › Home Page - FavoriteButton › Favorite button does not navigate to property detail page
+[1A[2K  4) tests/favorite-button.spec.ts:108:3 › Home Page - FavoriteButton › Favorite button does not navigate to property detail page 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      14 |   await page.getByTestId('login-email-input').fill(email)
+      15 |   await page.getByTestId('login-submit-button').click()
+    > 16 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                      ^
+      17 | }
+      18 |
+      19 | const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+        at loginAs (/repo/apps/AirbnbClone/tests/favorite-button.spec.ts:16:22)
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:109:5
+
+    Error Context: test-results/favorite-button-Home-Page--a5276-ate-to-property-detail-page/error-context.md
+
+
+
+[1A[2K[5/7] tests/favorite-button.spec.ts:124:3 › Home Page - FavoriteButton › Favorite button is not shown when user is not logged in
+[1A[2K  5) tests/favorite-button.spec.ts:124:3 › Home Page - FavoriteButton › Favorite button is not shown when user is not logged in 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-grid')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-grid')[22m
+
+
+      125 |     await page.goto('/')
+      126 |
+    > 127 |     await expect(page.getByTestId('property-grid')).toBeVisible({ timeout: 30000 })
+          |                                                     ^
+      128 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 15000 })
+      129 |
+      130 |     // Favorite buttons should not be visible when logged out
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:127:53
+
+    Error Context: test-results/favorite-button-Home-Page--dd9ba--when-user-is-not-logged-in/error-context.md
+
+
+
+[1A[2K[6/7] tests/favorite-button.spec.ts:136:3 › Home Page - FavoriteButton › Favorite button reflects correct state on page load
+[1A[2K  6) tests/favorite-button.spec.ts:136:3 › Home Page - FavoriteButton › Favorite button reflects correct state on page load 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      14 |   await page.getByTestId('login-email-input').fill(email)
+      15 |   await page.getByTestId('login-submit-button').click()
+    > 16 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                      ^
+      17 | }
+      18 |
+      19 | const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+        at loginAs (/repo/apps/AirbnbClone/tests/favorite-button.spec.ts:16:22)
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:138:5
+
+    Error Context: test-results/favorite-button-Home-Page--03c1e--correct-state-on-page-load/error-context.md
+
+
+
+[1A[2K[7/7] tests/favorite-button.spec.ts:163:3 › Home Page - FavoriteButton › Favorite button is functional on repeated use
+[1A[2K  7) tests/favorite-button.spec.ts:163:3 › Home Page - FavoriteButton › Favorite button is functional on repeated use 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      14 |   await page.getByTestId('login-email-input').fill(email)
+      15 |   await page.getByTestId('login-submit-button').click()
+    > 16 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                      ^
+      17 | }
+      18 |
+      19 | const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+        at loginAs (/repo/apps/AirbnbClone/tests/favorite-button.spec.ts:16:22)
+        at /repo/apps/AirbnbClone/tests/favorite-button.spec.ts:165:5
+
+    Error Context: test-results/favorite-button-Home-Page--d43c2--functional-on-repeated-use/error-context.md
+
+
+[1A[2K  7 failed
+    tests/favorite-button.spec.ts:47:3 › Home Page - FavoriteButton › Favorite button shows outline heart when property is not favorited 
+    tests/favorite-button.spec.ts:64:3 › Home Page - FavoriteButton › Clicking favorite button on unfavorited property adds it to favorites 
+    tests/favorite-button.spec.ts:86:3 › Home Page - FavoriteButton › Clicking favorite button on favorited property removes it from favorites 
+    tests/favorite-button.spec.ts:108:3 › Home Page - FavoriteButton › Favorite button does not navigate to property detail page 
+    tests/favorite-button.spec.ts:124:3 › Home Page - FavoriteButton › Favorite button is not shown when user is not logged in 
+    tests/favorite-button.spec.ts:136:3 › Home Page - FavoriteButton › Favorite button reflects correct state on page load 
+    tests/favorite-button.spec.ts:163:3 › Home Page - FavoriteButton › Favorite button is functional on repeated use 
+
+(node:10085) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:10184) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:10112) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:10288) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:10378) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:10472) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:10560) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:10651) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:10741) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

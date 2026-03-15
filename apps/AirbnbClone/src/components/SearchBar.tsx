@@ -49,7 +49,7 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
         <input
           data-testid="search-location"
           type="text"
-          placeholder="Search destinations"
+          placeholder="Where are you going?"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           className="w-full text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary"

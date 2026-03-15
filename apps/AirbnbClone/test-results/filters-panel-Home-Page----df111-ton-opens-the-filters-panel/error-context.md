@@ -1,0 +1,112 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]:
+          - generic [ref=e10]: airbnb
+      - navigation [ref=e11]:
+        - link "Home" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - link "My Trips" [ref=e13] [cursor=pointer]:
+          - /url: /trips
+        - link "Profile" [ref=e14] [cursor=pointer]:
+          - /url: /profile
+      - link "Log in" [ref=e16] [cursor=pointer]:
+        - /url: /login
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e22]: Where
+          - textbox "Where are you going?" [ref=e23]
+        - generic [ref=e25]:
+          - generic [ref=e26]: When
+          - generic [ref=e27]:
+            - textbox [ref=e28]
+            - generic [ref=e29]: –
+            - textbox [ref=e30]
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Who
+            - spinbutton [ref=e35]
+          - button [ref=e36]:
+            - img [ref=e37]
+      - generic [ref=e40]:
+        - generic [ref=e42]:
+          - button "Apartment" [ref=e43]
+          - button "House" [ref=e44]
+          - button "Cabin" [ref=e45]
+          - button "Villa" [ref=e46]
+          - button "Condo" [ref=e47]
+          - button "Loft" [ref=e48]
+          - button "Cottage" [ref=e49]
+          - button "Townhouse" [ref=e50]
+        - generic [ref=e51]:
+          - button "Filters" [active] [ref=e52]:
+            - img [ref=e53]
+            - text: Filters
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - heading "Filters" [level=3] [ref=e56]
+              - button [ref=e57]:
+                - img [ref=e58]
+            - generic [ref=e61]:
+              - heading "Price range" [level=4] [ref=e62]
+              - generic [ref=e63]:
+                - generic [ref=e64]:
+                  - text: Min price
+                  - textbox "$0" [ref=e65]
+                - generic [ref=e66]: –
+                - generic [ref=e67]:
+                  - text: Max price
+                  - textbox "Any" [ref=e68]
+            - generic [ref=e69]:
+              - heading "Rooms and beds" [level=4] [ref=e70]
+              - generic [ref=e71]:
+                - generic [ref=e72]:
+                  - text: Bedrooms
+                  - combobox [ref=e73]:
+                    - option "Any" [selected]
+                    - option "1+"
+                    - option "2+"
+                    - option "3+"
+                    - option "4+"
+                    - option "5+"
+                    - option "6+"
+                    - option "7+"
+                    - option "8+"
+                - generic [ref=e74]:
+                  - text: Beds
+                  - combobox [ref=e75]:
+                    - option "Any" [selected]
+                    - option "1+"
+                    - option "2+"
+                    - option "3+"
+                    - option "4+"
+                    - option "5+"
+                    - option "6+"
+                    - option "7+"
+                    - option "8+"
+                - generic [ref=e76]:
+                  - text: Bathrooms
+                  - combobox [ref=e77]:
+                    - option "Any" [selected]
+                    - option "1+"
+                    - option "2+"
+                    - option "3+"
+                    - option "4+"
+                    - option "5+"
+                    - option "6+"
+                    - option "7+"
+                    - option "8+"
+            - generic [ref=e78]:
+              - button "Clear all" [ref=e79]
+              - button "Show results" [ref=e80]
+      - generic [ref=e81]:
+        - paragraph [ref=e82]: No properties found
+        - paragraph [ref=e83]: Try adjusting your filters or search criteria
+```

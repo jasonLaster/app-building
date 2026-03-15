@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 test.describe('Home Page - PropertyGrid', () => {
   test('Property grid displays properties in a responsive grid layout', async ({ page }) => {

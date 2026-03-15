@@ -1,0 +1,333 @@
+Created branch: test-run-1773608932259 (br-royal-wildflower-a6pq3tcr)
+Test DB URL: postgresql://neondb_owner:***@ep-round-band-a6ozkjo7.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 13 tests using 1 worker
+
+
+[1A[2K[1/13] tests/filters-panel.spec.ts:12:3 › Home Page - FiltersPanel › Filters panel is hidden by default with a visible toggle button
+
+[1A[2K[2/13] tests/filters-panel.spec.ts:21:3 › Home Page - FiltersPanel › Clicking the Filters button opens the filters panel
+[1A[2K  1) tests/filters-panel.spec.ts:21:3 › Home Page - FiltersPanel › Clicking the Filters button opens the filters panel 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="amenity-checkbox-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="amenity-checkbox-"]').first()[22m
+
+
+      35 |
+      36 |     // Amenity checkboxes should be visible (fetched from API)
+    > 37 |     await expect(page.locator('[data-testid^="amenity-checkbox-"]').first()).toBeVisible({ timeout: 15000 })
+         |                                                                              ^
+      38 |   })
+      39 |
+      40 |   test('Clicking the Filters button again closes the filters panel', async ({ page }) => {
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:37:78
+
+    Error Context: test-results/filters-panel-Home-Page----df111-ton-opens-the-filters-panel/error-context.md
+
+
+
+[1A[2K[3/13] tests/filters-panel.spec.ts:40:3 › Home Page - FiltersPanel › Clicking the Filters button again closes the filters panel
+[1A[2K[4/13] tests/filters-panel.spec.ts:53:3 › Home Page - FiltersPanel › Price range slider filters properties by price per night
+[1A[2K  2) tests/filters-panel.spec.ts:53:3 › Home Page - FiltersPanel › Price range slider filters properties by price per night 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      54 |     test.slow()
+      55 |     await page.goto('/')
+    > 56 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      57 |
+      58 |     const cards = page.locator('[data-testid^="property-card-"]')
+      59 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:56:75
+
+    Error Context: test-results/filters-panel-Home-Page----a8c90-operties-by-price-per-night/error-context.md
+
+
+
+[1A[2K[5/13] tests/filters-panel.spec.ts:74:3 › Home Page - FiltersPanel › Bedrooms minimum filter works correctly
+[1A[2K  3) tests/filters-panel.spec.ts:74:3 › Home Page - FiltersPanel › Bedrooms minimum filter works correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      75 |     test.slow()
+      76 |     await page.goto('/')
+    > 77 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      78 |
+      79 |     const cards = page.locator('[data-testid^="property-card-"]')
+      80 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:77:75
+
+    Error Context: test-results/filters-panel-Home-Page----c5047-imum-filter-works-correctly/error-context.md
+
+
+
+[1A[2K[6/13] tests/filters-panel.spec.ts:94:3 › Home Page - FiltersPanel › Beds minimum filter works correctly
+[1A[2K  4) tests/filters-panel.spec.ts:94:3 › Home Page - FiltersPanel › Beds minimum filter works correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+       95 |     test.slow()
+       96 |     await page.goto('/')
+    >  97 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+       98 |
+       99 |     const cards = page.locator('[data-testid^="property-card-"]')
+      100 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:97:75
+
+    Error Context: test-results/filters-panel-Home-Page----eb653-imum-filter-works-correctly/error-context.md
+
+
+
+[1A[2K[7/13] tests/filters-panel.spec.ts:114:3 › Home Page - FiltersPanel › Bathrooms minimum filter works correctly
+[1A[2K  5) tests/filters-panel.spec.ts:114:3 › Home Page - FiltersPanel › Bathrooms minimum filter works correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      115 |     test.slow()
+      116 |     await page.goto('/')
+    > 117 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+      118 |
+      119 |     const cards = page.locator('[data-testid^="property-card-"]')
+      120 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:117:75
+
+    Error Context: test-results/filters-panel-Home-Page----39b7c-imum-filter-works-correctly/error-context.md
+
+
+
+[1A[2K[8/13] tests/filters-panel.spec.ts:134:3 › Home Page - FiltersPanel › Amenity checkboxes filter properties by selected amenities
+[1A[2K  6) tests/filters-panel.spec.ts:134:3 › Home Page - FiltersPanel › Amenity checkboxes filter properties by selected amenities 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      135 |     test.slow()
+      136 |     await page.goto('/')
+    > 137 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+      138 |
+      139 |     const cards = page.locator('[data-testid^="property-card-"]')
+      140 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:137:75
+
+    Error Context: test-results/filters-panel-Home-Page----fd0d3-rties-by-selected-amenities/error-context.md
+
+
+
+[1A[2K[9/13] tests/filters-panel.spec.ts:160:3 › Home Page - FiltersPanel › Amenity checkboxes are grouped by category
+[1A[2K  7) tests/filters-panel.spec.ts:160:3 › Home Page - FiltersPanel › Amenity checkboxes are grouped by category 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="amenity-checkbox-"]').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="amenity-checkbox-"]').first()[22m
+
+
+      164 |     await page.getByTestId('filters-toggle').click()
+      165 |     await expect(page.getByTestId('filters-panel')).toBeVisible({ timeout: 15000 })
+    > 166 |     await expect(page.locator('[data-testid^="amenity-checkbox-"]').first()).toBeVisible({ timeout: 15000 })
+          |                                                                              ^
+      167 |
+      168 |     // Verify category groups are present: Essentials, Features, Safety, Location
+      169 |     const panel = page.getByTestId('filters-panel')
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:166:78
+
+    Error Context: test-results/filters-panel-Home-Page----7f708-xes-are-grouped-by-category/error-context.md
+
+
+
+[1A[2K[10/13] tests/filters-panel.spec.ts:176:3 › Home Page - FiltersPanel › Multiple filters combine with AND logic
+[1A[2K  8) tests/filters-panel.spec.ts:176:3 › Home Page - FiltersPanel › Multiple filters combine with AND logic 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      177 |     test.slow()
+      178 |     await page.goto('/')
+    > 179 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+      180 |
+      181 |     const cards = page.locator('[data-testid^="property-card-"]')
+      182 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:179:75
+
+    Error Context: test-results/filters-panel-Home-Page----a10db-ters-combine-with-AND-logic/error-context.md
+
+
+
+[1A[2K[11/13] tests/filters-panel.spec.ts:205:3 › Home Page - FiltersPanel › Filters combine with search bar and category filter
+[1A[2K  9) tests/filters-panel.spec.ts:205:3 › Home Page - FiltersPanel › Filters combine with search bar and category filter 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      206 |     test.slow()
+      207 |     await page.goto('/')
+    > 208 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+      209 |
+      210 |     const cards = page.locator('[data-testid^="property-card-"]')
+      211 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:208:75
+
+    Error Context: test-results/filters-panel-Home-Page----67582-rch-bar-and-category-filter/error-context.md
+
+
+
+[1A[2K[12/13] tests/filters-panel.spec.ts:238:3 › Home Page - FiltersPanel › Resetting filters shows all properties
+[1A[2K  10) tests/filters-panel.spec.ts:238:3 › Home Page - FiltersPanel › Resetting filters shows all properties 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      239 |     test.slow()
+      240 |     await page.goto('/')
+    > 241 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+          |                                                                           ^
+      242 |
+      243 |     const cards = page.locator('[data-testid^="property-card-"]')
+      244 |
+        at /repo/apps/AirbnbClone/tests/filters-panel.spec.ts:241:75
+
+    Error Context: test-results/filters-panel-Home-Page----d17d8-ilters-shows-all-properties/error-context.md
+
+
+
+[1A[2K[13/13] tests/filters-panel.spec.ts:272:3 › Home Page - FiltersPanel › Filters panel controls are functional on repeated use
+
+(node:10955) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:11053) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:10982) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11184) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11292) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11380) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11469) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11556) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11640) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11726) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11812) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11901) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:11984) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

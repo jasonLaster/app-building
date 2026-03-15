@@ -1,0 +1,240 @@
+Cleaned up stale branch: test-run-1773607937734
+Created branch: test-run-1773608061205 (br-wispy-lake-a6r779ee)
+Test DB URL: postgresql://neondb_owner:***@ep-muddy-grass-a6ih001j.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/search.spec.ts:12:3 › Home Page - SearchBar › Search bar displays all input fields on load
+
+[1A[2K[2/10] tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results
+[1A[2K  1) tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      26 |   test('Search by location filters property results', async ({ page }) => {
+      27 |     await page.goto('/')
+    > 28 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      29 |
+      30 |     await page.getByTestId('search-location').fill('New York')
+      31 |     await page.getByTestId('search-button').click()
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:28:75
+
+    Error Context: test-results/search-Home-Page---SearchB-4a315-on-filters-property-results/error-context.md
+
+
+
+[1A[2K[3/10] tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results
+[1A[2K  2) tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      37 |
+      38 |   test('Search by check-in and check-out dates filters results', async ({ page }) => {
+    > 39 |     await page.goto('/')
+         |                ^
+      40 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+      41 |
+      42 |     await page.getByTestId('search-checkin').fill('2026-04-01')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:39:16
+
+
+
+[1A[2K[4/10] tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results
+[1A[2K  3) tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results ─────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      50 |
+      51 |   test('Search by guest count filters results', async ({ page }) => {
+    > 52 |     await page.goto('/')
+         |                ^
+      53 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+      54 |
+      55 |     await page.getByTestId('search-guests').fill('5')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:52:16
+
+
+
+[1A[2K[5/10] tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results
+[1A[2K  4) tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      62 |
+      63 |   test('Combined search with all fields filters results', async ({ page }) => {
+    > 64 |     await page.goto('/')
+         |                ^
+      65 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+      66 |
+      67 |     await page.getByTestId('search-location').fill('New York')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:64:16
+
+
+
+[1A[2K[6/10] tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results
+[1A[2K  5) tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      78 |
+      79 |   test('Clearing search fields and re-searching shows all results', async ({ page }) => {
+    > 80 |     await page.goto('/')
+         |                ^
+      81 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+      82 |
+      83 |     const cards = page.locator('[data-testid^="property-card-"]')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:80:16
+
+
+
+[1A[2K[7/10] tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use
+[1A[2K  6) tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use ──
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+       96 |   test('Search bar is functional on repeated use', async ({ page }) => {
+       97 |     test.slow()
+    >  98 |     await page.goto('/')
+          |                ^
+       99 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+      100 |
+      101 |     const cards = page.locator('[data-testid^="property-card-"]')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:98:16
+
+
+
+[1A[2K[8/10] tests/search.spec.ts:118:3 › Home Page - SearchBar › Check-in date picker prevents selecting past dates
+[1A[2K  7) tests/search.spec.ts:118:3 › Home Page - SearchBar › Check-in date picker prevents selecting past dates 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      117 |
+      118 |   test('Check-in date picker prevents selecting past dates', async ({ page }) => {
+    > 119 |     await page.goto('/')
+          |                ^
+      120 |     await expect(page.getByTestId('search-bar')).toBeVisible({ timeout: 30000 })
+      121 |
+      122 |     const today = new Date().toISOString().split('T')[0]
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:119:16
+
+
+
+[1A[2K[9/10] tests/search.spec.ts:126:3 › Home Page - SearchBar › Check-out date must be after check-in date
+[1A[2K  8) tests/search.spec.ts:126:3 › Home Page - SearchBar › Check-out date must be after check-in date 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      125 |
+      126 |   test('Check-out date must be after check-in date', async ({ page }) => {
+    > 127 |     await page.goto('/')
+          |                ^
+      128 |     await expect(page.getByTestId('search-bar')).toBeVisible({ timeout: 30000 })
+      129 |
+      130 |     await page.getByTestId('search-checkin').fill('2026-04-10')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:127:16
+
+
+
+[1A[2K[10/10] tests/search.spec.ts:136:3 › Home Page - SearchBar › Guest count selector enforces minimum of 1
+[1A[2K  9) tests/search.spec.ts:136:3 › Home Page - SearchBar › Guest count selector enforces minimum of 1 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:8888/
+    Call log:
+    [2m  - navigating to "http://localhost:8888/", waiting until "load"[22m
+
+
+      135 |
+      136 |   test('Guest count selector enforces minimum of 1', async ({ page }) => {
+    > 137 |     await page.goto('/')
+          |                ^
+      138 |     await expect(page.getByTestId('search-bar')).toBeVisible({ timeout: 30000 })
+      139 |
+      140 |     await expect(page.getByTestId('search-guests')).toHaveAttribute('min', '1')
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:137:16
+
+
+[1A[2K  9 failed
+    tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results 
+    tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results 
+    tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results ──────
+    tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results 
+    tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results 
+    tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use ───
+    tests/search.spec.ts:118:3 › Home Page - SearchBar › Check-in date picker prevents selecting past dates 
+    tests/search.spec.ts:126:3 › Home Page - SearchBar › Check-out date must be after check-in date 
+    tests/search.spec.ts:136:3 › Home Page - SearchBar › Guest count selector enforces minimum of 1 
+  1 passed (59.7s)
+
+(node:7107) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:7206) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:7134) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7424) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7505) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7588) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7669) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7753) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7836) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:7920) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:8004) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 test.describe('Home Page - FiltersPanel', () => {
   test('Filters panel is hidden by default with a visible toggle button', async ({ page }) => {
