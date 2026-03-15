@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "flight-result-card.spec.ts",
-      "file": "flight-result-card.spec.ts",
+      "title": "flight-summary.spec.ts",
+      "file": "flight-summary.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "FlightResultCard",
-          "file": "flight-result-card.spec.ts",
-          "line": 26,
+          "title": "FlightSummary",
+          "file": "flight-summary.spec.ts",
+          "line": 98,
           "column": 6,
           "specs": [
             {
-              "title": "FlightResultCard displays airline info",
+              "title": "FlightSummary displays full outbound itinerary",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1071,
+                      "duration": 1560,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:48.342Z",
+                      "startTime": "2026-03-15T07:54:15.018Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-637cd66ddab2b29b7ae5",
-              "file": "flight-result-card.spec.ts",
-              "line": 33,
+              "id": "23ebbdc48b48e46615fe-d319ee942f47cc0fdf4c",
+              "file": "flight-summary.spec.ts",
+              "line": 99,
               "column": 3
             },
             {
-              "title": "FlightResultCard displays departure and arrival times",
+              "title": "FlightSummary displays outbound and return flights for round trip",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 499,
+                      "duration": 2459,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:49.453Z",
+                      "startTime": "2026-03-15T07:54:16.641Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-8c8e7e7d9a50ef89b2e3",
-              "file": "flight-result-card.spec.ts",
-              "line": 47,
+              "id": "23ebbdc48b48e46615fe-342aa2f3bbd8cc8c0f2c",
+              "file": "flight-summary.spec.ts",
+              "line": 138,
               "column": 3
             },
             {
-              "title": "FlightResultCard displays flight duration",
+              "title": "FlightSummary displays connecting flight with multiple legs",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 517,
+                      "duration": 1011,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:49.962Z",
+                      "startTime": "2026-03-15T07:54:19.109Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-6d0ab7970e4f41e7f480",
-              "file": "flight-result-card.spec.ts",
-              "line": 59,
+              "id": "23ebbdc48b48e46615fe-7ee9b6435a73daeaa8ec",
+              "file": "flight-summary.spec.ts",
+              "line": 188,
               "column": 3
             },
             {
-              "title": "FlightResultCard displays stops and layover info",
+              "title": "FlightSummary shows total duration and stops count",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 512,
+                      "duration": 1857,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:50.489Z",
+                      "startTime": "2026-03-15T07:54:20.128Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-4f65e79d2eb2b010b838",
-              "file": "flight-result-card.spec.ts",
-              "line": 66,
+              "id": "23ebbdc48b48e46615fe-539bede8c715d0aab350",
+              "file": "flight-summary.spec.ts",
+              "line": 225,
               "column": 3
             },
             {
-              "title": "FlightResultCard displays price prominently",
+              "title": "FlightSummary shows overnight arrival indicator",
               "ok": true,
               "tags": [],
               "tests": [
@@ -231,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 480,
+                      "duration": 961,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:51.014Z",
+                      "startTime": "2026-03-15T07:54:21.997Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -244,13 +244,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-8f6aa43bc988b91a2de5",
-              "file": "flight-result-card.spec.ts",
-              "line": 77,
+              "id": "23ebbdc48b48e46615fe-3a3f5196a63d52a486ba",
+              "file": "flight-summary.spec.ts",
+              "line": 239,
               "column": 3
             },
             {
-              "title": "FlightResultCard displays CO2 emissions",
+              "title": "FlightSummary shows aircraft type and amenities",
               "ok": true,
               "tags": [],
               "tests": [
@@ -265,12 +265,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 499,
+                      "duration": 957,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:51.507Z",
+                      "startTime": "2026-03-15T07:54:22.965Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -278,13 +278,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-01f5d7b42b81ab0c1e51",
-              "file": "flight-result-card.spec.ts",
-              "line": 84,
+              "id": "23ebbdc48b48e46615fe-184daab5fb12a8597376",
+              "file": "flight-summary.spec.ts",
+              "line": 258,
               "column": 3
             },
             {
-              "title": "FlightResultCard expand to show details",
+              "title": "FlightSummary shows baggage allowance",
               "ok": true,
               "tags": [],
               "tests": [
@@ -299,12 +299,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 537,
+                      "duration": 2688,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:51:52.024Z",
+                      "startTime": "2026-03-15T07:54:23.930Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -312,247 +312,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "9cab501acf65004ffb05-adebef3546a5306c73e6",
-              "file": "flight-result-card.spec.ts",
-              "line": 90,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard collapse details",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 543,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:52.571Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-effca0a051dc93546bd0",
-              "file": "flight-result-card.spec.ts",
-              "line": 106,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard details show leg-by-leg breakdown",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 687,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:53.123Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-b64b208d3bf86a348f8b",
-              "file": "flight-result-card.spec.ts",
-              "line": 120,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard details show amenities icons",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 532,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:53.819Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-e65b22c15c33719aedb1",
-              "file": "flight-result-card.spec.ts",
-              "line": 152,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard details show baggage allowance",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 525,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:54.359Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-3a5bd0c0b4ef57458ec1",
-              "file": "flight-result-card.spec.ts",
-              "line": 172,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard overnight flight shows plus 1 day indicator",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 941,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:54.891Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-953f54053b70a4cad6fd",
-              "file": "flight-result-card.spec.ts",
-              "line": 187,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard clicking Select navigates to booking page",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 540,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:55.844Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-57bbdd3a25f9c1aa8034",
-              "file": "flight-result-card.spec.ts",
-              "line": 199,
-              "column": 3
-            },
-            {
-              "title": "FlightResultCard expand and collapse multiple cards",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 609,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:51:56.393Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "9cab501acf65004ffb05-7e5f0e7fc0cac29a123f",
-              "file": "flight-result-card.spec.ts",
-              "line": 216,
+              "id": "23ebbdc48b48e46615fe-9c255ea7a14ad75e4d14",
+              "file": "flight-summary.spec.ts",
+              "line": 281,
               "column": 3
             }
           ]
@@ -562,9 +324,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T07:51:47.906Z",
-    "duration": 9126.319,
-    "expected": 14,
+    "startTime": "2026-03-15T07:54:14.443Z",
+    "duration": 12228.099,
+    "expected": 7,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
