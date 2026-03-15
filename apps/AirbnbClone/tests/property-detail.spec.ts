@@ -7,7 +7,56 @@ const PROPERTY_NO_REVIEWS = 'b2222222-2222-2222-2222-222222222222'
 // b4444444: Apartment, 2 guests, 1 bedroom, 1 bed, 1 bath, Austin, TX, host Mike Johnson, 1 review (4.0)
 const PROPERTY_SINGULAR = 'b4444444-4444-4444-4444-444444444444'
 
+const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+const ALEX_ID = 'a4444444-4444-4444-4444-444444444444'
+
+async function resetReviewsToSeed(page: import('@playwright/test').Page) {
+  // Delete all reviews for the properties used in these tests
+  for (const propertyId of [PROPERTY_WITH_REVIEWS, PROPERTY_NO_REVIEWS, PROPERTY_SINGULAR]) {
+    const res = await page.request.get(`/api/reviews?property_id=${propertyId}`)
+    const reviews = await res.json()
+    for (const review of reviews) {
+      await page.request.delete(`/api/reviews/${review.id}`)
+    }
+  }
+  // Re-create seed review for b1111111 (Emma, rating 5)
+  await page.request.post('/api/reviews', {
+    data: {
+      booking_id: 'e1111111-1111-1111-1111-111111111111',
+      property_id: PROPERTY_WITH_REVIEWS,
+      guest_id: EMMA_ID,
+      rating: 5,
+      cleanliness: 5,
+      accuracy: 5,
+      communication: 5,
+      location: 5,
+      value: 4,
+      comment: 'Absolutely loved this loft! The city views are even better than the photos. Sarah was a wonderful host. Would definitely stay again.',
+    },
+  })
+  // Re-create seed review for b4444444 (Alex, rating 4)
+  await page.request.post('/api/reviews', {
+    data: {
+      booking_id: 'e4444444-4444-4444-4444-444444444444',
+      property_id: PROPERTY_SINGULAR,
+      guest_id: ALEX_ID,
+      rating: 4,
+      cleanliness: 4,
+      accuracy: 4,
+      communication: 5,
+      location: 5,
+      value: 4,
+      comment: 'Great location in SoCo. The apartment was clean and well-equipped. The rooftop pool was a nice bonus. Only wish the bedroom was a bit larger.',
+    },
+  })
+}
+
 test.describe('Property Detail - PropertyHeader', () => {
+  test.beforeAll(async ({ browser }) => {
+    const page = await browser.newPage()
+    await resetReviewsToSeed(page)
+    await page.close()
+  })
   test('Property header displays title, location, rating summary, and host info', async ({ page }) => {
     await page.goto(`/properties/${PROPERTY_WITH_REVIEWS}`)
 
