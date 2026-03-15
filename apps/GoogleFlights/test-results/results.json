@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "popular-destinations.spec.ts",
-      "file": "popular-destinations.spec.ts",
+      "title": "price-breakdown.spec.ts",
+      "file": "price-breakdown.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "PopularDestinations",
-          "file": "popular-destinations.spec.ts",
-          "line": 3,
+          "title": "PriceBreakdown",
+          "file": "price-breakdown.spec.ts",
+          "line": 84,
           "column": 6,
           "specs": [
             {
-              "title": "PopularDestinations grid is displayed on search page",
+              "title": "PriceBreakdown displays base fare per passenger",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 544,
+                      "duration": 1543,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:49:25.715Z",
+                      "startTime": "2026-03-15T08:51:32.970Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7cdf80e575c8cf3fd301-34cfaa7bd4d815b8b253",
-              "file": "popular-destinations.spec.ts",
-              "line": 9,
+              "id": "0ae208e1ad724f78116a-c0a6cbf292ce459228d4",
+              "file": "price-breakdown.spec.ts",
+              "line": 85,
               "column": 3
             },
             {
-              "title": "PopularDestinations card shows city country and price",
+              "title": "PriceBreakdown displays taxes and fees",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 218,
+                      "duration": 951,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:49:26.311Z",
+                      "startTime": "2026-03-15T08:51:34.569Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7cdf80e575c8cf3fd301-0611a158af34a8c0f6df",
-              "file": "popular-destinations.spec.ts",
-              "line": 27,
+              "id": "0ae208e1ad724f78116a-45157b5ebb2ab9c53c8d",
+              "file": "price-breakdown.spec.ts",
+              "line": 101,
               "column": 3
             },
             {
-              "title": "PopularDestinations clicking a card initiates a search",
+              "title": "PriceBreakdown displays total price",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 258,
+                      "duration": 962,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:49:26.537Z",
+                      "startTime": "2026-03-15T08:51:35.532Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "7cdf80e575c8cf3fd301-3d109f5bb78532e0041e",
-              "file": "popular-destinations.spec.ts",
-              "line": 46,
+              "id": "0ae208e1ad724f78116a-76ae9d30cd25053b86e3",
+              "file": "price-breakdown.spec.ts",
+              "line": 113,
               "column": 3
             },
             {
-              "title": "PopularDestinations displays multiple cards in grid layout",
+              "title": "PriceBreakdown shows per-passenger-type pricing for mixed group",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 201,
+                      "duration": 964,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:49:26.804Z",
+                      "startTime": "2026-03-15T08:51:36.503Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,9 +210,77 @@
                   "status": "expected"
                 }
               ],
-              "id": "7cdf80e575c8cf3fd301-7d9fc9801c51050c44c4",
-              "file": "popular-destinations.spec.ts",
-              "line": 67,
+              "id": "0ae208e1ad724f78116a-e66818d835b085d8a232",
+              "file": "price-breakdown.spec.ts",
+              "line": 143,
+              "column": 3
+            },
+            {
+              "title": "PriceBreakdown updates for round-trip flights",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1393,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T08:51:37.474Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0ae208e1ad724f78116a-727c8e45ddcbd813e473",
+              "file": "price-breakdown.spec.ts",
+              "line": 193,
+              "column": 3
+            },
+            {
+              "title": "PriceBreakdown reflects selected cabin class pricing",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1830,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T08:51:38.874Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "0ae208e1ad724f78116a-841167051e6612572413",
+              "file": "price-breakdown.spec.ts",
+              "line": 235,
               "column": 3
             }
           ]
@@ -222,9 +290,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T08:49:25.271Z",
-    "duration": 1762.655,
-    "expected": 4,
+    "startTime": "2026-03-15T08:51:32.535Z",
+    "duration": 8210.09,
+    "expected": 6,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
