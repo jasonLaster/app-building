@@ -1,0 +1,235 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Flights
+      - button "◀" [ref=e7] [cursor=pointer]
+    - list [ref=e8]:
+      - listitem [ref=e9]:
+        - link "✈ Search" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: ✈
+          - generic [ref=e12]: Search
+      - listitem [ref=e13]:
+        - link "🌍 Explore" [ref=e14] [cursor=pointer]:
+          - /url: /explore
+          - generic [ref=e15]: 🌍
+          - generic [ref=e16]: Explore
+      - listitem [ref=e17]:
+        - link "🧳 My Trips" [ref=e18] [cursor=pointer]:
+          - /url: /trips
+          - generic [ref=e19]: 🧳
+          - generic [ref=e20]: My Trips
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e24]:
+        - button "✈ LAX" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]: ✈
+          - text: LAX
+        - generic [ref=e28]: →
+        - button "✈ JFK" [ref=e30] [cursor=pointer]:
+          - generic [ref=e31]: ✈
+          - text: JFK
+        - generic [ref=e33]:
+          - button "📅 Apr 25 – Apr 30" [ref=e34] [cursor=pointer]:
+            - generic [ref=e35]: 📅
+            - text: Apr 25 – Apr 30
+          - generic [ref=e37]:
+            - button "📅 Apr 30, 2026" [ref=e38] [cursor=pointer]:
+              - generic [ref=e39]: 📅
+              - generic [ref=e40]: Apr 30, 2026
+            - generic [ref=e41]:
+              - generic [ref=e42]:
+                - button "◀" [ref=e43] [cursor=pointer]
+                - generic [ref=e44]: April 2026
+                - button "▶" [ref=e45] [cursor=pointer]
+              - generic [ref=e46]:
+                - generic [ref=e47]: Sun
+                - generic [ref=e48]: Mon
+                - generic [ref=e49]: Tue
+                - generic [ref=e50]: Wed
+                - generic [ref=e51]: Thu
+                - generic [ref=e52]: Fri
+                - generic [ref=e53]: Sat
+              - generic [ref=e54]:
+                - button "1" [disabled] [ref=e58]
+                - button "2" [disabled] [ref=e59]
+                - button "3" [disabled] [ref=e60]
+                - button "4" [disabled] [ref=e61]
+                - button "5" [disabled] [ref=e62]
+                - button "6" [disabled] [ref=e63]
+                - button "7" [disabled] [ref=e64]
+                - button "8" [disabled] [ref=e65]
+                - button "9" [disabled] [ref=e66]
+                - button "10" [disabled] [ref=e67]
+                - button "11" [disabled] [ref=e68]
+                - button "12" [disabled] [ref=e69]
+                - button "13" [disabled] [ref=e70]
+                - button "14" [disabled] [ref=e71]
+                - button "15" [disabled] [ref=e72]
+                - button "16" [disabled] [ref=e73]
+                - button "17" [disabled] [ref=e74]
+                - button "18" [disabled] [ref=e75]
+                - button "19" [disabled] [ref=e76]
+                - button "20" [disabled] [ref=e77]
+                - button "21" [disabled] [ref=e78]
+                - button "22" [disabled] [ref=e79]
+                - button "23" [disabled] [ref=e80]
+                - button "24" [disabled] [ref=e81]
+                - button "25" [ref=e82] [cursor=pointer]
+                - button "26" [ref=e83] [cursor=pointer]
+                - button "27" [ref=e84] [cursor=pointer]
+                - button "28" [ref=e85] [cursor=pointer]
+                - button "29" [ref=e86] [cursor=pointer]
+                - button "30" [ref=e87] [cursor=pointer]
+        - generic [ref=e88]:
+          - 'button "📅 Return: Apr 30" [active] [ref=e89] [cursor=pointer]':
+            - generic [ref=e90]: 📅
+            - text: "Return: Apr 30"
+          - generic [ref=e92]:
+            - button "📅 Apr 30, 2026" [ref=e93] [cursor=pointer]:
+              - generic [ref=e94]: 📅
+              - generic [ref=e95]: Apr 30, 2026
+            - generic [ref=e96]:
+              - generic [ref=e97]:
+                - button "◀" [ref=e98] [cursor=pointer]
+                - generic [ref=e99]: April 2026
+                - button "▶" [ref=e100] [cursor=pointer]
+              - generic [ref=e101]:
+                - generic [ref=e102]: Sun
+                - generic [ref=e103]: Mon
+                - generic [ref=e104]: Tue
+                - generic [ref=e105]: Wed
+                - generic [ref=e106]: Thu
+                - generic [ref=e107]: Fri
+                - generic [ref=e108]: Sat
+              - generic [ref=e109]:
+                - button "1" [disabled] [ref=e113]
+                - button "2" [disabled] [ref=e114]
+                - button "3" [disabled] [ref=e115]
+                - button "4" [disabled] [ref=e116]
+                - button "5" [disabled] [ref=e117]
+                - button "6" [disabled] [ref=e118]
+                - button "7" [disabled] [ref=e119]
+                - button "8" [disabled] [ref=e120]
+                - button "9" [disabled] [ref=e121]
+                - button "10" [disabled] [ref=e122]
+                - button "11" [disabled] [ref=e123]
+                - button "12" [disabled] [ref=e124]
+                - button "13" [disabled] [ref=e125]
+                - button "14" [disabled] [ref=e126]
+                - button "15" [disabled] [ref=e127]
+                - button "16" [disabled] [ref=e128]
+                - button "17" [disabled] [ref=e129]
+                - button "18" [disabled] [ref=e130]
+                - button "19" [disabled] [ref=e131]
+                - button "20" [disabled] [ref=e132]
+                - button "21" [disabled] [ref=e133]
+                - button "22" [disabled] [ref=e134]
+                - button "23" [disabled] [ref=e135]
+                - button "24" [disabled] [ref=e136]
+                - button "25" [ref=e137] [cursor=pointer]
+                - button "26" [ref=e138] [cursor=pointer]
+                - button "27" [ref=e139] [cursor=pointer]
+                - button "28" [ref=e140] [cursor=pointer]
+                - button "29" [ref=e141] [cursor=pointer]
+                - button "30" [ref=e142] [cursor=pointer]
+        - button "👤 1 adult" [ref=e145] [cursor=pointer]:
+          - generic [ref=e146]: 👤
+          - text: 1 adult
+        - button "💺 Economy" [ref=e148] [cursor=pointer]:
+          - generic [ref=e149]: 💺
+          - text: Economy
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - generic [ref=e152]:
+            - heading "Sort by" [level=3] [ref=e153]
+            - button "Best ▾" [ref=e155] [cursor=pointer]:
+              - generic [ref=e156]: Best
+              - generic [ref=e157]: ▾
+          - generic [ref=e158]:
+            - heading "Stops" [level=3] [ref=e159]
+            - generic [ref=e160] [cursor=pointer]:
+              - checkbox "Nonstop" [ref=e161]
+              - generic [ref=e162]: Nonstop
+            - generic [ref=e163] [cursor=pointer]:
+              - checkbox "1 stop" [ref=e164]
+              - generic [ref=e165]: 1 stop
+            - generic [ref=e166] [cursor=pointer]:
+              - checkbox "2+ stops" [ref=e167]
+              - generic [ref=e168]: 2+ stops
+          - heading "Airlines" [level=3] [ref=e170]
+          - generic [ref=e171]:
+            - heading "Price range" [level=3] [ref=e172]
+            - generic [ref=e173]:
+              - generic [ref=e174]:
+                - generic [ref=e175]: $0
+                - generic [ref=e176]: $100
+              - generic [ref=e177] [cursor=pointer]:
+                - slider "Minimum" [ref=e179]
+                - slider "Maximum" [ref=e180]
+          - generic [ref=e181]:
+            - heading "Duration range" [level=3] [ref=e182]
+            - generic [ref=e183]:
+              - generic [ref=e184]:
+                - generic [ref=e185]: 0h
+                - generic [ref=e186]: 48h
+              - generic [ref=e187] [cursor=pointer]:
+                - slider "Minimum" [ref=e189]
+                - slider "Maximum" [ref=e190]
+          - generic [ref=e191]:
+            - heading "Departure time" [level=3] [ref=e192]
+            - generic [ref=e193] [cursor=pointer]:
+              - checkbox "Morning 6:00 AM – 12:00 PM" [ref=e194]
+              - generic [ref=e195]:
+                - text: Morning
+                - generic [ref=e196]: 6:00 AM – 12:00 PM
+            - generic [ref=e197] [cursor=pointer]:
+              - checkbox "Afternoon 12:00 PM – 6:00 PM" [ref=e198]
+              - generic [ref=e199]:
+                - text: Afternoon
+                - generic [ref=e200]: 12:00 PM – 6:00 PM
+            - generic [ref=e201] [cursor=pointer]:
+              - checkbox "Evening 6:00 PM – 12:00 AM" [ref=e202]
+              - generic [ref=e203]:
+                - text: Evening
+                - generic [ref=e204]: 6:00 PM – 12:00 AM
+            - generic [ref=e205] [cursor=pointer]:
+              - checkbox "Night 12:00 AM – 6:00 AM" [ref=e206]
+              - generic [ref=e207]:
+                - text: Night
+                - generic [ref=e208]: 12:00 AM – 6:00 AM
+          - generic [ref=e209]:
+            - heading "Arrival time" [level=3] [ref=e210]
+            - generic [ref=e211] [cursor=pointer]:
+              - checkbox "Morning 6:00 AM – 12:00 PM" [ref=e212]
+              - generic [ref=e213]:
+                - text: Morning
+                - generic [ref=e214]: 6:00 AM – 12:00 PM
+            - generic [ref=e215] [cursor=pointer]:
+              - checkbox "Afternoon 12:00 PM – 6:00 PM" [ref=e216]
+              - generic [ref=e217]:
+                - text: Afternoon
+                - generic [ref=e218]: 12:00 PM – 6:00 PM
+            - generic [ref=e219] [cursor=pointer]:
+              - checkbox "Evening 6:00 PM – 12:00 AM" [ref=e220]
+              - generic [ref=e221]:
+                - text: Evening
+                - generic [ref=e222]: 6:00 PM – 12:00 AM
+            - generic [ref=e223] [cursor=pointer]:
+              - checkbox "Night 12:00 AM – 6:00 AM" [ref=e224]
+              - generic [ref=e225]:
+                - text: Night
+                - generic [ref=e226]: 12:00 AM – 6:00 AM
+        - generic [ref=e227]:
+          - generic [ref=e228]:
+            - generic [ref=e229]: 0 of 0 flights
+            - button "🔕 Track prices" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]: 🔕
+              - generic [ref=e233]: Track prices
+          - generic [ref=e236]:
+            - paragraph [ref=e237]: No flights found matching your criteria.
+            - paragraph [ref=e238]: Try adjusting your filters or search dates.
+```

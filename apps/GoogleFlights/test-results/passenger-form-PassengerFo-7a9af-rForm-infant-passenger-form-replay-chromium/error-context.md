@@ -1,0 +1,137 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Flights
+      - button "◀" [ref=e7] [cursor=pointer]
+    - list [ref=e8]:
+      - listitem [ref=e9]:
+        - link "✈ Search" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: ✈
+          - generic [ref=e12]: Search
+      - listitem [ref=e13]:
+        - link "🌍 Explore" [ref=e14] [cursor=pointer]:
+          - /url: /explore
+          - generic [ref=e15]: 🌍
+          - generic [ref=e16]: Explore
+      - listitem [ref=e17]:
+        - link "🧳 My Trips" [ref=e18] [cursor=pointer]:
+          - /url: /trips
+          - generic [ref=e19]: 🧳
+          - generic [ref=e20]: My Trips
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e24]:
+        - button "✈ LAX" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]: ✈
+          - text: LAX
+        - generic [ref=e28]: →
+        - button "✈ JFK" [ref=e30] [cursor=pointer]:
+          - generic [ref=e31]: ✈
+          - text: JFK
+        - button "📅 Apr 1 – Apr 8" [ref=e34] [cursor=pointer]:
+          - generic [ref=e35]: 📅
+          - text: Apr 1 – Apr 8
+        - 'button "📅 Return: Apr 8" [ref=e37] [cursor=pointer]':
+          - generic [ref=e38]: 📅
+          - text: "Return: Apr 8"
+        - button "👤 2 passengers" [ref=e41] [cursor=pointer]:
+          - generic [ref=e42]: 👤
+          - text: 2 passengers
+        - button "💺 Economy" [ref=e44] [cursor=pointer]:
+          - generic [ref=e45]: 💺
+          - text: Economy
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - heading "Sort by" [level=3] [ref=e49]
+            - button "Best ▾" [ref=e51] [cursor=pointer]:
+              - generic [ref=e52]: Best
+              - generic [ref=e53]: ▾
+          - generic [ref=e54]:
+            - heading "Stops" [level=3] [ref=e55]
+            - generic [ref=e56] [cursor=pointer]:
+              - checkbox "Nonstop" [ref=e57]
+              - generic [ref=e58]: Nonstop
+            - generic [ref=e59] [cursor=pointer]:
+              - checkbox "1 stop" [ref=e60]
+              - generic [ref=e61]: 1 stop
+            - generic [ref=e62] [cursor=pointer]:
+              - checkbox "2+ stops" [ref=e63]
+              - generic [ref=e64]: 2+ stops
+          - heading "Airlines" [level=3] [ref=e66]
+          - generic [ref=e67]:
+            - heading "Price range" [level=3] [ref=e68]
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - generic [ref=e71]: $0
+                - generic [ref=e72]: $100
+              - generic [ref=e73] [cursor=pointer]:
+                - slider "Minimum" [ref=e75]
+                - slider "Maximum" [ref=e76]
+          - generic [ref=e77]:
+            - heading "Duration range" [level=3] [ref=e78]
+            - generic [ref=e79]:
+              - generic [ref=e80]:
+                - generic [ref=e81]: 0h
+                - generic [ref=e82]: 48h
+              - generic [ref=e83] [cursor=pointer]:
+                - slider "Minimum" [ref=e85]
+                - slider "Maximum" [ref=e86]
+          - generic [ref=e87]:
+            - heading "Departure time" [level=3] [ref=e88]
+            - generic [ref=e89] [cursor=pointer]:
+              - checkbox "Morning 6:00 AM – 12:00 PM" [ref=e90]
+              - generic [ref=e91]:
+                - text: Morning
+                - generic [ref=e92]: 6:00 AM – 12:00 PM
+            - generic [ref=e93] [cursor=pointer]:
+              - checkbox "Afternoon 12:00 PM – 6:00 PM" [ref=e94]
+              - generic [ref=e95]:
+                - text: Afternoon
+                - generic [ref=e96]: 12:00 PM – 6:00 PM
+            - generic [ref=e97] [cursor=pointer]:
+              - checkbox "Evening 6:00 PM – 12:00 AM" [ref=e98]
+              - generic [ref=e99]:
+                - text: Evening
+                - generic [ref=e100]: 6:00 PM – 12:00 AM
+            - generic [ref=e101] [cursor=pointer]:
+              - checkbox "Night 12:00 AM – 6:00 AM" [ref=e102]
+              - generic [ref=e103]:
+                - text: Night
+                - generic [ref=e104]: 12:00 AM – 6:00 AM
+          - generic [ref=e105]:
+            - heading "Arrival time" [level=3] [ref=e106]
+            - generic [ref=e107] [cursor=pointer]:
+              - checkbox "Morning 6:00 AM – 12:00 PM" [ref=e108]
+              - generic [ref=e109]:
+                - text: Morning
+                - generic [ref=e110]: 6:00 AM – 12:00 PM
+            - generic [ref=e111] [cursor=pointer]:
+              - checkbox "Afternoon 12:00 PM – 6:00 PM" [ref=e112]
+              - generic [ref=e113]:
+                - text: Afternoon
+                - generic [ref=e114]: 12:00 PM – 6:00 PM
+            - generic [ref=e115] [cursor=pointer]:
+              - checkbox "Evening 6:00 PM – 12:00 AM" [ref=e116]
+              - generic [ref=e117]:
+                - text: Evening
+                - generic [ref=e118]: 6:00 PM – 12:00 AM
+            - generic [ref=e119] [cursor=pointer]:
+              - checkbox "Night 12:00 AM – 6:00 AM" [ref=e120]
+              - generic [ref=e121]:
+                - text: Night
+                - generic [ref=e122]: 12:00 AM – 6:00 AM
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - generic [ref=e125]: 0 of 0 flights
+            - button "🔕 Track prices" [ref=e127] [cursor=pointer]:
+              - generic [ref=e128]: 🔕
+              - generic [ref=e129]: Track prices
+          - generic [ref=e132]:
+            - paragraph [ref=e133]: No flights found matching your criteria.
+            - paragraph [ref=e134]: Try adjusting your filters or search dates.
+```

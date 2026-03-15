@@ -1,0 +1,144 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Flights
+      - button "◀" [ref=e7] [cursor=pointer]
+    - list [ref=e8]:
+      - listitem [ref=e9]:
+        - link "✈ Search" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: ✈
+          - generic [ref=e12]: Search
+      - listitem [ref=e13]:
+        - link "🌍 Explore" [ref=e14] [cursor=pointer]:
+          - /url: /explore
+          - generic [ref=e15]: 🌍
+          - generic [ref=e16]: Explore
+      - listitem [ref=e17]:
+        - link "🧳 My Trips" [ref=e18] [cursor=pointer]:
+          - /url: /trips
+          - generic [ref=e19]: 🧳
+          - generic [ref=e20]: My Trips
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e24]:
+        - button "✈ LAX" [ref=e26] [cursor=pointer]:
+          - generic [ref=e27]: ✈
+          - text: LAX
+        - generic [ref=e28]: →
+        - button "✈ JFK" [ref=e30] [cursor=pointer]:
+          - generic [ref=e31]: ✈
+          - text: JFK
+        - button "📅 Apr 25 – Apr 30" [ref=e34] [cursor=pointer]:
+          - generic [ref=e35]: 📅
+          - text: Apr 25 – Apr 30
+        - 'button "📅 Return: Apr 30" [ref=e37] [cursor=pointer]':
+          - generic [ref=e38]: 📅
+          - text: "Return: Apr 30"
+        - generic [ref=e40]:
+          - button "👤 1 adult" [active] [ref=e41] [cursor=pointer]:
+            - generic [ref=e42]: 👤
+            - text: 1 adult
+          - generic [ref=e43]:
+            - button "👤 1 Adult ▼" [ref=e45] [cursor=pointer]:
+              - generic [ref=e46]: 👤
+              - generic [ref=e47]: 1 Adult
+              - generic [ref=e48]: ▼
+            - button "Done" [ref=e49] [cursor=pointer]
+        - button "💺 Economy" [ref=e51] [cursor=pointer]:
+          - generic [ref=e52]: 💺
+          - text: Economy
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - heading "Sort by" [level=3] [ref=e56]
+            - button "Best ▾" [ref=e58] [cursor=pointer]:
+              - generic [ref=e59]: Best
+              - generic [ref=e60]: ▾
+          - generic [ref=e61]:
+            - heading "Stops" [level=3] [ref=e62]
+            - generic [ref=e63] [cursor=pointer]:
+              - checkbox "Nonstop" [ref=e64]
+              - generic [ref=e65]: Nonstop
+            - generic [ref=e66] [cursor=pointer]:
+              - checkbox "1 stop" [ref=e67]
+              - generic [ref=e68]: 1 stop
+            - generic [ref=e69] [cursor=pointer]:
+              - checkbox "2+ stops" [ref=e70]
+              - generic [ref=e71]: 2+ stops
+          - heading "Airlines" [level=3] [ref=e73]
+          - generic [ref=e74]:
+            - heading "Price range" [level=3] [ref=e75]
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - generic [ref=e78]: $0
+                - generic [ref=e79]: $100
+              - generic [ref=e80] [cursor=pointer]:
+                - slider "Minimum" [ref=e82]
+                - slider "Maximum" [ref=e83]
+          - generic [ref=e84]:
+            - heading "Duration range" [level=3] [ref=e85]
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - generic [ref=e88]: 0h
+                - generic [ref=e89]: 48h
+              - generic [ref=e90] [cursor=pointer]:
+                - slider "Minimum" [ref=e92]
+                - slider "Maximum" [ref=e93]
+          - generic [ref=e94]:
+            - heading "Departure time" [level=3] [ref=e95]
+            - generic [ref=e96] [cursor=pointer]:
+              - checkbox "Morning 6:00 AM – 12:00 PM" [ref=e97]
+              - generic [ref=e98]:
+                - text: Morning
+                - generic [ref=e99]: 6:00 AM – 12:00 PM
+            - generic [ref=e100] [cursor=pointer]:
+              - checkbox "Afternoon 12:00 PM – 6:00 PM" [ref=e101]
+              - generic [ref=e102]:
+                - text: Afternoon
+                - generic [ref=e103]: 12:00 PM – 6:00 PM
+            - generic [ref=e104] [cursor=pointer]:
+              - checkbox "Evening 6:00 PM – 12:00 AM" [ref=e105]
+              - generic [ref=e106]:
+                - text: Evening
+                - generic [ref=e107]: 6:00 PM – 12:00 AM
+            - generic [ref=e108] [cursor=pointer]:
+              - checkbox "Night 12:00 AM – 6:00 AM" [ref=e109]
+              - generic [ref=e110]:
+                - text: Night
+                - generic [ref=e111]: 12:00 AM – 6:00 AM
+          - generic [ref=e112]:
+            - heading "Arrival time" [level=3] [ref=e113]
+            - generic [ref=e114] [cursor=pointer]:
+              - checkbox "Morning 6:00 AM – 12:00 PM" [ref=e115]
+              - generic [ref=e116]:
+                - text: Morning
+                - generic [ref=e117]: 6:00 AM – 12:00 PM
+            - generic [ref=e118] [cursor=pointer]:
+              - checkbox "Afternoon 12:00 PM – 6:00 PM" [ref=e119]
+              - generic [ref=e120]:
+                - text: Afternoon
+                - generic [ref=e121]: 12:00 PM – 6:00 PM
+            - generic [ref=e122] [cursor=pointer]:
+              - checkbox "Evening 6:00 PM – 12:00 AM" [ref=e123]
+              - generic [ref=e124]:
+                - text: Evening
+                - generic [ref=e125]: 6:00 PM – 12:00 AM
+            - generic [ref=e126] [cursor=pointer]:
+              - checkbox "Night 12:00 AM – 6:00 AM" [ref=e127]
+              - generic [ref=e128]:
+                - text: Night
+                - generic [ref=e129]: 12:00 AM – 6:00 AM
+        - generic [ref=e130]:
+          - generic [ref=e131]:
+            - generic [ref=e132]: 0 of 0 flights
+            - button "🔕 Track prices" [ref=e134] [cursor=pointer]:
+              - generic [ref=e135]: 🔕
+              - generic [ref=e136]: Track prices
+          - generic [ref=e139]:
+            - paragraph [ref=e140]: No flights found matching your criteria.
+            - paragraph [ref=e141]: Try adjusting your filters or search dates.
+```

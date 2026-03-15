@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/passenger-count-selector.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:03:06.948Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/passenger-form.spec.ts"
       ],
       "timestamp": "2026-03-14T21:03:06.948Z",
@@ -108,7 +100,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/pagination.spec.ts"
+      "FixTests: tests/passenger-count-selector.spec.ts"
     ],
     "timestamp": "2026-03-14T21:03:06.948Z",
     "app": "GoogleFlights"

@@ -1,0 +1,55 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Flights
+      - button "◀" [ref=e7] [cursor=pointer]
+    - list [ref=e8]:
+      - listitem [ref=e9]:
+        - link "✈ Search" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e11]: ✈
+          - generic [ref=e12]: Search
+      - listitem [ref=e13]:
+        - link "🌍 Explore" [ref=e14] [cursor=pointer]:
+          - /url: /explore
+          - generic [ref=e15]: 🌍
+          - generic [ref=e16]: Explore
+      - listitem [ref=e17]:
+        - link "🧳 My Trips" [ref=e18] [cursor=pointer]:
+          - /url: /trips
+          - generic [ref=e19]: 🧳
+          - generic [ref=e20]: My Trips
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - heading "Explore destinations" [level=1] [ref=e24]
+        - paragraph [ref=e25]: Find cheap flights from your airport
+      - generic [ref=e26]:
+        - generic [ref=e27]: From
+        - textbox "Select origin airport" [active] [ref=e29]: LAX
+      - generic [ref=e30]:
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - button "+" [ref=e34] [cursor=pointer]
+            - button "−" [ref=e35] [cursor=pointer]
+            - button "⟳" [ref=e36] [cursor=pointer]
+          - img [ref=e37]
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - heading "Flexible dates" [level=3] [ref=e48]
+            - generic [ref=e49]:
+              - button "Weekend trips" [ref=e50] [cursor=pointer]
+              - button "1 week" [ref=e51] [cursor=pointer]
+              - button "2 weeks" [ref=e52] [cursor=pointer]
+          - generic [ref=e53]:
+            - generic [ref=e56]: Cheap
+            - generic [ref=e59]: Moderate
+            - generic [ref=e62]: Expensive
+          - generic [ref=e63]: No price data available for the selected dates
+        - generic [ref=e65]:
+          - heading "Deals" [level=3] [ref=e66]
+          - generic [ref=e67]: No deals available from this airport right now
+```
