@@ -37,8 +37,8 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
 
   return (
     <div data-testid="image-gallery" className="relative">
-      <div className="grid grid-cols-4 gap-2 rounded-xl overflow-hidden h-[400px]">
-        <div className="col-span-2 row-span-2 relative cursor-pointer hover:opacity-95 transition-opacity">
+      <div className="grid grid-cols-4 gap-2 h-[400px]">
+        <div className="col-span-2 row-span-2 relative cursor-pointer hover:opacity-95 transition-opacity rounded-l-xl overflow-hidden">
           <img
             src={mainImage!.url}
             alt={mainImage!.caption || 'Property image'}

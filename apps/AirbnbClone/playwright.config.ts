@@ -26,7 +26,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: 'npx netlify dev --offline --port 8888 --functions ./netlify/functions',
     port: 8888,
-    timeout: 30000,
+    timeout: 120000,
     reuseExistingServer: true,
   },
 }

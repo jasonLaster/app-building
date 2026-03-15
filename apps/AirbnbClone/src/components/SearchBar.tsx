@@ -59,34 +59,31 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
       <div className="w-px h-8 bg-border shrink-0" />
 
       <div className="px-4 py-3">
-        <label className="block text-xs font-semibold text-text">Check in</label>
-        <input
-          data-testid="search-checkin"
-          type="date"
-          value={checkIn}
-          min={today}
-          onChange={(e) => {
-            setCheckIn(e.target.value)
-            if (checkOut && e.target.value >= checkOut) {
-              setCheckOut('')
-            }
-          }}
-          className="text-sm text-text-secondary outline-none bg-transparent"
-        />
-      </div>
-
-      <div className="w-px h-8 bg-border shrink-0" />
-
-      <div className="px-4 py-3">
-        <label className="block text-xs font-semibold text-text">Check out</label>
-        <input
-          data-testid="search-checkout"
-          type="date"
-          value={checkOut}
-          min={checkOutMin}
-          onChange={(e) => setCheckOut(e.target.value)}
-          className="text-sm text-text-secondary outline-none bg-transparent"
-        />
+        <label className="block text-xs font-semibold text-text">When</label>
+        <div className="flex items-center gap-2">
+          <input
+            data-testid="search-checkin"
+            type="date"
+            value={checkIn}
+            min={today}
+            onChange={(e) => {
+              setCheckIn(e.target.value)
+              if (checkOut && e.target.value >= checkOut) {
+                setCheckOut('')
+              }
+            }}
+            className="text-sm text-text-secondary outline-none bg-transparent w-[130px]"
+          />
+          <span className="text-text-secondary text-xs">–</span>
+          <input
+            data-testid="search-checkout"
+            type="date"
+            value={checkOut}
+            min={checkOutMin}
+            onChange={(e) => setCheckOut(e.target.value)}
+            className="text-sm text-text-secondary outline-none bg-transparent w-[130px]"
+          />
+        </div>
       </div>
 
       <div className="w-px h-8 bg-border shrink-0" />

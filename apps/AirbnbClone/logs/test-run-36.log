@@ -1,0 +1,14 @@
+Created branch: test-run-1773559381694 (br-odd-base-ahk0qmeb)
+Test DB URL: postgresql://neondb_owner:***@ep-broad-shape-ahs6zs1p.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]:
+
+
+(node:1918) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[replay.io]: None of the configured projects ran using Replay Chromium.
+[replay.io]: Learn more at https://docs.replay.io/reference/test-runners/playwright/overview
+
+Could not parse recordings

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { ArrowLeft, Loader2, Share, Heart } from 'lucide-react'
+import { Loader2, Share, Heart } from 'lucide-react'
 import type { RootState, AppDispatch } from '../store'
 import { fetchPropertyDetail, clearPropertyDetail } from '../slices/propertyDetailSlice'
 import ImageGallery from '../components/ImageGallery'
@@ -52,18 +52,9 @@ export default function PropertyDetail() {
 
   return (
     <div data-testid="property-detail-page" className="px-6 max-sm:px-3 py-6 max-w-6xl mx-auto">
-      <button
-        data-testid="back-button"
-        className="flex items-center gap-1 text-text-secondary hover:text-text mb-4 cursor-pointer"
-        onClick={() => navigate('/')}
-      >
-        <ArrowLeft size={18} />
-        <span className="text-sm">Back</span>
-      </button>
-
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-[26px] font-semibold text-text">{property.title}</h1>
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-[26px] font-semibold text-text leading-tight">{property.title}</h1>
+        <div className="flex items-center gap-4 shrink-0">
           <button className="flex items-center gap-1.5 text-sm font-semibold text-text underline hover:no-underline cursor-pointer">
             <Share size={16} />
             Share
