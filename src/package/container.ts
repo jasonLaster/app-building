@@ -40,6 +40,8 @@ export interface ContainerConfig {
   localPort?: number;
   /** Absorb task files from other containers at startup. Default: false. */
   absorbTasks?: boolean;
+  /** Container name prefix. Default: "app-building". */
+  namePrefix?: string;
 }
 
 export interface RepoOptions {
@@ -166,7 +168,8 @@ async function startLocalContainer(
   buildImage(config);
 
   const uniqueId = Math.random().toString(36).slice(2, 8);
-  const containerName = `app-building-${uniqueId}`;
+  const prefix = config.namePrefix ?? "app-building";
+  const containerName = `${prefix}-${uniqueId}`;
   const containerPort = 3000;
   const hostPort = config.localPort ?? findFreePort();
 
@@ -257,7 +260,8 @@ async function startRemoteContainerImpl(
   const imageRef = config.imageRef ?? getImageRef();
 
   const uniqueId = Math.random().toString(36).slice(2, 8);
-  const machineName = `app-building-${uniqueId}`;
+  const prefix = config.namePrefix ?? "app-building";
+  const machineName = `${prefix}-${uniqueId}`;
 
   const extra = buildExtraEnv(config, machineName);
   const containerEnv = buildContainerEnv(repo, config.infisical, extra);

@@ -80,7 +80,7 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | `infisical` (required `InfisicalConfig`), optional `projectRoot` (local Docker only), `registry`, `flyToken`/`flyApp` (set both for remote Fly.io), `imageRef`, `webhookUrl`/`webhookSecret`, `detached`, `initialPrompt`, `localPort`, `absorbTasks`. |
+| `ContainerConfig` | `infisical` (required `InfisicalConfig`), optional `projectRoot` (local Docker only), `registry`, `flyToken`/`flyApp` (set both for remote Fly.io), `imageRef`, `webhookUrl`/`webhookSecret`, `detached`, `initialPrompt`, `localPort`, `absorbTasks`, `namePrefix` (default: `"app-building"`). |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
 | `AgentState` | Returned by `startContainer`. Contains `type`, `containerName`, `port`, `baseUrl`, and Fly-specific fields for remote containers. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
