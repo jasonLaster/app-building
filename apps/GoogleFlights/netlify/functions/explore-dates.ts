@@ -30,7 +30,7 @@ export default async (request: Request, _context: Context) => {
   // Filter dates based on range type
   const datePrices = results
     .map((r) => {
-      const date = String(r.departure_date).split('T')[0]!
+      const date = (r.departure_date instanceof Date ? r.departure_date.toISOString() : String(r.departure_date)).split('T')[0]!
       const dayOfWeek = new Date(date + 'T12:00:00').getDay()
 
       if (range === 'weekend') {

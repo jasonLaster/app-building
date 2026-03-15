@@ -1,0 +1,68 @@
+Creating branch: test-run-1773560743662
+Branch DB URL: postgresql://neondb_owner:***@ep-snowy-meadow-ahwel8c2.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/flexible-dates-grid.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 10 tests using 1 worker
+
+  ✓   1 [replay-chromium] › tests/flexible-dates-grid.spec.ts:20:3 › FlexibleDatesGrid › FlexibleDatesGrid displays calendar-style grid with prices (1.5s)
+  ✓   2 [replay-chromium] › tests/flexible-dates-grid.spec.ts:45:3 › FlexibleDatesGrid › FlexibleDatesGrid cells are color-coded by price level (696ms)
+  ✓   3 [replay-chromium] › tests/flexible-dates-grid.spec.ts:68:3 › FlexibleDatesGrid › FlexibleDatesGrid date range selector Weekend trips (736ms)
+  ✓   4 [replay-chromium] › tests/flexible-dates-grid.spec.ts:87:3 › FlexibleDatesGrid › FlexibleDatesGrid date range selector 1 week (741ms)
+  ✓   5 [replay-chromium] › tests/flexible-dates-grid.spec.ts:112:3 › FlexibleDatesGrid › FlexibleDatesGrid date range selector 2 weeks (869ms)
+  ✓   6 [replay-chromium] › tests/flexible-dates-grid.spec.ts:138:3 › FlexibleDatesGrid › FlexibleDatesGrid clicking a date cell initiates a search (747ms)
+  ✓   7 [replay-chromium] › tests/flexible-dates-grid.spec.ts:172:3 › FlexibleDatesGrid › FlexibleDatesGrid shows loading state while fetching price data (672ms)
+  ✘   8 [replay-chromium] › tests/flexible-dates-grid.spec.ts:186:3 › FlexibleDatesGrid › FlexibleDatesGrid updates when origin changes (16.1s)
+  ✓   9 [replay-chromium] › tests/flexible-dates-grid.spec.ts:208:3 › FlexibleDatesGrid › FlexibleDatesGrid date range selector can be toggled repeatedly (1.8s)
+  ✓  10 [replay-chromium] › tests/flexible-dates-grid.spec.ts:242:3 › FlexibleDatesGrid › FlexibleDatesGrid shows empty state when no prices available (109ms)
+
+
+  1) [replay-chromium] › tests/flexible-dates-grid.spec.ts:186:3 › FlexibleDatesGrid › FlexibleDatesGrid updates when origin changes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('flexible-dates-cells')
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('flexible-dates-cells')[22m
+
+
+      200 |
+      201 |     // Grid should still be visible and update with new data
+    > 202 |     await expect(cells).toBeVisible({ timeout: 15000 })
+          |                         ^
+      203 |     await expect(dateCells.first()).toBeVisible({ timeout: 10000 })
+      204 |     const updatedCount = await dateCells.count()
+      205 |     expect(updatedCount).toBeGreaterThan(0)
+        at /repo/apps/GoogleFlights/tests/flexible-dates-grid.spec.ts:202:25
+
+    Error Context: test-results/flexible-dates-grid-Flexib-09d3a-updates-when-origin-changes-replay-chromium/error-context.md
+
+  1 failed
+    [replay-chromium] › tests/flexible-dates-grid.spec.ts:186:3 › FlexibleDatesGrid › FlexibleDatesGrid updates when origin changes 
+  9 passed (25.2s)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 79 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

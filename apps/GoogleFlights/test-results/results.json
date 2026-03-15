@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "filter-sidebar.spec.ts",
-      "file": "filter-sidebar.spec.ts",
+      "title": "flexible-dates-grid.spec.ts",
+      "file": "flexible-dates-grid.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "FilterSidebar",
-          "file": "filter-sidebar.spec.ts",
-          "line": 54,
+          "title": "FlexibleDatesGrid",
+          "file": "flexible-dates-grid.spec.ts",
+          "line": 14,
           "column": 6,
           "specs": [
             {
-              "title": "FilterSidebar displays all filter sections",
+              "title": "FlexibleDatesGrid displays calendar-style grid with prices",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1097,
+                      "duration": 1528,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:26.260Z",
+                      "startTime": "2026-03-15T07:48:24.101Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-78a3748230ff66b0ad56",
-              "file": "filter-sidebar.spec.ts",
-              "line": 62,
+              "id": "3b796d9c7fec48bb10a9-01badc104988d145ab7d",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 20,
               "column": 3
             },
             {
-              "title": "FilterSidebar stops filter — check Nonstop",
+              "title": "FlexibleDatesGrid cells are color-coded by price level",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 536,
+                      "duration": 687,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:27.425Z",
+                      "startTime": "2026-03-15T07:48:25.672Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-2ec3693869a3d4d8e8fe",
-              "file": "filter-sidebar.spec.ts",
-              "line": 85,
+              "id": "3b796d9c7fec48bb10a9-04df37fbe0c9cf70b5d8",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 45,
               "column": 3
             },
             {
-              "title": "FilterSidebar stops filter — check 1 stop",
+              "title": "FlexibleDatesGrid date range selector Weekend trips",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 530,
+                      "duration": 723,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:27.969Z",
+                      "startTime": "2026-03-15T07:48:26.367Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,251 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-ad3fdc79823d5dabd371",
-              "file": "filter-sidebar.spec.ts",
-              "line": 104,
+              "id": "3b796d9c7fec48bb10a9-8ba4c177c66146d45670",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 68,
               "column": 3
             },
             {
-              "title": "FilterSidebar stops filter — check multiple options",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 584,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:28.512Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-7f052edf6ffce13553ec",
-              "file": "filter-sidebar.spec.ts",
-              "line": 120,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar stops filter — uncheck to remove filter",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 579,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:29.105Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-4da75e215e290be84109",
-              "file": "filter-sidebar.spec.ts",
-              "line": 132,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar airlines filter shows airlines with flight counts",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 503,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:29.691Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-3694b4aca18c9bb3dd03",
-              "file": "filter-sidebar.spec.ts",
-              "line": 147,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar airlines filter — select specific airline",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 508,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:30.201Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-93155af48bbe161c5f3b",
-              "file": "filter-sidebar.spec.ts",
-              "line": 167,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar airlines filter — select multiple airlines",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 548,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:30.715Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-b71ae3af88d5dc892588",
-              "file": "filter-sidebar.spec.ts",
-              "line": 183,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar price range slider displays histogram",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 512,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:31.271Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-d22f139d28040ae54222",
-              "file": "filter-sidebar.spec.ts",
-              "line": 195,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar price range slider filters results",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 734,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:31.792Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-1acb1123d4fbe8aa6af3",
-              "file": "filter-sidebar.spec.ts",
-              "line": 219,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar price range slider — adjust min price",
+              "title": "FlexibleDatesGrid date range selector 1 week",
               "ok": true,
               "tags": [],
               "tests": [
@@ -440,7 +202,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:32.536Z",
+                      "startTime": "2026-03-15T07:48:27.100Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -448,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-680832d0d46416108dab",
-              "file": "filter-sidebar.spec.ts",
-              "line": 236,
+              "id": "3b796d9c7fec48bb10a9-b7a75d5903a46206f875",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 87,
               "column": 3
             },
             {
-              "title": "FilterSidebar duration range slider filters results",
+              "title": "FlexibleDatesGrid date range selector 2 weeks",
               "ok": true,
               "tags": [],
               "tests": [
@@ -469,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 684,
+                      "duration": 839,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:33.284Z",
+                      "startTime": "2026-03-15T07:48:27.848Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -482,13 +244,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-8262065d66261c3277cb",
-              "file": "filter-sidebar.spec.ts",
-              "line": 248,
+              "id": "3b796d9c7fec48bb10a9-34f5bcf2cd00c47c4894",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 112,
               "column": 3
             },
             {
-              "title": "FilterSidebar departure time filter — Morning checkbox",
+              "title": "FlexibleDatesGrid clicking a date cell initiates a search",
               "ok": true,
               "tags": [],
               "tests": [
@@ -503,12 +265,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 483,
+                      "duration": 789,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:33.975Z",
+                      "startTime": "2026-03-15T07:48:28.694Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -516,13 +278,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-52ff76a98d52845ae74f",
-              "file": "filter-sidebar.spec.ts",
-              "line": 260,
+              "id": "3b796d9c7fec48bb10a9-e696b56f34ab0d72a21a",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 138,
               "column": 3
             },
             {
-              "title": "FilterSidebar departure time filter — multiple time periods",
+              "title": "FlexibleDatesGrid shows loading state while fetching price data",
               "ok": true,
               "tags": [],
               "tests": [
@@ -537,12 +299,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 567,
+                      "duration": 636,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:34.463Z",
+                      "startTime": "2026-03-15T07:48:29.493Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -550,13 +312,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-6ea4732f2b278851faee",
-              "file": "filter-sidebar.spec.ts",
-              "line": 271,
+              "id": "3b796d9c7fec48bb10a9-d89cd6e59f966045bd64",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 172,
               "column": 3
             },
             {
-              "title": "FilterSidebar departure time filter — arrival time checkboxes",
+              "title": "FlexibleDatesGrid updates when origin changes",
               "ok": true,
               "tags": [],
               "tests": [
@@ -571,12 +333,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 520,
+                      "duration": 1556,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:35.039Z",
+                      "startTime": "2026-03-15T07:48:30.137Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -584,13 +346,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-4c1ad8f06c6016d3ad48",
-              "file": "filter-sidebar.spec.ts",
-              "line": 285,
+              "id": "3b796d9c7fec48bb10a9-261a1e2a63c4b2d69619",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 186,
               "column": 3
             },
             {
-              "title": "FilterSidebar sort by dropdown — default \"Best\"",
+              "title": "FlexibleDatesGrid date range selector can be toggled repeatedly",
               "ok": true,
               "tags": [],
               "tests": [
@@ -605,12 +367,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 490,
+                      "duration": 1808,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:35.568Z",
+                      "startTime": "2026-03-15T07:48:31.705Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -618,13 +380,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-b1e8413fa868745868ff",
-              "file": "filter-sidebar.spec.ts",
-              "line": 296,
+              "id": "3b796d9c7fec48bb10a9-d0d31309d315f35adb67",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 208,
               "column": 3
             },
             {
-              "title": "FilterSidebar sort by Price (lowest)",
+              "title": "FlexibleDatesGrid shows empty state when no prices available",
               "ok": true,
               "tags": [],
               "tests": [
@@ -639,12 +401,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 612,
+                      "duration": 122,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:36:36.068Z",
+                      "startTime": "2026-03-15T07:48:33.527Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -652,111 +414,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "ff5f70fe22aa3068995b-c851bef5ea77e174056c",
-              "file": "filter-sidebar.spec.ts",
-              "line": 303,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar sort by Duration (shortest)",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 596,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:36.689Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-8951f70e224bb2d9460d",
-              "file": "filter-sidebar.spec.ts",
-              "line": 333,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar sort by Departure time (earliest)",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 585,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:37.291Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-4a8cdab134019158f0e6",
-              "file": "filter-sidebar.spec.ts",
-              "line": 364,
-              "column": 3
-            },
-            {
-              "title": "FilterSidebar sort by Arrival time (earliest)",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 594,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:36:37.884Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "ff5f70fe22aa3068995b-02bdcc25f067c126dd1a",
-              "file": "filter-sidebar.spec.ts",
-              "line": 381,
+              "id": "3b796d9c7fec48bb10a9-360e42c5717c309c5e21",
+              "file": "flexible-dates-grid.spec.ts",
+              "line": 242,
               "column": 3
             }
           ]
@@ -766,9 +426,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T07:36:25.710Z",
-    "duration": 12806.655999999999,
-    "expected": 20,
+    "startTime": "2026-03-15T07:48:23.669Z",
+    "duration": 10023.431,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

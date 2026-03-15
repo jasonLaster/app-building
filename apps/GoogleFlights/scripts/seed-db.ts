@@ -202,6 +202,10 @@ export async function truncateAndSeed(databaseUrl: string) {
   await createFlight('UA', 'UA801', 'SFO', 'LHR', '2026-04-01 17:00', '2026-04-02 11:00', 630, 'Boeing 787-9', true, true, true, 380, 599)
   await createFlight('CX', 'CX100', 'SFO', 'HKG', '2026-04-01 01:00', '2026-04-02 07:30', 870, 'Airbus A350-1000', true, true, true, 460, 799)
 
+  // SFO Friday/Saturday flights (for weekend date range tests)
+  await createFlight('UA', 'UA802', 'SFO', 'JFK', '2026-04-03 08:00', '2026-04-03 16:30', 330, 'Boeing 787-9', true, true, true, 155, 199)
+  await createFlight('DL', 'DL800', 'SFO', 'LAX', '2026-04-04 09:00', '2026-04-04 10:30', 90, 'Airbus A320', false, true, false, 60, 109)
+
   // ORD routes
   await createFlight('UA', 'UA900', 'ORD', 'LHR', '2026-04-01 18:00', '2026-04-02 07:30', 510, 'Boeing 787-10', true, true, true, 350, 549)
   await createFlight('LH', 'LH400', 'ORD', 'FRA', '2026-04-01 17:00', '2026-04-02 08:00', 540, 'Airbus A340-600', true, true, true, 380, 579)
