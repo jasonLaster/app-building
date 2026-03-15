@@ -1,0 +1,37 @@
+Creating branch: test-run-1773567578690
+Branch DB URL: postgresql://neondb_owner:***@ep-solitary-violet-ahnuep8m.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/trips-tabs.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 8 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/trips-tabs.spec.ts:17:3 › TripsTabs › TripsTabs displays three tabs (221ms)
+  ✓  2 [replay-chromium] › tests/trips-tabs.spec.ts:37:3 › TripsTabs › TripsTabs switches to Past tab (582ms)
+  ✓  3 [replay-chromium] › tests/trips-tabs.spec.ts:61:3 › TripsTabs › TripsTabs switches to Tracked tab (300ms)
+  ✓  4 [replay-chromium] › tests/trips-tabs.spec.ts:84:3 › TripsTabs › TripsTabs switches back to Upcoming after visiting other tabs (329ms)
+  ✓  5 [replay-chromium] › tests/trips-tabs.spec.ts:110:3 › TripsTabs › TripsTabs Upcoming tab shows empty state (209ms)
+  ✓  6 [replay-chromium] › tests/trips-tabs.spec.ts:121:3 › TripsTabs › TripsTabs Past tab shows empty state (237ms)
+  ✓  7 [replay-chromium] › tests/trips-tabs.spec.ts:134:3 › TripsTabs › TripsTabs Tracked tab shows empty state (248ms)
+  ✓  8 [replay-chromium] › tests/trips-tabs.spec.ts:148:3 › TripsTabs › TripsTabs Upcoming tab sorts trips by departure date ascending (309ms)
+
+  8 passed (3.0s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 80 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

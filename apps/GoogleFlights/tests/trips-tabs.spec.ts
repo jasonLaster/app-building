@@ -76,9 +76,9 @@ test.describe('TripsTabs', () => {
     // Trip cards should no longer be visible
     await expect(page.getByTestId('trips-upcoming-list')).not.toBeVisible()
 
-    // Should have at least one tracked route card
+    // Should have tracked route cards (seed data has 3)
     const trackedList = page.getByTestId('trips-tracked-list')
-    await expect(trackedList.locator('[data-testid^="tracked-route-card-"]')).toHaveCount(1, { timeout: 10000 })
+    await expect(trackedList.locator('[data-testid^="tracked-route-card-"]')).toHaveCount(3, { timeout: 10000 })
   })
 
   test('TripsTabs switches back to Upcoming after visiting other tabs', async ({ page }) => {

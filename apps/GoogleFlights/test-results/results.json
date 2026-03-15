@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "trip-type-selector.spec.ts",
-      "file": "trip-type-selector.spec.ts",
+      "title": "trips-tabs.spec.ts",
+      "file": "trips-tabs.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "TripTypeSelector",
-          "file": "trip-type-selector.spec.ts",
-          "line": 3,
+          "title": "TripsTabs",
+          "file": "trips-tabs.spec.ts",
+          "line": 16,
           "column": 6,
           "specs": [
             {
-              "title": "TripTypeSelector displays default Round trip selection",
+              "title": "TripsTabs displays three tabs",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 179,
+                      "duration": 221,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:35:23.526Z",
+                      "startTime": "2026-03-15T09:40:33.184Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "cc323a59d0bbb14157ba-0ab59283f19cd5948ee5",
-              "file": "trip-type-selector.spec.ts",
-              "line": 9,
+              "id": "9c8befa3dfb1ede47a69-ceebc30f85fc824eb351",
+              "file": "trips-tabs.spec.ts",
+              "line": 17,
               "column": 3
             },
             {
-              "title": "TripTypeSelector opens dropdown and shows all options",
+              "title": "TripsTabs switches to Past tab",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 167,
+                      "duration": 582,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:35:23.763Z",
+                      "startTime": "2026-03-15T09:40:33.442Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "cc323a59d0bbb14157ba-dfc782e6d1bb294676eb",
-              "file": "trip-type-selector.spec.ts",
-              "line": 20,
+              "id": "9c8befa3dfb1ede47a69-e10060d948dbf61db359",
+              "file": "trips-tabs.spec.ts",
+              "line": 37,
               "column": 3
             },
             {
-              "title": "TripTypeSelector selects One way and hides return date",
+              "title": "TripsTabs switches to Tracked tab",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 185,
+                      "duration": 300,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:35:23.936Z",
+                      "startTime": "2026-03-15T09:40:34.035Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,81 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "cc323a59d0bbb14157ba-afa265fd50a37b9ced37",
-              "file": "trip-type-selector.spec.ts",
-              "line": 35,
-              "column": 3
-            },
-            {
-              "title": "TripTypeSelector selects Multi-city option",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 162,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T09:35:24.127Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "cc323a59d0bbb14157ba-65f31bbf3a2fa675a51e",
-              "file": "trip-type-selector.spec.ts",
-              "line": 53,
-              "column": 3
-            },
-            {
-              "title": "TripTypeSelector switches back to Round trip from One way",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 227,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T09:35:24.294Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "cc323a59d0bbb14157ba-93cb7f6967fc1a945f93",
-              "file": "trip-type-selector.spec.ts",
+              "id": "9c8befa3dfb1ede47a69-962f0a3cc136e05af969",
+              "file": "trips-tabs.spec.ts",
               "line": 61,
               "column": 3
             },
             {
-              "title": "TripTypeSelector closes dropdown when clicking outside",
+              "title": "TripsTabs switches back to Upcoming after visiting other tabs",
               "ok": true,
               "tags": [],
               "tests": [
@@ -265,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 158,
+                      "duration": 329,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:35:24.528Z",
+                      "startTime": "2026-03-15T09:40:34.341Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -278,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "cc323a59d0bbb14157ba-606e7d41739329e4a158",
-              "file": "trip-type-selector.spec.ts",
-              "line": 76,
+              "id": "9c8befa3dfb1ede47a69-89ff4ca2e2a705e4821d",
+              "file": "trips-tabs.spec.ts",
+              "line": 84,
               "column": 3
             },
             {
-              "title": "TripTypeSelector can be used multiple times in sequence",
+              "title": "TripsTabs Upcoming tab shows empty state",
               "ok": true,
               "tags": [],
               "tests": [
@@ -299,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 278,
+                      "duration": 209,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:35:24.692Z",
+                      "startTime": "2026-03-15T09:40:34.675Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -312,9 +244,111 @@
                   "status": "expected"
                 }
               ],
-              "id": "cc323a59d0bbb14157ba-29bbf2f7a509c29d3823",
-              "file": "trip-type-selector.spec.ts",
-              "line": 91,
+              "id": "9c8befa3dfb1ede47a69-5ad548b9a56a57fbf0f2",
+              "file": "trips-tabs.spec.ts",
+              "line": 110,
+              "column": 3
+            },
+            {
+              "title": "TripsTabs Past tab shows empty state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 237,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:40:34.892Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9c8befa3dfb1ede47a69-c7c1b1f26a9dda91a009",
+              "file": "trips-tabs.spec.ts",
+              "line": 121,
+              "column": 3
+            },
+            {
+              "title": "TripsTabs Tracked tab shows empty state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 248,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:40:35.137Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9c8befa3dfb1ede47a69-bbe18b0eae633bc2ebd7",
+              "file": "trips-tabs.spec.ts",
+              "line": 134,
+              "column": 3
+            },
+            {
+              "title": "TripsTabs Upcoming tab sorts trips by departure date ascending",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 309,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:40:35.394Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9c8befa3dfb1ede47a69-73b294f048a11e969fac",
+              "file": "trips-tabs.spec.ts",
+              "line": 148,
               "column": 3
             }
           ]
@@ -324,9 +358,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T09:35:23.089Z",
-    "duration": 1907.4189999999999,
-    "expected": 7,
+    "startTime": "2026-03-15T09:40:32.709Z",
+    "duration": 3031.521,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

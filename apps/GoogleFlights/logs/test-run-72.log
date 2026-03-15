@@ -1,0 +1,68 @@
+Creating branch: test-run-1773567488384
+Branch DB URL: postgresql://neondb_owner:***@ep-cool-leaf-ah73hp60.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/trips-tabs.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 8 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/trips-tabs.spec.ts:17:3 › TripsTabs › TripsTabs displays three tabs (231ms)
+  ✓  2 [replay-chromium] › tests/trips-tabs.spec.ts:37:3 › TripsTabs › TripsTabs switches to Past tab (541ms)
+  ✘  3 [replay-chromium] › tests/trips-tabs.spec.ts:61:3 › TripsTabs › TripsTabs switches to Tracked tab (10.3s)
+  ✓  4 [replay-chromium] › tests/trips-tabs.spec.ts:84:3 › TripsTabs › TripsTabs switches back to Upcoming after visiting other tabs (656ms)
+  ✓  5 [replay-chromium] › tests/trips-tabs.spec.ts:110:3 › TripsTabs › TripsTabs Upcoming tab shows empty state (213ms)
+  ✓  6 [replay-chromium] › tests/trips-tabs.spec.ts:121:3 › TripsTabs › TripsTabs Past tab shows empty state (252ms)
+  ✓  7 [replay-chromium] › tests/trips-tabs.spec.ts:134:3 › TripsTabs › TripsTabs Tracked tab shows empty state (234ms)
+  ✓  8 [replay-chromium] › tests/trips-tabs.spec.ts:148:3 › TripsTabs › TripsTabs Upcoming tab sorts trips by departure date ascending (268ms)
+
+
+  1) [replay-chromium] › tests/trips-tabs.spec.ts:61:3 › TripsTabs › TripsTabs switches to Tracked tab 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByTestId('trips-tracked-list').locator('[data-testid^="tracked-route-card-"]')
+    Expected: [32m1[39m
+    Received: [31m3[39m
+    Timeout:  10000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('trips-tracked-list').locator('[data-testid^="tracked-route-card-"]')[22m
+    [2m    14 × locator resolved to 3 elements[22m
+    [2m       - unexpected value "3"[22m
+
+
+      79 |     // Should have at least one tracked route card
+      80 |     const trackedList = page.getByTestId('trips-tracked-list')
+    > 81 |     await expect(trackedList.locator('[data-testid^="tracked-route-card-"]')).toHaveCount(1, { timeout: 10000 })
+         |                                                                               ^
+      82 |   })
+      83 |
+      84 |   test('TripsTabs switches back to Upcoming after visiting other tabs', async ({ page }) => {
+        at /repo/apps/GoogleFlights/tests/trips-tabs.spec.ts:81:79
+
+    Error Context: test-results/trips-tabs-TripsTabs-TripsTabs-switches-to-Tracked-tab-replay-chromium/error-context.md
+
+  1 failed
+    [replay-chromium] › tests/trips-tabs.spec.ts:61:3 › TripsTabs › TripsTabs switches to Tracked tab 
+  7 passed (13.8s)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 85 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch
