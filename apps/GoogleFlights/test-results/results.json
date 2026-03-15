@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "recent-searches.spec.ts",
-      "file": "recent-searches.spec.ts",
+      "title": "search-button.spec.ts",
+      "file": "search-button.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "RecentSearches",
-          "file": "recent-searches.spec.ts",
-          "line": 85,
+          "title": "SearchButton",
+          "file": "search-button.spec.ts",
+          "line": 72,
           "column": 6,
           "specs": [
             {
-              "title": "RecentSearches shows empty state when no searches exist",
+              "title": "SearchButton is displayed with prominent styling",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 586,
+                      "duration": 184,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:56:55.965Z",
+                      "startTime": "2026-03-15T08:59:30.797Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "11ea01cac9abab13395b-c6033239af053255feab",
-              "file": "recent-searches.spec.ts",
-              "line": 95,
+              "id": "4106eb81ad7792dcc286-0856469c1e6cf82ba250",
+              "file": "search-button.spec.ts",
+              "line": 78,
               "column": 3
             },
             {
-              "title": "RecentSearches displays a recent search entry",
+              "title": "SearchButton navigates to results page with valid inputs",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2499,
+                      "duration": 2141,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:56:56.597Z",
+                      "startTime": "2026-03-15T08:59:31.044Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "11ea01cac9abab13395b-b32a657226eec4bd04ac",
-              "file": "recent-searches.spec.ts",
-              "line": 101,
+              "id": "4106eb81ad7792dcc286-2e9cab71f121ce96564c",
+              "file": "search-button.spec.ts",
+              "line": 91,
               "column": 3
             },
             {
-              "title": "RecentSearches clicking a recent search re-populates the form",
+              "title": "SearchButton shows validation error when origin is missing",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2664,
+                      "duration": 829,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:56:59.103Z",
+                      "startTime": "2026-03-15T08:59:33.195Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,28 +176,19 @@
                   "status": "expected"
                 }
               ],
-              "id": "11ea01cac9abab13395b-ce1eb19788cb534a9d49",
-              "file": "recent-searches.spec.ts",
-              "line": 124,
+              "id": "4106eb81ad7792dcc286-f9e4767db5fd52667edd",
+              "file": "search-button.spec.ts",
+              "line": 111,
               "column": 3
             },
             {
-              "title": "RecentSearches displays multiple recent searches in order",
+              "title": "SearchButton shows validation error when destination is missing",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
-                        "line": 157,
-                        "column": 10
-                      }
-                    }
-                  ],
+                  "timeout": 60000,
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -206,50 +197,32 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5782,
+                      "duration": 895,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:57:01.774Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
-                            "line": 157,
-                            "column": 10
-                          }
-                        }
-                      ],
+                      "startTime": "2026-03-15T08:59:34.035Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "11ea01cac9abab13395b-5d26cdbe21f5c6c58077",
-              "file": "recent-searches.spec.ts",
-              "line": 156,
+              "id": "4106eb81ad7792dcc286-44801ea9313996fb38fc",
+              "file": "search-button.spec.ts",
+              "line": 125,
               "column": 3
             },
             {
-              "title": "RecentSearches updates after a new search",
+              "title": "SearchButton shows validation error when departure date is missing",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
-                        "line": 217,
-                        "column": 10
-                      }
-                    }
-                  ],
+                  "timeout": 60000,
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -258,31 +231,124 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4113,
+                      "duration": 1083,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:57:07.563Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/GoogleFlights/tests/recent-searches.spec.ts",
-                            "line": 217,
-                            "column": 10
-                          }
-                        }
-                      ],
+                      "startTime": "2026-03-15T08:59:34.938Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "11ea01cac9abab13395b-86660883ae9b40d78c3d",
-              "file": "recent-searches.spec.ts",
-              "line": 216,
+              "id": "4106eb81ad7792dcc286-f8a833390233d30775d1",
+              "file": "search-button.spec.ts",
+              "line": 139,
+              "column": 3
+            },
+            {
+              "title": "SearchButton shows validation error when return date is missing for round trip",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1148,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T08:59:36.028Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4106eb81ad7792dcc286-f6b1f1c3307ce66bd7d4",
+              "file": "search-button.spec.ts",
+              "line": 153,
+              "column": 3
+            },
+            {
+              "title": "SearchButton works for One way trip without return date",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2101,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T08:59:37.182Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4106eb81ad7792dcc286-9f78fcd70f6415a876c4",
+              "file": "search-button.spec.ts",
+              "line": 167,
+              "column": 3
+            },
+            {
+              "title": "SearchButton saves search to recent searches",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2345,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T08:59:39.292Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4106eb81ad7792dcc286-fef7d6fc1e0d29f5b7d4",
+              "file": "search-button.spec.ts",
+              "line": 184,
               "column": 3
             }
           ]
@@ -292,9 +358,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T08:56:55.532Z",
-    "duration": 16177.448,
-    "expected": 5,
+    "startTime": "2026-03-15T08:59:30.363Z",
+    "duration": 11299.518,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

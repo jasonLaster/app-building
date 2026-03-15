@@ -1,0 +1,37 @@
+Creating branch: test-run-1773565116291
+Branch DB URL: postgresql://neondb_owner:***@ep-round-feather-ahgp7i9x.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/search-button.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 8 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/search-button.spec.ts:78:3 › SearchButton › SearchButton is displayed with prominent styling (184ms)
+  ✓  2 [replay-chromium] › tests/search-button.spec.ts:91:3 › SearchButton › SearchButton navigates to results page with valid inputs (2.1s)
+  ✓  3 [replay-chromium] › tests/search-button.spec.ts:111:3 › SearchButton › SearchButton shows validation error when origin is missing (829ms)
+  ✓  4 [replay-chromium] › tests/search-button.spec.ts:125:3 › SearchButton › SearchButton shows validation error when destination is missing (895ms)
+  ✓  5 [replay-chromium] › tests/search-button.spec.ts:139:3 › SearchButton › SearchButton shows validation error when departure date is missing (1.1s)
+  ✓  6 [replay-chromium] › tests/search-button.spec.ts:153:3 › SearchButton › SearchButton shows validation error when return date is missing for round trip (1.1s)
+  ✓  7 [replay-chromium] › tests/search-button.spec.ts:167:3 › SearchButton › SearchButton works for One way trip without return date (2.1s)
+  ✓  8 [replay-chromium] › tests/search-button.spec.ts:184:3 › SearchButton › SearchButton saves search to recent searches (2.3s)
+
+  8 passed (11.3s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 76 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch
