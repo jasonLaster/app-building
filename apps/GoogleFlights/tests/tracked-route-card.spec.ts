@@ -145,16 +145,17 @@ test.describe('TrackedRouteCard', () => {
   test('TrackedRouteCard Untrack then re-check shows updated list', async ({ page }) => {
     await navigateToTrackedTab(page)
 
-    // Should have 3 tracked routes from seed data
+    // Get current tracked route count
     const cards = page.locator('[data-testid^="tracked-route-card-"]')
-    await expect(cards).toHaveCount(3, { timeout: 15000 })
+    const initialCount = await cards.count()
+    expect(initialCount).toBeGreaterThanOrEqual(2)
 
     // Click Untrack on the first card
     const firstUntrackBtn = cards.first().locator('[data-testid^="tracked-route-untrack-"]')
     await firstUntrackBtn.click()
 
     // Wait for removal
-    await expect(cards).toHaveCount(2, { timeout: 15000 })
+    await expect(cards).toHaveCount(initialCount - 1, { timeout: 15000 })
 
     // Switch to Upcoming tab and back to Tracked
     await page.getByTestId('trips-tab-upcoming').click()
@@ -163,12 +164,42 @@ test.describe('TrackedRouteCard', () => {
     await page.getByTestId('trips-tab-tracked').click()
     await expect(page.getByTestId('trips-tracked-list')).toBeVisible({ timeout: 15000 })
 
-    // Verify still only 2 tracked routes
-    await expect(page.locator('[data-testid^="tracked-route-card-"]')).toHaveCount(2, { timeout: 15000 })
+    // Verify the count is still reduced after tab switching
+    await expect(page.locator('[data-testid^="tracked-route-card-"]')).toHaveCount(initialCount - 1, { timeout: 15000 })
   })
 
   test('TrackedRouteCard Search button works for multiple cards', async ({ page }) => {
-    await navigateToTrackedTab(page)
+    // Ensure SFO → NRT is tracked (may have been removed by prior untrack tests)
+    await page.goto('/')
+    await page.evaluate(() => {
+      localStorage.setItem('gf_session_token', 'seed-session-token')
+    })
+    const baseUrl = page.url().replace(/\/$/, '')
+    const checkRes = await page.evaluate(async (base) => {
+      const res = await fetch(`${base}/api/tracked-routes?session=seed-session-token&origin=SFO&destination=NRT`)
+      return res.json()
+    }, baseUrl)
+    if (!checkRes.tracked) {
+      await page.evaluate(async (base) => {
+        await fetch(`${base}/api/tracked-routes`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionToken: 'seed-session-token',
+            originCode: 'SFO',
+            destCode: 'NRT',
+            departureDateStart: '2026-04-10',
+            departureDateEnd: '2026-04-25',
+            cabinClass: 'economy',
+          }),
+        })
+      }, baseUrl)
+    }
+
+    await page.goto('/trips')
+    await expect(page.getByTestId('my-trips-page')).toBeVisible({ timeout: 15000 })
+    await page.getByTestId('trips-tab-tracked').click()
+    await expect(page.getByTestId('trips-tracked-list')).toBeVisible({ timeout: 15000 })
 
     const cards = page.locator('[data-testid^="tracked-route-card-"]')
 

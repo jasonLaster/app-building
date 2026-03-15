@@ -1,0 +1,67 @@
+Creating branch: test-run-1773566868955
+Branch DB URL: postgresql://neondb_owner:***@ep-raspy-lake-ah91kdf5.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/tracked-route-card.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 9 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/tracked-route-card.spec.ts:19:3 › TrackedRouteCard › TrackedRouteCard displays route (633ms)
+  ✓  2 [replay-chromium] › tests/tracked-route-card.spec.ts:36:3 › TrackedRouteCard › TrackedRouteCard displays date range being tracked (300ms)
+  ✓  3 [replay-chromium] › tests/tracked-route-card.spec.ts:52:3 › TrackedRouteCard › TrackedRouteCard displays current lowest price (301ms)
+  ✓  4 [replay-chromium] › tests/tracked-route-card.spec.ts:68:3 › TrackedRouteCard › TrackedRouteCard displays price trend indicator going up (303ms)
+  ✓  5 [replay-chromium] › tests/tracked-route-card.spec.ts:87:3 › TrackedRouteCard › TrackedRouteCard displays price trend indicator going down (309ms)
+  ✓  6 [replay-chromium] › tests/tracked-route-card.spec.ts:106:3 › TrackedRouteCard › TrackedRouteCard Search button navigates to search results (309ms)
+  ✓  7 [replay-chromium] › tests/tracked-route-card.spec.ts:129:3 › TrackedRouteCard › TrackedRouteCard Untrack button removes tracking (423ms)
+  ✓  8 [replay-chromium] › tests/tracked-route-card.spec.ts:145:3 › TrackedRouteCard › TrackedRouteCard Untrack then re-check shows updated list (515ms)
+  ✘  9 [replay-chromium] › tests/tracked-route-card.spec.ts:171:3 › TrackedRouteCard › TrackedRouteCard Search button works for multiple cards (10.3s)
+
+
+  1) [replay-chromium] › tests/tracked-route-card.spec.ts:171:3 › TrackedRouteCard › TrackedRouteCard Search button works for multiple cards 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="tracked-route-card-"]').filter({ has: locator('[data-testid^="tracked-route-route-"]').filter({ hasText: /SFO → NRT/ }) })
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for locator('[data-testid^="tracked-route-card-"]').filter({ has: locator('[data-testid^="tracked-route-route-"]').filter({ hasText: /SFO → NRT/ }) })[22m
+
+
+      178 |       has: page.locator('[data-testid^="tracked-route-route-"]', { hasText: /SFO → NRT/ }),
+      179 |     })
+    > 180 |     await expect(sfoNrtCard).toBeVisible({ timeout: 10000 })
+          |                              ^
+      181 |     const sfoSearchBtn = sfoNrtCard.locator('[data-testid^="tracked-route-search-"]')
+      182 |     await sfoSearchBtn.click()
+      183 |
+        at /repo/apps/GoogleFlights/tests/tracked-route-card.spec.ts:180:30
+
+    Error Context: test-results/tracked-route-card-Tracked-b5a2f-on-works-for-multiple-cards-replay-chromium/error-context.md
+
+  1 failed
+    [replay-chromium] › tests/tracked-route-card.spec.ts:171:3 › TrackedRouteCard › TrackedRouteCard Search button works for multiple cards 
+  8 passed (14.0s)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 78 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "track-prices-toggle.spec.ts",
-      "file": "track-prices-toggle.spec.ts",
+      "title": "tracked-route-card.spec.ts",
+      "file": "tracked-route-card.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "TrackPricesToggle",
-          "file": "track-prices-toggle.spec.ts",
-          "line": 61,
+          "title": "TrackedRouteCard",
+          "file": "tracked-route-card.spec.ts",
+          "line": 18,
           "column": 6,
           "specs": [
             {
-              "title": "TrackPricesToggle is displayed on results page",
+              "title": "TrackedRouteCard displays route",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 169,
+                      "duration": 634,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:20:03.687Z",
+                      "startTime": "2026-03-15T09:30:24.894Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "2364ddfe8f31f58b6dc1-571285e70468c6cccd56",
-              "file": "track-prices-toggle.spec.ts",
-              "line": 83,
+              "id": "5b3c6b191bae736147b5-6b4cca4f03d8cd467c9a",
+              "file": "tracked-route-card.spec.ts",
+              "line": 19,
               "column": 3
             },
             {
-              "title": "TrackPricesToggle enables price tracking",
+              "title": "TrackedRouteCard displays date range being tracked",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1224,
+                      "duration": 323,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:20:03.912Z",
+                      "startTime": "2026-03-15T09:30:25.574Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "2364ddfe8f31f58b6dc1-4c3f520b12e1429906cb",
-              "file": "track-prices-toggle.spec.ts",
-              "line": 95,
+              "id": "5b3c6b191bae736147b5-c995e9048f68d3b2fa04",
+              "file": "tracked-route-card.spec.ts",
+              "line": 36,
               "column": 3
             },
             {
-              "title": "TrackPricesToggle disables price tracking",
+              "title": "TrackedRouteCard displays current lowest price",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1298,
+                      "duration": 327,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:20:05.151Z",
+                      "startTime": "2026-03-15T09:30:25.907Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,28 +176,19 @@
                   "status": "expected"
                 }
               ],
-              "id": "2364ddfe8f31f58b6dc1-9a7ad2093785d835898a",
-              "file": "track-prices-toggle.spec.ts",
-              "line": 109,
+              "id": "5b3c6b191bae736147b5-c8520d45c57ea9805f6e",
+              "file": "tracked-route-card.spec.ts",
+              "line": 52,
               "column": 3
             },
             {
-              "title": "TrackPricesToggle reflects existing tracked route",
+              "title": "TrackedRouteCard displays price trend indicator going up",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
-                        "line": 126,
-                        "column": 10
-                      }
-                    }
-                  ],
+                  "timeout": 60000,
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -206,50 +197,32 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1400,
+                      "duration": 314,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:20:06.465Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
-                            "line": 126,
-                            "column": 10
-                          }
-                        }
-                      ],
+                      "startTime": "2026-03-15T09:30:26.241Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "2364ddfe8f31f58b6dc1-20ef7d0f3580dc69761b",
-              "file": "track-prices-toggle.spec.ts",
-              "line": 125,
+              "id": "5b3c6b191bae736147b5-ed2a94b3116e8a427aaf",
+              "file": "tracked-route-card.spec.ts",
+              "line": 68,
               "column": 3
             },
             {
-              "title": "TrackPricesToggle tracked route appears in My Trips",
+              "title": "TrackedRouteCard displays price trend indicator going down",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
-                        "line": 149,
-                        "column": 10
-                      }
-                    }
-                  ],
+                  "timeout": 60000,
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -258,50 +231,32 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1334,
+                      "duration": 319,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:20:07.876Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
-                            "line": 149,
-                            "column": 10
-                          }
-                        }
-                      ],
+                      "startTime": "2026-03-15T09:30:26.561Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "2364ddfe8f31f58b6dc1-587152eef97192f9d7b6",
-              "file": "track-prices-toggle.spec.ts",
-              "line": 148,
+              "id": "5b3c6b191bae736147b5-0da0a556a95f11fc7c43",
+              "file": "tracked-route-card.spec.ts",
+              "line": 87,
               "column": 3
             },
             {
-              "title": "TrackPricesToggle can be toggled multiple times",
+              "title": "TrackedRouteCard Search button navigates to search results",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 180000,
-                  "annotations": [
-                    {
-                      "type": "slow",
-                      "location": {
-                        "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
-                        "line": 176,
-                        "column": 10
-                      }
-                    }
-                  ],
+                  "timeout": 60000,
+                  "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -310,31 +265,124 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2160,
+                      "duration": 318,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:20:09.218Z",
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
-                            "line": 176,
-                            "column": 10
-                          }
-                        }
-                      ],
+                      "startTime": "2026-03-15T09:30:26.886Z",
+                      "annotations": [],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "2364ddfe8f31f58b6dc1-3afb374cb6230c6dd4f6",
-              "file": "track-prices-toggle.spec.ts",
-              "line": 175,
+              "id": "5b3c6b191bae736147b5-1652f130911921fac814",
+              "file": "tracked-route-card.spec.ts",
+              "line": 106,
+              "column": 3
+            },
+            {
+              "title": "TrackedRouteCard Untrack button removes tracking",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 702,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:30:27.210Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b3c6b191bae736147b5-4a4898f6f529b11437a1",
+              "file": "tracked-route-card.spec.ts",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "TrackedRouteCard Untrack then re-check shows updated list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 581,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:30:27.921Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b3c6b191bae736147b5-59b5a0ab0f810dcb37c6",
+              "file": "tracked-route-card.spec.ts",
+              "line": 145,
+              "column": 3
+            },
+            {
+              "title": "TrackedRouteCard Search button works for multiple cards",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1048,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:30:28.512Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "5b3c6b191bae736147b5-17d0ec97d59b1f454700",
+              "file": "tracked-route-card.spec.ts",
+              "line": 171,
               "column": 3
             }
           ]
@@ -344,9 +392,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T09:20:03.257Z",
-    "duration": 8155.5869999999995,
-    "expected": 6,
+    "startTime": "2026-03-15T09:30:24.399Z",
+    "duration": 5198.738,
+    "expected": 9,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

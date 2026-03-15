@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/tracked-route-card.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:03:06.948Z",
-      "app": "GoogleFlights"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/trip-card.spec.ts"
       ],
       "timestamp": "2026-03-14T21:03:06.948Z",
@@ -44,7 +36,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/track-prices-toggle.spec.ts"
+      "FixTests: tests/tracked-route-card.spec.ts"
     ],
     "timestamp": "2026-03-14T21:03:06.948Z",
     "app": "GoogleFlights"
