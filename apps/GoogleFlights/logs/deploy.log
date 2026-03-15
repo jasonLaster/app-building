@@ -10,7 +10,7 @@ computing gzip size...
 dist/index.html                     0.46 kB │ gzip:   0.30 kB
 dist/assets/index-wscByaDT.css     64.15 kB │ gzip:   8.25 kB
 dist/assets/index-5bIKUOEB.js   1,369.42 kB │ gzip: 235.42 kB │ map: 2,654.50 kB
-✓ built in 1.02s
+✓ built in 1.05s
 
 Deploying to Netlify...
 === Deploy Output ===
@@ -23,7 +23,7 @@ Netlify Build
 ​
 ❯ Flags
   accountId: 67db64f88522edc0da7e6ec8
-  deployId: 69b67eeebdba1f04ddbbccd3
+  deployId: 69b7195ff91a71863b51a910
 ​
 ❯ Current directory
   /repo/apps/GoogleFlights
@@ -50,9 +50,9 @@ computing gzip size...
 dist/index.html                     0.46 kB │ gzip:   0.30 kB
 dist/assets/index-wscByaDT.css     64.15 kB │ gzip:   8.25 kB
 dist/assets/index-5bIKUOEB.js   1,369.42 kB │ gzip: 235.42 kB │ map: 2,654.50 kB
-✓ built in 990ms
+✓ built in 1.07s
 ​
-(build.command completed in 1.1s)
+(build.command completed in 1.2s)
 ​
 Functions bundling                                            
 ────────────────────────────────────────────────────────────────
@@ -72,7 +72,7 @@ Packaging Functions from netlify/functions directory:
  - tracked-routes.ts
 ​
 ​
-(Functions bundling completed in 609ms)
+(Functions bundling completed in 677ms)
 
 Deploying to Netlify
 ────────────────────────────────────────────────────────────────
@@ -85,7 +85,7 @@ Configuration path: /repo/apps/GoogleFlights/netlify.toml
 Netlify Build Complete                                        
 ────────────────────────────────────────────────────────────────
 ​
-(Netlify Build completed in 23.1s)
+(Netlify Build completed in 4.4s)
 
 🚀 Deploy complete
 ────────────────────────────────────────────────────────────────
@@ -95,12 +95,12 @@ Netlify Build Complete
 │                         Deployed to production URL:                          │
 │               https://google-flights-1773521195043.netlify.app               │
 │                                                                              │
-│   Unique deploy URL: https://69b67eeebdba1f04ddbbccd3--google-flights-1773   │
+│   Unique deploy URL: https://69b7195ff91a71863b51a910--google-flights-1773   │
 │                            521195043.netlify.app                             │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯
 
-Build logs:         https://app.netlify.com/projects/google-flights-1773521195043/deploys/69b67eeebdba1f04ddbbccd3
+Build logs:         https://app.netlify.com/projects/google-flights-1773521195043/deploys/69b7195ff91a71863b51a910
 Function logs:      https://app.netlify.com/projects/google-flights-1773521195043/logs/functions
 Edge function Logs: https://app.netlify.com/projects/google-flights-1773521195043/logs/edge-functions
 

@@ -19,3 +19,11 @@ Changes:
 Changes:
 - Fixed test suites across all components (filter sidebar, flight cards, pagination, passenger forms, etc.)
 - Schema sync and redeployment to production
+
+--- Deployment 2026-03-15 (2) ---
+Changes:
+- Added 1,046 SFO→JFK seed flights covering Mar 16 – Apr 15, 2026
+- 8 airlines (UA, DL, AA, B6, NK, WN, AS, F9) with nonstop and connecting flights
+- 6 connecting hubs (ORD, DFW, DEN, ATL, LAX, SEA)
+- Dynamic pricing with day-of-week and advance purchase multipliers
+- 32-55 flights per day across all time slots (early morning through red-eye)
