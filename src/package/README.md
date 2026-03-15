@@ -15,12 +15,11 @@ import {
   loadDotEnv,
   FileContainerRegistry,
   getInfisicalConfig,
-  createMachine,
-  destroyMachine,
+  startContainer,
+  stopContainer,
   type ContainerConfig,
   type RepoOptions,
   httpGet,
-  httpPost,
   httpOptsFor,
 } from "@replayio/app-building";
 
@@ -28,36 +27,41 @@ import {
 const orchestrationVars = loadDotEnv("/path/to/project");
 const infisicalConfig = await getInfisicalConfig(orchestrationVars);
 
+// Local container (no flyToken/flyApp)
 const config: ContainerConfig = {
-  projectRoot: "/path/to/project",  // optional — only needed for local Docker operations
+  projectRoot: "/path/to/project",
   infisical: infisicalConfig,
   registry: new FileContainerRegistry("/path/to/.container-registry.jsonl"),
+};
+
+// Remote container (set flyToken + flyApp)
+const remoteConfig: ContainerConfig = {
+  ...config,
   flyToken: orchestrationVars.FLY_API_TOKEN,
   flyApp: orchestrationVars.FLY_APP_NAME,
 };
 
-// Create a Fly machine (automatically provisions a volume)
-const { machineId, volumeId } = await createMachine(
-  config.flyApp, config.flyToken, imageRef, containerEnv, machineName,
-);
+// Start — automatically chooses local or remote based on config
+const repo: RepoOptions = { repoUrl: "https://...", cloneBranch: "main", pushBranch: "feature/x" };
+const state = await startContainer(config, repo);
 
 // Check status
-const status = await httpGet(`https://${config.flyApp}.fly.dev/status`);
+const status = await httpGet(`${state.baseUrl}/status`, httpOptsFor(state));
 
 // Query the registry
 const alive = await config.registry.findAlive();
 
-// Clean up (destroys machine and its volume)
-await destroyMachine(config.flyApp, config.flyToken, machineId, volumeId);
+// Stop — handles both local and remote
+await stopContainer(config, state);
 ```
 
 ## Secrets architecture
 
 Secrets are never passed directly to the container or agent. Instead:
 
-1. The orchestration host passes **Infisical credentials** (token, project ID, environment) to the container.
-2. At startup, the container fetches all secrets from Infisical and stores them in memory.
-3. A **secrets server** (`127.0.0.1:9119`) runs inside the container, accessible only locally.
+1. The orchestration host passes **Infisical credentials** (`InfisicalConfig`) to the container via `ContainerConfig.infisical`.
+2. At startup, the container fetches global secrets from Infisical for internal use (clone token, agent API key).
+3. A **secrets server** (`127.0.0.1:9119`) runs inside the container, accessible only locally. It fetches secrets live from Infisical on every request — no caching.
 4. The agent process runs with a **restricted environment** — only `ANTHROPIC_API_KEY` (required for the Claude CLI) is present.
 5. When the agent needs to run a command that requires secrets, it uses `exec-secrets`:
 
@@ -66,9 +70,9 @@ exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" ht
 exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- netlify deploy --prod
 ```
 
-The secrets server spawns the command with the requested secrets in its environment and **redacts all secret values** from the output.
+The secrets server spawns the command with the requested secrets in its environment and **redacts requested secret values** from the output.
 
-The agent can also run `list-secrets` to see which secrets are available, and `set-branch-secret` to store new branch-level secrets (e.g., `DATABASE_URL` created at deploy time). The server rejects values that have already appeared in logs.
+The agent can also run `list-secrets` to see which secrets are available, and `set-branch-secret` to store new branch-level secrets (e.g., `DATABASE_URL` created at deploy time). The server rejects credential values that have already appeared in logs.
 
 ## Exported API
 
@@ -76,8 +80,9 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 
 | Export | Description |
 |---|---|
-| `ContainerConfig` | Interface bundling all external state: `infisical` (required `InfisicalConfig`), optional `projectRoot` (only needed for local Docker operations), `registry`, optional `flyToken`/`flyApp`/`imageRef`/`webhookUrl`/`webhookSecret`/`detached`/`initialPrompt`/`localPort`/`absorbTasks`. See [Webhooks](#webhooks) and [Container lifecycle](#container-lifecycle) below. |
+| `ContainerConfig` | `infisical` (required `InfisicalConfig`), optional `projectRoot` (local Docker only), `registry`, `flyToken`/`flyApp` (set both for remote Fly.io), `imageRef`, `webhookUrl`/`webhookSecret`, `detached`, `initialPrompt`, `localPort`, `absorbTasks`. |
 | `RepoOptions` | Per-invocation git settings: `repoUrl`, `cloneBranch`, `pushBranch`. |
+| `AgentState` | Returned by `startContainer`. Contains `type`, `containerName`, `port`, `baseUrl`, and Fly-specific fields for remote containers. |
 | `ContainerRegistry` | Interface for container registry storage. Methods: `log`, `markStopped`, `clearStopped`, `getRecent`, `find`, `findAlive`. |
 | `FileContainerRegistry` | Built-in file-backed implementation of `ContainerRegistry`, backed by a `.jsonl` file. |
 
@@ -85,13 +90,11 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 
 | Export | Description |
 |---|---|
-| `startContainer(config, repo)` | Build the Docker image locally and start a container with `--network host`. Returns `AgentState`. |
-| `stopContainer(config, containerName)` | Stop a local Docker container by name. |
-| `buildImage(config)` | Build the Docker image locally (called automatically by `startContainer`). |
-| `spawnTestContainer(config)` | Start an interactive (`-it`) container with the repo mounted at `/repo`. |
+| `startContainer(config, repo)` | Start a container. Uses local Docker if `flyToken`/`flyApp` are not set, Fly.io if they are. Returns `AgentState`. |
+| `stopContainer(config, state)` | Stop a container by its `AgentState` or `RegistryEntry`. Handles both local and remote. |
+| `buildImage(config)` | Build the Docker image locally (called automatically by `startContainer` for local containers). |
+| `spawnTestContainer(config)` | Start an interactive (`-it`) local container with the repo mounted at `/repo`. |
 | `loadDotEnv(projectRoot)` | Parse a `.env` file and return key-value pairs. |
-
-**Types:** `AgentState`, `ContainerConfig`, `RepoOptions`
 
 ### Container registry (`ContainerRegistry` interface / `FileContainerRegistry` class)
 
@@ -122,20 +125,6 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 | `httpOptsFor(state)` | Return `HttpOptions` for a container (adds `fly-force-instance-id` header for remote containers). |
 | `probeAlive(entry)` | Check if a container is responding to `/status`. |
 
-### Fly.io utilities
-
-| Export | Description |
-|---|---|
-| `createApp(token, name, org?)` | Create a Fly app and allocate IPs. |
-| `createMachine(app, token, image, env, name)` | Create a Fly machine with a 50GB volume mounted at `/repo`. Returns `{ machineId, volumeId }`. |
-| `waitForMachine(app, token, machineId)` | Poll until a machine reaches `started` state. |
-| `listMachines(app, token)` | List all machines for an app. |
-| `destroyMachine(app, token, machineId, volumeId?)` | Force-destroy a machine and optionally its volume. |
-| `listVolumes(app, token)` | List all volumes for an app. |
-| `deleteVolume(app, token, volumeId)` | Delete a Fly volume. |
-
-**Types:** `FlyMachineInfo`, `FlyVolumeInfo`, `CreateMachineResult`
-
 ### Secrets (Infisical)
 
 | Export | Description |
@@ -144,24 +133,10 @@ The agent can also run `list-secrets` to see which secrets are available, and `s
 | `getInfisicalConfig(envVars)` | Extract `InfisicalConfig` from env vars and log in. Requires `INFISICAL_CLIENT_ID`, `INFISICAL_CLIENT_SECRET`, `INFISICAL_PROJECT_ID`, `INFISICAL_ENVIRONMENT`. |
 | `fetchGlobalSecrets(config)` | Fetch secrets from the `/global/` path. |
 | `fetchBranchSecrets(config, branch)` | Fetch secrets from `/branches/<branch>/`. |
-| `createBranchSecret(config, branch, name, value)` | Create or update a secret in `/branches/<branch>/`. |
+| `createBranchSecret(config, branch, name, value)` | Create or update a secret in `/branches/<branch>/`. Creates the folder if needed. |
 | `fetchInfisicalSecrets(config, path)` | Raw fetch from any Infisical folder path. |
 
 **Types:** `InfisicalConfig`
-
-**Usage pattern** (orchestration scripts):
-
-```ts
-const orchestrationVars = loadDotEnv(projectRoot);
-const infisicalConfig = await getInfisicalConfig(orchestrationVars);
-
-const config: ContainerConfig = {
-  infisical: infisicalConfig,
-  flyToken: orchestrationVars.FLY_API_TOKEN,
-  flyApp: orchestrationVars.FLY_APP_NAME,
-  ...
-};
-```
 
 ### Image ref
 

@@ -6,8 +6,7 @@
  */
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions, getInfisicalConfig } from "./package";
-import { startRemoteContainer, stopRemoteContainer } from "./remote-container";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, type RepoOptions, httpGet, httpPost, type HttpOptions, getInfisicalConfig, startContainer, stopContainer } from "./package";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
@@ -53,7 +52,7 @@ async function main() {
   };
 
   console.log("Starting remote container...");
-  const state = await startRemoteContainer(config, repoOpts);
+  const state = await startContainer(config, repoOpts);
   console.log(`Machine: ${state.flyMachineId}`);
   console.log(`URL: ${state.baseUrl}`);
 
@@ -142,7 +141,7 @@ async function main() {
 
   } finally {
     console.log("\nCleaning up...");
-    await stopRemoteContainer(config, state);
+    await stopContainer(config, state);
     console.log("Done.");
   }
 

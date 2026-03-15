@@ -2,8 +2,7 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, FileContainerRegistry, type ContainerConfig, httpGet, httpPost, type RegistryEntry, httpOptsFor } from "./package";
-import { stopRemoteContainer } from "./remote-container";
+import { loadDotEnv, FileContainerRegistry, type ContainerConfig, stopContainer, httpGet, httpPost, type RegistryEntry, httpOptsFor } from "./package";
 import { RED, RESET } from "./format";
 
 async function waitForStopped(baseUrl: string, timeoutMs: number = 120000): Promise<void> {
@@ -49,28 +48,8 @@ async function stopEntry(config: ContainerConfig, entry: RegistryEntry): Promise
     // Server already gone
   }
 
-  if (entry.type === "remote") {
-    // Destroy the Fly machine so it doesn't sit idle and cost money
-    await stopRemoteContainer(config, entry);
-    return;
-  }
-
-  // Wait for local container to exit
-  for (let i = 0; i < 10; i++) {
-    await new Promise((r) => setTimeout(r, 500));
-    try {
-      await fetch(`${entry.baseUrl}/status`);
-      // Still running, keep waiting
-    } catch {
-      // Connection refused = container is gone
-      console.log("Container stopped.");
-      config.registry.markStopped(entry.containerName);
-      return;
-    }
-  }
-
-  console.error("Container did not stop within 5 seconds.");
-  process.exit(1);
+  await stopContainer(config, entry);
+  console.log("Container stopped.");
 }
 
 async function main(): Promise<void> {
@@ -78,7 +57,7 @@ async function main(): Promise<void> {
   const envVars = loadDotEnv(projectRoot);
   const config: ContainerConfig = {
     projectRoot,
-    infisical: { token: "", projectId: "", environment: "" }, // not needed for stop
+    infisical: { token: "", projectId: "", environment: "" },
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
     flyToken: envVars.FLY_API_TOKEN,
     flyApp: envVars.FLY_APP_NAME,

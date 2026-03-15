@@ -2,7 +2,8 @@ import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { loadDotEnv, listMachines, destroyMachine, listVolumes, deleteVolume } from "./package";
+import { loadDotEnv } from "./package";
+import { listMachines, destroyMachine, listVolumes, deleteVolume } from "./package/fly";
 
 const BOLD = "\x1b[1m";
 const DIM = "\x1b[2m";

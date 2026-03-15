@@ -4,7 +4,6 @@ import { Command } from "commander";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import { loadDotEnv, FileContainerRegistry, type ContainerConfig, startContainer, stopContainer, httpGet, httpPost, type HttpOptions, httpOptsFor, getInfisicalConfig } from "./package";
-import { startRemoteContainer } from "./remote-container";
 import { getLocalRemoteUrl, getLocalBranch } from "./git";
 import { formatEvent } from "./format";
 
@@ -143,12 +142,9 @@ async function runInteractive(config: ContainerConfig, opts: {
   repo: string;
   branch: string;
   pushBranch: string;
-  remote?: boolean;
 }): Promise<void> {
   const repo = { repoUrl: opts.repo, cloneBranch: opts.branch, pushBranch: opts.pushBranch };
-  const state = opts.remote
-    ? await startRemoteContainer(config, repo)
-    : await startContainer(config, repo);
+  const state = await startContainer(config, repo);
 
   const { containerName, baseUrl } = state;
   const httpOpts = httpOptsFor(state);
@@ -223,7 +219,7 @@ async function runInteractive(config: ContainerConfig, opts: {
       await httpPost(`${baseUrl}/detach`, undefined, httpOpts);
       console.log("Detached from container. It will exit when work completes.");
     } catch {
-      stopContainer(config, containerName);
+      await stopContainer(config, state);
     }
   }
 }
@@ -234,12 +230,9 @@ async function runDetached(config: ContainerConfig, opts: {
   repo: string;
   branch: string;
   pushBranch: string;
-  remote?: boolean;
 }): Promise<void> {
   const repo = { repoUrl: opts.repo, cloneBranch: opts.branch, pushBranch: opts.pushBranch };
-  const state = opts.remote
-    ? await startRemoteContainer(config, repo)
-    : await startContainer(config, repo);
+  const state = await startContainer(config, repo);
 
   console.log(`Container: ${state.containerName}`);
   console.log(`Server: ${state.baseUrl}`);
@@ -284,18 +277,18 @@ async function main(): Promise<void> {
     projectRoot,
     infisical: infisicalConfig,
     registry: new FileContainerRegistry(resolve(projectRoot, ".container-registry.jsonl")),
-    flyToken: orchestrationVars.FLY_API_TOKEN,
-    flyApp: orchestrationVars.FLY_APP_NAME,
+    flyToken: opts.remote ? orchestrationVars.FLY_API_TOKEN : undefined,
+    flyApp: opts.remote ? orchestrationVars.FLY_APP_NAME : undefined,
     webhookUrl: opts.webhook,
     localPort: orchestrationVars.LOCAL_CONTAINER_PORT ? parseInt(orchestrationVars.LOCAL_CONTAINER_PORT, 10) : undefined,
   };
 
   if (opts.interactive) {
-    await runInteractive(config, { repo, branch, pushBranch, remote: opts.remote });
+    await runInteractive(config, { repo, branch, pushBranch });
   } else {
     config.detached = true;
     if (opts.prompt) config.initialPrompt = opts.prompt;
-    await runDetached(config, { repo, branch, pushBranch, remote: opts.remote });
+    await runDetached(config, { repo, branch, pushBranch });
   }
 }
 
