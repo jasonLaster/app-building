@@ -1,0 +1,35 @@
+Creating branch: test-run-1773566349247
+Branch DB URL: postgresql://neondb_owner:***@ep-damp-band-ah8ejud6.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/track-prices-toggle.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 6 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/track-prices-toggle.spec.ts:83:3 › TrackPricesToggle › TrackPricesToggle is displayed on results page (169ms)
+  ✓  2 [replay-chromium] › tests/track-prices-toggle.spec.ts:95:3 › TrackPricesToggle › TrackPricesToggle enables price tracking (1.2s)
+  ✓  3 [replay-chromium] › tests/track-prices-toggle.spec.ts:109:3 › TrackPricesToggle › TrackPricesToggle disables price tracking (1.3s)
+  ✓  4 [replay-chromium] › tests/track-prices-toggle.spec.ts:125:3 › TrackPricesToggle › TrackPricesToggle reflects existing tracked route (1.4s)
+  ✓  5 [replay-chromium] › tests/track-prices-toggle.spec.ts:148:3 › TrackPricesToggle › TrackPricesToggle tracked route appears in My Trips (1.3s)
+  ✓  6 [replay-chromium] › tests/track-prices-toggle.spec.ts:175:3 › TrackPricesToggle › TrackPricesToggle can be toggled multiple times (2.2s)
+
+  6 passed (8.2s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 76 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

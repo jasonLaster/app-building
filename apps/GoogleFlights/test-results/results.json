@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "cabin-class-selector.spec.ts",
-      "file": "cabin-class-selector.spec.ts",
+      "title": "track-prices-toggle.spec.ts",
+      "file": "track-prices-toggle.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "CabinClassSelector",
-          "file": "cabin-class-selector.spec.ts",
-          "line": 3,
+          "title": "TrackPricesToggle",
+          "file": "track-prices-toggle.spec.ts",
+          "line": 61,
           "column": 6,
           "specs": [
             {
-              "title": "CabinClassSelector displays default Economy",
+              "title": "TrackPricesToggle is displayed on results page",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 154,
+                      "duration": 169,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:17:26.249Z",
+                      "startTime": "2026-03-15T09:20:03.687Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "eb8e2f418572acf653b5-1c573adc04282cedeefb",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 9,
+              "id": "2364ddfe8f31f58b6dc1-571285e70468c6cccd56",
+              "file": "track-prices-toggle.spec.ts",
+              "line": 83,
               "column": 3
             },
             {
-              "title": "CabinClassSelector opens dropdown showing all cabin classes",
+              "title": "TrackPricesToggle enables price tracking",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 137,
+                      "duration": 1224,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:17:26.437Z",
+                      "startTime": "2026-03-15T09:20:03.912Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "eb8e2f418572acf653b5-a2ce2588cedf179b3a99",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 17,
+              "id": "2364ddfe8f31f58b6dc1-4c3f520b12e1429906cb",
+              "file": "track-prices-toggle.spec.ts",
+              "line": 95,
               "column": 3
             },
             {
-              "title": "CabinClassSelector selects Business class",
+              "title": "TrackPricesToggle disables price tracking",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 189,
+                      "duration": 1298,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:17:26.580Z",
+                      "startTime": "2026-03-15T09:20:05.151Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,19 +176,28 @@
                   "status": "expected"
                 }
               ],
-              "id": "eb8e2f418572acf653b5-3de7a2f5de4e9a2f172c",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 33,
+              "id": "2364ddfe8f31f58b6dc1-9a7ad2093785d835898a",
+              "file": "track-prices-toggle.spec.ts",
+              "line": 109,
               "column": 3
             },
             {
-              "title": "CabinClassSelector selects Premium Economy class",
+              "title": "TrackPricesToggle reflects existing tracked route",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
+                        "line": 126,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -197,32 +206,50 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 161,
+                      "duration": 1400,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:17:26.774Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T09:20:06.465Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
+                            "line": 126,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "eb8e2f418572acf653b5-ec90590932a06e60d77c",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 41,
+              "id": "2364ddfe8f31f58b6dc1-20ef7d0f3580dc69761b",
+              "file": "track-prices-toggle.spec.ts",
+              "line": 125,
               "column": 3
             },
             {
-              "title": "CabinClassSelector selects First class",
+              "title": "TrackPricesToggle tracked route appears in My Trips",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
+                        "line": 149,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -231,32 +258,50 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 176,
+                      "duration": 1334,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:17:26.941Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T09:20:07.876Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
+                            "line": 149,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "eb8e2f418572acf653b5-2faba2ef28a5a6738259",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 49,
+              "id": "2364ddfe8f31f58b6dc1-587152eef97192f9d7b6",
+              "file": "track-prices-toggle.spec.ts",
+              "line": 148,
               "column": 3
             },
             {
-              "title": "CabinClassSelector closes dropdown when clicking outside",
+              "title": "TrackPricesToggle can be toggled multiple times",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
+                        "line": 176,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "replay-chromium",
                   "projectName": "replay-chromium",
@@ -265,56 +310,31 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 391,
+                      "duration": 2160,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:17:27.123Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T09:20:09.218Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/GoogleFlights/tests/track-prices-toggle.spec.ts",
+                            "line": 176,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "eb8e2f418572acf653b5-10a2244bed66bc19eef6",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 57,
-              "column": 3
-            },
-            {
-              "title": "CabinClassSelector can be changed multiple times",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 342,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T09:17:27.523Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "eb8e2f418572acf653b5-a2996e1e4736dd9aeac2",
-              "file": "cabin-class-selector.spec.ts",
-              "line": 70,
+              "id": "2364ddfe8f31f58b6dc1-3afb374cb6230c6dd4f6",
+              "file": "track-prices-toggle.spec.ts",
+              "line": 175,
               "column": 3
             }
           ]
@@ -324,9 +344,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T09:17:25.828Z",
-    "duration": 2075.102,
-    "expected": 7,
+    "startTime": "2026-03-15T09:20:03.257Z",
+    "duration": 8155.5869999999995,
+    "expected": 6,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
