@@ -1,6 +1,12 @@
 import { test, expect } from '@playwright/test'
 
 async function loginAs(page: import('@playwright/test').Page, email: string) {
+  // Log out first if already logged in
+  const logoutBtn = page.getByTestId('sidebar-logout')
+  if (await logoutBtn.isVisible().catch(() => false)) {
+    await logoutBtn.click()
+    await expect(page).toHaveURL(/\/login/, { timeout: 30000 })
+  }
   await page.goto('/login')
   await page.getByTestId('login-email-input').fill(email)
   await page.getByTestId('login-submit-button').click()
@@ -8,6 +14,26 @@ async function loginAs(page: import('@playwright/test').Page, email: string) {
 }
 
 test.describe('My Trips Page - TripCard', () => {
+  test.beforeEach(async ({ request }) => {
+    // Clean up non-seed bookings and reset seed booking statuses
+    await request.delete('http://localhost:8888/api/bookings')
+    // Re-create seed review for e4444444 if it was deleted by a previous test
+    await request.post('http://localhost:8888/api/reviews', {
+      data: {
+        booking_id: 'e4444444-4444-4444-4444-444444444444',
+        property_id: 'b4444444-4444-4444-4444-444444444444',
+        guest_id: 'a4444444-4444-4444-4444-444444444444',
+        rating: 4,
+        cleanliness: 4,
+        accuracy: 4,
+        communication: 5,
+        location: 5,
+        value: 4,
+        comment: 'Great location in SoCo.'
+      }
+    })
+  })
+
   test('Trip card displays all required information', async ({ page }) => {
     // Emma has a confirmed booking e6666666: Historic Townhouse in Georgetown, Washington, Jun 15-20, $1475
     await loginAs(page, 'emma@example.com')
