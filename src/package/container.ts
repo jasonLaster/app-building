@@ -75,7 +75,7 @@ export function loadDotEnv(projectRoot: string): Record<string, string> {
 export function buildImage(config: ContainerConfig): void {
   if (!config.projectRoot) throw new Error("projectRoot is required for local Docker operations");
   console.log("Building Docker image...");
-  execFileSync("docker", ["build", "--network", "host", "-t", IMAGE_NAME, config.projectRoot], {
+  execFileSync("docker", ["build", "--platform", "linux/amd64", "--network", "host", "-t", IMAGE_NAME, config.projectRoot], {
     stdio: "inherit",
     timeout: 600000,
   });
@@ -89,7 +89,7 @@ function ensureImageExists(projectRoot: string): void {
     });
   } catch {
     console.log("Building Docker image...");
-    execFileSync("docker", ["build", "--network", "host", "-t", IMAGE_NAME, projectRoot], {
+    execFileSync("docker", ["build", "--platform", "linux/amd64", "--network", "host", "-t", IMAGE_NAME, projectRoot], {
       stdio: "inherit",
       timeout: 600000,
     });
@@ -177,7 +177,7 @@ async function startLocalContainer(
   extra.PORT = String(containerPort);
   const containerEnv = buildContainerEnv(repo, config.infisical, extra);
 
-  const args: string[] = ["run", "-d", "--rm", "--name", containerName];
+  const args: string[] = ["run", "--platform", "linux/amd64", "-d", "--rm", "--name", containerName];
   args.push("-p", `${hostPort}:${containerPort}`);
   for (const [k, v] of Object.entries(containerEnv)) {
     args.push("--env", `${k}=${v}`);
@@ -416,7 +416,7 @@ export function spawnTestContainer(config: ContainerConfig): Promise<void> {
   const uniqueId = Math.random().toString(36).slice(2, 8);
   const containerName = `app-building-test-${uniqueId}`;
 
-  const args: string[] = ["run", "-it", "--rm", "--name", containerName];
+  const args: string[] = ["run", "--platform", "linux/amd64", "-it", "--rm", "--name", containerName];
   args.push("-v", `${config.projectRoot}:/repo`);
   args.push("-w", "/repo");
   args.push("--network", "host");
