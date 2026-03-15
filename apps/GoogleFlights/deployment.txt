@@ -14,3 +14,8 @@ Changes:
 - Popular destinations and recent searches on home page
 - Tracked price routes functionality
 - Full backend with Netlify Functions and Neon Postgres database
+
+--- Deployment 2026-03-15 ---
+Changes:
+- Fixed test suites across all components (filter sidebar, flight cards, pagination, passenger forms, etc.)
+- Schema sync and redeployment to production
