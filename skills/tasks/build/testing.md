@@ -461,6 +461,26 @@ failures (~57% of observed failures come from shared database state).
     reference members). Calling reseed endpoints in the wrong order causes FK constraint
     violations that look like application bugs but are actually test infrastructure issues.
 
+20. **Mandatory `beforeAll` truncateAndSeed.** Every spec file MUST include a `beforeAll`
+    hook that calls `truncateAndSeed` to ensure a clean database state before the spec runs.
+    This prevents cross-run data accumulation — the single largest sub-category of
+    data-contamination failures (57% of data-contamination, 40% of all failures in one
+    session). The `beforeEach` cleanup in mandate #1 handles within-run contamination;
+    this `beforeAll` handles cross-run contamination from prior test executions against the
+    same Neon branch.
+
+21. **Post-destructive re-seeding in serial blocks.** Any test that deletes all records
+    (empty state tests, bulk delete tests) MUST be wrapped in `test.describe.serial` AND
+    the block MUST re-seed the database after the destructive test completes (via `afterAll`
+    or a subsequent setup step). This prevents 25% of data-contamination failures caused by
+    destructive-ordering where later tests find an empty database.
+
+22. **API-format-aware test updates.** When a task changes backend API response formats
+    (e.g., switching from raw arrays to paginated `{items, total, page, pageSize}`
+    responses), the same task MUST update all affected test helpers and assertions. Do not
+    defer test updates to a later task — format mismatches cascade into widespread failures
+    (80+ tests in one session) that are expensive to fix after the fact.
+
 ## Pre-Commit Checklist for New Spec Files
 
 Before committing a new spec file, verify:
