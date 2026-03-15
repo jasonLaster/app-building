@@ -3,9 +3,79 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "Unpack: Check directive compliance"
+        "CheckTestSpecLoginRegister: Check testSpec.md directive violations in Login / Register test entries",
+        "CheckComponentsLoginRegister: Check writeApp.md directive violations in Login / Register components",
+        "CheckTestsLoginRegister: Check writeTests.md directive violations in Login / Register tests"
       ],
-      "timestamp": "2026-03-15T20:11:15.079Z",
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckTestSpecHomeSearch: Check testSpec.md directive violations in Home / Search test entries",
+        "CheckComponentsHomeSearch: Check writeApp.md directive violations in Home / Search components",
+        "CheckTestsHomeSearch: Check writeTests.md directive violations in Home / Search tests"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckTestSpecPropertyDetail: Check testSpec.md directive violations in Property Detail test entries",
+        "CheckComponentsPropertyDetail: Check writeApp.md directive violations in Property Detail components",
+        "CheckTestsPropertyDetail: Check writeTests.md directive violations in Property Detail tests"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckTestSpecMyTrips: Check testSpec.md directive violations in My Trips test entries",
+        "CheckComponentsMyTrips: Check writeApp.md directive violations in My Trips components",
+        "CheckTestsMyTrips: Check writeTests.md directive violations in My Trips tests"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckTestSpecHostDashboard: Check testSpec.md directive violations in Host Dashboard test entries",
+        "CheckComponentsHostDashboard: Check writeApp.md directive violations in Host Dashboard components",
+        "CheckTestsHostDashboard: Check writeTests.md directive violations in Host Dashboard tests"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckTestSpecUserProfile: Check testSpec.md directive violations in User Profile test entries",
+        "CheckComponentsUserProfile: Check writeApp.md directive violations in User Profile components",
+        "CheckTestsUserProfile: Check writeTests.md directive violations in User Profile tests"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckTestSpecWriteReview: Check testSpec.md directive violations in Write Review test entries",
+        "CheckComponentsWriteReview: Check writeApp.md directive violations in Write Review components",
+        "CheckTestsWriteReview: Check writeTests.md directive violations in Write Review tests"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "CheckBackend: Check writeApp.md directive violations in all backend functions"
+      ],
+      "timestamp": "2026-03-15T20:13:58.608Z",
       "app": "AirbnbClone"
     },
     {
@@ -26,9 +96,9 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/maintain/reviewBugReport.md",
+    "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "Unpack: Review fixed bug reports"
+      "Unpack: Check directive compliance"
     ],
     "timestamp": "2026-03-15T20:11:15.079Z",
     "app": "AirbnbClone"
