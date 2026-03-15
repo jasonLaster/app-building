@@ -1,0 +1,94 @@
+Creating branch: test-run-1773561414223
+Branch DB URL: postgresql://neondb_owner:***@ep-bold-rain-ah2drwrl.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/pagination.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 4 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/pagination.spec.ts:28:3 › Pagination › Pagination "Load more" button is displayed at bottom of results (568ms)
+  ✘  2 [replay-chromium] › tests/pagination.spec.ts:40:3 › Pagination › Pagination loading more results appends to list (15.6s)
+  ✓  3 [replay-chromium] › tests/pagination.spec.ts:55:3 › Pagination › Pagination button hidden when all results loaded (1.0s)
+  ✘  4 [replay-chromium] › tests/pagination.spec.ts:65:3 › Pagination › Pagination preserves filters when loading more (15.6s)
+
+
+  1) [replay-chromium] › tests/pagination.spec.ts:40:3 › Pagination › Pagination loading more results appends to list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('.flight-card')
+    Expected: [32m23[39m
+    Received: [31m20[39m
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 15000ms[22m
+    [2m  - waiting for locator('.flight-card')[22m
+    [2m    18 × locator resolved to 20 elements[22m
+    [2m       - unexpected value "20"[22m
+
+
+      50 |
+      51 |     // All 23 flights should now be displayed
+    > 52 |     await expect(page.locator('.flight-card')).toHaveCount(23, { timeout: 15000 })
+         |                                                ^
+      53 |   })
+      54 |
+      55 |   test('Pagination button hidden when all results loaded', async ({ page }) => {
+        at /repo/apps/GoogleFlights/tests/pagination.spec.ts:52:48
+
+    Error Context: test-results/pagination-Pagination-Pagi-fe57c-ore-results-appends-to-list-replay-chromium/error-context.md
+
+  2) [replay-chromium] › tests/pagination.spec.ts:65:3 › Pagination › Pagination preserves filters when loading more 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('results-count')
+    Expected substring: [32m"[7m22[27m of 23 flights"[39m
+    Received string:    [31m"[7m19[27m of 23 flights"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('results-count')[22m
+    [2m    3 × locator resolved to <div data-testid="results-count" class="search-results-page__count">19 of 20 flights</div>[22m
+    [2m      - unexpected value "19 of 20 flights"[22m
+    [2m    16 × locator resolved to <div data-testid="results-count" class="search-results-page__count">19 of 23 flights</div>[22m
+    [2m       - unexpected value "19 of 23 flights"[22m
+
+
+      83 |
+      84 |     // After loading more, total loaded = 23, nonstop = 22
+    > 85 |     await expect(resultsCount).toContainText('22 of 23 flights', { timeout: 15000 })
+         |                                ^
+      86 |   })
+      87 | })
+      88 |
+        at /repo/apps/GoogleFlights/tests/pagination.spec.ts:85:32
+
+    Error Context: test-results/pagination-Pagination-Pagi-51cc7-s-filters-when-loading-more-replay-chromium/error-context.md
+
+  2 failed
+    [replay-chromium] › tests/pagination.spec.ts:40:3 › Pagination › Pagination loading more results appends to list 
+    [replay-chromium] › tests/pagination.spec.ts:65:3 › Pagination › Pagination preserves filters when loading more 
+  2 passed (33.8s)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 75 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

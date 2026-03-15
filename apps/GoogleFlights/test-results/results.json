@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "flight-summary.spec.ts",
-      "file": "flight-summary.spec.ts",
+      "title": "pagination.spec.ts",
+      "file": "pagination.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "FlightSummary",
-          "file": "flight-summary.spec.ts",
-          "line": 98,
+          "title": "Pagination",
+          "file": "pagination.spec.ts",
+          "line": 27,
           "column": 6,
           "specs": [
             {
-              "title": "FlightSummary displays full outbound itinerary",
+              "title": "Pagination \"Load more\" button is displayed at bottom of results",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1560,
+                      "duration": 1059,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:54:15.018Z",
+                      "startTime": "2026-03-15T07:59:54.093Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "23ebbdc48b48e46615fe-d319ee942f47cc0fdf4c",
-              "file": "flight-summary.spec.ts",
-              "line": 99,
+              "id": "ffb96fb2c9977d04c390-d07b84d43c4f67eb94c6",
+              "file": "pagination.spec.ts",
+              "line": 28,
               "column": 3
             },
             {
-              "title": "FlightSummary displays outbound and return flights for round trip",
+              "title": "Pagination loading more results appends to list",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2459,
+                      "duration": 902,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:54:16.641Z",
+                      "startTime": "2026-03-15T07:59:55.194Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "23ebbdc48b48e46615fe-342aa2f3bbd8cc8c0f2c",
-              "file": "flight-summary.spec.ts",
-              "line": 138,
+              "id": "ffb96fb2c9977d04c390-3de2aa57312f96ec6f45",
+              "file": "pagination.spec.ts",
+              "line": 40,
               "column": 3
             },
             {
-              "title": "FlightSummary displays connecting flight with multiple legs",
+              "title": "Pagination button hidden when all results loaded",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1011,
+                      "duration": 511,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:54:19.109Z",
+                      "startTime": "2026-03-15T07:59:56.113Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "23ebbdc48b48e46615fe-7ee9b6435a73daeaa8ec",
-              "file": "flight-summary.spec.ts",
-              "line": 188,
+              "id": "ffb96fb2c9977d04c390-aedf5d9db382dba95ea4",
+              "file": "pagination.spec.ts",
+              "line": 55,
               "column": 3
             },
             {
-              "title": "FlightSummary shows total duration and stops count",
+              "title": "Pagination preserves filters when loading more",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1857,
+                      "duration": 970,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T07:54:20.128Z",
+                      "startTime": "2026-03-15T07:59:56.637Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,111 +210,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "23ebbdc48b48e46615fe-539bede8c715d0aab350",
-              "file": "flight-summary.spec.ts",
-              "line": 225,
-              "column": 3
-            },
-            {
-              "title": "FlightSummary shows overnight arrival indicator",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 961,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:54:21.997Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "23ebbdc48b48e46615fe-3a3f5196a63d52a486ba",
-              "file": "flight-summary.spec.ts",
-              "line": 239,
-              "column": 3
-            },
-            {
-              "title": "FlightSummary shows aircraft type and amenities",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 957,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:54:22.965Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "23ebbdc48b48e46615fe-184daab5fb12a8597376",
-              "file": "flight-summary.spec.ts",
-              "line": 258,
-              "column": 3
-            },
-            {
-              "title": "FlightSummary shows baggage allowance",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2688,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T07:54:23.930Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "23ebbdc48b48e46615fe-9c255ea7a14ad75e4d14",
-              "file": "flight-summary.spec.ts",
-              "line": 281,
+              "id": "ffb96fb2c9977d04c390-e98952e63de2ff596f01",
+              "file": "pagination.spec.ts",
+              "line": 65,
               "column": 3
             }
           ]
@@ -324,9 +222,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T07:54:14.443Z",
-    "duration": 12228.099,
-    "expected": 7,
+    "startTime": "2026-03-15T07:59:53.661Z",
+    "duration": 4000.522,
+    "expected": 4,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

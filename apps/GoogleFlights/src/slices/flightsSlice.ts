@@ -311,8 +311,19 @@ const flightsSlice = createSlice({
         if (state.flights.length > 0) {
           const prices = state.flights.map(f => f.total_price_cents)
           const durations = state.flights.map(f => f.duration_minutes)
-          state.priceRangeMax = [Math.min(...prices), Math.max(...prices)]
-          state.durationRangeMax = [Math.min(...durations), Math.max(...durations)]
+          const oldPriceMax = state.priceRangeMax
+          const oldDurationMax = state.durationRangeMax
+          const newPriceMin = Math.min(...prices)
+          const newPriceMax = Math.max(...prices)
+          const newDurationMin = Math.min(...durations)
+          const newDurationMax = Math.max(...durations)
+          state.priceRangeMax = [newPriceMin, newPriceMax]
+          state.durationRangeMax = [newDurationMin, newDurationMax]
+          // Expand priceRange/durationRange if they were at the old max bounds
+          if (state.priceRange[0] === oldPriceMax[0]) state.priceRange[0] = newPriceMin
+          if (state.priceRange[1] === oldPriceMax[1]) state.priceRange[1] = newPriceMax
+          if (state.durationRange[0] === oldDurationMax[0]) state.durationRange[0] = newDurationMin
+          if (state.durationRange[1] === oldDurationMax[1]) state.durationRange[1] = newDurationMax
         }
       })
       .addCase(loadMoreFlights.rejected, (state) => {
