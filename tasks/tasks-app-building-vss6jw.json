@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/reviews-section.spec.ts"
-      ],
-      "timestamp": "2026-03-14T21:45:21.187Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/search.spec.ts"
       ],
       "timestamp": "2026-03-14T21:45:21.187Z",
@@ -52,7 +44,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/property-grid.spec.ts"
+      "FixTests: tests/reviews-section.spec.ts"
     ],
     "timestamp": "2026-03-14T21:45:21.187Z",
     "app": "AirbnbClone"

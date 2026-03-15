@@ -75,20 +75,20 @@
   },
   "suites": [
     {
-      "title": "property-grid.spec.ts",
-      "file": "property-grid.spec.ts",
+      "title": "reviews-section.spec.ts",
+      "file": "reviews-section.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Home Page - PropertyGrid",
-          "file": "property-grid.spec.ts",
-          "line": 3,
+          "title": "Property Detail - ReviewsSection",
+          "file": "reviews-section.spec.ts",
+          "line": 73,
           "column": 6,
           "specs": [
             {
-              "title": "Property grid displays properties in a responsive grid layout",
+              "title": "Reviews section displays average ratings by category",
               "ok": true,
               "tags": [],
               "tests": [
@@ -97,7 +97,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/e5276cc2-7d8f-401e-ab47-81fa6a1e6f65"
+                      "description": "https://app.replay.io/recording/442a1c58-9fd2-4107-9774-cb313bc48f53"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -108,12 +108,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3308,
+                      "duration": 3111,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:44.507Z",
+                      "startTime": "2026-03-15T01:08:35.088Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -121,13 +121,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-29deb0c5a04b4a3bb757",
-              "file": "property-grid.spec.ts",
-              "line": 4,
+              "id": "a71ed32437c169425cfe-3957e3b91b168aa5c31e",
+              "file": "reviews-section.spec.ts",
+              "line": 74,
               "column": 3
             },
             {
-              "title": "Property grid shows message when no properties match filters",
+              "title": "Reviews section displays overall average rating and total review count",
               "ok": true,
               "tags": [],
               "tests": [
@@ -136,7 +136,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/0f4b50ed-6461-420d-9ffe-1642645053fe"
+                      "description": "https://app.replay.io/recording/f8a65712-7f88-4dbf-bb35-126beb3023db"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -147,12 +147,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2404,
+                      "duration": 1326,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:47.970Z",
+                      "startTime": "2026-03-15T01:08:38.377Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -160,13 +160,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-a21c86fa2b57129a0fcc",
-              "file": "property-grid.spec.ts",
-              "line": 23,
+              "id": "a71ed32437c169425cfe-ae9c5037c372d0d8d12c",
+              "file": "reviews-section.spec.ts",
+              "line": 102,
               "column": 3
             },
             {
-              "title": "Property grid loads and displays properties from API on initial page load",
+              "title": "Reviews section displays individual review cards",
               "ok": true,
               "tags": [],
               "tests": [
@@ -175,7 +175,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/c4f2d8c6-3025-4b64-b835-bc2e039a2423"
+                      "description": "https://app.replay.io/recording/15e4701f-3239-4960-a911-879ba3256a6f"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -186,12 +186,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1470,
+                      "duration": 1377,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:50.389Z",
+                      "startTime": "2026-03-15T01:08:39.723Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -199,69 +199,30 @@
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-63ce45e0e4a95dc539cb",
-              "file": "property-grid.spec.ts",
-              "line": 38,
-              "column": 3
-            }
-          ]
-        },
-        {
-          "title": "Home Page - PropertyCard",
-          "file": "property-grid.spec.ts",
-          "line": 56,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Property card displays all required information",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [
-                    {
-                      "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/0a0eb363-9b4d-4091-95f5-d959f03ad2f0"
-                    }
-                  ],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1453,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T01:01:51.871Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "baebc498156c9aee719c-b123bee2cbb4fe042d5b",
-              "file": "property-grid.spec.ts",
-              "line": 57,
+              "id": "a71ed32437c169425cfe-a281a4031aa564a23977",
+              "file": "reviews-section.spec.ts",
+              "line": 114,
               "column": 3
             },
             {
-              "title": "Property card shows property image",
+              "title": "Review cards display guest avatar or initial",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 180000,
                   "annotations": [
                     {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                        "line": 130,
+                        "column": 10
+                      }
+                    },
+                    {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/b9eaa142-d27b-444a-b2b8-e9e022fab9c3"
+                      "description": "https://app.replay.io/recording/30138b78-10e2-4cdb-95c9-90c856fc39bf"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -272,26 +233,35 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1412,
+                      "duration": 3973,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:53.337Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T01:08:41.113Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                            "line": 130,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-4d9c1511b332c9524253",
-              "file": "property-grid.spec.ts",
-              "line": 86,
+              "id": "a71ed32437c169425cfe-b7001da1c1bb8caf12e8",
+              "file": "reviews-section.spec.ts",
+              "line": 129,
               "column": 3
             },
             {
-              "title": "Clicking a property card navigates to property detail page",
+              "title": "Reviews section shows message when property has no reviews",
               "ok": true,
               "tags": [],
               "tests": [
@@ -300,7 +270,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/f5b9633a-7488-49b2-a072-aec4c466fa52"
+                      "description": "https://app.replay.io/recording/e16de9f7-6631-47a9-9086-df95de948598"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -311,12 +281,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1473,
+                      "duration": 1358,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:54.761Z",
+                      "startTime": "2026-03-15T01:08:45.098Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -324,22 +294,30 @@
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-32c4ec8d24e764859287",
-              "file": "property-grid.spec.ts",
-              "line": 100,
+              "id": "a71ed32437c169425cfe-c85e680c12e2d0b907b6",
+              "file": "reviews-section.spec.ts",
+              "line": 170,
               "column": 3
             },
             {
-              "title": "Property card displays property type badge",
+              "title": "Reviews section handles pagination or Show more for many reviews",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 180000,
                   "annotations": [
                     {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                        "line": 184,
+                        "column": 10
+                      }
+                    },
+                    {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/029b66a7-9088-4976-9f4c-891ad96f7efb"
+                      "description": "https://app.replay.io/recording/52d3067c-5da9-4eb2-bd9d-b9d4e4bfd6e0"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -350,35 +328,52 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1434,
+                      "duration": 11398,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:56.250Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T01:08:46.470Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                            "line": 184,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-fdac8fd90e988354964d",
-              "file": "property-grid.spec.ts",
-              "line": 113,
+              "id": "a71ed32437c169425cfe-f5a031563e4e1a509573",
+              "file": "reviews-section.spec.ts",
+              "line": 183,
               "column": 3
             },
             {
-              "title": "Property card displays average rating with review count",
+              "title": "Clicking Show all reviews reveals all review cards",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
+                  "timeout": 180000,
                   "annotations": [
                     {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                        "line": 224,
+                        "column": 10
+                      }
+                    },
+                    {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/867d10de-7660-40ab-98e7-3a1b1bc7aa1a"
+                      "description": "https://app.replay.io/recording/781120eb-e4b6-42da-a442-73128e7e8362"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -389,22 +384,87 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1568,
+                      "duration": 16586,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T01:01:57.696Z",
-                      "annotations": [],
+                      "startTime": "2026-03-15T01:08:57.889Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                            "line": 224,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "baebc498156c9aee719c-7643f23471e7806e7aeb",
-              "file": "property-grid.spec.ts",
-              "line": 132,
+              "id": "a71ed32437c169425cfe-9b76e75d65db887fdb23",
+              "file": "reviews-section.spec.ts",
+              "line": 223,
+              "column": 3
+            },
+            {
+              "title": "Reviews are ordered by most recent first",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                        "line": 267,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/e42b1062-1789-4b7b-a50a-21e533c788fe"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11828,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:09:14.494Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/reviews-section.spec.ts",
+                            "line": 267,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "a71ed32437c169425cfe-11020739acc09d81547f",
+              "file": "reviews-section.spec.ts",
+              "line": 266,
               "column": 3
             }
           ]
@@ -414,8 +474,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T01:01:38.976Z",
-    "duration": 20483.488999999998,
+    "startTime": "2026-03-15T01:08:29.565Z",
+    "duration": 56926.907999999996,
     "expected": 8,
     "skipped": 0,
     "unexpected": 0,

@@ -15,6 +15,31 @@ async function deleteAllReviewsForProperty(page: import('@playwright/test').Page
   }
 }
 
+async function deleteNonSeedBookingsForProperty(page: import('@playwright/test').Page, propertyId: string) {
+  const seedIds = [
+    'e1111111-1111-1111-1111-111111111111',
+    'e2222222-2222-2222-2222-222222222222',
+    'e3333333-3333-3333-3333-333333333333',
+    'e4444444-4444-4444-4444-444444444444',
+    'e5555555-5555-5555-5555-555555555555',
+    'e6666666-6666-6666-6666-666666666666',
+  ]
+  const res = await page.request.get(`/api/bookings?guest_id=${GUEST_EMMA_ID}`)
+  const emmaBookings = await res.json()
+  for (const b of emmaBookings) {
+    if (b.property_id === propertyId && !seedIds.includes(b.id)) {
+      await page.request.delete(`/api/bookings/${b.id}`)
+    }
+  }
+  const res2 = await page.request.get(`/api/bookings?guest_id=${GUEST_ALEX_ID}`)
+  const alexBookings = await res2.json()
+  for (const b of alexBookings) {
+    if (b.property_id === propertyId && !seedIds.includes(b.id)) {
+      await page.request.delete(`/api/bookings/${b.id}`)
+    }
+  }
+}
+
 async function createBookingAndReview(
   page: import('@playwright/test').Page,
   propertyId: string,
@@ -162,8 +187,9 @@ test.describe('Property Detail - ReviewsSection', () => {
     await page.goto(`/properties/${PROPERTY_NO_REVIEWS}`)
     await expect(page.getByTestId('reviews-section')).toBeVisible({ timeout: 30000 })
 
-    // Clean up any reviews
+    // Clean up any reviews and non-seed bookings to avoid date overlap conflicts
     await deleteAllReviewsForProperty(page, PROPERTY_NO_REVIEWS)
+    await deleteNonSeedBookingsForProperty(page, PROPERTY_NO_REVIEWS)
 
     // Create 8 bookings + reviews (non-overlapping dates)
     for (let i = 0; i < 8; i++) {
@@ -201,6 +227,7 @@ test.describe('Property Detail - ReviewsSection', () => {
     await expect(page.getByTestId('reviews-section')).toBeVisible({ timeout: 30000 })
 
     await deleteAllReviewsForProperty(page, PROPERTY_NO_REVIEWS)
+    await deleteNonSeedBookingsForProperty(page, PROPERTY_NO_REVIEWS)
 
     // Create 8 bookings + reviews
     for (let i = 0; i < 8; i++) {
@@ -244,6 +271,7 @@ test.describe('Property Detail - ReviewsSection', () => {
     await expect(page.getByTestId('reviews-section')).toBeVisible({ timeout: 30000 })
 
     await deleteAllReviewsForProperty(page, PROPERTY_NO_REVIEWS)
+    await deleteNonSeedBookingsForProperty(page, PROPERTY_NO_REVIEWS)
 
     // Older review from Emma (January 2025)
     await createBookingAndReview(page, PROPERTY_NO_REVIEWS, GUEST_EMMA_ID, '2025-01-01', '2025-01-05', {
