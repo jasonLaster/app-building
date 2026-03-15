@@ -15,7 +15,7 @@ export default function BecomeHostButton({ userId, isHost }: BecomeHostButtonPro
   const [loading, setLoading] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
 
-  if (isHost) return null
+  if (isHost && !successMessage) return null
 
   const handleConfirm = async () => {
     setLoading(true)
@@ -40,17 +40,19 @@ export default function BecomeHostButton({ userId, isHost }: BecomeHostButtonPro
         </div>
       )}
 
-      <button
-        data-testid="become-host-button"
-        onClick={() => setShowConfirm(true)}
-        className="w-full flex items-center justify-center gap-2 py-3 rounded-lg font-semibold text-white transition-colors"
-        style={{ backgroundColor: '#FF5A5F' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E04E52')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FF5A5F')}
-      >
-        <Home size={18} />
-        Become a Host
-      </button>
+      {!isHost && (
+        <button
+          data-testid="become-host-button"
+          onClick={() => setShowConfirm(true)}
+          className="w-full flex items-center justify-center gap-2 py-3 rounded-lg font-semibold text-white transition-colors"
+          style={{ backgroundColor: '#FF5A5F' }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E04E52')}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FF5A5F')}
+        >
+          <Home size={18} />
+          Become a Host
+        </button>
+      )}
 
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" data-testid="become-host-dialog">

@@ -20,6 +20,34 @@ async function deleteAllReviewsForGuest(page: import('@playwright/test').Page, g
   }
 }
 
+async function resetHostStatus(page: import('@playwright/test').Page, userId: string) {
+  await page.request.post(`/api/users/${userId}/reset-host`)
+}
+
+async function deleteNonSeedBookings(page: import('@playwright/test').Page) {
+  await page.request.delete('/api/bookings')
+}
+
+async function resetEmmaReviewsToSeed(page: import('@playwright/test').Page) {
+  await deleteAllReviewsForGuest(page, EMMA_ID)
+  await deleteNonSeedBookings(page)
+  // Re-create seed review for Emma's completed booking
+  await page.request.post('/api/reviews', {
+    data: {
+      booking_id: 'e1111111-1111-1111-1111-111111111111',
+      property_id: 'b1111111-1111-1111-1111-111111111111',
+      guest_id: EMMA_ID,
+      rating: 5,
+      cleanliness: 5,
+      accuracy: 5,
+      communication: 5,
+      location: 5,
+      value: 4,
+      comment: 'Absolutely loved this loft! The city views are even better than the photos. Sarah was a wonderful host. Would definitely stay again.',
+    },
+  })
+}
+
 async function createBookingAndReview(
   page: import('@playwright/test').Page,
   propertyId: string,
@@ -53,6 +81,7 @@ async function createBookingAndReview(
 test.describe('Profile Page - BecomeHostButton', () => {
   test('Become a Host button is visible for non-host users', async ({ page }) => {
     test.slow()
+    await resetHostStatus(page, EMMA_ID)
     await login(page, 'emma@example.com')
     await page.goto('/profile')
 
@@ -71,6 +100,7 @@ test.describe('Profile Page - BecomeHostButton', () => {
 
   test('Clicking Become a Host sets user as host', async ({ page }) => {
     test.slow()
+    await resetHostStatus(page, EMMA_ID)
     await login(page, 'emma@example.com')
     await page.goto('/profile')
 
@@ -94,6 +124,7 @@ test.describe('Profile Page - BecomeHostButton', () => {
 
   test('Cancel Become a Host confirmation dialog', async ({ page }) => {
     test.slow()
+    await resetHostStatus(page, EMMA_ID)
     await login(page, 'emma@example.com')
     await page.goto('/profile')
 
@@ -113,6 +144,7 @@ test.describe('Profile Page - BecomeHostButton', () => {
 
   test('Become a Host button appearance', async ({ page }) => {
     test.slow()
+    await resetHostStatus(page, EMMA_ID)
     await login(page, 'emma@example.com')
     await page.goto('/profile')
 
@@ -132,6 +164,7 @@ test.describe('Profile Page - UserReviewsList', () => {
     test.slow()
     // Emma has 1 review for "Cozy Downtown Loft with City Views" rated 5
     await login(page, 'emma@example.com')
+    await resetEmmaReviewsToSeed(page)
     await page.goto('/profile')
 
     await expect(page.getByTestId('user-reviews-list')).toBeVisible({ timeout: 30000 })
@@ -170,6 +203,7 @@ test.describe('Profile Page - UserReviewsList', () => {
     test.slow()
     // Emma's review has rating 5
     await login(page, 'emma@example.com')
+    await resetEmmaReviewsToSeed(page)
     await page.goto('/profile')
 
     await expect(page.getByTestId('user-reviews-list')).toBeVisible({ timeout: 30000 })
@@ -188,6 +222,7 @@ test.describe('Profile Page - UserReviewsList', () => {
     test.slow()
     // Emma's review is for property b1111111-1111-1111-1111-111111111111
     await login(page, 'emma@example.com')
+    await resetEmmaReviewsToSeed(page)
     await page.goto('/profile')
 
     await expect(page.getByTestId('user-reviews-list')).toBeVisible({ timeout: 30000 })
@@ -204,10 +239,11 @@ test.describe('Profile Page - UserReviewsList', () => {
 
   test('Reviews list shows review details correctly', async ({ page }) => {
     test.slow()
-    // Set up: delete existing reviews for Emma, create one with specific details
+    // Set up: delete existing reviews for Emma and non-seed bookings, create one with specific details
     await login(page, 'emma@example.com')
 
     await deleteAllReviewsForGuest(page, EMMA_ID)
+    await deleteNonSeedBookings(page)
     await createBookingAndReview(page, PROPERTY_VILLA, EMMA_ID, '2025-07-01', '2025-07-05', {
       rating: 5,
       cleanliness: 5,
@@ -245,10 +281,11 @@ test.describe('Profile Page - UserReviewsList', () => {
 
   test('Reviews list updates after writing a new review', async ({ page }) => {
     test.slow()
-    // Set up: delete all of Emma's reviews, create 2 new reviews via API
+    // Set up: delete all of Emma's reviews and non-seed bookings, create 2 new reviews via API
     await login(page, 'emma@example.com')
 
     await deleteAllReviewsForGuest(page, EMMA_ID)
+    await deleteNonSeedBookings(page)
 
     // Create 2 reviews for Emma on different properties
     await createBookingAndReview(page, PROPERTY_VILLA, EMMA_ID, '2025-06-01', '2025-06-05', {
@@ -282,7 +319,10 @@ test.describe('Profile Page - UserReviewsList', () => {
     await page.goto('/trips/e1111111-1111-1111-1111-111111111111/review')
     await expect(page.getByTestId('review-form')).toBeVisible({ timeout: 30000 })
 
-    // Fill in the review
+    // Fill in the review - set all ratings first
+    for (const key of ['rating', 'cleanliness', 'accuracy', 'communication', 'location', 'value']) {
+      await page.getByTestId(`rating-input-${key}`).fill('5')
+    }
     await page.getByTestId('review-comment-textarea').fill('Fantastic loft with amazing views!')
     await page.getByTestId('submit-review-button').click()
 
@@ -306,10 +346,11 @@ test.describe('Profile Page - UserReviewsList', () => {
 
   test('Reviews list shows multiple reviews in chronological order', async ({ page }) => {
     test.slow()
-    // Set up: delete all of Emma's reviews, create 3 with specific dates
+    // Set up: delete all of Emma's reviews and non-seed bookings, create 3 with specific dates
     await login(page, 'emma@example.com')
 
     await deleteAllReviewsForGuest(page, EMMA_ID)
+    await deleteNonSeedBookings(page)
 
     // Create 3 reviews with different dates (inserted in non-chronological order to test sorting)
     await createBookingAndReview(page, PROPERTY_VILLA, EMMA_ID, '2025-06-01', '2025-06-05', {
