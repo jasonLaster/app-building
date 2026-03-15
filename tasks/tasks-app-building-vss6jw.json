@@ -3,18 +3,19 @@
     {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "Unpack: Deploy tested app to production"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-14T18:32:06.248Z",
+      "timestamp": "2026-03-15T01:35:03.374Z",
       "app": "AirbnbClone"
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/testing.md",
+    "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "FixTests: tests/write-review-sliders.spec.ts"
+      "Unpack: Deploy tested app to production"
     ],
-    "timestamp": "2026-03-14T21:45:21.187Z",
+    "timestamp": "2026-03-14T18:32:06.248Z",
     "app": "AirbnbClone"
   }
 }
