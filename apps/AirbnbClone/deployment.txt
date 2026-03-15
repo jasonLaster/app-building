@@ -19,3 +19,14 @@ Changes:
 - Added Tailwind CSS v4 with Vite plugin for production build
 - Added SPA routing redirects for Netlify
 - Replay recording: https://app.replay.io/recording/23652cf3-9a59-46b3-806d-fc28382c1eaa
+
+--- Deployment 2026-03-15 ---
+Changes:
+- Redeployment with test fixes across multiple spec files
+- Fixed write-review-sliders, write-review-form, write-review-context tests
+- Fixed search, reviews-section, property-grid, property-detail tests
+- Fixed profile-host-reviews, profile-form, pagination tests
+- Fixed my-trips-tabs, my-trips-review-order, my-trips-cards, my-trips-cancel-dialog tests
+- Fixed image-gallery, host-info-card, host-dashboard-listings, host-dashboard-bookings tests
+- Deployment test passed: data displays and write operations work
+- Replay recording upload failed (API key limit reached), local recording ID: 5d3c8406-17ce-46c8-b36d-6862ffcf25c5

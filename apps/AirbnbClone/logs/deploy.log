@@ -7,8 +7,8 @@ rendering chunks...
 computing gzip size...
 dist/index.html                     0.46 kB │ gzip:   0.30 kB
 dist/assets/index-BJgZ59QQ.css     41.05 kB │ gzip:   6.88 kB
-dist/assets/index-BaB4rp7P.js   1,406.98 kB │ gzip: 241.99 kB │ map: 2,707.23 kB
-✓ built in 4.01s
+dist/assets/index-CRzalpfa.js   1,409.33 kB │ gzip: 242.60 kB │ map: 2,711.56 kB
+✓ built in 3.86s
 
 === Deploy ===
 ​
@@ -20,7 +20,7 @@ Netlify Build
 ​
 > Flags
   accountId: 67db64f88522edc0da7e6ec8
-  deployId: 69b5d54369a13fd41b17ec29
+  deployId: 69b60d0155d43cb32569b03b
 ​
 > Current directory
   /repo/apps/AirbnbClone
@@ -46,10 +46,10 @@ rendering chunks...
 computing gzip size...
 dist/index.html                     0.46 kB │ gzip:   0.30 kB
 dist/assets/index-BJgZ59QQ.css     41.05 kB │ gzip:   6.88 kB
-dist/assets/index-BaB4rp7P.js   1,406.98 kB │ gzip: 241.99 kB │ map: 2,707.23 kB
-✓ built in 3.87s
+dist/assets/index-CRzalpfa.js   1,409.33 kB │ gzip: 242.60 kB │ map: 2,711.56 kB
+✓ built in 3.92s
 ​
-(build.command completed in 4.4s)
+(build.command completed in 4.5s)
 ​
 Functions bundling                                            
 ────────────────────────────────────────────────────────────────
@@ -82,7 +82,7 @@ Deploying to Netlify
 Netlify Build Complete                                        
 ────────────────────────────────────────────────────────────────
 ​
-(Netlify Build completed in 20.5s)
+(Netlify Build completed in 20.7s)
 
 🚀 Deploy complete
 ────────────────────────────────────────────────────────────────
@@ -92,11 +92,11 @@ Netlify Build Complete
   │   Deployed to production URL: https://magenta-jelly-44409b.netlify.app   │
   │                                                                          │
   │                            Unique deploy URL:                            │
-  │    https://69b5d54369a13fd41b17ec29--magenta-jelly-44409b.netlify.app    │
+  │    https://69b60d0155d43cb32569b03b--magenta-jelly-44409b.netlify.app    │
   │                                                                          │
   ╰──────────────────────────────────────────────────────────────────────────╯
 
-[32mBuild logs: [39m        https://app.netlify.com/projects/magenta-jelly-44409b/deploys/69b5d54369a13fd41b17ec29
+[32mBuild logs: [39m        https://app.netlify.com/projects/magenta-jelly-44409b/deploys/69b60d0155d43cb32569b03b
 [32mFunction logs: [39m     https://app.netlify.com/projects/magenta-jelly-44409b/logs/functions
 [32mEdge function Logs: [39mhttps://app.netlify.com/projects/magenta-jelly-44409b/logs/edge-functions
 
