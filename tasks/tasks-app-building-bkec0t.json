@@ -5,6 +5,454 @@
       "subtasks": [
         "FixTests: tests/burndown-chart.spec.ts"
       ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/create-cycle.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/create-issue-modal-actions-integration.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/create-issue-modal-cycles-dates.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/create-issue-modal-form.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/create-issue-modal-selectors.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/cycle-detail.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/cycle-list.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/deployment.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/group-by-sort-group.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/group-by-sort-sort.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/inbox-list.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/issue-detail-activity-comments.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/issue-detail-description.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/issue-detail-header.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/issue-detail-sidebar-fields.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/issue-detail-sidebar.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/issue-detail-sub-issues.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/keyboard-shortcuts.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/labels-create.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/labels-edit.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/labels-list.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/login.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/members-actions.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/members-invite.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/members-list.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-issues-filters.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-issues-row.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/my-issues.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/notification-row.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-card.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-header-lead-progress.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-header.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-issues-bulk.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-issues-tab.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-overview-description.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-overview-metrics.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/project-overview-milestones.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/projects-create-modal.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/projects-page-filters.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/settings-page.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/sidebar-collapse.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/sidebar-navigation.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/sidebar.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/signup.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-issues-bulk-actions.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-issues-create.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-issues-filters-advanced.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-issues-filters.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-issues-row.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-issues.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-settings-members.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/team-settings.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/teams-create-advanced.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/teams-create.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/teams-page.spec.ts"
+      ],
+      "timestamp": "2026-03-15T03:07:12.082Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/build/testing.md",
+      "subtasks": [
+        "FixTests: tests/burndown-chart.spec.ts"
+      ],
       "timestamp": "2026-03-14T23:49:38.971Z",
       "app": "LinearClone"
     },
