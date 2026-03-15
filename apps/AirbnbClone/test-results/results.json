@@ -1,0 +1,456 @@
+{
+  "config": {
+    "configFile": "/repo/apps/AirbnbClone/playwright.config.ts",
+    "rootDir": "/repo/apps/AirbnbClone/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/repo/apps/AirbnbClone/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/repo/apps/AirbnbClone/tests",
+        "testIgnore": [
+          "**/deployment.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": {
+      "command": "PATH=/tmp/fake-deno:$PATH npx netlify dev --offline --port 8888 --functions ./netlify/functions",
+      "port": 8888,
+      "timeout": 120000,
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "image-gallery.spec.ts",
+      "file": "image-gallery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Property Detail - ImageGallery",
+          "file": "image-gallery.spec.ts",
+          "line": 22,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Image gallery displays main large image and smaller thumbnails",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31634,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:42:27",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                          "column": 27,
+                          "line": 42
+                        },
+                        "snippet": "  40 |\n  41 |     const gallery = page.getByTestId('image-gallery')\n> 42 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n     |                           ^\n  43 |\n  44 |     // Main image should be visible\n  45 |     const mainImage = gallery.locator('img').first()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                            "column": 27,
+                            "line": 42
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n\n  40 |\n  41 |     const gallery = page.getByTestId('image-gallery')\n> 42 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n     |                           ^\n  43 |\n  44 |     // Main image should be visible\n  45 |     const mainImage = gallery.locator('img').first()\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:42:27"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T23:32:48.264Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/image-gallery-Property-Det-573c9-mage-and-smaller-thumbnails/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                        "column": 27,
+                        "line": 42
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-b3e718f955aa3dac8421",
+              "file": "image-gallery.spec.ts",
+              "line": 38,
+              "column": 3
+            },
+            {
+              "title": "Clicking a thumbnail image makes it the main displayed image",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31171,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:109:27",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                          "column": 27,
+                          "line": 109
+                        },
+                        "snippet": "  107 |\n  108 |     const gallery = page.getByTestId('image-gallery')\n> 109 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n      |                           ^\n  110 |\n  111 |     // Main image area is the first child of the grid\n  112 |     const mainImageArea = gallery.locator('> div > div').first()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                            "column": 27,
+                            "line": 109
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n\n  107 |\n  108 |     const gallery = page.getByTestId('image-gallery')\n> 109 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n      |                           ^\n  110 |\n  111 |     // Main image area is the first child of the grid\n  112 |     const mainImageArea = gallery.locator('> div > div').first()\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:109:27"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T23:33:25.020Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/image-gallery-Property-Det-b590a-it-the-main-displayed-image/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                        "column": 27,
+                        "line": 109
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-643a6421fb5d7a7327e9",
+              "file": "image-gallery.spec.ts",
+              "line": 105,
+              "column": 3
+            },
+            {
+              "title": "Clicking thumbnails is functional on repeated use",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31060,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:133:27",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                          "column": 27,
+                          "line": 133
+                        },
+                        "snippet": "  131 |\n  132 |     const gallery = page.getByTestId('image-gallery')\n> 133 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n      |                           ^\n  134 |\n  135 |     const mainImageArea = gallery.locator('> div > div').first()\n  136 |     const thumbnails = gallery.locator('[data-testid^=\"thumbnail-\"]')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                            "column": 27,
+                            "line": 133
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n\n  131 |\n  132 |     const gallery = page.getByTestId('image-gallery')\n> 133 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n      |                           ^\n  134 |\n  135 |     const mainImageArea = gallery.locator('> div > div').first()\n  136 |     const thumbnails = gallery.locator('[data-testid^=\"thumbnail-\"]')\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:133:27"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T23:33:58.048Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/image-gallery-Property-Det-5a351--functional-on-repeated-use/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                        "column": 27,
+                        "line": 133
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-b9737d203252e3b4d896",
+              "file": "image-gallery.spec.ts",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "Image gallery shows image captions when available",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 31085,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:158:27",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                          "column": 27,
+                          "line": 158
+                        },
+                        "snippet": "  156 |\n  157 |     const gallery = page.getByTestId('image-gallery')\n> 158 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n      |                           ^\n  159 |\n  160 |     // Main image should show its caption\n  161 |     await expect(gallery).toContainText('Pool overlooking ocean')"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                            "column": 27,
+                            "line": 158
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('image-gallery')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('image-gallery')\u001b[22m\n\n\n  156 |\n  157 |     const gallery = page.getByTestId('image-gallery')\n> 158 |     await expect(gallery).toBeVisible({ timeout: 30000 })\n      |                           ^\n  159 |\n  160 |     // Main image should show its caption\n  161 |     await expect(gallery).toContainText('Pool overlooking ocean')\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:158:27"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T23:34:31.035Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/image-gallery-Property-Det-a1e8f-age-captions-when-available/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                        "column": 27,
+                        "line": 158
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "8f0d378bd1d999f0bae0-16401df4958dc8df63f9",
+              "file": "image-gallery.spec.ts",
+              "line": 154,
+              "column": 3
+            }
+          ],
+          "suites": [
+            {
+              "title": "Destructive image tests",
+              "file": "image-gallery.spec.ts",
+              "line": 54,
+              "column": 17,
+              "specs": [
+                {
+                  "title": "Image gallery displays single image when property has only one image",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "",
+                      "projectName": "",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 1442,
+                          "error": {
+                            "message": "SyntaxError: Unexpected token 'E', \"Error: con\"... is not valid JSON",
+                            "stack": "SyntaxError: Unexpected token 'E', \"Error: con\"... is not valid JSON\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:58:24",
+                            "location": {
+                              "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                              "column": 24,
+                              "line": 58
+                            },
+                            "snippet": "  56 |       // Delete one of the two images from property b4444444 to leave only one\n  57 |       const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)\n> 58 |       const property = await propertyResponse.json()\n     |                        ^\n  59 |       const images = property.images as { id: string }[]\n  60 |\n  61 |       // Delete all images except the first one"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                                "column": 24,
+                                "line": 58
+                              },
+                              "message": "SyntaxError: Unexpected token 'E', \"Error: con\"... is not valid JSON\n\n  56 |       // Delete one of the two images from property b4444444 to leave only one\n  57 |       const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)\n> 58 |       const property = await propertyResponse.json()\n     |                        ^\n  59 |       const images = property.images as { id: string }[]\n  60 |\n  61 |       // Delete all images except the first one\n    at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:58:24"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-03-15T23:33:21.747Z",
+                          "annotations": [],
+                          "attachments": [],
+                          "errorLocation": {
+                            "file": "/repo/apps/AirbnbClone/tests/image-gallery.spec.ts",
+                            "column": 24,
+                            "line": 58
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "8f0d378bd1d999f0bae0-79c262f19608a564ecd9",
+                  "file": "image-gallery.spec.ts",
+                  "line": 55,
+                  "column": 5
+                },
+                {
+                  "title": "Image gallery displays placeholder when property has no images",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 60000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "",
+                      "projectName": "",
+                      "results": [
+                        {
+                          "workerIndex": -1,
+                          "parallelIndex": -1,
+                          "status": "skipped",
+                          "duration": 0,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-03-15T23:33:24.496Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "skipped"
+                    }
+                  ],
+                  "id": "8f0d378bd1d999f0bae0-576d11ecc90ffd5162f4",
+                  "file": "image-gallery.spec.ts",
+                  "line": 81,
+                  "column": 5
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-15T23:32:45.834Z",
+    "duration": 137614.367,
+    "expected": 0,
+    "skipped": 1,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

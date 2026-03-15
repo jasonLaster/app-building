@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: ImageGallery component does not display image captions visibly - captions are only used as alt text but test spec requires them displayed below or overlaying images",
-        "RunTests: Run tests/image-gallery.spec.ts to verify fix"
-      ],
-      "timestamp": "2026-03-15T21:19:21.048Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "FixViolation: PropertyInfo component only shows check-in/check-out times but test spec expects it to also display property_type, max_guests, bedrooms, beds, bathrooms with icons. These details are currently in PropertyHeader instead of PropertyInfo",
         "RunTests: Run tests/property-detail.spec.ts to verify fix"
       ],
@@ -104,7 +95,7 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: Wrap image-gallery.spec.ts destructive tests (single image and no images tests that delete from PROPERTY_FOR_SINGLE) in test.describe.serial",
+      "FixViolation: ImageGallery component does not display image captions visibly - captions are only used as alt text but test spec requires them displayed below or overlaying images",
       "RunTests: Run tests/image-gallery.spec.ts to verify fix"
     ],
     "timestamp": "2026-03-15T21:19:21.048Z",

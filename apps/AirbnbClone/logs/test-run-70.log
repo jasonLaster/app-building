@@ -1,0 +1,99 @@
+Cleaned up stale branch: test-run-1773617232599
+Created branch: test-run-1773617236062 (br-dark-dawn-a6aw64uj)
+Test DB URL: postgresql://neondb_owner:***@ep-twilight-lake-a64g2ftz.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+Wrote DATABASE_URL to .env: postgresql://neondb_owner:***@ep-twilight-lake-a64g2ftz.us-west-2.aws.neon.tech/neondb?sslmode=require
+.env contents: NEON_PROJECT_ID=muddy-art-91639904
+DATABASE_URL=postgresql://***
+
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/search.spec.ts:12:3 › Home Page - SearchBar › Search bar displays all input fields on load
+
+[1A[2K[2/10] tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results
+[1A[2K  1) tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('[data-testid^="property-card-"]').first()
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for locator('[data-testid^="property-card-"]').first()[22m
+
+
+      26 |   test('Search by location filters property results', async ({ page }) => {
+      27 |     await page.goto('/')
+    > 28 |     await expect(page.locator('[data-testid^="property-card-"]').first()).toBeVisible({ timeout: 30000 })
+         |                                                                           ^
+      29 |
+      30 |     await page.getByTestId('search-location').fill('New York')
+      31 |     await page.getByTestId('search-button').click()
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:28:75
+
+    Error Context: test-results/search-Home-Page---SearchB-4a315-on-filters-property-results/error-context.md
+
+
+
+[1A[2K[3/10] tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results
+[1A[2K  2) tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results 
+
+    NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.
+
+       at ../scripts/seed-db.ts:7
+
+       5 |
+       6 |   // Truncate in dependency order (leaf tables first)
+    >  7 |   await sql`TRUNCATE favorites CASCADE`
+         |   ^
+       8 |   await sql`TRUNCATE reviews CASCADE`
+       9 |   await sql`TRUNCATE bookings CASCADE`
+      10 |   await sql`TRUNCATE property_amenities CASCADE`
+        at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)
+        at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)
+        at /repo/apps/AirbnbClone/tests/search.spec.ts:7:5
+
+
+[1A[2K[4/10] tests/search.spec.ts:51:3 › Home Page - SearchBar › Search by guest count filters results
+[1A[2K[5/10] tests/search.spec.ts:63:3 › Home Page - SearchBar › Combined search with all fields filters results
+[1A[2K[6/10] tests/search.spec.ts:79:3 › Home Page - SearchBar › Clearing search fields and re-searching shows all results
+[1A[2K[7/10] tests/search.spec.ts:96:3 › Home Page - SearchBar › Search bar is functional on repeated use
+[1A[2K[8/10] tests/search.spec.ts:118:3 › Home Page - SearchBar › Check-in date picker prevents selecting past dates
+[1A[2K[9/10] tests/search.spec.ts:126:3 › Home Page - SearchBar › Check-out date must be after check-in date
+[1A[2K[10/10] tests/search.spec.ts:136:3 › Home Page - SearchBar › Guest count selector enforces minimum of 1
+[1A[2K  2 failed
+    tests/search.spec.ts:26:3 › Home Page - SearchBar › Search by location filters property results 
+    tests/search.spec.ts:38:3 › Home Page - SearchBar › Search by check-in and check-out dates filters results 
+  7 did not run
+  1 passed (35.5s)
+
+(node:39632) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:39733) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:39659) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:39860) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

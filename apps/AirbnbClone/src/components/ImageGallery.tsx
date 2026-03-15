@@ -44,6 +44,11 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             alt={mainImage!.caption || 'Property image'}
             className="w-full h-full object-cover"
           />
+          {mainImage!.caption && (
+            <span className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+              {mainImage!.caption}
+            </span>
+          )}
         </div>
         {thumbnails.slice(0, 4).map((img, i) => {
           const originalIndex = images.indexOf(img)
@@ -61,6 +66,11 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
                 alt={img.caption || 'Property image'}
                 className="w-full h-full object-cover"
               />
+              {img.caption && (
+                <span className="absolute bottom-1 left-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">
+                  {img.caption}
+                </span>
+              )}
             </div>
           )
         })}

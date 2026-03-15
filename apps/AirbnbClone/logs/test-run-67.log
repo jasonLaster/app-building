@@ -1,0 +1,172 @@
+Created branch: test-run-1773616009176 (br-flat-surf-a6ia2hy2)
+Test DB URL: postgresql://neondb_owner:***@ep-divine-star-a6edgceq.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 6 tests using 1 worker
+
+
+[1A[2K[1/6] tests/image-gallery.spec.ts:38:3 › Property Detail - ImageGallery › Image gallery displays main large image and smaller thumbnails
+
+[1A[2K  1) tests/image-gallery.spec.ts:38:3 › Property Detail - ImageGallery › Image gallery displays main large image and smaller thumbnails 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('image-gallery')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('image-gallery')[22m
+
+
+      40 |
+      41 |     const gallery = page.getByTestId('image-gallery')
+    > 42 |     await expect(gallery).toBeVisible({ timeout: 30000 })
+         |                           ^
+      43 |
+      44 |     // Main image should be visible
+      45 |     const mainImage = gallery.locator('img').first()
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:42:27
+
+    Error Context: test-results/image-gallery-Property-Det-573c9-mage-and-smaller-thumbnails/error-context.md
+
+
+
+[1A[2K[2/6] tests/image-gallery.spec.ts:55:5 › Property Detail - ImageGallery › Destructive image tests › Image gallery displays single image when property has only one image
+[1A[2K  2) tests/image-gallery.spec.ts:55:5 › Property Detail - ImageGallery › Destructive image tests › Image gallery displays single image when property has only one image 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      56 |       // Delete one of the two images from property b4444444 to leave only one
+      57 |       const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 58 |       const property = await propertyResponse.json()
+         |                        ^
+      59 |       const images = property.images as { id: string }[]
+      60 |
+      61 |       // Delete all images except the first one
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:58:24
+
+
+[1A[2K[3/6] tests/image-gallery.spec.ts:81:5 › Property Detail - ImageGallery › Destructive image tests › Image gallery displays placeholder when property has no images
+
+[1A[2K[4/6] tests/image-gallery.spec.ts:105:3 › Property Detail - ImageGallery › Clicking a thumbnail image makes it the main displayed image
+[1A[2K  3) tests/image-gallery.spec.ts:105:3 › Property Detail - ImageGallery › Clicking a thumbnail image makes it the main displayed image 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('image-gallery')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('image-gallery')[22m
+
+
+      107 |
+      108 |     const gallery = page.getByTestId('image-gallery')
+    > 109 |     await expect(gallery).toBeVisible({ timeout: 30000 })
+          |                           ^
+      110 |
+      111 |     // Main image area is the first child of the grid
+      112 |     const mainImageArea = gallery.locator('> div > div').first()
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:109:27
+
+    Error Context: test-results/image-gallery-Property-Det-b590a-it-the-main-displayed-image/error-context.md
+
+
+
+[1A[2K[5/6] tests/image-gallery.spec.ts:129:3 › Property Detail - ImageGallery › Clicking thumbnails is functional on repeated use
+[1A[2K  4) tests/image-gallery.spec.ts:129:3 › Property Detail - ImageGallery › Clicking thumbnails is functional on repeated use 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('image-gallery')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('image-gallery')[22m
+
+
+      131 |
+      132 |     const gallery = page.getByTestId('image-gallery')
+    > 133 |     await expect(gallery).toBeVisible({ timeout: 30000 })
+          |                           ^
+      134 |
+      135 |     const mainImageArea = gallery.locator('> div > div').first()
+      136 |     const thumbnails = gallery.locator('[data-testid^="thumbnail-"]')
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:133:27
+
+    Error Context: test-results/image-gallery-Property-Det-5a351--functional-on-repeated-use/error-context.md
+
+
+
+[1A[2K[6/6] tests/image-gallery.spec.ts:154:3 › Property Detail - ImageGallery › Image gallery shows image captions when available
+[1A[2K  5) tests/image-gallery.spec.ts:154:3 › Property Detail - ImageGallery › Image gallery shows image captions when available 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('image-gallery')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('image-gallery')[22m
+
+
+      156 |
+      157 |     const gallery = page.getByTestId('image-gallery')
+    > 158 |     await expect(gallery).toBeVisible({ timeout: 30000 })
+          |                           ^
+      159 |
+      160 |     // Main image should show its caption
+      161 |     await expect(gallery).toContainText('Pool overlooking ocean')
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:158:27
+
+    Error Context: test-results/image-gallery-Property-Det-a1e8f-age-captions-when-available/error-context.md
+
+
+[1A[2K  5 failed
+    tests/image-gallery.spec.ts:38:3 › Property Detail - ImageGallery › Image gallery displays main large image and smaller thumbnails 
+    tests/image-gallery.spec.ts:55:5 › Property Detail - ImageGallery › Destructive image tests › Image gallery displays single image when property has only one image 
+    tests/image-gallery.spec.ts:105:3 › Property Detail - ImageGallery › Clicking a thumbnail image makes it the main displayed image 
+    tests/image-gallery.spec.ts:129:3 › Property Detail - ImageGallery › Clicking thumbnails is functional on repeated use 
+    tests/image-gallery.spec.ts:154:3 › Property Detail - ImageGallery › Image gallery shows image captions when available 
+  1 did not run
+
+(node:36257) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:36356) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:36284) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:36464) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:36546) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:36634) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:36725) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

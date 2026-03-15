@@ -45,6 +45,33 @@ function tryExec(cmd: string, opts?: Parameters<typeof execSync>[1]) {
   try { execSync(cmd, opts) } catch { /* ignored */ }
 }
 
+function writeEnvValue(key: string, value: string) {
+  const envPath = join(appDir, '.env')
+  let content = ''
+  if (existsSync(envPath)) {
+    content = readFileSync(envPath, 'utf-8')
+    const lines = content.split('\n')
+    const idx = lines.findIndex(l => l.startsWith(key + '='))
+    if (idx >= 0) {
+      lines[idx] = `${key}=${value}`
+      content = lines.join('\n')
+    } else {
+      content = content.trimEnd() + '\n' + `${key}=${value}` + '\n'
+    }
+  } else {
+    content = `${key}=${value}\n`
+  }
+  writeFileSync(envPath, content)
+}
+
+function removeEnvValue(key: string) {
+  const envPath = join(appDir, '.env')
+  if (!existsSync(envPath)) return
+  const content = readFileSync(envPath, 'utf-8')
+  const lines = content.split('\n').filter(l => !l.startsWith(key + '='))
+  writeFileSync(envPath, lines.join('\n'))
+}
+
 const testFile = process.argv[2]
 if (!testFile) {
   console.error('Usage: npm run test <test-file>')
@@ -136,7 +163,10 @@ async function run() {
     process.exit(1)
   }
 
-  // Step 5 & 6: Remove stale recordings
+  // Step 5: Write DATABASE_URL to .env so netlify dev functions can access it
+  writeEnvValue('DATABASE_URL', testDbUrl)
+
+  // Step 6: Remove stale recordings
   tryExec('npx replayio remove --all 2>/dev/null || true', { stdio: 'ignore', cwd: appDir })
 
   // Step 7: Run Playwright
@@ -245,6 +275,7 @@ async function run() {
   }
 
   // Step 10: Cleanup
+  removeEnvValue('DATABASE_URL')
   cleanup(branchId, neonProjectId, neonApiKey)
   tryExec('npx replayio remove --all 2>/dev/null || true', { stdio: 'ignore', cwd: appDir })
 
