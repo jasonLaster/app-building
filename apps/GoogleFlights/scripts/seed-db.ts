@@ -297,6 +297,164 @@ export async function truncateAndSeed(databaseUrl: string) {
       { origin: 'ORD', dest: 'JFK', dep: '2026-04-01 21:30', arr: '2026-04-02 00:00', dur: 150, terminal_dep: 'T2', terminal_arr: 'T5' }
     ])
 
+  // ============================================================
+  // SFO→JFK comprehensive seed: ~1,050 flights over Mar 16 – Apr 15
+  // Covers all permutations of airline, time-of-day, nonstop/connecting,
+  // aircraft, amenities, and price tiers across 31 days.
+  // ============================================================
+  {
+    // Nonstop flight templates: [airlineCode, flightNumPrefix, depHour, depMin, durationMin, aircraft, wifi, power, entertainment, co2, basePrice]
+    const nonstopTemplates: [string, string, number, number, number, string, boolean, boolean, boolean, number, number][] = [
+      // Early morning departures (5-7am) — red-eye arrivals
+      ['UA', 'UA7', 5, 0, 325, 'Boeing 777-200', true, true, true, 155, 189],
+      ['DL', 'DL7', 5, 30, 330, 'Boeing 767-400', true, true, false, 160, 199],
+      ['AA', 'AA7', 6, 0, 330, 'Boeing 737 MAX', true, false, false, 165, 179],
+      ['B6', 'B67', 6, 30, 330, 'Airbus A321', true, true, false, 150, 159],
+      ['NK', 'NK7', 7, 0, 335, 'Airbus A320neo', false, false, false, 145, 89],
+      // Morning departures (8-10am) — premium time slots
+      ['UA', 'UA8', 8, 0, 325, 'Boeing 787-9', true, true, true, 155, 249],
+      ['DL', 'DL8', 8, 30, 330, 'Airbus A321neo', true, true, true, 155, 259],
+      ['AA', 'AA8', 9, 0, 330, 'Boeing 777-300ER', true, true, true, 170, 279],
+      ['AS', 'AS7', 9, 30, 335, 'Boeing 737-900ER', true, true, false, 155, 169],
+      ['WN', 'WN7', 10, 0, 340, 'Boeing 737-800', false, false, false, 145, 109],
+      // Midday departures (11am-1pm)
+      ['UA', 'UA9', 11, 0, 330, 'Boeing 787-10', true, true, true, 160, 229],
+      ['DL', 'DL9', 11, 30, 325, 'Airbus A330-300', true, true, true, 165, 239],
+      ['AA', 'AA9', 12, 0, 330, 'Boeing 787-9', true, true, true, 170, 249],
+      ['B6', 'B68', 12, 30, 335, 'Airbus A321LR', true, true, false, 150, 169],
+      ['F9', 'F97', 13, 0, 340, 'Airbus A321neo', false, false, false, 155, 79],
+      // Afternoon departures (2-4pm)
+      ['UA', 'UA0', 14, 0, 325, 'Boeing 777-200', true, true, true, 155, 269],
+      ['DL', 'DL0', 14, 30, 330, 'Boeing 757-200', true, true, true, 150, 219],
+      ['AA', 'AA0', 15, 0, 330, 'Boeing 737-800', true, true, false, 160, 209],
+      ['AS', 'AS8', 15, 30, 335, 'Boeing 737-900ER', true, true, false, 155, 179],
+      // Evening departures (5-7pm) — business traveler slots
+      ['UA', 'UA1', 17, 0, 325, 'Boeing 787-9', true, true, true, 160, 299],
+      ['DL', 'DL1', 17, 30, 330, 'Airbus A330-900neo', true, true, true, 165, 309],
+      ['AA', 'AA1', 18, 0, 330, 'Boeing 777-300ER', true, true, true, 175, 329],
+      ['B6', 'B69', 18, 30, 335, 'Airbus A321', true, true, false, 150, 189],
+      // Late/red-eye departures (9-11pm)
+      ['UA', 'UA2', 21, 0, 320, 'Boeing 787-9', true, true, true, 155, 199],
+      ['DL', 'DL2', 22, 0, 315, 'Airbus A321neo', true, true, true, 150, 179],
+      ['AA', 'AA2', 23, 0, 310, 'Boeing 737 MAX', true, false, false, 160, 159],
+    ]
+
+    // 1-stop connecting flight templates: [airlineCode, flightNumPrefix, depHour, depMin, totalDur, aircraft, wifi, power, entertainment, co2, basePrice, hubCode, leg1Dur, layoverMin, leg2Dur, leg1TermDep, leg1TermArr, leg2TermDep, leg2TermArr]
+    const connectingTemplates: [string, string, number, number, number, string, boolean, boolean, boolean, number, number, string, number, number, number, string, string, string, string][] = [
+      // Via ORD (Chicago)
+      ['UA', 'UA3', 6, 0, 420, 'Boeing 737-900', true, true, false, 195, 149, 'ORD', 240, 90, 150, 'T2', 'T1', 'T1', 'T5'],
+      ['AA', 'AA3', 8, 0, 450, 'Boeing 737-800', true, true, false, 200, 139, 'ORD', 240, 120, 150, 'T2', 'T3', 'T3', 'T8'],
+      ['UA', 'UA4', 13, 0, 430, 'Airbus A320neo', true, true, false, 190, 159, 'ORD', 240, 100, 150, 'T2', 'T1', 'T2', 'T5'],
+      // Via DFW (Dallas)
+      ['AA', 'AA4', 7, 0, 460, 'Boeing 737 MAX', true, true, false, 210, 129, 'DFW', 210, 120, 210, 'T2', 'TC', 'TC', 'T8'],
+      ['AA', 'AA5', 14, 0, 440, 'Boeing 737-800', true, true, false, 205, 139, 'DFW', 210, 100, 200, 'T2', 'TC', 'TC', 'T8'],
+      // Via DEN (Denver)
+      ['UA', 'UA5', 9, 0, 470, 'Boeing 737-800', true, false, false, 200, 119, 'DEN', 180, 120, 240, 'T2', 'B', 'B', 'T5'],
+      ['F9', 'F98', 11, 0, 490, 'Airbus A321neo', false, false, false, 210, 89, 'DEN', 180, 150, 230, 'T2', 'A', 'A', 'T5'],
+      // Via ATL (Atlanta)
+      ['DL', 'DL3', 7, 30, 440, 'Boeing 757-200', true, true, true, 195, 139, 'ATL', 270, 90, 150, 'T2', 'S', 'S', 'T4'],
+      ['DL', 'DL4', 15, 0, 460, 'Airbus A321neo', true, true, true, 200, 149, 'ATL', 270, 100, 150, 'T2', 'S', 'T', 'T4'],
+      // Via LAX (Los Angeles)
+      ['AA', 'AA6', 6, 30, 480, 'Boeing 737-800', true, true, false, 215, 119, 'LAX', 90, 120, 330, 'T2', 'T4', 'T4', 'T8'],
+      ['DL', 'DL5', 10, 0, 460, 'Airbus A320', true, true, false, 205, 129, 'LAX', 90, 90, 330, 'T2', 'T5', 'T5', 'T4'],
+      // Via SEA (Seattle — backtrack connecting)
+      ['AS', 'AS9', 8, 0, 510, 'Boeing 737-900ER', true, true, false, 220, 109, 'SEA', 120, 120, 330, 'T2', 'N', 'N', 'T5'],
+    ]
+
+    // Date range: March 16 – April 15, 2026 (31 days)
+    const startDate = new Date('2026-03-16')
+    const numDays = 31
+
+    // Seeded deterministic "random" for reproducible variation
+    let seed = 42
+    function seededRandom(): number {
+      seed = (seed * 1103515245 + 12345) & 0x7fffffff
+      return (seed >> 16) / 32768
+    }
+
+    // Price multipliers by day-of-week: Fri/Sun premium, Tue/Wed discount
+    const dowPriceMultipliers = [1.15, 0.95, 0.88, 0.88, 0.98, 1.22, 1.18] // Sun-Sat
+
+    // Advance purchase discount: closer dates are more expensive
+    function advancePriceMult(daysOut: number): number {
+      if (daysOut <= 3) return 1.35
+      if (daysOut <= 7) return 1.20
+      if (daysOut <= 14) return 1.05
+      if (daysOut <= 21) return 0.95
+      return 0.90
+    }
+
+    for (let d = 0; d < numDays; d++) {
+      const date = new Date(startDate)
+      date.setDate(date.getDate() + d)
+      const dateStr = date.toISOString().split('T')[0]!
+      const dow = date.getDay() // 0=Sun
+      const daysFromToday = Math.max(1, Math.round((date.getTime() - new Date('2026-03-15').getTime()) / 86400000))
+
+      const dowMult = dowPriceMultipliers[dow]!
+      const advMult = advancePriceMult(daysFromToday)
+
+      // Nonstop flights — vary which ones operate each day for realism
+      for (let t = 0; t < nonstopTemplates.length; t++) {
+        const tmpl = nonstopTemplates[t]!
+        // Skip some flights on certain days for variety (but keep majority)
+        const skipHash = (d * 31 + t * 7) % 10
+        if (skipHash === 0) continue // ~10% of flights don't operate on a given day
+
+        const [airline, prefix, depH, depM, dur, aircraft, wifi, power, ent, co2, baseEcon] = tmpl
+        const dayNum = String(d + 1).padStart(2, '0')
+        const flightNum = `${prefix}${dayNum}`
+        const depHStr = String(depH).padStart(2, '0')
+        const depMStr = String(depM).padStart(2, '0')
+        const depTimeStr = `${dateStr} ${depHStr}:${depMStr}`
+
+        // Calculate arrival
+        const depDate = new Date(`${dateStr}T${depHStr}:${depMStr}:00`)
+        const arrDate = new Date(depDate.getTime() + dur * 60000)
+        const arrStr = `${arrDate.getFullYear()}-${String(arrDate.getMonth() + 1).padStart(2, '0')}-${String(arrDate.getDate()).padStart(2, '0')} ${String(arrDate.getHours()).padStart(2, '0')}:${String(arrDate.getMinutes()).padStart(2, '0')}`
+
+        // Price varies by day-of-week, advance purchase, and random noise
+        const noise = 0.90 + seededRandom() * 0.20 // ±10% noise
+        const price = Math.round(baseEcon * dowMult * advMult * noise)
+
+        await createFlight(airline, flightNum, 'SFO', 'JFK', depTimeStr, arrStr, dur, aircraft, wifi, power, ent, co2, price)
+      }
+
+      // Connecting flights — fewer per day
+      for (let t = 0; t < connectingTemplates.length; t++) {
+        const tmpl = connectingTemplates[t]!
+        // ~20% skip for connecting flights
+        const skipHash = (d * 17 + t * 13) % 5
+        if (skipHash === 0) continue
+
+        const [airline, prefix, depH, depM, totalDur, aircraft, wifi, power, ent, co2, baseEcon, hubCode, leg1Dur, layoverMin, leg2Dur, l1td, l1ta, l2td, l2ta] = tmpl
+        const dayNum = String(d + 1).padStart(2, '0')
+        const flightNum = `${prefix}${dayNum}`
+        const depHStr = String(depH).padStart(2, '0')
+        const depMStr = String(depM).padStart(2, '0')
+        const depTimeStr = `${dateStr} ${depHStr}:${depMStr}`
+
+        // Leg 1 arrival
+        const depDate = new Date(`${dateStr}T${depHStr}:${depMStr}:00`)
+        const leg1Arr = new Date(depDate.getTime() + leg1Dur * 60000)
+        const leg2Dep = new Date(leg1Arr.getTime() + layoverMin * 60000)
+        const leg2Arr = new Date(leg2Dep.getTime() + leg2Dur * 60000)
+
+        function fmtDt(dt: Date): string {
+          return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')} ${String(dt.getHours()).padStart(2, '0')}:${String(dt.getMinutes()).padStart(2, '0')}`
+        }
+
+        const noise = 0.88 + seededRandom() * 0.24 // wider noise for connecting
+        const price = Math.round(baseEcon * dowMult * advMult * noise)
+
+        await createFlight(airline, flightNum, 'SFO', 'JFK', depTimeStr, fmtDt(leg2Arr), totalDur, aircraft, wifi, power, ent, co2, price, [
+          { origin: 'SFO', dest: hubCode, dep: depTimeStr, arr: fmtDt(leg1Arr), dur: leg1Dur, terminal_dep: l1td, terminal_arr: l1ta },
+          { origin: hubCode, dest: 'JFK', dep: fmtDt(leg2Dep), arr: fmtDt(leg2Arr), dur: leg2Dur, terminal_dep: l2td, terminal_arr: l2ta }
+        ])
+      }
+    }
+  }
+
   // LAX-LHR
   await createFlight('BA', 'BA500', 'LAX', 'LHR', '2026-04-01 20:00', '2026-04-02 14:30', 630, 'Boeing 777-300ER', true, true, true, 380, 649)
   await createFlight('AA', 'AA800', 'LAX', 'LHR', '2026-04-01 18:00', '2026-04-02 12:30', 630, 'Boeing 787-9', true, true, true, 370, 599)
