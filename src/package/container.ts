@@ -358,6 +358,16 @@ export async function startContainer(
   config: ContainerConfig,
   repo: RepoOptions,
 ): Promise<AgentState> {
+  const { token, projectId, environment } = config.infisical;
+  if (!token || !projectId || !environment) {
+    const missing = [
+      !token && "token",
+      !projectId && "projectId",
+      !environment && "environment",
+    ].filter(Boolean);
+    throw new Error(`Missing Infisical credentials: ${missing.join(", ")}. Containers cannot start without Infisical.`);
+  }
+
   debugLog("startContainer config:", {
     projectRoot: config.projectRoot,
     flyApp: config.flyApp,
