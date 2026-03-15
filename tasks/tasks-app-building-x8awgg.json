@@ -3,18 +3,19 @@
     {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "Unpack: Deploy tested app to production"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-14T18:21:13.050Z",
+      "timestamp": "2026-03-15T09:41:00.392Z",
       "app": "GoogleFlights"
     }
   ],
   "current": {
-    "skill": "skills/tasks/build/testing.md",
+    "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "FixTests: tests/trips-tabs.spec.ts"
+      "Unpack: Deploy tested app to production"
     ],
-    "timestamp": "2026-03-14T21:03:06.948Z",
+    "timestamp": "2026-03-14T18:21:13.050Z",
     "app": "GoogleFlights"
   }
 }
