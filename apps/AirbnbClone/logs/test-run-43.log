@@ -1,0 +1,333 @@
+Created branch: test-run-1773606833719 (br-dry-snow-a6cjjqjz)
+Test DB URL: postgresql://neondb_owner:***@ep-aged-flower-a68nfwtx.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+
+
+Running 16 tests using 1 worker
+
+
+[1A[2K[1/16] tests/auth.spec.ts:18:5 › Auth Page › AuthToggle › Auth page defaults to login mode
+
+
+[1A[2K  1) tests/auth.spec.ts:18:5 › Auth Page › AuthToggle › Auth page defaults to login mode ───────────
+
+    Error: apiRequestContext.delete: socket hang up
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+
+      12 |   test.beforeEach(async ({ request }) => {
+      13 |     // Delete all non-seed users created by registration tests
+    > 14 |     await request.delete('http://localhost:8888/api/auth')
+         |                         ^
+      15 |   })
+      16 |
+      17 |   test.describe('AuthToggle', () => {
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[2/16] tests/auth.spec.ts:29:5 › Auth Page › AuthToggle › Toggle from login to register mode
+[1A[2K  2) tests/auth.spec.ts:29:5 › Auth Page › AuthToggle › Toggle from login to register mode ─────────
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[3/16] tests/auth.spec.ts:42:5 › Auth Page › AuthToggle › Toggle from register back to login mode
+[1A[2K  3) tests/auth.spec.ts:42:5 › Auth Page › AuthToggle › Toggle from register back to login mode ────
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[4/16] tests/auth.spec.ts:57:5 › Auth Page › AuthToggle › Toggle preserves no stale input between modes
+[1A[2K  4) tests/auth.spec.ts:57:5 › Auth Page › AuthToggle › Toggle preserves no stale input between modes 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[5/16] tests/auth.spec.ts:74:5 › Auth Page › LoginForm › Login with valid email redirects to home
+[1A[2K  5) tests/auth.spec.ts:74:5 › Auth Page › LoginForm › Login with valid email redirects to home ────
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[6/16] tests/auth.spec.ts:83:5 › Auth Page › LoginForm › Login with empty email shows validation error
+[1A[2K  6) tests/auth.spec.ts:83:5 › Auth Page › LoginForm › Login with empty email shows validation error 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[7/16] tests/auth.spec.ts:92:5 › Auth Page › LoginForm › Login with invalid email format shows validation error
+[1A[2K  7) tests/auth.spec.ts:92:5 › Auth Page › LoginForm › Login with invalid email format shows validation error 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[8/16] tests/auth.spec.ts:102:5 › Auth Page › LoginForm › Login with non-existent email shows error
+[1A[2K  8) tests/auth.spec.ts:102:5 › Auth Page › LoginForm › Login with non-existent email shows error ──
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[9/16] tests/auth.spec.ts:113:5 › Auth Page › LoginForm › Login form email input is functional on repeated use
+[1A[2K  9) tests/auth.spec.ts:113:5 › Auth Page › LoginForm › Login form email input is functional on repeated use 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[10/16] tests/auth.spec.ts:133:5 › Auth Page › RegisterForm › Register with valid name and email creates account and redirects to home
+[1A[2K  10) tests/auth.spec.ts:133:5 › Auth Page › RegisterForm › Register with valid name and email creates account and redirects to home 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[11/16] tests/auth.spec.ts:148:5 › Auth Page › RegisterForm › Register with empty name shows validation error
+[1A[2K  11) tests/auth.spec.ts:148:5 › Auth Page › RegisterForm › Register with empty name shows validation error 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[12/16] tests/auth.spec.ts:161:5 › Auth Page › RegisterForm › Register with empty email shows validation error
+[1A[2K  12) tests/auth.spec.ts:161:5 › Auth Page › RegisterForm › Register with empty email shows validation error 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[13/16] tests/auth.spec.ts:174:5 › Auth Page › RegisterForm › Register with invalid email format shows validation error
+[1A[2K  13) tests/auth.spec.ts:174:5 › Auth Page › RegisterForm › Register with invalid email format shows validation error 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[14/16] tests/auth.spec.ts:188:5 › Auth Page › RegisterForm › Register with already-existing email shows error
+[1A[2K  14) tests/auth.spec.ts:188:5 › Auth Page › RegisterForm › Register with already-existing email shows error 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[15/16] tests/auth.spec.ts:203:5 › Auth Page › RegisterForm › Register form fields are functional on repeated use
+[1A[2K  15) tests/auth.spec.ts:203:5 › Auth Page › RegisterForm › Register form fields are functional on repeated use 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+
+[1A[2K[16/16] tests/auth.spec.ts:228:5 › Auth Page › E2E Auth Flow › Complete signup, signout, and signin flow
+[1A[2K  16) tests/auth.spec.ts:228:5 › Auth Page › E2E Auth Flow › Complete signup, signout, and signin flow 
+
+    Error: apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+    Call log:
+    [2m  - → DELETE http://localhost:8888/api/auth[22m
+    [2m    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.6 Safari/537.36[22m
+    [2m    - accept: */*[22m
+    [2m    - accept-encoding: gzip,deflate,br[22m
+
+        at apiRequestContext.delete: connect ECONNREFUSED ::1:8888
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:14:25
+
+
+[1A[2K  16 failed
+    tests/auth.spec.ts:18:5 › Auth Page › AuthToggle › Auth page defaults to login mode ────────────
+    tests/auth.spec.ts:29:5 › Auth Page › AuthToggle › Toggle from login to register mode ──────────
+    tests/auth.spec.ts:42:5 › Auth Page › AuthToggle › Toggle from register back to login mode ─────
+    tests/auth.spec.ts:57:5 › Auth Page › AuthToggle › Toggle preserves no stale input between modes 
+    tests/auth.spec.ts:74:5 › Auth Page › LoginForm › Login with valid email redirects to home ─────
+    tests/auth.spec.ts:83:5 › Auth Page › LoginForm › Login with empty email shows validation error 
+    tests/auth.spec.ts:92:5 › Auth Page › LoginForm › Login with invalid email format shows validation error 
+    tests/auth.spec.ts:102:5 › Auth Page › LoginForm › Login with non-existent email shows error ───
+    tests/auth.spec.ts:113:5 › Auth Page › LoginForm › Login form email input is functional on repeated use 
+    tests/auth.spec.ts:133:5 › Auth Page › RegisterForm › Register with valid name and email creates account and redirects to home 
+    tests/auth.spec.ts:148:5 › Auth Page › RegisterForm › Register with empty name shows validation error 
+    tests/auth.spec.ts:161:5 › Auth Page › RegisterForm › Register with empty email shows validation error 
+    tests/auth.spec.ts:174:5 › Auth Page › RegisterForm › Register with invalid email format shows validation error 
+    tests/auth.spec.ts:188:5 › Auth Page › RegisterForm › Register with already-existing email shows error 
+    tests/auth.spec.ts:203:5 › Auth Page › RegisterForm › Register form fields are functional on repeated use 
+    tests/auth.spec.ts:228:5 › Auth Page › E2E Auth Flow › Complete signup, signout, and signin flow 
+
+(node:3575) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[1A[2K[WebServer] [33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K[WebServer] [33m⠋[39m Setting up the Edge Functions environment. This may take a couple of minutes.
+[1A[2K(node:3675) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [31m✖[39m Setting up the Edge Functions environment. This may take a couple of minutes.
+[1A[2K[WebServer]  [31m›[39m   [31mError:[39m [31mNetlify CLI has terminated unexpectedly.[39m
+[WebServer] 
+[WebServer] Please report this problem with reproduction steps at [4mhttps://ntl.fyi/cli-error[24m including the error details below.
+[WebServer] 
+[1A[2K(node:3802) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:3870) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:3939) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4003) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4069) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4137) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4202) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4268) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4334) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4402) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4469) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4534) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4600) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4667) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:4735) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

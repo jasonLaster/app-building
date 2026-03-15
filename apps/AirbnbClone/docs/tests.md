@@ -84,6 +84,13 @@
 - **Action:** User fills in name and an already-existing email, submits and gets an error, then changes the email to a new unique email and clicks "Register" again.
 - **Expected:** The second submission succeeds, the user is registered and redirected to home.
 
+### Component: E2E Auth Flow
+
+#### Test: Complete signup, signout, and signin flow
+- **Initial state:** User navigates to `/login` (not logged in). No account exists for the test email.
+- **Action:** User toggles to register mode, fills in a unique name and email, and clicks "Register". After being redirected to the home page, the user opens the sidebar menu and clicks "Log out". The user then navigates to `/login`, enters the same email used during registration, and clicks "Log In".
+- **Expected:** After registration, the user is redirected to the home page (`/`). After logging out, a "Log in" link is visible in the header. After logging in with the previously registered email, the user is redirected back to the home page (`/`), confirming the account was persisted and the full auth round-trip works.
+
 ## Page: Home / Search (`/`)
 
 <!-- Components: SearchBar, CategoryFilter, PropertyGrid, PropertyCard, FavoriteButton, FiltersPanel, Pagination -->

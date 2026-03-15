@@ -1,6 +1,19 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 test.describe('Auth Page', () => {
+  test.beforeEach(async ({ request }) => {
+    // Delete all non-seed users created by registration tests
+    await request.delete('http://localhost:8888/api/auth')
+  })
+
   test.describe('AuthToggle', () => {
     test('Auth page defaults to login mode', async ({ page }) => {
       await page.goto('/login')
@@ -207,6 +220,42 @@ test.describe('Auth Page', () => {
       await page.getByTestId('register-email-input').fill(uniqueEmail)
       await page.getByTestId('register-submit-button').click()
 
+      await expect(page).toHaveURL('/', { timeout: 30000 })
+    })
+  })
+
+  test.describe('E2E Auth Flow', () => {
+    test('Complete signup, signout, and signin flow', async ({ page }) => {
+      test.slow()
+      const uniqueEmail = `e2e-user-${Date.now()}@example.com`
+      const userName = `E2E User ${Date.now()}`
+
+      // Step 1: Sign up
+      await page.goto('/login')
+      await page.getByTestId('auth-toggle-link').click()
+      await expect(page.getByTestId('register-form')).toBeVisible()
+
+      await page.getByTestId('register-name-input').fill(userName)
+      await page.getByTestId('register-email-input').fill(uniqueEmail)
+      await page.getByTestId('register-submit-button').click()
+
+      // Verify post-signup state: redirected to home
+      await expect(page).toHaveURL('/', { timeout: 30000 })
+
+      // Step 2: Sign out
+      await page.getByTestId('sidebar-toggle').click()
+      await page.getByTestId('sidebar-logout').click()
+
+      // Verify signed out: login link visible in header
+      await expect(page.locator('a[href="/login"]')).toBeVisible({ timeout: 30000 })
+
+      // Step 3: Sign in with the new credentials
+      await page.goto('/login')
+      await expect(page.getByTestId('login-form')).toBeVisible()
+      await page.getByTestId('login-email-input').fill(uniqueEmail)
+      await page.getByTestId('login-submit-button').click()
+
+      // Verify authenticated state: redirected to home
       await expect(page).toHaveURL('/', { timeout: 30000 })
     })
   })
