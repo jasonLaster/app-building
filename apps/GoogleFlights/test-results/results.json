@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "tracked-route-card.spec.ts",
-      "file": "tracked-route-card.spec.ts",
+      "title": "trip-card.spec.ts",
+      "file": "trip-card.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "TrackedRouteCard",
-          "file": "tracked-route-card.spec.ts",
-          "line": 18,
+          "title": "TripCard",
+          "file": "trip-card.spec.ts",
+          "line": 25,
           "column": 6,
           "specs": [
             {
-              "title": "TrackedRouteCard displays route",
+              "title": "TripCard displays route information",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 634,
+                      "duration": 588,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:24.894Z",
+                      "startTime": "2026-03-15T09:32:55.718Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-6b4cca4f03d8cd467c9a",
-              "file": "tracked-route-card.spec.ts",
-              "line": 19,
+              "id": "e493fccf2688db394ea2-8fac9bce56cf8ae6aad7",
+              "file": "trip-card.spec.ts",
+              "line": 26,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard displays date range being tracked",
+              "title": "TripCard displays travel dates",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 323,
+                      "duration": 269,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:25.574Z",
+                      "startTime": "2026-03-15T09:32:56.366Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-c995e9048f68d3b2fa04",
-              "file": "tracked-route-card.spec.ts",
-              "line": 36,
+              "id": "e493fccf2688db394ea2-e5103fafac22943719b5",
+              "file": "trip-card.spec.ts",
+              "line": 43,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard displays current lowest price",
+              "title": "TripCard displays airline and flight info",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 327,
+                      "duration": 280,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:25.907Z",
+                      "startTime": "2026-03-15T09:32:56.641Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-c8520d45c57ea9805f6e",
-              "file": "tracked-route-card.spec.ts",
-              "line": 52,
+              "id": "e493fccf2688db394ea2-570ac30e4bacbbaf0f1a",
+              "file": "trip-card.spec.ts",
+              "line": 60,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard displays price trend indicator going up",
+              "title": "TripCard displays Confirmed status badge",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 314,
+                      "duration": 249,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:26.241Z",
+                      "startTime": "2026-03-15T09:32:56.927Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-ed2a94b3116e8a427aaf",
-              "file": "tracked-route-card.spec.ts",
-              "line": 68,
+              "id": "e493fccf2688db394ea2-f65c83df96233e2d4c0e",
+              "file": "trip-card.spec.ts",
+              "line": 79,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard displays price trend indicator going down",
+              "title": "TripCard displays Completed status badge",
               "ok": true,
               "tags": [],
               "tests": [
@@ -231,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 319,
+                      "duration": 272,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:26.561Z",
+                      "startTime": "2026-03-15T09:32:57.184Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -244,13 +244,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-0da0a556a95f11fc7c43",
-              "file": "tracked-route-card.spec.ts",
-              "line": 87,
+              "id": "e493fccf2688db394ea2-42ed6da09907f9ae061a",
+              "file": "trip-card.spec.ts",
+              "line": 95,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard Search button navigates to search results",
+              "title": "TripCard displays Cancelled status badge",
               "ok": true,
               "tags": [],
               "tests": [
@@ -265,12 +265,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 318,
+                      "duration": 266,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:26.886Z",
+                      "startTime": "2026-03-15T09:32:57.463Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -278,13 +278,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-1652f130911921fac814",
-              "file": "tracked-route-card.spec.ts",
-              "line": 106,
+              "id": "e493fccf2688db394ea2-d0cda6fa601ec58e5fcd",
+              "file": "trip-card.spec.ts",
+              "line": 112,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard Untrack button removes tracking",
+              "title": "TripCard displays price paid",
               "ok": true,
               "tags": [],
               "tests": [
@@ -299,12 +299,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 702,
+                      "duration": 239,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:27.210Z",
+                      "startTime": "2026-03-15T09:32:57.734Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -312,13 +312,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-4a4898f6f529b11437a1",
-              "file": "tracked-route-card.spec.ts",
-              "line": 129,
+              "id": "e493fccf2688db394ea2-1dee17e657219a9c1b6e",
+              "file": "trip-card.spec.ts",
+              "line": 128,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard Untrack then re-check shows updated list",
+              "title": "TripCard displays booking reference",
               "ok": true,
               "tags": [],
               "tests": [
@@ -333,12 +333,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 581,
+                      "duration": 247,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:27.921Z",
+                      "startTime": "2026-03-15T09:32:57.979Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -346,13 +346,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-59b5a0ab0f810dcb37c6",
-              "file": "tracked-route-card.spec.ts",
-              "line": 145,
+              "id": "e493fccf2688db394ea2-661b0786bb677abc0caf",
+              "file": "trip-card.spec.ts",
+              "line": 143,
               "column": 3
             },
             {
-              "title": "TrackedRouteCard Search button works for multiple cards",
+              "title": "TripCard shows cancel button for upcoming confirmed flights",
               "ok": true,
               "tags": [],
               "tests": [
@@ -367,12 +367,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1048,
+                      "duration": 255,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T09:30:28.512Z",
+                      "startTime": "2026-03-15T09:32:58.232Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -380,9 +380,145 @@
                   "status": "expected"
                 }
               ],
-              "id": "5b3c6b191bae736147b5-17d0ec97d59b1f454700",
-              "file": "tracked-route-card.spec.ts",
-              "line": 171,
+              "id": "e493fccf2688db394ea2-1146df336f1235405848",
+              "file": "trip-card.spec.ts",
+              "line": 157,
+              "column": 3
+            },
+            {
+              "title": "TripCard does not show cancel button for past flights",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 292,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:32:58.493Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e493fccf2688db394ea2-ea4b28e67620ae377347",
+              "file": "trip-card.spec.ts",
+              "line": 173,
+              "column": 3
+            },
+            {
+              "title": "TripCard does not show cancel button for already cancelled flights",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 264,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:32:58.791Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e493fccf2688db394ea2-43bc73c6d043d33431da",
+              "file": "trip-card.spec.ts",
+              "line": 189,
+              "column": 3
+            },
+            {
+              "title": "TripCard displays round-trip with return flight info",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 262,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:32:59.062Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e493fccf2688db394ea2-71d72f55efeb5c93e11a",
+              "file": "trip-card.spec.ts",
+              "line": 208,
+              "column": 3
+            },
+            {
+              "title": "TripCard displays one-way trip correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "replay-chromium",
+                  "projectName": "replay-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 259,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T09:32:59.328Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e493fccf2688db394ea2-0989edf440b1968467f8",
+              "file": "trip-card.spec.ts",
+              "line": 244,
               "column": 3
             }
           ]
@@ -392,9 +528,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T09:30:24.399Z",
-    "duration": 5198.738,
-    "expected": 9,
+    "startTime": "2026-03-15T09:32:55.286Z",
+    "duration": 4327.567999999999,
+    "expected": 13,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
