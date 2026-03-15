@@ -1,6 +1,9 @@
 # Skill
 
-Instructions for testing your ability to reproduce a test failure benchmark problem and fix it correctly.
+Instructions for testing your ability to reproduce a test failure benchmark problem, fix it, and verify
+the fix was appropriate.
+
+Make sure to follow directions from the appropriate section below based on your current task.
 
 ## Unpacking subtasks
 
