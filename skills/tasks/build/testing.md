@@ -408,10 +408,21 @@ failures (~57% of observed failures come from shared database state).
    is no base URL to resolve against. Always ensure the page has navigated before making
    fetch calls via `page.evaluate`.
 
-12. **Weekend-safe seed data.** Seed data must include entries for the current day
-   regardless of day-of-week. Use relative date calculations (e.g., `new Date()`) rather
-   than hardcoded weekday dates. Tests that rely on "today's appointments" or similar
-   day-specific queries will fail on weekends if seed data only contains weekday entries.
+12. **Weekend-safe seed data with weekday-aware computation.** Seed data must include entries
+   for the current day regardless of day-of-week. Replace fixed day-offset arithmetic
+   (e.g., `today - N days`) with actual weekday computation that accounts for the current
+   day of week. Simple offsets like `today - 1` resolve to Saturday when run on Sunday,
+   which breaks queries filtering by business days. Use helper functions that skip weekends:
+   ```ts
+   function nextWeekday(date: Date): Date {
+     const d = new Date(date);
+     while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate() + 1);
+     return d;
+   }
+   ```
+   Tests that rely on "today's appointments", dashboard stats, or stylist schedules are
+   particularly affected — the Saturday execution issue caused 5+ spec file failures in one
+   session across dashboard stats, stylist appointments, and client visit history.
 
 13. **Use click-based interaction for custom dropdowns.** When the UI uses custom dropdown
     components (non-native `<select>`), tests must use click-based interaction patterns
@@ -479,11 +490,13 @@ failures (~57% of observed failures come from shared database state).
     or a subsequent setup step). This prevents 25% of data-contamination failures caused by
     destructive-ordering where later tests find an empty database.
 
-22. **API-format-aware test updates.** When a task changes backend API response formats
-    (e.g., switching from raw arrays to paginated `{items, total, page, pageSize}`
-    responses), the same task MUST update all affected test helpers and assertions. Do not
-    defer test updates to a later task — format mismatches cascade into widespread failures
-    (80+ tests in one session) that are expensive to fix after the fact.
+22. **API-format-aware test updates (post-refactoring test sweep).** When a polishApp,
+    checkDirectives, or any task changes backend API response formats (e.g., switching from
+    raw arrays to paginated `{items, total, page, pageSize}` responses), the same task MUST
+    run all spec files that import those endpoints before committing. The PaginateAPIs change
+    in one session caused 7 failures across 5 spec files that could have been caught
+    immediately with a full test sweep. Do not defer test updates to a later task — format
+    mismatches cascade into widespread `api-breaking-change` failures.
 
 ## Pre-Commit Checklist for New Spec Files
 

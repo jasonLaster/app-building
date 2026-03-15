@@ -55,17 +55,23 @@ the GET to complete before asserting.
 *Example*: Webhook toggle test. SearchSources showed the GET response handler had more
 hits than expected, and the late GET overwrote the PATCH result.
 
-### React strict mode double-firing effects
+### React strict mode double-effect race
 In development mode, React strict mode runs effects twice. If an effect makes an API call
 (e.g., fetching data on mount), the second call's response can arrive and overwrite state
-set by earlier interactions.
+set by earlier interactions. When a toggle or form state resets unexpectedly, this is often
+the cause — the duplicate API call resets state back to its original value.
 
 **Diagnosis tool sequence**: When a test hangs on an element action or shows stale data after
 a mutation, use `PlaywrightSteps → Screenshot → NetworkRequest` to check if concurrent API
 calls from StrictMode double-mounts are resetting state. NetworkRequest will show interleaved
-request ordering that reveals the race.
+request ordering that reveals the race. Replay NetworkRequest is the fastest diagnostic for
+this pattern — look for two requests to the same endpoint within milliseconds, where the
+timing sequence (e.g., fetch at 2421ms, PATCH at 2489ms) shows the duplicate response
+arriving between the user action and the intended state update.
 
-**Fix**: Ensure effects are idempotent, or use abort controllers to cancel stale requests.
+**Fix**: Use functional state updates or `useRef` to track user intent, ensuring that
+duplicate effect responses don't overwrite intentional user actions. Alternatively, use abort
+controllers to cancel stale requests.
 
 ### Cross-test data contamination
 When tests fail intermittently with unexpected data states (wrong counts, unexpected records,
@@ -413,6 +419,25 @@ useEffect(() => {
 ```
 
 This prevents overlapping fetches from separate effects racing against each other.
+
+### useEffect dependency closure (dropdown/modal closing unexpectedly)
+When dropdowns or modals close unexpectedly after opening, check `useEffect` dependency arrays
+for state values that trigger re-renders. A common pattern: `useEffect` depends on a value like
+`stylists.length`, and when an async fetch resolves and updates that value, the effect re-runs
+and resets UI state (e.g., closing a dropdown that was just opened).
+
+**Diagnosis with Replay**: `Logpoint` on the state setter (e.g., `setDropdownOpen`) reveals
+multiple calls — the user's open action followed by the effect-driven close. `PlaywrightSteps`
+shows the dropdown opening then immediately closing. The timing of the async resolution
+(e.g., `fetchStylists` at 1908ms closing a dropdown opened at 1793ms) confirms the cause.
+
+**Diagnosis without Replay**: If a dropdown or modal closes immediately after opening, check
+the component's `useEffect` hooks for dependencies that change asynchronously. Look for state
+values derived from API responses (e.g., `.length` of a fetched array) in dependency arrays.
+
+**Fix**: Remove the problematic value from the `useEffect` dependency array, or separate the
+effect into independent `useEffect` hooks so that unrelated state changes don't trigger
+UI-resetting side effects.
 
 ### Date.now() or shared identifiers across workers
 When parallel Playwright workers share a module-level `Date.now()` value for generating

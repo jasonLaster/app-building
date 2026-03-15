@@ -36,7 +36,9 @@ df -h / | awk 'NR==2 {print $4}'
 
 If free space is below 1GB, run the disk cleanup procedure in `skills/scripts/disk-cleanup.md`
 before proceeding. TypeScript compilation and ESLint both need temporary disk space — running
-them on a full disk produces confusing errors unrelated to your code.
+them on a full disk produces confusing ENOSPC errors unrelated to your code. When `npm run check`
+fails with ENOSPC, run disk cleanup (remove recordings, clear temp files) before retrying.
+Do NOT truncate log files to free space — this destroys data needed for post-session analysis.
 
 ## Proactive Cleanup Before Running
 

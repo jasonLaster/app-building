@@ -198,12 +198,14 @@ EOF
   data causes strict-mode violations and cross-test contamination when multiple tests create
   records with identical names. This is a template requirement for all test data creation.
 
-- When a test file's describe block contains tests that perform destructive mid-test operations
-  (e.g., deleting records via API requests during the test body) that would invalidate the
-  preconditions of other tests in the same block, wrap those tests in `test.describe.serial`
-  to guarantee sequential execution. With `fullyParallel: true` in the Playwright config,
-  tests within a plain `test.describe` can run concurrently or in any order, so a destructive
-  test may execute before or alongside tests that depend on the destroyed data.
+- **Tests that mutate shared database state MUST use serial mode.** When a test file's describe
+  block contains tests that create, modify, or delete database records, wrap them in
+  `test.describe.configure({ mode: 'serial' })` to guarantee sequential execution. This applies
+  to ALL tests that mutate shared state, not just destructive operations. With `fullyParallel: true`
+  in the Playwright config, tests within a plain `test.describe` can run concurrently, causing
+  parallel race condition failures when multiple tests read/write the same database tables
+  simultaneously. In observed sessions, adding serial mode was the fix for 4+ recurring parallel
+  interference failures.
 
 - When multiple tests in the same describe block perform state-changing operations on database
   records (e.g., submitting a claim, changing a status), each test must operate on a distinct
