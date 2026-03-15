@@ -79,7 +79,7 @@ export default async (request: Request, _context: Context) => {
       SELECT count(*)::int as total
       FROM properties p
       WHERE p.is_active = true
-        AND (${city} = '' OR LOWER(p.city) LIKE LOWER('%' || ${city} || '%'))
+        AND (${city} = '' OR LOWER(p.city) LIKE LOWER('%' || ${city} || '%') OR LOWER(p.title) LIKE LOWER('%' || ${city} || '%') OR LOWER(p.description) LIKE LOWER('%' || ${city} || '%'))
         AND (${guestsNum} = 0 OR p.max_guests >= ${guestsNum})
         AND (${propertyType} = '' OR p.property_type = ${propertyType})
         AND (${minPrice} = 0 OR p.price_per_night >= ${minPrice})
@@ -109,7 +109,7 @@ export default async (request: Request, _context: Context) => {
         (SELECT count(*)::int FROM reviews r WHERE r.property_id = p.id) as review_count
       FROM properties p
       WHERE p.is_active = true
-        AND (${city} = '' OR LOWER(p.city) LIKE LOWER('%' || ${city} || '%'))
+        AND (${city} = '' OR LOWER(p.city) LIKE LOWER('%' || ${city} || '%') OR LOWER(p.title) LIKE LOWER('%' || ${city} || '%') OR LOWER(p.description) LIKE LOWER('%' || ${city} || '%'))
         AND (${guestsNum} = 0 OR p.max_guests >= ${guestsNum})
         AND (${propertyType} = '' OR p.property_type = ${propertyType})
         AND (${minPrice} = 0 OR p.price_per_night >= ${minPrice})

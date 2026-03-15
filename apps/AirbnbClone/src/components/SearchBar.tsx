@@ -42,19 +42,24 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
     <form
       data-testid="search-bar"
       onSubmit={handleSubmit}
-      className="flex flex-wrap items-center gap-3 rounded-full border border-border bg-bg p-2 shadow-md"
+      className="flex items-center rounded-full border border-border bg-bg shadow-md hover:shadow-lg transition-shadow max-w-3xl mx-auto"
     >
-      <div className="flex-1 min-w-[160px]">
+      <div className="flex-1 min-w-0 px-6 py-3">
+        <label className="block text-xs font-semibold text-text">Where</label>
         <input
           data-testid="search-location"
           type="text"
-          placeholder="Where are you going?"
+          placeholder="Search destinations"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="w-full rounded-full px-4 py-2 text-sm text-text outline-none bg-transparent"
+          className="w-full text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary"
         />
       </div>
-      <div className="border-l border-border pl-3">
+
+      <div className="w-px h-8 bg-border shrink-0" />
+
+      <div className="px-4 py-3">
+        <label className="block text-xs font-semibold text-text">Check in</label>
         <input
           data-testid="search-checkin"
           type="date"
@@ -66,37 +71,47 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
               setCheckOut('')
             }
           }}
-          className="rounded-full px-3 py-2 text-sm text-text outline-none bg-transparent"
+          className="text-sm text-text-secondary outline-none bg-transparent"
         />
       </div>
-      <div className="border-l border-border pl-3">
+
+      <div className="w-px h-8 bg-border shrink-0" />
+
+      <div className="px-4 py-3">
+        <label className="block text-xs font-semibold text-text">Check out</label>
         <input
           data-testid="search-checkout"
           type="date"
           value={checkOut}
           min={checkOutMin}
           onChange={(e) => setCheckOut(e.target.value)}
-          className="rounded-full px-3 py-2 text-sm text-text outline-none bg-transparent"
+          className="text-sm text-text-secondary outline-none bg-transparent"
         />
       </div>
-      <div className="border-l border-border pl-3 flex items-center gap-2">
-        <input
-          data-testid="search-guests"
-          type="number"
-          min={1}
-          placeholder="Guests"
-          value={guests || ''}
-          onChange={(e) => handleGuestsChange(e.target.value)}
-          className="w-20 rounded-full px-3 py-2 text-sm text-text outline-none bg-transparent"
-        />
+
+      <div className="w-px h-8 bg-border shrink-0" />
+
+      <div className="flex items-center gap-2 pl-4 pr-2 py-2">
+        <div>
+          <label className="block text-xs font-semibold text-text">Who</label>
+          <input
+            data-testid="search-guests"
+            type="number"
+            min={1}
+            placeholder="Add guests"
+            value={guests || ''}
+            onChange={(e) => handleGuestsChange(e.target.value)}
+            className="w-24 text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary"
+          />
+        </div>
+        <button
+          data-testid="search-button"
+          type="submit"
+          className="flex items-center justify-center rounded-full bg-primary p-3 text-white hover:bg-primary-dark transition-colors shrink-0"
+        >
+          <Search size={16} />
+        </button>
       </div>
-      <button
-        data-testid="search-button"
-        type="submit"
-        className="flex items-center justify-center rounded-full bg-primary p-3 text-white hover:bg-primary-dark transition-colors"
-      >
-        <Search size={18} />
-      </button>
     </form>
   )
 }

@@ -29,12 +29,14 @@ export default function FavoriteButton({ propertyId }: FavoriteButtonProps) {
     <button
       data-testid={`favorite-button-${propertyId}`}
       onClick={handleClick}
-      className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-white/70 hover:bg-white/90 transition-colors"
+      className="absolute top-3 right-3 z-10 cursor-pointer"
       aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
     >
       <Heart
-        size={20}
-        className={isFavorited ? 'fill-primary text-primary' : 'text-text-secondary'}
+        size={24}
+        strokeWidth={2}
+        className={isFavorited ? 'fill-primary text-primary' : 'fill-black/30 text-white'}
+        style={{ filter: isFavorited ? 'none' : 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }}
       />
     </button>
   )

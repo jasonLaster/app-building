@@ -1,0 +1,9 @@
+{
+  "tasks": [],
+  "current": {
+    "skill": "",
+    "subtasks": [],
+    "timestamp": "2026-03-15T03:19:40.755Z",
+    "prompt": "Look at the reference screenshots in apps/AirbnbClone/screenshots/ - these are from the real Airbnb website. Update the UI to match the look and feel of real Airbnb as closely as possible. Additionally: 1) The date picker on the listing detail page should show listing availability (grey out dates that are already booked). 2) The search functionality should search across both listing title AND description, not just title."
+  }
+}

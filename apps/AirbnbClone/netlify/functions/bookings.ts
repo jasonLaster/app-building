@@ -100,6 +100,19 @@ export default async (request: Request, _context: Context) => {
 
   if (request.method === 'GET') {
     const guestId = url.searchParams.get('guest_id')
+    const propertyId = url.searchParams.get('property_id')
+
+    if (propertyId) {
+      const bookings = await sql`
+        SELECT check_in, check_out FROM bookings
+        WHERE property_id = ${propertyId}
+        AND status IN ('confirmed', 'pending')
+        AND check_out >= CURRENT_DATE
+        ORDER BY check_in ASC
+      `
+      return new Response(JSON.stringify(bookings), { status: 200, headers })
+    }
+
     if (!guestId) {
       return new Response(JSON.stringify({ error: 'guest_id is required' }), { status: 400, headers })
     }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Grid } from 'lucide-react'
 import type { PropertyImage } from '../slices/propertiesSlice'
 
 interface ImageGalleryProps {
@@ -27,11 +28,6 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             alt={mainImage!.caption || 'Property image'}
             className="w-full h-full object-cover"
           />
-          {mainImage!.caption && (
-            <p className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-sm px-3 py-1.5">
-              {mainImage!.caption}
-            </p>
-          )}
         </div>
       </div>
     )
@@ -40,45 +36,41 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
   const thumbnails = images.filter((_, i) => i !== mainIndex)
 
   return (
-    <div data-testid="image-gallery">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 rounded-xl overflow-hidden">
-        <div className="relative h-[400px]">
+    <div data-testid="image-gallery" className="relative">
+      <div className="grid grid-cols-4 gap-2 rounded-xl overflow-hidden h-[400px]">
+        <div className="col-span-2 row-span-2 relative cursor-pointer hover:opacity-95 transition-opacity">
           <img
             src={mainImage!.url}
             alt={mainImage!.caption || 'Property image'}
             className="w-full h-full object-cover"
           />
-          {mainImage!.caption && (
-            <p className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-sm px-3 py-1.5">
-              {mainImage!.caption}
-            </p>
-          )}
         </div>
-        <div className="grid grid-cols-2 gap-2 h-[400px]">
-          {thumbnails.slice(0, 4).map((img) => {
-            const originalIndex = images.indexOf(img)
-            return (
-              <div
-                key={img.id}
-                data-testid={`thumbnail-${img.id}`}
-                className="relative cursor-pointer overflow-hidden hover:opacity-90 transition-opacity"
-                onClick={() => setMainIndex(originalIndex)}
-              >
-                <img
-                  src={img.url}
-                  alt={img.caption || 'Property image'}
-                  className="w-full h-full object-cover"
-                />
-                {img.caption && (
-                  <p className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs px-2 py-1">
-                    {img.caption}
-                  </p>
-                )}
-              </div>
-            )
-          })}
-        </div>
+        {thumbnails.slice(0, 4).map((img, i) => {
+          const originalIndex = images.indexOf(img)
+          return (
+            <div
+              key={img.id}
+              data-testid={`thumbnail-${img.id}`}
+              className={`relative cursor-pointer overflow-hidden hover:opacity-90 transition-opacity ${
+                i === 1 ? 'rounded-tr-xl' : i === 3 ? 'rounded-br-xl' : ''
+              }`}
+              onClick={() => setMainIndex(originalIndex)}
+            >
+              <img
+                src={img.url}
+                alt={img.caption || 'Property image'}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )
+        })}
       </div>
+      {images.length > 5 && (
+        <button className="absolute bottom-4 right-4 flex items-center gap-2 bg-white border border-text rounded-lg px-4 py-1.5 text-sm font-semibold text-text hover:bg-bg-secondary transition-colors cursor-pointer">
+          <Grid size={14} />
+          Show all photos
+        </button>
+      )}
     </div>
   )
 }

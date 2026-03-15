@@ -15,10 +15,10 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   return (
     <div
       data-testid={`property-card-${property.id}`}
-      className="cursor-pointer rounded-xl overflow-visible group"
+      className="cursor-pointer group"
       onClick={() => navigate(`/properties/${property.id}`)}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+      <div className="relative aspect-square overflow-hidden rounded-xl">
         {property.main_image ? (
           <img
             src={property.main_image}
@@ -30,33 +30,29 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             No image
           </div>
         )}
-        <span
-          data-testid={`property-type-badge-${property.id}`}
-          className="absolute top-3 left-3 bg-white/90 text-text text-xs font-semibold px-2.5 py-1 rounded-full"
-        >
-          {property.property_type}
-        </span>
         <FavoriteButton propertyId={property.id} />
       </div>
-      <div className="mt-2.5">
-        <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-text text-sm truncate">{property.title}</h3>
+      <div className="mt-3">
+        <div className="flex items-start justify-between gap-1">
+          <h3 className="font-semibold text-text text-[15px] leading-tight truncate">
+            {property.city}, {property.country}
+          </h3>
           {reviewCount > 0 ? (
-            <div className="flex items-center gap-1 shrink-0 ml-2">
-              <Star size={14} className="fill-text text-text" />
-              <span className="text-sm font-medium text-text">{rating.toFixed(1)}</span>
-              <span className="text-sm text-text-secondary">({reviewCount})</span>
+            <div className="flex items-center gap-1 shrink-0">
+              <Star size={12} className="fill-text text-text" />
+              <span className="text-sm text-text">{rating.toFixed(2)}</span>
             </div>
           ) : (
-            <span className="text-sm text-text-secondary shrink-0 ml-2">New</span>
+            <span className="text-sm text-text-secondary shrink-0">New</span>
           )}
         </div>
-        <p className="text-text-secondary text-sm mt-0.5">
-          {property.city}, {property.country}
+        <p className="text-text-secondary text-sm mt-0.5 truncate">{property.title}</p>
+        <p className="text-text-secondary text-sm">
+          {property.property_type} · {property.bedrooms} {property.bedrooms === 1 ? 'bedroom' : 'bedrooms'} · {property.beds} {property.beds === 1 ? 'bed' : 'beds'}
         </p>
-        <p className="mt-1 text-sm">
+        <p className="mt-1.5 text-[15px]">
           <span className="font-semibold text-text">${Number(property.price_per_night).toFixed(0)}</span>
-          <span className="text-text-secondary"> / night</span>
+          <span className="text-text"> night</span>
         </p>
       </div>
     </div>
