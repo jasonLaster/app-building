@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/maintain/fixBugReport.md",
-      "subtasks": [
-        "Unpack: Fix open bug reports"
-      ],
-      "timestamp": "2026-03-15T20:11:15.079Z",
-      "app": "AirbnbClone"
-    },
-    {
       "skill": "skills/tasks/maintain/reviewBugReport.md",
       "subtasks": [
         "Unpack: Review fixed bug reports"
@@ -42,9 +34,9 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/mergeFromMain.md",
+    "skill": "skills/tasks/maintain/fixBugReport.md",
     "subtasks": [
-      "MergeFromMain: Merge latest main into branch"
+      "Unpack: Fix open bug reports"
     ],
     "timestamp": "2026-03-15T20:11:15.079Z",
     "app": "AirbnbClone"
