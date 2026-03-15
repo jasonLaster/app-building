@@ -1,0 +1,24 @@
+[2026-03-15T07:39:10.920Z] Committed: Look at the reference screenshots in apps/AirbnbClone/scr...
+  apps/AirbnbClone/docs/AppRevisions.md +34/-0
+  apps/AirbnbClone/logs/test-run-36.log +14/-0
+  apps/AirbnbClone/logs/test-run-37.log +16/-0
+  apps/AirbnbClone/logs/test-run-38.log +16/-0
+  apps/AirbnbClone/netlify.toml +6/-0
+  apps/AirbnbClone/playwright.config.ts +1/-1
+  apps/AirbnbClone/src/components/HostInfoCard.tsx +14/-4
+  apps/AirbnbClone/src/components/ImageGallery.tsx +2/-2
+  apps/AirbnbClone/src/components/PropertyCard.tsx +10/-3
+  apps/AirbnbClone/src/components/PropertyHeader.tsx +40/-27
+  apps/AirbnbClone/src/components/SearchBar.tsx +25/-28
+  apps/AirbnbClone/src/pages/PropertyDetail.tsx +4/-13
+  apps/AirbnbClone/test-results/.last-run.json +13/-2
+  apps/AirbnbClone/test-results/results.json +524/-0
+  logs/worker-app-building-e61kc0-1-2026-03-15T07-39-10-837Z.log +510/-0
+  tasks/tasks-app-building-e61kc0.json +9/-0
+  tasks/tasks-app-building-jubjf9.json +0/-3
+  tasks/tasks-app-building-vss6jw.json +0/-3
+[2026-03-15T07:39:13.851Z] Pushed 11fa317d55 to feature/airbnb-clone
+[2026-03-15T07:39:13.851Z] Task signaled <DONE>. Completing task.
+[2026-03-15T07:39:13.852Z] Completed task: 0 subtask(s) (skill: )
+[2026-03-15T07:39:13.854Z] Detach requested and all work complete. Exiting.
+[2026-03-15T07:39:13.854Z] Shutting down.
