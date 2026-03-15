@@ -69,11 +69,15 @@ be set as a branch secret. Also verify `DATABASE_URL` is available. See
 ### 3. Verify Replay browser
 
 ```bash
-ls ~/.replay/runtimes/chrome-linux/chrome
+ls -l ~/.replay/runtimes/chrome-linux/chrome
 ```
 
 If the Replay browser is not installed, run `npx replayio install` before any test execution.
 Without it, test failures produce no recordings and debugging is impossible.
+
+**Important**: Also verify the binary is non-zero bytes. Disk pressure (ENOSPC) can corrupt
+the binary to 0 bytes, which causes silent recording failures. If the file exists but is 0
+bytes, reinstall with `npx replayio install`.
 
 ### 4. Clear stale Replay recordings
 

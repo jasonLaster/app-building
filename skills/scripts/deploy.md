@@ -250,7 +250,17 @@ The Netlify CLI (`npx netlify`) can fail in container environments. Common issue
   shells. The deploy script must NEVER produce interactive prompts. Always pass required
   arguments explicitly (e.g., `--name <site-name>` or `--site <site-id>`). Test the script
   end-to-end in a non-interactive shell before considering it complete.
-- **Authentication errors**: Ensure the command is wrapped with `exec-secrets NETLIFY_AUTH_TOKEN -- ...`
+- **Authentication errors (401)**: Before attempting deployment, check token validity with a
+  lightweight API call first:
+  ```bash
+  exec-secrets NETLIFY_AUTH_TOKEN -- curl -s -o /dev/null -w "%{http_code}" \
+    -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" \
+    "https://api.netlify.com/api/v1/accounts"
+  ```
+  If this returns 401, the token is expired/invalid — skip deployment immediately and do NOT
+  retry with variations. Queue a notification task if deploy is blocked by token issues. In one
+  session, agents wasted ~186 commands across 4 deploy sessions retrying with an expired token.
+  Ensure the command is wrapped with `exec-secrets NETLIFY_AUTH_TOKEN -- ...`
   so the token is available to the subprocess.
 - **"Site not found" errors on deploy**: If `netlify deploy` fails with a site-not-found error,
   run `npx netlify link --id $NETLIFY_SITE_ID` before deploying. This writes the site ID to

@@ -58,6 +58,16 @@ development or testing. Only use when steps 1–4 are insufficient.
 - When `netlify dev` or `npm install` fails with disk-related errors.
 - After extended test sessions that produce many recordings.
 
+## What NOT to Do
+
+- **NEVER truncate log files** to free disk space. Log data is critical for post-session
+  analysis. In one session, 57 truncated logs were rendered useless for report generation.
+- **NEVER create files at system directory paths** (e.g., writing a regular file where
+  `session-env` directory should be). This permanently breaks Bash tool execution for all
+  subsequent worker sessions until the container is reset.
+- **NEVER run `npm cache clean --force`** as a first resort — it frees minimal space compared
+  to Replay recordings and can cause npm installs to be slower.
+
 ## Notes
 
 - Replay recordings at `~/.replay/recording-*.dat` are the single largest space consumer

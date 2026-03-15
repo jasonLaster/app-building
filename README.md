@@ -219,10 +219,13 @@ apps/<AppName>/deployment.txt
 Example contents:
 ```
 url=https://your-app-abc123.netlify.app
+site_id=<netlify-site-id>
+neon_project_id=<neon-project-id>
+database_url=postgresql://...
 deployed_at=2026-01-01T00:00:00Z
 ```
 
-Open the `url` value in a browser to see the live app. Each subsequent deploy appends a history entry to this file describing what changed. Resource IDs and credentials (`DATABASE_URL`, `NEON_PROJECT_ID`, `NETLIFY_SITE_ID`) are stored as branch secrets in Infisical, not in this file.
+Open the `url` value in a browser to see the live app. Each subsequent deploy appends a history entry to this file describing what changed.
 
 ## Skills
 

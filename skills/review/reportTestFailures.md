@@ -54,6 +54,15 @@ CASCADING_FIX_COUNT: <number of distinct test failures resolved by this changese
 
 If a log has no test failures, just write the Summary section with TEST_FAILURES: 0.
 
+### JourneyQA Discovery Runs
+
+When a log has `DEBUGGING_ATTEMPTED=no` across ALL failures (e.g., a journeyQA discovery run
+that only identifies failures without fixing them), clearly mark it as a **discovery-only log**
+in the Summary section. Discovery-only logs should NOT inflate debugging metrics (debugging
+success rate, fix iteration counts, replay usage rate among debugged failures). The synthesizer
+should exclude discovery-only failures from debugging metrics while still counting them in the
+total failure count and failure category distribution.
+
 ### Cross-Log Deduplication
 
 When analyzing multiple logs, note when a failure is a repeat of one already analyzed in a
@@ -63,6 +72,13 @@ count cross-log duplicates as a single distinct failure (the first occurrence) a
 repeat in the Root Cause Clusters table. Example: if seed-data-pending-surveys appears
 identically in clean-2, clean-3, and clean-26, count it as 1 distinct failure with 3
 occurrences, not 3 distinct failures.
+
+**Proactive duplicate detection**: When a discovery run (e.g., worker-48) identifies failures
+that are later fixed by subsequent workers (e.g., workers 49-55), each of these should be
+explicitly flagged as `CROSS_LOG_DUPLICATE` in the later worker's analysis if the root cause
+is the same. Do not rely on the synthesizer to infer duplicates from matching test names alone
+— explicit flags improve synthesis accuracy, especially when the same test fails for different
+reasons across logs.
 
 ### Clustered Failures
 
@@ -225,6 +241,11 @@ as separate clusters across different logs.
   calls rather than within-spec test ordering issues. This sub-category requires a different
   fix (API-level state reset) than within-run contamination (test reordering or per-test
   cleanup).
+- **api-breaking-change as a prominent category** — `api-breaking-change` is a distinct failure
+  mode from `backend-bug` (the API change was intentional, tests simply weren't updated). When
+  it appears in the top 5 categories by count, include it in the Patterns section with specific
+  analysis: which API change caused it, how many spec files were affected, and whether a
+  post-refactoring test sweep would have caught it.
 - **Self-inflicted failure rate** — prominently report the percentage of failures that were
   self-inflicted (from SELF_INFLICTED field). This is a key quality signal for the test-writing
   process. A high rate (>50%) indicates systematic issues with how tests are written.

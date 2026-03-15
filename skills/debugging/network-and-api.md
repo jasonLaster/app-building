@@ -298,6 +298,23 @@ from tests shows the literal string `[object Object]` in assertions.
 
 This applies to any Redux `unwrapResult()` or `.unwrap()` rejection handler.
 
+### PaginateAPIs response shape change
+When API responses change from raw arrays to paginated `{items, total, page, pageSize}` format,
+all test helpers and assertions that call those endpoints must be updated. This is a common
+source of `api-breaking-change` failures — a single API format change can cause 7+ failures
+across 5+ spec files.
+
+**Diagnosis without Replay**: Error output shows type errors, undefined values, or assertion
+mismatches where the test expected an array but received an object with `items`, `total`, etc.
+
+**Fix**: Systematically update all callers of the changed endpoints:
+1. Grep for endpoint usage across all test files and app code.
+2. Update response destructuring (e.g., `const data = await resp.json()` → `const { items } = await resp.json()`).
+3. Update any count assertions to use the `total` field or `items.length`.
+
+**Prevention**: When a polishApp or refactoring task changes API response formats, run all
+spec files that import those endpoints before committing.
+
 ### Stale dev server with wrong database configuration
 When `reuseExistingServer` in Playwright config reuses a dev server from a previous run,
 all API calls may fail with connection or database errors if the server's state is stale.
