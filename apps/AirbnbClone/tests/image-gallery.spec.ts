@@ -51,53 +51,55 @@ test.describe('Property Detail - ImageGallery', () => {
     await expect(thumbnails).toHaveCount(3)
   })
 
-  test('Image gallery displays single image when property has only one image', async ({ page, request }) => {
-    // Delete one of the two images from property b4444444 to leave only one
-    const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
-    const property = await propertyResponse.json()
-    const images = property.images as { id: string }[]
+  test.describe.serial('Destructive image tests', () => {
+    test('Image gallery displays single image when property has only one image', async ({ page, request }) => {
+      // Delete one of the two images from property b4444444 to leave only one
+      const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+      const property = await propertyResponse.json()
+      const images = property.images as { id: string }[]
 
-    // Delete all images except the first one
-    for (let i = 1; i < images.length; i++) {
-      await request.delete(`/api/property-images/${images[i]!.id}`)
-    }
+      // Delete all images except the first one
+      for (let i = 1; i < images.length; i++) {
+        await request.delete(`/api/property-images/${images[i]!.id}`)
+      }
 
-    await page.goto(`/properties/${PROPERTY_FOR_SINGLE}`)
+      await page.goto(`/properties/${PROPERTY_FOR_SINGLE}`)
 
-    const gallery = page.getByTestId('image-gallery')
-    await expect(gallery).toBeVisible({ timeout: 30000 })
+      const gallery = page.getByTestId('image-gallery')
+      await expect(gallery).toBeVisible({ timeout: 30000 })
 
-    // Single image displayed as main
-    const mainImage = gallery.locator('img')
-    await expect(mainImage).toHaveCount(1)
-    await expect(mainImage).toBeVisible()
+      // Single image displayed as main
+      const mainImage = gallery.locator('img')
+      await expect(mainImage).toHaveCount(1)
+      await expect(mainImage).toBeVisible()
 
-    // No thumbnail grid
-    const thumbnails = gallery.locator('[data-testid^="thumbnail-"]')
-    await expect(thumbnails).toHaveCount(0)
-  })
+      // No thumbnail grid
+      const thumbnails = gallery.locator('[data-testid^="thumbnail-"]')
+      await expect(thumbnails).toHaveCount(0)
+    })
 
-  test('Image gallery displays placeholder when property has no images', async ({ page, request }) => {
-    // Delete all images from property b4444444
-    const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
-    const property = await propertyResponse.json()
-    const images = property.images as { id: string }[]
+    test('Image gallery displays placeholder when property has no images', async ({ page, request }) => {
+      // Delete all images from property b4444444
+      const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+      const property = await propertyResponse.json()
+      const images = property.images as { id: string }[]
 
-    for (const img of images) {
-      await request.delete(`/api/property-images/${img.id}`)
-    }
+      for (const img of images) {
+        await request.delete(`/api/property-images/${img.id}`)
+      }
 
-    await page.goto(`/properties/${PROPERTY_FOR_SINGLE}`)
+      await page.goto(`/properties/${PROPERTY_FOR_SINGLE}`)
 
-    const gallery = page.getByTestId('image-gallery')
-    await expect(gallery).toBeVisible({ timeout: 30000 })
+      const gallery = page.getByTestId('image-gallery')
+      await expect(gallery).toBeVisible({ timeout: 30000 })
 
-    // Should show "No images available" placeholder
-    await expect(gallery).toContainText('No images available')
+      // Should show "No images available" placeholder
+      await expect(gallery).toContainText('No images available')
 
-    // No img elements
-    const imgs = gallery.locator('img')
-    await expect(imgs).toHaveCount(0)
+      // No img elements
+      const imgs = gallery.locator('img')
+      await expect(imgs).toHaveCount(0)
+    })
   })
 
   test('Clicking a thumbnail image makes it the main displayed image', async ({ page }) => {
