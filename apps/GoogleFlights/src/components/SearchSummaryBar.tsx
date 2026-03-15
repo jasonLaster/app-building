@@ -185,18 +185,6 @@ function SearchSummaryBar({
               />
             </div>
           )}
-          {editing === 'returnDate' && tripType === 'round_trip' && (
-            <div className="search-summary-bar__editor" data-testid="summary-return-editor">
-              <DatePicker
-                value={returnDate}
-                onChange={handleReturnDateSelect}
-                placeholder="Return"
-                minDate={departureDate}
-                testIdPrefix="summary-return"
-                initiallyOpen
-              />
-            </div>
-          )}
         </div>
 
         {tripType === 'round_trip' && returnDate && (
@@ -237,7 +225,7 @@ function SearchSummaryBar({
           </button>
           {editing === 'passengers' && (
             <div className="search-summary-bar__editor search-summary-bar__editor--wide" data-testid="summary-passengers-editor">
-              <PassengerCountSelector />
+              <PassengerCountSelector initiallyOpen />
               <ApplyButton
                 testId="summary-passengers-done"
                 onClick={() => {
@@ -264,7 +252,7 @@ function SearchSummaryBar({
           </button>
           {editing === 'cabinClass' && (
             <div className="search-summary-bar__editor" data-testid="summary-cabin-editor">
-              <CabinClassSelector />
+              <CabinClassSelector initiallyOpen />
               <ApplyButton
                 testId="summary-cabin-done"
                 onClick={() => {

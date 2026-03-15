@@ -105,3 +105,9 @@
   text-align: center;
   color: var(--color-text-primary);
 }
+
+.passenger-selector__dropdown--inline {
+  position: static;
+  box-shadow: none;
+  margin-top: 0;
+}

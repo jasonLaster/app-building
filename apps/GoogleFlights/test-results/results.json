@@ -67,20 +67,20 @@
   },
   "suites": [
     {
-      "title": "search-button.spec.ts",
-      "file": "search-button.spec.ts",
+      "title": "cabin-class-selector.spec.ts",
+      "file": "cabin-class-selector.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "SearchButton",
-          "file": "search-button.spec.ts",
-          "line": 72,
+          "title": "CabinClassSelector",
+          "file": "cabin-class-selector.spec.ts",
+          "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "SearchButton is displayed with prominent styling",
+              "title": "CabinClassSelector displays default Economy",
               "ok": true,
               "tags": [],
               "tests": [
@@ -95,12 +95,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 184,
+                      "duration": 154,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:30.797Z",
+                      "startTime": "2026-03-15T09:17:26.249Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -108,13 +108,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-0856469c1e6cf82ba250",
-              "file": "search-button.spec.ts",
-              "line": 78,
+              "id": "eb8e2f418572acf653b5-1c573adc04282cedeefb",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 9,
               "column": 3
             },
             {
-              "title": "SearchButton navigates to results page with valid inputs",
+              "title": "CabinClassSelector opens dropdown showing all cabin classes",
               "ok": true,
               "tags": [],
               "tests": [
@@ -129,12 +129,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2141,
+                      "duration": 137,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:31.044Z",
+                      "startTime": "2026-03-15T09:17:26.437Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -142,13 +142,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-2e9cab71f121ce96564c",
-              "file": "search-button.spec.ts",
-              "line": 91,
+              "id": "eb8e2f418572acf653b5-a2ce2588cedf179b3a99",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 17,
               "column": 3
             },
             {
-              "title": "SearchButton shows validation error when origin is missing",
+              "title": "CabinClassSelector selects Business class",
               "ok": true,
               "tags": [],
               "tests": [
@@ -163,12 +163,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 829,
+                      "duration": 189,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:33.195Z",
+                      "startTime": "2026-03-15T09:17:26.580Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -176,13 +176,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-f9e4767db5fd52667edd",
-              "file": "search-button.spec.ts",
-              "line": 111,
+              "id": "eb8e2f418572acf653b5-3de7a2f5de4e9a2f172c",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 33,
               "column": 3
             },
             {
-              "title": "SearchButton shows validation error when destination is missing",
+              "title": "CabinClassSelector selects Premium Economy class",
               "ok": true,
               "tags": [],
               "tests": [
@@ -197,12 +197,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 895,
+                      "duration": 161,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:34.035Z",
+                      "startTime": "2026-03-15T09:17:26.774Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -210,13 +210,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-44801ea9313996fb38fc",
-              "file": "search-button.spec.ts",
-              "line": 125,
+              "id": "eb8e2f418572acf653b5-ec90590932a06e60d77c",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 41,
               "column": 3
             },
             {
-              "title": "SearchButton shows validation error when departure date is missing",
+              "title": "CabinClassSelector selects First class",
               "ok": true,
               "tags": [],
               "tests": [
@@ -231,12 +231,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1083,
+                      "duration": 176,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:34.938Z",
+                      "startTime": "2026-03-15T09:17:26.941Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -244,13 +244,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-f8a833390233d30775d1",
-              "file": "search-button.spec.ts",
-              "line": 139,
+              "id": "eb8e2f418572acf653b5-2faba2ef28a5a6738259",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 49,
               "column": 3
             },
             {
-              "title": "SearchButton shows validation error when return date is missing for round trip",
+              "title": "CabinClassSelector closes dropdown when clicking outside",
               "ok": true,
               "tags": [],
               "tests": [
@@ -265,12 +265,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1148,
+                      "duration": 391,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:36.028Z",
+                      "startTime": "2026-03-15T09:17:27.123Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -278,13 +278,13 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-f6b1f1c3307ce66bd7d4",
-              "file": "search-button.spec.ts",
-              "line": 153,
+              "id": "eb8e2f418572acf653b5-10a2244bed66bc19eef6",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 57,
               "column": 3
             },
             {
-              "title": "SearchButton works for One way trip without return date",
+              "title": "CabinClassSelector can be changed multiple times",
               "ok": true,
               "tags": [],
               "tests": [
@@ -299,12 +299,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2101,
+                      "duration": 342,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T08:59:37.182Z",
+                      "startTime": "2026-03-15T09:17:27.523Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -312,43 +312,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "4106eb81ad7792dcc286-9f78fcd70f6415a876c4",
-              "file": "search-button.spec.ts",
-              "line": 167,
-              "column": 3
-            },
-            {
-              "title": "SearchButton saves search to recent searches",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "replay-chromium",
-                  "projectName": "replay-chromium",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2345,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T08:59:39.292Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "4106eb81ad7792dcc286-fef7d6fc1e0d29f5b7d4",
-              "file": "search-button.spec.ts",
-              "line": 184,
+              "id": "eb8e2f418572acf653b5-a2996e1e4736dd9aeac2",
+              "file": "cabin-class-selector.spec.ts",
+              "line": 70,
               "column": 3
             }
           ]
@@ -358,9 +324,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T08:59:30.363Z",
-    "duration": 11299.518,
-    "expected": 8,
+    "startTime": "2026-03-15T09:17:25.828Z",
+    "duration": 2075.102,
+    "expected": 7,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

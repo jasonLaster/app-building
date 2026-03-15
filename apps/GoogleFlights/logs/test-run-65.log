@@ -1,0 +1,36 @@
+Creating branch: test-run-1773566192698
+Branch DB URL: postgresql://neondb_owner:***@ep-shy-recipe-ah5ya9pj.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/cabin-class-selector.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 7 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/cabin-class-selector.spec.ts:9:3 › CabinClassSelector › CabinClassSelector displays default Economy (154ms)
+  ✓  2 [replay-chromium] › tests/cabin-class-selector.spec.ts:17:3 › CabinClassSelector › CabinClassSelector opens dropdown showing all cabin classes (137ms)
+  ✓  3 [replay-chromium] › tests/cabin-class-selector.spec.ts:33:3 › CabinClassSelector › CabinClassSelector selects Business class (189ms)
+  ✓  4 [replay-chromium] › tests/cabin-class-selector.spec.ts:41:3 › CabinClassSelector › CabinClassSelector selects Premium Economy class (161ms)
+  ✓  5 [replay-chromium] › tests/cabin-class-selector.spec.ts:49:3 › CabinClassSelector › CabinClassSelector selects First class (176ms)
+  ✓  6 [replay-chromium] › tests/cabin-class-selector.spec.ts:57:3 › CabinClassSelector › CabinClassSelector closes dropdown when clicking outside (391ms)
+  ✓  7 [replay-chromium] › tests/cabin-class-selector.spec.ts:70:3 › CabinClassSelector › CabinClassSelector can be changed multiple times (342ms)
+
+  7 passed (2.1s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 76 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

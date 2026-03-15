@@ -1,0 +1,38 @@
+Creating branch: test-run-1773566053866
+Branch DB URL: postgresql://neondb_owner:***@ep-weathered-fog-ahd8p7n6.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/search-summary-bar.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 9 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/search-summary-bar.spec.ts:51:3 › SearchSummaryBar › SearchSummaryBar displays search parameters after search (185ms)
+  ✓  2 [replay-chromium] › tests/search-summary-bar.spec.ts:71:3 › SearchSummaryBar › SearchSummaryBar inline edit origin airport (607ms)
+  ✓  3 [replay-chromium] › tests/search-summary-bar.spec.ts:92:3 › SearchSummaryBar › SearchSummaryBar inline edit destination airport (642ms)
+  ✓  4 [replay-chromium] › tests/search-summary-bar.spec.ts:113:3 › SearchSummaryBar › SearchSummaryBar inline edit departure date (216ms)
+  ✓  5 [replay-chromium] › tests/search-summary-bar.spec.ts:136:3 › SearchSummaryBar › SearchSummaryBar inline edit return date (178ms)
+  ✓  6 [replay-chromium] › tests/search-summary-bar.spec.ts:162:3 › SearchSummaryBar › SearchSummaryBar inline edit passengers (313ms)
+  ✓  7 [replay-chromium] › tests/search-summary-bar.spec.ts:186:3 › SearchSummaryBar › SearchSummaryBar inline edit cabin class (350ms)
+  ✓  8 [replay-chromium] › tests/search-summary-bar.spec.ts:209:3 › SearchSummaryBar › SearchSummaryBar inline editor closes without changes on outside click (204ms)
+  ✓  9 [replay-chromium] › tests/search-summary-bar.spec.ts:230:3 › SearchSummaryBar › SearchSummaryBar can be edited multiple times in sequence (859ms)
+
+  9 passed (4.2s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 76 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Server process exited with code: null
+Functions process exited with code: null
+Cleaned up test branch

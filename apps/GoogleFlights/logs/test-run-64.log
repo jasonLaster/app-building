@@ -1,0 +1,38 @@
+Creating branch: test-run-1773566132250
+Branch DB URL: postgresql://neondb_owner:***@ep-round-mud-ahkaue7r.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+[functions] Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/passenger-count-selector.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 9 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/passenger-count-selector.spec.ts:9:3 › PassengerCountSelector › PassengerCountSelector displays default 1 Adult (177ms)
+  ✓  2 [replay-chromium] › tests/passenger-count-selector.spec.ts:21:3 › PassengerCountSelector › PassengerCountSelector opens dropdown with passenger categories (168ms)
+  ✓  3 [replay-chromium] › tests/passenger-count-selector.spec.ts:53:3 › PassengerCountSelector › PassengerCountSelector increments adult count (260ms)
+  ✓  4 [replay-chromium] › tests/passenger-count-selector.spec.ts:71:3 › PassengerCountSelector › PassengerCountSelector decrements adult count with minimum of 1 (130ms)
+  ✓  5 [replay-chromium] › tests/passenger-count-selector.spec.ts:87:3 › PassengerCountSelector › PassengerCountSelector increments and decrements children (289ms)
+  ✓  6 [replay-chromium] › tests/passenger-count-selector.spec.ts:110:3 › PassengerCountSelector › PassengerCountSelector increments and decrements infants (417ms)
+  ✓  7 [replay-chromium] › tests/passenger-count-selector.spec.ts:127:3 › PassengerCountSelector › PassengerCountSelector prevents infants exceeding adults (191ms)
+  ✓  8 [replay-chromium] › tests/passenger-count-selector.spec.ts:144:3 › PassengerCountSelector › PassengerCountSelector closes dropdown and retains values (274ms)
+  ✓  9 [replay-chromium] › tests/passenger-count-selector.spec.ts:170:3 › PassengerCountSelector › PassengerCountSelector can be used repeatedly (632ms)
+
+  9 passed (3.1s)
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 80 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch

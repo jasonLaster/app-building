@@ -4,13 +4,14 @@ import { setPassengers } from '../slices/searchSlice'
 import type { RootState } from '../store'
 import './PassengerCountSelector.css'
 
-function PassengerCountSelector() {
+function PassengerCountSelector({ initiallyOpen = false }: { initiallyOpen?: boolean } = {}) {
   const dispatch = useDispatch()
   const passengers = useSelector((state: RootState) => state.search.passengers)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(initiallyOpen)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (initiallyOpen) return
     function handleClickOutside(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setIsOpen(false)
@@ -20,7 +21,7 @@ function PassengerCountSelector() {
       document.addEventListener('mousedown', handleClickOutside)
       return () => document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isOpen])
+  }, [isOpen, initiallyOpen])
 
   const total = passengers.adults + passengers.children + passengers.infants
   const label = total === 1 ? '1 Adult' : `${total} passengers`
@@ -41,17 +42,19 @@ function PassengerCountSelector() {
 
   return (
     <div className="passenger-selector" ref={ref} data-testid="passenger-count-selector">
-      <button
-        className="passenger-selector__trigger"
-        onClick={() => setIsOpen(!isOpen)}
-        data-testid="passenger-count-trigger"
-      >
-        <span className="passenger-selector__icon">👤</span>
-        <span>{label}</span>
-        <span className="passenger-selector__arrow">{isOpen ? '▲' : '▼'}</span>
-      </button>
+      {!initiallyOpen && (
+        <button
+          className="passenger-selector__trigger"
+          onClick={() => setIsOpen(!isOpen)}
+          data-testid="passenger-count-trigger"
+        >
+          <span className="passenger-selector__icon">👤</span>
+          <span>{label}</span>
+          <span className="passenger-selector__arrow">{isOpen ? '▲' : '▼'}</span>
+        </button>
+      )}
       {isOpen && (
-        <div className="passenger-selector__dropdown" data-testid="passenger-count-dropdown">
+        <div className={`passenger-selector__dropdown ${initiallyOpen ? 'passenger-selector__dropdown--inline' : ''}`} data-testid="passenger-count-dropdown">
           <div className="passenger-selector__row" data-testid="passenger-row-adults">
             <div className="passenger-selector__info">
               <span className="passenger-selector__category">Adults</span>

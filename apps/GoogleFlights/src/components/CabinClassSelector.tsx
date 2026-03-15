@@ -11,10 +11,10 @@ const cabinClasses: { value: CabinClass; label: string }[] = [
   { value: 'first', label: 'First' },
 ]
 
-function CabinClassSelector() {
+function CabinClassSelector({ initiallyOpen = false }: { initiallyOpen?: boolean } = {}) {
   const dispatch = useDispatch()
   const cabinClass = useSelector((state: RootState) => state.search.cabinClass)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(initiallyOpen)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

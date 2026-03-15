@@ -1,0 +1,69 @@
+Creating branch: test-run-1773565817827
+Branch DB URL: postgresql://neondb_owner:***@ep-rapid-hill-ahy9p14j.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Initializing schema...
+Schema initialized
+Seeding database...
+Database seeded
+Starting functions server...
+[functions] Loaded 11 functions: airports, bookings, explore-dates, explore-deals, explore-destinations, flight-legs, my-bookings, popular-destinations, recent-searches, search-flights, tracked-routes
+Functions server ready on port 9999
+Functions server ready
+Starting vite dev server...
+Server ready
+Running: npx playwright test tests/search-summary-bar.spec.ts --retries 0 --workers 1
+=== Playwright Output ===
+
+Running 9 tests using 1 worker
+
+  ✓  1 [replay-chromium] › tests/search-summary-bar.spec.ts:51:3 › SearchSummaryBar › SearchSummaryBar displays search parameters after search (188ms)
+  ✓  2 [replay-chromium] › tests/search-summary-bar.spec.ts:71:3 › SearchSummaryBar › SearchSummaryBar inline edit origin airport (597ms)
+  ✓  3 [replay-chromium] › tests/search-summary-bar.spec.ts:92:3 › SearchSummaryBar › SearchSummaryBar inline edit destination airport (584ms)
+  ✓  4 [replay-chromium] › tests/search-summary-bar.spec.ts:113:3 › SearchSummaryBar › SearchSummaryBar inline edit departure date (193ms)
+  ✓  5 [replay-chromium] › tests/search-summary-bar.spec.ts:136:3 › SearchSummaryBar › SearchSummaryBar inline edit return date (175ms)
+  ✘  6 [replay-chromium] › tests/search-summary-bar.spec.ts:162:3 › SearchSummaryBar › SearchSummaryBar inline edit passengers (10.2s)
+  ✓  7 [replay-chromium] › tests/search-summary-bar.spec.ts:186:3 › SearchSummaryBar › SearchSummaryBar inline edit cabin class (351ms)
+  ✓  8 [replay-chromium] › tests/search-summary-bar.spec.ts:209:3 › SearchSummaryBar › SearchSummaryBar inline editor closes without changes on outside click (193ms)
+  ✓  9 [replay-chromium] › tests/search-summary-bar.spec.ts:230:3 › SearchSummaryBar › SearchSummaryBar can be edited multiple times in sequence (710ms)
+
+
+  1) [replay-chromium] › tests/search-summary-bar.spec.ts:162:3 › SearchSummaryBar › SearchSummaryBar inline edit passengers 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).not.[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator:  getByTestId('summary-passengers-editor')
+    Expected: not visible
+    Received: visible
+    Timeout:  10000ms
+
+    Call log:
+    [2m  - Expect "not toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('summary-passengers-editor')[22m
+    [2m    14 × locator resolved to <div data-testid="summary-passengers-editor" class="search-summary-bar__editor search-summary-bar__editor--wide">…</div>[22m
+    [2m       - unexpected value "visible"[22m
+
+
+      176 |
+      177 |     // Editor should close
+    > 178 |     await expect(page.getByTestId('summary-passengers-editor')).not.toBeVisible()
+          |                                                                     ^
+      179 |
+      180 |     // URL should update with adults=2
+      181 |     await expect(page).toHaveURL(/adults=2/, { timeout: 10000 })
+        at /repo/apps/GoogleFlights/tests/search-summary-bar.spec.ts:178:69
+
+    Error Context: test-results/search-summary-bar-SearchS-c62ca-yBar-inline-edit-passengers-replay-chromium/error-context.md
+
+  1 failed
+    [replay-chromium] › tests/search-summary-bar.spec.ts:162:3 › SearchSummaryBar › SearchSummaryBar inline edit passengers 
+  8 passed (14.3s)
+
+
+=== Server Output ===
+
+  VITE v6.4.1  ready in 82 ms
+
+  ➜  Local:   http://127.0.0.1:8888/
+
+Functions process exited with code: null
+Server process exited with code: null
+Cleaned up test branch
