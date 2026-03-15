@@ -3,11 +3,55 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "CheckTestSpecPropertyDetail: Check testSpec.md directive violations in Property Detail test entries",
-        "CheckComponentsPropertyDetail: Check writeApp.md directive violations in Property Detail components",
-        "CheckTestsPropertyDetail: Check writeTests.md directive violations in Property Detail tests"
+        "FixViolation: Add truncateAndSeed beforeAll and beforeEach cleanup helpers to all Property Detail test files (property-detail.spec.ts, image-gallery.spec.ts, booking-card.spec.ts, amenities-list.spec.ts, reviews-section.spec.ts, host-info-card.spec.ts)",
+        "RunTests: Run all Property Detail test files to verify truncateAndSeed and cleanup fixes"
       ],
-      "timestamp": "2026-03-15T20:13:58.608Z",
+      "timestamp": "2026-03-15T21:19:21.048Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "FixViolation: Wrap image-gallery.spec.ts destructive tests (single image and no images tests that delete from PROPERTY_FOR_SINGLE) in test.describe.serial",
+        "RunTests: Run tests/image-gallery.spec.ts to verify fix"
+      ],
+      "timestamp": "2026-03-15T21:19:21.048Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "FixViolation: ImageGallery component does not display image captions visibly - captions are only used as alt text but test spec requires them displayed below or overlaying images",
+        "RunTests: Run tests/image-gallery.spec.ts to verify fix"
+      ],
+      "timestamp": "2026-03-15T21:19:21.048Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "FixViolation: PropertyInfo component only shows check-in/check-out times but test spec expects it to also display property_type, max_guests, bedrooms, beds, bathrooms with icons. These details are currently in PropertyHeader instead of PropertyInfo",
+        "RunTests: Run tests/property-detail.spec.ts to verify fix"
+      ],
+      "timestamp": "2026-03-15T21:19:21.048Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "FixViolation: BookingCard uses native HTML select element for guest count selector (line 260-271 of BookingCard.tsx) which violates the directive against native select elements when app has custom design system",
+        "RunTests: Run tests/booking-card.spec.ts to verify fix"
+      ],
+      "timestamp": "2026-03-15T21:19:21.048Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "FixViolation: BookingCard tests assume native date inputs (fill, toHaveAttribute type=date, toHaveValue) but component uses custom calendar with p elements for booking-checkin and booking-checkout. Tests need to be rewritten to interact with the custom calendar UI",
+        "RunTests: Run tests/booking-card.spec.ts to verify fix"
+      ],
+      "timestamp": "2026-03-15T21:19:21.048Z",
       "app": "AirbnbClone"
     },
     {
@@ -78,11 +122,11 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: Fix SearchBar placeholder to match test spec ('Where are you going?' instead of 'Search destinations')",
-      "FixViolation: Add beforeAll with truncateAndSeed to all 6 Home/Search test files (search.spec.ts, property-grid.spec.ts, favorite-button.spec.ts, category-filter.spec.ts, filters-panel.spec.ts, pagination.spec.ts)",
-      "RunTests: Run all Home/Search test files to verify fixes"
+      "CheckTestSpecPropertyDetail: Check testSpec.md directive violations in Property Detail test entries",
+      "CheckComponentsPropertyDetail: Check writeApp.md directive violations in Property Detail components",
+      "CheckTestsPropertyDetail: Check writeTests.md directive violations in Property Detail tests"
     ],
-    "timestamp": "2026-03-15T20:50:34.978Z",
+    "timestamp": "2026-03-15T20:13:58.608Z",
     "app": "AirbnbClone"
   }
 }
