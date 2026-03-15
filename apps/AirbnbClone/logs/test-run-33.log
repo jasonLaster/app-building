@@ -1,0 +1,39 @@
+Created branch: test-run-1773538052002 (br-old-lab-ah4dsecs)
+Test DB URL: postgresql://neondb_owner:***@ep-tiny-wind-ah1xxhr4.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:5049) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"62d7e5be-a25e-45be-9aa8-928557814fbe","duration":0,"result":"passed","title":""}
+{"id":"4cf39c14-7144-404c-a3c2-b5fb1af1a76a","duration":0,"result":"passed","title":""}
+{"id":"38916324-42a7-4d9d-85f8-afa7b4d265b3","duration":0,"result":"passed","title":""}
+{"id":"0a17c43f-2b0e-4058-8525-b6ca8af502cb","duration":0,"result":"passed","title":""}
+{"id":"3f06789c-1e3c-4058-9169-c161242b2d06","duration":0,"result":"passed","title":""}
+{"id":"b4e65c73-cc92-4b04-a8a4-db341ead1f74","duration":0,"result":"passed","title":""}
+{"id":"e6e07d8b-d14e-49d2-b226-fa3e424f5580","duration":0,"result":"passed","title":""}
+{"id":"a3059fee-a8ac-4c0e-82dd-ac8958530319","duration":0,"result":"failed","title":""}
+{"id":"02d0be56-5bc5-478d-92d6-7f5aed18cb7f","duration":0,"result":"passed","title":""}
+{"id":"ca1e2504-bb82-4ed7-b700-8c05601df4b3","duration":0,"result":"passed","title":""}
+{"id":"ab0d7d72-5250-47a0-a3ca-811e6eed08b4","duration":0,"result":"passed","title":""}
+{"id":"a06c1670-91ec-4f6c-a31d-fc56e03b5ef0","duration":0,"result":"passed","title":""}
+{"id":"c4cf009b-0494-4faa-8f4a-b7ef6b2aadf0","duration":0,"result":"passed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: a3059fee-a8ac-4c0e-82dd-ac8958530319
+⠙ Initializing…
+Uploading recordings...
+   a3059fee…  Submit button is disabled when ratings are not set  57s ago  31.5s   
+
+Uploaded recordings
+ ✘  a3059fee…  Submit button is disabled when ratings are not set  57s ago  31.5s  (failed) 
+
+

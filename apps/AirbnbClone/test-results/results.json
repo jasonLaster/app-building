@@ -1,0 +1,721 @@
+{
+  "config": {
+    "configFile": "/repo/apps/AirbnbClone/playwright.config.ts",
+    "rootDir": "/repo/apps/AirbnbClone/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/repo/apps/AirbnbClone/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/repo/apps/AirbnbClone/tests",
+        "testIgnore": [
+          "**/deployment.spec.ts"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "/repo/apps/AirbnbClone/node_modules/@replayio/playwright/dist/reporter.js",
+        {
+          "upload": false
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": {
+      "command": "npx netlify dev --offline --port 8888 --functions ./netlify/functions",
+      "port": 8888,
+      "timeout": 30000,
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "write-review-form.spec.ts",
+      "file": "write-review-form.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "ReviewForm",
+          "file": "write-review-form.spec.ts",
+          "line": 44,
+          "column": 15,
+          "specs": [
+            {
+              "title": "Review form displays comment text area",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/2cd53a26-c205-4d0b-914c-863359a80489"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4782,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:31.000Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-193cea46a90176f2d8ff",
+              "file": "write-review-form.spec.ts",
+              "line": 49,
+              "column": 3
+            },
+            {
+              "title": "Submit button is visible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/bde9eed1-ec81-4d93-8ab9-2a17a9bf2f2c"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2467,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:35.948Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-9bf352daaf3e3eeb528d",
+              "file": "write-review-form.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "Type a comment in the text area",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/d9c6e0cd-11c2-4043-8382-c316e22d7e56"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2845,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:38.444Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-9a4edde4f0cecae96a11",
+              "file": "write-review-form.spec.ts",
+              "line": 69,
+              "column": 3
+            },
+            {
+              "title": "Submit review with all ratings and comment",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                        "line": 78,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/e1a80c2d-df31-42a4-803c-8942f4620189"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3097,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:41.312Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                            "line": 78,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-7924d71a56557723634b",
+              "file": "write-review-form.spec.ts",
+              "line": 77,
+              "column": 3
+            },
+            {
+              "title": "Submitted review appears on property detail page",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                        "line": 99,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/af088d65-60c9-419d-be06-68c3f1fa08bc"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4571,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:44.424Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                            "line": 99,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-65b2599b36886b300cd2",
+              "file": "write-review-form.spec.ts",
+              "line": 98,
+              "column": 3
+            },
+            {
+              "title": "Submitted review appears in user profile reviews list",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                        "line": 130,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/e01d6964-f551-47d7-a542-e70e79f34d85"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4094,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:49.010Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                            "line": 130,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-6c7723ed9b43ca1ecfa8",
+              "file": "write-review-form.spec.ts",
+              "line": 129,
+              "column": 3
+            },
+            {
+              "title": "Submit review with ratings but no comment",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                        "line": 161,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/d19cff2d-27d0-4f0f-988f-877f2a7f7707"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3375,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:53.120Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                            "line": 161,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-1738096ac1ef4a6ecec8",
+              "file": "write-review-form.spec.ts",
+              "line": 160,
+              "column": 3
+            },
+            {
+              "title": "Submit button is disabled when ratings are not set",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/d446506e-cd51-4095-92e8-cccbe8b3ad7b"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2885,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:56.508Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-d1dc8eea3681d2d168f8",
+              "file": "write-review-form.spec.ts",
+              "line": 181,
+              "column": 3
+            },
+            {
+              "title": "Form validation prevents submission without all ratings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/4d63f878-cd59-4fa4-bbb3-7d4ef9e5677b"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3033,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:30:59.408Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-f29afbb33833eadcf63a",
+              "file": "write-review-form.spec.ts",
+              "line": 191,
+              "column": 3
+            },
+            {
+              "title": "Write Review button on My Trips disappears after submitting review",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                        "line": 213,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/91b9f64d-bbe5-493e-970e-1aa132fe7c5d"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:31:02.458Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                            "line": 213,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-84e31c5d24fd38c4afa9",
+              "file": "write-review-form.spec.ts",
+              "line": 210,
+              "column": 3
+            },
+            {
+              "title": "Navigate back from review page without submitting",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                        "line": 247,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/9d8d2501-2de1-4d91-b212-3fc81cc08a6b"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4136,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:31:06.677Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/write-review-form.spec.ts",
+                            "line": 247,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-7e68784281524cc48029",
+              "file": "write-review-form.spec.ts",
+              "line": 246,
+              "column": 3
+            },
+            {
+              "title": "Comment text area allows multi-line input",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/edb55585-34ad-4d6a-b0b1-40b0eb831a81"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2880,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:31:10.828Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-c8d6ed41e529f4bfdb71",
+              "file": "write-review-form.spec.ts",
+              "line": 268,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "ReviewForm - Already Reviewed",
+          "file": "write-review-form.spec.ts",
+          "line": 280,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Re-visiting review page after submission shows already-reviewed state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/f5e63123-ac92-407d-8ded-9032a81fffab"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2191,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T01:31:13.721Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "df55088d7b6c89ff8eaa-58a7b79cd1010365cd82",
+              "file": "write-review-form.spec.ts",
+              "line": 281,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-15T01:30:25.488Z",
+    "duration": 50620.344,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

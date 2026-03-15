@@ -7,7 +7,6 @@ const ALEX_COMPLETED_BOOKING = 'e4444444-4444-4444-4444-444444444444'
 const ALEX_COMPLETED_PROPERTY = 'b4444444-4444-4444-4444-444444444444'
 
 const EMMA_EMAIL = 'emma@example.com'
-const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
 const EMMA_COMPLETED_BOOKING = 'e1111111-1111-1111-1111-111111111111'
 
 async function login(page: import('@playwright/test').Page, email: string) {
@@ -41,7 +40,7 @@ async function navigateToReviewPage(page: import('@playwright/test').Page) {
   await expect(page.getByTestId('review-form')).toBeVisible({ timeout: 30000 })
 }
 
-test.describe('ReviewForm', () => {
+test.describe.serial('ReviewForm', () => {
   test.beforeEach(async ({ page }) => {
     await deleteAllReviewsForGuest(page, ALEX_ID)
   })

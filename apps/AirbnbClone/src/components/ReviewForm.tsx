@@ -59,7 +59,7 @@ export default function ReviewForm({ booking }: ReviewFormProps) {
     )
 
     if (submitReview.fulfilled.match(result)) {
-      // Success state is shown by parent WriteReview component
+      navigate('/trips')
     }
   }
 

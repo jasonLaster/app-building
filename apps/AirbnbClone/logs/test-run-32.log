@@ -1,0 +1,39 @@
+Created branch: test-run-1773537859307 (br-fancy-night-ahd8rbiv)
+Test DB URL: postgresql://neondb_owner:***@ep-green-frost-ahm7drvm.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
+(node:4263) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+
+=== REPLAY RECORDINGS METADATA ===
+{"id":"d2766b9e-c4c8-478d-82c0-6770dd4f46fd","duration":0,"result":"passed","title":""}
+{"id":"f41371c5-7fb2-4db5-9c30-11fbf30f597b","duration":0,"result":"passed","title":""}
+{"id":"84e6a926-049e-4fd0-8b51-fee17d28669d","duration":0,"result":"passed","title":""}
+{"id":"86d92a27-6a6b-4016-88e6-069e83239174","duration":0,"result":"passed","title":""}
+{"id":"b9950015-d507-4b37-9677-c77fc39d1ff2","duration":0,"result":"passed","title":""}
+{"id":"097e4d6f-6b98-4c04-93cc-0169a88c7c3c","duration":0,"result":"passed","title":""}
+{"id":"33348c8b-094f-4460-a888-b1e46e77ff8d","duration":0,"result":"passed","title":""}
+{"id":"c3808b73-a0da-4ec3-9a9f-7a1a1b5f0a95","duration":0,"result":"passed","title":""}
+{"id":"9d4aca15-88f6-496c-b107-9ec553609fa1","duration":0,"result":"passed","title":""}
+{"id":"b98ad719-79bf-4922-8deb-f66faf406e2c","duration":0,"result":"failed","title":""}
+{"id":"89123254-8fc0-423c-97fd-7c6e8237c08e","duration":0,"result":"passed","title":""}
+{"id":"dab48c34-ca2f-41ca-bd3c-9bada1326ed6","duration":0,"result":"passed","title":""}
+{"id":"41a557f5-0f06-4907-bb31-e65c9e02430e","duration":0,"result":"passed","title":""}
+=== END REPLAY RECORDINGS METADATA ===
+REPLAY UPLOADED: b98ad719-79bf-4922-8deb-f66faf406e2c
+⠙ Initializing…
+Uploading recordings...
+   b98ad719…  Write Review button on My Trips disappears after s…  51s ago  32.5s   
+
+Uploaded recordings
+ ✘  b98ad719…  Write Review button on My Trips disappears after s…  51s ago  32.5s  (failed) 
+
+
