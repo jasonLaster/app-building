@@ -1,0 +1,148 @@
+Created branch: test-run-1773614827689 (br-sweet-term-a6a2g91s)
+Test DB URL: postgresql://neondb_owner:***@ep-lingering-tooth-a6tfb668.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 8 tests using 1 worker
+
+
+[1A[2K[1/8] tests/reviews-section.spec.ts:111:3 › Property Detail - ReviewsSection › Reviews section displays average ratings by category
+
+[1A[2K  1) tests/reviews-section.spec.ts:111:3 › Property Detail - ReviewsSection › Reviews section displays average ratings by category 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('reviews-section')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('reviews-section')[22m
+
+
+      114 |
+      115 |     const section = page.getByTestId('reviews-section')
+    > 116 |     await expect(section).toBeVisible({ timeout: 30000 })
+          |                           ^
+      117 |
+      118 |     const cleanliness = page.getByTestId('rating-category-cleanliness')
+      119 |     await expect(cleanliness).toContainText('Cleanliness')
+        at /repo/apps/AirbnbClone/tests/reviews-section.spec.ts:116:27
+
+    Error Context: test-results/reviews-section-Property-D-67ea1-average-ratings-by-category/error-context.md
+
+
+
+[1A[2K[2/8] tests/reviews-section.spec.ts:139:3 › Property Detail - ReviewsSection › Reviews section displays overall average rating and total review count
+[1A[2K  2) tests/reviews-section.spec.ts:139:3 › Property Detail - ReviewsSection › Reviews section displays overall average rating and total review count 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('reviews-section')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('reviews-section')[22m
+
+
+      142 |
+      143 |     const section = page.getByTestId('reviews-section')
+    > 144 |     await expect(section).toBeVisible({ timeout: 30000 })
+          |                           ^
+      145 |
+      146 |     // Header: "5.0 · 1 review"
+      147 |     await expect(section).toContainText('5.0')
+        at /repo/apps/AirbnbClone/tests/reviews-section.spec.ts:144:27
+
+    Error Context: test-results/reviews-section-Property-D-e6a27-ting-and-total-review-count/error-context.md
+
+
+
+[1A[2K[3/8] tests/reviews-section.spec.ts:151:3 › Property Detail - ReviewsSection › Reviews section displays individual review cards
+[1A[2K  3) tests/reviews-section.spec.ts:151:3 › Property Detail - ReviewsSection › Reviews section displays individual review cards 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('reviews-section')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('reviews-section')[22m
+
+
+      154 |
+      155 |     const section = page.getByTestId('reviews-section')
+    > 156 |     await expect(section).toBeVisible({ timeout: 30000 })
+          |                           ^
+      157 |
+      158 |     const reviewCards = section.locator('[data-testid^="review-card-"]')
+      159 |     await expect(reviewCards).toHaveCount(1, { timeout: 10000 })
+        at /repo/apps/AirbnbClone/tests/reviews-section.spec.ts:156:27
+
+    Error Context: test-results/reviews-section-Property-D-f0862-ays-individual-review-cards/error-context.md
+
+
+
+[1A[2K[4/8] tests/reviews-section.spec.ts:166:3 › Property Detail - ReviewsSection › Review cards display guest avatar or initial
+[1A[2K  4) tests/reviews-section.spec.ts:166:3 › Property Detail - ReviewsSection › Review cards display guest avatar or initial 
+
+    NeonDbError: Error connecting to database: fetch failed
+
+       at ../scripts/seed-db.ts:7
+
+       5 |
+       6 |   // Truncate in dependency order (leaf tables first)
+    >  7 |   await sql`TRUNCATE favorites CASCADE`
+         |   ^
+       8 |   await sql`TRUNCATE reviews CASCADE`
+       9 |   await sql`TRUNCATE bookings CASCADE`
+      10 |   await sql`TRUNCATE property_amenities CASCADE`
+        at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1549:24)
+        at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)
+        at /repo/apps/AirbnbClone/tests/reviews-section.spec.ts:7:5
+
+
+[1A[2K[5/8] tests/reviews-section.spec.ts:207:3 › Property Detail - ReviewsSection › Reviews section shows message when property has no reviews
+[1A[2K[6/8] tests/reviews-section.spec.ts:220:3 › Property Detail - ReviewsSection › Reviews section handles pagination or Show more for many reviews
+[1A[2K[7/8] tests/reviews-section.spec.ts:260:3 › Property Detail - ReviewsSection › Clicking Show all reviews reveals all review cards
+[1A[2K[8/8] tests/reviews-section.spec.ts:303:3 › Property Detail - ReviewsSection › Reviews are ordered by most recent first
+[1A[2K  4 failed
+    tests/reviews-section.spec.ts:111:3 › Property Detail - ReviewsSection › Reviews section displays average ratings by category 
+    tests/reviews-section.spec.ts:139:3 › Property Detail - ReviewsSection › Reviews section displays overall average rating and total review count 
+    tests/reviews-section.spec.ts:151:3 › Property Detail - ReviewsSection › Reviews section displays individual review cards 
+    tests/reviews-section.spec.ts:166:3 › Property Detail - ReviewsSection › Review cards display guest avatar or initial 
+  4 did not run
+
+(node:31833) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:31934) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:31860) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:32045) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:32140) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:32230) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

@@ -1,0 +1,142 @@
+Created branch: test-run-1773610073862 (br-withered-waterfall-a6fr1oyg)
+Test DB URL: postgresql://neondb_owner:***@ep-still-cell-a66znbuk.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 6 tests using 1 worker
+
+
+[1A[2K[1/6] tests/image-gallery.spec.ts:36:3 › Property Detail - ImageGallery › Image gallery displays main large image and smaller thumbnails
+
+[1A[2K  1) tests/image-gallery.spec.ts:36:3 › Property Detail - ImageGallery › Image gallery displays main large image and smaller thumbnails 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      24 |     // Delete all images for b4444444 and re-create seed images
+      25 |     const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 26 |     const property = await propertyResponse.json()
+         |                      ^
+      27 |     const images = property.images as { id: string }[]
+      28 |     for (const img of images) {
+      29 |       await request.delete(`/api/property-images/${img.id}`)
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:26:22
+
+
+
+[1A[2K[2/6] tests/image-gallery.spec.ts:52:3 › Property Detail - ImageGallery › Image gallery displays single image when property has only one image
+[1A[2K  2) tests/image-gallery.spec.ts:52:3 › Property Detail - ImageGallery › Image gallery displays single image when property has only one image 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      24 |     // Delete all images for b4444444 and re-create seed images
+      25 |     const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 26 |     const property = await propertyResponse.json()
+         |                      ^
+      27 |     const images = property.images as { id: string }[]
+      28 |     for (const img of images) {
+      29 |       await request.delete(`/api/property-images/${img.id}`)
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:26:22
+
+
+
+[1A[2K[3/6] tests/image-gallery.spec.ts:78:3 › Property Detail - ImageGallery › Image gallery displays placeholder when property has no images
+[1A[2K  3) tests/image-gallery.spec.ts:78:3 › Property Detail - ImageGallery › Image gallery displays placeholder when property has no images 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      24 |     // Delete all images for b4444444 and re-create seed images
+      25 |     const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 26 |     const property = await propertyResponse.json()
+         |                      ^
+      27 |     const images = property.images as { id: string }[]
+      28 |     for (const img of images) {
+      29 |       await request.delete(`/api/property-images/${img.id}`)
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:26:22
+
+
+
+[1A[2K[4/6] tests/image-gallery.spec.ts:101:3 › Property Detail - ImageGallery › Clicking a thumbnail image makes it the main displayed image
+[1A[2K  4) tests/image-gallery.spec.ts:101:3 › Property Detail - ImageGallery › Clicking a thumbnail image makes it the main displayed image 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      24 |     // Delete all images for b4444444 and re-create seed images
+      25 |     const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 26 |     const property = await propertyResponse.json()
+         |                      ^
+      27 |     const images = property.images as { id: string }[]
+      28 |     for (const img of images) {
+      29 |       await request.delete(`/api/property-images/${img.id}`)
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:26:22
+
+
+
+[1A[2K[5/6] tests/image-gallery.spec.ts:125:3 › Property Detail - ImageGallery › Clicking thumbnails is functional on repeated use
+[1A[2K  5) tests/image-gallery.spec.ts:125:3 › Property Detail - ImageGallery › Clicking thumbnails is functional on repeated use 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      24 |     // Delete all images for b4444444 and re-create seed images
+      25 |     const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 26 |     const property = await propertyResponse.json()
+         |                      ^
+      27 |     const images = property.images as { id: string }[]
+      28 |     for (const img of images) {
+      29 |       await request.delete(`/api/property-images/${img.id}`)
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:26:22
+
+
+
+[1A[2K[6/6] tests/image-gallery.spec.ts:150:3 › Property Detail - ImageGallery › Image gallery shows image captions when available
+[1A[2K  6) tests/image-gallery.spec.ts:150:3 › Property Detail - ImageGallery › Image gallery shows image captions when available 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      24 |     // Delete all images for b4444444 and re-create seed images
+      25 |     const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    > 26 |     const property = await propertyResponse.json()
+         |                      ^
+      27 |     const images = property.images as { id: string }[]
+      28 |     for (const img of images) {
+      29 |       await request.delete(`/api/property-images/${img.id}`)
+        at /repo/apps/AirbnbClone/tests/image-gallery.spec.ts:26:22
+
+
+[1A[2K  6 failed
+    tests/image-gallery.spec.ts:36:3 › Property Detail - ImageGallery › Image gallery displays main large image and smaller thumbnails 
+    tests/image-gallery.spec.ts:52:3 › Property Detail - ImageGallery › Image gallery displays single image when property has only one image 
+    tests/image-gallery.spec.ts:78:3 › Property Detail - ImageGallery › Image gallery displays placeholder when property has no images 
+    tests/image-gallery.spec.ts:101:3 › Property Detail - ImageGallery › Clicking a thumbnail image makes it the main displayed image 
+    tests/image-gallery.spec.ts:125:3 › Property Detail - ImageGallery › Clicking thumbnails is functional on repeated use 
+    tests/image-gallery.spec.ts:150:3 › Property Detail - ImageGallery › Image gallery shows image captions when available 
+
+(node:13688) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:13785) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:13715) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13850) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13917) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13986) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14053) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14118) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

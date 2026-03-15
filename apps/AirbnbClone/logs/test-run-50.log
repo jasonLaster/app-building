@@ -1,0 +1,302 @@
+Created branch: test-run-1773609799939 (br-solitary-math-a6s1c2uj)
+Test DB URL: postgresql://neondb_owner:***@ep-noisy-base-a6c2278f.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+Running 12 tests using 1 worker
+
+
+[1A[2K[1/12] tests/property-detail.spec.ts:68:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info
+
+[1A[2K  1) tests/property-detail.spec.ts:68:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      23 |   for (const propertyId of [PROPERTY_WITH_REVIEWS, PROPERTY_NO_REVIEWS, PROPERTY_SINGULAR]) {
+      24 |     const res = await page.request.get(`/api/reviews?property_id=${propertyId}`)
+    > 25 |     const reviews = await res.json()
+         |                     ^
+      26 |     for (const review of reviews) {
+      27 |       await page.request.delete(`/api/reviews/${review.id}`)
+      28 |     }
+        at resetReviewsToSeed (/repo/apps/AirbnbClone/tests/property-detail.spec.ts:25:21)
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:65:5
+
+
+[1A[2K[2/12] tests/property-detail.spec.ts:95:3 › Property Detail - PropertyHeader › Property header shows "New" when property has no reviews
+[1A[2K[3/12] tests/property-detail.spec.ts:108:3 › Property Detail - PropertyHeader › Clicking review count scrolls to or navigates to reviews section
+[1A[2K[4/12] tests/property-detail.spec.ts:123:3 › Property Detail - PropertyHeader › Property header displays host avatar as clickable element
+
+[1A[2K[5/12] tests/property-detail.spec.ts:144:3 › Property Detail - PropertyInfo › Property info section displays all property details
+[1A[2K  2) tests/property-detail.spec.ts:144:3 › Property Detail - PropertyInfo › Property info section displays all property details 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-info')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-info')[22m
+
+
+      147 |
+      148 |     const info = page.getByTestId('property-info')
+    > 149 |     await expect(info).toBeVisible({ timeout: 30000 })
+          |                        ^
+      150 |
+      151 |     await expect(info).toContainText('Villa')
+      152 |     await expect(info).toContainText('8 guests')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:149:24
+
+    Error Context: test-results/property-detail-Property-D-d0449-splays-all-property-details/error-context.md
+
+
+
+[1A[2K[6/12] tests/property-detail.spec.ts:158:3 › Property Detail - PropertyInfo › Property info section displays check-in and check-out times
+[1A[2K  3) tests/property-detail.spec.ts:158:3 › Property Detail - PropertyInfo › Property info section displays check-in and check-out times 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-info')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-info')[22m
+
+
+      161 |
+      162 |     const info = page.getByTestId('property-info')
+    > 163 |     await expect(info).toBeVisible({ timeout: 30000 })
+          |                        ^
+      164 |
+      165 |     // 15:00 → 3:00 PM
+      166 |     await expect(info).toContainText('Check-in: 3:00 PM')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:163:24
+
+    Error Context: test-results/property-detail-Property-D-21a7b-heck-in-and-check-out-times/error-context.md
+
+
+
+[1A[2K[7/12] tests/property-detail.spec.ts:171:3 › Property Detail - PropertyInfo › Property info section handles singular and plural labels correctly
+[1A[2K  4) tests/property-detail.spec.ts:171:3 › Property Detail - PropertyInfo › Property info section handles singular and plural labels correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-info')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-info')[22m
+
+
+      174 |
+      175 |     const info = page.getByTestId('property-info')
+    > 176 |     await expect(info).toBeVisible({ timeout: 30000 })
+          |                        ^
+      177 |
+      178 |     await expect(info).toContainText('1 bedroom')
+      179 |     await expect(info).toContainText('1 bed')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:176:24
+
+    Error Context: test-results/property-detail-Property-D-1e699-and-plural-labels-correctly/error-context.md
+
+
+
+[1A[2K[8/12] tests/property-detail.spec.ts:187:3 › Property Detail - PropertyDescription › Property description displays full description text
+[1A[2K  5) tests/property-detail.spec.ts:187:3 › Property Detail - PropertyDescription › Property description displays full description text 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      190 |
+      191 |     const desc = page.getByTestId('property-description')
+    > 192 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      193 |
+      194 |     await expect(desc).toContainText('Stylish apartment in the vibrant South Congress neighborhood')
+      195 |     await expect(desc).toContainText('Features a rooftop pool and gym access')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:192:24
+
+    Error Context: test-results/property-detail-Property-D-890ee-plays-full-description-text/error-context.md
+
+
+
+[1A[2K[9/12] tests/property-detail.spec.ts:201:3 › Property Detail - PropertyDescription › Long description shows a "Show more" toggle
+[1A[2K  6) tests/property-detail.spec.ts:201:3 › Property Detail - PropertyDescription › Long description shows a "Show more" toggle 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      204 |
+      205 |     const desc = page.getByTestId('property-description')
+    > 206 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      207 |
+      208 |     // Description should be truncated
+      209 |     const descText = desc.locator('p')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:206:24
+
+    Error Context: test-results/property-detail-Property-D-52e8c-on-shows-a-Show-more-toggle/error-context.md
+
+
+
+[1A[2K[10/12] tests/property-detail.spec.ts:218:3 › Property Detail - PropertyDescription › Clicking "Show more" expands the full description
+[1A[2K  7) tests/property-detail.spec.ts:218:3 › Property Detail - PropertyDescription › Clicking "Show more" expands the full description 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      220 |
+      221 |     const desc = page.getByTestId('property-description')
+    > 222 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      223 |
+      224 |     const toggle = page.getByTestId('description-toggle')
+      225 |     await expect(toggle).toHaveText('Show more')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:222:24
+
+    Error Context: test-results/property-detail-Property-D-8aeac-xpands-the-full-description/error-context.md
+
+
+
+[1A[2K[11/12] tests/property-detail.spec.ts:238:3 › Property Detail - PropertyDescription › Clicking "Show less" collapses the description back
+[1A[2K  8) tests/property-detail.spec.ts:238:3 › Property Detail - PropertyDescription › Clicking "Show less" collapses the description back 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      240 |
+      241 |     const desc = page.getByTestId('property-description')
+    > 242 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      243 |
+      244 |     // Expand first
+      245 |     const toggle = page.getByTestId('description-toggle')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:242:24
+
+    Error Context: test-results/property-detail-Property-D-ce3c4-lapses-the-description-back/error-context.md
+
+
+
+[1A[2K[12/12] tests/property-detail.spec.ts:258:3 › Property Detail - PropertyDescription › Show more/less toggle is functional on repeated use
+[1A[2K  9) tests/property-detail.spec.ts:258:3 › Property Detail - PropertyDescription › Show more/less toggle is functional on repeated use 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      260 |
+      261 |     const desc = page.getByTestId('property-description')
+    > 262 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      263 |
+      264 |     const toggle = page.getByTestId('description-toggle')
+      265 |     const descText = desc.locator('p')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:262:24
+
+    Error Context: test-results/property-detail-Property-D-19ea3--functional-on-repeated-use/error-context.md
+
+
+[1A[2K  9 failed
+    tests/property-detail.spec.ts:68:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info 
+    tests/property-detail.spec.ts:144:3 › Property Detail - PropertyInfo › Property info section displays all property details 
+    tests/property-detail.spec.ts:158:3 › Property Detail - PropertyInfo › Property info section displays check-in and check-out times 
+    tests/property-detail.spec.ts:171:3 › Property Detail - PropertyInfo › Property info section handles singular and plural labels correctly 
+    tests/property-detail.spec.ts:187:3 › Property Detail - PropertyDescription › Property description displays full description text 
+    tests/property-detail.spec.ts:201:3 › Property Detail - PropertyDescription › Long description shows a "Show more" toggle 
+    tests/property-detail.spec.ts:218:3 › Property Detail - PropertyDescription › Clicking "Show more" expands the full description 
+    tests/property-detail.spec.ts:238:3 › Property Detail - PropertyDescription › Clicking "Show less" collapses the description back 
+    tests/property-detail.spec.ts:258:3 › Property Detail - PropertyDescription › Show more/less toggle is functional on repeated use 
+  3 did not run
+
+(node:12680) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:12778) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:12707) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:12853) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:12959) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13046) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13134) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13219) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13304) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13390) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:13477) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

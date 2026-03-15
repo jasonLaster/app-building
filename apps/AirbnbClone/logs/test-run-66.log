@@ -1,0 +1,151 @@
+Created branch: test-run-1773614953100 (br-withered-cherry-a6ssrati)
+Test DB URL: postgresql://neondb_owner:***@ep-icy-violet-a6k62lt4.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 4 tests using 1 worker
+
+
+[1A[2K[1/4] tests/host-info-card.spec.ts:31:3 › Property Detail - HostInfoCard › Host info card displays host name, avatar, bio, and member since date
+
+[1A[2K  1) tests/host-info-card.spec.ts:31:3 › Property Detail - HostInfoCard › Host info card displays host name, avatar, bio, and member since date 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('host-info-card')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('host-info-card')[22m
+
+
+      34 |
+      35 |     const card = page.getByTestId('host-info-card')
+    > 36 |     await expect(card).toBeVisible({ timeout: 30000 })
+         |                        ^
+      37 |
+      38 |     // Host name
+      39 |     await expect(card).toContainText('Sarah Chen')
+        at /repo/apps/AirbnbClone/tests/host-info-card.spec.ts:36:24
+
+    Error Context: test-results/host-info-card-Property-De-46baa-r-bio-and-member-since-date/error-context.md
+
+
+
+[1A[2K[2/4] tests/host-info-card.spec.ts:53:3 › Property Detail - HostInfoCard › Host info card displays number of listings
+[1A[2K  2) tests/host-info-card.spec.ts:53:3 › Property Detail - HostInfoCard › Host info card displays number of listings 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('host-info-card')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('host-info-card')[22m
+
+
+      56 |
+      57 |     const card = page.getByTestId('host-info-card')
+    > 58 |     await expect(card).toBeVisible({ timeout: 30000 })
+         |                        ^
+      59 |
+      60 |     await expect(card).toContainText('3 listings')
+      61 |   })
+        at /repo/apps/AirbnbClone/tests/host-info-card.spec.ts:58:24
+
+    Error Context: test-results/host-info-card-Property-De-14c2d-displays-number-of-listings/error-context.md
+
+
+
+[1A[2K[3/4] tests/host-info-card.spec.ts:63:3 › Property Detail - HostInfoCard › Host info card shows placeholder avatar when host has no avatar
+[1A[2K  3) tests/host-info-card.spec.ts:63:3 › Property Detail - HostInfoCard › Host info card shows placeholder avatar when host has no avatar 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('host-info-card')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('host-info-card')[22m
+
+
+      66 |     // Navigate first to get request context
+      67 |     await page.goto(`/properties/${PROPERTY_CABIN}`)
+    > 68 |     await expect(page.getByTestId('host-info-card')).toBeVisible({ timeout: 30000 })
+         |                                                      ^
+      69 |
+      70 |     // Remove Mike's avatar via API
+      71 |     await page.request.put(`/api/users/${HOST_MIKE_ID}`, {
+        at /repo/apps/AirbnbClone/tests/host-info-card.spec.ts:68:54
+
+    Error Context: test-results/host-info-card-Property-De-5cff7-tar-when-host-has-no-avatar/error-context.md
+
+
+
+[1A[2K[4/4] tests/host-info-card.spec.ts:90:3 › Property Detail - HostInfoCard › Host info card displays correctly when host has no bio
+[1A[2K  4) tests/host-info-card.spec.ts:90:3 › Property Detail - HostInfoCard › Host info card displays correctly when host has no bio 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('host-info-card')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('host-info-card')[22m
+
+
+      93 |     // Navigate first to get request context
+      94 |     await page.goto(`/properties/${PROPERTY_CABIN}`)
+    > 95 |     await expect(page.getByTestId('host-info-card')).toBeVisible({ timeout: 30000 })
+         |                                                      ^
+      96 |
+      97 |     // Remove Mike's bio via API (explicitly preserve avatar in case another test cleared it)
+      98 |     await page.request.put(`/api/users/${HOST_MIKE_ID}`, {
+        at /repo/apps/AirbnbClone/tests/host-info-card.spec.ts:95:54
+
+    Error Context: test-results/host-info-card-Property-De-487e4-rectly-when-host-has-no-bio/error-context.md
+
+
+[1A[2K  4 failed
+    tests/host-info-card.spec.ts:31:3 › Property Detail - HostInfoCard › Host info card displays host name, avatar, bio, and member since date 
+    tests/host-info-card.spec.ts:53:3 › Property Detail - HostInfoCard › Host info card displays number of listings 
+    tests/host-info-card.spec.ts:63:3 › Property Detail - HostInfoCard › Host info card shows placeholder avatar when host has no avatar 
+    tests/host-info-card.spec.ts:90:3 › Property Detail - HostInfoCard › Host info card displays correctly when host has no bio 
+
+(node:32415) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:32516) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:32442) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:32622) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:32707) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:32796) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

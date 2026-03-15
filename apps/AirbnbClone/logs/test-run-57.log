@@ -1,0 +1,177 @@
+Cleaned up stale branch: test-run-1773611501842
+Created branch: test-run-1773611804684 (br-jolly-sound-a6pp2pc5)
+Test DB URL: postgresql://neondb_owner:***@ep-bold-leaf-a6imuxdo.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+
+
+Running 5 tests using 1 worker
+
+
+[1A[2K[1/5] tests/amenities-list.spec.ts:37:3 › Property Detail - AmenitiesList › Amenities list displays amenities grouped by category with icons
+
+[1A[2K  1) tests/amenities-list.spec.ts:37:3 › Property Detail - AmenitiesList › Amenities list displays amenities grouped by category with icons 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('amenities-list')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('amenities-list')[22m
+
+
+      39 |
+      40 |     const amenitiesList = page.getByTestId('amenities-list')
+    > 41 |     await expect(amenitiesList).toBeVisible({ timeout: 30000 })
+         |                                 ^
+      42 |
+      43 |     // Should display category headings - Villa has amenities in all 4 categories
+      44 |     await expect(amenitiesList).toContainText('Essentials')
+        at /repo/apps/AirbnbClone/tests/amenities-list.spec.ts:41:33
+
+    Error Context: test-results/amenities-list-Property-De-f244f-uped-by-category-with-icons/error-context.md
+
+
+
+[1A[2K[2/5] tests/amenities-list.spec.ts:61:3 › Property Detail - AmenitiesList › Amenities list only shows categories that have amenities
+[1A[2K  2) tests/amenities-list.spec.ts:61:3 › Property Detail - AmenitiesList › Amenities list only shows categories that have amenities 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('amenities-list')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('amenities-list')[22m
+
+
+      65 |
+      66 |     const amenitiesList = page.getByTestId('amenities-list')
+    > 67 |     await expect(amenitiesList).toBeVisible({ timeout: 30000 })
+         |                                 ^
+      68 |
+      69 |     // Should show categories that have amenities
+      70 |     await expect(amenitiesList).toContainText('Essentials')
+        at /repo/apps/AirbnbClone/tests/amenities-list.spec.ts:67:33
+
+    Error Context: test-results/amenities-list-Property-De-9dff7-egories-that-have-amenities/error-context.md
+
+
+
+[1A[2K[3/5] tests/amenities-list.spec.ts:78:3 › Property Detail - AmenitiesList › Amenities list shows "Show all amenities" when there are many amenities
+[1A[2K  3) tests/amenities-list.spec.ts:78:3 › Property Detail - AmenitiesList › Amenities list shows "Show all amenities" when there are many amenities 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('amenities-list')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('amenities-list')[22m
+
+
+      81 |
+      82 |     const amenitiesList = page.getByTestId('amenities-list')
+    > 83 |     await expect(amenitiesList).toBeVisible({ timeout: 30000 })
+         |                                 ^
+      84 |
+      85 |     // Should show "Show all 18 amenities" button
+      86 |     const toggle = page.getByTestId('amenities-toggle')
+        at /repo/apps/AirbnbClone/tests/amenities-list.spec.ts:83:33
+
+    Error Context: test-results/amenities-list-Property-De-c60f9-en-there-are-many-amenities/error-context.md
+
+
+
+[1A[2K[4/5] tests/amenities-list.spec.ts:95:3 › Property Detail - AmenitiesList › Clicking "Show all amenities" reveals the complete list
+[1A[2K  4) tests/amenities-list.spec.ts:95:3 › Property Detail - AmenitiesList › Clicking "Show all amenities" reveals the complete list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('amenities-list')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('amenities-list')[22m
+
+
+       97 |
+       98 |     const amenitiesList = page.getByTestId('amenities-list')
+    >  99 |     await expect(amenitiesList).toBeVisible({ timeout: 30000 })
+          |                                 ^
+      100 |
+      101 |     const toggle = page.getByTestId('amenities-toggle')
+      102 |     await expect(toggle).toHaveText('Show all 18 amenities')
+        at /repo/apps/AirbnbClone/tests/amenities-list.spec.ts:99:33
+
+    Error Context: test-results/amenities-list-Property-De-128c3-s-reveals-the-complete-list/error-context.md
+
+
+
+[1A[2K[5/5] tests/amenities-list.spec.ts:121:3 › Property Detail - AmenitiesList › Amenities list displays message when property has no amenities
+[1A[2K  5) tests/amenities-list.spec.ts:121:3 › Property Detail - AmenitiesList › Amenities list displays message when property has no amenities 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      139 |       },
+      140 |     })
+    > 141 |     const property = await createResponse.json()
+          |                      ^
+      142 |
+      143 |     await page.goto(`/properties/${property.id}`)
+      144 |
+        at /repo/apps/AirbnbClone/tests/amenities-list.spec.ts:141:22
+
+
+[1A[2K  5 failed
+    tests/amenities-list.spec.ts:37:3 › Property Detail - AmenitiesList › Amenities list displays amenities grouped by category with icons 
+    tests/amenities-list.spec.ts:61:3 › Property Detail - AmenitiesList › Amenities list only shows categories that have amenities 
+    tests/amenities-list.spec.ts:78:3 › Property Detail - AmenitiesList › Amenities list shows "Show all amenities" when there are many amenities 
+    tests/amenities-list.spec.ts:95:3 › Property Detail - AmenitiesList › Clicking "Show all amenities" reveals the complete list 
+    tests/amenities-list.spec.ts:121:3 › Property Detail - AmenitiesList › Amenities list displays message when property has no amenities 
+
+(node:20770) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:20870) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:20797) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:20977) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:21063) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:21149) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:21236) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

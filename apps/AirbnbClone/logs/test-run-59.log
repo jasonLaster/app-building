@@ -1,0 +1,302 @@
+Cleaned up stale branch: test-run-1773612642736
+Created branch: test-run-1773612947030 (br-icy-mountain-a6rgi4s4)
+Test DB URL: postgresql://neondb_owner:***@ep-divine-sea-a6kh1ok7.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+Running 12 tests using 1 worker
+
+
+[1A[2K[1/12] tests/property-detail.spec.ts:19:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info
+[1A[2K  1) tests/property-detail.spec.ts:19:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-header')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-header')[22m
+
+
+      21 |
+      22 |     const header = page.getByTestId('property-header')
+    > 23 |     await expect(header).toBeVisible({ timeout: 30000 })
+         |                          ^
+      24 |
+      25 |     // Title
+      26 |     await expect(header.locator('h1')).toHaveText('Cozy Downtown Loft with City Views')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:23:26
+
+    Error Context: test-results/property-detail-Property-D-807b7-ating-summary-and-host-info/error-context.md
+
+
+
+[1A[2K[2/12] tests/property-detail.spec.ts:46:3 › Property Detail - PropertyHeader › Property header shows "New" when property has no reviews
+[1A[2K  2) tests/property-detail.spec.ts:46:3 › Property Detail - PropertyHeader › Property header shows "New" when property has no reviews 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-header')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-header')[22m
+
+
+      48 |
+      49 |     const header = page.getByTestId('property-header')
+    > 50 |     await expect(header).toBeVisible({ timeout: 30000 })
+         |                          ^
+      51 |
+      52 |     // Should show "New" instead of rating
+      53 |     await expect(header).toContainText('New')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:50:26
+
+    Error Context: test-results/property-detail-Property-D-88c63-hen-property-has-no-reviews/error-context.md
+
+
+
+[1A[2K[3/12] tests/property-detail.spec.ts:59:3 › Property Detail - PropertyHeader › Clicking review count scrolls to or navigates to reviews section
+[1A[2K  3) tests/property-detail.spec.ts:59:3 › Property Detail - PropertyHeader › Clicking review count scrolls to or navigates to reviews section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('review-count-link')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('review-count-link')[22m
+
+
+      61 |
+      62 |     const reviewLink = page.getByTestId('review-count-link')
+    > 63 |     await expect(reviewLink).toBeVisible({ timeout: 30000 })
+         |                              ^
+      64 |
+      65 |     // Click the review count
+      66 |     await reviewLink.click()
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:63:30
+
+    Error Context: test-results/property-detail-Property-D-e9c15-avigates-to-reviews-section/error-context.md
+
+
+
+[1A[2K[4/12] tests/property-detail.spec.ts:74:3 › Property Detail - PropertyHeader › Property header displays host avatar as clickable element
+[1A[2K  4) tests/property-detail.spec.ts:74:3 › Property Detail - PropertyHeader › Property header displays host avatar as clickable element 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-header')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-header')[22m
+
+
+      76 |
+      77 |     const header = page.getByTestId('property-header')
+    > 78 |     await expect(header).toBeVisible({ timeout: 30000 })
+         |                          ^
+      79 |
+      80 |     // Host avatar should be visible and circular (img element)
+      81 |     const avatar = page.getByTestId('host-avatar')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:78:26
+
+    Error Context: test-results/property-detail-Property-D-84e79-avatar-as-clickable-element/error-context.md
+
+
+
+[1A[2K[5/12] tests/property-detail.spec.ts:95:3 › Property Detail - PropertyInfo › Property info section displays all property details
+[1A[2K  5) tests/property-detail.spec.ts:95:3 › Property Detail - PropertyInfo › Property info section displays all property details 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-info')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-info')[22m
+
+
+       98 |
+       99 |     const info = page.getByTestId('property-info')
+    > 100 |     await expect(info).toBeVisible({ timeout: 30000 })
+          |                        ^
+      101 |
+      102 |     await expect(info).toContainText('Villa')
+      103 |     await expect(info).toContainText('8 guests')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:100:24
+
+    Error Context: test-results/property-detail-Property-D-d0449-splays-all-property-details/error-context.md
+
+
+
+[1A[2K[6/12] tests/property-detail.spec.ts:109:3 › Property Detail - PropertyInfo › Property info section displays check-in and check-out times
+[1A[2K  6) tests/property-detail.spec.ts:109:3 › Property Detail - PropertyInfo › Property info section displays check-in and check-out times 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-info')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-info')[22m
+
+
+      112 |
+      113 |     const info = page.getByTestId('property-info')
+    > 114 |     await expect(info).toBeVisible({ timeout: 30000 })
+          |                        ^
+      115 |
+      116 |     // 15:00 → 3:00 PM
+      117 |     await expect(info).toContainText('Check-in: 3:00 PM')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:114:24
+
+    Error Context: test-results/property-detail-Property-D-21a7b-heck-in-and-check-out-times/error-context.md
+
+
+
+[1A[2K[7/12] tests/property-detail.spec.ts:122:3 › Property Detail - PropertyInfo › Property info section handles singular and plural labels correctly
+[1A[2K  7) tests/property-detail.spec.ts:122:3 › Property Detail - PropertyInfo › Property info section handles singular and plural labels correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-info')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-info')[22m
+
+
+      125 |
+      126 |     const info = page.getByTestId('property-info')
+    > 127 |     await expect(info).toBeVisible({ timeout: 30000 })
+          |                        ^
+      128 |
+      129 |     await expect(info).toContainText('1 bedroom')
+      130 |     await expect(info).toContainText('1 bed')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:127:24
+
+    Error Context: test-results/property-detail-Property-D-1e699-and-plural-labels-correctly/error-context.md
+
+
+
+[1A[2K[8/12] tests/property-detail.spec.ts:138:3 › Property Detail - PropertyDescription › Property description displays full description text
+[1A[2K  8) tests/property-detail.spec.ts:138:3 › Property Detail - PropertyDescription › Property description displays full description text 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      141 |
+      142 |     const desc = page.getByTestId('property-description')
+    > 143 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      144 |
+      145 |     await expect(desc).toContainText('Stylish apartment in the vibrant South Congress neighborhood')
+      146 |     await expect(desc).toContainText('Features a rooftop pool and gym access')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:143:24
+
+    Error Context: test-results/property-detail-Property-D-890ee-plays-full-description-text/error-context.md
+
+
+
+[1A[2K[9/12] tests/property-detail.spec.ts:152:3 › Property Detail - PropertyDescription › Long description shows a "Show more" toggle
+[1A[2K  9) tests/property-detail.spec.ts:152:3 › Property Detail - PropertyDescription › Long description shows a "Show more" toggle 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-description')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-description')[22m
+
+
+      155 |
+      156 |     const desc = page.getByTestId('property-description')
+    > 157 |     await expect(desc).toBeVisible({ timeout: 30000 })
+          |                        ^
+      158 |
+      159 |     // Description should be truncated
+      160 |     const descText = desc.locator('p')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:157:24
+
+    Error Context: test-results/property-detail-Property-D-52e8c-on-shows-a-Show-more-toggle/error-context.md
+
+
+
+[1A[2K[10/12] tests/property-detail.spec.ts:169:3 › Property Detail - PropertyDescription › Clicking "Show more" expands the full description
+
+(node:24790) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K[WebServer] (node:24817) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:24890) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:24996) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25078) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25165) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25251) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25337) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25421) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25505) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25592) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:25680) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

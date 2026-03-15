@@ -1,0 +1,331 @@
+Created branch: test-run-1773610100734 (br-bitter-sea-a60ihp2j)
+Test DB URL: postgresql://neondb_owner:***@ep-fragrant-truth-a6lnxpr3.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 16 tests using 1 worker
+
+
+[1A[2K[1/16] tests/booking-card.spec.ts:60:3 › Property Detail - BookingCard › Booking card displays price per night
+
+[1A[2K  1) tests/booking-card.spec.ts:60:3 › Property Detail - BookingCard › Booking card displays price per night 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[2/16] tests/booking-card.spec.ts:71:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers
+[1A[2K  2) tests/booking-card.spec.ts:71:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[3/16] tests/booking-card.spec.ts:90:3 › Property Detail - BookingCard › Booking card displays guest count selector
+[1A[2K  3) tests/booking-card.spec.ts:90:3 › Property Detail - BookingCard › Booking card displays guest count selector 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[4/16] tests/booking-card.spec.ts:110:3 › Property Detail - BookingCard › Selecting dates and guests shows price breakdown
+[1A[2K  4) tests/booking-card.spec.ts:110:3 › Property Detail - BookingCard › Selecting dates and guests shows price breakdown 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[5/16] tests/booking-card.spec.ts:139:3 › Property Detail - BookingCard › Price breakdown updates when dates change
+[1A[2K  5) tests/booking-card.spec.ts:139:3 › Property Detail - BookingCard › Price breakdown updates when dates change 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[6/16] tests/booking-card.spec.ts:162:3 › Property Detail - BookingCard › Reserve button creates a booking when logged in
+[1A[2K  6) tests/booking-card.spec.ts:162:3 › Property Detail - BookingCard › Reserve button creates a booking when logged in 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[7/16] tests/booking-card.spec.ts:191:3 › Property Detail - BookingCard › Reserve button is disabled when dates are not selected
+[1A[2K  7) tests/booking-card.spec.ts:191:3 › Property Detail - BookingCard › Reserve button is disabled when dates are not selected 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[8/16] tests/booking-card.spec.ts:209:3 › Property Detail - BookingCard › Reserve button prompts login when user is not logged in
+[1A[2K  8) tests/booking-card.spec.ts:209:3 › Property Detail - BookingCard › Reserve button prompts login when user is not logged in 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[9/16] tests/booking-card.spec.ts:227:3 › Property Detail - BookingCard › Reserve button is disabled for host's own property
+[1A[2K  9) tests/booking-card.spec.ts:227:3 › Property Detail - BookingCard › Reserve button is disabled for host's own property 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[10/16] tests/booking-card.spec.ts:246:3 › Property Detail - BookingCard › Check-in date picker prevents selecting past dates
+[1A[2K  10) tests/booking-card.spec.ts:246:3 › Property Detail - BookingCard › Check-in date picker prevents selecting past dates 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[11/16] tests/booking-card.spec.ts:259:3 › Property Detail - BookingCard › Check-out date must be after check-in date
+[1A[2K  11) tests/booking-card.spec.ts:259:3 › Property Detail - BookingCard › Check-out date must be after check-in date 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[12/16] tests/booking-card.spec.ts:273:3 › Property Detail - BookingCard › Guest count cannot exceed property max_guests
+[1A[2K  12) tests/booking-card.spec.ts:273:3 › Property Detail - BookingCard › Guest count cannot exceed property max_guests 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[13/16] tests/booking-card.spec.ts:290:3 › Property Detail - BookingCard › Guest count minimum is 1
+[1A[2K  13) tests/booking-card.spec.ts:290:3 › Property Detail - BookingCard › Guest count minimum is 1 ──
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[14/16] tests/booking-card.spec.ts:306:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates
+[1A[2K  14) tests/booking-card.spec.ts:306:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[15/16] tests/booking-card.spec.ts:332:3 › Property Detail - BookingCard › Booking card date pickers and guest selector are functional on repeated use
+[1A[2K  15) tests/booking-card.spec.ts:332:3 › Property Detail - BookingCard › Booking card date pickers and guest selector are functional on repeated use 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+
+[1A[2K[16/16] tests/booking-card.spec.ts:377:3 › Property Detail - BookingCard › Booking card is sticky on desktop viewport
+[1A[2K  16) tests/booking-card.spec.ts:377:3 › Property Detail - BookingCard › Booking card is sticky on desktop viewport 
+
+    SyntaxError: Unexpected token 'E', "Error: con"... is not valid JSON
+
+      40 |     // Clean up any non-seed bookings created by Emma
+      41 |     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    > 42 |     const bookings = await res.json()
+         |                      ^
+      43 |     const seedBookingIds = [
+      44 |       'e1111111-1111-1111-1111-111111111111',
+      45 |       'e2222222-2222-2222-2222-222222222222',
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:42:22
+
+
+[1A[2K  16 failed
+    tests/booking-card.spec.ts:60:3 › Property Detail - BookingCard › Booking card displays price per night 
+    tests/booking-card.spec.ts:71:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers 
+    tests/booking-card.spec.ts:90:3 › Property Detail - BookingCard › Booking card displays guest count selector 
+    tests/booking-card.spec.ts:110:3 › Property Detail - BookingCard › Selecting dates and guests shows price breakdown 
+    tests/booking-card.spec.ts:139:3 › Property Detail - BookingCard › Price breakdown updates when dates change 
+    tests/booking-card.spec.ts:162:3 › Property Detail - BookingCard › Reserve button creates a booking when logged in 
+    tests/booking-card.spec.ts:191:3 › Property Detail - BookingCard › Reserve button is disabled when dates are not selected 
+    tests/booking-card.spec.ts:209:3 › Property Detail - BookingCard › Reserve button prompts login when user is not logged in 
+    tests/booking-card.spec.ts:227:3 › Property Detail - BookingCard › Reserve button is disabled for host's own property 
+    tests/booking-card.spec.ts:246:3 › Property Detail - BookingCard › Check-in date picker prevents selecting past dates 
+    tests/booking-card.spec.ts:259:3 › Property Detail - BookingCard › Check-out date must be after check-in date 
+    tests/booking-card.spec.ts:273:3 › Property Detail - BookingCard › Guest count cannot exceed property max_guests 
+    tests/booking-card.spec.ts:290:3 › Property Detail - BookingCard › Guest count minimum is 1 ────
+    tests/booking-card.spec.ts:306:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates 
+    tests/booking-card.spec.ts:332:3 › Property Detail - BookingCard › Booking card date pickers and guest selector are functional on repeated use 
+    tests/booking-card.spec.ts:377:3 › Property Detail - BookingCard › Booking card is sticky on desktop viewport 
+
+(node:14308) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:14409) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:14335) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14477) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14546) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14612) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14680) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14750) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14818) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14889) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:14955) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15022) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15088) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15156) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15225) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15292) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15359) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15426) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

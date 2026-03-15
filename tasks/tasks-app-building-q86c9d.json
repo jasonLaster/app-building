@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: Add truncateAndSeed beforeAll and beforeEach cleanup helpers to all Property Detail test files (property-detail.spec.ts, image-gallery.spec.ts, booking-card.spec.ts, amenities-list.spec.ts, reviews-section.spec.ts, host-info-card.spec.ts)",
-        "RunTests: Run all Property Detail test files to verify truncateAndSeed and cleanup fixes"
-      ],
-      "timestamp": "2026-03-15T21:19:21.048Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "FixViolation: Wrap image-gallery.spec.ts destructive tests (single image and no images tests that delete from PROPERTY_FOR_SINGLE) in test.describe.serial",
         "RunTests: Run tests/image-gallery.spec.ts to verify fix"
       ],
@@ -122,11 +113,10 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "CheckTestSpecPropertyDetail: Check testSpec.md directive violations in Property Detail test entries",
-      "CheckComponentsPropertyDetail: Check writeApp.md directive violations in Property Detail components",
-      "CheckTestsPropertyDetail: Check writeTests.md directive violations in Property Detail tests"
+      "FixViolation: Add truncateAndSeed beforeAll and beforeEach cleanup helpers to all Property Detail test files (property-detail.spec.ts, image-gallery.spec.ts, booking-card.spec.ts, amenities-list.spec.ts, reviews-section.spec.ts, host-info-card.spec.ts)",
+      "RunTests: Run all Property Detail test files to verify truncateAndSeed and cleanup fixes"
     ],
-    "timestamp": "2026-03-15T20:13:58.608Z",
+    "timestamp": "2026-03-15T21:19:21.048Z",
     "app": "AirbnbClone"
   }
 }

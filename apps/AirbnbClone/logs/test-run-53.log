@@ -1,0 +1,252 @@
+Created branch: test-run-1773610306806 (br-solitary-darkness-a6uy3ayl)
+Test DB URL: postgresql://neondb_owner:***@ep-rough-recipe-a6ts1gd5.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 16 tests using 1 worker
+
+
+[1A[2K[1/16] tests/auth.spec.ts:18:5 › Auth Page › AuthToggle › Auth page defaults to login mode
+
+[1A[2K[2/16] tests/auth.spec.ts:29:5 › Auth Page › AuthToggle › Toggle from login to register mode
+[1A[2K[3/16] tests/auth.spec.ts:42:5 › Auth Page › AuthToggle › Toggle from register back to login mode
+[1A[2K[4/16] tests/auth.spec.ts:57:5 › Auth Page › AuthToggle › Toggle preserves no stale input between modes
+[1A[2K[5/16] tests/auth.spec.ts:74:5 › Auth Page › LoginForm › Login with valid email redirects to home
+[1A[2K  1) tests/auth.spec.ts:74:5 › Auth Page › LoginForm › Login with valid email redirects to home ────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      78 |       await page.getByTestId('login-submit-button').click()
+      79 |
+    > 80 |       await expect(page).toHaveURL('/', { timeout: 30000 })
+         |                          ^
+      81 |     })
+      82 |
+      83 |     test('Login with empty email shows validation error', async ({ page }) => {
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:80:26
+
+    Error Context: test-results/auth-Auth-Page-LoginForm-L-6164f-lid-email-redirects-to-home/error-context.md
+
+
+
+[1A[2K[6/16] tests/auth.spec.ts:83:5 › Auth Page › LoginForm › Login with empty email shows validation error
+[1A[2K[7/16] tests/auth.spec.ts:92:5 › Auth Page › LoginForm › Login with invalid email format shows validation error
+[1A[2K[8/16] tests/auth.spec.ts:102:5 › Auth Page › LoginForm › Login with non-existent email shows error
+[1A[2K  2) tests/auth.spec.ts:102:5 › Auth Page › LoginForm › Login with non-existent email shows error ──
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('login-error')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('login-error')[22m
+
+
+      106 |       await page.getByTestId('login-submit-button').click()
+      107 |
+    > 108 |       await expect(page.getByTestId('login-error')).toBeVisible({ timeout: 30000 })
+          |                                                     ^
+      109 |       await expect(page.getByTestId('login-error')).toContainText('No account found with this email')
+      110 |       await expect(page).toHaveURL(/\/login/)
+      111 |     })
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:108:53
+
+    Error Context: test-results/auth-Auth-Page-LoginForm-L-97b4d--existent-email-shows-error/error-context.md
+
+
+
+[1A[2K[9/16] tests/auth.spec.ts:113:5 › Auth Page › LoginForm › Login form email input is functional on repeated use
+[1A[2K  3) tests/auth.spec.ts:113:5 › Auth Page › LoginForm › Login form email input is functional on repeated use 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('login-error')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('login-error')[22m
+
+
+      119 |       await page.getByTestId('login-submit-button').click()
+      120 |
+    > 121 |       await expect(page.getByTestId('login-error')).toBeVisible({ timeout: 30000 })
+          |                                                     ^
+      122 |
+      123 |       // Clear and try with valid email
+      124 |       await page.getByTestId('login-email-input').fill('')
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:121:53
+
+    Error Context: test-results/auth-Auth-Page-LoginForm-L-ea35e--functional-on-repeated-use/error-context.md
+
+
+
+[1A[2K[10/16] tests/auth.spec.ts:133:5 › Auth Page › RegisterForm › Register with valid name and email creates account and redirects to home
+[1A[2K  4) tests/auth.spec.ts:133:5 › Auth Page › RegisterForm › Register with valid name and email creates account and redirects to home 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      143 |       await page.getByTestId('register-submit-button').click()
+      144 |
+    > 145 |       await expect(page).toHaveURL('/', { timeout: 30000 })
+          |                          ^
+      146 |     })
+      147 |
+      148 |     test('Register with empty name shows validation error', async ({ page }) => {
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:145:26
+
+    Error Context: test-results/auth-Auth-Page-RegisterFor-3b24d-count-and-redirects-to-home/error-context.md
+
+
+
+[1A[2K[11/16] tests/auth.spec.ts:148:5 › Auth Page › RegisterForm › Register with empty name shows validation error
+[1A[2K[12/16] tests/auth.spec.ts:161:5 › Auth Page › RegisterForm › Register with empty email shows validation error
+[1A[2K[13/16] tests/auth.spec.ts:174:5 › Auth Page › RegisterForm › Register with invalid email format shows validation error
+[1A[2K[14/16] tests/auth.spec.ts:188:5 › Auth Page › RegisterForm › Register with already-existing email shows error
+[1A[2K  5) tests/auth.spec.ts:188:5 › Auth Page › RegisterForm › Register with already-existing email shows error 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('register-error')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('register-error')[22m
+
+
+      196 |       await page.getByTestId('register-submit-button').click()
+      197 |
+    > 198 |       await expect(page.getByTestId('register-error')).toBeVisible({ timeout: 30000 })
+          |                                                        ^
+      199 |       await expect(page.getByTestId('register-error')).toContainText('An account with this email already exists')
+      200 |       await expect(page.getByTestId('register-form')).toBeVisible()
+      201 |     })
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:198:56
+
+    Error Context: test-results/auth-Auth-Page-RegisterFor-6ea3e--existing-email-shows-error/error-context.md
+
+
+
+[1A[2K[15/16] tests/auth.spec.ts:203:5 › Auth Page › RegisterForm › Register form fields are functional on repeated use
+[1A[2K  6) tests/auth.spec.ts:203:5 › Auth Page › RegisterForm › Register form fields are functional on repeated use 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('register-error')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('register-error')[22m
+
+
+      214 |       await page.getByTestId('register-submit-button').click()
+      215 |
+    > 216 |       await expect(page.getByTestId('register-error')).toBeVisible({ timeout: 30000 })
+          |                                                        ^
+      217 |
+      218 |       // Change email to unique one and retry
+      219 |       await page.getByTestId('register-email-input').fill('')
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:216:56
+
+    Error Context: test-results/auth-Auth-Page-RegisterFor-dd7b1--functional-on-repeated-use/error-context.md
+
+
+
+[1A[2K[16/16] tests/auth.spec.ts:228:5 › Auth Page › E2E Auth Flow › Complete signup, signout, and signin flow
+[1A[2K  7) tests/auth.spec.ts:228:5 › Auth Page › E2E Auth Flow › Complete signup, signout, and signin flow 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected: [32m"http://localhost:8888/"[39m
+    Received: [31m"http://localhost:8888/[7mlogin[27m"[39m
+    Timeout:  30000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 30000ms[22m
+    [2m    33 × unexpected value "http://localhost:8888/login"[22m
+
+
+      241 |
+      242 |       // Verify post-signup state: redirected to home
+    > 243 |       await expect(page).toHaveURL('/', { timeout: 30000 })
+          |                          ^
+      244 |
+      245 |       // Step 2: Sign out
+      246 |       await page.getByTestId('sidebar-toggle').click()
+        at /repo/apps/AirbnbClone/tests/auth.spec.ts:243:26
+
+    Error Context: test-results/auth-Auth-Page-E2E-Auth-Fl-e42b1-nup-signout-and-signin-flow/error-context.md
+
+
+[1A[2K  7 failed
+    tests/auth.spec.ts:74:5 › Auth Page › LoginForm › Login with valid email redirects to home ─────
+    tests/auth.spec.ts:102:5 › Auth Page › LoginForm › Login with non-existent email shows error ───
+    tests/auth.spec.ts:113:5 › Auth Page › LoginForm › Login form email input is functional on repeated use 
+    tests/auth.spec.ts:133:5 › Auth Page › RegisterForm › Register with valid name and email creates account and redirects to home 
+    tests/auth.spec.ts:188:5 › Auth Page › RegisterForm › Register with already-existing email shows error 
+    tests/auth.spec.ts:203:5 › Auth Page › RegisterForm › Register form fields are functional on repeated use 
+    tests/auth.spec.ts:228:5 › Auth Page › E2E Auth Flow › Complete signup, signout, and signin flow 
+  9 passed (3.9m)
+
+(node:15659) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:15757) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:15686) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:15931) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:16053) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:16138) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:16223) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:16361) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:16445) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

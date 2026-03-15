@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // b1111111: Loft, host Sarah, 1 seed review from Emma (rating 5, c5 a5 comm5 loc5 val4)
 const PROPERTY_WITH_REVIEW = 'b1111111-1111-1111-1111-111111111111'
@@ -9,6 +17,7 @@ const GUEST_ALEX_ID = 'a4444444-4444-4444-4444-444444444444'
 
 async function deleteAllReviewsForProperty(page: import('@playwright/test').Page, propertyId: string) {
   const res = await page.request.get(`/api/reviews?property_id=${propertyId}`)
+  if (!res.ok()) return
   const reviews = await res.json()
   for (const review of reviews) {
     await page.request.delete(`/api/reviews/${review.id}`)
@@ -25,17 +34,21 @@ async function deleteNonSeedBookingsForProperty(page: import('@playwright/test')
     'e6666666-6666-6666-6666-666666666666',
   ]
   const res = await page.request.get(`/api/bookings?guest_id=${GUEST_EMMA_ID}`)
-  const emmaBookings = await res.json()
-  for (const b of emmaBookings) {
-    if (b.property_id === propertyId && !seedIds.includes(b.id)) {
-      await page.request.delete(`/api/bookings/${b.id}`)
+  if (res.ok()) {
+    const emmaBookings = await res.json()
+    for (const b of emmaBookings) {
+      if (b.property_id === propertyId && !seedIds.includes(b.id)) {
+        await page.request.delete(`/api/bookings/${b.id}`)
+      }
     }
   }
   const res2 = await page.request.get(`/api/bookings?guest_id=${GUEST_ALEX_ID}`)
-  const alexBookings = await res2.json()
-  for (const b of alexBookings) {
-    if (b.property_id === propertyId && !seedIds.includes(b.id)) {
-      await page.request.delete(`/api/bookings/${b.id}`)
+  if (res2.ok()) {
+    const alexBookings = await res2.json()
+    for (const b of alexBookings) {
+      if (b.property_id === propertyId && !seedIds.includes(b.id)) {
+        await page.request.delete(`/api/bookings/${b.id}`)
+      }
     }
   }
 }
@@ -71,6 +84,30 @@ async function createBookingAndReview(
 }
 
 test.describe('Property Detail - ReviewsSection', () => {
+  test.beforeEach(async ({ page }) => {
+    // Reset reviews and non-seed bookings for both properties to seed state
+    await deleteAllReviewsForProperty(page, PROPERTY_WITH_REVIEW)
+    await deleteAllReviewsForProperty(page, PROPERTY_NO_REVIEWS)
+    await deleteNonSeedBookingsForProperty(page, PROPERTY_WITH_REVIEW)
+    await deleteNonSeedBookingsForProperty(page, PROPERTY_NO_REVIEWS)
+
+    // Re-create the seed review for b1111111 (Emma, rating 5)
+    await page.request.post('/api/reviews', {
+      data: {
+        booking_id: 'e1111111-1111-1111-1111-111111111111',
+        property_id: PROPERTY_WITH_REVIEW,
+        guest_id: GUEST_EMMA_ID,
+        rating: 5,
+        cleanliness: 5,
+        accuracy: 5,
+        communication: 5,
+        location: 5,
+        value: 4,
+        comment: 'Absolutely loved this loft! The city views are even better than the photos. Sarah was a wonderful host. Would definitely stay again.',
+      },
+    })
+  })
+
   test('Reviews section displays average ratings by category', async ({ page }) => {
     // b1111111 has 1 seed review: cleanliness 5, accuracy 5, communication 5, location 5, value 4
     await page.goto(`/properties/${PROPERTY_WITH_REVIEW}`)

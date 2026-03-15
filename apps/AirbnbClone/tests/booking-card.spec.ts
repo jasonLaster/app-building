@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // b1111111: Loft, $150/night, $75 cleaning, 4 max guests, host: Sarah (a1111111)
 const PROPERTY_LOFT = 'b1111111-1111-1111-1111-111111111111'
@@ -8,6 +16,7 @@ const PROPERTY_CABIN = 'b3333333-3333-3333-3333-333333333333'
 const GUEST_EMAIL = 'emma@example.com'
 // Host user: Sarah Chen (a1111111) — owns b1111111
 const HOST_EMAIL = 'sarah@example.com'
+const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
 
 async function loginAs(page: import('@playwright/test').Page, email: string) {
   await page.goto('/login')
@@ -27,6 +36,29 @@ async function deleteAllBookings(page: import('@playwright/test').Page, guestId:
 }
 
 test.describe('Property Detail - BookingCard', () => {
+  test.beforeEach(async ({ request }) => {
+    // Clean up any non-seed bookings created by Emma
+    const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
+    if (res.ok()) {
+      const bookings = await res.json()
+      const seedBookingIds = [
+        'e1111111-1111-1111-1111-111111111111',
+        'e2222222-2222-2222-2222-222222222222',
+        'e3333333-3333-3333-3333-333333333333',
+        'e4444444-4444-4444-4444-444444444444',
+        'e5555555-5555-5555-5555-555555555555',
+        'e6666666-6666-6666-6666-666666666666',
+      ]
+      for (const booking of bookings) {
+        if (!seedBookingIds.includes(booking.id)) {
+          await request.put(`/api/bookings/${booking.id}`, {
+            data: { status: 'cancelled' },
+          })
+        }
+      }
+    }
+  })
+
   test('Booking card displays price per night', async ({ page }) => {
     await page.goto(`/properties/${PROPERTY_LOFT}`)
 

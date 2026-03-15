@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // b1111111: Loft, host Sarah Chen (a1111111), avatar set, bio set, created 2021-03-15
 // Sarah owns 3 properties: b1111111, b2222222, b5555555
@@ -10,6 +18,16 @@ const PROPERTY_CABIN = 'b3333333-3333-3333-3333-333333333333'
 const HOST_MIKE_ID = 'a2222222-2222-2222-2222-222222222222'
 
 test.describe('Property Detail - HostInfoCard', () => {
+  test.beforeEach(async ({ request }) => {
+    // Restore Mike's avatar and bio to seed state before each test
+    await request.put(`/api/users/${HOST_MIKE_ID}`, {
+      data: {
+        avatar_url: 'https://i.pravatar.cc/150?u=mike',
+        bio: 'Travel enthusiast and outdoor adventure guide. I love sharing my favorite spots with guests from around the world.',
+      },
+    })
+  })
+
   test('Host info card displays host name, avatar, bio, and member since date', async ({ page }) => {
     // Sarah Chen: avatar set, bio "Superhost with 5 years...", created 2021-03-15
     await page.goto(`/properties/${PROPERTY_LOFT}`)

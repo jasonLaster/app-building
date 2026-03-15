@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // b2222222: Villa, Miami, 18 amenities across all 4 categories (Essentials, Features, Safety, Location)
 const PROPERTY_MANY_AMENITIES = 'b2222222-2222-2222-2222-222222222222'
@@ -6,6 +14,26 @@ const PROPERTY_MANY_AMENITIES = 'b2222222-2222-2222-2222-222222222222'
 const PROPERTY_FEW_AMENITIES = 'b4444444-4444-4444-4444-444444444444'
 
 test.describe('Property Detail - AmenitiesList', () => {
+  test.beforeEach(async ({ request }) => {
+    // Clean up any non-seed properties created by tests (e.g. "No Amenities Property")
+    const res = await request.get('/api/properties')
+    if (res.ok()) {
+      const properties = await res.json()
+      const seedIds = [
+        'b1111111-1111-1111-1111-111111111111',
+        'b2222222-2222-2222-2222-222222222222',
+        'b3333333-3333-3333-3333-333333333333',
+        'b4444444-4444-4444-4444-444444444444',
+        'b5555555-5555-5555-5555-555555555555',
+      ]
+      for (const property of properties) {
+        if (!seedIds.includes(property.id)) {
+          await request.delete(`/api/properties/${property.id}`)
+        }
+      }
+    }
+  })
+
   test('Amenities list displays amenities grouped by category with icons', async ({ page }) => {
     await page.goto(`/properties/${PROPERTY_MANY_AMENITIES}`)
 

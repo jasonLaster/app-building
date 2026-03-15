@@ -1,11 +1,40 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // Property b2222222 has 4 images (most images in seed data)
 const PROPERTY_WITH_IMAGES = 'b2222222-2222-2222-2222-222222222222'
 // Property b4444444 has 2 images
 const PROPERTY_FOR_SINGLE = 'b4444444-4444-4444-4444-444444444444'
 
+// Seed images for b4444444 that need to be restored after deletion tests
+const SEED_IMAGES_B4444444 = [
+  { property_id: PROPERTY_FOR_SINGLE, url: 'https://picsum.photos/seed/apt1/800/600', caption: 'Living room', display_order: 0 },
+  { property_id: PROPERTY_FOR_SINGLE, url: 'https://picsum.photos/seed/apt2/800/600', caption: 'Bedroom', display_order: 1 },
+]
+
 test.describe('Property Detail - ImageGallery', () => {
+  test.beforeEach(async ({ request }) => {
+    // Delete all images for b4444444 and re-create seed images
+    const propertyResponse = await request.get(`/api/properties/${PROPERTY_FOR_SINGLE}`)
+    if (propertyResponse.ok()) {
+      const property = await propertyResponse.json()
+      const images = property.images as { id: string }[]
+      for (const img of images) {
+        await request.delete(`/api/property-images/${img.id}`)
+      }
+    }
+    for (const img of SEED_IMAGES_B4444444) {
+      await request.post('/api/property-images', { data: img })
+    }
+  })
+
   test('Image gallery displays main large image and smaller thumbnails', async ({ page }) => {
     await page.goto(`/properties/${PROPERTY_WITH_IMAGES}`)
 
