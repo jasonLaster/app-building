@@ -40,6 +40,7 @@ FAILURE_RESOLUTION_TYPE: <one of: test-code, app-code, both, none> (whether the 
 FIX_ITERATIONS: <number of test re-runs needed to fully resolve this failure, 0 if not yet resolved, 1 if resolved on first attempt. REQUIRED — captures debugging difficulty. Failures taking 4+ iterations indicate complex root causes that may warrant process improvements.>
 TOOL_CALL_COUNT: <recommended — total number of tool calls (Replay MCP, file reads, code searches) used to diagnose and fix this failure. Complements FIX_ITERATIONS as a resolution effort metric — when most failures resolve in 1 iteration, tool call count differentiates easy fixes (2-3 tool calls) from complex investigations (10+ tool calls). Include whenever possible to improve resolution effort analysis coverage.>
 SPEC_FILE: <recommended — the spec file containing this test, e.g. "tests/customer-list.spec.ts". Simplifies aggregation by spec file and makes the failure table more scannable. Many clusters are spec-file-specific, so this field enables per-file failure analysis.>
+FAILURE_RESOLUTION_SCOPE: <recommended — one of: localized, cross-spec. "localized" = fix was contained to a single spec file or single app file. "cross-spec" = fix required changes spanning multiple files (e.g., updating a shared utility, fixing a backend endpoint used by multiple specs). Helps identify systemic issues that warrant architectural attention rather than per-file fixes.>
 
 #### Replay Usage (if REPLAY_USED is yes)
 OUTCOME: <what the Replay analysis revealed>
@@ -199,6 +200,7 @@ Compile all analysis files into a single report with these sections:
 - Resolution effort distribution (when TOOL_CALL_COUNT data is available, show the breakdown — e.g., 1-3 calls: 15, 4-9 calls: 8, 10+ calls: 3. Complements FIX_ITERATIONS when most failures resolve in 1 iteration but vary widely in investigation effort)
 - Test Isolation Score trend (when prior reports exist for the same container/app, compare the current Test Isolation Score against previous reports to measure whether beforeEach cleanup mandates are reducing isolation failures over time. Show the trend as: `current% (previous%→current%)` or `current% (first report)` if no prior data exists)
 - Infrastructure failure sub-categories (break down infrastructure failures into: environment (socket-timeout, navigation-timeout, port-conflict), recording (recording-upload-failure), and agent-workflow-error (running `npx playwright test` directly instead of `npm run test`, missing dev server startup). Agent workflow errors are distinct from real infrastructure issues and indicate process compliance gaps rather than environmental problems)
+- Failure resolution scope (when FAILURE_RESOLUTION_SCOPE data is available, report the breakdown of localized fixes (single spec file) vs cross-spec fixes (changes spanning multiple files). A high cross-spec ratio indicates systemic issues that warrant architectural attention rather than per-file fixes)
 
 ### 2. Failure Table
 A markdown table with columns:

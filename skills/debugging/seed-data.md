@@ -193,6 +193,22 @@ FK constraint errors the tests are hitting.
 order. This is the same fix as cross-run-accumulation — FK violations are a symptom of
 missing reseeding, not a distinct failure category.
 
+## truncateAndSeed Checklist
+
+When adding new database tables to an app, always add them to the `truncateAndSeed` function's
+truncation list. Missing tables cause cross-run-accumulation failures that are hard to diagnose
+because the count grows with each test run.
+
+**Checklist when adding a new table:**
+1. Add the table to the `TRUNCATE ... CASCADE` statement in the seed function.
+2. Add seed data inserts for the new table if tests will assert on its contents.
+3. If the table has foreign key dependencies, ensure it's truncated in the correct order
+   (or use `CASCADE`).
+
+This was the root cause of the largest single failure cluster in one session (6 failures across
+4 logs) — dashboard tables (`dashboards`, `dashboard_widgets`) were not included in
+`truncateAndSeed`, causing widget data to accumulate across test runs.
+
 ## General Guidance
 
 When many detail-page tests fail with `expected count > 0, received 0`, resist the urge to

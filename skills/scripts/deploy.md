@@ -63,6 +63,22 @@ All 6 secrets are always required. The deploy script reads them from `process.en
 - `package.json` entry: `"deploy": "tsx scripts/deploy.ts"`
 - Example: `npm run deploy` (wrapped in `exec-secrets` as shown above)
 
+## Fail-Fast Auth Verification
+
+Before attempting any deployment steps, verify that the Netlify auth token is valid. An expired
+token causes all Netlify API/CLI calls to fail with 401 Unauthorized, and the agent can waste
+200+ commands trying workarounds that will never succeed. Run this check first and stop
+immediately if it fails:
+
+```bash
+exec-secrets NETLIFY_AUTH_TOKEN -- bash -c 'curl -sf -H "Authorization: Bearer $NETLIFY_AUTH_TOKEN" https://api.netlify.com/api/v1/user > /dev/null && echo "AUTH OK" || echo "AUTH EXPIRED — update token via set-branch-secret NETLIFY_AUTH_TOKEN"'
+```
+
+If auth is expired:
+- `npx netlify login` requires interactive input and **cannot work** in agent/CI contexts.
+- The only fix is to update the token via `set-branch-secret NETLIFY_AUTH_TOKEN`.
+- Do NOT attempt dozens of alternative auth approaches — they will all fail for the same reason.
+
 ## Behavior
 
 ### Database schema sync (every run)

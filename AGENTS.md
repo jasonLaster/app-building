@@ -105,42 +105,15 @@ Each task object must have `skill` and `subtasks`. `app` is optional.
 
 ## Secrets
 
-When you are running in a container you do **not** have direct access to secrets
-(API keys, tokens, etc.) in your environment.
-
-All secrets are managed by the container's secrets server. To run any command that needs
-a secret, use `exec-secrets`:
-
-```bash
-exec-secrets <SECRET_NAME> [SECRET_NAME2 ...] -- <command> [args...]
-```
-
-Examples:
-
-```bash
-# Neon API call
-exec-secrets NEON_API_KEY -- curl -s -H "Authorization: Bearer $NEON_API_KEY" \
-  "https://console.neon.tech/api/v2/projects"
-
-# Netlify deploy
-exec-secrets NETLIFY_AUTH_TOKEN NETLIFY_ACCOUNT_SLUG -- netlify deploy --prod
-
-# Multiple secrets
-exec-secrets NEON_API_KEY NETLIFY_AUTH_TOKEN -- bash -c 'echo "neon: $NEON_API_KEY" && echo "netlify: $NETLIFY_AUTH_TOKEN"'
-```
-
-The secrets server spawns your command with the requested secrets in its environment,
-and redacts secret values from all output.
-
-To see which secrets are available, run `list-secrets`.
-
-**Rules:**
-- Never try to read secrets from environment variables directly — they are not set.
-- Always use `exec-secrets` to wrap any command that needs secret values.
-- If a command needs multiple secrets, list them all before `--`.
-- For complex commands that use shell expansion of secret vars, wrap in `bash -c '...'`.
+When you are running in a container secrets are **not** available directly in your environment.
+Use `exec-secrets` to run commands with secrets, `list-secrets` to see available secrets,
+and `set-branch-secret` to store new branch-level secrets. See `skills/accessSecrets.md` for full details.
 
 ## Running Tests
+
+**NEVER run `playwright test` or `npx playwright` directly.** Always use `npm run test <file>`
+from the app directory, which handles Neon branch creation, seeding, Replay recording, and
+cleanup. Running playwright directly skips all of this and produces useless results.
 
 You MUST read `skills/tasks/build/testing.md` and precisely follow its instructions when running
 tests and debugging test failures.

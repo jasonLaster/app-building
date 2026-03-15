@@ -184,6 +184,12 @@ These are the most frequent lint errors that require manual fixes after `eslint 
   move the ref read into a `useEffect`, event handler, or callback — never in the render
   body or useMemo/useCallback.
 
+- **`react-compiler/react-compiler` (mutation of existing object)**: The React compiler
+  flags direct mutations of objects (e.g., `obj.key = value`, `array.push(item)`,
+  `array.sort()`). Fix: use immutable patterns instead — spread for objects
+  (`{ ...obj, key: value }`), `[...array, item]` for additions, `[...array].sort()` for
+  in-place operations, and `Array.reduce()` for building new objects from iterations.
+
 - **`no-unused-vars` / `@typescript-eslint/no-unused-vars`**: Remove the unused import or
   variable. If intentionally unused (e.g., rest parameter), prefix with `_`. This is the
   most common lint error (~80% of failures) — proactively clean up imports before running.
