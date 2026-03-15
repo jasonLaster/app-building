@@ -75,20 +75,20 @@
   },
   "suites": [
     {
-      "title": "pagination.spec.ts",
-      "file": "pagination.spec.ts",
+      "title": "profile-form.spec.ts",
+      "file": "profile-form.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Home Page - Pagination",
-          "file": "pagination.spec.ts",
-          "line": 49,
+          "title": "Profile Page - ProfileForm",
+          "file": "profile-form.spec.ts",
+          "line": 10,
           "column": 6,
           "specs": [
             {
-              "title": "Pagination controls are hidden when all results fit on one page",
+              "title": "Profile page requires login",
               "ok": true,
               "tags": [],
               "tests": [
@@ -97,7 +97,7 @@
                   "annotations": [
                     {
                       "type": "Replay recording",
-                      "description": "https://app.replay.io/recording/6117c186-c797-440b-9ace-1130b585edbd"
+                      "description": "https://app.replay.io/recording/884eec9c-9453-4b84-92cf-2a43ac646de6"
                     }
                   ],
                   "expectedStatus": "passed",
@@ -108,12 +108,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 11996,
+                      "duration": 2765,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T00:25:43.711Z",
+                      "startTime": "2026-03-15T00:30:02.987Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -121,366 +121,570 @@
                   "status": "expected"
                 }
               ],
-              "id": "ffb96fb2c9977d04c390-37a83d313f5e6d351e16",
-              "file": "pagination.spec.ts",
-              "line": 204,
+              "id": "800059627c1404a4b473-3a0e7ae92b86ed8e063d",
+              "file": "profile-form.spec.ts",
+              "line": 11,
               "column": 3
-            }
-          ],
-          "suites": [
+            },
             {
-              "title": "Multi-page tests",
-              "file": "pagination.spec.ts",
-              "line": 54,
-              "column": 8,
-              "specs": [
+              "title": "Profile page displays current user info",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "title": "Pagination controls are displayed when results exceed one page",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
+                  "timeout": 180000,
+                  "annotations": [
                     {
-                      "timeout": 60000,
-                      "annotations": [
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/4580c31e-85ab-4502-9cab-f99afa719eaa"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 14311,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:22:44.544Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 18,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/20a82a15-67c4-4cc9-87f4-4e2f0a0c758c"
                     }
                   ],
-                  "id": "ffb96fb2c9977d04c390-a8c40072bdae7869457c",
-                  "file": "pagination.spec.ts",
-                  "line": 60,
-                  "column": 5
-                },
-                {
-                  "title": "Clicking Next page loads the next set of properties",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
                     {
-                      "timeout": 60000,
-                      "annotations": [
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/7c9a9f78-c360-4103-b5b3-5f5d79ae2b4c"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 23311,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:22:59.025Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ffb96fb2c9977d04c390-8063b4b095aed108a94d",
-                  "file": "pagination.spec.ts",
-                  "line": 71,
-                  "column": 5
-                },
-                {
-                  "title": "Clicking Previous page loads the previous set of properties",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/11d86860-7f98-42e7-b3c8-a02060254582"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 23789,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:23:22.362Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ffb96fb2c9977d04c390-b02ac33a7342bc1c0383",
-                  "file": "pagination.spec.ts",
-                  "line": 91,
-                  "column": 5
-                },
-                {
-                  "title": "Clicking a specific page number navigates to that page",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/da5e462c-a58c-4d3d-aa47-845b5b8d4e85"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 22742,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:23:46.172Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ffb96fb2c9977d04c390-ae028c320cd13d85876b",
-                  "file": "pagination.spec.ts",
-                  "line": 112,
-                  "column": 5
-                },
-                {
-                  "title": "Next button is disabled on the last page",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/fed53e68-36cc-4122-8742-356332ed75be"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 22762,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:24:08.934Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ffb96fb2c9977d04c390-470b8975d7fe47dca741",
-                  "file": "pagination.spec.ts",
-                  "line": 126,
-                  "column": 5
-                },
-                {
-                  "title": "Previous button is disabled on the first page",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/029158fe-c338-4285-a0ee-a2b83ccc8123"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 22541,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:24:31.712Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ffb96fb2c9977d04c390-b60ab4ba52acafcd4b50",
-                  "file": "pagination.spec.ts",
-                  "line": 142,
-                  "column": 5
-                },
-                {
-                  "title": "Applying filters resets pagination to page 1",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 180000,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1904,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:05.910Z",
                       "annotations": [
                         {
                           "type": "slow",
                           "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/pagination.spec.ts",
-                            "line": 154,
-                            "column": 12
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 18,
+                            "column": 10
                           }
-                        },
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/e187fe08-7328-43b0-a386-3dce19109958"
                         }
                       ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 25000,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:24:54.271Z",
-                          "annotations": [
-                            {
-                              "type": "slow",
-                              "location": {
-                                "file": "/repo/apps/AirbnbClone/tests/pagination.spec.ts",
-                                "line": 154,
-                                "column": 12
-                              }
-                            }
-                          ],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
+                      "attachments": []
                     }
                   ],
-                  "id": "ffb96fb2c9977d04c390-58a85cc5d0b41bfb5188",
-                  "file": "pagination.spec.ts",
-                  "line": 153,
-                  "column": 5
-                },
-                {
-                  "title": "Pagination is functional on repeated use",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 180000,
-                      "annotations": [
-                        {
-                          "type": "slow",
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/pagination.spec.ts",
-                            "line": 175,
-                            "column": 12
-                          }
-                        },
-                        {
-                          "type": "Replay recording",
-                          "description": "https://app.replay.io/recording/95356054-c5c0-4960-b014-b38b4a7b928b"
-                        }
-                      ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 24404,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-15T00:25:19.289Z",
-                          "annotations": [
-                            {
-                              "type": "slow",
-                              "location": {
-                                "file": "/repo/apps/AirbnbClone/tests/pagination.spec.ts",
-                                "line": 175,
-                                "column": 12
-                              }
-                            }
-                          ],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ffb96fb2c9977d04c390-40938601fbdb4f96512c",
-                  "file": "pagination.spec.ts",
-                  "line": 174,
-                  "column": 5
+                  "status": "expected"
                 }
-              ]
+              ],
+              "id": "800059627c1404a4b473-3e1c0defba95d792b0d7",
+              "file": "profile-form.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Edit name field inline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 32,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/178f5732-e28d-40f7-9312-e4fc2e5438c5"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2753,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:07.830Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 32,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-ff82de4ebdb94d0ed08a",
+              "file": "profile-form.spec.ts",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "Edit bio field inline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 46,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/86a72e7d-6973-4637-8fd9-99d3ee5dea00"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2740,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:10.602Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 46,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-389478df21af97c28ff7",
+              "file": "profile-form.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "Edit phone field inline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 59,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/bf36e625-7f7c-43df-8b77-2180145160cd"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2752,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:13.354Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 59,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-35b0ae7193cab2b37f7a",
+              "file": "profile-form.spec.ts",
+              "line": 58,
+              "column": 3
+            },
+            {
+              "title": "Edit avatar URL field inline",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 72,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/180f159e-9b27-40c2-be5b-cef675c75cf1"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2771,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:16.119Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 72,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-4718c09c4f41ddc3ba3a",
+              "file": "profile-form.spec.ts",
+              "line": 71,
+              "column": 3
+            },
+            {
+              "title": "Save with empty name shows validation error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 86,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/57346fb3-6860-4f38-ba5e-fc3aa9e8bb9a"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1895,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:18.902Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 86,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-ae1ce609d28446869c36",
+              "file": "profile-form.spec.ts",
+              "line": 85,
+              "column": 3
+            },
+            {
+              "title": "Save with invalid avatar URL shows validation error",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 99,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/7dfecfd9-2028-4e62-9afb-60dbc8f3659a"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1852,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:20.811Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 99,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-91b143d244edcf70f6d9",
+              "file": "profile-form.spec.ts",
+              "line": 98,
+              "column": 3
+            },
+            {
+              "title": "Profile form fields are functional on repeated edits",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 112,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/e5590c35-98e8-4b43-8379-bda174a9e374"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2868,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:22.676Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 112,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-c3d7db1883bee4645e8f",
+              "file": "profile-form.spec.ts",
+              "line": 111,
+              "column": 3
+            },
+            {
+              "title": "Email field is displayed but not editable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 132,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/0cb97923-d6c0-401d-afd8-14d2c2fdcdba"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1807,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:25.561Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 132,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-195e87f85a43c90d9538",
+              "file": "profile-form.spec.ts",
+              "line": 131,
+              "column": 3
+            },
+            {
+              "title": "Profile update persists across navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                        "line": 142,
+                        "column": 10
+                      }
+                    },
+                    {
+                      "type": "Replay recording",
+                      "description": "https://app.replay.io/recording/017b40a5-3cbf-45c3-b5d4-4804e4d5b1f6"
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3482,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T00:30:27.381Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/profile-form.spec.ts",
+                            "line": 142,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "800059627c1404a4b473-5891455871e4e3f83522",
+              "file": "profile-form.spec.ts",
+              "line": 141,
+              "column": 3
             }
           ]
         }
@@ -489,9 +693,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T00:22:39.031Z",
-    "duration": 196848.48500000002,
-    "expected": 9,
+    "startTime": "2026-03-15T00:29:57.437Z",
+    "duration": 33631.869,
+    "expected": 11,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

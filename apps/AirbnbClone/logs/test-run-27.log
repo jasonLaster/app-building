@@ -1,0 +1,11 @@
+Created branch: test-run-1773534586968 (br-soft-mud-ahoyns6a)
+Test DB URL: postgresql://neondb_owner:***@ep-sparkling-cake-ahgcax9a.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+[replay.io]: Finishing up. This should only take a moment ...
+[replay.io]: 
+[replay.io]: ❌ We encountered some unexpected errors creating your tests on replay.io
+[replay.io]:    - GraphQL request for CreateTestRunShard failed (Only workspace API keys may perform this operation)
+
+
