@@ -56,25 +56,33 @@ export default async function handler(req: Request, _context: Context) {
       `;
 
       // Determine active cycle: current date falls within start_date and end_date
+      // Only one cycle can be active at a time — pick the most recently started one
       const now = new Date();
-      const enrichedCycles = cycles.map((c) => {
+      let activeCycleId: string | null = null;
+      let activeCycleStart: Date | null = null;
+      const parsedCycles = cycles.map((c) => {
         const startStr = c.start_date instanceof Date ? c.start_date.toISOString().split('T')[0] : String(c.start_date).split('T')[0];
         const endStr = c.end_date instanceof Date ? c.end_date.toISOString().split('T')[0] : String(c.end_date).split('T')[0];
         const startDate = new Date(startStr + 'T00:00:00');
         const endDate = new Date(endStr + 'T23:59:59');
-        const isActive = now >= startDate && now <= endDate;
-        return {
-          id: c.id,
-          name: c.name,
-          startDate: startStr,
-          endDate: endStr,
-          teamId: c.team_id,
-          issueCount: c.issue_count,
-          doneCount: c.done_count,
-          inProgressCount: c.in_progress_count,
-          isActive,
-        };
+        const inRange = now >= startDate && now <= endDate;
+        if (inRange && (!activeCycleStart || startDate > activeCycleStart)) {
+          activeCycleId = c.id;
+          activeCycleStart = startDate;
+        }
+        return { c, startStr, endStr };
       });
+      const enrichedCycles = parsedCycles.map(({ c, startStr, endStr }) => ({
+        id: c.id,
+        name: c.name,
+        startDate: startStr,
+        endDate: endStr,
+        teamId: c.team_id,
+        issueCount: c.issue_count,
+        doneCount: c.done_count,
+        inProgressCount: c.in_progress_count,
+        isActive: c.id === activeCycleId,
+      }));
 
       return new Response(JSON.stringify({ cycles: enrichedCycles }), {
         status: 200,

@@ -65,6 +65,8 @@ export default function ActiveCycle() {
       endDate: data.endDate,
     })).unwrap();
     setCreateModalOpen(false);
+    // Show list view so user can see the new cycle
+    dispatch(setSelectedCycleId(null));
     // Refetch cycles to get updated data
     dispatch(fetchCycles(teamId));
   }

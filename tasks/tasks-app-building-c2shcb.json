@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/build/testing.md",
       "subtasks": [
-        "FixTests: tests/create-cycle.spec.ts"
-      ],
-      "timestamp": "2026-03-15T03:07:12.082Z",
-      "app": "LinearClone"
-    },
-    {
-      "skill": "skills/tasks/build/testing.md",
-      "subtasks": [
         "FixTests: tests/create-issue-modal-actions-integration.spec.ts"
       ],
       "timestamp": "2026-03-15T03:07:12.082Z",
@@ -900,7 +892,7 @@
   "current": {
     "skill": "skills/tasks/build/testing.md",
     "subtasks": [
-      "FixTests: tests/burndown-chart.spec.ts"
+      "FixTests: tests/create-cycle.spec.ts"
     ],
     "timestamp": "2026-03-15T03:07:12.082Z",
     "app": "LinearClone"
