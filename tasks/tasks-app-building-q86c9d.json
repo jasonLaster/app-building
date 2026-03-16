@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "MakeResponsiveMyTrips: Make My Trips page responsive"
-      ],
-      "timestamp": "2026-03-16T03:04:02.704Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/polishApp.md",
-      "subtasks": [
         "MakeResponsiveHostDashboard: Make Host Dashboard page responsive"
       ],
       "timestamp": "2026-03-16T03:04:02.704Z",
@@ -52,7 +44,7 @@
   "current": {
     "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "MakeResponsivePropertyDetail: Make Property Detail page responsive"
+      "MakeResponsiveMyTrips: Make My Trips page responsive"
     ],
     "timestamp": "2026-03-16T03:04:02.704Z",
     "app": "AirbnbClone"

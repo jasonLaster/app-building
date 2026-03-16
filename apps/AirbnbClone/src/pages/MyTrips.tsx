@@ -34,7 +34,7 @@ export default function MyTrips() {
 
   return (
     <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="my-trips-page">
-      <h1 className="text-[32px] font-bold text-text mb-8">Trips</h1>
+      <h1 className="text-[32px] max-sm:text-[24px] font-bold text-text mb-8 max-sm:mb-5">Trips</h1>
 
       <div aria-live="polite">
         {loading ? (

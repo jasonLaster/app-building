@@ -76,7 +76,7 @@ export default function TripsTabs({ bookings, onCancelBooking }: TripsTabsProps)
             tabIndex={activeTab === tab.key ? 0 : -1}
             onClick={() => setActiveTab(tab.key)}
             onKeyDown={(e) => handleTabKeyDown(e, index)}
-            className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+            className={`px-4 max-sm:px-3 py-3 max-sm:py-2 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.key
                 ? 'border-text text-text'
                 : 'border-transparent text-text-secondary hover:text-text hover:border-border-dark'

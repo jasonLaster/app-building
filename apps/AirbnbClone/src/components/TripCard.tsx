@@ -43,10 +43,10 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
   return (
     <article
       data-testid={`trip-card-${booking.id}`}
-      className="flex gap-4 rounded-xl border border-border hover:shadow-md transition-shadow cursor-pointer overflow-hidden"
+      className="flex max-sm:flex-col gap-4 max-sm:gap-0 rounded-xl border border-border hover:shadow-md transition-shadow cursor-pointer overflow-hidden"
       onClick={handleCardClick}
     >
-      <div className="w-[180px] h-[140px] shrink-0 overflow-hidden">
+      <div className="w-[180px] h-[140px] max-sm:w-full max-sm:h-[180px] shrink-0 overflow-hidden">
         {booking.property_image ? (
           <img
             src={booking.property_image}
@@ -60,7 +60,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
         )}
       </div>
 
-      <div className="flex-1 py-3.5 pr-4 flex flex-col justify-between min-w-0">
+      <div className="flex-1 py-3.5 pr-4 max-sm:px-3 max-sm:pb-3 flex flex-col justify-between min-w-0">
         <div>
           <div className="flex items-center justify-between gap-2">
             <h3 className="font-semibold text-text text-base truncate">
@@ -86,7 +86,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
           </p>
         </div>
 
-        <div className="flex items-center justify-between mt-2">
+        <div className="flex items-center justify-between mt-2 flex-wrap gap-2">
           <p className="text-sm font-semibold text-text">
             ${Number(booking.total_price).toFixed(0)}
           </p>

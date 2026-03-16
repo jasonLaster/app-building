@@ -61,7 +61,7 @@ export default function CancelBookingDialog({ booking, onConfirm, onDismiss }: C
         role="dialog"
         aria-modal="true"
         aria-labelledby="cancel-dialog-title"
-        className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
+        className="bg-white rounded-xl p-6 max-sm:p-4 max-w-md w-full mx-4 max-sm:max-w-[calc(100%-24px)] shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="cancel-dialog-title" className="text-lg font-semibold text-text mb-2">Cancel Booking</h2>
