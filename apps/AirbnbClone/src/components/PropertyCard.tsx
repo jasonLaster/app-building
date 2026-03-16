@@ -34,12 +34,6 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             </div>
           )}
           <FavoriteButton propertyId={property.id} />
-          <span
-            data-testid={`property-type-badge-${property.id}`}
-            className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-2.5 py-1 text-xs font-semibold text-text shadow-sm"
-          >
-            {property.property_type}
-          </span>
         </div>
         <div className="mt-3">
           <div className="flex items-start justify-between gap-1">
@@ -50,7 +44,6 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <div className="flex items-center gap-1 shrink-0">
                 <Star size={12} className="fill-text text-text" aria-hidden="true" />
                 <span className="text-sm text-text">{rating.toFixed(2)}</span>
-                <span className="text-sm text-text-secondary">({reviewCount})</span>
               </div>
             ) : (
               <span className="text-sm text-text-secondary shrink-0">New</span>
@@ -58,11 +51,11 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           </div>
           <p className="text-text-secondary text-sm mt-0.5 truncate">{property.title}</p>
           <p className="text-text-secondary text-sm">
-            {property.beds} {property.beds === 1 ? 'bed' : 'beds'}
+            {property.beds} {property.beds === 1 ? 'bed' : 'beds'} · {property.bedrooms} {property.bedrooms === 1 ? 'bedroom' : 'bedrooms'}
           </p>
-          <p className="mt-1 text-[15px]">
+          <p className="mt-1.5 text-[15px]">
             <span className="font-semibold text-text">${Number(property.price_per_night).toFixed(0)}</span>
-            <span className="text-text"> / night</span>
+            <span className="text-text-secondary font-normal"> night</span>
           </p>
         </div>
       </Link>

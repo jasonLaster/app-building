@@ -95,7 +95,7 @@ function RegisterForm() {
         type="submit"
         disabled={loading}
         aria-busy={loading}
-        className="w-full py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 cursor-pointer"
+        className="w-full py-3.5 rounded-lg bg-gradient-to-r from-[#E61E4D] to-[#BD1E59] text-white font-semibold hover:opacity-95 transition-opacity disabled:opacity-50 cursor-pointer text-base"
         data-testid="register-submit-button"
       >
         {loading ? 'Registering...' : 'Register'}

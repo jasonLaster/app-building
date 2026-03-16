@@ -7,6 +7,7 @@ import HostDashboard from './pages/HostDashboard'
 import Profile from './pages/Profile'
 import WriteReview from './pages/WriteReview'
 import Sidebar from './components/Sidebar'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   )
 }

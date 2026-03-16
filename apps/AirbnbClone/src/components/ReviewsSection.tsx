@@ -31,8 +31,8 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
 
   if (reviews.length === 0) {
     return (
-      <section id="reviews-section" data-testid="reviews-section" className="py-6 border-b border-border">
-        <h2 className="text-lg font-semibold text-text mb-3">Reviews</h2>
+      <section id="reviews-section" data-testid="reviews-section" className="py-8 border-b border-border">
+        <h2 className="text-[22px] font-semibold text-text mb-3">Reviews</h2>
         <p className="text-text-secondary">No reviews yet</p>
       </section>
     )
@@ -42,22 +42,22 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
   const displayReviews = showAll ? reviews : reviews.slice(0, INITIAL_SHOW)
 
   return (
-    <section id="reviews-section" data-testid="reviews-section" className="py-6 border-b border-border">
-      <div className="flex items-center gap-2 mb-4">
-        <Star size={20} className="fill-text text-text" aria-hidden="true" />
-        <h2 className="text-lg font-semibold text-text">
+    <section id="reviews-section" data-testid="reviews-section" className="py-8 border-b border-border">
+      <div className="flex items-center gap-2 mb-6">
+        <Star size={22} className="fill-text text-text" aria-hidden="true" />
+        <h2 className="text-[22px] font-semibold text-text">
           {overallAvg.toFixed(1)} · {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-3 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-12 gap-y-4 mb-8">
         {CATEGORIES.map(({ key, label }) => {
           const avg = avgRating(reviews, key)
           return (
             <div key={key} data-testid={`rating-category-${key}`} className="flex items-center justify-between text-sm">
-              <span className="text-text-secondary">{label}</span>
-              <div className="flex items-center gap-1">
-                <div className="w-24 h-1 bg-bg-secondary rounded-full overflow-hidden" role="meter" aria-label={`${label} rating`} aria-valuenow={avg} aria-valuemin={0} aria-valuemax={5}>
+              <span className="text-text">{label}</span>
+              <div className="flex items-center gap-2">
+                <div className="w-28 h-1 bg-border rounded-full overflow-hidden" role="meter" aria-label={`${label} rating`} aria-valuenow={avg} aria-valuemin={0} aria-valuemax={5}>
                   <div
                     className="h-full bg-text rounded-full"
                     style={{ width: `${(avg / 5) * 100}%` }}
@@ -70,23 +70,23 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
         })}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
         {displayReviews.map((review) => (
-          <div key={review.id} data-testid={`review-card-${review.id}`} className="space-y-2">
+          <div key={review.id} data-testid={`review-card-${review.id}`} className="space-y-3">
             <div className="flex items-center gap-3">
               {review.guest_avatar ? (
                 <img
                   src={review.guest_avatar}
                   alt={review.guest_name}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-12 h-12 rounded-full object-cover"
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-bg-secondary flex items-center justify-center text-sm font-semibold text-text-secondary">
+                <div className="w-12 h-12 rounded-full bg-text flex items-center justify-center text-sm font-bold text-white">
                   {review.guest_name.charAt(0)}
                 </div>
               )}
               <div>
-                <p className="font-medium text-text text-sm">{review.guest_name}</p>
+                <p className="font-semibold text-text text-sm">{review.guest_name}</p>
                 <p className="text-text-secondary text-xs">{formatDate(review.created_at)}</p>
               </div>
             </div>
@@ -101,7 +101,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
               ))}
             </div>
             {review.comment && (
-              <p className="text-text-secondary text-sm leading-relaxed">{review.comment}</p>
+              <p className="text-text text-sm leading-relaxed">{review.comment}</p>
             )}
           </div>
         ))}
@@ -110,7 +110,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
       {reviews.length > INITIAL_SHOW && (
         <button
           data-testid="reviews-toggle"
-          className="mt-6 font-semibold text-text underline cursor-pointer"
+          className="mt-8 px-6 py-3 rounded-lg border border-text text-sm font-semibold text-text hover:bg-bg-secondary transition-colors cursor-pointer"
           onClick={() => setShowAll(!showAll)}
           aria-expanded={showAll}
         >

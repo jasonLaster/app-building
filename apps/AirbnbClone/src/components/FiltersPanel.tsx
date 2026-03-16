@@ -120,7 +120,7 @@ export default function FiltersPanel({
         data-testid="filters-toggle"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-text hover:border-text transition-colors"
+        className="flex items-center gap-2 rounded-xl border border-border px-4 py-3 text-xs font-semibold text-text hover:border-text transition-colors"
       >
         <SlidersHorizontal size={16} aria-hidden="true" />
         Filters
