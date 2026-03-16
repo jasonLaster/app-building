@@ -3,11 +3,10 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "CheckTestSpecUserProfile: Check testSpec.md directive violations in User Profile test entries",
-        "CheckComponentsUserProfile: Check writeApp.md directive violations in User Profile components",
-        "CheckTestsUserProfile: Check writeTests.md directive violations in User Profile tests"
+        "FixViolation: Both profile-form.spec.ts and profile-host-reviews.spec.ts are missing beforeAll hooks calling truncateAndSeed (required by writeTests.md directive). Also profile-form.spec.ts modifies user profile records but has no beforeEach cleanup helper to reset user data between tests. Add truncateAndSeed beforeAll to both files and add a beforeEach cleanup helper to profile-form.spec.ts that resets the user profile to seed state via API",
+        "RunTests: Run tests/profile-form.spec.ts and tests/profile-host-reviews.spec.ts to verify fix"
       ],
-      "timestamp": "2026-03-15T20:13:58.608Z",
+      "timestamp": "2026-03-16T02:51:52.384Z",
       "app": "AirbnbClone"
     },
     {
@@ -48,11 +47,11 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: All 6 Host Dashboard test files (host-dashboard-auth-stats.spec.ts, host-dashboard-listings.spec.ts, host-dashboard-bookings.spec.ts, host-dashboard-bookings-actions.spec.ts, add-listing-form.spec.ts, add-listing-form-advanced.spec.ts) are missing the required beforeAll hook with truncateAndSeed. Add `import { truncateAndSeed } from '../scripts/seed-db'` and a `test.beforeAll` block that calls truncateAndSeed(process.env.DATABASE_URL) to each file, matching the pattern used by all other test files in the app.",
-      "FixViolation: host-dashboard-listings.spec.ts tests 'Confirming deactivation sets property to inactive' and 'Deactivate and activate actions work on repeated use' hardcode absolute stat counts ('3', '2') instead of capturing initial count and asserting relative changes (initialCount - 1). Refactor to capture initial stat value before the action and assert initialCount - 1 or initialCount + 1 after.",
-      "RunTests: Run host-dashboard test files to verify fixes"
+      "CheckTestSpecUserProfile: Check testSpec.md directive violations in User Profile test entries",
+      "CheckComponentsUserProfile: Check writeApp.md directive violations in User Profile components",
+      "CheckTestsUserProfile: Check writeTests.md directive violations in User Profile tests"
     ],
-    "timestamp": "2026-03-16T01:58:20.621Z",
+    "timestamp": "2026-03-15T20:13:58.608Z",
     "app": "AirbnbClone"
   }
 }
