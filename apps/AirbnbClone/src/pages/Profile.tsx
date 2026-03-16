@@ -28,9 +28,9 @@ export default function Profile() {
   return (
     <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="profile-page">
       <div className="max-w-2xl">
-        <h1 className="text-[32px] font-bold text-text mb-8">Personal info</h1>
+        <h1 className="text-[32px] max-sm:text-[24px] font-bold text-text mb-8 max-sm:mb-6">Personal info</h1>
 
-        <section className="rounded-xl border border-border p-6 mb-8" aria-label="Profile details">
+        <section className="rounded-xl border border-border p-6 max-sm:p-4 mb-8" aria-label="Profile details">
           <ProfileForm user={currentUser} />
         </section>
 

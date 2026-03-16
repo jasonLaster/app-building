@@ -108,7 +108,7 @@ export default function BecomeHostButton({ userId, isHost }: BecomeHostButtonPro
             role="dialog"
             aria-modal="true"
             aria-labelledby="become-host-dialog-title"
-            className="bg-bg rounded-xl p-6 max-w-sm w-full mx-4 shadow-xl"
+            className="bg-bg rounded-xl p-6 max-sm:p-4 max-w-sm w-full mx-4 max-sm:max-w-[calc(100%-24px)] shadow-xl"
           >
             <h3 id="become-host-dialog-title" className="text-lg font-semibold text-text mb-2">Become a Host</h3>
             <p className="text-text-secondary text-sm mb-6">

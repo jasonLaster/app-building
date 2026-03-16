@@ -41,7 +41,7 @@ export default function UserReviewsList({ reviews, loading }: UserReviewsListPro
 
   return (
     <section data-testid="user-reviews-list" aria-labelledby="my-reviews-heading">
-      <h2 id="my-reviews-heading" className="text-xl font-semibold text-text mb-4 flex items-center gap-2">
+      <h2 id="my-reviews-heading" className="text-xl max-sm:text-lg font-semibold text-text mb-4 flex items-center gap-2">
         <MessageSquare size={20} aria-hidden="true" />
         My Reviews
       </h2>
@@ -56,9 +56,9 @@ export default function UserReviewsList({ reviews, loading }: UserReviewsListPro
             <li
               key={review.id}
               data-testid={`review-card-${review.id}`}
-              className="rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
+              className="rounded-xl border border-border p-4 max-sm:p-3 hover:shadow-md transition-shadow"
             >
-              <div className="flex items-start justify-between gap-2 mb-2">
+              <div className="flex items-start justify-between gap-2 mb-2 max-sm:flex-col">
                 <button
                   data-testid={`review-property-link-${review.id}`}
                   onClick={() => navigate(`/properties/${review.property_id}`)}

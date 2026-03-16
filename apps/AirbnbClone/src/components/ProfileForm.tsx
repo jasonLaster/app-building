@@ -87,8 +87,8 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         </div>
       )}
 
-      <div className="flex items-center gap-4 mb-6">
-        <div className="w-20 h-20 rounded-full overflow-hidden bg-bg-secondary border border-border shrink-0">
+      <div className="flex items-center gap-4 max-sm:gap-3 mb-6">
+        <div className="w-20 h-20 max-sm:w-16 max-sm:h-16 rounded-full overflow-hidden bg-bg-secondary border border-border shrink-0">
           {avatarUrl.trim() && isValidUrl(avatarUrl.trim()) ? (
             <img
               data-testid="avatar-preview"
