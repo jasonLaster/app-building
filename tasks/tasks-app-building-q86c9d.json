@@ -3,18 +3,19 @@
     {
       "skill": "skills/tasks/deployment.md",
       "subtasks": [
-        "Unpack: Deploy to production"
+        "DoDeploy: Deploy the app to production",
+        "TestDeploy: Test the deployed app"
       ],
-      "timestamp": "2026-03-15T20:11:15.079Z",
+      "timestamp": "2026-03-16T04:55:53.267Z",
       "app": "AirbnbClone"
     }
   ],
   "current": {
-    "skill": "skills/tasks/maintain/polishApp.md",
+    "skill": "skills/tasks/deployment.md",
     "subtasks": [
-      "PaginateAPIs: Review and paginate backend APIs that return large datasets"
+      "Unpack: Deploy to production"
     ],
-    "timestamp": "2026-03-16T03:04:02.704Z",
+    "timestamp": "2026-03-15T20:11:15.079Z",
     "app": "AirbnbClone"
   }
 }
