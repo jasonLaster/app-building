@@ -78,11 +78,7 @@ export default function HostDashboard() {
 
   if (!currentUser.is_host) {
     return (
-<<<<<<< HEAD
-      <main data-testid="host-dashboard" className="p-6 max-sm:p-3">
-=======
-      <div data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
->>>>>>> origin/feature/airbnb-clone
+      <main data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
         <div className="max-w-lg mx-auto text-center py-16">
           <h1 className="text-[32px] font-bold text-text mb-4">Become a Host</h1>
           <p className="text-text-secondary mb-6 text-lg">
@@ -101,90 +97,19 @@ export default function HostDashboard() {
   }
 
   return (
-<<<<<<< HEAD
-    <main data-testid="host-dashboard" className="p-6 max-sm:p-3">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold text-text mb-6">Host Dashboard</h1>
-=======
-    <div data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
+    <main data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
       <h1 className="text-[32px] font-bold text-text mb-8">Host Dashboard</h1>
->>>>>>> origin/feature/airbnb-clone
 
       <StatsOverview stats={stats} loading={statsLoading} />
 
-<<<<<<< HEAD
-        <div className="mt-8 mb-6">
-          <div className="flex border-b border-border" role="tablist" aria-label="Dashboard sections">
-            <button
-              data-testid="tab-listings"
-              role="tab"
-              aria-selected={activeTab === 'listings'}
-              aria-controls="tabpanel-listings"
-              id="tab-listings-btn"
-              onClick={() => setActiveTab('listings')}
-              className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'listings'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-text-secondary hover:text-text'
-              }`}
-            >
-              Listings
-            </button>
-            <button
-              data-testid="tab-bookings"
-              role="tab"
-              aria-selected={activeTab === 'bookings'}
-              aria-controls="tabpanel-bookings"
-              id="tab-bookings-btn"
-              onClick={() => setActiveTab('bookings')}
-              className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'bookings'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-text-secondary hover:text-text'
-              }`}
-            >
-              Bookings
-            </button>
-          </div>
-        </div>
-
-        {activeTab === 'listings' && (
-          <div role="tabpanel" id="tabpanel-listings" aria-labelledby="tab-listings-btn">
-            <ListingsTab
-              listings={listings}
-              loading={listingsLoading}
-              onDeactivate={handleDeactivate}
-              onActivate={handleActivate}
-              onAddListing={() => setShowAddForm(true)}
-            />
-          </div>
-        )}
-
-        {activeTab === 'bookings' && (
-          <div role="tabpanel" id="tabpanel-bookings" aria-labelledby="tab-bookings-btn">
-            <BookingsTab
-              bookings={bookings}
-              loading={bookingsLoading}
-              onConfirm={handleConfirmBooking}
-              onCancel={handleCancelBooking}
-            />
-          </div>
-        )}
-
-        {showAddForm && (
-          <AddListingForm
-            hostId={currentUser.id}
-            onClose={() => setShowAddForm(false)}
-            onSuccess={handleAddListingSuccess}
-          />
-        )}
-      </div>
-    </main>
-=======
       <div className="mt-10 mb-6">
-        <div className="flex border-b border-border">
+        <div className="flex border-b border-border" role="tablist" aria-label="Dashboard sections">
           <button
             data-testid="tab-listings"
+            role="tab"
+            aria-selected={activeTab === 'listings'}
+            aria-controls="tabpanel-listings"
+            id="tab-listings-btn"
             onClick={() => setActiveTab('listings')}
             className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'listings'
@@ -196,6 +121,10 @@ export default function HostDashboard() {
           </button>
           <button
             data-testid="tab-bookings"
+            role="tab"
+            aria-selected={activeTab === 'bookings'}
+            aria-controls="tabpanel-bookings"
+            id="tab-bookings-btn"
             onClick={() => setActiveTab('bookings')}
             className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'bookings'
@@ -209,22 +138,26 @@ export default function HostDashboard() {
       </div>
 
       {activeTab === 'listings' && (
-        <ListingsTab
-          listings={listings}
-          loading={listingsLoading}
-          onDeactivate={handleDeactivate}
-          onActivate={handleActivate}
-          onAddListing={() => setShowAddForm(true)}
-        />
+        <div role="tabpanel" id="tabpanel-listings" aria-labelledby="tab-listings-btn">
+          <ListingsTab
+            listings={listings}
+            loading={listingsLoading}
+            onDeactivate={handleDeactivate}
+            onActivate={handleActivate}
+            onAddListing={() => setShowAddForm(true)}
+          />
+        </div>
       )}
 
       {activeTab === 'bookings' && (
-        <BookingsTab
-          bookings={bookings}
-          loading={bookingsLoading}
-          onConfirm={handleConfirmBooking}
-          onCancel={handleCancelBooking}
-        />
+        <div role="tabpanel" id="tabpanel-bookings" aria-labelledby="tab-bookings-btn">
+          <BookingsTab
+            bookings={bookings}
+            loading={bookingsLoading}
+            onConfirm={handleConfirmBooking}
+            onCancel={handleCancelBooking}
+          />
+        </div>
       )}
 
       {showAddForm && (
@@ -234,7 +167,6 @@ export default function HostDashboard() {
           onSuccess={handleAddListingSuccess}
         />
       )}
-    </div>
->>>>>>> origin/feature/airbnb-clone
+    </main>
   )
 }
