@@ -1,6 +1,7 @@
 import { execFileSync, spawn } from "child_process";
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
+import { platform } from "os";
 import type { ContainerRegistry, RegistryEntry } from "./container-registry";
 import type { InfisicalConfig } from "./secrets";
 import { createMachine, waitForMachine, destroyMachine, listMachines } from "./fly";
@@ -99,19 +100,19 @@ function ensureImageExists(projectRoot: string): void {
 
 function findFreePort(): number {
   let port = 3100;
+  const usedPorts = new Set<number>();
   try {
-    const out = execFileSync("ss", ["-tlnH"], {
-      encoding: "utf-8",
-      timeout: 5000,
-    });
-    const usedPorts = new Set<number>();
+    const [cmd, args] = platform() === "linux"
+      ? ["ss", ["-tlnH"]] as const
+      : ["lsof", ["-iTCP", "-sTCP:LISTEN", "-nP"]] as const;
+    const out = execFileSync(cmd, [...args], { encoding: "utf-8", timeout: 5000 });
     for (const match of out.matchAll(/:(\d+)\s/g)) {
       usedPorts.add(parseInt(match[1], 10));
     }
-    while (usedPorts.has(port)) port++;
   } catch {
-    // ss not available, just use default
+    // Command unavailable or failed — fall through to default
   }
+  while (usedPorts.has(port)) port++;
   return port;
 }
 
