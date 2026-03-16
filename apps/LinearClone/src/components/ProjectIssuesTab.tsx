@@ -113,6 +113,7 @@ export default function ProjectIssuesTab() {
       {/* Bulk actions toolbar */}
       {selectedIssueIds.length > 0 && (
         <div className="project-issues-bulk" data-testid="project-issues-bulk-toolbar">
+          {bulkDropdown && <div className="dropdown-mask" onClick={() => setBulkDropdown(null)} />}
           <span className="project-issues-bulk-count" data-testid="project-issues-bulk-count">
             {selectedIssueIds.length} selected
           </span>

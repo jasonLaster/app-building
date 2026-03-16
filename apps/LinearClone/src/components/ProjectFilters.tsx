@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import type { ProjectMember, ProjectTeamFilter } from '../slices/projectsSlice';
 import './ProjectFilters.css';
 
@@ -45,19 +45,6 @@ export default function ProjectFilters({
   teams,
 }: ProjectFiltersProps) {
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
-  const toolbarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (toolbarRef.current && !toolbarRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   function toggleDropdown(type: DropdownType) {
     setOpenDropdown(openDropdown === type ? null : type);
@@ -72,7 +59,8 @@ export default function ProjectFilters({
   }
 
   return (
-    <div className="project-filters" ref={toolbarRef} data-testid="project-filters-toolbar">
+    <div className="project-filters" data-testid="project-filters-toolbar">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       {/* Status Filter */}
       <div className="project-filters-filter">
         <button

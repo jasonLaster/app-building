@@ -17,7 +17,6 @@ export default function IssueHeader({ issue }: IssueHeaderProps) {
   const [titleError, setTitleError] = useState(false);
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
   const titleInputRef = useRef<HTMLInputElement>(null);
-  const statusRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTitleValue(issue.title);
@@ -29,18 +28,6 @@ export default function IssueHeader({ issue }: IssueHeaderProps) {
       titleInputRef.current?.select();
     }
   }, [editingTitle]);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (statusRef.current && !statusRef.current.contains(e.target as Node)) {
-        setStatusDropdownOpen(false);
-      }
-    }
-    if (statusDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [statusDropdownOpen]);
 
   function handleTitleClick() {
     setEditingTitle(true);
@@ -106,7 +93,7 @@ export default function IssueHeader({ issue }: IssueHeaderProps) {
         )}
       </div>
 
-      <div className="issue-header-status-row" ref={statusRef}>
+      <div className="issue-header-status-row">
         <button
           className="issue-header-status-btn"
           onClick={() => setStatusDropdownOpen(!statusDropdownOpen)}
@@ -116,6 +103,8 @@ export default function IssueHeader({ issue }: IssueHeaderProps) {
           <span style={{ color: statusConfig.color }}>{statusConfig.label}</span>
         </button>
         {statusDropdownOpen && (
+          <>
+          <div className="dropdown-mask" onClick={() => setStatusDropdownOpen(false)} />
           <div className="issue-header-status-dropdown" data-testid="issue-header-status-dropdown">
             {STATUS_ORDER.map((s) => {
               const cfg = STATUS_CONFIG[s];
@@ -132,6 +121,7 @@ export default function IssueHeader({ issue }: IssueHeaderProps) {
               );
             })}
           </div>
+          </>
         )}
       </div>
     </div>

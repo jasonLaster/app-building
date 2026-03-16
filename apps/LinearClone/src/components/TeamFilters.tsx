@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { STATUS_ORDER, STATUS_CONFIG, StatusIcon, PriorityIcon } from './IssueRow';
@@ -55,19 +55,6 @@ export default function TeamFilters({
   const { members, projects, cycles } = useSelector((state: RootState) => state.teamIssues);
   const { items: labels } = useSelector((state: RootState) => state.labels);
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
-  const toolbarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (toolbarRef.current && !toolbarRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   function toggleDropdown(type: DropdownType) {
     setOpenDropdown(openDropdown === type ? null : type);
@@ -82,7 +69,8 @@ export default function TeamFilters({
   }
 
   return (
-    <div className="team-filters" ref={toolbarRef} data-testid="team-filters-toolbar">
+    <div className="team-filters" data-testid="team-filters-toolbar">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       {/* Status Filter */}
       <div className="team-filters-filter">
         <button

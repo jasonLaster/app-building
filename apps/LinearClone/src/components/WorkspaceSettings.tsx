@@ -19,7 +19,6 @@ export default function WorkspaceSettings() {
   const [teamDropdownOpen, setTeamDropdownOpen] = useState(false);
 
   const nameInputRef = useRef<HTMLInputElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (token) {
@@ -34,18 +33,6 @@ export default function WorkspaceSettings() {
     }
   }, [workspace]);
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setTeamDropdownOpen(false);
-      }
-    }
-    if (teamDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [teamDropdownOpen]);
 
   function clearSuccess() {
     setTimeout(() => setSuccessMessage(null), 3000);
@@ -123,7 +110,7 @@ export default function WorkspaceSettings() {
         {/* Default Team */}
         <div className="ws-field" data-testid="workspace-default-team-field">
           <label className="ws-field-label">Default team for new issues</label>
-          <div className="ws-dropdown-wrapper" ref={dropdownRef}>
+          <div className="ws-dropdown-wrapper">
             <button
               className="ws-select-btn"
               onClick={() => setTeamDropdownOpen(!teamDropdownOpen)}
@@ -135,6 +122,8 @@ export default function WorkspaceSettings() {
               </svg>
             </button>
             {teamDropdownOpen && (
+              <>
+              <div className="dropdown-mask" onClick={() => setTeamDropdownOpen(false)} />
               <div className="ws-dropdown" data-testid="workspace-default-team-dropdown">
                 <button
                   className={`ws-dropdown-option ${!selectedTeamId ? 'ws-dropdown-option-active' : ''}`}
@@ -154,6 +143,7 @@ export default function WorkspaceSettings() {
                   </button>
                 ))}
               </div>
+              </>
             )}
           </div>
         </div>

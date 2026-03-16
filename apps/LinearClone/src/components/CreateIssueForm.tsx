@@ -58,7 +58,6 @@ export default function CreateIssueForm({ defaultTeamId, formData, onFormChange,
   const [teamProjects, setTeamProjects] = useState<Array<{ id: string; name: string }>>([]);
   const [teamCycles, setTeamCycles] = useState<Array<{ id: string; name: string; start_date: string; end_date: string }>>([]);
 
-  const formRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
   // Focus title on mount
@@ -127,25 +126,6 @@ export default function CreateIssueForm({ defaultTeamId, formData, onFormChange,
     };
   }, [parentSearch, formData.teamId, token, openDropdown]);
 
-  // Close dropdown on outside click or click on non-dropdown form elements
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      const target = e.target as HTMLElement;
-      // Close if click is outside the form entirely
-      if (formRef.current && !formRef.current.contains(target)) {
-        setOpenDropdown(null);
-        return;
-      }
-      // Close if click is inside the form but outside any dropdown wrapper
-      if (!target.closest('.cif-dropdown-wrapper')) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   function updateField<K extends keyof CreateIssueFormData>(key: K, value: CreateIssueFormData[K]) {
     onFormChange({ ...formData, [key]: value });
@@ -201,7 +181,8 @@ export default function CreateIssueForm({ defaultTeamId, formData, onFormChange,
   }
 
   return (
-    <div className="create-issue-form" ref={formRef} data-testid="create-issue-form">
+    <div className="create-issue-form" data-testid="create-issue-form">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       {/* Team Selector */}
       <div className="cif-field" data-testid="create-issue-team-field">
         <label className="cif-label">Team</label>

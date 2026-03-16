@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { STATUS_ORDER, STATUS_CONFIG, PRIORITY_CONFIG, StatusIcon, PriorityIcon } from './IssueRow';
@@ -27,19 +27,6 @@ export default function FiltersToolbar({
 }: FiltersToolbarProps) {
   const { items: labels } = useSelector((state: RootState) => state.labels);
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
-  const toolbarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (toolbarRef.current && !toolbarRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   function toggleDropdown(type: DropdownType) {
     setOpenDropdown(openDropdown === type ? null : type);
@@ -70,7 +57,8 @@ export default function FiltersToolbar({
   }
 
   return (
-    <div className="filters-toolbar" ref={toolbarRef} data-testid="filters-toolbar">
+    <div className="filters-toolbar" data-testid="filters-toolbar">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       <div className="filters-toolbar-filter">
         <button
           className={`filters-toolbar-btn ${selectedStatuses.length > 0 ? 'filters-toolbar-btn-active' : ''}`}

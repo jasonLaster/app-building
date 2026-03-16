@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../store';
@@ -145,19 +145,6 @@ export default function IssueRow({ issue, showCheckbox, checked, onCheckChange }
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setStatusDropdownOpen(false);
-      }
-    }
-    if (statusDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [statusDropdownOpen]);
 
   function handleTitleClick() {
     navigate(`/issue/${issue.id}`);
@@ -229,7 +216,7 @@ export default function IssueRow({ issue, showCheckbox, checked, onCheckChange }
             {formatDueDate(issue.dueDate)}
           </span>
         )}
-        <div className="issue-row-status-wrapper" ref={dropdownRef}>
+        <div className="issue-row-status-wrapper">
           <button
             className="issue-row-status-btn"
             onClick={handleStatusClick}
@@ -239,6 +226,8 @@ export default function IssueRow({ issue, showCheckbox, checked, onCheckChange }
             <StatusIcon status={issue.status} color={statusConfig.color} />
           </button>
           {statusDropdownOpen && (
+            <>
+            <div className="dropdown-mask" onClick={() => setStatusDropdownOpen(false)} />
             <div className="issue-row-status-dropdown" data-testid={`issue-status-dropdown-${issue.id}`}>
               {STATUS_ORDER.map((s) => {
                 const cfg = STATUS_CONFIG[s];
@@ -255,6 +244,7 @@ export default function IssueRow({ issue, showCheckbox, checked, onCheckChange }
                 );
               })}
             </div>
+            </>
           )}
         </div>
         {issue.assigneeName && (

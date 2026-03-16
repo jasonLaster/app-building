@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '../store';
 import { bulkUpdateIssues, clearSelection } from '../slices/teamIssuesSlice';
@@ -25,19 +25,6 @@ export default function BulkActions({ teamId }: BulkActionsProps) {
   const { selectedIds, members } = useSelector((state: RootState) => state.teamIssues);
   const { items: labels } = useSelector((state: RootState) => state.labels);
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
-  const toolbarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (toolbarRef.current && !toolbarRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   if (selectedIds.length === 0) {
     return null;
@@ -68,7 +55,8 @@ export default function BulkActions({ teamId }: BulkActionsProps) {
   }
 
   return (
-    <div className="bulk-actions" ref={toolbarRef} data-testid="bulk-actions-toolbar">
+    <div className="bulk-actions" data-testid="bulk-actions-toolbar">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       <span className="bulk-actions-count" data-testid="bulk-actions-count">
         {selectedIds.length} selected
       </span>

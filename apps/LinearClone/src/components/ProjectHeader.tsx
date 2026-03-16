@@ -41,7 +41,6 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
 
   // Status dropdown
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
-  const statusRef = useRef<HTMLDivElement>(null);
 
   // Date editing
   const [editingDate, setEditingDate] = useState(false);
@@ -50,7 +49,6 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
   // Lead selector
   const [leadDropdownOpen, setLeadDropdownOpen] = useState(false);
   const [leadSearch, setLeadSearch] = useState('');
-  const leadRef = useRef<HTMLDivElement>(null);
   const leadSearchRef = useRef<HTMLInputElement>(null);
 
   // Sync name from props
@@ -73,32 +71,6 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
     }
   }, [leadDropdownOpen]);
 
-  // Close status dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (statusRef.current && !statusRef.current.contains(e.target as Node)) {
-        setStatusDropdownOpen(false);
-      }
-    }
-    if (statusDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [statusDropdownOpen]);
-
-  // Close lead dropdown on outside click
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (leadRef.current && !leadRef.current.contains(e.target as Node)) {
-        setLeadDropdownOpen(false);
-        setLeadSearch('');
-      }
-    }
-    if (leadDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [leadDropdownOpen]);
 
   // Name handlers
   function handleNameClick() {
@@ -207,7 +179,7 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
       {/* Meta row: status, progress, target date, lead */}
       <div className="project-header-meta">
         {/* Status badge */}
-        <div className="project-header-status-wrapper" ref={statusRef}>
+        <div className="project-header-status-wrapper">
           <button
             className={`project-header-status-badge ${statusCfg.className}`}
             onClick={() => setStatusDropdownOpen(!statusDropdownOpen)}
@@ -216,6 +188,8 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
             {statusCfg.label}
           </button>
           {statusDropdownOpen && (
+            <>
+            <div className="dropdown-mask" onClick={() => setStatusDropdownOpen(false)} />
             <div className="project-header-status-dropdown" data-testid="project-header-status-dropdown">
               {PROJECT_STATUS_ORDER.map((s) => {
                 const cfg = PROJECT_STATUS_CONFIG[s];
@@ -232,6 +206,7 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
                 );
               })}
             </div>
+            </>
           )}
         </div>
 
@@ -291,7 +266,7 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
         </div>
 
         {/* Lead selector */}
-        <div className="project-header-lead-wrapper" ref={leadRef}>
+        <div className="project-header-lead-wrapper">
           <button
             className="project-header-lead-btn"
             onClick={() => setLeadDropdownOpen(!leadDropdownOpen)}
@@ -309,6 +284,8 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
             )}
           </button>
           {leadDropdownOpen && (
+            <>
+            <div className="dropdown-mask" onClick={() => { setLeadDropdownOpen(false); setLeadSearch(''); }} />
             <div className="project-header-lead-dropdown" data-testid="project-header-lead-dropdown">
               <input
                 ref={leadSearchRef}
@@ -340,6 +317,7 @@ export default function ProjectHeader({ project, members, activeTab, onTabChange
                 </button>
               ))}
             </div>
+            </>
           )}
         </div>
       </div>

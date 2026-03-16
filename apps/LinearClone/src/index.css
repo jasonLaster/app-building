@@ -198,6 +198,13 @@ input:focus, textarea:focus, select:focus {
   background: #dc2626;
 }
 
+/* Dropdown overlay mask */
+.dropdown-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
 /* Modal overlay */
 .modal-overlay {
   position: fixed;

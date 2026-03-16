@@ -52,7 +52,6 @@ export default function CreateProjectModal({
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
   const [leadSearch, setLeadSearch] = useState('');
   const nameRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
 
   // Reset form when modal opens
   useEffect(() => {
@@ -89,18 +88,6 @@ export default function CreateProjectModal({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [open, handleClose]);
 
-  // Close dropdown on outside click within form
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (formRef.current && !formRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   async function handleSubmit() {
     if (!formData.name.trim()) {
@@ -157,7 +144,8 @@ export default function CreateProjectModal({
           <h2 className="cpm-title">Create Project</h2>
         </div>
 
-        <div className="cpm-body" ref={formRef}>
+        <div className="cpm-body">
+          {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
           {/* Name */}
           <div className="cpm-field" data-testid="create-project-name-field">
             <label className="cpm-label">Name</label>

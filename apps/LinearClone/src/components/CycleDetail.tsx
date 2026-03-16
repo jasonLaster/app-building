@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState, AppDispatch } from '../store';
 import type { CycleIssue } from '../slices/cyclesSlice';
@@ -91,29 +91,6 @@ export default function CycleDetail() {
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
   const [bulkStatusOpen, setBulkStatusOpen] = useState(false);
 
-  const statusFilterRef = useRef<HTMLDivElement>(null);
-  const groupRef = useRef<HTMLDivElement>(null);
-  const sortRef = useRef<HTMLDivElement>(null);
-  const bulkRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (statusFilterRef.current && !statusFilterRef.current.contains(e.target as Node)) {
-        setStatusFilterOpen(false);
-      }
-      if (groupRef.current && !groupRef.current.contains(e.target as Node)) {
-        setGroupDropdownOpen(false);
-      }
-      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
-        setSortDropdownOpen(false);
-      }
-      if (bulkRef.current && !bulkRef.current.contains(e.target as Node)) {
-        setBulkStatusOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   const filteredIssues = useMemo(() => {
     if (selectedStatuses.length === 0) return cycleIssues;
@@ -351,7 +328,7 @@ export default function CycleDetail() {
 
       <div className="cycle-detail-toolbar">
         <div className="cycle-detail-filters">
-          <div className="cycle-detail-filter-control" ref={statusFilterRef}>
+          <div className="cycle-detail-filter-control">
             <button
               className={`cycle-detail-filter-btn ${selectedStatuses.length > 0 ? 'cycle-detail-filter-btn-active' : ''}`}
               onClick={() => setStatusFilterOpen(!statusFilterOpen)}
@@ -360,6 +337,8 @@ export default function CycleDetail() {
               Status{selectedStatuses.length > 0 ? ` (${selectedStatuses.length})` : ''}
             </button>
             {statusFilterOpen && (
+              <>
+              <div className="dropdown-mask" onClick={() => setStatusFilterOpen(false)} />
               <div className="cycle-detail-filter-dropdown" data-testid="cycle-status-filter-dropdown">
                 {ALL_STATUSES.map((status) => (
                   <label key={status} className="cycle-detail-filter-option">
@@ -373,17 +352,18 @@ export default function CycleDetail() {
                   </label>
                 ))}
               </div>
+              </>
             )}
           </div>
         </div>
 
         <div className="cycle-detail-group-sort">
-          <div className="cycle-detail-filter-control" ref={groupRef}>
+          <div className="cycle-detail-filter-control">
             <button
               className="cycle-detail-filter-btn"
               onClick={() => setGroupDropdownOpen(!groupDropdownOpen)}
               data-testid="cycle-group-by-btn"
-            >
+>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="12" x2="15" y2="12" />
@@ -392,6 +372,8 @@ export default function CycleDetail() {
               Group: {currentGroupLabel}
             </button>
             {groupDropdownOpen && (
+              <>
+              <div className="dropdown-mask" onClick={() => setGroupDropdownOpen(false)} />
               <div className="cycle-detail-filter-dropdown" data-testid="cycle-group-by-dropdown">
                 {GROUP_OPTIONS.map((opt) => (
                   <button
@@ -407,9 +389,10 @@ export default function CycleDetail() {
                   </button>
                 ))}
               </div>
+              </>
             )}
           </div>
-          <div className="cycle-detail-filter-control" ref={sortRef}>
+          <div className="cycle-detail-filter-control">
             <button
               className="cycle-detail-filter-btn"
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
@@ -423,6 +406,8 @@ export default function CycleDetail() {
               Sort: {currentSortLabel}
             </button>
             {sortDropdownOpen && (
+              <>
+              <div className="dropdown-mask" onClick={() => setSortDropdownOpen(false)} />
               <div className="cycle-detail-filter-dropdown" data-testid="cycle-sort-by-dropdown">
                 {SORT_OPTIONS.map((opt) => (
                   <button
@@ -438,6 +423,7 @@ export default function CycleDetail() {
                   </button>
                 ))}
               </div>
+              </>
             )}
           </div>
         </div>
@@ -446,7 +432,7 @@ export default function CycleDetail() {
       {selectedIds.length > 0 && (
         <div className="cycle-detail-bulk-bar" data-testid="cycle-bulk-actions">
           <span className="cycle-detail-bulk-count">{selectedIds.length} selected</span>
-          <div className="cycle-detail-bulk-actions" ref={bulkRef}>
+          <div className="cycle-detail-bulk-actions">
             <button
               className="cycle-detail-bulk-btn"
               onClick={() => setBulkStatusOpen(!bulkStatusOpen)}
@@ -455,6 +441,8 @@ export default function CycleDetail() {
               Set Status
             </button>
             {bulkStatusOpen && (
+              <>
+              <div className="dropdown-mask" onClick={() => setBulkStatusOpen(false)} />
               <div className="cycle-detail-filter-dropdown" data-testid="cycle-bulk-status-dropdown">
                 {ALL_STATUSES.map((status) => (
                   <button
@@ -467,6 +455,7 @@ export default function CycleDetail() {
                   </button>
                 ))}
               </div>
+              </>
             )}
           </div>
           <button

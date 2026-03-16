@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../store';
 import type { Issue, IssueLabel } from '../slices/issuesSlice';
@@ -43,19 +43,6 @@ export default function IssueSidebar({ issue, members, projects, cycles, allLabe
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
   const [assigneeSearch, setAssigneeSearch] = useState('');
   const [projectSearch, setProjectSearch] = useState('');
-  const sidebarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   function toggleDropdown(type: DropdownType) {
     setOpenDropdown(openDropdown === type ? null : type);
@@ -119,7 +106,8 @@ export default function IssueSidebar({ issue, members, projects, cycles, allLabe
   const issueLabelIds = issue.labels.map((l) => l.id);
 
   return (
-    <div className="issue-sidebar" ref={sidebarRef} data-testid="issue-sidebar">
+    <div className="issue-sidebar" data-testid="issue-sidebar">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       {/* Status */}
       <div className="sidebar-field" data-testid="sidebar-status-field">
         <label className="sidebar-label">Status</label>

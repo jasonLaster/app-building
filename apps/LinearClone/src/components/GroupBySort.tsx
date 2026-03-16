@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../store';
 import { setGroupBy, setSortBy } from '../slices/teamIssuesSlice';
@@ -26,19 +26,6 @@ export default function GroupBySort() {
   const dispatch = useDispatch<AppDispatch>();
   const { groupBy, sortBy } = useSelector((state: RootState) => state.teamIssues);
   const [openDropdown, setOpenDropdown] = useState<DropdownType>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null);
-      }
-    }
-    if (openDropdown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
 
   function toggleDropdown(type: DropdownType) {
     setOpenDropdown(openDropdown === type ? null : type);
@@ -48,7 +35,8 @@ export default function GroupBySort() {
   const currentSortLabel = SORT_OPTIONS.find((o) => o.value === sortBy)?.label || 'Priority';
 
   return (
-    <div className="group-by-sort" ref={containerRef} data-testid="group-by-sort">
+    <div className="group-by-sort" data-testid="group-by-sort">
+      {openDropdown && <div className="dropdown-mask" onClick={() => setOpenDropdown(null)} />}
       <div className="group-by-sort-control">
         <button
           className="group-by-sort-btn"

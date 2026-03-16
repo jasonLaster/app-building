@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import type { Member } from '../slices/membersSlice';
 import './MemberActions.css';
 
@@ -20,19 +20,6 @@ export default function MemberActions({
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
   const [confirmRemoveOpen, setConfirmRemoveOpen] = useState(false);
   const [updating, setUpdating] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setRoleDropdownOpen(false);
-      }
-    }
-    if (roleDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [roleDropdownOpen]);
 
   async function handleRoleChange(newRole: string) {
     if (newRole === member.role) {
@@ -62,7 +49,7 @@ export default function MemberActions({
 
   return (
     <div className="member-actions" data-testid={`member-actions-${member.id}`}>
-      <div className="member-actions-role-wrapper" ref={dropdownRef}>
+      <div className="member-actions-role-wrapper">
         <button
           className="member-actions-role-btn"
           onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
@@ -75,6 +62,8 @@ export default function MemberActions({
           </svg>
         </button>
         {roleDropdownOpen && (
+          <>
+          <div className="dropdown-mask" onClick={() => setRoleDropdownOpen(false)} />
           <div className="member-actions-role-dropdown" data-testid={`member-role-dropdown-${member.id}`}>
             <button
               className={`member-actions-role-option ${member.role === 'admin' ? 'member-actions-role-option-active' : ''}`}
@@ -97,6 +86,7 @@ export default function MemberActions({
               )}
             </button>
           </div>
+          </>
         )}
       </div>
 
