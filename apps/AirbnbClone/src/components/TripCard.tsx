@@ -63,13 +63,8 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
       <div className="flex-1 py-3.5 pr-4 flex flex-col justify-between min-w-0">
         <div>
           <div className="flex items-center justify-between gap-2">
-<<<<<<< HEAD
             <h3 className="font-semibold text-text text-base truncate">
-              {booking.property_title || 'Untitled Property'}
-=======
-            <h3 className="font-semibold text-text truncate">
               {title}
->>>>>>> origin/feature/airbnb-clone
             </h3>
             <span
               data-testid={`status-badge-${booking.id}`}
@@ -100,12 +95,8 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
               <button
                 data-testid={`cancel-button-${booking.id}`}
                 onClick={onCancel}
-<<<<<<< HEAD
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-border text-text hover:bg-bg-secondary transition-colors"
-=======
                 aria-label={`Cancel booking for ${title}`}
-                className="text-xs font-medium px-3 py-1.5 rounded-lg border border-status-cancelled text-status-cancelled hover:bg-status-cancelled/10 transition-colors"
->>>>>>> origin/feature/airbnb-clone
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-border text-text hover:bg-bg-secondary transition-colors"
               >
                 Cancel
               </button>
@@ -114,12 +105,8 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
               <button
                 data-testid={`review-button-${booking.id}`}
                 onClick={() => navigate(`/trips/${booking.id}/review`)}
-<<<<<<< HEAD
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-text text-white hover:opacity-90 transition-opacity"
-=======
                 aria-label={`Write review for ${title}`}
-                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
->>>>>>> origin/feature/airbnb-clone
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-text text-white hover:opacity-90 transition-opacity"
               >
                 Write Review
               </button>

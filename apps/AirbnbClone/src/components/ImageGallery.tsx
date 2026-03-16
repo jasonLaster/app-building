@@ -50,7 +50,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
             </span>
           )}
         </div>
-        {thumbnails.slice(0, 4).map((img, i) => {
+        {thumbnails.slice(0, 4).map((img) => {
           const originalIndex = images.indexOf(img)
           return (
             <button
