@@ -78,7 +78,7 @@ async function loginAndOpenCreateModal(
 }
 
 // Helper to delete all non-seed issues via API
-async function deleteCreatedIssues(baseURL: string, token: string, teamId: string) {
+async function _deleteCreatedIssues(baseURL: string, token: string, teamId: string) {
   const response = await fetch(`${baseURL}/api/team-issues?teamId=${teamId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -172,7 +172,7 @@ test.describe.serial('CreateIssueModalActions', () => {
 
   test('Create Issue button submits the form with all fields', async ({ page, baseURL }) => {
     test.slow();
-    const { token, team } = await loginAndOpenCreateModal(page, baseURL!);
+    const { token: _token, team: _team } = await loginAndOpenCreateModal(page, baseURL!);
 
     const uniqueTitle = `Implement OAuth ${Date.now()}`;
 
@@ -345,7 +345,7 @@ test.describe.serial('CreateIssueModalActions', () => {
     const successText = await page.getByTestId('create-issue-success').textContent();
     // Extract identifier like "ENG-9" from "Created ENG-9"
     const identifierMatch = successText?.match(/(ENG-\d+)/);
-    const identifier = identifierMatch ? identifierMatch[1] : '';
+    const _identifier = identifierMatch ? identifierMatch[1] : '';
 
     await expect(page.getByTestId('create-issue-modal')).toHaveCount(0, { timeout: 30000 });
 
@@ -438,7 +438,7 @@ test.describe.serial('CreateIssueModalActions', () => {
 
   test('Creating multiple issues in sequence works correctly', async ({ page, baseURL }) => {
     test.slow();
-    const { token, team } = await loginAndNavigateToTeamIssues(page, baseURL!);
+    const { token: _token, team: _team } = await loginAndNavigateToTeamIssues(page, baseURL!);
 
     const firstTitle = `First task ${Date.now()}`;
     const secondTitle = `Second task ${Date.now()}`;
@@ -493,7 +493,7 @@ test.describe.serial('CreateIssueModalActions', () => {
     test.slow();
 
     // Login as Alice and create an issue assigned to Bob
-    const { token, team } = await loginAndOpenCreateModal(page, baseURL!);
+    const { token: _token, team: _team } = await loginAndOpenCreateModal(page, baseURL!);
 
     const uniqueTitle = `Review PR ${Date.now()}`;
 

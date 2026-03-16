@@ -27,7 +27,7 @@ async function getProjectsData(baseURL: string, token: string) {
   }>;
 }
 
-async function deleteAllProjectsViaApi(baseURL: string, token: string) {
+async function _deleteAllProjectsViaApi(baseURL: string, token: string) {
   const { projects } = await getProjectsData(baseURL, token);
   for (const project of projects) {
     await fetch(`${baseURL}/api/projects?id=${project.id}`, {

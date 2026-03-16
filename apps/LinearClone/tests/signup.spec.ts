@@ -35,7 +35,7 @@ test.describe('SignUpForm', () => {
     await expect(page.getByTestId('signup-login-link')).toHaveText('Log in');
   });
 
-  test('Successful account creation', async ({ page, baseURL }) => {
+  test('Successful account creation', async ({ page, baseURL: _baseURL }) => {
     test.slow();
 
     const email = `newuser-${Date.now()}@test.com`;
@@ -160,7 +160,7 @@ test.describe('SignUpForm', () => {
     await expect(passwordInput).toHaveValue('secretpassword');
   });
 
-  test('Sign up form can be submitted via Enter key', async ({ page, baseURL }) => {
+  test('Sign up form can be submitted via Enter key', async ({ page, baseURL: _baseURL }) => {
     test.slow();
 
     const email = `enterkey-${Date.now()}@test.com`;

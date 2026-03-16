@@ -38,7 +38,7 @@ async function getLabels(baseURL: string, token: string) {
 }
 
 // Helper to get projects via API
-async function getProjects(baseURL: string, token: string) {
+async function _getProjects(baseURL: string, token: string) {
   const response = await fetch(`${baseURL}/api/projects`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -345,7 +345,7 @@ test.describe('Issue Detail Sidebar - Dropdown Behavior', () => {
 
   test('Use assignee selector multiple times in sequence', async ({ page, baseURL }) => {
     // ENG-1: assigned to Alice Johnson
-    const { token } = await loginAndNavigateToIssue(page, baseURL!, 1);
+    const { token: _token } = await loginAndNavigateToIssue(page, baseURL!, 1);
 
     // Verify initial assignee is Alice
     await expect(page.getByTestId('sidebar-assignee-btn')).toContainText('Alice Johnson');

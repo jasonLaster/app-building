@@ -20,7 +20,7 @@ async function getLabels(baseURL: string, token: string) {
 }
 
 // Helper to delete all labels via API
-async function deleteAllLabels(baseURL: string, token: string) {
+async function _deleteAllLabels(baseURL: string, token: string) {
   const labels = await getLabels(baseURL, token);
   for (const label of labels) {
     await fetch(`${baseURL}/api/labels`, {

@@ -29,9 +29,9 @@ async function getCycles(baseURL: string, token: string, teamId: string) {
 }
 
 // Helper to delete all cycles for a team via direct API
-async function deleteAllCycles(baseURL: string, token: string, teamId: string) {
+async function _deleteAllCycles(baseURL: string, token: string, teamId: string) {
   const cycles = await getCycles(baseURL, token, teamId);
-  for (const cycle of cycles) {
+  for (const _cycle of cycles) {
     // No delete endpoint exists, so we rely on DB reset between tests
   }
 }
@@ -170,7 +170,7 @@ test.describe('CycleList', () => {
 
     // Get initial cycle count from API
     const initialCycles = await getCycles(baseURL!, token, team.id);
-    const initialCount = initialCycles.length;
+    const _initialCount = initialCycles.length;
 
     // Click "New Cycle" button
     await page.getByTestId('new-cycle-btn').click();
@@ -213,7 +213,7 @@ test.describe('CycleList', () => {
         endDate: '2026-04-14',
       }),
     });
-    const secondCycle = await response.json();
+    const _secondCycle = await response.json();
 
     // Reload the page to see both cycles
     await page.goto(`/team/${team.id}/cycles`);

@@ -21,7 +21,7 @@ async function getTeams(baseURL: string, token: string) {
 }
 
 // Helper to authenticate page as Alice
-async function authenticatePage(page: any, baseURL: string): Promise<string> {
+async function authenticatePage(page: unknown, baseURL: string): Promise<string> {
   const token = await loginAsAlice(baseURL);
   await page.goto('/login');
   await page.evaluate((t: string) => localStorage.setItem('session_token', t), token);

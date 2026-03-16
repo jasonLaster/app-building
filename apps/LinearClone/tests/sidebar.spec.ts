@@ -38,7 +38,7 @@ async function markNotificationRead(baseURL: string, token: string, notification
 }
 
 // Helper to authenticate page as Alice
-async function authenticatePage(page: any, baseURL: string): Promise<string> {
+async function authenticatePage(page: unknown, baseURL: string): Promise<string> {
   const token = await loginAsAlice(baseURL);
   await page.goto('/login');
   await page.evaluate((t: string) => localStorage.setItem('session_token', t), token);
@@ -47,7 +47,7 @@ async function authenticatePage(page: any, baseURL: string): Promise<string> {
 
 test.describe('Sidebar', () => {
   test('Sidebar renders workspace header', async ({ page, baseURL }) => {
-    const token = await authenticatePage(page, baseURL!);
+    const _token = await authenticatePage(page, baseURL!);
     await page.goto('/my-issues');
     await expect(page.getByTestId('sidebar')).toBeVisible({ timeout: 30000 });
     await expect(page.getByTestId('sidebar-workspace-name')).toBeVisible({ timeout: 30000 });

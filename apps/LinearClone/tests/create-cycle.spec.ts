@@ -94,7 +94,7 @@ test.describe('CreateCycle', () => {
 
     // Get initial cycle count
     const initialCycles = await getCycles(baseURL!, token, team.id);
-    const initialCount = initialCycles.length;
+    const _initialCount = initialCycles.length;
 
     // Open create modal
     await page.getByTestId('new-cycle-btn').click();
@@ -191,7 +191,7 @@ test.describe('CreateCycle', () => {
 
     // Get initial cycle count
     const initialCycles = await getCycles(baseURL!, token, team.id);
-    const initialCount = initialCycles.length;
+    const _initialCount = initialCycles.length;
 
     // Open create modal
     await page.getByTestId('new-cycle-btn').click();
@@ -244,7 +244,7 @@ test.describe('CreateCycle', () => {
   });
 
   test('Creating a cycle persists after page refresh', async ({ page, baseURL }) => {
-    const { token, team } = await loginAndGoToCycles(page, baseURL!);
+    const { token: _token, team: _team } = await loginAndGoToCycles(page, baseURL!);
 
     // Create a new cycle
     await page.getByTestId('new-cycle-btn').click();

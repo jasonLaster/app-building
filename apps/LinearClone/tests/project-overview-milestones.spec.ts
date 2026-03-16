@@ -51,7 +51,7 @@ async function goToOverviewTab(page: import('@playwright/test').Page) {
   await expect(page.getByTestId('project-overview-tab')).toBeVisible({ timeout: 10000 });
 }
 
-async function deleteAllMilestones(baseURL: string, token: string, projectId: string) {
+async function _deleteAllMilestones(baseURL: string, token: string, projectId: string) {
   const detail = await getProjectDetail(baseURL, token, projectId);
   for (const ms of detail.milestones) {
     await fetch(`${baseURL}/api/project-milestones?milestoneId=${ms.id}&projectId=${projectId}`, {

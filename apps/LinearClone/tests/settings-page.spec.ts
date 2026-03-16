@@ -41,7 +41,7 @@ async function getTeams(baseURL: string, token: string) {
 }
 
 // Helper to create a team via API
-async function createTeamViaApi(
+async function _createTeamViaApi(
   baseURL: string,
   token: string,
   data: { name: string; identifier: string; description?: string }

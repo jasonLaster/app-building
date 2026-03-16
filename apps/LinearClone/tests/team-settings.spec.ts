@@ -375,7 +375,7 @@ test.describe('Team Settings', () => {
 
   test('Team settings changes are reflected in sidebar navigation', async ({ page, baseURL }) => {
     test.slow();
-    const { token, team } = await loginAndNavigateToTeamSettings(page, baseURL!, 'ENG');
+    const { token: _token, team } = await loginAndNavigateToTeamSettings(page, baseURL!, 'ENG');
 
     // Sidebar should show "Engineering" team section
     await expect(page.getByTestId('sidebar')).toBeVisible({ timeout: 30000 });

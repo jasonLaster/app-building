@@ -191,7 +191,7 @@ test.describe.serial('Labels List', () => {
   });
 
   test('Labels list updates after creating a new label', async ({ page, baseURL }) => {
-    const { token } = await loginAndNavigateToLabels(page, baseURL!);
+    const { token: _token } = await loginAndNavigateToLabels(page, baseURL!);
 
     await expect(page.getByTestId('label-list')).toBeVisible({ timeout: 30000 });
 

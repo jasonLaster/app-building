@@ -102,11 +102,11 @@ test.describe('ProjectsPage', () => {
     const { token } = await loginAndGoToProjects(page, baseURL!);
 
     // Seed has V2 Launch. Create 2 more projects.
-    const p2 = await createProjectViaApi(baseURL!, token, {
+    const _p2 = await createProjectViaApi(baseURL!, token, {
       name: `Mobile App ${Date.now()}`,
       status: 'planned',
     });
-    const p3 = await createProjectViaApi(baseURL!, token, {
+    const _p3 = await createProjectViaApi(baseURL!, token, {
       name: `API v2 ${Date.now()}`,
       status: 'in_progress',
     });
@@ -410,7 +410,7 @@ test.describe('ProjectFilters', () => {
     await expect(page.getByTestId('projects-page')).toBeVisible({ timeout: 30000 });
 
     const { projects } = await getProjectsData(baseURL!, token);
-    const initialCount = projects.length;
+    const _initialCount = projects.length;
 
     // Apply In Progress filter
     await page.getByTestId('project-filter-btn-status').click();
@@ -439,7 +439,7 @@ test.describe('ProjectFilters', () => {
       name: `Planned Repeat ${Date.now()}`,
       status: 'planned',
     });
-    const completed = await createProjectViaApi(baseURL!, token, {
+    const _completed = await createProjectViaApi(baseURL!, token, {
       name: `Completed Repeat ${Date.now()}`,
       status: 'completed',
     });

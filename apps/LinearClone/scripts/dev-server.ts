@@ -131,7 +131,7 @@ async function main() {
   })
 
   // Handle WebSocket upgrades for Vite HMR
-  server.on('upgrade', (req, socket, head) => {
+  server.on('upgrade', (req, socket, _head) => {
     const proxyReq = http.request({
       hostname: '127.0.0.1',
       port: VITE_PORT,

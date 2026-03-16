@@ -191,7 +191,7 @@ test.describe.serial('Teams Page', () => {
   });
 
   test('Teams page updates after creating a new team', async ({ page, baseURL }) => {
-    const { token } = await loginAndNavigateToTeams(page, baseURL!);
+    const { token: _token } = await loginAndNavigateToTeams(page, baseURL!);
 
     await expect(page.getByTestId('teams-grid')).toBeVisible({ timeout: 30000 });
 

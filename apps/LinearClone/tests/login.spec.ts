@@ -11,7 +11,7 @@ async function createTestUser(baseURL: string, name: string, email: string, pass
 }
 
 // Helper to delete all sessions and members created by tests
-async function cleanupTestUsers(baseURL: string) {
+async function _cleanupTestUsers(_baseURL: string) {
   // We rely on the test script's between-test DB reset (truncate + re-seed)
   // No additional cleanup needed since seed data is restored each test
 }
@@ -86,7 +86,7 @@ test.describe('LoginForm', () => {
     expect(token).toBeFalsy();
   });
 
-  test('Login fails with incorrect password', async ({ page, baseURL }) => {
+  test('Login fails with incorrect password', async ({ page, baseURL: _baseURL }) => {
     // Use seeded user alice@acme.com
     await page.goto('/login');
     await expect(page.getByTestId('login-form')).toBeVisible({ timeout: 30000 });

@@ -65,7 +65,7 @@ async function getProjectDetail(baseURL: string, token: string, projectId: strin
   }>;
 }
 
-async function createProjectViaApi(
+async function _createProjectViaApi(
   baseURL: string,
   token: string,
   data: Record<string, unknown>
@@ -81,7 +81,7 @@ async function createProjectViaApi(
   return response.json();
 }
 
-async function createIssueViaApi(
+async function _createIssueViaApi(
   baseURL: string,
   token: string,
   data: Record<string, unknown>

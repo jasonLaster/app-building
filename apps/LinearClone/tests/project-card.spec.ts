@@ -46,7 +46,7 @@ async function createProjectViaApi(
   return response.json();
 }
 
-async function deleteProjectViaApi(baseURL: string, token: string, projectId: string) {
+async function _deleteProjectViaApi(baseURL: string, token: string, projectId: string) {
   await fetch(`${baseURL}/api/projects?id=${projectId}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },

@@ -1,13 +1,13 @@
 import { defineConfig } from '@playwright/test';
 import { devices as replayDevices, replayReporter } from '@replayio/playwright';
+import { existsSync } from 'fs';
 
 // Check if Replay Chromium is available (not available on aarch64)
 const replayChromiumAvailable = (() => {
   try {
     const config = replayDevices['Replay Chromium'];
     if (!config?.launchOptions?.executablePath) return false;
-    const fs = require('fs');
-    return fs.existsSync(config.launchOptions.executablePath);
+    return existsSync(config.launchOptions.executablePath);
   } catch { return false; }
 })();
 

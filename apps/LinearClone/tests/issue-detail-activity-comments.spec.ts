@@ -194,7 +194,7 @@ test.describe('IssueDetailActivityComments', () => {
 
   test('Add a new comment', async ({ page, baseURL }) => {
     // Use ENG-3
-    const { token, issue } = await loginAndNavigateToIssue(page, baseURL!, 3);
+    const { token: _token, issue: _issue } = await loginAndNavigateToIssue(page, baseURL!, 3);
 
     // Switch to Comments tab
     await page.getByTestId('comments-tab').click();
@@ -253,7 +253,7 @@ test.describe('IssueDetailActivityComments', () => {
 
   test('Submit comment via Enter key', async ({ page, baseURL }) => {
     // Use ENG-4
-    const { token, issue } = await loginAndNavigateToIssue(page, baseURL!, 4);
+    const { token: _token, issue: _issue } = await loginAndNavigateToIssue(page, baseURL!, 4);
 
     // Switch to Comments tab
     await page.getByTestId('comments-tab').click();
@@ -356,7 +356,7 @@ test.describe('IssueDetailActivityComments', () => {
 
   test('Add multiple comments in sequence', async ({ page, baseURL }) => {
     // Use ENG-6
-    const { token, issue } = await loginAndNavigateToIssue(page, baseURL!, 6);
+    const { token: _token, issue: _issue } = await loginAndNavigateToIssue(page, baseURL!, 6);
 
     // Switch to Comments tab
     await page.getByTestId('comments-tab').click();
@@ -394,7 +394,7 @@ test.describe('IssueDetailActivityComments', () => {
 
   test('Comment displays long text properly', async ({ page, baseURL }) => {
     // Use ENG-3
-    const { token, issue } = await loginAndNavigateToIssue(page, baseURL!, 3);
+    const { token: _token, issue: _issue } = await loginAndNavigateToIssue(page, baseURL!, 3);
 
     // Switch to Comments tab
     await page.getByTestId('comments-tab').click();

@@ -20,7 +20,7 @@ async function getLabels(baseURL: string, token: string) {
 }
 
 // Helper to delete all labels via API
-async function deleteAllLabels(baseURL: string, token: string) {
+async function _deleteAllLabels(baseURL: string, token: string) {
   const labels = await getLabels(baseURL, token);
   for (const label of labels) {
     await fetch(`${baseURL}/api/labels`, {
@@ -35,7 +35,7 @@ async function deleteAllLabels(baseURL: string, token: string) {
 }
 
 // Helper to create a label via API
-async function createLabelViaApi(
+async function _createLabelViaApi(
   baseURL: string,
   token: string,
   data: { name: string; color: string }
@@ -89,7 +89,7 @@ test.describe.serial('Create Label', () => {
   });
 
   test('Successfully create a new label with preset color', async ({ page, baseURL }) => {
-    const { token } = await loginAndNavigateToLabels(page, baseURL!);
+    const { token: _token } = await loginAndNavigateToLabels(page, baseURL!);
 
     await expect(page.getByTestId('label-list')).toBeVisible({ timeout: 30000 });
 

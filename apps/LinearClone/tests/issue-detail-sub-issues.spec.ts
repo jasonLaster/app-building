@@ -53,7 +53,7 @@ async function createIssue(
 }
 
 // Helper to update issue field via API
-async function updateIssueField(
+async function _updateIssueField(
   baseURL: string,
   token: string,
   issueId: string,

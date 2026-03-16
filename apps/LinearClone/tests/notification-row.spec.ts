@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 // Helper to login as Alice and return token
 async function loginAsAlice(baseURL: string): Promise<string> {
@@ -29,7 +29,7 @@ async function getNotifications(baseURL: string, token: string) {
 }
 
 // Helper to mark notification as read via API
-async function markNotificationReadAPI(baseURL: string, token: string, id: string) {
+async function _markNotificationReadAPI(baseURL: string, token: string, id: string) {
   await fetch(`${baseURL}/api/notifications/${id}/read`, {
     method: 'PUT',
     headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +37,7 @@ async function markNotificationReadAPI(baseURL: string, token: string, id: strin
 }
 
 // Helper to authenticate page as Alice
-async function authenticatePage(page: any, baseURL: string): Promise<string> {
+async function authenticatePage(page: Page, baseURL: string): Promise<string> {
   const token = await loginAsAlice(baseURL);
   await page.goto('/login');
   await page.evaluate((t: string) => localStorage.setItem('session_token', t), token);

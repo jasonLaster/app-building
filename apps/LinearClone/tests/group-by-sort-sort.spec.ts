@@ -38,7 +38,7 @@ async function loginAndNavigateToTeamIssues(
 }
 
 // Helper to get team issues via API
-async function getTeamIssues(baseURL: string, token: string, teamId: string) {
+async function _getTeamIssues(baseURL: string, token: string, teamId: string) {
   const response = await fetch(`${baseURL}/api/team-issues?teamId=${teamId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
