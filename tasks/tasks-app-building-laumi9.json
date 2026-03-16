@@ -1,0 +1,68 @@
+{
+  "tasks": [
+    {
+      "skill": "skills/tasks/maintain/fixBugReport.md",
+      "subtasks": [
+        "AnalyzeBug: Analyze Users cannot assign issues to themselves",
+        "FixBug: Fix Users cannot assign issues to themselves",
+        "UpdateTests: Update tests for Users cannot assign issues to themselves",
+        "UpdateRevisions: Record spec changes for Users cannot assign issues to themselves",
+        "ResolveBug: Mark Users cannot assign issues to themselves as resolved"
+      ],
+      "timestamp": "2026-03-16T04:58:52.557Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/fixBugReport.md",
+      "subtasks": [
+        "AnalyzeBug: Analyze Users cannot save filter selections as views",
+        "FixBug: Fix Users cannot save filter selections as views",
+        "UpdateTests: Update tests for Users cannot save filter selections as views",
+        "UpdateRevisions: Record spec changes for Users cannot save filter selections as views",
+        "ResolveBug: Mark Users cannot save filter selections as views as resolved"
+      ],
+      "timestamp": "2026-03-16T04:58:52.557Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/reviewBugReport.md",
+      "subtasks": [
+        "Unpack: Review fixed bug reports"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "Unpack: Check directive compliance"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "Unpack: Polish app quality"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/deployment.md",
+      "subtasks": [
+        "Unpack: Deploy to production"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    }
+  ],
+  "current": {
+    "skill": "skills/tasks/maintain/fixBugReport.md",
+    "subtasks": [
+      "Unpack: Fix open bug reports"
+    ],
+    "timestamp": "2026-03-16T04:57:59.339Z",
+    "app": "LinearClone"
+  }
+}

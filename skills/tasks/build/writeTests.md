@@ -93,12 +93,19 @@ EOF
   calls that can block indefinitely. Use locator chaining (`.filter()`, `.locator()`) and
   single-assertion expect matchers (`.toHaveCount()`, `.toContainText()`, `.toBeVisible()`) instead.
 
-- Every test file that modifies database records MUST include a `beforeEach` cleanup helper
-  that resets the relevant data via API calls. Do not wait for data contamination failures
-  to surface before adding cleanup — add it from the start during test authoring. This is
-  the #1 cause of test difficulty, accounting for 24%+ of all test failures. The cleanup
-  helper should fetch ALL records of the relevant type and delete each one, rather than
-  deleting a hardcoded list of known IDs.
+- Every test file MUST include a `beforeAll` hook that calls `truncateAndSeed` to ensure a
+  clean database state before the spec runs. This is boilerplate — include it in every new
+  spec file without exception. Cross-run data accumulation (records persisting from prior
+  test executions against the same Neon branch) is the single largest failure sub-category,
+  accounting for 40% of all test failures in one session. The `beforeAll` with
+  `truncateAndSeed` prevents this entire class of failures.
+
+- Every test file that modifies database records MUST also include a `beforeEach` cleanup
+  helper that resets the relevant data via API calls. Do not wait for data contamination
+  failures to surface before adding cleanup — add it from the start during test authoring.
+  This is the #1 cause of test difficulty, accounting for 24%+ of all test failures. The
+  cleanup helper should fetch ALL records of the relevant type and delete each one, rather
+  than deleting a hardcoded list of known IDs.
 
 - Do not add unnecessary state cleanup (e.g., `localStorage.removeItem`, `page.reload()`) in
   `beforeEach` hooks when Playwright already provides a fresh browser context per test. Redundant
