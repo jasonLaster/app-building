@@ -27,6 +27,9 @@ export default async (request: Request, _context: Context) => {
       RETURNING *
     `
     const image = result[0]
+    if (!image) {
+      return new Response(JSON.stringify({ error: 'Failed to create image' }), { status: 500, headers })
+    }
     return new Response(JSON.stringify(image), { status: 201, headers })
   }
 

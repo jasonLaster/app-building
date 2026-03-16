@@ -45,6 +45,9 @@ export default async (request: Request, _context: Context) => {
       RETURNING *
     `
     const booking = result[0]
+    if (!booking) {
+      return new Response(JSON.stringify({ error: 'Failed to create booking' }), { status: 500, headers })
+    }
     return new Response(JSON.stringify(booking), { status: 201, headers })
   }
 

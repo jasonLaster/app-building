@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
-        "FixViolation: Add undefined checks for result[0] after INSERT/UPDATE in users.ts (line 74), properties.ts (lines 185, 227), bookings.ts (line 47), and property-images.ts (line 29) — noUncheckedIndexedAccess directive violation"
-      ],
-      "timestamp": "2026-03-16T03:02:28.897Z",
-      "app": "AirbnbClone"
-    },
-    {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
         "Unpack: Polish app quality"
@@ -28,9 +20,9 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "CheckBackend: Check writeApp.md directive violations in all backend functions"
+      "FixViolation: Add undefined checks for result[0] after INSERT/UPDATE in users.ts (line 74), properties.ts (lines 185, 227), bookings.ts (line 47), and property-images.ts (line 29) — noUncheckedIndexedAccess directive violation"
     ],
-    "timestamp": "2026-03-15T20:13:58.608Z",
+    "timestamp": "2026-03-16T03:02:28.897Z",
     "app": "AirbnbClone"
   }
 }

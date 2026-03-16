@@ -183,6 +183,9 @@ export default async (request: Request, _context: Context) => {
       RETURNING *
     `
     const property = result[0]
+    if (!property) {
+      return new Response(JSON.stringify({ error: 'Failed to create property' }), { status: 500, headers })
+    }
 
     if (amenity_ids && amenity_ids.length > 0) {
       for (const amenityId of amenity_ids) {
@@ -225,6 +228,9 @@ export default async (request: Request, _context: Context) => {
       RETURNING *
     `
     const property = result[0]
+    if (!property) {
+      return new Response(JSON.stringify({ error: 'Property not found' }), { status: 404, headers })
+    }
     return new Response(JSON.stringify(property), { status: 200, headers })
   }
 

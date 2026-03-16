@@ -72,6 +72,9 @@ export default async (request: Request, _context: Context) => {
       RETURNING *
     `
     const user = result[0]
+    if (!user) {
+      return new Response(JSON.stringify({ error: 'User not found' }), { status: 404, headers })
+    }
     return new Response(JSON.stringify(user), { status: 200, headers })
   }
 
