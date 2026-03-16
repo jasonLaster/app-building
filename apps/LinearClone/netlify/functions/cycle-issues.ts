@@ -118,7 +118,7 @@ export default async function handler(req: Request, _context: Context) {
       priority: issue.priority,
       identifier: `${issue.team_identifier}-${issue.number}`,
       number: issue.number,
-      dueDate: issue.due_date ? String(issue.due_date).split('T')[0] : null,
+      dueDate: issue.due_date ? (issue.due_date instanceof Date ? issue.due_date.toISOString().split('T')[0] : String(issue.due_date).split('T')[0]) : null,
       createdAt: issue.created_at,
       updatedAt: issue.updated_at,
       teamId: issue.team_id,
@@ -134,18 +134,24 @@ export default async function handler(req: Request, _context: Context) {
       labels: labelsByIssue[issue.id] || [],
     }));
 
+    const cycleStartDate = cycle.start_date instanceof Date ? cycle.start_date.toISOString().split('T')[0] : String(cycle.start_date).split('T')[0];
+    const cycleEndDate = cycle.end_date instanceof Date ? cycle.end_date.toISOString().split('T')[0] : String(cycle.end_date).split('T')[0];
+
     // Fetch burndown data: activity entries where status changed to 'done' for issues in this cycle
-    const burndownData = await sql`
-      SELECT DATE(a.created_at) AS completion_date, COUNT(*)::int AS count
-      FROM activity a
-      WHERE a.issue_id = ANY(${issueIds.length > 0 ? issueIds : ['__none__']})
-        AND a.field = 'status'
-        AND a.new_value = 'done'
-        AND DATE(a.created_at) >= ${String(cycle.start_date).split('T')[0]}
-        AND DATE(a.created_at) <= ${String(cycle.end_date).split('T')[0]}
-      GROUP BY DATE(a.created_at)
-      ORDER BY DATE(a.created_at) ASC
-    `;
+    let burndownData: Array<{ completion_date: Date | string; count: number }> = [];
+    if (issueIds.length > 0) {
+      burndownData = await sql`
+        SELECT DATE(a.created_at) AS completion_date, COUNT(*)::int AS count
+        FROM activity a
+        WHERE a.issue_id = ANY(${issueIds})
+          AND a.field = 'status'
+          AND a.new_value = 'done'
+          AND DATE(a.created_at) >= ${cycleStartDate}
+          AND DATE(a.created_at) <= ${cycleEndDate}
+        GROUP BY DATE(a.created_at)
+        ORDER BY DATE(a.created_at) ASC
+      `;
+    }
 
     // Fetch team members for filters
     const members = await sql`
@@ -160,14 +166,14 @@ export default async function handler(req: Request, _context: Context) {
       cycle: {
         id: cycle.id,
         name: cycle.name,
-        startDate: String(cycle.start_date).split('T')[0],
-        endDate: String(cycle.end_date).split('T')[0],
+        startDate: cycleStartDate,
+        endDate: cycleEndDate,
         teamId: cycle.team_id,
       },
       issues: enrichedIssues,
       members,
       burndown: burndownData.map((d) => ({
-        date: String(d.completion_date).split('T')[0],
+        date: d.completion_date instanceof Date ? d.completion_date.toISOString().split('T')[0] : String(d.completion_date).split('T')[0],
         count: d.count,
       })),
     }), {

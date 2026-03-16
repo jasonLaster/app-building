@@ -136,6 +136,12 @@ const cyclesSlice = createSlice({
   reducers: {
     setSelectedCycleId(state, action: { payload: string | null }) {
       state.selectedCycleId = action.payload;
+      if (action.payload === null) {
+        state.cycleDetail = null;
+        state.cycleIssues = [];
+        state.cycleMembers = [];
+        state.burndown = [];
+      }
     },
     setCycleGroupBy(state, action: { payload: CyclesState['groupBy'] }) {
       state.groupBy = action.payload;
@@ -190,6 +196,8 @@ const cyclesSlice = createSlice({
       })
       .addCase(fetchCycleIssues.fulfilled, (state, action) => {
         state.detailLoading = false;
+        // Ignore stale responses from previously-selected cycles
+        if (action.meta.arg !== state.selectedCycleId) return;
         state.cycleDetail = action.payload.cycle;
         state.cycleIssues = action.payload.issues;
         state.cycleMembers = action.payload.members;

@@ -186,12 +186,15 @@ export async function resetDatabase(databaseUrl: string) {
 }
 
 // CLI
-const url = process.argv[2];
-if (url) {
-  truncateAndSeed(url).then(() => {
-    process.exit(0);
-  }).catch((err) => {
-    console.error('Seed failed:', err);
-    process.exit(1);
-  });
+const isMainModule = import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('/seed-db.ts');
+if (isMainModule) {
+  const url = process.argv[2];
+  if (url) {
+    truncateAndSeed(url).then(() => {
+      process.exit(0);
+    }).catch((err) => {
+      console.error('Seed failed:', err);
+      process.exit(1);
+    });
+  }
 }

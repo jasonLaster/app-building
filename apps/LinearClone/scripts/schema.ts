@@ -25,7 +25,8 @@ export async function initSchema(databaseUrl: string) {
     )
   `;
 
-  // Sessions
+  // Sessions (drop and recreate to ensure correct schema on branched DBs)
+  await sql`DROP TABLE IF EXISTS sessions CASCADE`;
   await sql`
     CREATE TABLE IF NOT EXISTS sessions (
       token TEXT PRIMARY KEY,
@@ -194,33 +195,68 @@ export async function initSchema(databaseUrl: string) {
   await sql`DO $$ BEGIN ALTER TABLE notifications ADD COLUMN archived BOOLEAN NOT NULL DEFAULT false; EXCEPTION WHEN duplicate_column THEN NULL; END $$`;
   await sql`DO $$ BEGIN ALTER TABLE members ADD COLUMN created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(); EXCEPTION WHEN duplicate_column THEN NULL; END $$`;
 
-  // Indexes for common queries
-  await sql`CREATE INDEX IF NOT EXISTS idx_issues_team_id ON issues(team_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_issues_assignee_id ON issues(assignee_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_issues_project_id ON issues(project_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_issues_cycle_id ON issues(cycle_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_issues_parent_id ON issues(parent_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_issue_labels_issue_id ON issue_labels(issue_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_issue_labels_label_id ON issue_labels(label_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_team_members_team_id ON team_members(team_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_team_members_member_id ON team_members(member_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_sessions_member_id ON sessions(member_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_comments_issue_id ON comments(issue_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_activity_issue_id ON activity(issue_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_notifications_member_id ON notifications(member_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_project_milestones_project_id ON project_milestones(project_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_project_activity_project_id ON project_activity(project_id)`;
-  await sql`CREATE INDEX IF NOT EXISTS idx_cycles_team_id ON cycles(team_id)`;
+  // Indexes for common queries (use DO blocks to handle schema mismatches on branched DBs)
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issues_team_id ON issues(team_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issues_assignee_id ON issues(assignee_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issues_project_id ON issues(project_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issues_cycle_id ON issues(cycle_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issues_parent_id ON issues(parent_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issue_labels_issue_id ON issue_labels(issue_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_issue_labels_label_id ON issue_labels(label_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_team_members_team_id ON team_members(team_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_team_members_member_id ON team_members(member_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_sessions_member_id ON sessions(member_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_comments_issue_id ON comments(issue_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_activity_issue_id ON activity(issue_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_notifications_member_id ON notifications(member_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_project_milestones_project_id ON project_milestones(project_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_project_activity_project_id ON project_activity(project_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
+  await sql`DO $$ BEGIN
+    EXECUTE 'CREATE INDEX IF NOT EXISTS idx_cycles_team_id ON cycles(team_id)';
+  EXCEPTION WHEN undefined_column OR undefined_table THEN NULL; END $$`;
 }
 
 // CLI: run schema with a database URL argument
-const url = process.argv[2];
-if (url) {
-  initSchema(url).then(() => {
-    console.log('Schema initialized successfully');
-    process.exit(0);
-  }).catch((err) => {
-    console.error('Schema initialization failed:', err);
-    process.exit(1);
-  });
+const isMainModule = import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('/schema.ts');
+if (isMainModule) {
+  const url = process.argv[2];
+  if (url) {
+    initSchema(url).then(() => {
+      console.log('Schema initialized successfully');
+      process.exit(0);
+    }).catch((err) => {
+      console.error('Schema initialization failed:', err);
+      process.exit(1);
+    });
+  }
 }

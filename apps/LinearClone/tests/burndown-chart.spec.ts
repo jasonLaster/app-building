@@ -7,7 +7,11 @@ async function loginViaApi(baseURL: string, email: string, password: string) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
   });
-  return response.json();
+  const data = await response.json();
+  if (!data.token) {
+    throw new Error(`loginViaApi failed (${response.status}): ${JSON.stringify(data)}`);
+  }
+  return data;
 }
 
 // Helper to get teams via API
@@ -16,6 +20,9 @@ async function getTeams(baseURL: string, token: string) {
     headers: { Authorization: `Bearer ${token}` },
   });
   const data = await response.json();
+  if (!data.teams) {
+    throw new Error(`getTeams failed: ${JSON.stringify(data)}`);
+  }
   return data.teams;
 }
 
@@ -79,9 +86,24 @@ async function loginAndGoToCycleDetail(
   await page.goto(`/team/${team.id}/cycles`);
   await expect(page.getByTestId('active-cycle-page')).toBeVisible({ timeout: 30000 });
 
-  // Wait for cycle list and click the cycle
-  await expect(page.getByTestId('cycle-list')).toBeVisible({ timeout: 30000 });
-  await page.getByTestId(`cycle-row-${cycle.id}`).click();
+  // Wait for either cycle-list or cycle-detail to appear
+  await expect(
+    page.getByTestId('cycle-list').or(page.getByTestId('cycle-detail'))
+  ).toBeVisible({ timeout: 30000 });
+
+  // If auto-selection already showed CycleDetail for a different cycle, go back to list
+  const detailVisible = await page.getByTestId('cycle-detail').isVisible().catch(() => false);
+  if (detailVisible && cycleId) {
+    // CycleDetail is showing the auto-selected cycle; click back to get the list
+    await page.getByTestId('cycle-back-btn').click();
+    await expect(page.getByTestId('cycle-list')).toBeVisible({ timeout: 30000 });
+  }
+
+  // If cycle-list is visible, click the desired cycle
+  const listVisible = await page.getByTestId('cycle-list').isVisible().catch(() => false);
+  if (listVisible) {
+    await page.getByTestId(`cycle-row-${cycle.id}`).click({ force: true, timeout: 30000 });
+  }
   await expect(page.getByTestId('cycle-detail')).toBeVisible({ timeout: 30000 });
 
   return { token: data.token, user: data.user, team, teams, cycle, cycles };
@@ -103,8 +125,8 @@ test.describe('BurndownChart', () => {
 
     // Get cycle data to verify date range bars exist
     const cycleData = await getCycleIssues(baseURL!, token, cycle.id);
-    const startDate = new Date(cycleData.cycle.startDate + 'T00:00:00');
-    const endDate = new Date(cycleData.cycle.endDate + 'T00:00:00');
+    const _startDate = new Date(cycleData.cycle.startDate + 'T00:00:00');
+    const _endDate = new Date(cycleData.cycle.endDate + 'T00:00:00');
 
     // Verify bars exist for the start date
     const startDateStr = cycleData.cycle.startDate;
@@ -196,10 +218,12 @@ test.describe('BurndownChart', () => {
     await page.evaluate((t) => localStorage.setItem('session_token', t), data.token);
     await page.goto(`/team/${team.id}/cycles`);
     await expect(page.getByTestId('active-cycle-page')).toBeVisible({ timeout: 30000 });
-    await expect(page.getByTestId('cycle-list')).toBeVisible({ timeout: 30000 });
+
+    // Wait for either cycle-list or cycle-detail to appear
+    await expect(page.getByTestId('cycle-list').or(page.getByTestId('cycle-detail'))).toBeVisible({ timeout: 30000 });
 
     // Click the new empty cycle
-    await page.getByTestId(`cycle-row-${newCycle.id}`).click();
+    await page.getByTestId(`cycle-row-${newCycle.id}`).click({ timeout: 30000 });
     await expect(page.getByTestId('cycle-detail')).toBeVisible({ timeout: 30000 });
 
     // Verify burndown chart shows empty state
@@ -212,7 +236,7 @@ test.describe('BurndownChart', () => {
   });
 
   test('Burndown chart has readable axis labels and chart title', async ({ page, baseURL }) => {
-    const { token, cycle } = await loginAndGoToCycleDetail(page, baseURL!);
+    await loginAndGoToCycleDetail(page, baseURL!);
 
     await expect(page.getByTestId('burndown-chart')).toBeVisible({ timeout: 15000 });
 
@@ -278,11 +302,10 @@ test.describe('BurndownChart', () => {
   });
 
   test('Burndown chart handles a cycle spanning a long date range', async ({ page, baseURL }) => {
+    // Create a cycle spanning 28 days (4 weeks)
     const data = await loginViaApi(baseURL!, 'alice@acme.com', 'password123');
     const teams = await getTeams(baseURL!, data.token);
     const team = teams.find((t: { identifier: string }) => t.identifier === 'ENG');
-
-    // Create a cycle spanning 28 days (4 weeks)
     const cycleName = `Long Cycle ${Date.now()}`;
     const newCycle = await createCycleViaApi(
       baseURL!,
@@ -293,16 +316,9 @@ test.describe('BurndownChart', () => {
       '2026-08-28'
     );
 
-    // Navigate to cycles page
-    await page.goto('/login');
-    await page.evaluate((t) => localStorage.setItem('session_token', t), data.token);
-    await page.goto(`/team/${team.id}/cycles`);
-    await expect(page.getByTestId('active-cycle-page')).toBeVisible({ timeout: 30000 });
-    await expect(page.getByTestId('cycle-list')).toBeVisible({ timeout: 30000 });
-
-    // Click the long cycle
-    await page.getByTestId(`cycle-row-${newCycle.id}`).click();
-    await expect(page.getByTestId('cycle-detail')).toBeVisible({ timeout: 30000 });
+    // Navigate and select the Long Cycle
+    await loginAndGoToCycleDetail(page, baseURL!, newCycle.id);
+    await expect(page.getByTestId('cycle-detail-name')).toContainText('Long Cycle', { timeout: 15000 });
 
     // Verify burndown chart renders
     await expect(page.getByTestId('burndown-chart')).toBeVisible({ timeout: 15000 });

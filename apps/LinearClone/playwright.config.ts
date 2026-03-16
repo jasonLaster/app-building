@@ -1,5 +1,19 @@
 import { defineConfig } from '@playwright/test';
-import { replayDevices, replayReporter } from '@replayio/playwright';
+import { devices as replayDevices, replayReporter } from '@replayio/playwright';
+
+// Check if Replay Chromium is available (not available on aarch64)
+const replayChromiumAvailable = (() => {
+  try {
+    const config = replayDevices['Replay Chromium'];
+    if (!config?.launchOptions?.executablePath) return false;
+    const fs = require('fs');
+    return fs.existsSync(config.launchOptions.executablePath);
+  } catch { return false; }
+})();
+
+const browserConfig = replayChromiumAvailable
+  ? { ...replayDevices['Replay Chromium'] }
+  : {};
 
 export default defineConfig({
   testDir: './tests',
@@ -12,12 +26,12 @@ export default defineConfig({
   forbidOnly: true,
   retries: 0,
   reporter: [
-    replayReporter({ upload: false }),
+    ...(replayChromiumAvailable ? [replayReporter({ upload: false })] : []),
     ['json', { outputFile: 'test-results/results.json' }],
     ['html', { open: 'never' }],
   ],
   use: {
-    ...replayDevices['Replay Chromium'],
+    ...browserConfig,
     baseURL: 'http://localhost:8888',
     actionTimeout: 15000,
   },

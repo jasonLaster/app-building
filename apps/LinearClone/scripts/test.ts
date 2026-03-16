@@ -43,7 +43,10 @@ function getNextLogNumber(): number {
 
 function killStaleProcesses(): void {
   try { execSync("pkill -f 'netlify dev' || true", { stdio: 'ignore' }) } catch { /* ignore */ }
+  try { execSync("pkill -f 'dev-server' || true", { stdio: 'ignore' }) } catch { /* ignore */ }
   try { execSync("pkill -f 'vite' || true", { stdio: 'ignore' }) } catch { /* ignore */ }
+  try { execSync("fuser -k 8888/tcp 2>/dev/null || true", { stdio: 'ignore' }) } catch { /* ignore */ }
+  try { execSync("fuser -k 5173/tcp 2>/dev/null || true", { stdio: 'ignore' }) } catch { /* ignore */ }
   execSync('sleep 1', { stdio: 'ignore' })
 }
 
@@ -172,33 +175,45 @@ async function main(): Promise<void> {
     await initSchema(ephemeralDbUrl)
     await seedDatabase(ephemeralDbUrl)
 
-    const netlifyDev = spawn('npx', ['netlify', 'dev', '--port', '8888', '--functions', './netlify/functions'], {
+    const netlifyDev = spawn('npx', ['tsx', 'scripts/dev-server.ts'], {
       cwd: appDir,
-      env: { ...process.env, DATABASE_URL: ephemeralDbUrl },
+      env: { ...process.env, DATABASE_URL: ephemeralDbUrl, DEV_PORT: '8888' },
       stdio: ['ignore', 'pipe', 'pipe'],
       detached: true,
     })
 
     await new Promise<void>((resolve, reject) => {
-      const timeout = setTimeout(() => reject(new Error('netlify dev failed to start within 60s')), 60000)
+      const timeout = setTimeout(() => reject(new Error('dev server failed to start within 60s')), 60000)
       let output = ''
+      let resolved = false
       const check = (data: Buffer) => {
         output += data.toString()
-        if (output.includes('Server ready') || output.includes('ready on') || output.includes('localhost:8888')) {
-          clearTimeout(timeout); resolve()
+        if (!resolved && (output.includes('Dev server ready') || output.includes('localhost:8888'))) {
+          resolved = true
+          setTimeout(() => { clearTimeout(timeout); resolve() }, 2000)
         }
       }
       netlifyDev.stdout?.on('data', check)
       netlifyDev.stderr?.on('data', check)
-      netlifyDev.on('error', (err) => { clearTimeout(timeout); reject(err) })
+      netlifyDev.on('error', (err) => { if (!resolved) { clearTimeout(timeout); reject(err) } })
       netlifyDev.on('exit', (code) => {
-        if (code !== null && code !== 0) { clearTimeout(timeout); reject(new Error(`netlify dev exited ${code}\n${output}`)) }
+        if (!resolved && code !== null && code !== 0) { clearTimeout(timeout); reject(new Error(`dev server exited ${code}\n${output}`)) }
       })
     })
 
     try { execSync('npx replayio remove --all', { cwd: appDir, stdio: 'ignore' }) } catch { /* ignore */ }
 
-    await resetDatabase(ephemeralDbUrl)
+    // Retry resetDatabase in case the Neon endpoint needs time to become available
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        await resetDatabase(ephemeralDbUrl)
+        break
+      } catch (err) {
+        if (attempt === 2) throw err
+        console.log(`resetDatabase attempt ${attempt + 1} failed, retrying in 3s...`)
+        await new Promise(r => setTimeout(r, 3000))
+      }
+    }
 
     try {
       const pwOutput = execSync(`npx playwright test ${testFile} --retries 0 --workers 1`, {

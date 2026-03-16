@@ -58,14 +58,16 @@ export default async function handler(req: Request, _context: Context) {
       // Determine active cycle: current date falls within start_date and end_date
       const now = new Date();
       const enrichedCycles = cycles.map((c) => {
-        const startDate = new Date(String(c.start_date).split('T')[0] + 'T00:00:00');
-        const endDate = new Date(String(c.end_date).split('T')[0] + 'T23:59:59');
+        const startStr = c.start_date instanceof Date ? c.start_date.toISOString().split('T')[0] : String(c.start_date).split('T')[0];
+        const endStr = c.end_date instanceof Date ? c.end_date.toISOString().split('T')[0] : String(c.end_date).split('T')[0];
+        const startDate = new Date(startStr + 'T00:00:00');
+        const endDate = new Date(endStr + 'T23:59:59');
         const isActive = now >= startDate && now <= endDate;
         return {
           id: c.id,
           name: c.name,
-          startDate: String(c.start_date).split('T')[0],
-          endDate: String(c.end_date).split('T')[0],
+          startDate: startStr,
+          endDate: endStr,
           teamId: c.team_id,
           issueCount: c.issue_count,
           doneCount: c.done_count,
@@ -112,8 +114,8 @@ export default async function handler(req: Request, _context: Context) {
       return new Response(JSON.stringify({
         id: cycle.id,
         name: cycle.name,
-        startDate: String(cycle.start_date).split('T')[0],
-        endDate: String(cycle.end_date).split('T')[0],
+        startDate: cycle.start_date instanceof Date ? cycle.start_date.toISOString().split('T')[0] : String(cycle.start_date).split('T')[0],
+        endDate: cycle.end_date instanceof Date ? cycle.end_date.toISOString().split('T')[0] : String(cycle.end_date).split('T')[0],
         teamId: cycle.team_id,
         issueCount: 0,
         doneCount: 0,
