@@ -3,9 +3,9 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "CheckBackend: Check writeApp.md directive violations in all backend functions"
+        "FixViolation: Add undefined checks for result[0] after INSERT/UPDATE in users.ts (line 74), properties.ts (lines 185, 227), bookings.ts (line 47), and property-images.ts (line 29) — noUncheckedIndexedAccess directive violation"
       ],
-      "timestamp": "2026-03-15T20:13:58.608Z",
+      "timestamp": "2026-03-16T03:02:28.897Z",
       "app": "AirbnbClone"
     },
     {
@@ -28,10 +28,9 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: All 3 Write Review test files (write-review-context.spec.ts, write-review-form.spec.ts, write-review-sliders.spec.ts) are missing the required beforeAll hook that calls truncateAndSeed. Add the import and beforeAll hook to each file following the pattern used by other test files in the project.",
-      "FixViolation: In write-review-form.spec.ts, the 'Submitted review appears on property detail page' test does not assert that the property's average rating and review count are updated after submitting a review. Add assertions to verify the parent-level aggregate values are updated in the UI."
+      "CheckBackend: Check writeApp.md directive violations in all backend functions"
     ],
-    "timestamp": "2026-03-16T02:59:02.119Z",
+    "timestamp": "2026-03-15T20:13:58.608Z",
     "app": "AirbnbClone"
   }
 }
