@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: BookingCard tests assume native date inputs (fill, toHaveAttribute type=date, toHaveValue) but component uses custom calendar with p elements for booking-checkin and booking-checkout. Tests need to be rewritten to interact with the custom calendar UI",
-        "RunTests: Run tests/booking-card.spec.ts to verify fix"
-      ],
-      "timestamp": "2026-03-15T21:19:21.048Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "CheckTestSpecMyTrips: Check testSpec.md directive violations in My Trips test entries",
         "CheckComponentsMyTrips: Check writeApp.md directive violations in My Trips components",
         "CheckTestsMyTrips: Check writeTests.md directive violations in My Trips tests"
@@ -77,7 +68,7 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: BookingCard uses native HTML select element for guest count selector (line 260-271 of BookingCard.tsx) which violates the directive against native select elements when app has custom design system",
+      "FixViolation: BookingCard tests assume native date inputs (fill, toHaveAttribute type=date, toHaveValue) but component uses custom calendar with p elements for booking-checkin and booking-checkout. Tests need to be rewritten to interact with the custom calendar UI",
       "RunTests: Run tests/booking-card.spec.ts to verify fix"
     ],
     "timestamp": "2026-03-15T21:19:21.048Z",

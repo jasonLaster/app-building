@@ -78,12 +78,12 @@
         {
           "title": "Property Detail - BookingCard",
           "file": "booking-card.spec.ts",
-          "line": 38,
+          "line": 77,
           "column": 6,
           "specs": [
             {
               "title": "Booking card displays price per night",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -96,58 +96,28 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 31006,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('booking-card')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('booking-card')\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('booking-card')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('booking-card')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:66:24",
-                        "location": {
-                          "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
-                          "column": 24,
-                          "line": 66
-                        },
-                        "snippet": "  64 |\n  65 |     const card = page.getByTestId('booking-card')\n> 66 |     await expect(card).toBeVisible({ timeout: 30000 })\n     |                        ^\n  67 |\n  68 |     // $150 / night\n  69 |     await expect(card).toContainText('$150')"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
-                            "column": 24,
-                            "line": 66
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('booking-card')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('booking-card')\u001b[22m\n\n\n  64 |\n  65 |     const card = page.getByTestId('booking-card')\n> 66 |     await expect(card).toBeVisible({ timeout: 30000 })\n     |                        ^\n  67 |\n  68 |     // $150 / night\n  69 |     await expect(card).toContainText('$150')\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:66:24"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 2183,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:24:58.192Z",
+                      "startTime": "2026-03-16T01:32:31.062Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/repo/apps/AirbnbClone/test-results/booking-card-Property-Deta-a4866-rd-displays-price-per-night/error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
-                        "column": 24,
-                        "line": 66
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-a3b4224a50cdefd6aaa0",
               "file": "booking-card.spec.ts",
-              "line": 62,
+              "line": 101,
               "column": 3
             },
             {
               "title": "Booking card displays check-in and check-out date pickers",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -158,49 +128,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": 1,
+                      "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 0,
-                      "error": {
-                        "message": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.",
-                        "stack": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.\n    at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)\n    at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:7:5",
-                        "location": {
-                          "file": "/repo/apps/AirbnbClone/scripts/seed-db.ts",
-                          "column": 3,
-                          "line": 7
-                        },
-                        "snippet": "   at ../scripts/seed-db.ts:7\n\n   5 |\n   6 |   // Truncate in dependency order (leaf tables first)\n>  7 |   await sql`TRUNCATE favorites CASCADE`\n     |   ^\n   8 |   await sql`TRUNCATE reviews CASCADE`\n   9 |   await sql`TRUNCATE bookings CASCADE`\n  10 |   await sql`TRUNCATE property_amenities CASCADE`"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/scripts/seed-db.ts",
-                            "column": 3,
-                            "line": 7
-                          },
-                          "message": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.\n\n   at ../scripts/seed-db.ts:7\n\n   5 |\n   6 |   // Truncate in dependency order (leaf tables first)\n>  7 |   await sql`TRUNCATE favorites CASCADE`\n     |   ^\n   8 |   await sql`TRUNCATE reviews CASCADE`\n   9 |   await sql`TRUNCATE bookings CASCADE`\n  10 |   await sql`TRUNCATE property_amenities CASCADE`\n    at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)\n    at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:7:5"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 1493,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.103Z",
+                      "startTime": "2026-03-16T01:32:34.669Z",
                       "annotations": [],
-                      "attachments": [],
-                      "errorLocation": {
-                        "file": "/repo/apps/AirbnbClone/scripts/seed-db.ts",
-                        "column": 3,
-                        "line": 7
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-1235b7b820e47806df55",
               "file": "booking-card.spec.ts",
-              "line": 73,
+              "line": 116,
               "column": 3
             },
             {
@@ -216,25 +162,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1504,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
+                      "startTime": "2026-03-16T01:32:36.169Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-9460af9aa527c3b32386",
               "file": "booking-card.spec.ts",
-              "line": 92,
+              "line": 137,
               "column": 3
             },
             {
@@ -250,25 +196,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1712,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
+                      "startTime": "2026-03-16T01:32:37.679Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-12464ce8ed001e1f18f8",
               "file": "booking-card.spec.ts",
-              "line": 120,
+              "line": 165,
               "column": 3
             },
             {
@@ -284,25 +230,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1818,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
+                      "startTime": "2026-03-16T01:32:39.398Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-6165cff7d2e9e27844d1",
               "file": "booking-card.spec.ts",
-              "line": 150,
+              "line": 196,
               "column": 3
             },
             {
@@ -311,32 +257,50 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                        "line": 222,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "",
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5952,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
-                      "annotations": [],
+                      "startTime": "2026-03-16T01:32:41.223Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                            "line": 222,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-7024b92c177cd97152ef",
               "file": "booking-card.spec.ts",
-              "line": 173,
+              "line": 221,
               "column": 3
             },
             {
@@ -345,32 +309,50 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                        "line": 251,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "",
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2145,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
-                      "annotations": [],
+                      "startTime": "2026-03-16T01:32:47.181Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                            "line": 251,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-f2ccb99504c3c331adad",
               "file": "booking-card.spec.ts",
-              "line": 203,
+              "line": 250,
               "column": 3
             },
             {
@@ -386,25 +368,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1725,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
+                      "startTime": "2026-03-16T01:32:49.333Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-007e0e62fd64acdc232f",
               "file": "booking-card.spec.ts",
-              "line": 221,
+              "line": 268,
               "column": 3
             },
             {
@@ -413,32 +395,50 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                        "line": 287,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "",
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2174,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.320Z",
-                      "annotations": [],
+                      "startTime": "2026-03-16T01:32:51.065Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                            "line": 287,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-462eb047350f3d607619",
               "file": "booking-card.spec.ts",
-              "line": 239,
+              "line": 286,
               "column": 3
             },
             {
@@ -454,25 +454,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1722,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "startTime": "2026-03-16T01:32:53.246Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-85e971f454da1cb9574e",
               "file": "booking-card.spec.ts",
-              "line": 258,
+              "line": 305,
               "column": 3
             },
             {
@@ -488,25 +488,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1803,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "startTime": "2026-03-16T01:32:54.975Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-60b676f07d3750211bfe",
               "file": "booking-card.spec.ts",
-              "line": 271,
+              "line": 334,
               "column": 3
             },
             {
@@ -522,25 +522,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1741,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "startTime": "2026-03-16T01:32:56.784Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-b12aa43928ce590f2402",
               "file": "booking-card.spec.ts",
-              "line": 285,
+              "line": 362,
               "column": 3
             },
             {
@@ -556,25 +556,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1781,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "startTime": "2026-03-16T01:32:58.531Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-8949724d8fb90a031abb",
               "file": "booking-card.spec.ts",
-              "line": 307,
+              "line": 384,
               "column": 3
             },
             {
@@ -583,32 +583,50 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 60000,
-                  "annotations": [],
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                        "line": 407,
+                        "column": 10
+                      }
+                    }
+                  ],
                   "expectedStatus": "passed",
                   "projectId": "",
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2213,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
-                      "annotations": [],
+                      "startTime": "2026-03-16T01:33:00.320Z",
+                      "annotations": [
+                        {
+                          "type": "slow",
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                            "line": 407,
+                            "column": 10
+                          }
+                        }
+                      ],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-b85e809207620d6b4db6",
               "file": "booking-card.spec.ts",
-              "line": 329,
+              "line": 406,
               "column": 3
             },
             {
@@ -624,25 +642,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2309,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "startTime": "2026-03-16T01:33:02.539Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-c397964d8fe97a7f3841",
               "file": "booking-card.spec.ts",
-              "line": 356,
+              "line": 434,
               "column": 3
             },
             {
@@ -658,25 +676,25 @@
                   "projectName": "",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1729,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "startTime": "2026-03-16T01:33:04.855Z",
                       "annotations": [],
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
               "id": "4d57d9eff36cbb3b33f2-8260dbefb39fd2961837",
               "file": "booking-card.spec.ts",
-              "line": 404,
+              "line": 483,
               "column": 3
             }
           ]
@@ -686,11 +704,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-16T00:24:55.655Z",
-    "duration": 35679.079,
-    "expected": 0,
-    "skipped": 14,
-    "unexpected": 2,
+    "startTime": "2026-03-16T01:32:28.603Z",
+    "duration": 38027.254,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 0,
     "flaky": 0
   }
 }

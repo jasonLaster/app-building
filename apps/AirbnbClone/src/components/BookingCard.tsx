@@ -150,7 +150,10 @@ export default function BookingCard({ property }: BookingCardProps) {
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) {
-          setBookedRanges(data as BookedRange[])
+          setBookedRanges(data.map((b: { check_in: string; check_out: string }) => ({
+            check_in: b.check_in.slice(0, 10),
+            check_out: b.check_out.slice(0, 10),
+          })))
         }
       })
       .catch(() => {})
@@ -307,6 +310,7 @@ export default function BookingCard({ property }: BookingCardProps) {
           </div>
           <div className="flex items-center justify-between mb-2">
             <button
+              data-testid="calendar-prev-month"
               onClick={handlePrevMonth}
               className="p-1 rounded-full hover:bg-bg-secondary cursor-pointer"
             >
@@ -314,6 +318,7 @@ export default function BookingCard({ property }: BookingCardProps) {
             </button>
             <div />
             <button
+              data-testid="calendar-next-month"
               onClick={handleNextMonth}
               className="p-1 rounded-full hover:bg-bg-secondary cursor-pointer"
             >

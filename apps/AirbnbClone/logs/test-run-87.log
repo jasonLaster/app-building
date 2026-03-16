@@ -1,0 +1,120 @@
+Cleaned up stale branch: test-run-1773624197766
+Created branch: test-run-1773624233179 (br-shy-fog-a6v1izz3)
+Test DB URL: postgresql://neondb_owner:***@ep-hidden-pine-a6xc0eha.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 16 tests using 1 worker
+
+
+[1A[2K[1/16] tests/booking-card.spec.ts:101:3 › Property Detail - BookingCard › Booking card displays price per night
+
+[1A[2K  1) tests/booking-card.spec.ts:101:3 › Property Detail - BookingCard › Booking card displays price per night 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('booking-card')
+    Expected substring: [32m"$150"[39m
+    Received string:    [31m"Add dates for pricesCheck-inAdd dateCheckoutAdd dateGuests1 guestLog in to reserve"[39m
+    Timeout: 10000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 10000ms[22m
+    [2m  - waiting for getByTestId('booking-card')[22m
+    [2m    14 × locator resolved to <div data-testid="booking-card" class="border border-border rounded-xl p-6 shadow-lg sticky top-[96px]">…</div>[22m
+    [2m       - unexpected value "Add dates for pricesCheck-inAdd dateCheckoutAdd dateGuests1 guestLog in to reserve"[22m
+
+
+      106 |
+      107 |     // $150 / night
+    > 108 |     await expect(card).toContainText('$150')
+          |                        ^
+      109 |     await expect(card).toContainText('night')
+      110 |   })
+      111 |
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:108:24
+
+    Error Context: test-results/booking-card-Property-Deta-a4866-rd-displays-price-per-night/error-context.md
+
+
+
+[1A[2K[2/16] tests/booking-card.spec.ts:112:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers
+[1A[2K[3/16] tests/booking-card.spec.ts:133:3 › Property Detail - BookingCard › Booking card displays guest count selector
+[1A[2K[4/16] tests/booking-card.spec.ts:161:3 › Property Detail - BookingCard › Selecting dates and guests shows price breakdown
+[1A[2K[5/16] tests/booking-card.spec.ts:192:3 › Property Detail - BookingCard › Price breakdown updates when dates change
+[1A[2K[6/16] tests/booking-card.spec.ts:217:3 › Property Detail - BookingCard › Reserve button creates a booking when logged in
+[1A[2K[7/16] tests/booking-card.spec.ts:246:3 › Property Detail - BookingCard › Reserve button is disabled when dates are not selected
+[1A[2K[8/16] tests/booking-card.spec.ts:264:3 › Property Detail - BookingCard › Reserve button prompts login when user is not logged in
+[1A[2K[9/16] tests/booking-card.spec.ts:282:3 › Property Detail - BookingCard › Reserve button is disabled for host's own property
+[1A[2K[10/16] tests/booking-card.spec.ts:301:3 › Property Detail - BookingCard › Check-in date picker prevents selecting past dates
+[1A[2K[11/16] tests/booking-card.spec.ts:330:3 › Property Detail - BookingCard › Check-out date must be after check-in date
+[1A[2K[12/16] tests/booking-card.spec.ts:358:3 › Property Detail - BookingCard › Guest count cannot exceed property max_guests
+[1A[2K[13/16] tests/booking-card.spec.ts:380:3 › Property Detail - BookingCard › Guest count minimum is 1
+[1A[2K[14/16] tests/booking-card.spec.ts:402:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates
+[1A[2K  2) tests/booking-card.spec.ts:402:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for getByTestId('calendar-day-2026-04-02')[22m
+    [2m    - locator resolved to <button disabled data-testid="calendar-day-2026-04-02" class="h-10 w-full text-sm rounded-full transition-colors cursor-pointer↵                text-border line-through cursor-not-allowed↵                ↵                ↵                bg-bg-secondary↵              ">2</button>[22m
+    [2m  - attempting click action[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is not enabled[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 100ms[22m
+    [2m    29 × waiting for element to be visible, enabled and stable[22m
+    [2m       - element is not enabled[22m
+    [2m     - retrying click action[22m
+    [2m       - waiting 500ms[22m
+
+
+      55 |     await page.getByTestId('calendar-next-month').click()
+      56 |   }
+    > 57 |   await dayButton.click()
+         |                   ^
+      58 | }
+      59 |
+      60 | async function selectDatesViaCalendar(
+        at navigateToAndClickDay (/repo/apps/AirbnbClone/tests/booking-card.spec.ts:57:19)
+        at selectDatesViaCalendar (/repo/apps/AirbnbClone/tests/booking-card.spec.ts:66:3)
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:413:5
+
+    Error Context: test-results/booking-card-Property-Deta-77524-error-for-unavailable-dates/error-context.md
+
+
+
+[1A[2K[15/16] tests/booking-card.spec.ts:428:3 › Property Detail - BookingCard › Booking card date pickers and guest selector are functional on repeated use
+[1A[2K[16/16] tests/booking-card.spec.ts:477:3 › Property Detail - BookingCard › Booking card is sticky on desktop viewport
+[1A[2K  2 failed
+    tests/booking-card.spec.ts:101:3 › Property Detail - BookingCard › Booking card displays price per night 
+    tests/booking-card.spec.ts:402:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates 
+  14 passed (1.1m)
+
+(node:57499) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:57599) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:57526) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:57712) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:58115) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

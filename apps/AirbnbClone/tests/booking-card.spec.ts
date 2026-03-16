@@ -35,6 +35,45 @@ async function deleteAllBookings(page: import('@playwright/test').Page, guestId:
   }
 }
 
+/**
+ * Opens the custom calendar and selects a date by navigating to the correct month
+ * and clicking the day button. Assumes calendar may or may not be open already.
+ */
+async function openCalendarIfNeeded(page: import('@playwright/test').Page) {
+  const selectDatesHeading = page.getByText('Select dates')
+  if (!(await selectDatesHeading.isVisible().catch(() => false))) {
+    await page.getByTestId('booking-checkin').click()
+    await expect(selectDatesHeading).toBeVisible({ timeout: 5000 })
+  }
+}
+
+async function navigateToAndClickDay(page: import('@playwright/test').Page, dateStr: string) {
+  const dayButton = page.getByTestId(`calendar-day-${dateStr}`)
+  // Navigate forward until the day is visible (max 12 months ahead)
+  for (let i = 0; i < 12; i++) {
+    if (await dayButton.isVisible().catch(() => false)) break
+    await page.getByTestId('calendar-next-month').click()
+  }
+  await dayButton.click()
+}
+
+async function selectDatesViaCalendar(
+  page: import('@playwright/test').Page,
+  checkInDate: string,
+  checkOutDate: string
+) {
+  await openCalendarIfNeeded(page)
+  await navigateToAndClickDay(page, checkInDate)
+  await navigateToAndClickDay(page, checkOutDate)
+  // Close calendar
+  await page.getByRole('button', { name: 'Close' }).click()
+}
+
+async function clearCalendarDates(page: import('@playwright/test').Page) {
+  await openCalendarIfNeeded(page)
+  await page.getByRole('button', { name: 'Clear dates' }).click()
+}
+
 test.describe('Property Detail - BookingCard', () => {
   test.beforeEach(async ({ request }) => {
     // Clean up any non-seed bookings created by Emma
@@ -65,9 +104,13 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    // $150 / night
+    // Without dates selected, shows "Add dates for prices"
+    await expect(card).toContainText('Add dates for prices')
+
+    // After selecting dates, shows "$150 / night"
+    await selectDatesViaCalendar(page, '2026-07-10', '2026-07-13')
     await expect(card).toContainText('$150')
-    await expect(card).toContainText('/ night')
+    await expect(card).toContainText('night')
   })
 
   test('Booking card displays check-in and check-out date pickers', async ({ page }) => {
@@ -82,11 +125,13 @@ test.describe('Property Detail - BookingCard', () => {
     await expect(checkin).toBeVisible()
     await expect(checkout).toBeVisible()
 
-    // Both should be date inputs and initially empty
-    await expect(checkin).toHaveAttribute('type', 'date')
-    await expect(checkout).toHaveAttribute('type', 'date')
-    await expect(checkin).toHaveValue('')
-    await expect(checkout).toHaveValue('')
+    // Both should show placeholder text when no date is selected
+    await expect(checkin).toContainText('Add date')
+    await expect(checkout).toContainText('Add date')
+
+    // Clicking the date area should open the custom calendar
+    await checkin.click()
+    await expect(page.getByText('Select dates')).toBeVisible()
   })
 
   test('Booking card displays guest count selector', async ({ page }) => {
@@ -124,9 +169,10 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    // Select check-in and check-out (3 nights)
-    await page.getByTestId('booking-checkin').fill('2026-05-01')
-    await page.getByTestId('booking-checkout').fill('2026-05-04')
+    // Select check-in and check-out (3 nights) via custom calendar
+    await selectDatesViaCalendar(page, '2026-05-01', '2026-05-04')
+
+    // Select 2 guests
     await page.getByTestId('booking-guests').click()
     await page.getByTestId('guest-option-2').click()
 
@@ -154,15 +200,17 @@ test.describe('Property Detail - BookingCard', () => {
     await expect(card).toBeVisible({ timeout: 30000 })
 
     // Initial: 3 nights
-    await page.getByTestId('booking-checkin').fill('2026-05-01')
-    await page.getByTestId('booking-checkout').fill('2026-05-04')
+    await selectDatesViaCalendar(page, '2026-05-01', '2026-05-04')
 
     const breakdown = page.getByTestId('price-breakdown')
     await expect(breakdown).toContainText('$150 x 3 nights')
     await expect(breakdown).toContainText('$525')
 
-    // Change to 5 nights
-    await page.getByTestId('booking-checkout').fill('2026-05-06')
+    // Clear dates and select new dates: 5 nights
+    await clearCalendarDates(page)
+    await navigateToAndClickDay(page, '2026-05-01')
+    await navigateToAndClickDay(page, '2026-05-06')
+    await page.getByRole('button', { name: 'Close' }).click()
 
     // $150 x 5 nights = $750, Total: $825
     await expect(breakdown).toContainText('$150 x 5 nights')
@@ -182,9 +230,8 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    // Select dates and guests
-    await page.getByTestId('booking-checkin').fill('2026-07-01')
-    await page.getByTestId('booking-checkout').fill('2026-07-04')
+    // Select dates and guests via custom calendar
+    await selectDatesViaCalendar(page, '2026-07-01', '2026-07-04')
     await page.getByTestId('booking-guests').click()
     await page.getByTestId('guest-option-2').click()
 
@@ -214,8 +261,8 @@ test.describe('Property Detail - BookingCard', () => {
     await expect(reserveBtn).toBeVisible()
     await expect(reserveBtn).toBeDisabled()
 
-    // Should show hint text
-    await expect(card).toContainText('Select dates to book')
+    // Should show hint text about adding dates
+    await expect(card).toContainText('Add dates for prices')
   })
 
   test('Reserve button prompts login when user is not logged in', async ({ page }) => {
@@ -261,11 +308,27 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    const checkin = page.getByTestId('booking-checkin')
+    // Open the calendar
+    await page.getByTestId('booking-checkin').click()
+    await expect(page.getByText('Select dates')).toBeVisible()
 
-    // The min attribute should be set to today's date
-    const today = new Date().toISOString().split('T')[0]
-    await expect(checkin).toHaveAttribute('min', today!)
+    // Yesterday's date should be disabled in the calendar
+    const yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() - 1)
+    const yesterdayStr = yesterday.toISOString().split('T')[0]
+    const yesterdayButton = page.getByTestId(`calendar-day-${yesterdayStr}`)
+
+    // Past date button should be disabled (if visible in current month view)
+    if (await yesterdayButton.isVisible().catch(() => false)) {
+      await expect(yesterdayButton).toBeDisabled()
+    }
+
+    // Today's date should be enabled
+    const todayStr = new Date().toISOString().split('T')[0]
+    const todayButton = page.getByTestId(`calendar-day-${todayStr}`)
+    if (await todayButton.isVisible().catch(() => false)) {
+      await expect(todayButton).toBeEnabled()
+    }
   })
 
   test('Check-out date must be after check-in date', async ({ page }) => {
@@ -274,12 +337,26 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    // Set check-in date
-    await page.getByTestId('booking-checkin').fill('2026-05-01')
+    // Open calendar and select check-in date
+    await openCalendarIfNeeded(page)
+    await navigateToAndClickDay(page, '2026-05-01')
 
-    // Check-out min should be set to check-in date or later
-    const checkout = page.getByTestId('booking-checkout')
-    await expect(checkout).toHaveAttribute('min', '2026-05-01')
+    // Check-in should be displayed
+    await expect(page.getByTestId('booking-checkin')).toContainText('May 1, 2026')
+
+    // Selecting a date before check-in should reset check-in (not set as check-out)
+    // Navigate back to April if needed and click April 30
+    const aprilDay = page.getByTestId('calendar-day-2026-04-30')
+    // Need to navigate back to see April
+    for (let i = 0; i < 12; i++) {
+      if (await aprilDay.isVisible().catch(() => false)) break
+      await page.getByTestId('calendar-prev-month').click()
+    }
+    await aprilDay.click()
+
+    // Check-in should now be April 30 (reset), check-out should be empty
+    await expect(page.getByTestId('booking-checkin')).toContainText('Apr 30, 2026')
+    await expect(page.getByTestId('booking-checkout')).toContainText('Add date')
   })
 
   test('Guest count cannot exceed property max_guests', async ({ page }) => {
@@ -336,21 +413,22 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    // Select overlapping dates
-    await page.getByTestId('booking-checkin').fill('2026-04-02')
-    await page.getByTestId('booking-checkout').fill('2026-04-06')
-    await page.getByTestId('booking-guests').click()
-    await page.getByTestId('guest-option-2').click()
+    // Open the calendar and navigate to April 2026
+    await openCalendarIfNeeded(page)
+    const aprDay = page.getByTestId('calendar-day-2026-04-03')
+    for (let i = 0; i < 12; i++) {
+      if (await aprDay.isVisible().catch(() => false)) break
+      await page.getByTestId('calendar-next-month').click()
+    }
 
-    // Click Reserve
-    const reserveBtn = page.getByTestId('reserve-button')
-    await expect(reserveBtn).toBeEnabled()
-    await reserveBtn.click()
+    // Booked dates (April 1-6) should be disabled in the calendar
+    await expect(page.getByTestId('calendar-day-2026-04-01')).toBeDisabled()
+    await expect(page.getByTestId('calendar-day-2026-04-03')).toBeDisabled()
+    await expect(page.getByTestId('calendar-day-2026-04-06')).toBeDisabled()
 
-    // Should show error about unavailable dates
-    const errorMsg = page.getByTestId('booking-error')
-    await expect(errorMsg).toBeVisible({ timeout: 30000 })
-    await expect(errorMsg).toContainText('not available')
+    // Dates outside the booking should be enabled
+    await expect(page.getByTestId('calendar-day-2026-04-08')).toBeEnabled()
+    await expect(page.getByTestId('calendar-day-2026-04-10')).toBeEnabled()
   })
 
   test('Booking card date pickers and guest selector are functional on repeated use', async ({ page }) => {
@@ -366,8 +444,7 @@ test.describe('Property Detail - BookingCard', () => {
     const breakdown = page.getByTestId('price-breakdown')
 
     // First selection: 2026-05-01 to 2026-05-04 (3 nights), 2 guests
-    await checkin.fill('2026-05-01')
-    await checkout.fill('2026-05-04')
+    await selectDatesViaCalendar(page, '2026-05-01', '2026-05-04')
     await guestsSelect.click()
     await page.getByTestId('guest-option-2').click()
 
@@ -376,8 +453,10 @@ test.describe('Property Detail - BookingCard', () => {
     await expect(breakdown).toContainText('$525')
 
     // Change dates: 2026-06-01 to 2026-06-05 (4 nights)
-    await checkin.fill('2026-06-01')
-    await checkout.fill('2026-06-05')
+    await clearCalendarDates(page)
+    await navigateToAndClickDay(page, '2026-06-01')
+    await navigateToAndClickDay(page, '2026-06-05')
+    await page.getByRole('button', { name: 'Close' }).click()
 
     // $150 x 4 = $600 + $75 = $675
     await expect(breakdown).toContainText('$150 x 4 nights')
@@ -396,8 +475,8 @@ test.describe('Property Detail - BookingCard', () => {
     await expect(breakdown).toContainText('$675')
 
     // Final state verification
-    await expect(checkin).toHaveValue('2026-06-01')
-    await expect(checkout).toHaveValue('2026-06-05')
+    await expect(checkin).toContainText('Jun 1, 2026')
+    await expect(checkout).toContainText('Jun 5, 2026')
     await expect(guestsSelect).toHaveAttribute('data-value', '2')
   })
 
