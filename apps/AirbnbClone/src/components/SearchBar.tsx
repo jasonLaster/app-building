@@ -44,9 +44,9 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
       onSubmit={handleSubmit}
       role="search"
       aria-label="Search properties"
-      className="flex items-center rounded-full border border-border bg-bg shadow-sm hover:shadow-md transition-shadow max-w-[850px] mx-auto"
+      className="flex items-center max-md:flex-col rounded-full max-md:rounded-2xl border border-border bg-bg shadow-sm hover:shadow-md transition-shadow max-w-[850px] mx-auto"
     >
-      <div className="flex-1 min-w-0 px-7 py-3.5">
+      <div className="flex-1 min-w-0 px-7 py-3.5 max-md:w-full max-md:px-4 max-md:py-2.5">
         <label htmlFor="search-location" className="block text-xs font-bold text-text">Where</label>
         <input
           id="search-location"
@@ -59,9 +59,10 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
         />
       </div>
 
-      <div className="w-px h-8 bg-border shrink-0" aria-hidden="true" />
+      <div className="w-px h-8 bg-border shrink-0 max-md:hidden" aria-hidden="true" />
+      <div className="hidden max-md:block w-full h-px bg-border" aria-hidden="true" />
 
-      <div className="px-5 py-3.5">
+      <div className="px-5 py-3.5 max-md:w-full max-md:px-4 max-md:py-2.5">
         <span className="block text-xs font-bold text-text" id="search-when-label">Check in</span>
         <div className="flex items-center gap-2" role="group" aria-labelledby="search-when-label">
           <label htmlFor="search-checkin" className="sr-only">Check-in date</label>
@@ -77,14 +78,15 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
                 setCheckOut('')
               }
             }}
-            className="text-sm text-text-secondary outline-none bg-transparent w-[120px] mt-0.5"
+            className="text-sm text-text-secondary outline-none bg-transparent w-[120px] max-md:w-full mt-0.5"
           />
         </div>
       </div>
 
-      <div className="w-px h-8 bg-border shrink-0" aria-hidden="true" />
+      <div className="w-px h-8 bg-border shrink-0 max-md:hidden" aria-hidden="true" />
+      <div className="hidden max-md:block w-full h-px bg-border" aria-hidden="true" />
 
-      <div className="px-5 py-3.5">
+      <div className="px-5 py-3.5 max-md:w-full max-md:px-4 max-md:py-2.5">
         <label htmlFor="search-checkout" className="block text-xs font-bold text-text">Check out</label>
         <input
           id="search-checkout"
@@ -93,14 +95,15 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
           value={checkOut}
           min={checkOutMin}
           onChange={(e) => setCheckOut(e.target.value)}
-          className="text-sm text-text-secondary outline-none bg-transparent w-[120px] mt-0.5"
+          className="text-sm text-text-secondary outline-none bg-transparent w-[120px] max-md:w-full mt-0.5"
         />
       </div>
 
-      <div className="w-px h-8 bg-border shrink-0" aria-hidden="true" />
+      <div className="w-px h-8 bg-border shrink-0 max-md:hidden" aria-hidden="true" />
+      <div className="hidden max-md:block w-full h-px bg-border" aria-hidden="true" />
 
-      <div className="flex items-center gap-2 pl-5 pr-2 py-2">
-        <div>
+      <div className="flex items-center gap-2 pl-5 pr-2 py-2 max-md:w-full max-md:px-4 max-md:py-2.5 max-md:justify-between">
+        <div className="max-md:flex-1">
           <label htmlFor="search-guests" className="block text-xs font-bold text-text">Who</label>
           <input
             id="search-guests"
@@ -110,7 +113,7 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
             placeholder="Add guests"
             value={guests || ''}
             onChange={(e) => handleGuestsChange(e.target.value)}
-            className="w-24 text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary mt-0.5"
+            className="w-24 max-md:w-full text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary mt-0.5"
           />
         </div>
         <button

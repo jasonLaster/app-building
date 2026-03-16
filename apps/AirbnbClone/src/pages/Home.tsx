@@ -74,7 +74,7 @@ export default function Home() {
       </div>
 
       {/* Category filter + Filters button */}
-      <div className="sticky top-[80px] z-40 bg-bg border-b border-border">
+      <div className="sticky top-[80px] max-md:top-[64px] z-40 bg-bg border-b border-border">
         <div className="max-w-[1280px] mx-auto px-6 max-sm:px-3 flex items-center gap-4">
           <div className="flex-1 overflow-hidden">
             <CategoryFilter

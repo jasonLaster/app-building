@@ -114,7 +114,7 @@ export default function FiltersPanel({
   }, {})
 
   return (
-    <div data-testid="filters-panel-container">
+    <div data-testid="filters-panel-container" className="relative max-md:static">
       <button
         ref={toggleRef}
         data-testid="filters-toggle"
@@ -132,7 +132,7 @@ export default function FiltersPanel({
           data-testid="filters-panel"
           role="dialog"
           aria-label="Filters"
-          className="mt-3 rounded-xl border border-border bg-bg p-5 shadow-lg"
+          className="mt-3 rounded-xl border border-border bg-bg p-5 max-sm:p-3 shadow-lg max-sm:max-w-[calc(100%-24px)]"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-text text-lg">Filters</h3>
@@ -178,7 +178,7 @@ export default function FiltersPanel({
           {/* Rooms */}
           <fieldset className="mb-5">
             <legend className="font-medium text-text text-sm mb-2">Rooms and beds</legend>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-3">
               <div>
                 <label htmlFor="filter-min-bedrooms" className="text-xs text-text-secondary">Bedrooms</label>
                 <select
@@ -257,7 +257,7 @@ export default function FiltersPanel({
           )}
 
           {/* Action buttons */}
-          <div className="flex items-center justify-between pt-3 border-t border-border">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-border">
             <button
               data-testid="filters-reset"
               onClick={handleReset}

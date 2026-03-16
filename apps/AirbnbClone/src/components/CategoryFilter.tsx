@@ -163,7 +163,7 @@ export default function CategoryFilter({ selectedType, onSelectType }: CategoryF
       )}
       <div
         ref={scrollRef}
-        className="flex gap-8 overflow-x-auto py-3 px-1 scrollbar-hide"
+        className="flex gap-8 max-sm:gap-5 overflow-x-auto py-3 px-1 scrollbar-hide"
         style={{ scrollbarWidth: 'none' }}
       >
         {PROPERTY_TYPES.map(({ type, icon }) => {
