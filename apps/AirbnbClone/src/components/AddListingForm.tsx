@@ -309,12 +309,12 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
   }, {})
 
   const renderStepIndicator = () => (
-    <nav data-testid="step-indicator" aria-label="Form progress" className="flex items-center justify-center gap-2 mb-6">
+    <nav data-testid="step-indicator" aria-label="Form progress" className="flex items-center justify-center gap-2 max-sm:gap-1.5 mb-6">
       {Array.from({ length: TOTAL_STEPS }, (_, i) => i + 1).map((s) => (
         <div
           key={s}
           aria-hidden="true"
-          className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
+          className={`w-8 h-8 max-sm:w-6 max-sm:h-6 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
             s < step
               ? 'bg-primary text-white'
               : s === step
@@ -322,7 +322,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
                 : 'bg-bg-secondary text-text-secondary'
           }`}
         >
-          {s < step ? <Check size={14} /> : s}
+          {s < step ? <Check size={14} className="max-sm:w-3 max-sm:h-3" /> : s}
         </div>
       ))}
       <span className="ml-2 text-sm text-text-secondary" aria-live="polite">Step {step} of {TOTAL_STEPS}</span>
@@ -447,7 +447,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4 mb-4">
         <div>
           <label htmlFor="listing-city-input" className="block text-sm font-medium text-text mb-1.5">City *</label>
           <input
@@ -558,7 +558,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       {Object.entries(amenitiesByCategory).map(([category, items]) => (
         <div key={category} className="mb-6">
           <h4 className="text-sm font-semibold text-text mb-2 capitalize">{category}</h4>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-2">
             {items.map((amenity) => (
               <label
                 key={amenity.id}
@@ -782,9 +782,9 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         role="dialog"
         aria-modal="true"
         aria-labelledby="add-listing-dialog-title"
-        className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto mx-4 shadow-lg"
+        className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto mx-4 max-sm:mx-3 shadow-lg"
       >
-        <div className="sticky top-0 bg-white border-b border-border px-6 py-4 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-white border-b border-border px-6 max-sm:px-4 py-4 flex items-center justify-between z-10">
           <h2 id="add-listing-dialog-title" className="text-lg font-semibold text-text">Add New Listing</h2>
           <button
             data-testid="add-listing-close"
@@ -796,7 +796,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
           </button>
         </div>
 
-        <div className="px-6 py-6">
+        <div className="px-6 max-sm:px-4 py-6">
           {renderStepIndicator()}
 
           {step === 1 && renderStep1()}
@@ -808,7 +808,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
           {step === 7 && renderStep7()}
         </div>
 
-        <div className="sticky bottom-0 bg-white border-t border-border px-6 py-4 flex items-center justify-between">
+        <div className="sticky bottom-0 bg-white border-t border-border px-6 max-sm:px-4 py-4 flex items-center justify-between">
           <button
             data-testid="add-listing-cancel"
             onClick={handleCancel}

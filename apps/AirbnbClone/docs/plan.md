@@ -14,7 +14,7 @@
 - [x] HomeSearch
 - [x] PropertyDetail
 - [x] MyTrips
-- [ ] HostDashboard
+- [x] HostDashboard
 - [ ] UserProfile
 - [ ] WriteReview
 

@@ -79,14 +79,14 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
   return (
     <div data-testid="listings-tab">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-text">Your Listings</h2>
+        <h2 className="text-lg max-sm:text-base font-semibold text-text">Your Listings</h2>
         <button
           data-testid="add-listing-button"
           onClick={onAddListing}
           className="flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg font-medium hover:bg-primary-dark transition-colors"
         >
           <Plus size={18} aria-hidden="true" />
-          Add Listing
+          <span className="max-sm:hidden">Add Listing</span>
         </button>
       </div>
 
@@ -160,14 +160,14 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                     )}
                   </div>
 
-                  <div className="flex gap-2 mt-4">
+                  <div className="flex gap-2 mt-4 flex-wrap">
                     <button
                       data-testid={`listing-edit-${property.id}`}
                       onClick={() => navigate(`/properties/${property.id}`)}
                       className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-text bg-bg-secondary rounded-lg hover:bg-border transition-colors"
                     >
                       <Edit size={14} aria-hidden="true" />
-                      Edit
+                      <span className="max-sm:hidden">Edit</span>
                     </button>
                     {property.is_active ? (
                       <button
@@ -177,7 +177,7 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                         className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-status-cancelled bg-status-cancelled/10 rounded-lg hover:bg-status-cancelled/20 transition-colors disabled:opacity-50"
                       >
                         <Power size={14} aria-hidden="true" />
-                        {isLoading ? 'Deactivating...' : 'Deactivate'}
+                        <span className="max-sm:hidden">{isLoading ? 'Deactivating...' : 'Deactivate'}</span>
                       </button>
                     ) : (
                       <button
@@ -187,7 +187,7 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                         className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-status-confirmed bg-status-confirmed/10 rounded-lg hover:bg-status-confirmed/20 transition-colors disabled:opacity-50"
                       >
                         <Power size={14} aria-hidden="true" />
-                        {isLoading ? 'Activating...' : 'Activate'}
+                        <span className="max-sm:hidden">{isLoading ? 'Activating...' : 'Activate'}</span>
                       </button>
                     )}
                   </div>

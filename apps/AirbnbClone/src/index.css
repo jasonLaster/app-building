@@ -291,3 +291,51 @@ a {
     gap: 16px;
   }
 }
+
+/* Bookings table card mode at narrow viewports */
+@media (max-width: 480px) {
+  .bookings-table-head {
+    display: none;
+  }
+
+  .bookings-table-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 4px 12px;
+  }
+
+  .bookings-table-row td {
+    padding: 2px 0;
+    border: none;
+  }
+
+  .bookings-col-property {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .bookings-col-guest {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .bookings-col-checkin,
+  .bookings-col-checkout,
+  .bookings-col-guests {
+    display: none;
+  }
+
+  .bookings-col-total {
+    font-size: 13px;
+  }
+
+  .bookings-col-status {
+    font-size: 13px;
+  }
+
+  .bookings-col-actions {
+    width: 100%;
+    padding-top: 8px;
+  }
+}

@@ -123,13 +123,13 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
       ) : (
         <div className="overflow-x-auto">
           <table data-testid="bookings-table" className="w-full" aria-label="Bookings">
-            <thead>
+            <thead className="bookings-table-head">
               <tr className="border-b border-border">
                 <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Property</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Guest</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Check-in</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Check-out</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Guests</th>
+                <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary max-md:hidden">Check-in</th>
+                <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary max-lg:hidden">Check-out</th>
+                <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary max-lg:hidden">Guests</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Total</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Status</th>
                 <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Actions</th>
@@ -140,17 +140,17 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
                 <tr
                   key={booking.id}
                   data-testid={`booking-row-${booking.id}`}
-                  className="border-b border-border hover:bg-bg-secondary/50 transition-colors"
+                  className="bookings-table-row border-b border-border hover:bg-bg-secondary/50 transition-colors"
                 >
-                  <td className="py-3 px-4 text-sm font-medium text-text">{booking.property_title}</td>
-                  <td className="py-3 px-4 text-sm text-text">{booking.guest_name}</td>
-                  <td className="py-3 px-4 text-sm text-text-secondary">{formatDate(booking.check_in)}</td>
-                  <td className="py-3 px-4 text-sm text-text-secondary">{formatDate(booking.check_out)}</td>
-                  <td className="py-3 px-4 text-sm text-text">{booking.num_guests}</td>
-                  <td className="py-3 px-4 text-sm font-medium text-text">
+                  <td className="py-3 px-4 text-sm font-medium text-text bookings-col-property">{booking.property_title}</td>
+                  <td className="py-3 px-4 text-sm text-text bookings-col-guest">{booking.guest_name}</td>
+                  <td className="py-3 px-4 text-sm text-text-secondary max-md:hidden bookings-col-checkin">{formatDate(booking.check_in)}</td>
+                  <td className="py-3 px-4 text-sm text-text-secondary max-lg:hidden bookings-col-checkout">{formatDate(booking.check_out)}</td>
+                  <td className="py-3 px-4 text-sm text-text max-lg:hidden bookings-col-guests">{booking.num_guests}</td>
+                  <td className="py-3 px-4 text-sm font-medium text-text bookings-col-total">
                     ${Number(booking.total_price).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-3 px-4 bookings-col-status">
                     <span
                       data-testid={`booking-status-${booking.id}`}
                       className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold capitalize ${statusColors[booking.status] || ''}`}
@@ -158,9 +158,9 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
                       {booking.status}
                     </span>
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-3 px-4 bookings-col-actions">
                     {booking.status === 'pending' && (
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 flex-wrap">
                         <button
                           data-testid={`booking-confirm-${booking.id}`}
                           onClick={() => handleConfirm(booking.id)}

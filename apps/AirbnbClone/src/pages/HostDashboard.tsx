@@ -98,7 +98,7 @@ export default function HostDashboard() {
 
   return (
     <main data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
-      <h1 className="text-[32px] font-bold text-text mb-8">Host Dashboard</h1>
+      <h1 className="text-[32px] max-sm:text-[24px] font-bold text-text mb-8 max-sm:mb-6">Host Dashboard</h1>
 
       <StatsOverview stats={stats} loading={statsLoading} />
 
@@ -111,7 +111,7 @@ export default function HostDashboard() {
             aria-controls="tabpanel-listings"
             id="tab-listings-btn"
             onClick={() => setActiveTab('listings')}
-            className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
+            className={`px-6 max-sm:px-4 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'listings'
                 ? 'border-text text-text'
                 : 'border-transparent text-text-secondary hover:text-text'
@@ -126,7 +126,7 @@ export default function HostDashboard() {
             aria-controls="tabpanel-bookings"
             id="tab-bookings-btn"
             onClick={() => setActiveTab('bookings')}
-            className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
+            className={`px-6 max-sm:px-4 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'bookings'
                 ? 'border-text text-text'
                 : 'border-transparent text-text-secondary hover:text-text'
