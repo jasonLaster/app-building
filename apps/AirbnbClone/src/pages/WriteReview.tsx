@@ -32,17 +32,17 @@ export default function WriteReview() {
 
   if (loading) {
     return (
-      <div className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
-        <div className="text-center py-12 text-text-secondary">Loading booking details...</div>
-      </div>
+      <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
+        <div className="text-center py-12 text-text-secondary" aria-live="polite">Loading booking details...</div>
+      </main>
     )
   }
 
   if (error) {
     return (
-      <div className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
+      <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
         <div className="text-center py-12">
-          <p data-testid="review-page-error" className="text-error text-lg font-medium mb-4">{error}</p>
+          <p data-testid="review-page-error" role="alert" className="text-error text-lg font-medium mb-4">{error}</p>
           <Link
             to="/trips"
             className="text-primary hover:text-primary-dark font-semibold underline"
@@ -50,14 +50,14 @@ export default function WriteReview() {
             Back to My Trips
           </Link>
         </div>
-      </div>
+      </main>
     )
   }
 
   if (submitSuccess) {
     return (
-      <div className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
-        <div className="text-center py-12">
+      <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
+        <div className="text-center py-12" aria-live="polite">
           <p data-testid="review-success-message" className="text-success text-lg font-semibold mb-4">
             Review submitted successfully
           </p>
@@ -68,25 +68,25 @@ export default function WriteReview() {
             Back to My Trips
           </Link>
         </div>
-      </div>
+      </main>
     )
   }
 
   if (!booking) {
     return (
-      <div className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
+      <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
         <div className="text-center py-12 text-text-secondary">Booking not found</div>
-      </div>
+      </main>
     )
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
+    <main className="max-w-2xl mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
       <h1 className="text-[26px] font-semibold text-text mb-6">Write a Review</h1>
-      <div className="mb-8 rounded-xl border border-border p-5">
+      <section className="mb-8 rounded-xl border border-border p-5" aria-label="Booking details">
         <PropertyBookingContext booking={booking} />
-      </div>
+      </section>
       <ReviewForm booking={booking} />
-    </div>
+    </main>
   )
 }

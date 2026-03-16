@@ -42,18 +42,18 @@ export default function PropertyBookingContext({ booking }: PropertyBookingConte
             {booking.property_title}
           </h3>
           <p className="flex items-center gap-1 text-sm text-text-secondary mt-1" data-testid="booking-context-location">
-            <MapPin size={14} />
+            <MapPin size={14} aria-hidden="true" />
             {booking.property_city}{booking.property_country ? `, ${booking.property_country}` : ''}
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-text-secondary">
           <span className="flex items-center gap-1" data-testid="booking-context-dates">
-            <Calendar size={14} />
+            <Calendar size={14} aria-hidden="true" />
             {formatDate(booking.check_in)} – {formatDate(booking.check_out)} ({nights} {nights === 1 ? 'night' : 'nights'})
           </span>
           <span className="flex items-center gap-1" data-testid="booking-context-guests">
-            <Users size={14} />
+            <Users size={14} aria-hidden="true" />
             {booking.num_guests} {booking.num_guests === 1 ? 'guest' : 'guests'}
           </span>
           <span className="font-semibold text-text" data-testid="booking-context-price">

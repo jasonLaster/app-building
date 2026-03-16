@@ -64,7 +64,7 @@ export default function ReviewForm({ booking }: ReviewFormProps) {
   }
 
   return (
-    <div data-testid="review-form" className="space-y-6">
+    <form data-testid="review-form" className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleSubmit() }} noValidate>
       <RatingSliders ratings={ratings} onChange={setRatings} />
 
       <div className="space-y-2">
@@ -78,26 +78,28 @@ export default function ReviewForm({ booking }: ReviewFormProps) {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           rows={5}
+          aria-describedby={(error || validationError) ? 'review-form-error' : undefined}
           className="w-full rounded-lg border border-border px-3 py-2 text-sm text-text placeholder:text-text-secondary focus:outline-none focus:border-primary resize-y"
         />
       </div>
 
       {(error || validationError) && (
-        <p data-testid="review-form-error" className="text-sm text-error">
+        <p id="review-form-error" data-testid="review-form-error" role="alert" className="text-sm text-error">
           {validationError || error}
         </p>
       )}
 
       <div className="flex items-center gap-3">
         <button
+          type="submit"
           data-testid="submit-review-button"
-          onClick={handleSubmit}
           disabled={submitting || allUnset}
           className="px-6 py-2.5 rounded-lg bg-primary text-white font-semibold text-sm hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {submitting ? 'Submitting...' : 'Submit Review'}
         </button>
         <button
+          type="button"
           data-testid="cancel-review-button"
           onClick={() => navigate('/trips')}
           className="px-6 py-2.5 rounded-lg border border-border text-text font-medium text-sm hover:bg-bg-secondary transition-colors"
@@ -105,6 +107,6 @@ export default function ReviewForm({ booking }: ReviewFormProps) {
           Cancel
         </button>
       </div>
-    </div>
+    </form>
   )
 }

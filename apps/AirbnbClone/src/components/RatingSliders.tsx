@@ -34,7 +34,7 @@ export default function RatingSliders({ ratings, onChange }: RatingSlidersProps)
       {SLIDER_CATEGORIES.map(({ key, label }) => (
         <div key={key} data-testid={`rating-slider-${key}`} className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-text">{label}</label>
+            <label htmlFor={`rating-input-${key}`} className="text-sm font-medium text-text">{label}</label>
             <span className="text-sm font-semibold text-text" data-testid={`rating-value-${key}`}>
               {ratings[key] === 0 ? 'Not rated' : ratings[key]}
             </span>
@@ -42,11 +42,13 @@ export default function RatingSliders({ ratings, onChange }: RatingSlidersProps)
           <div className="flex items-center gap-3">
             <input
               type="range"
+              id={`rating-input-${key}`}
               min={0}
               max={5}
               step={1}
               value={ratings[key]}
               onChange={(e) => handleChange(key, parseInt(e.target.value, 10))}
+              aria-valuetext={ratings[key] === 0 ? 'Not rated' : `${ratings[key]} out of 5`}
               data-testid={`rating-input-${key}`}
               className="flex-1 h-2 rounded-full appearance-none cursor-pointer accent-primary"
               style={{
@@ -55,7 +57,7 @@ export default function RatingSliders({ ratings, onChange }: RatingSlidersProps)
                   : `linear-gradient(to right, var(--color-primary) ${((ratings[key] - 1) / 4) * 100}%, var(--color-bg-secondary) ${((ratings[key] - 1) / 4) * 100}%)`,
               }}
             />
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-0.5" aria-hidden="true">
               {Array.from({ length: 5 }, (_, i) => (
                 <Star
                   key={i}

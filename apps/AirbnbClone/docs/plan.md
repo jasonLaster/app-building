@@ -1,13 +1,13 @@
 ## Polish
 
-### Accessibility
+### Accessibility ✓
 - [x] LoginRegister
 - [x] HomeSearch
 - [x] PropertyDetail
 - [x] MyTrips
 - [x] HostDashboard
 - [x] UserProfile
-- [ ] WriteReview
+- [x] WriteReview
 
 ### Responsive UI
 - [ ] LoginRegister
