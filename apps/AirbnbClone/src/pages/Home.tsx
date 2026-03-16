@@ -60,6 +60,7 @@ export default function Home() {
 
   return (
     <div data-testid="home-page" className="p-6 max-sm:p-3 max-w-7xl mx-auto">
+      <h1 className="sr-only">Find your next stay</h1>
       <div className="mb-4">
         <SearchBar
           onSearch={handleSearch}

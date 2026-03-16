@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { SlidersHorizontal, X } from 'lucide-react'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState, AppDispatch } from '../store'
@@ -36,6 +36,8 @@ export default function FiltersPanel({
   const dispatch = useDispatch<AppDispatch>()
   const amenities = useSelector((state: RootState) => state.amenities.items)
   const [isOpen, setIsOpen] = useState(false)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   const [localMinPrice, setLocalMinPrice] = useState(minPrice)
   const [localMaxPrice, setLocalMaxPrice] = useState(maxPrice)
@@ -49,6 +51,20 @@ export default function FiltersPanel({
       dispatch(fetchAmenities())
     }
   }, [isOpen, amenities.length, dispatch])
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setIsOpen(false)
+      toggleRef.current?.focus()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+    }
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, handleKeyDown])
 
   useEffect(() => {
     setLocalMinPrice(minPrice)
@@ -100,33 +116,39 @@ export default function FiltersPanel({
   return (
     <div data-testid="filters-panel-container">
       <button
+        ref={toggleRef}
         data-testid="filters-toggle"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-text hover:border-text transition-colors"
       >
-        <SlidersHorizontal size={16} />
+        <SlidersHorizontal size={16} aria-hidden="true" />
         Filters
       </button>
 
       {isOpen && (
         <div
+          ref={panelRef}
           data-testid="filters-panel"
+          role="dialog"
+          aria-label="Filters"
           className="mt-3 rounded-xl border border-border bg-bg p-5 shadow-lg"
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-text text-lg">Filters</h3>
-            <button onClick={() => setIsOpen(false)} className="text-text-secondary hover:text-text">
-              <X size={20} />
+            <button onClick={() => { setIsOpen(false); toggleRef.current?.focus() }} aria-label="Close filters" className="text-text-secondary hover:text-text">
+              <X size={20} aria-hidden="true" />
             </button>
           </div>
 
           {/* Price Range */}
-          <div className="mb-5">
-            <h4 className="font-medium text-text text-sm mb-2">Price range</h4>
+          <fieldset className="mb-5">
+            <legend className="font-medium text-text text-sm mb-2">Price range</legend>
             <div className="flex items-center gap-3">
               <div className="flex-1">
-                <label className="text-xs text-text-secondary">Min price</label>
+                <label htmlFor="filter-min-price" className="text-xs text-text-secondary">Min price</label>
                 <input
+                  id="filter-min-price"
                   data-testid="filter-min-price"
                   type="text"
                   inputMode="decimal"
@@ -136,10 +158,11 @@ export default function FiltersPanel({
                   className="w-full mt-1 rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-text"
                 />
               </div>
-              <span className="text-text-secondary mt-4">–</span>
+              <span className="text-text-secondary mt-4" aria-hidden="true">–</span>
               <div className="flex-1">
-                <label className="text-xs text-text-secondary">Max price</label>
+                <label htmlFor="filter-max-price" className="text-xs text-text-secondary">Max price</label>
                 <input
+                  id="filter-max-price"
                   data-testid="filter-max-price"
                   type="text"
                   inputMode="decimal"
@@ -150,15 +173,16 @@ export default function FiltersPanel({
                 />
               </div>
             </div>
-          </div>
+          </fieldset>
 
           {/* Rooms */}
-          <div className="mb-5">
-            <h4 className="font-medium text-text text-sm mb-2">Rooms and beds</h4>
+          <fieldset className="mb-5">
+            <legend className="font-medium text-text text-sm mb-2">Rooms and beds</legend>
             <div className="grid grid-cols-3 gap-3">
               <div>
-                <label className="text-xs text-text-secondary">Bedrooms</label>
+                <label htmlFor="filter-min-bedrooms" className="text-xs text-text-secondary">Bedrooms</label>
                 <select
+                  id="filter-min-bedrooms"
                   data-testid="filter-min-bedrooms"
                   value={localMinBedrooms}
                   onChange={(e) => setLocalMinBedrooms(parseInt(e.target.value, 10))}
@@ -171,8 +195,9 @@ export default function FiltersPanel({
                 </select>
               </div>
               <div>
-                <label className="text-xs text-text-secondary">Beds</label>
+                <label htmlFor="filter-min-beds" className="text-xs text-text-secondary">Beds</label>
                 <select
+                  id="filter-min-beds"
                   data-testid="filter-min-beds"
                   value={localMinBeds}
                   onChange={(e) => setLocalMinBeds(parseInt(e.target.value, 10))}
@@ -185,8 +210,9 @@ export default function FiltersPanel({
                 </select>
               </div>
               <div>
-                <label className="text-xs text-text-secondary">Bathrooms</label>
+                <label htmlFor="filter-min-bathrooms" className="text-xs text-text-secondary">Bathrooms</label>
                 <select
+                  id="filter-min-bathrooms"
                   data-testid="filter-min-bathrooms"
                   value={localMinBathrooms}
                   onChange={(e) => setLocalMinBathrooms(parseInt(e.target.value, 10))}
@@ -199,7 +225,7 @@ export default function FiltersPanel({
                 </select>
               </div>
             </div>
-          </div>
+          </fieldset>
 
           {/* Amenities */}
           {Object.keys(grouped).length > 0 && (

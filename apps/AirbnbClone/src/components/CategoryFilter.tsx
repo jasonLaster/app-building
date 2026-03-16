@@ -26,6 +26,8 @@ export default function CategoryFilter({ selectedType, onSelectType }: CategoryF
   return (
     <div
       data-testid="category-filter"
+      role="group"
+      aria-label="Filter by property type"
       className="flex gap-2 overflow-x-auto py-3 scrollbar-hide"
       style={{ scrollbarWidth: 'none' }}
     >
@@ -34,6 +36,7 @@ export default function CategoryFilter({ selectedType, onSelectType }: CategoryF
           key={type}
           data-testid={`category-chip-${type}`}
           onClick={() => handleClick(type)}
+          aria-pressed={selectedType === type}
           className={`whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium border transition-colors ${
             selectedType === type
               ? 'bg-text text-bg border-text'

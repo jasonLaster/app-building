@@ -26,7 +26,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
   }
 
   return (
-    <nav data-testid="pagination" className="flex items-center justify-center gap-1 mt-8">
+    <nav data-testid="pagination" aria-label="Pagination" className="flex items-center justify-center gap-1 mt-8">
       <button
         data-testid="pagination-previous"
         onClick={() => onPageChange(currentPage - 1)}
@@ -34,12 +34,12 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         className="flex items-center justify-center w-9 h-9 rounded-full text-text disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bg-secondary transition-colors"
         aria-label="Previous page"
       >
-        <ChevronLeft size={18} />
+        <ChevronLeft size={18} aria-hidden="true" />
       </button>
 
       {getPageNumbers().map((page, index) =>
         typeof page === 'string' ? (
-          <span key={`ellipsis-${index}`} className="w-9 h-9 flex items-center justify-center text-text-secondary text-sm">
+          <span key={`ellipsis-${index}`} className="w-9 h-9 flex items-center justify-center text-text-secondary text-sm" aria-hidden="true">
             ...
           </span>
         ) : (
@@ -47,6 +47,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             key={page}
             data-testid={`pagination-page-${page}`}
             onClick={() => onPageChange(page)}
+            aria-label={`Page ${page}`}
+            aria-current={page === currentPage ? 'page' : undefined}
             className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
               page === currentPage
                 ? 'bg-text text-bg'
@@ -65,7 +67,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         className="flex items-center justify-center w-9 h-9 rounded-full text-text disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bg-secondary transition-colors"
         aria-label="Next page"
       >
-        <ChevronRight size={18} />
+        <ChevronRight size={18} aria-hidden="true" />
       </button>
     </nav>
   )

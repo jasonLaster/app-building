@@ -2,7 +2,7 @@
 
 ### Accessibility
 - [x] LoginRegister
-- [ ] HomeSearch
+- [x] HomeSearch
 - [ ] PropertyDetail
 - [ ] MyTrips
 - [ ] HostDashboard

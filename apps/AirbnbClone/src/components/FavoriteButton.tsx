@@ -35,6 +35,7 @@ export default function FavoriteButton({ propertyId }: FavoriteButtonProps) {
       <Heart
         size={24}
         strokeWidth={2}
+        aria-hidden="true"
         className={isFavorited ? 'fill-primary text-primary' : 'fill-black/30 text-white'}
         style={{ filter: isFavorited ? 'none' : 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }}
       />
