@@ -33,17 +33,19 @@ export default function MyTrips() {
   }
 
   return (
-    <div className="p-6 max-sm:p-3 max-w-4xl mx-auto" data-testid="my-trips-page">
+    <main className="p-6 max-sm:p-3 max-w-4xl mx-auto" data-testid="my-trips-page">
       <h1 className="text-2xl font-bold text-text mb-6">My Trips</h1>
 
-      {loading ? (
-        <div className="text-center py-12 text-text-secondary">Loading trips...</div>
-      ) : (
-        <TripsTabs
-          bookings={bookings}
-          onCancelBooking={(booking) => setCancelTarget(booking)}
-        />
-      )}
+      <div aria-live="polite">
+        {loading ? (
+          <div className="text-center py-12 text-text-secondary" role="status">Loading trips...</div>
+        ) : (
+          <TripsTabs
+            bookings={bookings}
+            onCancelBooking={(booking) => setCancelTarget(booking)}
+          />
+        )}
+      </div>
 
       {cancelTarget && (
         <CancelBookingDialog
@@ -52,6 +54,6 @@ export default function MyTrips() {
           onDismiss={() => setCancelTarget(null)}
         />
       )}
-    </div>
+    </main>
   )
 }

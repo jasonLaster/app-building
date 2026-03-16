@@ -34,13 +34,14 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
   const navigate = useNavigate()
   const canCancel = booking.status === 'pending' || booking.status === 'confirmed'
   const canReview = booking.status === 'completed' && !booking.has_review
+  const title = booking.property_title || 'Untitled Property'
 
   const handleCardClick = () => {
     navigate(`/properties/${booking.property_id}`)
   }
 
   return (
-    <div
+    <article
       data-testid={`trip-card-${booking.id}`}
       className="flex gap-4 rounded-xl border border-border hover:shadow-md transition-shadow cursor-pointer"
       onClick={handleCardClick}
@@ -49,7 +50,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
         {booking.property_image ? (
           <img
             src={booking.property_image}
-            alt={booking.property_title || 'Property'}
+            alt=""
             className="w-full h-full object-cover"
           />
         ) : (
@@ -63,7 +64,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
         <div>
           <div className="flex items-center justify-between gap-2">
             <h3 className="font-semibold text-text truncate">
-              {booking.property_title || 'Untitled Property'}
+              {title}
             </h3>
             <span
               data-testid={`status-badge-${booking.id}`}
@@ -74,13 +75,13 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
           </div>
           {booking.property_city && (
             <p className="flex items-center gap-1 text-sm text-text-secondary mt-1">
-              <MapPin size={14} />
+              <MapPin size={14} aria-hidden="true" />
               {booking.property_city}
               {booking.property_country ? `, ${booking.property_country}` : ''}
             </p>
           )}
           <p className="flex items-center gap-1 text-sm text-text-secondary mt-1">
-            <Calendar size={14} />
+            <Calendar size={14} aria-hidden="true" />
             {formatDateRange(booking.check_in, booking.check_out)}
           </p>
         </div>
@@ -94,6 +95,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
               <button
                 data-testid={`cancel-button-${booking.id}`}
                 onClick={onCancel}
+                aria-label={`Cancel booking for ${title}`}
                 className="text-xs font-medium px-3 py-1.5 rounded-lg border border-status-cancelled text-status-cancelled hover:bg-status-cancelled/10 transition-colors"
               >
                 Cancel
@@ -103,6 +105,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
               <button
                 data-testid={`review-button-${booking.id}`}
                 onClick={() => navigate(`/trips/${booking.id}/review`)}
+                aria-label={`Write review for ${title}`}
                 className="text-xs font-medium px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
               >
                 Write Review
@@ -119,6 +122,6 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   )
 }
