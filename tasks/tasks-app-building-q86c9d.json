@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "MakeAccessibleMyTrips: Make My Trips page accessible"
-      ],
-      "timestamp": "2026-03-16T03:04:02.704Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/polishApp.md",
-      "subtasks": [
         "MakeAccessibleHostDashboard: Make Host Dashboard page accessible"
       ],
       "timestamp": "2026-03-16T03:04:02.704Z",
@@ -108,7 +100,7 @@
   "current": {
     "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "MakeAccessiblePropertyDetail: Make Property Detail page accessible"
+      "MakeAccessibleMyTrips: Make My Trips page accessible"
     ],
     "timestamp": "2026-03-16T03:04:02.704Z",
     "app": "AirbnbClone"

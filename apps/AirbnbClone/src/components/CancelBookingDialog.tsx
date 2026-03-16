@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import type { Booking } from '../slices/bookingsSlice'
 
 interface CancelBookingDialogProps {
@@ -16,18 +17,54 @@ function formatDateRange(checkIn: string, checkOut: string): string {
 }
 
 export default function CancelBookingDialog({ booking, onConfirm, onDismiss }: CancelBookingDialogProps) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const dismissRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    dismissRef.current?.focus()
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onDismiss()
+        return
+      }
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last?.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [onDismiss])
+
   return (
     <div
       data-testid="cancel-dialog-overlay"
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
       onClick={onDismiss}
+      role="presentation"
     >
       <div
+        ref={dialogRef}
         data-testid="cancel-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cancel-dialog-title"
         className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-lg font-semibold text-text mb-2">Cancel Booking</h2>
+        <h2 id="cancel-dialog-title" className="text-lg font-semibold text-text mb-2">Cancel Booking</h2>
         <p className="text-text-secondary mb-4">
           Are you sure you want to cancel this booking?
         </p>
@@ -39,6 +76,7 @@ export default function CancelBookingDialog({ booking, onConfirm, onDismiss }: C
         </div>
         <div className="flex gap-3 justify-end">
           <button
+            ref={dismissRef}
             data-testid="cancel-dialog-dismiss"
             onClick={onDismiss}
             className="px-4 py-2 text-sm font-medium rounded-lg border border-border text-text hover:bg-bg-secondary transition-colors"

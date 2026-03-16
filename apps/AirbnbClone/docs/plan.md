@@ -4,7 +4,7 @@
 - [x] LoginRegister
 - [x] HomeSearch
 - [x] PropertyDetail
-- [ ] MyTrips
+- [x] MyTrips
 - [ ] HostDashboard
 - [ ] UserProfile
 - [ ] WriteReview

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import type { Booking } from '../slices/bookingsSlice'
 import TripCard from './TripCard'
 import { Link } from 'react-router-dom'
@@ -41,15 +41,41 @@ function filterBookings(bookings: Booking[], tab: TabKey): Booking[] {
 export default function TripsTabs({ bookings, onCancelBooking }: TripsTabsProps) {
   const [activeTab, setActiveTab] = useState<TabKey>('upcoming')
   const filtered = filterBookings(bookings, activeTab)
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  const handleTabKeyDown = (e: React.KeyboardEvent, index: number) => {
+    let nextIndex: number | null = null
+    if (e.key === 'ArrowRight') {
+      nextIndex = (index + 1) % tabs.length
+    } else if (e.key === 'ArrowLeft') {
+      nextIndex = (index - 1 + tabs.length) % tabs.length
+    } else if (e.key === 'Home') {
+      nextIndex = 0
+    } else if (e.key === 'End') {
+      nextIndex = tabs.length - 1
+    }
+    if (nextIndex !== null) {
+      e.preventDefault()
+      setActiveTab(tabs[nextIndex]!.key)
+      tabRefs.current[nextIndex]?.focus()
+    }
+  }
 
   return (
     <div data-testid="trips-tabs">
-      <div className="flex gap-1 border-b border-border mb-6">
-        {tabs.map((tab) => (
+      <div className="flex gap-1 border-b border-border mb-6" role="tablist" aria-label="Trip categories">
+        {tabs.map((tab, index) => (
           <button
             key={tab.key}
+            ref={(el) => { tabRefs.current[index] = el }}
             data-testid={`tab-${tab.key}`}
+            role="tab"
+            aria-selected={activeTab === tab.key}
+            aria-controls={`tabpanel-${tab.key}`}
+            id={`tab-${tab.key}`}
+            tabIndex={activeTab === tab.key ? 0 : -1}
             onClick={() => setActiveTab(tab.key)}
+            onKeyDown={(e) => handleTabKeyDown(e, index)}
             className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.key
                 ? 'border-text text-text'
@@ -61,7 +87,12 @@ export default function TripsTabs({ bookings, onCancelBooking }: TripsTabsProps)
         ))}
       </div>
 
-      <div data-testid="trips-list">
+      <div
+        data-testid="trips-list"
+        role="tabpanel"
+        id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+      >
         {filtered.length === 0 ? (
           <div data-testid="trips-empty-state" className="text-center py-12">
             <p className="text-text-secondary text-lg">
@@ -79,15 +110,16 @@ export default function TripsTabs({ bookings, onCancelBooking }: TripsTabsProps)
             )}
           </div>
         ) : (
-          <div className="grid gap-4">
+          <ul className="grid gap-4" role="list">
             {filtered.map((booking) => (
-              <TripCard
-                key={booking.id}
-                booking={booking}
-                onCancel={() => onCancelBooking(booking)}
-              />
+              <li key={booking.id}>
+                <TripCard
+                  booking={booking}
+                  onCancel={() => onCancelBooking(booking)}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
     </div>

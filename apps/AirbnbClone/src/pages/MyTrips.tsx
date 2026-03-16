@@ -33,17 +33,24 @@ export default function MyTrips() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="my-trips-page">
       <h1 className="text-[32px] font-bold text-text mb-8">Trips</h1>
+=======
+    <main className="p-6 max-sm:p-3 max-w-4xl mx-auto" data-testid="my-trips-page">
+      <h1 className="text-2xl font-bold text-text mb-6">My Trips</h1>
+>>>>>>> origin/feature/airbnb-clone
 
-      {loading ? (
-        <div className="text-center py-12 text-text-secondary">Loading trips...</div>
-      ) : (
-        <TripsTabs
-          bookings={bookings}
-          onCancelBooking={(booking) => setCancelTarget(booking)}
-        />
-      )}
+      <div aria-live="polite">
+        {loading ? (
+          <div className="text-center py-12 text-text-secondary" role="status">Loading trips...</div>
+        ) : (
+          <TripsTabs
+            bookings={bookings}
+            onCancelBooking={(booking) => setCancelTarget(booking)}
+          />
+        )}
+      </div>
 
       {cancelTarget && (
         <CancelBookingDialog
@@ -52,6 +59,6 @@ export default function MyTrips() {
           onDismiss={() => setCancelTarget(null)}
         />
       )}
-    </div>
+    </main>
   )
 }
