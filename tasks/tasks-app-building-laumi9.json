@@ -3,9 +3,25 @@
     {
       "skill": "skills/tasks/maintain/fixBugReport.md",
       "subtasks": [
-        "Unpack: Fix open bug reports"
+        "AnalyzeBug: Analyze Users cannot assign issues to themselves",
+        "FixBug: Fix Users cannot assign issues to themselves",
+        "UpdateTests: Update tests for Users cannot assign issues to themselves",
+        "UpdateRevisions: Record spec changes for Users cannot assign issues to themselves",
+        "ResolveBug: Mark Users cannot assign issues to themselves as resolved"
       ],
-      "timestamp": "2026-03-16T04:57:59.339Z",
+      "timestamp": "2026-03-16T04:58:52.557Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/fixBugReport.md",
+      "subtasks": [
+        "AnalyzeBug: Analyze Users cannot save filter selections as views",
+        "FixBug: Fix Users cannot save filter selections as views",
+        "UpdateTests: Update tests for Users cannot save filter selections as views",
+        "UpdateRevisions: Record spec changes for Users cannot save filter selections as views",
+        "ResolveBug: Mark Users cannot save filter selections as views as resolved"
+      ],
+      "timestamp": "2026-03-16T04:58:52.557Z",
       "app": "LinearClone"
     },
     {
@@ -42,9 +58,9 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/mergeFromMain.md",
+    "skill": "skills/tasks/maintain/fixBugReport.md",
     "subtasks": [
-      "MergeFromMain: Merge latest main into branch"
+      "Unpack: Fix open bug reports"
     ],
     "timestamp": "2026-03-16T04:57:59.339Z",
     "app": "LinearClone"
