@@ -3,11 +3,12 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "CheckTestSpecMyTrips: Check testSpec.md directive violations in My Trips test entries",
-        "CheckComponentsMyTrips: Check writeApp.md directive violations in My Trips components",
-        "CheckTestsMyTrips: Check writeTests.md directive violations in My Trips tests"
+        "FixViolation: All 4 My Trips test files (my-trips-tabs.spec.ts, my-trips-cards.spec.ts, my-trips-cancel-dialog.spec.ts, my-trips-review-order.spec.ts) are missing beforeAll hook with truncateAndSeed to ensure clean database state before spec runs — add import of truncateAndSeed from scripts/seed-db and beforeAll block to each file",
+        "FixViolation: my-trips-cancel-dialog.spec.ts has destructive tests (cancel booking) without beforeEach cleanup and not wrapped in test.describe.serial — add beforeEach that resets booking statuses via API and wrap destructive tests in test.describe.serial, also ensure tests use distinct record IDs (e3333333 is used in both Confirming cancellation and Cancel dialog repeated use tests)",
+        "FixViolation: my-trips-review-order.spec.ts first test deletes reviews but has no beforeEach cleanup to restore them for subsequent tests — add beforeEach that resets reviews via API",
+        "RunTests: Run all My Trips test files to verify fixes: tests/my-trips-tabs.spec.ts tests/my-trips-cards.spec.ts tests/my-trips-cancel-dialog.spec.ts tests/my-trips-review-order.spec.ts"
       ],
-      "timestamp": "2026-03-15T20:13:58.608Z",
+      "timestamp": "2026-03-16T01:38:13.525Z",
       "app": "AirbnbClone"
     },
     {
@@ -68,10 +69,11 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: BookingCard tests assume native date inputs (fill, toHaveAttribute type=date, toHaveValue) but component uses custom calendar with p elements for booking-checkin and booking-checkout. Tests need to be rewritten to interact with the custom calendar UI",
-      "RunTests: Run tests/booking-card.spec.ts to verify fix"
+      "CheckTestSpecMyTrips: Check testSpec.md directive violations in My Trips test entries",
+      "CheckComponentsMyTrips: Check writeApp.md directive violations in My Trips components",
+      "CheckTestsMyTrips: Check writeTests.md directive violations in My Trips tests"
     ],
-    "timestamp": "2026-03-15T21:19:21.048Z",
+    "timestamp": "2026-03-15T20:13:58.608Z",
     "app": "AirbnbClone"
   }
 }
