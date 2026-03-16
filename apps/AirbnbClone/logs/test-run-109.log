@@ -1,0 +1,72 @@
+Created branch: test-run-1773628949573 (br-steep-paper-a6nydtpl)
+Test DB URL: postgresql://neondb_owner:***@ep-shy-snow-a616elr6.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 9 tests using 1 worker
+
+
+[1A[2K[1/9] tests/host-dashboard-auth-stats.spec.ts:19:3 › Host Dashboard - Auth & Stats › Host Dashboard requires login — redirects unauthenticated users
+
+[1A[2K[2/9] tests/host-dashboard-auth-stats.spec.ts:25:3 › Host Dashboard - Auth & Stats › Host Dashboard requires host status — shows upgrade prompt for non-hosts
+[1A[2K[3/9] tests/host-dashboard-auth-stats.spec.ts:38:3 › Host Dashboard - Auth & Stats › Stats overview displays total listings count
+[1A[2K[4/9] tests/host-dashboard-auth-stats.spec.ts:50:3 › Host Dashboard - Auth & Stats › Stats overview displays active bookings count
+[1A[2K  1) tests/host-dashboard-auth-stats.spec.ts:50:3 › Host Dashboard - Auth & Stats › Stats overview displays active bookings count 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('stat-active-bookings')
+    Expected substring: [32m"2"[39m
+    Received string:    [31m"Active Bookings3"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('stat-active-bookings')[22m
+    [2m    18 × locator resolved to <div data-testid="stat-active-bookings" class="bg-white rounded-xl border border-border p-5 flex items-start gap-4">…</div>[22m
+    [2m       - unexpected value "Active Bookings3"[22m
+
+
+      57 |     await expect(activeBookings).toBeVisible()
+      58 |     await expect(activeBookings).toContainText('Active Bookings')
+    > 59 |     await expect(activeBookings).toContainText('2', { timeout: 15000 })
+         |                                  ^
+      60 |   })
+      61 |
+      62 |   test('Stats overview displays total earnings', async ({ page }) => {
+        at /repo/apps/AirbnbClone/tests/host-dashboard-auth-stats.spec.ts:59:34
+
+    Error Context: test-results/host-dashboard-auth-stats--0398c-plays-active-bookings-count/error-context.md
+
+
+
+[1A[2K[5/9] tests/host-dashboard-auth-stats.spec.ts:62:3 › Host Dashboard - Auth & Stats › Stats overview displays total earnings
+[1A[2K[6/9] tests/host-dashboard-auth-stats.spec.ts:74:3 › Host Dashboard - Auth & Stats › Stats overview displays average rating
+[1A[2K[7/9] tests/host-dashboard-auth-stats.spec.ts:86:3 › Host Dashboard - Auth & Stats › Stats overview shows zeros for a new host with no data
+[1A[2K[8/9] tests/host-dashboard-auth-stats.spec.ts:101:3 › Host Dashboard - Auth & Stats › Host Dashboard displays navigation tabs for Listings and Bookings
+[1A[2K[9/9] tests/host-dashboard-auth-stats.spec.ts:118:3 › Host Dashboard - Auth & Stats › Switching between Listings and Bookings tabs
+[1A[2K  1 failed
+    tests/host-dashboard-auth-stats.spec.ts:50:3 › Host Dashboard - Auth & Stats › Stats overview displays active bookings count 
+  8 passed (32.1s)
+
+(node:79371) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:79471) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:79398) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:79647) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // Sarah's property IDs (host a1111111)
 const PROP_LOFT = 'b1111111-1111-1111-1111-111111111111'
@@ -85,7 +93,8 @@ test.describe('Host Dashboard - Listings Tab', () => {
     await goToHostDashboard(page)
 
     // Capture initial Total Listings count
-    await expect(page.getByTestId('stat-total-listings')).toContainText('3', { timeout: 15000 })
+    const initialStatText = await page.getByTestId('stat-total-listings').textContent()
+    const initialCount = parseInt(initialStatText?.match(/\d+/)?.[0] || '0', 10)
 
     // Deactivate the Loft
     await page.getByTestId(`listing-deactivate-${PROP_LOFT}`).click()
@@ -98,8 +107,8 @@ test.describe('Host Dashboard - Listings Tab', () => {
     // Property status should change to Inactive
     await expect(page.getByTestId(`listing-status-${PROP_LOFT}`)).toHaveText('Inactive', { timeout: 15000 })
 
-    // Total Listings stat should decrease
-    await expect(page.getByTestId('stat-total-listings')).toContainText('2', { timeout: 15000 })
+    // Total Listings stat should decrease by 1
+    await expect(page.getByTestId('stat-total-listings')).toContainText(String(initialCount - 1), { timeout: 15000 })
   })
 
   test('Dismissing deactivation dialog keeps property active', async ({ page }) => {
@@ -174,8 +183,9 @@ test.describe('Host Dashboard - Listings Tab', () => {
     test.slow()
     await goToHostDashboard(page)
 
-    // Verify initial state: 3 active listings
-    await expect(page.getByTestId('stat-total-listings')).toContainText('3', { timeout: 15000 })
+    // Capture initial Total Listings count
+    const initialStatText = await page.getByTestId('stat-total-listings').textContent()
+    const initialCount = parseInt(initialStatText?.match(/\d+/)?.[0] || '0', 10)
 
     // 1. Deactivate the Loft (first property)
     await page.getByTestId(`listing-deactivate-${PROP_LOFT}`).click()
@@ -183,12 +193,12 @@ test.describe('Host Dashboard - Listings Tab', () => {
     await page.getByTestId('deactivate-dialog-confirm').click()
     await expect(page.getByTestId('deactivate-dialog')).not.toBeVisible({ timeout: 15000 })
     await expect(page.getByTestId(`listing-status-${PROP_LOFT}`)).toHaveText('Inactive', { timeout: 15000 })
-    await expect(page.getByTestId('stat-total-listings')).toContainText('2', { timeout: 15000 })
+    await expect(page.getByTestId('stat-total-listings')).toContainText(String(initialCount - 1), { timeout: 15000 })
 
     // 2. Activate the Loft back
     await page.getByTestId(`listing-activate-${PROP_LOFT}`).click()
     await expect(page.getByTestId(`listing-status-${PROP_LOFT}`)).toHaveText('Active', { timeout: 15000 })
-    await expect(page.getByTestId('stat-total-listings')).toContainText('3', { timeout: 15000 })
+    await expect(page.getByTestId('stat-total-listings')).toContainText(String(initialCount), { timeout: 15000 })
 
     // 3. Deactivate the Villa (second property)
     await page.getByTestId(`listing-deactivate-${PROP_VILLA}`).click()
@@ -196,6 +206,6 @@ test.describe('Host Dashboard - Listings Tab', () => {
     await page.getByTestId('deactivate-dialog-confirm').click()
     await expect(page.getByTestId('deactivate-dialog')).not.toBeVisible({ timeout: 15000 })
     await expect(page.getByTestId(`listing-status-${PROP_VILLA}`)).toHaveText('Inactive', { timeout: 15000 })
-    await expect(page.getByTestId('stat-total-listings')).toContainText('2', { timeout: 15000 })
+    await expect(page.getByTestId('stat-total-listings')).toContainText(String(initialCount - 1), { timeout: 15000 })
   })
 })

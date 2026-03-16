@@ -1,0 +1,105 @@
+Created branch: test-run-1773629018489 (br-flat-paper-a6esa1d4)
+Test DB URL: postgresql://neondb_owner:***@ep-broad-bonus-a6xpd80r.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/host-dashboard-listings.spec.ts:38:3 › Host Dashboard - Listings Tab › Listings tab displays host's properties in a grid
+
+[1A[2K[2/10] tests/host-dashboard-listings.spec.ts:51:3 › Host Dashboard - Listings Tab › Listing card shows property details
+[1A[2K[3/10] tests/host-dashboard-listings.spec.ts:67:3 › Host Dashboard - Listings Tab › Listing card has Edit button that navigates to property detail
+[1A[2K[4/10] tests/host-dashboard-listings.spec.ts:77:3 › Host Dashboard - Listings Tab › Listing card has Deactivate button for active properties
+[1A[2K[5/10] tests/host-dashboard-listings.spec.ts:92:3 › Host Dashboard - Listings Tab › Confirming deactivation sets property to inactive
+[1A[2K  1) tests/host-dashboard-listings.spec.ts:92:3 › Host Dashboard - Listings Tab › Confirming deactivation sets property to inactive 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('stat-total-listings')
+    Expected substring: [32m"2"[39m
+    Received string:    [31m"Total Listings3"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('stat-total-listings')[22m
+    [2m    19 × locator resolved to <div data-testid="stat-total-listings" class="bg-white rounded-xl border border-border p-5 flex items-start gap-4">…</div>[22m
+    [2m       - unexpected value "Total Listings3"[22m
+
+
+      109 |
+      110 |     // Total Listings stat should decrease by 1
+    > 111 |     await expect(page.getByTestId('stat-total-listings')).toContainText(String(initialCount - 1), { timeout: 15000 })
+          |                                                           ^
+      112 |   })
+      113 |
+      114 |   test('Dismissing deactivation dialog keeps property active', async ({ page }) => {
+        at /repo/apps/AirbnbClone/tests/host-dashboard-listings.spec.ts:111:59
+
+    Error Context: test-results/host-dashboard-listings-Ho-c8db4-n-sets-property-to-inactive/error-context.md
+
+
+
+[1A[2K[6/10] tests/host-dashboard-listings.spec.ts:114:3 › Host Dashboard - Listings Tab › Dismissing deactivation dialog keeps property active
+[1A[2K[7/10] tests/host-dashboard-listings.spec.ts:131:3 › Host Dashboard - Listings Tab › Listing card shows Activate button for inactive properties
+[1A[2K[8/10] tests/host-dashboard-listings.spec.ts:156:3 › Host Dashboard - Listings Tab › Listings tab shows empty state for host with no properties
+[1A[2K[9/10] tests/host-dashboard-listings.spec.ts:174:3 › Host Dashboard - Listings Tab › Add Listing button is visible on the Listings tab
+[1A[2K[10/10] tests/host-dashboard-listings.spec.ts:182:3 › Host Dashboard - Listings Tab › Deactivate and activate actions work on repeated use
+[1A[2K  2) tests/host-dashboard-listings.spec.ts:182:3 › Host Dashboard - Listings Tab › Deactivate and activate actions work on repeated use 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByTestId('stat-total-listings')
+    Expected substring: [32m"2"[39m
+    Received string:    [31m"Total Listings3"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 15000ms[22m
+    [2m  - waiting for getByTestId('stat-total-listings')[22m
+    [2m    19 × locator resolved to <div data-testid="stat-total-listings" class="bg-white rounded-xl border border-border p-5 flex items-start gap-4">…</div>[22m
+    [2m       - unexpected value "Total Listings3"[22m
+
+
+      194 |     await expect(page.getByTestId('deactivate-dialog')).not.toBeVisible({ timeout: 15000 })
+      195 |     await expect(page.getByTestId(`listing-status-${PROP_LOFT}`)).toHaveText('Inactive', { timeout: 15000 })
+    > 196 |     await expect(page.getByTestId('stat-total-listings')).toContainText(String(initialCount - 1), { timeout: 15000 })
+          |                                                           ^
+      197 |
+      198 |     // 2. Activate the Loft back
+      199 |     await page.getByTestId(`listing-activate-${PROP_LOFT}`).click()
+        at /repo/apps/AirbnbClone/tests/host-dashboard-listings.spec.ts:196:59
+
+    Error Context: test-results/host-dashboard-listings-Ho-0519c-ctions-work-on-repeated-use/error-context.md
+
+
+[1A[2K  2 failed
+    tests/host-dashboard-listings.spec.ts:92:3 › Host Dashboard - Listings Tab › Confirming deactivation sets property to inactive 
+    tests/host-dashboard-listings.spec.ts:182:3 › Host Dashboard - Listings Tab › Deactivate and activate actions work on repeated use 
+  8 passed (1.0m)
+
+(node:79985) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:80086) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:80012) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:80319) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

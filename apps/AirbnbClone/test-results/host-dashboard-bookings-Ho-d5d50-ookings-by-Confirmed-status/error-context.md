@@ -1,0 +1,104 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]:
+          - generic [ref=e10]: airbnb
+      - navigation [ref=e11]:
+        - link "Home" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - link "My Trips" [ref=e13] [cursor=pointer]:
+          - /url: /trips
+        - link "Hosting" [ref=e14] [cursor=pointer]:
+          - /url: /hosting
+        - link "Profile" [ref=e15] [cursor=pointer]:
+          - /url: /profile
+      - button "Sarah Chen" [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+        - img "Sarah Chen" [ref=e20]
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - heading "Host Dashboard" [level=1] [ref=e24]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - img [ref=e28]
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: Total Listings
+            - paragraph [ref=e33]: "3"
+        - generic [ref=e34]:
+          - img [ref=e36]
+          - generic [ref=e38]:
+            - paragraph [ref=e39]: Active Bookings
+            - paragraph [ref=e40]: "3"
+        - generic [ref=e41]:
+          - img [ref=e43]
+          - generic [ref=e45]:
+            - paragraph [ref=e46]: Total Earnings
+            - paragraph [ref=e47]: $825
+        - generic [ref=e48]:
+          - img [ref=e50]
+          - generic [ref=e52]:
+            - paragraph [ref=e53]: Average Rating
+            - paragraph [ref=e54]:
+              - img [ref=e55]
+              - text: "5.0"
+      - generic [ref=e58]:
+        - button "Listings" [ref=e59]
+        - button "Bookings" [ref=e60]
+      - generic [ref=e61]:
+        - generic [ref=e62]:
+          - button "All" [ref=e63]
+          - button "Pending" [ref=e64]
+          - button "Confirmed" [active] [ref=e65]
+          - button "Cancelled" [ref=e66]
+          - button "Completed" [ref=e67]
+        - table [ref=e69]:
+          - rowgroup [ref=e70]:
+            - row "Property Guest Check-in Check-out Guests Total Status Actions" [ref=e71]:
+              - columnheader "Property" [ref=e72]
+              - columnheader "Guest" [ref=e73]
+              - columnheader "Check-in" [ref=e74]
+              - columnheader "Check-out" [ref=e75]
+              - columnheader "Guests" [ref=e76]
+              - columnheader "Total" [ref=e77]
+              - columnheader "Status" [ref=e78]
+              - columnheader "Actions" [ref=e79]
+          - rowgroup [ref=e80]:
+            - row "Beachfront Villa with Private Pool Alex Rivera Apr 1, 2026 Apr 7, 2026 6 $2,850 confirmed Cancel" [ref=e81]:
+              - cell "Beachfront Villa with Private Pool" [ref=e82]
+              - cell "Alex Rivera" [ref=e83]
+              - cell "Apr 1, 2026" [ref=e84]
+              - cell "Apr 7, 2026" [ref=e85]
+              - cell "6" [ref=e86]
+              - cell "$2,850" [ref=e87]
+              - cell "confirmed" [ref=e88]:
+                - generic [ref=e89]: confirmed
+              - cell "Cancel" [ref=e90]:
+                - button "Cancel" [ref=e91]
+            - row "Beachfront Villa with Private Pool Emma Wilson Jul 1, 2026 Jul 5, 2026 2 $1,900 confirmed Cancel" [ref=e92]:
+              - cell "Beachfront Villa with Private Pool" [ref=e93]
+              - cell "Emma Wilson" [ref=e94]
+              - cell "Jul 1, 2026" [ref=e95]
+              - cell "Jul 5, 2026" [ref=e96]
+              - cell "2" [ref=e97]
+              - cell "$1,900" [ref=e98]
+              - cell "confirmed" [ref=e99]:
+                - generic [ref=e100]: confirmed
+              - cell "Cancel" [ref=e101]:
+                - button "Cancel" [ref=e102]
+            - row "Historic Townhouse in Georgetown Emma Wilson Jun 15, 2026 Jun 20, 2026 4 $1,475 confirmed Cancel" [ref=e103]:
+              - cell "Historic Townhouse in Georgetown" [ref=e104]
+              - cell "Emma Wilson" [ref=e105]
+              - cell "Jun 15, 2026" [ref=e106]
+              - cell "Jun 20, 2026" [ref=e107]
+              - cell "4" [ref=e108]
+              - cell "$1,475" [ref=e109]
+              - cell "confirmed" [ref=e110]:
+                - generic [ref=e111]: confirmed
+              - cell "Cancel" [ref=e112]:
+                - button "Cancel" [ref=e113]
+```

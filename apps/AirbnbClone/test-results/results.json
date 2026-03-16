@@ -69,21 +69,21 @@
   },
   "suites": [
     {
-      "title": "my-trips-cancel-dialog.spec.ts",
-      "file": "my-trips-cancel-dialog.spec.ts",
+      "title": "host-dashboard-bookings.spec.ts",
+      "file": "host-dashboard-bookings.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "My Trips - CancelBookingDialog",
-          "file": "my-trips-cancel-dialog.spec.ts",
-          "line": 18,
+          "title": "Host Dashboard - Bookings Tab Display & Filters",
+          "file": "host-dashboard-bookings.spec.ts",
+          "line": 50,
           "column": 6,
           "specs": [
             {
-              "title": "Clicking Cancel button opens confirmation dialog",
-              "ok": true,
+              "title": "Bookings tab displays table of bookings for host's properties",
+              "ok": false,
               "tags": [],
               "tests": [
                 {
@@ -96,256 +96,566 @@
                     {
                       "workerIndex": 0,
                       "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1534,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T01:53:20.662Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "dd61595c25e1ab8cf7ce-7728af7d5fae9c6d6c77",
-              "file": "my-trips-cancel-dialog.spec.ts",
-              "line": 19,
-              "column": 3
-            },
-            {
-              "title": "Dismissing cancellation dialog keeps booking unchanged",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1119,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T01:53:23.459Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "dd61595c25e1ab8cf7ce-0adffcfbf6a13161567d",
-              "file": "my-trips-cancel-dialog.spec.ts",
-              "line": 39,
-              "column": 3
-            },
-            {
-              "title": "Closing the dialog via overlay click keeps booking unchanged",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1613,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T01:53:24.585Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "dd61595c25e1ab8cf7ce-7547bd6fbc2a2574b3c8",
-              "file": "my-trips-cancel-dialog.spec.ts",
-              "line": 62,
-              "column": 3
-            },
-            {
-              "title": "Cancel dialog shows property and date context",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 1085,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T01:53:26.203Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "dd61595c25e1ab8cf7ce-d3c238f099f8b615ec20",
-              "file": "my-trips-cancel-dialog.spec.ts",
-              "line": 87,
-              "column": 3
-            }
-          ],
-          "suites": [
-            {
-              "title": "Destructive cancellation tests",
-              "file": "my-trips-cancel-dialog.spec.ts",
-              "line": 108,
-              "column": 17,
-              "specs": [
-                {
-                  "title": "Confirming cancellation updates booking status to cancelled",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
+                      "status": "failed",
+                      "duration": 17220,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:76:24",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                          "column": 24,
+                          "line": 76
+                        },
+                        "snippet": "  74 |     // Sarah has 4 bookings\n  75 |     const rows = page.locator('[data-testid^=\"booking-row-\"]')\n> 76 |     await expect(rows).toHaveCount(4, { timeout: 15000 })\n     |                        ^\n  77 |   })\n  78 |\n  79 |   test('Bookings table shows correct data for each booking', async ({ page }) => {"
+                      },
+                      "errors": [
                         {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 2326,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-16T01:53:27.293Z",
-                          "annotations": [],
-                          "attachments": []
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                            "column": 24,
+                            "line": 76
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n  74 |     // Sarah has 4 bookings\n  75 |     const rows = page.locator('[data-testid^=\"booking-row-\"]')\n> 76 |     await expect(rows).toHaveCount(4, { timeout: 15000 })\n     |                        ^\n  77 |   })\n  78 |\n  79 |   test('Bookings table shows correct data for each booking', async ({ page }) => {\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:76:24"
                         }
                       ],
-                      "status": "expected"
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:45:26.864Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/host-dashboard-bookings-Ho-14fe6-kings-for-host-s-properties/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                        "column": 24,
+                        "line": 76
+                      }
                     }
                   ],
-                  "id": "dd61595c25e1ab8cf7ce-5cf53eedae340451c2af",
-                  "file": "my-trips-cancel-dialog.spec.ts",
-                  "line": 114,
-                  "column": 5
-                },
+                  "status": "unexpected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-a8c197a2cf1427ae3bd2",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "Bookings table shows correct data for each booking",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "title": "Cancel dialog is functional on repeated use",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
                     {
-                      "timeout": 180000,
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1759,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:45:45.933Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-31c4bd7fa66021c73b72",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 79,
+              "column": 3
+            },
+            {
+              "title": "Bookings tab has status filter controls",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1704,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:45:49.004Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-861495d9fe9d79365c46",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 96,
+              "column": 3
+            },
+            {
+              "title": "Filtering bookings by Pending status",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 17113,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:118:65",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                          "column": 65,
+                          "line": 118
+                        },
+                        "snippet": "  116 |\n  117 |     // Should now have 5 bookings total (4 seed + 1 pending)\n> 118 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(5, { timeout: 15000 })\n      |                                                                 ^\n  119 |\n  120 |     // Click Pending filter\n  121 |     await page.getByTestId('booking-filter-pending').click()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                            "column": 65,
+                            "line": 118
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n\n  116 |\n  117 |     // Should now have 5 bookings total (4 seed + 1 pending)\n> 118 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(5, { timeout: 15000 })\n      |                                                                 ^\n  119 |\n  120 |     // Click Pending filter\n  121 |     await page.getByTestId('booking-filter-pending').click()\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:118:65"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:45:50.716Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/host-dashboard-bookings-Ho-10843--bookings-by-Pending-status/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                        "column": 65,
+                        "line": 118
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-891e1f2f37e42205aece",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 111,
+              "column": 3
+            },
+            {
+              "title": "Filtering bookings by Confirmed status",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 16965,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:136:65",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                          "column": 65,
+                          "line": 136
+                        },
+                        "snippet": "  134 |\n  135 |     // Sarah has 2 confirmed bookings\n> 136 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(2, { timeout: 15000 })\n      |                                                                 ^\n  137 |\n  138 |     // Verify both confirmed bookings are visible\n  139 |     await expect(page.getByTestId(`booking-row-${BOOKING_CONFIRMED_VILLA}`)).toBeVisible()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                            "column": 65,
+                            "line": 136
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  134 |\n  135 |     // Sarah has 2 confirmed bookings\n> 136 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(2, { timeout: 15000 })\n      |                                                                 ^\n  137 |\n  138 |     // Verify both confirmed bookings are visible\n  139 |     await expect(page.getByTestId(`booking-row-${BOOKING_CONFIRMED_VILLA}`)).toBeVisible()\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:136:65"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:46:08.441Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/host-dashboard-bookings-Ho-d5d50-ookings-by-Confirmed-status/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                        "column": 65,
+                        "line": 136
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-92eef8ff412e1cb72cb7",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "Filtering bookings by Completed status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1864,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:46:27.209Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-b406592a49e47e260105",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 143,
+              "column": 3
+            },
+            {
+              "title": "Filtering bookings by Cancelled status",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1750,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:46:30.364Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-00cededa693f9dcd6766",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 153,
+              "column": 3
+            },
+            {
+              "title": "Resetting filter to All shows all bookings",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 16770,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:168:65",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                          "column": 65,
+                          "line": 168
+                        },
+                        "snippet": "  166 |     // First filter by Confirmed\n  167 |     await page.getByTestId('booking-filter-confirmed').click()\n> 168 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(2, { timeout: 15000 })\n      |                                                                 ^\n  169 |\n  170 |     // Reset to All\n  171 |     await page.getByTestId('booking-filter-all').click()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                            "column": 65,
+                            "line": 168
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m2\u001b[39m\nReceived: \u001b[31m3\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 3 elements\u001b[22m\n\u001b[2m       - unexpected value \"3\"\u001b[22m\n\n\n  166 |     // First filter by Confirmed\n  167 |     await page.getByTestId('booking-filter-confirmed').click()\n> 168 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(2, { timeout: 15000 })\n      |                                                                 ^\n  169 |\n  170 |     // Reset to All\n  171 |     await page.getByTestId('booking-filter-all').click()\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:168:65"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:46:32.124Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/host-dashboard-bookings-Ho-3910d-r-to-All-shows-all-bookings/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                        "column": 65,
+                        "line": 168
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-585ea4acf236a25c07b0",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 163,
+              "column": 3
+            },
+            {
+              "title": "Status filters work on repeated use",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [
+                    {
+                      "type": "slow",
+                      "location": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                        "line": 179,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 17172,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:184:65",
+                        "location": {
+                          "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                          "column": 65,
+                          "line": 184
+                        },
+                        "snippet": "  182 |\n  183 |     await goToBookingsTab(page)\n> 184 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(5, { timeout: 15000 })\n      |                                                                 ^\n  185 |\n  186 |     // Pending\n  187 |     await page.getByTestId('booking-filter-pending').click()"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                            "column": 65,
+                            "line": 184
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-testid^=\"booking-row-\"]')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid^=\"booking-row-\"]')\u001b[22m\n\u001b[2m    19 × locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n\n  182 |\n  183 |     await goToBookingsTab(page)\n> 184 |     await expect(page.locator('[data-testid^=\"booking-row-\"]')).toHaveCount(5, { timeout: 15000 })\n      |                                                                 ^\n  185 |\n  186 |     // Pending\n  187 |     await page.getByTestId('booking-filter-pending').click()\n    at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:184:65"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:46:49.467Z",
                       "annotations": [
                         {
                           "type": "slow",
                           "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/my-trips-cancel-dialog.spec.ts",
-                            "line": 140,
-                            "column": 12
+                            "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                            "line": 179,
+                            "column": 10
                           }
                         }
                       ],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
+                      "attachments": [
                         {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 2897,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-16T01:53:29.628Z",
-                          "annotations": [
-                            {
-                              "type": "slow",
-                              "location": {
-                                "file": "/repo/apps/AirbnbClone/tests/my-trips-cancel-dialog.spec.ts",
-                                "line": 140,
-                                "column": 12
-                              }
-                            }
-                          ],
-                          "attachments": []
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/repo/apps/AirbnbClone/test-results/host-dashboard-bookings-Ho-dfb8d-ilters-work-on-repeated-use/error-context.md"
                         }
                       ],
-                      "status": "expected"
+                      "errorLocation": {
+                        "file": "/repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts",
+                        "column": 65,
+                        "line": 184
+                      }
                     }
                   ],
-                  "id": "dd61595c25e1ab8cf7ce-223e58cf4d8e64356635",
-                  "file": "my-trips-cancel-dialog.spec.ts",
-                  "line": 139,
-                  "column": 5
-                },
-                {
-                  "title": "After cancellation, booking moves from Upcoming to Cancelled tab",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 60000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "",
-                      "projectName": "",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 2326,
-                          "errors": [],
-                          "stdout": [],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2026-03-16T01:53:32.535Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "dd61595c25e1ab8cf7ce-9d8747e2de82307cb1e8",
-                  "file": "my-trips-cancel-dialog.spec.ts",
-                  "line": 173,
-                  "column": 5
+                  "status": "unexpected"
                 }
-              ]
+              ],
+              "id": "36a31ccf18e19a0f90eb-776ed67316b90b34c959",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 178,
+              "column": 3
+            },
+            {
+              "title": "Bookings tab shows empty state when no bookings exist",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2010,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:47:08.474Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-1243a247b5e912472c1c",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 207,
+              "column": 3
+            },
+            {
+              "title": "Completed and cancelled bookings have no action buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1783,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:47:11.823Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-a499d9f142326056ee67",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 226,
+              "column": 3
+            },
+            {
+              "title": "Status badges display correct colors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2047,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T02:47:13.613Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "36a31ccf18e19a0f90eb-ce8214490563b6bcda75",
+              "file": "host-dashboard-bookings.spec.ts",
+              "line": 245,
+              "column": 3
             }
           ]
         }
@@ -354,11 +664,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-16T01:53:18.213Z",
-    "duration": 16689.437,
+    "startTime": "2026-03-16T02:45:24.414Z",
+    "duration": 111283.446,
     "expected": 7,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 5,
     "flaky": 0
   }
 }

@@ -1,0 +1,205 @@
+Created branch: test-run-1773629115725 (br-small-term-a63o563y)
+Test DB URL: postgresql://neondb_owner:***@ep-divine-flower-a6weey5n.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+Running 12 tests using 1 worker
+
+
+[1A[2K[1/12] tests/host-dashboard-bookings.spec.ts:56:3 › Host Dashboard - Bookings Tab Display & Filters › Bookings tab displays table of bookings for host's properties
+
+[1A[2K  1) tests/host-dashboard-bookings.spec.ts:56:3 › Host Dashboard - Bookings Tab Display & Filters › Bookings tab displays table of bookings for host's properties 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-testid^="booking-row-"]')
+    Expected: [32m4[39m
+    Received: [31m5[39m
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="booking-row-"]')[22m
+    [2m    19 × locator resolved to 5 elements[22m
+    [2m       - unexpected value "5"[22m
+
+
+      74 |     // Sarah has 4 bookings
+      75 |     const rows = page.locator('[data-testid^="booking-row-"]')
+    > 76 |     await expect(rows).toHaveCount(4, { timeout: 15000 })
+         |                        ^
+      77 |   })
+      78 |
+      79 |   test('Bookings table shows correct data for each booking', async ({ page }) => {
+        at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:76:24
+
+    Error Context: test-results/host-dashboard-bookings-Ho-14fe6-kings-for-host-s-properties/error-context.md
+
+
+
+[1A[2K[2/12] tests/host-dashboard-bookings.spec.ts:79:3 › Host Dashboard - Bookings Tab Display & Filters › Bookings table shows correct data for each booking
+[1A[2K[3/12] tests/host-dashboard-bookings.spec.ts:96:3 › Host Dashboard - Bookings Tab Display & Filters › Bookings tab has status filter controls
+[1A[2K[4/12] tests/host-dashboard-bookings.spec.ts:111:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Pending status
+[1A[2K  2) tests/host-dashboard-bookings.spec.ts:111:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Pending status 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-testid^="booking-row-"]')
+    Expected: [32m5[39m
+    Received: [31m6[39m
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="booking-row-"]')[22m
+    [2m    19 × locator resolved to 6 elements[22m
+    [2m       - unexpected value "6"[22m
+
+
+      116 |
+      117 |     // Should now have 5 bookings total (4 seed + 1 pending)
+    > 118 |     await expect(page.locator('[data-testid^="booking-row-"]')).toHaveCount(5, { timeout: 15000 })
+          |                                                                 ^
+      119 |
+      120 |     // Click Pending filter
+      121 |     await page.getByTestId('booking-filter-pending').click()
+        at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:118:65
+
+    Error Context: test-results/host-dashboard-bookings-Ho-10843--bookings-by-Pending-status/error-context.md
+
+
+
+[1A[2K[5/12] tests/host-dashboard-bookings.spec.ts:130:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Confirmed status
+[1A[2K  3) tests/host-dashboard-bookings.spec.ts:130:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Confirmed status 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-testid^="booking-row-"]')
+    Expected: [32m2[39m
+    Received: [31m3[39m
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="booking-row-"]')[22m
+    [2m    19 × locator resolved to 3 elements[22m
+    [2m       - unexpected value "3"[22m
+
+
+      134 |
+      135 |     // Sarah has 2 confirmed bookings
+    > 136 |     await expect(page.locator('[data-testid^="booking-row-"]')).toHaveCount(2, { timeout: 15000 })
+          |                                                                 ^
+      137 |
+      138 |     // Verify both confirmed bookings are visible
+      139 |     await expect(page.getByTestId(`booking-row-${BOOKING_CONFIRMED_VILLA}`)).toBeVisible()
+        at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:136:65
+
+    Error Context: test-results/host-dashboard-bookings-Ho-d5d50-ookings-by-Confirmed-status/error-context.md
+
+
+
+[1A[2K[6/12] tests/host-dashboard-bookings.spec.ts:143:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Completed status
+[1A[2K[7/12] tests/host-dashboard-bookings.spec.ts:153:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Cancelled status
+[1A[2K[8/12] tests/host-dashboard-bookings.spec.ts:163:3 › Host Dashboard - Bookings Tab Display & Filters › Resetting filter to All shows all bookings
+[1A[2K  4) tests/host-dashboard-bookings.spec.ts:163:3 › Host Dashboard - Bookings Tab Display & Filters › Resetting filter to All shows all bookings 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-testid^="booking-row-"]')
+    Expected: [32m2[39m
+    Received: [31m3[39m
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="booking-row-"]')[22m
+    [2m    19 × locator resolved to 3 elements[22m
+    [2m       - unexpected value "3"[22m
+
+
+      166 |     // First filter by Confirmed
+      167 |     await page.getByTestId('booking-filter-confirmed').click()
+    > 168 |     await expect(page.locator('[data-testid^="booking-row-"]')).toHaveCount(2, { timeout: 15000 })
+          |                                                                 ^
+      169 |
+      170 |     // Reset to All
+      171 |     await page.getByTestId('booking-filter-all').click()
+        at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:168:65
+
+    Error Context: test-results/host-dashboard-bookings-Ho-3910d-r-to-All-shows-all-bookings/error-context.md
+
+
+
+[1A[2K[9/12] tests/host-dashboard-bookings.spec.ts:178:3 › Host Dashboard - Bookings Tab Display & Filters › Status filters work on repeated use
+[1A[2K  5) tests/host-dashboard-bookings.spec.ts:178:3 › Host Dashboard - Bookings Tab Display & Filters › Status filters work on repeated use 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('[data-testid^="booking-row-"]')
+    Expected: [32m5[39m
+    Received: [31m6[39m
+    Timeout:  15000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 15000ms[22m
+    [2m  - waiting for locator('[data-testid^="booking-row-"]')[22m
+    [2m    19 × locator resolved to 6 elements[22m
+    [2m       - unexpected value "6"[22m
+
+
+      182 |
+      183 |     await goToBookingsTab(page)
+    > 184 |     await expect(page.locator('[data-testid^="booking-row-"]')).toHaveCount(5, { timeout: 15000 })
+          |                                                                 ^
+      185 |
+      186 |     // Pending
+      187 |     await page.getByTestId('booking-filter-pending').click()
+        at /repo/apps/AirbnbClone/tests/host-dashboard-bookings.spec.ts:184:65
+
+    Error Context: test-results/host-dashboard-bookings-Ho-dfb8d-ilters-work-on-repeated-use/error-context.md
+
+
+
+[1A[2K[10/12] tests/host-dashboard-bookings.spec.ts:207:3 › Host Dashboard - Bookings Tab Display & Filters › Bookings tab shows empty state when no bookings exist
+[1A[2K[11/12] tests/host-dashboard-bookings.spec.ts:226:3 › Host Dashboard - Bookings Tab Display & Filters › Completed and cancelled bookings have no action buttons
+[1A[2K[12/12] tests/host-dashboard-bookings.spec.ts:245:3 › Host Dashboard - Bookings Tab Display & Filters › Status badges display correct colors
+[1A[2K  5 failed
+    tests/host-dashboard-bookings.spec.ts:56:3 › Host Dashboard - Bookings Tab Display & Filters › Bookings tab displays table of bookings for host's properties 
+    tests/host-dashboard-bookings.spec.ts:111:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Pending status 
+    tests/host-dashboard-bookings.spec.ts:130:3 › Host Dashboard - Bookings Tab Display & Filters › Filtering bookings by Confirmed status 
+    tests/host-dashboard-bookings.spec.ts:163:3 › Host Dashboard - Bookings Tab Display & Filters › Resetting filter to All shows all bookings 
+    tests/host-dashboard-bookings.spec.ts:178:3 › Host Dashboard - Bookings Tab Display & Filters › Status filters work on repeated use 
+  7 passed (1.9m)
+
+(node:80670) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:80769) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:80697) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:80885) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:81035) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:81128) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:81275) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:81371) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings
