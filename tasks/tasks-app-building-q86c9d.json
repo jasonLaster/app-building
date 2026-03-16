@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "MakeAccessibleUserProfile: Make User Profile page accessible"
-      ],
-      "timestamp": "2026-03-16T03:04:02.704Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/polishApp.md",
-      "subtasks": [
         "MakeAccessibleWriteReview: Make Write Review page accessible"
       ],
       "timestamp": "2026-03-16T03:04:02.704Z",
@@ -90,10 +82,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/resolveConflicts.md",
+    "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "Resolve merge conflicts from auto-resolution with --theirs and verify the codebase is correct"
+      "MakeAccessibleUserProfile: Make User Profile page accessible"
     ],
-    "timestamp": "2026-03-16T03:47:19.568Z"
+    "timestamp": "2026-03-16T03:04:02.704Z",
+    "app": "AirbnbClone"
   }
 }

@@ -6,7 +6,7 @@
 - [x] PropertyDetail
 - [x] MyTrips
 - [x] HostDashboard
-- [ ] UserProfile
+- [x] UserProfile
 - [ ] WriteReview
 
 ### Responsive UI

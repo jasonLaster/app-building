@@ -72,15 +72,17 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
   return (
     <div data-testid="profile-form">
-      {successMessage && (
-        <div data-testid="profile-success-message" className="flex items-center gap-2 mb-4 p-3 rounded-lg bg-success/10 text-success text-sm font-medium">
-          <Check size={16} />
-          {successMessage}
-        </div>
-      )}
+      <div aria-live="polite">
+        {successMessage && (
+          <div data-testid="profile-success-message" className="flex items-center gap-2 mb-4 p-3 rounded-lg bg-success/10 text-success text-sm font-medium">
+            <Check size={16} aria-hidden="true" />
+            {successMessage}
+          </div>
+        )}
+      </div>
 
       {errors.form && (
-        <div data-testid="profile-error-message" className="mb-4 p-3 rounded-lg bg-error/10 text-error text-sm font-medium">
+        <div data-testid="profile-error-message" role="alert" className="mb-4 p-3 rounded-lg bg-error/10 text-error text-sm font-medium">
           {errors.form}
         </div>
       )}
@@ -95,7 +97,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-text-secondary">
+            <div className="w-full h-full flex items-center justify-center text-text-secondary" aria-hidden="true">
               <UserIcon size={32} />
             </div>
           )}
@@ -108,27 +110,32 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
       <div className="space-y-4">
         <div>
-          <label className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
-            <UserIcon size={14} />
+          <label htmlFor="profile-name" className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
+            <UserIcon size={14} aria-hidden="true" />
             Name
           </label>
           <input
+            id="profile-name"
             data-testid="profile-name-input"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            aria-required="true"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? 'name-error' : undefined}
             className={`w-full px-3 py-2.5 rounded-lg border ${errors.name ? 'border-error' : 'border-border'} bg-bg text-text focus:outline-none focus:border-primary transition-colors`}
             placeholder="Your name"
           />
-          {errors.name && <p data-testid="name-error" className="text-error text-xs mt-1">{errors.name}</p>}
+          {errors.name && <p id="name-error" data-testid="name-error" role="alert" className="text-error text-xs mt-1">{errors.name}</p>}
         </div>
 
         <div>
-          <label className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
-            <Mail size={14} />
+          <label htmlFor="profile-email" className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
+            <Mail size={14} aria-hidden="true" />
             Email
           </label>
           <input
+            id="profile-email"
             data-testid="profile-email-input"
             type="email"
             value={user.email}
@@ -139,11 +146,12 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div>
-          <label className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
-            <FileText size={14} />
+          <label htmlFor="profile-bio" className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
+            <FileText size={14} aria-hidden="true" />
             Bio
           </label>
           <textarea
+            id="profile-bio"
             data-testid="profile-bio-input"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
@@ -154,11 +162,12 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div>
-          <label className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
-            <Phone size={14} />
+          <label htmlFor="profile-phone" className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
+            <Phone size={14} aria-hidden="true" />
             Phone
           </label>
           <input
+            id="profile-phone"
             data-testid="profile-phone-input"
             type="text"
             value={phone}
@@ -169,19 +178,22 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div>
-          <label className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
-            <Image size={14} />
+          <label htmlFor="profile-avatar" className="flex items-center gap-2 text-sm font-medium text-text-secondary mb-1.5">
+            <Image size={14} aria-hidden="true" />
             Avatar URL
           </label>
           <input
+            id="profile-avatar"
             data-testid="profile-avatar-input"
             type="text"
             value={avatarUrl}
             onChange={(e) => setAvatarUrl(e.target.value)}
+            aria-invalid={!!errors.avatar_url}
+            aria-describedby={errors.avatar_url ? 'avatar-url-error' : undefined}
             className={`w-full px-3 py-2.5 rounded-lg border ${errors.avatar_url ? 'border-error' : 'border-border'} bg-bg text-text focus:outline-none focus:border-primary transition-colors`}
             placeholder="https://example.com/avatar.jpg"
           />
-          {errors.avatar_url && <p data-testid="avatar-url-error" className="text-error text-xs mt-1">{errors.avatar_url}</p>}
+          {errors.avatar_url && <p id="avatar-url-error" data-testid="avatar-url-error" role="alert" className="text-error text-xs mt-1">{errors.avatar_url}</p>}
         </div>
       </div>
 

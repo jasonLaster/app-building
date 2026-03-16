@@ -14,11 +14,12 @@ function formatDate(dateStr: string): string {
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-0.5" data-testid="star-rating">
+    <div className="flex items-center gap-0.5" data-testid="star-rating" role="img" aria-label={`${rating} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((star) => (
         <Star
           key={star}
           size={16}
+          aria-hidden="true"
           className={star <= rating ? 'text-primary fill-primary' : 'text-border'}
           fill={star <= rating ? 'currentColor' : 'none'}
         />
@@ -32,16 +33,16 @@ export default function UserReviewsList({ reviews, loading }: UserReviewsListPro
 
   if (loading) {
     return (
-      <div data-testid="reviews-loading" className="text-center py-8 text-text-secondary">
+      <div data-testid="reviews-loading" aria-live="polite" className="text-center py-8 text-text-secondary">
         Loading reviews...
       </div>
     )
   }
 
   return (
-    <div data-testid="user-reviews-list">
-      <h2 className="text-xl font-semibold text-text mb-4 flex items-center gap-2">
-        <MessageSquare size={20} />
+    <section data-testid="user-reviews-list" aria-labelledby="my-reviews-heading">
+      <h2 id="my-reviews-heading" className="text-xl font-semibold text-text mb-4 flex items-center gap-2">
+        <MessageSquare size={20} aria-hidden="true" />
         My Reviews
       </h2>
 
@@ -50,9 +51,9 @@ export default function UserReviewsList({ reviews, loading }: UserReviewsListPro
           You haven't written any reviews yet
         </div>
       ) : (
-        <div className="space-y-3">
+        <ul className="space-y-3 list-none p-0 m-0">
           {reviews.map((review) => (
-            <div
+            <li
               key={review.id}
               data-testid={`review-card-${review.id}`}
               className="rounded-xl border border-border p-4 hover:shadow-md transition-shadow"
@@ -75,10 +76,10 @@ export default function UserReviewsList({ reviews, loading }: UserReviewsListPro
               {review.comment && (
                 <p className="text-sm text-text mt-2">{review.comment}</p>
               )}
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </section>
   )
 }

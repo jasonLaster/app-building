@@ -26,13 +26,13 @@ export default function Profile() {
   }
 
   return (
-    <div className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="profile-page">
+    <main className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8" data-testid="profile-page">
       <div className="max-w-2xl">
         <h1 className="text-[32px] font-bold text-text mb-8">Personal info</h1>
 
-        <div className="rounded-xl border border-border p-6 mb-8">
+        <section className="rounded-xl border border-border p-6 mb-8" aria-label="Profile details">
           <ProfileForm user={currentUser} />
-        </div>
+        </section>
 
         <div className="mb-8">
           <BecomeHostButton userId={currentUser.id} isHost={currentUser.is_host} />
@@ -40,6 +40,6 @@ export default function Profile() {
 
         <UserReviewsList reviews={reviews} loading={reviewsLoading} />
       </div>
-    </div>
+    </main>
   )
 }
