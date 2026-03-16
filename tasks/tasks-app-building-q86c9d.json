@@ -3,9 +3,121 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "Unpack: Polish app quality"
+        "MakeAccessibleLoginRegister: Make Login / Register page accessible"
       ],
-      "timestamp": "2026-03-15T20:11:15.079Z",
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeAccessibleHomeSearch: Make Home / Search page accessible"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeAccessiblePropertyDetail: Make Property Detail page accessible"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeAccessibleMyTrips: Make My Trips page accessible"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeAccessibleHostDashboard: Make Host Dashboard page accessible"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeAccessibleUserProfile: Make User Profile page accessible"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeAccessibleWriteReview: Make Write Review page accessible"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsiveLoginRegister: Make Login / Register page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsiveHomeSearch: Make Home / Search page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsivePropertyDetail: Make Property Detail page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsiveMyTrips: Make My Trips page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsiveHostDashboard: Make Host Dashboard page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsiveUserProfile: Make User Profile page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "MakeResponsiveWriteReview: Make Write Review page responsive"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
+      "app": "AirbnbClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "PaginateAPIs: Review and paginate backend APIs that return large datasets"
+      ],
+      "timestamp": "2026-03-16T03:04:02.704Z",
       "app": "AirbnbClone"
     },
     {
@@ -18,11 +130,11 @@
     }
   ],
   "current": {
-    "skill": "skills/tasks/maintain/checkDirectives.md",
+    "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "FixViolation: Add undefined checks for result[0] after INSERT/UPDATE in users.ts (line 74), properties.ts (lines 185, 227), bookings.ts (line 47), and property-images.ts (line 29) — noUncheckedIndexedAccess directive violation"
+      "Unpack: Polish app quality"
     ],
-    "timestamp": "2026-03-16T03:02:28.897Z",
+    "timestamp": "2026-03-15T20:11:15.079Z",
     "app": "AirbnbClone"
   }
 }
