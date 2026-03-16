@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Menu } from 'lucide-react'
+import { Menu, Globe } from 'lucide-react'
 import type { RootState, AppDispatch } from '../store'
 import { logout } from '../slices/authSlice'
 
@@ -76,6 +76,14 @@ function Sidebar() {
         <div className="header-right" ref={menuRef}>
           {currentUser ? (
             <>
+              {currentUser.is_host && (
+                <NavLink to="/hosting" className="header-host-link">
+                  Airbnb your home
+                </NavLink>
+              )}
+              <button className="header-globe-btn" aria-label="Language">
+                <Globe size={16} aria-hidden="true" />
+              </button>
               <button
                 data-testid="sidebar-toggle"
                 className="header-menu-btn"
@@ -83,12 +91,12 @@ function Sidebar() {
                 aria-expanded={menuOpen}
                 aria-label="User menu"
               >
-                <Menu size={18} aria-hidden="true" />
+                <Menu size={16} aria-hidden="true" />
                 <div className="header-avatar">
                   {currentUser.avatar_url ? (
                     <img src={currentUser.avatar_url} alt={currentUser.name} className="w-full h-full rounded-full object-cover" />
                   ) : (
-                    <span className="text-xs font-semibold text-text-secondary">
+                    <span className="text-xs font-semibold text-white">
                       {currentUser.name?.charAt(0) || 'U'}
                     </span>
                   )}
@@ -96,7 +104,7 @@ function Sidebar() {
               </button>
               {menuOpen && (
                 <div className="header-dropdown">
-                  <div className="px-4 py-2 border-b border-border">
+                  <div className="px-4 py-3 border-b border-border">
                     <p className="text-sm font-semibold text-text">{currentUser.name}</p>
                     <p className="text-xs text-text-secondary">{currentUser.email}</p>
                   </div>
@@ -106,7 +114,7 @@ function Sidebar() {
                         key={item.to}
                         to={item.to}
                         end={item.to === '/'}
-                        className="block px-4 py-2 text-sm text-text hover:bg-bg-secondary"
+                        className="block px-4 py-2.5 text-sm text-text hover:bg-bg-secondary transition-colors"
                       >
                         {item.label}
                       </NavLink>
@@ -115,7 +123,7 @@ function Sidebar() {
                   <div className="border-t border-border py-1">
                     <button
                       data-testid="sidebar-logout"
-                      className="w-full text-left px-4 py-2 text-sm text-text hover:bg-bg-secondary cursor-pointer"
+                      className="w-full text-left px-4 py-2.5 text-sm text-text hover:bg-bg-secondary cursor-pointer transition-colors"
                       onClick={() => dispatch(logout())}
                     >
                       Log out

@@ -1,4 +1,4 @@
-import { Shield, Home } from 'lucide-react'
+import { Shield, Home, Star } from 'lucide-react'
 import type { Property } from '../slices/propertiesSlice'
 
 interface HostInfoCardProps {
@@ -17,45 +17,74 @@ function getYearsHosting(dateStr: string): number {
 
 export default function HostInfoCard({ property }: HostInfoCardProps) {
   const listingCount = property.host_listing_count || 0
+  const rating = Number(property.avg_rating) || 0
+  const reviewCount = property.review_count || 0
 
   return (
-    <section id="host-info-card" data-testid="host-info-card" className="py-6">
-      <h2 className="text-lg font-semibold text-text mb-4">Meet your host</h2>
-      <div className="flex items-start gap-4">
-        <div className="shrink-0">
-          {property.host_avatar ? (
-            <img
-              src={property.host_avatar}
-              alt={property.host_name || 'Host'}
-              className="w-16 h-16 rounded-full object-cover"
-            />
-          ) : (
-            <div className="w-16 h-16 rounded-full bg-bg-secondary flex items-center justify-center text-xl font-semibold text-text-secondary">
-              {property.host_name?.charAt(0) || 'H'}
-            </div>
-          )}
-        </div>
-        <div className="flex-1">
-          <h3 className="font-semibold text-text text-lg">{property.host_name}</h3>
-          {property.host_since && (
-            <>
-              <p className="text-text-secondary text-sm flex items-center gap-1 mt-1">
-                <Shield size={14} aria-hidden="true" />
-                {getYearsHosting(property.host_since)} {getYearsHosting(property.host_since) === 1 ? 'year' : 'years'} hosting
-              </p>
-              <p className="text-text-secondary text-xs mt-0.5">
-                Member since {formatMemberSince(property.host_since)}
-              </p>
-            </>
-          )}
-          <div className="flex items-center gap-1 text-text-secondary text-sm mt-1">
-            <Home size={14} aria-hidden="true" />
-            <span>{listingCount} {listingCount === 1 ? 'listing' : 'listings'}</span>
+    <section id="host-info-card" data-testid="host-info-card" className="py-8">
+      <div className="rounded-xl border border-border p-6 shadow-sm">
+        <div className="flex items-start gap-6">
+          {/* Host avatar + name card */}
+          <div className="flex flex-col items-center text-center min-w-[120px]">
+            {property.host_avatar ? (
+              <img
+                src={property.host_avatar}
+                alt={property.host_name || 'Host'}
+                className="w-[72px] h-[72px] rounded-full object-cover mb-2"
+              />
+            ) : (
+              <div className="w-[72px] h-[72px] rounded-full bg-text flex items-center justify-center text-2xl font-bold text-white mb-2">
+                {property.host_name?.charAt(0) || 'H'}
+              </div>
+            )}
+            <h3 className="font-bold text-text text-lg">{property.host_name}</h3>
+            <p className="text-text-secondary text-xs mt-0.5">Host</p>
           </div>
-          {property.host_bio && (
-            <p className="text-text-secondary text-sm mt-3 leading-relaxed">{property.host_bio}</p>
-          )}
+
+          {/* Host stats */}
+          <div className="flex-1">
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              {reviewCount > 0 && (
+                <div className="text-center">
+                  <p className="text-lg font-bold text-text">{reviewCount}</p>
+                  <p className="text-xs text-text-secondary">{reviewCount === 1 ? 'Review' : 'Reviews'}</p>
+                </div>
+              )}
+              {reviewCount > 0 && (
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-0.5">
+                    <p className="text-lg font-bold text-text">{rating.toFixed(1)}</p>
+                    <Star size={12} className="fill-text text-text" aria-hidden="true" />
+                  </div>
+                  <p className="text-xs text-text-secondary">Rating</p>
+                </div>
+              )}
+              {property.host_since && (
+                <div className="text-center">
+                  <p className="text-lg font-bold text-text">{getYearsHosting(property.host_since)}</p>
+                  <p className="text-xs text-text-secondary">{getYearsHosting(property.host_since) === 1 ? 'Year' : 'Years'} hosting</p>
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-2 text-sm text-text-secondary">
+              {property.host_since && (
+                <p className="flex items-center gap-2">
+                  <Shield size={16} aria-hidden="true" />
+                  Member since {formatMemberSince(property.host_since)}
+                </p>
+              )}
+              <p className="flex items-center gap-2">
+                <Home size={16} aria-hidden="true" />
+                {listingCount} {listingCount === 1 ? 'listing' : 'listings'}
+              </p>
+            </div>
+          </div>
         </div>
+
+        {property.host_bio && (
+          <p className="text-text text-sm mt-5 pt-5 border-t border-border leading-relaxed">{property.host_bio}</p>
+        )}
       </div>
     </section>
   )

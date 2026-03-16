@@ -11,7 +11,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
 
   if (images.length === 0) {
     return (
-      <div data-testid="image-gallery" className="rounded-xl bg-bg-secondary flex items-center justify-center h-[400px]">
+      <div data-testid="image-gallery" className="rounded-xl bg-bg-secondary flex items-center justify-center h-[420px]">
         <p className="text-text-secondary">No images available</p>
       </div>
     )
@@ -22,7 +22,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
   if (images.length === 1) {
     return (
       <div data-testid="image-gallery">
-        <div className="relative rounded-xl overflow-hidden h-[400px]">
+        <div className="relative rounded-xl overflow-hidden h-[420px]">
           <img
             src={mainImage!.url}
             alt={mainImage!.caption || 'Property image'}
@@ -37,8 +37,8 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
 
   return (
     <div data-testid="image-gallery" className="relative">
-      <div className="grid grid-cols-4 gap-2 h-[400px]">
-        <div className="col-span-2 row-span-2 relative cursor-pointer hover:opacity-95 transition-opacity rounded-l-xl overflow-hidden">
+      <div className="grid grid-cols-4 gap-2 h-[420px] rounded-xl overflow-hidden">
+        <div className="col-span-2 row-span-2 relative cursor-pointer hover:opacity-95 transition-opacity overflow-hidden">
           <img
             src={mainImage!.url}
             alt={mainImage!.caption || 'Property image'}
@@ -58,9 +58,7 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
               data-testid={`thumbnail-${img.id}`}
               type="button"
               aria-label={img.caption || `View property image ${originalIndex + 1}`}
-              className={`relative cursor-pointer overflow-hidden hover:opacity-90 transition-opacity ${
-                i === 1 ? 'rounded-tr-xl' : i === 3 ? 'rounded-br-xl' : ''
-              }`}
+              className="relative cursor-pointer overflow-hidden hover:opacity-90 transition-opacity"
               onClick={() => setMainIndex(originalIndex)}
             >
               <img

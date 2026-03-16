@@ -78,16 +78,16 @@ export default function HostDashboard() {
 
   if (!currentUser.is_host) {
     return (
-      <div data-testid="host-dashboard" className="p-6 max-sm:p-3">
+      <div data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
         <div className="max-w-lg mx-auto text-center py-16">
-          <h1 className="text-2xl font-bold text-text mb-4">Become a Host</h1>
-          <p className="text-text-secondary mb-6">
+          <h1 className="text-[32px] font-bold text-text mb-4">Become a Host</h1>
+          <p className="text-text-secondary mb-6 text-lg">
             You need to become a host to access this page. Visit your profile to get started.
           </p>
           <button
             data-testid="become-host-link"
             onClick={() => navigate('/profile')}
-            className="bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors"
+            className="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
           >
             Go to Profile
           </button>
@@ -97,66 +97,64 @@ export default function HostDashboard() {
   }
 
   return (
-    <div data-testid="host-dashboard" className="p-6 max-sm:p-3">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold text-text mb-6">Host Dashboard</h1>
+    <div data-testid="host-dashboard" className="max-w-[1120px] mx-auto px-6 max-sm:px-3 py-8">
+      <h1 className="text-[32px] font-bold text-text mb-8">Host Dashboard</h1>
 
-        <StatsOverview stats={stats} loading={statsLoading} />
+      <StatsOverview stats={stats} loading={statsLoading} />
 
-        <div className="mt-8 mb-6">
-          <div className="flex border-b border-border">
-            <button
-              data-testid="tab-listings"
-              onClick={() => setActiveTab('listings')}
-              className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'listings'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-text-secondary hover:text-text'
-              }`}
-            >
-              Listings
-            </button>
-            <button
-              data-testid="tab-bookings"
-              onClick={() => setActiveTab('bookings')}
-              className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                activeTab === 'bookings'
-                  ? 'border-primary text-primary'
-                  : 'border-transparent text-text-secondary hover:text-text'
-              }`}
-            >
-              Bookings
-            </button>
-          </div>
+      <div className="mt-10 mb-6">
+        <div className="flex border-b border-border">
+          <button
+            data-testid="tab-listings"
+            onClick={() => setActiveTab('listings')}
+            className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
+              activeTab === 'listings'
+                ? 'border-text text-text'
+                : 'border-transparent text-text-secondary hover:text-text'
+            }`}
+          >
+            Listings
+          </button>
+          <button
+            data-testid="tab-bookings"
+            onClick={() => setActiveTab('bookings')}
+            className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
+              activeTab === 'bookings'
+                ? 'border-text text-text'
+                : 'border-transparent text-text-secondary hover:text-text'
+            }`}
+          >
+            Bookings
+          </button>
         </div>
-
-        {activeTab === 'listings' && (
-          <ListingsTab
-            listings={listings}
-            loading={listingsLoading}
-            onDeactivate={handleDeactivate}
-            onActivate={handleActivate}
-            onAddListing={() => setShowAddForm(true)}
-          />
-        )}
-
-        {activeTab === 'bookings' && (
-          <BookingsTab
-            bookings={bookings}
-            loading={bookingsLoading}
-            onConfirm={handleConfirmBooking}
-            onCancel={handleCancelBooking}
-          />
-        )}
-
-        {showAddForm && (
-          <AddListingForm
-            hostId={currentUser.id}
-            onClose={() => setShowAddForm(false)}
-            onSuccess={handleAddListingSuccess}
-          />
-        )}
       </div>
+
+      {activeTab === 'listings' && (
+        <ListingsTab
+          listings={listings}
+          loading={listingsLoading}
+          onDeactivate={handleDeactivate}
+          onActivate={handleActivate}
+          onAddListing={() => setShowAddForm(true)}
+        />
+      )}
+
+      {activeTab === 'bookings' && (
+        <BookingsTab
+          bookings={bookings}
+          loading={bookingsLoading}
+          onConfirm={handleConfirmBooking}
+          onCancel={handleCancelBooking}
+        />
+      )}
+
+      {showAddForm && (
+        <AddListingForm
+          hostId={currentUser.id}
+          onClose={() => setShowAddForm(false)}
+          onSuccess={handleAddListingSuccess}
+        />
+      )}
     </div>
   )
 }

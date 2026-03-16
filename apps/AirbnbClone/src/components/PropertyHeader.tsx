@@ -23,32 +23,22 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
 
   return (
     <header data-testid="property-header" className="pb-6 border-b border-border">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex-1">
-          <h1 className="text-[22px] font-semibold text-text">
-            {property.title}
-          </h1>
-          <p className="text-sm text-text-secondary mt-1">
-            {property.city}, {property.country}
-          </p>
-          <div className="flex items-center gap-1.5 mt-1 text-sm">
-            {reviewCount > 0 ? (
-              <button
-                data-testid="review-count-link"
-                className="flex items-center gap-1 hover:underline cursor-pointer"
-                onClick={scrollToReviews}
-                aria-label={`${rating.toFixed(2)} stars, ${reviewCount} ${reviewCount === 1 ? 'review' : 'reviews'} - scroll to reviews`}
-              >
-                <Star size={14} className="fill-text text-text" aria-hidden="true" />
-                <span className="font-semibold text-text">{rating.toFixed(2)}</span>
-                <span className="text-text-secondary">·</span>
-                <span className="text-text-secondary underline">({reviewCount} {reviewCount === 1 ? 'review' : 'reviews'})</span>
-              </button>
-            ) : (
-              <span className="text-text-secondary">New</span>
-            )}
-          </div>
-        </div>
+      <div className="flex items-center gap-2 mb-2">
+        {reviewCount > 0 ? (
+          <button
+            data-testid="review-count-link"
+            className="flex items-center gap-1.5 hover:underline cursor-pointer text-sm"
+            onClick={scrollToReviews}
+            aria-label={`${rating.toFixed(2)} stars, ${reviewCount} ${reviewCount === 1 ? 'review' : 'reviews'} - scroll to reviews`}
+          >
+            <Star size={14} className="fill-text text-text" aria-hidden="true" />
+            <span className="font-semibold text-text">{rating.toFixed(2)}</span>
+            <span className="text-text-secondary">·</span>
+            <span className="text-text-secondary underline">{reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}</span>
+          </button>
+        ) : (
+          <span className="text-sm text-text-secondary">New listing</span>
+        )}
       </div>
 
       <div className="flex items-center gap-4 mt-6 pt-6 border-t border-border">
@@ -61,17 +51,17 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
               data-testid="host-avatar"
               src={property.host_avatar}
               alt={property.host_name || 'Host'}
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-12 h-12 rounded-full object-cover"
             />
           ) : (
-            <div data-testid="host-avatar" className="w-10 h-10 rounded-full bg-text flex items-center justify-center text-sm font-semibold text-white">
+            <div data-testid="host-avatar" className="w-12 h-12 rounded-full bg-text flex items-center justify-center text-sm font-semibold text-white">
               {property.host_name?.charAt(0) || 'H'}
             </div>
           )}
           <div className="text-left">
-            <p className="text-sm font-semibold text-text">Hosted by {property.host_name}</p>
+            <p className="text-base font-semibold text-text">Hosted by {property.host_name}</p>
             {yearsHosting && (
-              <p className="text-xs text-text-secondary">{yearsHosting} {yearsHosting === 1 ? 'year' : 'years'} hosting</p>
+              <p className="text-sm text-text-secondary">{yearsHosting} {yearsHosting === 1 ? 'year' : 'years'} hosting</p>
             )}
           </div>
         </button>

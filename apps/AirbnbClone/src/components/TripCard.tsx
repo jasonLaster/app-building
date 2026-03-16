@@ -42,10 +42,10 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
   return (
     <div
       data-testid={`trip-card-${booking.id}`}
-      className="flex gap-4 rounded-xl border border-border hover:shadow-md transition-shadow cursor-pointer"
+      className="flex gap-4 rounded-xl border border-border hover:shadow-md transition-shadow cursor-pointer overflow-hidden"
       onClick={handleCardClick}
     >
-      <div className="w-40 h-32 shrink-0 overflow-hidden rounded-l-xl">
+      <div className="w-[180px] h-[140px] shrink-0 overflow-hidden">
         {booking.property_image ? (
           <img
             src={booking.property_image}
@@ -59,10 +59,10 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
         )}
       </div>
 
-      <div className="flex-1 py-3 pr-4 flex flex-col justify-between min-w-0">
+      <div className="flex-1 py-3.5 pr-4 flex flex-col justify-between min-w-0">
         <div>
           <div className="flex items-center justify-between gap-2">
-            <h3 className="font-semibold text-text truncate">
+            <h3 className="font-semibold text-text text-base truncate">
               {booking.property_title || 'Untitled Property'}
             </h3>
             <span
@@ -74,13 +74,13 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
           </div>
           {booking.property_city && (
             <p className="flex items-center gap-1 text-sm text-text-secondary mt-1">
-              <MapPin size={14} />
+              <MapPin size={14} aria-hidden="true" />
               {booking.property_city}
               {booking.property_country ? `, ${booking.property_country}` : ''}
             </p>
           )}
           <p className="flex items-center gap-1 text-sm text-text-secondary mt-1">
-            <Calendar size={14} />
+            <Calendar size={14} aria-hidden="true" />
             {formatDateRange(booking.check_in, booking.check_out)}
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
               <button
                 data-testid={`cancel-button-${booking.id}`}
                 onClick={onCancel}
-                className="text-xs font-medium px-3 py-1.5 rounded-lg border border-status-cancelled text-status-cancelled hover:bg-status-cancelled/10 transition-colors"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-border text-text hover:bg-bg-secondary transition-colors"
               >
                 Cancel
               </button>
@@ -103,7 +103,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
               <button
                 data-testid={`review-button-${booking.id}`}
                 onClick={() => navigate(`/trips/${booking.id}/review`)}
-                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors"
+                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-text text-white hover:opacity-90 transition-opacity"
               >
                 Write Review
               </button>
@@ -113,7 +113,7 @@ export default function TripCard({ booking, onCancel }: TripCardProps) {
                 data-testid={`reviewed-badge-${booking.id}`}
                 className="text-xs font-medium px-3 py-1.5 text-status-confirmed"
               >
-                Reviewed ✓
+                Reviewed
               </span>
             )}
           </div>

@@ -59,9 +59,11 @@ export default function Home() {
   }, [dispatch])
 
   return (
-    <div data-testid="home-page" className="p-6 max-sm:p-3 max-w-7xl mx-auto">
+    <div data-testid="home-page">
       <h1 className="sr-only">Find your next stay</h1>
-      <div className="mb-4">
+
+      {/* Search section */}
+      <div className="py-4 px-6 max-sm:px-3 border-b border-border">
         <SearchBar
           onSearch={handleSearch}
           initialCity={filters.city}
@@ -71,32 +73,38 @@ export default function Home() {
         />
       </div>
 
-      <div className="flex items-center gap-3 mb-4">
-        <div className="flex-1 overflow-hidden">
-          <CategoryFilter
-            selectedType={filters.propertyType}
-            onSelectType={handleCategorySelect}
+      {/* Category filter + Filters button */}
+      <div className="sticky top-[80px] z-40 bg-bg border-b border-border">
+        <div className="max-w-[1280px] mx-auto px-6 max-sm:px-3 flex items-center gap-4">
+          <div className="flex-1 overflow-hidden">
+            <CategoryFilter
+              selectedType={filters.propertyType}
+              onSelectType={handleCategorySelect}
+            />
+          </div>
+          <FiltersPanel
+            minPrice={filters.minPrice}
+            maxPrice={filters.maxPrice}
+            minBedrooms={filters.minBedrooms}
+            minBeds={filters.minBeds}
+            minBathrooms={filters.minBathrooms}
+            selectedAmenityIds={filters.amenityIds}
+            onApplyFilters={handleApplyFilters}
+            onReset={handleResetFilters}
           />
         </div>
-        <FiltersPanel
-          minPrice={filters.minPrice}
-          maxPrice={filters.maxPrice}
-          minBedrooms={filters.minBedrooms}
-          minBeds={filters.minBeds}
-          minBathrooms={filters.minBathrooms}
-          selectedAmenityIds={filters.amenityIds}
-          onApplyFilters={handleApplyFilters}
-          onReset={handleResetFilters}
-        />
       </div>
 
-      <PropertyGrid properties={items} loading={loading} />
+      {/* Property grid */}
+      <div className="max-w-[1280px] mx-auto px-6 max-sm:px-3 pt-6 pb-8">
+        <PropertyGrid properties={items} loading={loading} />
 
-      <Pagination
-        currentPage={filters.page}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+        <Pagination
+          currentPage={filters.page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   )
 }

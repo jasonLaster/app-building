@@ -26,20 +26,20 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
   }
 
   return (
-    <nav data-testid="pagination" aria-label="Pagination" className="flex items-center justify-center gap-1 mt-8">
+    <nav data-testid="pagination" aria-label="Pagination" className="flex items-center justify-center gap-1.5 mt-10 mb-4">
       <button
         data-testid="pagination-previous"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="flex items-center justify-center w-9 h-9 rounded-full text-text disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bg-secondary transition-colors"
+        className="flex items-center justify-center w-8 h-8 rounded-full text-text disabled:opacity-20 disabled:cursor-not-allowed hover:bg-bg-secondary transition-colors cursor-pointer"
         aria-label="Previous page"
       >
-        <ChevronLeft size={18} aria-hidden="true" />
+        <ChevronLeft size={16} aria-hidden="true" />
       </button>
 
       {getPageNumbers().map((page, index) =>
         typeof page === 'string' ? (
-          <span key={`ellipsis-${index}`} className="w-9 h-9 flex items-center justify-center text-text-secondary text-sm" aria-hidden="true">
+          <span key={`ellipsis-${index}`} className="w-8 h-8 flex items-center justify-center text-text-secondary text-sm" aria-hidden="true">
             ...
           </span>
         ) : (
@@ -49,10 +49,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             onClick={() => onPageChange(page)}
             aria-label={`Page ${page}`}
             aria-current={page === currentPage ? 'page' : undefined}
-            className={`w-9 h-9 rounded-full text-sm font-medium transition-colors ${
+            className={`w-8 h-8 rounded-full text-sm font-semibold transition-colors cursor-pointer ${
               page === currentPage
-                ? 'bg-text text-bg'
-                : 'text-text hover:bg-bg-secondary'
+                ? 'bg-text text-white'
+                : 'text-text hover:underline'
             }`}
           >
             {page}
@@ -64,10 +64,10 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         data-testid="pagination-next"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
-        className="flex items-center justify-center w-9 h-9 rounded-full text-text disabled:opacity-30 disabled:cursor-not-allowed hover:bg-bg-secondary transition-colors"
+        className="flex items-center justify-center w-8 h-8 rounded-full text-text disabled:opacity-20 disabled:cursor-not-allowed hover:bg-bg-secondary transition-colors cursor-pointer"
         aria-label="Next page"
       >
-        <ChevronRight size={18} aria-hidden="true" />
+        <ChevronRight size={16} aria-hidden="true" />
       </button>
     </nav>
   )

@@ -44,25 +44,25 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
       onSubmit={handleSubmit}
       role="search"
       aria-label="Search properties"
-      className="flex items-center rounded-full border border-border bg-bg shadow-md hover:shadow-lg transition-shadow max-w-3xl mx-auto"
+      className="flex items-center rounded-full border border-border bg-bg shadow-sm hover:shadow-md transition-shadow max-w-[850px] mx-auto"
     >
-      <div className="flex-1 min-w-0 px-6 py-3">
-        <label htmlFor="search-location" className="block text-xs font-semibold text-text">Where</label>
+      <div className="flex-1 min-w-0 px-7 py-3.5">
+        <label htmlFor="search-location" className="block text-xs font-bold text-text">Where</label>
         <input
           id="search-location"
           data-testid="search-location"
           type="text"
-          placeholder="Where are you going?"
+          placeholder="Search destinations"
           value={city}
           onChange={(e) => setCity(e.target.value)}
-          className="w-full text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary"
+          className="w-full text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary mt-0.5"
         />
       </div>
 
       <div className="w-px h-8 bg-border shrink-0" aria-hidden="true" />
 
-      <div className="px-4 py-3">
-        <span className="block text-xs font-semibold text-text" id="search-when-label">When</span>
+      <div className="px-5 py-3.5">
+        <span className="block text-xs font-bold text-text" id="search-when-label">Check in</span>
         <div className="flex items-center gap-2" role="group" aria-labelledby="search-when-label">
           <label htmlFor="search-checkin" className="sr-only">Check-in date</label>
           <input
@@ -77,27 +77,31 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
                 setCheckOut('')
               }
             }}
-            className="text-sm text-text-secondary outline-none bg-transparent w-[130px]"
-          />
-          <span className="text-text-secondary text-xs" aria-hidden="true">–</span>
-          <label htmlFor="search-checkout" className="sr-only">Check-out date</label>
-          <input
-            id="search-checkout"
-            data-testid="search-checkout"
-            type="date"
-            value={checkOut}
-            min={checkOutMin}
-            onChange={(e) => setCheckOut(e.target.value)}
-            className="text-sm text-text-secondary outline-none bg-transparent w-[130px]"
+            className="text-sm text-text-secondary outline-none bg-transparent w-[120px] mt-0.5"
           />
         </div>
       </div>
 
       <div className="w-px h-8 bg-border shrink-0" aria-hidden="true" />
 
-      <div className="flex items-center gap-2 pl-4 pr-2 py-2">
+      <div className="px-5 py-3.5">
+        <label htmlFor="search-checkout" className="block text-xs font-bold text-text">Check out</label>
+        <input
+          id="search-checkout"
+          data-testid="search-checkout"
+          type="date"
+          value={checkOut}
+          min={checkOutMin}
+          onChange={(e) => setCheckOut(e.target.value)}
+          className="text-sm text-text-secondary outline-none bg-transparent w-[120px] mt-0.5"
+        />
+      </div>
+
+      <div className="w-px h-8 bg-border shrink-0" aria-hidden="true" />
+
+      <div className="flex items-center gap-2 pl-5 pr-2 py-2">
         <div>
-          <label htmlFor="search-guests" className="block text-xs font-semibold text-text">Who</label>
+          <label htmlFor="search-guests" className="block text-xs font-bold text-text">Who</label>
           <input
             id="search-guests"
             data-testid="search-guests"
@@ -106,14 +110,14 @@ export default function SearchBar({ onSearch, initialCity = '', initialCheckIn =
             placeholder="Add guests"
             value={guests || ''}
             onChange={(e) => handleGuestsChange(e.target.value)}
-            className="w-24 text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary"
+            className="w-24 text-sm text-text-secondary outline-none bg-transparent placeholder-text-secondary mt-0.5"
           />
         </div>
         <button
           data-testid="search-button"
           type="submit"
           aria-label="Search"
-          className="flex items-center justify-center rounded-full bg-primary p-3 text-white hover:bg-primary-dark transition-colors shrink-0"
+          className="flex items-center justify-center gap-2 rounded-full bg-primary p-3.5 text-white hover:bg-primary-dark transition-colors shrink-0"
         >
           <Search size={16} aria-hidden="true" />
         </button>
