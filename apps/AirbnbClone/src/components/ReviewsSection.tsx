@@ -45,19 +45,19 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
     <section id="reviews-section" data-testid="reviews-section" className="py-8 border-b border-border">
       <div className="flex items-center gap-2 mb-6">
         <Star size={22} className="fill-text text-text" aria-hidden="true" />
-        <h2 className="text-[22px] font-semibold text-text">
+        <h2 className="text-[22px] max-sm:text-[18px] font-semibold text-text">
           {overallAvg.toFixed(1)} · {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-12 gap-y-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-12 max-sm:gap-x-6 gap-y-4 mb-8">
         {CATEGORIES.map(({ key, label }) => {
           const avg = avgRating(reviews, key)
           return (
             <div key={key} data-testid={`rating-category-${key}`} className="flex items-center justify-between text-sm">
               <span className="text-text">{label}</span>
               <div className="flex items-center gap-2">
-                <div className="w-28 h-1 bg-border rounded-full overflow-hidden" role="meter" aria-label={`${label} rating`} aria-valuenow={avg} aria-valuemin={0} aria-valuemax={5}>
+                <div className="w-28 max-sm:w-20 h-1 bg-border rounded-full overflow-hidden" role="meter" aria-label={`${label} rating`} aria-valuenow={avg} aria-valuemin={0} aria-valuemax={5}>
                   <div
                     className="h-full bg-text rounded-full"
                     style={{ width: `${(avg / 5) * 100}%` }}

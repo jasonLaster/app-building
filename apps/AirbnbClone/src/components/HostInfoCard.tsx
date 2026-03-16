@@ -22,8 +22,8 @@ export default function HostInfoCard({ property }: HostInfoCardProps) {
 
   return (
     <section id="host-info-card" data-testid="host-info-card" className="py-8">
-      <div className="rounded-xl border border-border p-6 shadow-sm">
-        <div className="flex items-start gap-6">
+      <div className="rounded-xl border border-border p-6 max-sm:p-4 shadow-sm">
+        <div className="flex items-start gap-6 max-sm:flex-col max-sm:items-center">
           {/* Host avatar + name card */}
           <div className="flex flex-col items-center text-center min-w-[120px]">
             {property.host_avatar ? (

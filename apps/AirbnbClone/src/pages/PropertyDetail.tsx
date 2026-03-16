@@ -54,7 +54,7 @@ export default function PropertyDetail() {
   return (
     <main data-testid="property-detail-page" className="px-6 max-sm:px-3 py-6 max-w-[1120px] mx-auto">
       {/* Title section above images - Airbnb style */}
-      <h1 className="text-[26px] font-semibold text-text mb-1">{property.title}</h1>
+      <h1 className="text-[26px] max-sm:text-[20px] font-semibold text-text mb-1">{property.title}</h1>
       <div className="flex items-center justify-between mb-6">
         <p className="text-sm text-text underline cursor-pointer">
           {property.city}, {property.country}
@@ -62,18 +62,18 @@ export default function PropertyDetail() {
         <div className="flex items-center gap-4 shrink-0">
           <button className="flex items-center gap-1.5 text-sm font-semibold text-text underline hover:no-underline cursor-pointer">
             <Share size={16} aria-hidden="true" />
-            Share
+            <span className="max-sm:hidden">Share</span>
           </button>
           <button className="flex items-center gap-1.5 text-sm font-semibold text-text underline hover:no-underline cursor-pointer">
             <Heart size={16} aria-hidden="true" />
-            Save
+            <span className="max-sm:hidden">Save</span>
           </button>
         </div>
       </div>
 
       <ImageGallery images={property.images || []} />
 
-      <div className="mt-10 flex flex-col lg:flex-row gap-12">
+      <div className="mt-10 max-sm:mt-6 flex flex-col lg:flex-row gap-12 max-md:gap-8">
         <div className="flex-1 min-w-0">
           <PropertyHeader property={property} />
           <PropertyInfo property={property} />

@@ -340,7 +340,7 @@ export default function BookingCard({ property }: BookingCardProps) {
               <ChevronRight size={20} aria-hidden="true" />
             </button>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-6">
             <CalendarMonth
               year={calYear}
               month={calMonth}
