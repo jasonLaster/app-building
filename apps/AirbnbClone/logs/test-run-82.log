@@ -1,0 +1,101 @@
+Cleaned up stale branch: test-run-1773620640198
+Created branch: test-run-1773620687882 (br-dark-forest-a6k285z9)
+Test DB URL: postgresql://neondb_owner:***@ep-morning-forest-a6s2hsvm.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+Running 16 tests using 1 worker
+
+
+[1A[2K[1/16] tests/booking-card.spec.ts:62:3 › Property Detail - BookingCard › Booking card displays price per night
+
+[1A[2K  1) tests/booking-card.spec.ts:62:3 › Property Detail - BookingCard › Booking card displays price per night 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('booking-card')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('booking-card')[22m
+
+
+      64 |
+      65 |     const card = page.getByTestId('booking-card')
+    > 66 |     await expect(card).toBeVisible({ timeout: 30000 })
+         |                        ^
+      67 |
+      68 |     // $150 / night
+      69 |     await expect(card).toContainText('$150')
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:66:24
+
+    Error Context: test-results/booking-card-Property-Deta-a4866-rd-displays-price-per-night/error-context.md
+
+
+
+[1A[2K[2/16] tests/booking-card.spec.ts:73:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers
+[1A[2K  2) tests/booking-card.spec.ts:73:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers 
+
+    NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.
+
+       at ../scripts/seed-db.ts:7
+
+       5 |
+       6 |   // Truncate in dependency order (leaf tables first)
+    >  7 |   await sql`TRUNCATE favorites CASCADE`
+         |   ^
+       8 |   await sql`TRUNCATE reviews CASCADE`
+       9 |   await sql`TRUNCATE bookings CASCADE`
+      10 |   await sql`TRUNCATE property_amenities CASCADE`
+        at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)
+        at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)
+        at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:7:5
+
+
+[1A[2K[3/16] tests/booking-card.spec.ts:92:3 › Property Detail - BookingCard › Booking card displays guest count selector
+[1A[2K[4/16] tests/booking-card.spec.ts:120:3 › Property Detail - BookingCard › Selecting dates and guests shows price breakdown
+[1A[2K[5/16] tests/booking-card.spec.ts:150:3 › Property Detail - BookingCard › Price breakdown updates when dates change
+[1A[2K[6/16] tests/booking-card.spec.ts:173:3 › Property Detail - BookingCard › Reserve button creates a booking when logged in
+[1A[2K[7/16] tests/booking-card.spec.ts:203:3 › Property Detail - BookingCard › Reserve button is disabled when dates are not selected
+[1A[2K[8/16] tests/booking-card.spec.ts:221:3 › Property Detail - BookingCard › Reserve button prompts login when user is not logged in
+[1A[2K[9/16] tests/booking-card.spec.ts:239:3 › Property Detail - BookingCard › Reserve button is disabled for host's own property
+[1A[2K[10/16] tests/booking-card.spec.ts:258:3 › Property Detail - BookingCard › Check-in date picker prevents selecting past dates
+[1A[2K[11/16] tests/booking-card.spec.ts:271:3 › Property Detail - BookingCard › Check-out date must be after check-in date
+[1A[2K[12/16] tests/booking-card.spec.ts:285:3 › Property Detail - BookingCard › Guest count cannot exceed property max_guests
+[1A[2K[13/16] tests/booking-card.spec.ts:307:3 › Property Detail - BookingCard › Guest count minimum is 1
+[1A[2K[14/16] tests/booking-card.spec.ts:329:3 › Property Detail - BookingCard › Reserve button shows error for unavailable dates
+[1A[2K[15/16] tests/booking-card.spec.ts:356:3 › Property Detail - BookingCard › Booking card date pickers and guest selector are functional on repeated use
+[1A[2K[16/16] tests/booking-card.spec.ts:404:3 › Property Detail - BookingCard › Booking card is sticky on desktop viewport
+[1A[2K  2 failed
+    tests/booking-card.spec.ts:62:3 › Property Detail - BookingCard › Booking card displays price per night 
+    tests/booking-card.spec.ts:73:3 › Property Detail - BookingCard › Booking card displays check-in and check-out date pickers 
+  14 did not run
+
+(node:51037) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:51136) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:51064) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:51243) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

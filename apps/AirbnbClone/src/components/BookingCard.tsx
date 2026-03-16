@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import type { RootState, AppDispatch } from '../store'
 import type { Property } from '../slices/propertiesSlice'
 import { createBooking, clearBookingError } from '../slices/bookingsSlice'
@@ -130,6 +130,18 @@ export default function BookingCard({ property }: BookingCardProps) {
   const todayStr = formatDateStr(now.getFullYear(), now.getMonth(), now.getDate())
   const [calMonth, setCalMonth] = useState(now.getMonth())
   const [calYear, setCalYear] = useState(now.getFullYear())
+  const [guestDropdownOpen, setGuestDropdownOpen] = useState(false)
+  const guestDropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (guestDropdownRef.current && !guestDropdownRef.current.contains(e.target as Node)) {
+        setGuestDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const isOwnProperty = currentUser?.id === property.host_id
 
@@ -255,20 +267,35 @@ export default function BookingCard({ property }: BookingCardProps) {
             </p>
           </div>
         </div>
-        <div className="border-t border-border p-3">
+        <div className="border-t border-border p-3 relative" ref={guestDropdownRef}>
           <label className="block text-[10px] font-bold text-text uppercase tracking-wide">Guests</label>
-          <select
+          <button
             data-testid="booking-guests"
-            value={guests}
-            onChange={(e) => setGuests(Number(e.target.value))}
-            className="w-full text-sm text-text bg-transparent outline-none mt-0.5 cursor-pointer"
+            data-value={String(guests)}
+            type="button"
+            onClick={() => setGuestDropdownOpen(!guestDropdownOpen)}
+            className="w-full flex items-center justify-between text-sm text-text bg-transparent outline-none mt-0.5 cursor-pointer"
           >
-            {Array.from({ length: property.max_guests }, (_, i) => i + 1).map((n) => (
-              <option key={n} value={n}>
-                {n} {n === 1 ? 'guest' : 'guests'}
-              </option>
-            ))}
-          </select>
+            <span>{guests} {guests === 1 ? 'guest' : 'guests'}</span>
+            <ChevronDown size={16} className={`transition-transform ${guestDropdownOpen ? 'rotate-180' : ''}`} />
+          </button>
+          {guestDropdownOpen && (
+            <div data-testid="booking-guests-dropdown" className="absolute left-0 right-0 top-full mt-1 bg-bg border border-border rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+              {Array.from({ length: property.max_guests }, (_, i) => i + 1).map((n) => (
+                <button
+                  key={n}
+                  data-testid={`guest-option-${n}`}
+                  type="button"
+                  onClick={() => { setGuests(n); setGuestDropdownOpen(false) }}
+                  className={`w-full text-left px-3 py-2 text-sm cursor-pointer transition-colors
+                    ${guests === n ? 'bg-bg-secondary font-semibold text-text' : 'text-text hover:bg-bg-secondary'}
+                  `}
+                >
+                  {n} {n === 1 ? 'guest' : 'guests'}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

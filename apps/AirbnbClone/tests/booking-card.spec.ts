@@ -96,17 +96,25 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    const guestsSelect = page.getByTestId('booking-guests')
-    await expect(guestsSelect).toBeVisible()
+    const guestsButton = page.getByTestId('booking-guests')
+    await expect(guestsButton).toBeVisible()
+
+    // Open dropdown to see options
+    await guestsButton.click()
+    const dropdown = page.getByTestId('booking-guests-dropdown')
+    await expect(dropdown).toBeVisible()
 
     // Should have options from 1 to 6
-    const options = guestsSelect.locator('option')
+    const options = dropdown.locator('button')
     await expect(options).toHaveCount(6)
 
     // First option should be "1 guest"
     await expect(options.first()).toHaveText('1 guest')
     // Last option should be "6 guests"
     await expect(options.last()).toHaveText('6 guests')
+
+    // Close dropdown
+    await guestsButton.click()
   })
 
   test('Selecting dates and guests shows price breakdown', async ({ page }) => {
@@ -119,7 +127,8 @@ test.describe('Property Detail - BookingCard', () => {
     // Select check-in and check-out (3 nights)
     await page.getByTestId('booking-checkin').fill('2026-05-01')
     await page.getByTestId('booking-checkout').fill('2026-05-04')
-    await page.getByTestId('booking-guests').selectOption('2')
+    await page.getByTestId('booking-guests').click()
+    await page.getByTestId('guest-option-2').click()
 
     // Price breakdown should appear
     const breakdown = page.getByTestId('price-breakdown')
@@ -176,7 +185,8 @@ test.describe('Property Detail - BookingCard', () => {
     // Select dates and guests
     await page.getByTestId('booking-checkin').fill('2026-07-01')
     await page.getByTestId('booking-checkout').fill('2026-07-04')
-    await page.getByTestId('booking-guests').selectOption('2')
+    await page.getByTestId('booking-guests').click()
+    await page.getByTestId('guest-option-2').click()
 
     // Click Reserve
     const reserveBtn = page.getByTestId('reserve-button')
@@ -279,14 +289,19 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    const guestsSelect = page.getByTestId('booking-guests')
-    const options = guestsSelect.locator('option')
+    const guestsButton = page.getByTestId('booking-guests')
+    await guestsButton.click()
+    const dropdown = page.getByTestId('booking-guests-dropdown')
+    const options = dropdown.locator('button')
 
     // Should have exactly 4 options (1-4)
     await expect(options).toHaveCount(4)
 
     // Last option value should be "4"
     await expect(options.last()).toHaveText('4 guests')
+
+    // Close dropdown
+    await guestsButton.click()
   })
 
   test('Guest count minimum is 1', async ({ page }) => {
@@ -295,14 +310,20 @@ test.describe('Property Detail - BookingCard', () => {
     const card = page.getByTestId('booking-card')
     await expect(card).toBeVisible({ timeout: 30000 })
 
-    const guestsSelect = page.getByTestId('booking-guests')
+    const guestsButton = page.getByTestId('booking-guests')
 
-    // First option should be "1 guest" (minimum)
-    const options = guestsSelect.locator('option')
+    // Default display should show "1 guest"
+    await expect(guestsButton).toContainText('1 guest')
+    await expect(guestsButton).toHaveAttribute('data-value', '1')
+
+    // Open dropdown to verify first option
+    await guestsButton.click()
+    const dropdown = page.getByTestId('booking-guests-dropdown')
+    const options = dropdown.locator('button')
     await expect(options.first()).toHaveText('1 guest')
 
-    // Default value should be 1
-    await expect(guestsSelect).toHaveValue('1')
+    // Close dropdown
+    await guestsButton.click()
   })
 
   test('Reserve button shows error for unavailable dates', async ({ page }) => {
@@ -318,7 +339,8 @@ test.describe('Property Detail - BookingCard', () => {
     // Select overlapping dates
     await page.getByTestId('booking-checkin').fill('2026-04-02')
     await page.getByTestId('booking-checkout').fill('2026-04-06')
-    await page.getByTestId('booking-guests').selectOption('2')
+    await page.getByTestId('booking-guests').click()
+    await page.getByTestId('guest-option-2').click()
 
     // Click Reserve
     const reserveBtn = page.getByTestId('reserve-button')
@@ -346,7 +368,8 @@ test.describe('Property Detail - BookingCard', () => {
     // First selection: 2026-05-01 to 2026-05-04 (3 nights), 2 guests
     await checkin.fill('2026-05-01')
     await checkout.fill('2026-05-04')
-    await guestsSelect.selectOption('2')
+    await guestsSelect.click()
+    await page.getByTestId('guest-option-2').click()
 
     // $150 x 3 = $450 + $75 = $525
     await expect(breakdown).toContainText('$150 x 3 nights')
@@ -361,10 +384,12 @@ test.describe('Property Detail - BookingCard', () => {
     await expect(breakdown).toContainText('$675')
 
     // Change guests: 2 -> 4 -> 2
-    await guestsSelect.selectOption('4')
-    await expect(guestsSelect).toHaveValue('4')
-    await guestsSelect.selectOption('2')
-    await expect(guestsSelect).toHaveValue('2')
+    await guestsSelect.click()
+    await page.getByTestId('guest-option-4').click()
+    await expect(guestsSelect).toHaveAttribute('data-value', '4')
+    await guestsSelect.click()
+    await page.getByTestId('guest-option-2').click()
+    await expect(guestsSelect).toHaveAttribute('data-value', '2')
 
     // Price breakdown should still be correct after guest changes
     await expect(breakdown).toContainText('$150 x 4 nights')
@@ -373,7 +398,7 @@ test.describe('Property Detail - BookingCard', () => {
     // Final state verification
     await expect(checkin).toHaveValue('2026-06-01')
     await expect(checkout).toHaveValue('2026-06-05')
-    await expect(guestsSelect).toHaveValue('2')
+    await expect(guestsSelect).toHaveAttribute('data-value', '2')
   })
 
   test('Booking card is sticky on desktop viewport', async ({ page }) => {

@@ -69,20 +69,20 @@
   },
   "suites": [
     {
-      "title": "property-detail.spec.ts",
-      "file": "property-detail.spec.ts",
+      "title": "booking-card.spec.ts",
+      "file": "booking-card.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Property Detail - PropertyHeader",
-          "file": "property-detail.spec.ts",
-          "line": 18,
+          "title": "Property Detail - BookingCard",
+          "file": "booking-card.spec.ts",
+          "line": 38,
           "column": 6,
           "specs": [
             {
-              "title": "Property header displays title, location, rating summary, and host info",
+              "title": "Booking card displays price per night",
               "ok": false,
               "tags": [],
               "tests": [
@@ -97,56 +97,56 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 30682,
+                      "duration": 31006,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('property-header')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('property-header')\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('property-header')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('property-header')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:23:26",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('booking-card')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('booking-card')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('booking-card')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('booking-card')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:66:24",
                         "location": {
-                          "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                          "column": 26,
-                          "line": 23
+                          "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                          "column": 24,
+                          "line": 66
                         },
-                        "snippet": "  21 |\n  22 |     const header = page.getByTestId('property-header')\n> 23 |     await expect(header).toBeVisible({ timeout: 30000 })\n     |                          ^\n  24 |\n  25 |     // Title\n  26 |     await expect(header.locator('h1')).toHaveText('Cozy Downtown Loft with City Views')"
+                        "snippet": "  64 |\n  65 |     const card = page.getByTestId('booking-card')\n> 66 |     await expect(card).toBeVisible({ timeout: 30000 })\n     |                        ^\n  67 |\n  68 |     // $150 / night\n  69 |     await expect(card).toContainText('$150')"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                            "column": 26,
-                            "line": 23
+                            "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                            "column": 24,
+                            "line": 66
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('property-header')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('property-header')\u001b[22m\n\n\n  21 |\n  22 |     const header = page.getByTestId('property-header')\n> 23 |     await expect(header).toBeVisible({ timeout: 30000 })\n     |                          ^\n  24 |\n  25 |     // Title\n  26 |     await expect(header.locator('h1')).toHaveText('Cozy Downtown Loft with City Views')\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:23:26"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('booking-card')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('booking-card')\u001b[22m\n\n\n  64 |\n  65 |     const card = page.getByTestId('booking-card')\n> 66 |     await expect(card).toBeVisible({ timeout: 30000 })\n     |                        ^\n  67 |\n  68 |     // $150 / night\n  69 |     await expect(card).toContainText('$150')\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:66:24"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:03:53.087Z",
+                      "startTime": "2026-03-16T00:24:58.192Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "/repo/apps/AirbnbClone/test-results/property-detail-Property-D-807b7-ating-summary-and-host-info/error-context.md"
+                          "path": "/repo/apps/AirbnbClone/test-results/booking-card-Property-Deta-a4866-rd-displays-price-per-night/error-context.md"
                         }
                       ],
                       "errorLocation": {
-                        "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                        "column": 26,
-                        "line": 23
+                        "file": "/repo/apps/AirbnbClone/tests/booking-card.spec.ts",
+                        "column": 24,
+                        "line": 66
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-70ecb07455ffec96b1d2",
-              "file": "property-detail.spec.ts",
-              "line": 19,
+              "id": "4d57d9eff36cbb3b33f2-a3b4224a50cdefd6aaa0",
+              "file": "booking-card.spec.ts",
+              "line": 62,
               "column": 3
             },
             {
-              "title": "Property header shows \"New\" when property has no reviews",
+              "title": "Booking card displays check-in and check-out date pickers",
               "ok": false,
               "tags": [],
               "tests": [
@@ -161,138 +161,10 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 30237,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('property-header')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('property-header')\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('property-header')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('property-header')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:50:26",
-                        "location": {
-                          "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                          "column": 26,
-                          "line": 50
-                        },
-                        "snippet": "  48 |\n  49 |     const header = page.getByTestId('property-header')\n> 50 |     await expect(header).toBeVisible({ timeout: 30000 })\n     |                          ^\n  51 |\n  52 |     // Should show \"New\" instead of rating\n  53 |     await expect(header).toContainText('New')"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                            "column": 26,
-                            "line": 50
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('property-header')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('property-header')\u001b[22m\n\n\n  48 |\n  49 |     const header = page.getByTestId('property-header')\n> 50 |     await expect(header).toBeVisible({ timeout: 30000 })\n     |                          ^\n  51 |\n  52 |     // Should show \"New\" instead of rating\n  53 |     await expect(header).toContainText('New')\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:50:26"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T00:04:25.696Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/repo/apps/AirbnbClone/test-results/property-detail-Property-D-88c63-hen-property-has-no-reviews/error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                        "column": 26,
-                        "line": 50
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "794fd1a64fd4d9678896-cae471c4ecc7157238f4",
-              "file": "property-detail.spec.ts",
-              "line": 46,
-              "column": 3
-            },
-            {
-              "title": "Clicking review count scrolls to or navigates to reviews section",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 30255,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('review-count-link')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('review-count-link')\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('review-count-link')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('review-count-link')\u001b[22m\n\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:63:30",
-                        "location": {
-                          "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                          "column": 30,
-                          "line": 63
-                        },
-                        "snippet": "  61 |\n  62 |     const reviewLink = page.getByTestId('review-count-link')\n> 63 |     await expect(reviewLink).toBeVisible({ timeout: 30000 })\n     |                              ^\n  64 |\n  65 |     // Click the review count\n  66 |     await reviewLink.click()"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                            "column": 30,
-                            "line": 63
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('review-count-link')\nExpected: visible\nTimeout: 30000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 30000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('review-count-link')\u001b[22m\n\n\n  61 |\n  62 |     const reviewLink = page.getByTestId('review-count-link')\n> 63 |     await expect(reviewLink).toBeVisible({ timeout: 30000 })\n     |                              ^\n  64 |\n  65 |     // Click the review count\n  66 |     await reviewLink.click()\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:63:30"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T00:04:57.836Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/repo/apps/AirbnbClone/test-results/property-detail-Property-D-e9c15-avigates-to-reviews-section/error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/repo/apps/AirbnbClone/tests/property-detail.spec.ts",
-                        "column": 30,
-                        "line": 63
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "794fd1a64fd4d9678896-c6049e99324a30e7f3ef",
-              "file": "property-detail.spec.ts",
-              "line": 59,
-              "column": 3
-            },
-            {
-              "title": "Property header displays host avatar as clickable element",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 3,
-                      "parallelIndex": 0,
-                      "status": "failed",
                       "duration": 0,
                       "error": {
                         "message": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.",
-                        "stack": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.\n    at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)\n    at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:7:5",
+                        "stack": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.\n    at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)\n    at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:7:5",
                         "location": {
                           "file": "/repo/apps/AirbnbClone/scripts/seed-db.ts",
                           "column": 3,
@@ -307,13 +179,13 @@
                             "column": 3,
                             "line": 7
                           },
-                          "message": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.\n\n   at ../scripts/seed-db.ts:7\n\n   5 |\n   6 |   // Truncate in dependency order (leaf tables first)\n>  7 |   await sql`TRUNCATE favorites CASCADE`\n     |   ^\n   8 |   await sql`TRUNCATE reviews CASCADE`\n   9 |   await sql`TRUNCATE bookings CASCADE`\n  10 |   await sql`TRUNCATE property_amenities CASCADE`\n    at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)\n    at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)\n    at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:7:5"
+                          "message": "NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.\n\n   at ../scripts/seed-db.ts:7\n\n   5 |\n   6 |   // Truncate in dependency order (leaf tables first)\n>  7 |   await sql`TRUNCATE favorites CASCADE`\n     |   ^\n   8 |   await sql`TRUNCATE reviews CASCADE`\n   9 |   await sql`TRUNCATE bookings CASCADE`\n  10 |   await sql`TRUNCATE property_amenities CASCADE`\n    at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)\n    at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)\n    at /repo/apps/AirbnbClone/tests/booking-card.spec.ts:7:5"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:29.999Z",
+                      "startTime": "2026-03-16T00:25:31.103Z",
                       "annotations": [],
                       "attachments": [],
                       "errorLocation": {
@@ -326,55 +198,13 @@
                   "status": "unexpected"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-9f7a5c559a240589541f",
-              "file": "property-detail.spec.ts",
-              "line": 74,
-              "column": 3
-            }
-          ]
-        },
-        {
-          "title": "Property Detail - PropertyInfo",
-          "file": "property-detail.spec.ts",
-          "line": 94,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Property info section displays all property details",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "794fd1a64fd4d9678896-6045b45def656e8e6ab2",
-              "file": "property-detail.spec.ts",
-              "line": 95,
+              "id": "4d57d9eff36cbb3b33f2-1235b7b820e47806df55",
+              "file": "booking-card.spec.ts",
+              "line": 73,
               "column": 3
             },
             {
-              "title": "Property info section displays check-in and check-out times",
+              "title": "Booking card displays guest count selector",
               "ok": true,
               "tags": [],
               "tests": [
@@ -394,7 +224,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
+                      "startTime": "2026-03-16T00:25:31.320Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -402,13 +232,13 @@
                   "status": "skipped"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-ff9bc8263d68c4c64011",
-              "file": "property-detail.spec.ts",
-              "line": 109,
+              "id": "4d57d9eff36cbb3b33f2-9460af9aa527c3b32386",
+              "file": "booking-card.spec.ts",
+              "line": 92,
               "column": 3
             },
             {
-              "title": "Property info section handles singular and plural labels correctly",
+              "title": "Selecting dates and guests shows price breakdown",
               "ok": true,
               "tags": [],
               "tests": [
@@ -428,7 +258,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
+                      "startTime": "2026-03-16T00:25:31.320Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -436,55 +266,13 @@
                   "status": "skipped"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-4bb371d3a5eba3cd014c",
-              "file": "property-detail.spec.ts",
-              "line": 122,
-              "column": 3
-            }
-          ]
-        },
-        {
-          "title": "Property Detail - PropertyDescription",
-          "file": "property-detail.spec.ts",
-          "line": 137,
-          "column": 6,
-          "specs": [
-            {
-              "title": "Property description displays full description text",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "parallelIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "794fd1a64fd4d9678896-0f6cdef30bb8ade55879",
-              "file": "property-detail.spec.ts",
-              "line": 138,
+              "id": "4d57d9eff36cbb3b33f2-12464ce8ed001e1f18f8",
+              "file": "booking-card.spec.ts",
+              "line": 120,
               "column": 3
             },
             {
-              "title": "Long description shows a \"Show more\" toggle",
+              "title": "Price breakdown updates when dates change",
               "ok": true,
               "tags": [],
               "tests": [
@@ -504,7 +292,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
+                      "startTime": "2026-03-16T00:25:31.320Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -512,13 +300,13 @@
                   "status": "skipped"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-3b6d5ccdddadf681a6ca",
-              "file": "property-detail.spec.ts",
-              "line": 152,
+              "id": "4d57d9eff36cbb3b33f2-6165cff7d2e9e27844d1",
+              "file": "booking-card.spec.ts",
+              "line": 150,
               "column": 3
             },
             {
-              "title": "Clicking \"Show more\" expands the full description",
+              "title": "Reserve button creates a booking when logged in",
               "ok": true,
               "tags": [],
               "tests": [
@@ -538,7 +326,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
+                      "startTime": "2026-03-16T00:25:31.320Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -546,13 +334,13 @@
                   "status": "skipped"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-603896557f602f2363fa",
-              "file": "property-detail.spec.ts",
-              "line": 169,
+              "id": "4d57d9eff36cbb3b33f2-7024b92c177cd97152ef",
+              "file": "booking-card.spec.ts",
+              "line": 173,
               "column": 3
             },
             {
-              "title": "Clicking \"Show less\" collapses the description back",
+              "title": "Reserve button is disabled when dates are not selected",
               "ok": true,
               "tags": [],
               "tests": [
@@ -572,7 +360,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
+                      "startTime": "2026-03-16T00:25:31.320Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -580,13 +368,13 @@
                   "status": "skipped"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-23ea5d9bbd6968d39cdc",
-              "file": "property-detail.spec.ts",
-              "line": 189,
+              "id": "4d57d9eff36cbb3b33f2-f2ccb99504c3c331adad",
+              "file": "booking-card.spec.ts",
+              "line": 203,
               "column": 3
             },
             {
-              "title": "Show more/less toggle is functional on repeated use",
+              "title": "Reserve button prompts login when user is not logged in",
               "ok": true,
               "tags": [],
               "tests": [
@@ -606,7 +394,7 @@
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-16T00:05:30.203Z",
+                      "startTime": "2026-03-16T00:25:31.320Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -614,9 +402,281 @@
                   "status": "skipped"
                 }
               ],
-              "id": "794fd1a64fd4d9678896-1ccf5c76d549a2db2c78",
-              "file": "property-detail.spec.ts",
-              "line": 209,
+              "id": "4d57d9eff36cbb3b33f2-007e0e62fd64acdc232f",
+              "file": "booking-card.spec.ts",
+              "line": 221,
+              "column": 3
+            },
+            {
+              "title": "Reserve button is disabled for host's own property",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.320Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-462eb047350f3d607619",
+              "file": "booking-card.spec.ts",
+              "line": 239,
+              "column": 3
+            },
+            {
+              "title": "Check-in date picker prevents selecting past dates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-85e971f454da1cb9574e",
+              "file": "booking-card.spec.ts",
+              "line": 258,
+              "column": 3
+            },
+            {
+              "title": "Check-out date must be after check-in date",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-60b676f07d3750211bfe",
+              "file": "booking-card.spec.ts",
+              "line": 271,
+              "column": 3
+            },
+            {
+              "title": "Guest count cannot exceed property max_guests",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-b12aa43928ce590f2402",
+              "file": "booking-card.spec.ts",
+              "line": 285,
+              "column": 3
+            },
+            {
+              "title": "Guest count minimum is 1",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-8949724d8fb90a031abb",
+              "file": "booking-card.spec.ts",
+              "line": 307,
+              "column": 3
+            },
+            {
+              "title": "Reserve button shows error for unavailable dates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-b85e809207620d6b4db6",
+              "file": "booking-card.spec.ts",
+              "line": 329,
+              "column": 3
+            },
+            {
+              "title": "Booking card date pickers and guest selector are functional on repeated use",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-c397964d8fe97a7f3841",
+              "file": "booking-card.spec.ts",
+              "line": 356,
+              "column": 3
+            },
+            {
+              "title": "Booking card is sticky on desktop viewport",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-16T00:25:31.321Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4d57d9eff36cbb3b33f2-8260dbefb39fd2961837",
+              "file": "booking-card.spec.ts",
+              "line": 404,
               "column": 3
             }
           ]
@@ -626,11 +686,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-16T00:03:50.598Z",
-    "duration": 99620.693,
+    "startTime": "2026-03-16T00:24:55.655Z",
+    "duration": 35679.079,
     "expected": 0,
-    "skipped": 8,
-    "unexpected": 4,
+    "skipped": 14,
+    "unexpected": 2,
     "flaky": 0
   }
 }

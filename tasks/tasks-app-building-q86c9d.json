@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: BookingCard uses native HTML select element for guest count selector (line 260-271 of BookingCard.tsx) which violates the directive against native select elements when app has custom design system",
-        "RunTests: Run tests/booking-card.spec.ts to verify fix"
-      ],
-      "timestamp": "2026-03-15T21:19:21.048Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "FixViolation: BookingCard tests assume native date inputs (fill, toHaveAttribute type=date, toHaveValue) but component uses custom calendar with p elements for booking-checkin and booking-checkout. Tests need to be rewritten to interact with the custom calendar UI",
         "RunTests: Run tests/booking-card.spec.ts to verify fix"
       ],
@@ -86,8 +77,8 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: PropertyInfo component only shows check-in/check-out times but test spec expects it to also display property_type, max_guests, bedrooms, beds, bathrooms with icons. These details are currently in PropertyHeader instead of PropertyInfo",
-      "RunTests: Run tests/property-detail.spec.ts to verify fix"
+      "FixViolation: BookingCard uses native HTML select element for guest count selector (line 260-271 of BookingCard.tsx) which violates the directive against native select elements when app has custom design system",
+      "RunTests: Run tests/booking-card.spec.ts to verify fix"
     ],
     "timestamp": "2026-03-15T21:19:21.048Z",
     "app": "AirbnbClone"
