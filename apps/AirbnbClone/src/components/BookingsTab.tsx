@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Loader2, Calendar } from 'lucide-react'
 import type { HostBooking } from '../slices/hostSlice'
 
@@ -28,6 +28,38 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
   const [activeFilter, setActiveFilter] = useState<StatusFilter>('All')
   const [cancelDialog, setCancelDialog] = useState<HostBooking | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setCancelDialog(null)
+    }
+    if (e.key === 'Tab' && dialogRef.current) {
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last?.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first?.focus()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (cancelDialog) {
+      document.addEventListener('keydown', handleKeyDown)
+      dialogRef.current?.querySelector<HTMLElement>('button')?.focus()
+      return () => document.removeEventListener('keydown', handleKeyDown)
+    } else {
+      triggerRef.current?.focus()
+    }
+  }, [cancelDialog, handleKeyDown])
 
   const filteredBookings = activeFilter === 'All'
     ? bookings
@@ -39,7 +71,8 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
     setActionLoading(null)
   }
 
-  const handleCancelClick = (booking: HostBooking) => {
+  const handleCancelClick = (booking: HostBooking, button: HTMLButtonElement) => {
+    triggerRef.current = button
     setCancelDialog(booking)
   }
 
@@ -53,20 +86,22 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-16">
-        <Loader2 size={32} className="animate-spin text-primary" />
+      <div className="flex items-center justify-center py-16" role="status">
+        <Loader2 size={32} className="animate-spin text-primary" aria-hidden="true" />
+        <span className="sr-only">Loading bookings...</span>
       </div>
     )
   }
 
   return (
     <div data-testid="bookings-tab">
-      <div className="flex items-center gap-2 mb-6 flex-wrap">
+      <div className="flex items-center gap-2 mb-6 flex-wrap" role="group" aria-label="Filter bookings by status">
         {STATUS_FILTERS.map((filter) => (
           <button
             key={filter}
             data-testid={`booking-filter-${filter.toLowerCase()}`}
             onClick={() => setActiveFilter(filter)}
+            aria-pressed={activeFilter === filter}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
               activeFilter === filter
                 ? 'bg-primary text-white'
@@ -80,14 +115,14 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
 
       {filteredBookings.length === 0 ? (
         <div data-testid="bookings-empty-state" className="text-center py-16">
-          <Calendar size={48} className="mx-auto text-text-secondary mb-4 opacity-50" />
+          <Calendar size={48} className="mx-auto text-text-secondary mb-4 opacity-50" aria-hidden="true" />
           <p className="text-text-secondary text-lg">
             {activeFilter === 'All' ? 'No bookings yet' : `No ${activeFilter.toLowerCase()} bookings`}
           </p>
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table data-testid="bookings-table" className="w-full">
+          <table data-testid="bookings-table" className="w-full" aria-label="Bookings">
             <thead>
               <tr className="border-b border-border">
                 <th className="text-left py-3 px-4 text-sm font-medium text-text-secondary">Property</th>
@@ -136,7 +171,7 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
                         </button>
                         <button
                           data-testid={`booking-cancel-${booking.id}`}
-                          onClick={() => handleCancelClick(booking)}
+                          onClick={(e) => handleCancelClick(booking, e.currentTarget)}
                           disabled={actionLoading === booking.id}
                           className="px-3 py-1.5 text-xs font-medium text-white bg-status-cancelled rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
                         >
@@ -147,7 +182,7 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
                     {booking.status === 'confirmed' && (
                       <button
                         data-testid={`booking-cancel-${booking.id}`}
-                        onClick={() => handleCancelClick(booking)}
+                        onClick={(e) => handleCancelClick(booking, e.currentTarget)}
                         disabled={actionLoading === booking.id}
                         className="px-3 py-1.5 text-xs font-medium text-white bg-status-cancelled rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
                       >
@@ -169,10 +204,14 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
           onClick={() => setCancelDialog(null)}
         >
           <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cancel-booking-dialog-title"
             className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-lg font-semibold text-text mb-2">Cancel Booking</h3>
+            <h3 id="cancel-booking-dialog-title" className="text-lg font-semibold text-text mb-2">Cancel Booking</h3>
             <p className="text-text-secondary mb-1">Are you sure you want to cancel this booking?</p>
             <div className="bg-bg-secondary rounded-lg p-3 mb-6 text-sm">
               <p className="font-medium text-text">{cancelDialog.property_title}</p>

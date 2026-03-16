@@ -84,6 +84,37 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
   const [propertyTypeOpen, setPropertyTypeOpen] = useState(false)
   const propertyTypeRef = useRef<HTMLDivElement>(null)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const modalRef = useRef<HTMLDivElement>(null)
+  const discardDialogRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (showDiscardDialog) {
+          setShowDiscardDialog(false)
+        } else {
+          setShowDiscardDialog(true)
+        }
+      }
+      const activeContainer = showDiscardDialog ? discardDialogRef.current : modalRef.current
+      if (e.key === 'Tab' && activeContainer) {
+        const focusable = activeContainer.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last?.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [showDiscardDialog])
 
   useEffect(() => {
     if (amenities.length === 0) {
@@ -278,10 +309,11 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
   }, {})
 
   const renderStepIndicator = () => (
-    <div data-testid="step-indicator" className="flex items-center justify-center gap-2 mb-6">
+    <nav data-testid="step-indicator" aria-label="Form progress" className="flex items-center justify-center gap-2 mb-6">
       {Array.from({ length: TOTAL_STEPS }, (_, i) => i + 1).map((s) => (
         <div
           key={s}
+          aria-hidden="true"
           className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
             s < step
               ? 'bg-primary text-white'
@@ -293,8 +325,8 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
           {s < step ? <Check size={14} /> : s}
         </div>
       ))}
-      <span className="ml-2 text-sm text-text-secondary">Step {step} of {TOTAL_STEPS}</span>
-    </div>
+      <span className="ml-2 text-sm text-text-secondary" aria-live="polite">Step {step} of {TOTAL_STEPS}</span>
+    </nav>
   )
 
   const renderStep1 = () => (
@@ -302,11 +334,16 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       <h3 className="text-lg font-semibold text-text mb-4">Property Type & Title</h3>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-text mb-1.5">Property Type *</label>
+        <label id="property-type-label" className="block text-sm font-medium text-text mb-1.5">Property Type *</label>
         <div className="relative" ref={propertyTypeRef}>
           <button
             type="button"
             data-testid="property-type-select"
+            aria-haspopup="listbox"
+            aria-expanded={propertyTypeOpen}
+            aria-labelledby="property-type-label"
+            aria-required="true"
+            aria-describedby={errors.propertyType ? 'property-type-error' : undefined}
             onClick={() => setPropertyTypeOpen(!propertyTypeOpen)}
             className={`w-full text-left px-4 py-3 rounded-lg border ${
               errors.propertyType ? 'border-error' : 'border-border'
@@ -315,11 +352,13 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
             {formData.propertyType || 'Select property type...'}
           </button>
           {propertyTypeOpen && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-border rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
+            <div role="listbox" aria-labelledby="property-type-label" className="absolute top-full left-0 right-0 mt-1 bg-white border border-border rounded-lg shadow-lg z-10 max-h-60 overflow-y-auto">
               {PROPERTY_TYPES.map((type) => (
                 <button
                   key={type}
                   type="button"
+                  role="option"
+                  aria-selected={formData.propertyType === type}
                   data-testid={`property-type-option-${type.toLowerCase()}`}
                   onClick={() => {
                     setFormData((prev) => ({ ...prev, propertyType: type }))
@@ -340,14 +379,17 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
             </div>
           )}
         </div>
-        {errors.propertyType && <p className="text-error text-xs mt-1">{errors.propertyType}</p>}
+        {errors.propertyType && <p id="property-type-error" className="text-error text-xs mt-1" role="alert">{errors.propertyType}</p>}
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-text mb-1.5">Title *</label>
+        <label htmlFor="listing-title-input" className="block text-sm font-medium text-text mb-1.5">Title *</label>
         <input
+          id="listing-title-input"
           data-testid="listing-title-input"
           type="text"
+          aria-required="true"
+          aria-describedby={errors.title ? 'title-error' : undefined}
           value={formData.title}
           onChange={(e) => {
             setFormData((prev) => ({ ...prev, title: e.target.value }))
@@ -358,7 +400,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
             errors.title ? 'border-error' : 'border-border'
           } text-sm focus:outline-none focus:border-primary`}
         />
-        {errors.title && <p className="text-error text-xs mt-1">{errors.title}</p>}
+        {errors.title && <p id="title-error" className="text-error text-xs mt-1" role="alert">{errors.title}</p>}
       </div>
     </div>
   )
@@ -368,10 +410,13 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       <h3 className="text-lg font-semibold text-text mb-4">Location</h3>
 
       <div className="mb-4 relative">
-        <label className="block text-sm font-medium text-text mb-1.5">Address</label>
+        <label htmlFor="listing-address-input" className="block text-sm font-medium text-text mb-1.5">Address</label>
         <input
+          id="listing-address-input"
           data-testid="listing-address-input"
           type="text"
+          aria-autocomplete="list"
+          aria-controls={showSuggestions && addressSuggestions.length > 0 ? 'address-suggestions-list' : undefined}
           value={formData.address}
           onChange={(e) => handleAddressChange(e.target.value)}
           onFocus={() => { if (addressSuggestions.length > 0) setShowSuggestions(true) }}
@@ -380,13 +425,18 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         />
         {showSuggestions && addressSuggestions.length > 0 && (
           <div
+            id="address-suggestions-list"
             data-testid="address-suggestions"
+            role="listbox"
+            aria-label="Address suggestions"
             className="absolute top-full left-0 right-0 mt-1 bg-white border border-border rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto"
           >
             {addressSuggestions.map((s, i) => (
               <button
                 key={i}
                 type="button"
+                role="option"
+                aria-selected={false}
                 onClick={() => handleSelectSuggestion(s)}
                 className="w-full text-left px-4 py-2.5 text-sm hover:bg-bg-secondary transition-colors border-b border-border last:border-b-0"
               >
@@ -399,10 +449,13 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
 
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-sm font-medium text-text mb-1.5">City *</label>
+          <label htmlFor="listing-city-input" className="block text-sm font-medium text-text mb-1.5">City *</label>
           <input
+            id="listing-city-input"
             data-testid="listing-city-input"
             type="text"
+            aria-required="true"
+            aria-describedby={errors.city ? 'city-error' : undefined}
             value={formData.city}
             onChange={(e) => {
               setFormData((prev) => ({ ...prev, city: e.target.value }))
@@ -413,11 +466,12 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
               errors.city ? 'border-error' : 'border-border'
             } text-sm focus:outline-none focus:border-primary`}
           />
-          {errors.city && <p className="text-error text-xs mt-1">{errors.city}</p>}
+          {errors.city && <p id="city-error" className="text-error text-xs mt-1" role="alert">{errors.city}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-text mb-1.5">State</label>
+          <label htmlFor="listing-state-input" className="block text-sm font-medium text-text mb-1.5">State</label>
           <input
+            id="listing-state-input"
             data-testid="listing-state-input"
             type="text"
             value={formData.state}
@@ -429,10 +483,13 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-text mb-1.5">Country *</label>
+        <label htmlFor="listing-country-input" className="block text-sm font-medium text-text mb-1.5">Country *</label>
         <input
+          id="listing-country-input"
           data-testid="listing-country-input"
           type="text"
+          aria-required="true"
+          aria-describedby={errors.country ? 'country-error' : undefined}
           value={formData.country}
           onChange={(e) => {
             setFormData((prev) => ({ ...prev, country: e.target.value }))
@@ -443,7 +500,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
             errors.country ? 'border-error' : 'border-border'
           } text-sm focus:outline-none focus:border-primary`}
         />
-        {errors.country && <p className="text-error text-xs mt-1">{errors.country}</p>}
+        {errors.country && <p id="country-error" className="text-error text-xs mt-1" role="alert">{errors.country}</p>}
       </div>
     </div>
   )
@@ -462,29 +519,31 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         <div className="space-y-4">
           {fields.map(({ key, label }) => (
             <div key={key} className="flex items-center justify-between">
-              <label className="text-sm font-medium text-text">{label} *</label>
-              <div className="flex items-center gap-3">
+              <label id={`${key}-label`} className="text-sm font-medium text-text">{label} *</label>
+              <div className="flex items-center gap-3" role="group" aria-labelledby={`${key}-label`}>
                 <button
                   type="button"
                   data-testid={`${key}-decrement`}
+                  aria-label={`Decrease ${label}`}
                   onClick={() => decrementField(key)}
                   className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-text-secondary hover:border-text transition-colors"
                 >
-                  <Minus size={14} />
+                  <Minus size={14} aria-hidden="true" />
                 </button>
-                <span data-testid={`${key}-value`} className="text-lg font-medium text-text w-8 text-center">
+                <span data-testid={`${key}-value`} aria-live="polite" className="text-lg font-medium text-text w-8 text-center">
                   {formData[key]}
                 </span>
                 <button
                   type="button"
                   data-testid={`${key}-increment`}
+                  aria-label={`Increase ${label}`}
                   onClick={() => incrementField(key)}
                   className="w-8 h-8 rounded-full border border-border flex items-center justify-center text-text-secondary hover:border-text transition-colors"
                 >
-                  <Plus size={14} />
+                  <Plus size={14} aria-hidden="true" />
                 </button>
               </div>
-              {errors[key] && <p className="text-error text-xs">{errors[key]}</p>}
+              {errors[key] && <p className="text-error text-xs" role="alert">{errors[key]}</p>}
             </div>
           ))}
         </div>
@@ -544,6 +603,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         <input
           data-testid="photo-url-input"
           type="text"
+          aria-label="Photo URL"
           value={photoUrl}
           onChange={(e) => setPhotoUrl(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddPhoto() } }}
@@ -560,7 +620,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         </button>
       </div>
 
-      {errors.photos && <p className="text-error text-xs mb-3">{errors.photos}</p>}
+      {errors.photos && <p className="text-error text-xs mb-3" role="alert">{errors.photos}</p>}
 
       {formData.photos.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -580,10 +640,11 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
               <button
                 type="button"
                 data-testid={`remove-photo-${index}`}
+                aria-label={`Remove photo ${index + 1}`}
                 onClick={() => handleRemovePhoto(index)}
                 className="absolute top-2 right-2 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white"
               >
-                <Trash2 size={14} className="text-status-cancelled" />
+                <Trash2 size={14} className="text-status-cancelled" aria-hidden="true" />
               </button>
             </div>
           ))}
@@ -597,13 +658,16 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       <h3 className="text-lg font-semibold text-text mb-4">Pricing</h3>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-text mb-1.5">Price per Night *</label>
+        <label htmlFor="price-per-night-input" className="block text-sm font-medium text-text mb-1.5">Price per Night *</label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">$</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" aria-hidden="true">$</span>
           <input
+            id="price-per-night-input"
             data-testid="price-per-night-input"
             type="text"
             inputMode="decimal"
+            aria-required="true"
+            aria-describedby={errors.pricePerNight ? 'price-error' : undefined}
             value={formData.pricePerNight}
             onChange={(e) => {
               const val = e.target.value.replace(/[^0-9.]/g, '')
@@ -616,14 +680,15 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
             } text-sm focus:outline-none focus:border-primary`}
           />
         </div>
-        {errors.pricePerNight && <p className="text-error text-xs mt-1">{errors.pricePerNight}</p>}
+        {errors.pricePerNight && <p id="price-error" className="text-error text-xs mt-1" role="alert">{errors.pricePerNight}</p>}
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-text mb-1.5">Cleaning Fee</label>
+        <label htmlFor="cleaning-fee-input" className="block text-sm font-medium text-text mb-1.5">Cleaning Fee</label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">$</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" aria-hidden="true">$</span>
           <input
+            id="cleaning-fee-input"
             data-testid="cleaning-fee-input"
             type="text"
             inputMode="decimal"
@@ -650,7 +715,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
         <h3 className="text-lg font-semibold text-text mb-4">Review & Publish</h3>
 
         {errors.publish && (
-          <div className="bg-error/10 text-error text-sm px-4 py-3 rounded-lg mb-4">{errors.publish}</div>
+          <div className="bg-error/10 text-error text-sm px-4 py-3 rounded-lg mb-4" role="alert">{errors.publish}</div>
         )}
 
         <div className="space-y-4">
@@ -712,15 +777,22 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
       data-testid="add-listing-form"
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
     >
-      <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto mx-4 shadow-lg">
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="add-listing-dialog-title"
+        className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto mx-4 shadow-lg"
+      >
         <div className="sticky top-0 bg-white border-b border-border px-6 py-4 flex items-center justify-between z-10">
-          <h2 className="text-lg font-semibold text-text">Add New Listing</h2>
+          <h2 id="add-listing-dialog-title" className="text-lg font-semibold text-text">Add New Listing</h2>
           <button
             data-testid="add-listing-close"
             onClick={handleCancel}
+            aria-label="Close"
             className="w-8 h-8 rounded-full hover:bg-bg-secondary flex items-center justify-center transition-colors"
           >
-            <X size={20} className="text-text-secondary" />
+            <X size={20} className="text-text-secondary" aria-hidden="true" />
           </button>
         </div>
 
@@ -751,7 +823,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
                 onClick={handleBack}
                 className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-text bg-bg-secondary rounded-lg hover:bg-border transition-colors"
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={16} aria-hidden="true" />
                 Back
               </button>
             )}
@@ -762,7 +834,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
                 className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-dark transition-colors"
               >
                 Next
-                <ChevronRight size={16} />
+                <ChevronRight size={16} aria-hidden="true" />
               </button>
             ) : (
               <button
@@ -773,7 +845,7 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
               >
                 {publishing ? (
                   <>
-                    <Loader2 size={16} className="animate-spin" />
+                    <Loader2 size={16} className="animate-spin" aria-hidden="true" />
                     Publishing...
                   </>
                 ) : (
@@ -792,10 +864,14 @@ export default function AddListingForm({ hostId, onClose, onSuccess }: AddListin
           onClick={() => setShowDiscardDialog(false)}
         >
           <div
+            ref={discardDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="discard-dialog-title"
             className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-lg font-semibold text-text mb-2">Discard your listing?</h3>
+            <h3 id="discard-dialog-title" className="text-lg font-semibold text-text mb-2">Discard your listing?</h3>
             <p className="text-text-secondary mb-6">All entered information will be lost.</p>
             <div className="flex gap-3 justify-end">
               <button

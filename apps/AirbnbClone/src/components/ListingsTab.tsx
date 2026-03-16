@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Star, Edit, Power, Plus, Loader2, MapPin } from 'lucide-react'
 import type { Property } from '../slices/propertiesSlice'
@@ -15,8 +15,41 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
   const navigate = useNavigate()
   const [confirmDialog, setConfirmDialog] = useState<Property | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
 
-  const handleDeactivateClick = (property: Property) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setConfirmDialog(null)
+    }
+    if (e.key === 'Tab' && dialogRef.current) {
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last?.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first?.focus()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (confirmDialog) {
+      document.addEventListener('keydown', handleKeyDown)
+      dialogRef.current?.querySelector<HTMLElement>('button')?.focus()
+      return () => document.removeEventListener('keydown', handleKeyDown)
+    } else {
+      triggerRef.current?.focus()
+    }
+  }, [confirmDialog, handleKeyDown])
+
+  const handleDeactivateClick = (property: Property, button: HTMLButtonElement) => {
+    triggerRef.current = button
     setConfirmDialog(property)
   }
 
@@ -36,8 +69,9 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-16">
-        <Loader2 size={32} className="animate-spin text-primary" />
+      <div className="flex items-center justify-center py-16" role="status">
+        <Loader2 size={32} className="animate-spin text-primary" aria-hidden="true" />
+        <span className="sr-only">Loading listings...</span>
       </div>
     )
   }
@@ -51,14 +85,14 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
           onClick={onAddListing}
           className="flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg font-medium hover:bg-primary-dark transition-colors"
         >
-          <Plus size={18} />
+          <Plus size={18} aria-hidden="true" />
           Add Listing
         </button>
       </div>
 
       {listings.length === 0 ? (
         <div data-testid="listings-empty-state" className="text-center py-16">
-          <Home size={48} className="mx-auto text-text-secondary mb-4 opacity-50" />
+          <Home size={48} className="mx-auto text-text-secondary mb-4 opacity-50" aria-hidden="true" />
           <p className="text-text-secondary text-lg mb-4">You don&apos;t have any listings yet</p>
           <button
             onClick={onAddListing}
@@ -107,7 +141,7 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                 <div className="p-4">
                   <h3 className="font-semibold text-text truncate">{property.title}</h3>
                   <div className="flex items-center gap-1 text-sm text-text-secondary mt-1">
-                    <MapPin size={14} />
+                    <MapPin size={14} aria-hidden="true" />
                     <span>{property.city}</span>
                   </div>
                   <div className="flex items-center justify-between mt-2">
@@ -117,7 +151,7 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                     </p>
                     {reviewCount > 0 ? (
                       <div className="flex items-center gap-1">
-                        <Star size={14} className="fill-text text-text" />
+                        <Star size={14} className="fill-text text-text" aria-hidden="true" />
                         <span className="text-sm font-medium">{rating.toFixed(1)}</span>
                         <span className="text-sm text-text-secondary">({reviewCount} reviews)</span>
                       </div>
@@ -132,17 +166,17 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                       onClick={() => navigate(`/properties/${property.id}`)}
                       className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-text bg-bg-secondary rounded-lg hover:bg-border transition-colors"
                     >
-                      <Edit size={14} />
+                      <Edit size={14} aria-hidden="true" />
                       Edit
                     </button>
                     {property.is_active ? (
                       <button
                         data-testid={`listing-deactivate-${property.id}`}
-                        onClick={() => handleDeactivateClick(property)}
+                        onClick={(e) => handleDeactivateClick(property, e.currentTarget)}
                         disabled={isLoading}
                         className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-status-cancelled bg-status-cancelled/10 rounded-lg hover:bg-status-cancelled/20 transition-colors disabled:opacity-50"
                       >
-                        <Power size={14} />
+                        <Power size={14} aria-hidden="true" />
                         {isLoading ? 'Deactivating...' : 'Deactivate'}
                       </button>
                     ) : (
@@ -152,7 +186,7 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
                         disabled={isLoading}
                         className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-status-confirmed bg-status-confirmed/10 rounded-lg hover:bg-status-confirmed/20 transition-colors disabled:opacity-50"
                       >
-                        <Power size={14} />
+                        <Power size={14} aria-hidden="true" />
                         {isLoading ? 'Activating...' : 'Activate'}
                       </button>
                     )}
@@ -171,10 +205,14 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
           onClick={() => setConfirmDialog(null)}
         >
           <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="deactivate-dialog-title"
             className="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-lg font-semibold text-text mb-2">Deactivate Listing</h3>
+            <h3 id="deactivate-dialog-title" className="text-lg font-semibold text-text mb-2">Deactivate Listing</h3>
             <p className="text-text-secondary mb-6">
               Are you sure you want to deactivate this listing? <strong>&quot;{confirmDialog.title}&quot;</strong> will
               no longer be visible to guests.
@@ -203,7 +241,7 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
   )
 }
 
-function Home(props: { size: number; className: string }) {
+function Home(props: { size: number; className: string; 'aria-hidden'?: boolean | 'true' | 'false' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -216,6 +254,7 @@ function Home(props: { size: number; className: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={props.className}
+      aria-hidden={props['aria-hidden']}
     >
       <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
       <polyline points="9 22 9 12 15 12 15 22" />

@@ -36,39 +36,40 @@ export default function StatsOverview({ stats, loading }: StatsOverviewProps) {
 
   if (loading) {
     return (
-      <div data-testid="stats-overview" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section data-testid="stats-overview" aria-label="Host statistics" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <p className="sr-only" aria-live="polite">Loading statistics...</p>
         {[1, 2, 3, 4].map((i) => (
-          <div key={i} className="bg-white rounded-xl border border-border p-5 animate-pulse">
+          <div key={i} className="bg-white rounded-xl border border-border p-5 animate-pulse" aria-hidden="true">
             <div className="h-4 bg-bg-secondary rounded w-24 mb-3" />
             <div className="h-8 bg-bg-secondary rounded w-16" />
           </div>
         ))}
-      </div>
+      </section>
     )
   }
 
   return (
-    <div data-testid="stats-overview" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <section data-testid="stats-overview" aria-label="Host statistics" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((card) => (
         <div
           key={card.testId}
           data-testid={card.testId}
           className="bg-white rounded-xl border border-border p-5 flex items-start gap-4"
         >
-          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0" aria-hidden="true">
             <card.icon size={20} className="text-primary" />
           </div>
           <div>
             <p className="text-sm text-text-secondary font-medium">{card.label}</p>
             <p className="text-2xl font-bold text-text mt-0.5 flex items-center gap-1">
               {card.label === 'Average Rating' && stats.reviewCount > 0 && (
-                <Star size={18} className="fill-status-pending text-status-pending" />
+                <Star size={18} className="fill-status-pending text-status-pending" aria-hidden="true" />
               )}
               {card.value}
             </p>
           </div>
         </div>
       ))}
-    </div>
+    </section>
   )
 }
