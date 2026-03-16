@@ -1,0 +1,58 @@
+{
+  "tasks": [
+    {
+      "skill": "skills/tasks/mergeFromMain.md",
+      "subtasks": [
+        "MergeFromMain: Merge latest main into branch"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/fixBugReport.md",
+      "subtasks": [
+        "Unpack: Fix open bug reports"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/reviewBugReport.md",
+      "subtasks": [
+        "Unpack: Review fixed bug reports"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/checkDirectives.md",
+      "subtasks": [
+        "Unpack: Check directive compliance"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/maintain/polishApp.md",
+      "subtasks": [
+        "Unpack: Polish app quality"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    },
+    {
+      "skill": "skills/tasks/deployment.md",
+      "subtasks": [
+        "Unpack: Deploy to production"
+      ],
+      "timestamp": "2026-03-16T04:57:59.339Z",
+      "app": "LinearClone"
+    }
+  ],
+  "current": {
+    "skill": "",
+    "subtasks": [],
+    "timestamp": "2026-03-16T04:57:30.899Z",
+    "prompt": "do maintenance"
+  }
+}
