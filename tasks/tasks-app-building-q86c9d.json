@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "MakeResponsiveLoginRegister: Make Login / Register page responsive"
-      ],
-      "timestamp": "2026-03-16T03:04:02.704Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/polishApp.md",
-      "subtasks": [
         "MakeResponsiveHomeSearch: Make Home / Search page responsive"
       ],
       "timestamp": "2026-03-16T03:04:02.704Z",
@@ -76,7 +68,7 @@
   "current": {
     "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "MakeAccessibleWriteReview: Make Write Review page accessible"
+      "MakeResponsiveLoginRegister: Make Login / Register page responsive"
     ],
     "timestamp": "2026-03-16T03:04:02.704Z",
     "app": "AirbnbClone"

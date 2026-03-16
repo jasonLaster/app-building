@@ -10,7 +10,7 @@
 - [x] WriteReview
 
 ### Responsive UI
-- [ ] LoginRegister
+- [x] LoginRegister
 - [ ] HomeSearch
 - [ ] PropertyDetail
 - [ ] MyTrips
