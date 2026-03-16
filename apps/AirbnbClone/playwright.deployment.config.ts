@@ -1,12 +1,17 @@
-import { PlaywrightTestConfig } from '@playwright/test'
+import { PlaywrightTestConfig, devices } from '@playwright/test'
 import { devices as replayDevices, replayReporter } from '@replayio/playwright'
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
+import { arch } from 'os'
 
 function getDeployedUrl(): string {
   const content = readFileSync('deployment.txt', 'utf-8')
   const match = content.match(/url=(.+)/)
   return match?.[1]?.trim() || ''
 }
+
+const replayDevice = replayDevices['Replay Chromium']
+const replayExePath = replayDevice?.launchOptions?.executablePath
+const useReplay = !!replayExePath && existsSync(replayExePath) && arch() === 'x64'
 
 const config: PlaywrightTestConfig = {
   testDir: './tests',
@@ -20,11 +25,11 @@ const config: PlaywrightTestConfig = {
   retries: 0,
   workers: 1,
   reporter: [
-    replayReporter({ apiKey: process.env.RECORD_REPLAY_API_KEY, upload: true }),
+    ...(useReplay ? [replayReporter({ apiKey: process.env.RECORD_REPLAY_API_KEY, upload: true })] : []),
     ['list'],
   ],
   use: {
-    ...replayDevices['Replay Chromium'],
+    ...(useReplay ? replayDevice : devices['Desktop Chrome']),
     baseURL: getDeployedUrl(),
     headless: true,
     actionTimeout: 15000,

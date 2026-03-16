@@ -2,33 +2,33 @@ Schema synced
 === Build ===
 vite v6.4.1 building for production...
 transforming...
-✓ 1649 modules transformed.
+✓ 1650 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                     0.46 kB │ gzip:   0.30 kB
-dist/assets/index-BJgZ59QQ.css     41.05 kB │ gzip:   6.88 kB
-dist/assets/index-CRzalpfa.js   1,409.33 kB │ gzip: 242.60 kB │ map: 2,711.56 kB
-✓ built in 3.86s
+dist/assets/index-0HKTCRaf.css     54.26 kB │ gzip:   8.75 kB
+dist/assets/index-DvBHHcXr.js   1,473.94 kB │ gzip: 254.39 kB │ map: 2,805.17 kB
+✓ built in 2.24s
 
 === Deploy ===
 ​
 Netlify Build                                                 
 ────────────────────────────────────────────────────────────────
 ​
-> Version
+❯ Version
   @netlify/build 35.8.8
 ​
-> Flags
+❯ Flags
   accountId: 67db64f88522edc0da7e6ec8
-  deployId: 69b60d0155d43cb32569b03b
+  deployId: 69b78dbe55d43cda4069b09a
 ​
-> Current directory
+❯ Current directory
   /repo/apps/AirbnbClone
 ​
-> Config file
+❯ Config file
   /repo/apps/AirbnbClone/netlify.toml
 ​
-> Context
+❯ Context
   production
 ​
 build.command from netlify.toml                               
@@ -41,15 +41,15 @@ $ npm run build
 
 vite v6.4.1 building for production...
 transforming...
-✓ 1649 modules transformed.
+✓ 1650 modules transformed.
 rendering chunks...
 computing gzip size...
 dist/index.html                     0.46 kB │ gzip:   0.30 kB
-dist/assets/index-BJgZ59QQ.css     41.05 kB │ gzip:   6.88 kB
-dist/assets/index-CRzalpfa.js   1,409.33 kB │ gzip: 242.60 kB │ map: 2,711.56 kB
-✓ built in 3.92s
+dist/assets/index-0HKTCRaf.css     54.26 kB │ gzip:   8.75 kB
+dist/assets/index-DvBHHcXr.js   1,473.94 kB │ gzip: 254.39 kB │ map: 2,805.17 kB
+✓ built in 1.82s
 ​
-(build.command completed in 4.5s)
+(build.command completed in 2s)
 ​
 Functions bundling                                            
 ────────────────────────────────────────────────────────────────
@@ -69,20 +69,20 @@ Packaging Functions from netlify/functions directory:
  - users.ts
 ​
 ​
-(Functions bundling completed in 1.4s)
+(Functions bundling completed in 758ms)
 
 Deploying to Netlify
 ────────────────────────────────────────────────────────────────
 
-[32mDeploy path: [39m       /repo/apps/AirbnbClone/dist
-[32mFunctions path: [39m    /repo/apps/AirbnbClone/netlify/functions
-[32mConfiguration path: [39m/repo/apps/AirbnbClone/netlify.toml
+Deploy path:        /repo/apps/AirbnbClone/dist
+Functions path:     /repo/apps/AirbnbClone/netlify/functions
+Configuration path: /repo/apps/AirbnbClone/netlify.toml
 
 ​
 Netlify Build Complete                                        
 ────────────────────────────────────────────────────────────────
 ​
-(Netlify Build completed in 20.7s)
+(Netlify Build completed in 19s)
 
 🚀 Deploy complete
 ────────────────────────────────────────────────────────────────
@@ -92,11 +92,11 @@ Netlify Build Complete
   │   Deployed to production URL: https://magenta-jelly-44409b.netlify.app   │
   │                                                                          │
   │                            Unique deploy URL:                            │
-  │    https://69b60d0155d43cb32569b03b--magenta-jelly-44409b.netlify.app    │
+  │    https://69b78dbe55d43cda4069b09a--magenta-jelly-44409b.netlify.app    │
   │                                                                          │
   ╰──────────────────────────────────────────────────────────────────────────╯
 
-[32mBuild logs: [39m        https://app.netlify.com/projects/magenta-jelly-44409b/deploys/69b60d0155d43cb32569b03b
-[32mFunction logs: [39m     https://app.netlify.com/projects/magenta-jelly-44409b/logs/functions
-[32mEdge function Logs: [39mhttps://app.netlify.com/projects/magenta-jelly-44409b/logs/edge-functions
+Build logs:         https://app.netlify.com/projects/magenta-jelly-44409b/deploys/69b78dbe55d43cda4069b09a
+Function logs:      https://app.netlify.com/projects/magenta-jelly-44409b/logs/functions
+Edge function Logs: https://app.netlify.com/projects/magenta-jelly-44409b/logs/edge-functions
 

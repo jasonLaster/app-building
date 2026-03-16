@@ -30,3 +30,15 @@ Changes:
 - Fixed image-gallery, host-info-card, host-dashboard-listings, host-dashboard-bookings tests
 - Deployment test passed: data displays and write operations work
 - Replay recording upload failed (API key limit reached), local recording ID: 5d3c8406-17ce-46c8-b36d-6862ffcf25c5
+
+--- Deployment 2026-03-16 ---
+Changes:
+- Complete UI overhaul to match Airbnb.com reference design
+- Added accessibility improvements across all pages (Login/Register, Home/Search, Property Detail, My Trips, Host Dashboard, User Profile, Write Review)
+- Made all pages responsive for mobile, tablet, and desktop viewports
+- Paginated backend APIs that return lists (properties, bookings, reviews, favorites, host listings, host bookings)
+- Fixed various test violations and test spec compliance issues
+- Added undefined checks for database query results
+- Deployment test passed: data displays and favorite write operation works
+- Replay browser unavailable on arm64 (used standard Chromium for test)
+- Cleaned up leftover test data from production database

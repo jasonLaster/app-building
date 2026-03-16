@@ -10,7 +10,7 @@ test('deployment: app displays data and supports updates', async ({ page }) => {
   await expect(firstCard).toBeVisible({ timeout: 15000 })
 
   // Verify property card has meaningful content (title, price)
-  await expect(firstCard.locator('text=/ night')).toBeVisible()
+  await expect(firstCard.getByText('night')).toBeVisible()
 
   // Count properties - should have at least 1
   const cardCount = await page.locator('[data-testid^="property-card-"]').count()
