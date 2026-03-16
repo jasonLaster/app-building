@@ -31,10 +31,10 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
 
   if (reviews.length === 0) {
     return (
-      <div id="reviews-section" data-testid="reviews-section" className="py-6 border-b border-border">
+      <section id="reviews-section" data-testid="reviews-section" className="py-6 border-b border-border">
         <h2 className="text-lg font-semibold text-text mb-3">Reviews</h2>
         <p className="text-text-secondary">No reviews yet</p>
-      </div>
+      </section>
     )
   }
 
@@ -42,9 +42,9 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
   const displayReviews = showAll ? reviews : reviews.slice(0, INITIAL_SHOW)
 
   return (
-    <div id="reviews-section" data-testid="reviews-section" className="py-6 border-b border-border">
+    <section id="reviews-section" data-testid="reviews-section" className="py-6 border-b border-border">
       <div className="flex items-center gap-2 mb-4">
-        <Star size={20} className="fill-text text-text" />
+        <Star size={20} className="fill-text text-text" aria-hidden="true" />
         <h2 className="text-lg font-semibold text-text">
           {overallAvg.toFixed(1)} · {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
         </h2>
@@ -57,7 +57,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
             <div key={key} data-testid={`rating-category-${key}`} className="flex items-center justify-between text-sm">
               <span className="text-text-secondary">{label}</span>
               <div className="flex items-center gap-1">
-                <div className="w-24 h-1 bg-bg-secondary rounded-full overflow-hidden">
+                <div className="w-24 h-1 bg-bg-secondary rounded-full overflow-hidden" role="meter" aria-label={`${label} rating`} aria-valuenow={avg} aria-valuemin={0} aria-valuemax={5}>
                   <div
                     className="h-full bg-text rounded-full"
                     style={{ width: `${(avg / 5) * 100}%` }}
@@ -90,11 +90,12 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
                 <p className="text-text-secondary text-xs">{formatDate(review.created_at)}</p>
               </div>
             </div>
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center gap-0.5" role="img" aria-label={`${Number(review.rating)} out of 5 stars`}>
               {Array.from({ length: 5 }, (_, i) => (
                 <Star
                   key={i}
                   size={12}
+                  aria-hidden="true"
                   className={i < Number(review.rating) ? 'fill-text text-text' : 'text-border'}
                 />
               ))}
@@ -111,10 +112,11 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
           data-testid="reviews-toggle"
           className="mt-6 font-semibold text-text underline cursor-pointer"
           onClick={() => setShowAll(!showAll)}
+          aria-expanded={showAll}
         >
           {showAll ? 'Show less' : `Show all ${reviews.length} reviews`}
         </button>
       )}
-    </div>
+    </section>
   )
 }

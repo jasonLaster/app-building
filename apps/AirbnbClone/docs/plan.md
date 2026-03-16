@@ -3,7 +3,7 @@
 ### Accessibility
 - [x] LoginRegister
 - [x] HomeSearch
-- [ ] PropertyDetail
+- [x] PropertyDetail
 - [ ] MyTrips
 - [ ] HostDashboard
 - [ ] UserProfile

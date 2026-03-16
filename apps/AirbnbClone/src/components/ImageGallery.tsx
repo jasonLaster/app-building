@@ -53,9 +53,11 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
         {thumbnails.slice(0, 4).map((img, i) => {
           const originalIndex = images.indexOf(img)
           return (
-            <div
+            <button
               key={img.id}
               data-testid={`thumbnail-${img.id}`}
+              type="button"
+              aria-label={img.caption || `View property image ${originalIndex + 1}`}
               className={`relative cursor-pointer overflow-hidden hover:opacity-90 transition-opacity ${
                 i === 1 ? 'rounded-tr-xl' : i === 3 ? 'rounded-br-xl' : ''
               }`}
@@ -71,13 +73,13 @@ export default function ImageGallery({ images }: ImageGalleryProps) {
                   {img.caption}
                 </span>
               )}
-            </div>
+            </button>
           )
         })}
       </div>
       {images.length > 5 && (
         <button className="absolute bottom-4 right-4 flex items-center gap-2 bg-white border border-text rounded-lg px-4 py-1.5 text-sm font-semibold text-text hover:bg-bg-secondary transition-colors cursor-pointer">
-          <Grid size={14} />
+          <Grid size={14} aria-hidden="true" />
           Show all photos
         </button>
       )}

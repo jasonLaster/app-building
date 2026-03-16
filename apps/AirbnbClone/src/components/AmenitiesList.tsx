@@ -45,10 +45,10 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
 
   if (amenities.length === 0) {
     return (
-      <div data-testid="amenities-list" className="py-6 border-b border-border">
+      <section data-testid="amenities-list" className="py-6 border-b border-border">
         <h2 className="text-lg font-semibold text-text mb-3">Amenities</h2>
         <p className="text-text-secondary">No amenities listed</p>
-      </div>
+      </section>
     )
   }
 
@@ -96,7 +96,7 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
         .filter((g) => g.items.length > 0))
 
   return (
-    <div data-testid="amenities-list" className="py-6 border-b border-border">
+    <section data-testid="amenities-list" className="py-6 border-b border-border">
       <h2 className="text-lg font-semibold text-text mb-4">Amenities</h2>
       <div className="space-y-4">
         {displayCategories.map((group) => (
@@ -104,18 +104,18 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
             <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-2">
               {group.category}
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 list-none p-0 m-0">
               {group.items.map((amenity) => (
-                <div
+                <li
                   key={amenity.id}
                   data-testid={`amenity-${amenity.id}`}
                   className="flex items-center gap-3 text-text-secondary py-1"
                 >
-                  <span className="text-text-secondary">{getIcon(amenity)}</span>
+                  <span className="text-text-secondary" aria-hidden="true">{getIcon(amenity)}</span>
                   <span>{amenity.name}</span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>
@@ -124,10 +124,11 @@ export default function AmenitiesList({ amenities }: AmenitiesListProps) {
           data-testid="amenities-toggle"
           className="mt-4 font-semibold text-text underline cursor-pointer"
           onClick={() => setShowAll(!showAll)}
+          aria-expanded={showAll}
         >
           {showAll ? 'Show less' : `Show all ${amenities.length} amenities`}
         </button>
       )}
-    </div>
+    </section>
   )
 }

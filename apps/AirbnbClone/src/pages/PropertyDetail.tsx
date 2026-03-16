@@ -30,40 +30,41 @@ export default function PropertyDetail() {
 
   if (loading) {
     return (
-      <div data-testid="property-detail-page" className="p-6 max-sm:p-3 max-w-6xl mx-auto flex items-center justify-center min-h-[60vh]">
-        <Loader2 size={32} className="animate-spin text-primary" />
-      </div>
+      <main data-testid="property-detail-page" className="p-6 max-sm:p-3 max-w-6xl mx-auto flex items-center justify-center min-h-[60vh]" aria-busy="true">
+        <Loader2 size={32} className="animate-spin text-primary" aria-hidden="true" />
+        <span className="sr-only">Loading property details</span>
+      </main>
     )
   }
 
   if (error || !property) {
     return (
-      <div data-testid="property-detail-page" className="p-6 max-sm:p-3 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <p className="text-text-secondary">{error || 'Property not found'}</p>
+      <main data-testid="property-detail-page" className="p-6 max-sm:p-3 max-w-6xl mx-auto flex flex-col items-center justify-center min-h-[60vh] gap-4">
+        <p className="text-text-secondary" role="alert">{error || 'Property not found'}</p>
         <button
           className="text-primary font-semibold hover:underline cursor-pointer"
           onClick={() => navigate('/')}
         >
           Back to listings
         </button>
-      </div>
+      </main>
     )
   }
 
   return (
-    <div data-testid="property-detail-page" className="px-6 max-sm:px-3 py-6 max-w-6xl mx-auto">
-      <div className="flex items-center justify-end mb-6">
+    <main data-testid="property-detail-page" className="px-6 max-sm:px-3 py-6 max-w-6xl mx-auto">
+      <nav aria-label="Property actions" className="flex items-center justify-end mb-6">
         <div className="flex items-center gap-4 shrink-0">
           <button className="flex items-center gap-1.5 text-sm font-semibold text-text underline hover:no-underline cursor-pointer">
-            <Share size={16} />
+            <Share size={16} aria-hidden="true" />
             Share
           </button>
           <button className="flex items-center gap-1.5 text-sm font-semibold text-text underline hover:no-underline cursor-pointer">
-            <Heart size={16} />
+            <Heart size={16} aria-hidden="true" />
             Save
           </button>
         </div>
-      </div>
+      </nav>
 
       <ImageGallery images={property.images || []} />
 
@@ -81,6 +82,6 @@ export default function PropertyDetail() {
           <BookingCard property={property} />
         </div>
       </div>
-    </div>
+    </main>
   )
 }

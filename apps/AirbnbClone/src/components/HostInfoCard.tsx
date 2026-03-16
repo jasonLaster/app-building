@@ -19,7 +19,7 @@ export default function HostInfoCard({ property }: HostInfoCardProps) {
   const listingCount = property.host_listing_count || 0
 
   return (
-    <div id="host-info-card" data-testid="host-info-card" className="py-6">
+    <section id="host-info-card" data-testid="host-info-card" className="py-6">
       <h2 className="text-lg font-semibold text-text mb-4">Meet your host</h2>
       <div className="flex items-start gap-4">
         <div className="shrink-0">
@@ -40,7 +40,7 @@ export default function HostInfoCard({ property }: HostInfoCardProps) {
           {property.host_since && (
             <>
               <p className="text-text-secondary text-sm flex items-center gap-1 mt-1">
-                <Shield size={14} />
+                <Shield size={14} aria-hidden="true" />
                 {getYearsHosting(property.host_since)} {getYearsHosting(property.host_since) === 1 ? 'year' : 'years'} hosting
               </p>
               <p className="text-text-secondary text-xs mt-0.5">
@@ -49,7 +49,7 @@ export default function HostInfoCard({ property }: HostInfoCardProps) {
             </>
           )}
           <div className="flex items-center gap-1 text-text-secondary text-sm mt-1">
-            <Home size={14} />
+            <Home size={14} aria-hidden="true" />
             <span>{listingCount} {listingCount === 1 ? 'listing' : 'listings'}</span>
           </div>
           {property.host_bio && (
@@ -57,6 +57,6 @@ export default function HostInfoCard({ property }: HostInfoCardProps) {
           )}
         </div>
       </div>
-    </div>
+    </section>
   )
 }

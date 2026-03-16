@@ -68,13 +68,13 @@ function CalendarMonth({
   for (let d = 1; d <= daysInMonth; d++) cells.push(d)
 
   return (
-    <div>
+    <div role="grid" aria-label={`${MONTH_NAMES[month]} ${year}`}>
       <div className="text-center text-sm font-semibold text-text mb-3">
         {MONTH_NAMES[month]} {year}
       </div>
       <div className="grid grid-cols-7 gap-0">
         {DAY_NAMES.map((d) => (
-          <div key={d} className="text-center text-xs font-semibold text-text-secondary py-1">
+          <div key={d} className="text-center text-xs font-semibold text-text-secondary py-1" role="columnheader">
             {d}
           </div>
         ))}
@@ -97,6 +97,8 @@ function CalendarMonth({
               data-testid={`calendar-day-${dateStr}`}
               disabled={disabled}
               onClick={() => !disabled && onSelectDate(dateStr)}
+              aria-label={`${MONTH_NAMES[month]} ${day}, ${year}${isCheckIn ? ' (check-in)' : ''}${isCheckOut ? ' (checkout)' : ''}${booked ? ' (unavailable)' : ''}${isPast ? ' (past date)' : ''}`}
+              aria-pressed={isSelected}
               className={`h-10 w-full text-sm rounded-full transition-colors cursor-pointer
                 ${disabled ? 'text-border line-through cursor-not-allowed' : 'hover:bg-bg-secondary text-text'}
                 ${isSelected ? 'bg-text text-white hover:bg-text' : ''}
@@ -245,7 +247,7 @@ export default function BookingCard({ property }: BookingCardProps) {
   }
 
   return (
-    <div data-testid="booking-card" className="border border-border rounded-xl p-6 shadow-lg sticky top-[96px]">
+    <aside data-testid="booking-card" className="border border-border rounded-xl p-6 shadow-lg sticky top-[96px]" aria-label="Booking">
       {nights > 0 ? (
         <div className="flex items-baseline gap-1 mb-5">
           <span className="text-[22px] font-semibold text-text">${Number(property.price_per_night).toFixed(0)}</span>
@@ -256,39 +258,50 @@ export default function BookingCard({ property }: BookingCardProps) {
       )}
 
       <div className="border border-border rounded-lg overflow-hidden mb-4">
-        <div className="grid grid-cols-2 cursor-pointer" onClick={() => setCalendarOpen(!calendarOpen)}>
+        <button
+          type="button"
+          className="grid grid-cols-2 cursor-pointer w-full text-left bg-transparent border-0 p-0"
+          onClick={() => setCalendarOpen(!calendarOpen)}
+          aria-expanded={calendarOpen}
+          aria-label="Select check-in and checkout dates"
+        >
           <div className="p-3 border-r border-border">
-            <label className="block text-[10px] font-bold text-text uppercase tracking-wide">Check-in</label>
+            <span className="block text-[10px] font-bold text-text uppercase tracking-wide">Check-in</span>
             <p data-testid="booking-checkin" className="text-sm text-text-secondary mt-0.5">
               {checkIn ? formatDisplayDate(checkIn) : 'Add date'}
             </p>
           </div>
           <div className="p-3">
-            <label className="block text-[10px] font-bold text-text uppercase tracking-wide">Checkout</label>
+            <span className="block text-[10px] font-bold text-text uppercase tracking-wide">Checkout</span>
             <p data-testid="booking-checkout" className="text-sm text-text-secondary mt-0.5">
               {checkOut ? formatDisplayDate(checkOut) : 'Add date'}
             </p>
           </div>
-        </div>
+        </button>
         <div className="border-t border-border p-3 relative" ref={guestDropdownRef}>
-          <label className="block text-[10px] font-bold text-text uppercase tracking-wide">Guests</label>
+          <span id="guests-label" className="block text-[10px] font-bold text-text uppercase tracking-wide">Guests</span>
           <button
             data-testid="booking-guests"
             data-value={String(guests)}
             type="button"
             onClick={() => setGuestDropdownOpen(!guestDropdownOpen)}
+            aria-expanded={guestDropdownOpen}
+            aria-haspopup="listbox"
+            aria-labelledby="guests-label"
             className="w-full flex items-center justify-between text-sm text-text bg-transparent outline-none mt-0.5 cursor-pointer"
           >
             <span>{guests} {guests === 1 ? 'guest' : 'guests'}</span>
-            <ChevronDown size={16} className={`transition-transform ${guestDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown size={16} aria-hidden="true" className={`transition-transform ${guestDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
           {guestDropdownOpen && (
-            <div data-testid="booking-guests-dropdown" className="absolute left-0 right-0 top-full mt-1 bg-bg border border-border rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+            <div data-testid="booking-guests-dropdown" role="listbox" aria-label="Number of guests" className="absolute left-0 right-0 top-full mt-1 bg-bg border border-border rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
               {Array.from({ length: property.max_guests }, (_, i) => i + 1).map((n) => (
                 <button
                   key={n}
                   data-testid={`guest-option-${n}`}
                   type="button"
+                  role="option"
+                  aria-selected={guests === n}
                   onClick={() => { setGuests(n); setGuestDropdownOpen(false) }}
                   className={`w-full text-left px-3 py-2 text-sm cursor-pointer transition-colors
                     ${guests === n ? 'bg-bg-secondary font-semibold text-text' : 'text-text hover:bg-bg-secondary'}
@@ -312,17 +325,19 @@ export default function BookingCard({ property }: BookingCardProps) {
             <button
               data-testid="calendar-prev-month"
               onClick={handlePrevMonth}
+              aria-label="Previous month"
               className="p-1 rounded-full hover:bg-bg-secondary cursor-pointer"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={20} aria-hidden="true" />
             </button>
             <div />
             <button
               data-testid="calendar-next-month"
               onClick={handleNextMonth}
+              aria-label="Next month"
               className="p-1 rounded-full hover:bg-bg-secondary cursor-pointer"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={20} aria-hidden="true" />
             </button>
           </div>
           <div className="grid grid-cols-2 gap-6">
@@ -407,14 +422,14 @@ export default function BookingCard({ property }: BookingCardProps) {
       )}
 
       {error && (
-        <p data-testid="booking-error" className="text-error text-sm mt-2 text-center">{error}</p>
+        <p data-testid="booking-error" role="alert" className="text-error text-sm mt-2 text-center">{error}</p>
       )}
 
       {success && (
-        <p data-testid="booking-success" className="text-success text-sm mt-2 text-center font-semibold">
+        <p data-testid="booking-success" role="status" aria-live="polite" className="text-success text-sm mt-2 text-center font-semibold">
           Booking confirmed! Redirecting...
         </p>
       )}
-    </div>
+    </aside>
   )
 }

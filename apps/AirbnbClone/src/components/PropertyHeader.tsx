@@ -22,7 +22,7 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
     : null
 
   return (
-    <div data-testid="property-header" className="pb-6 border-b border-border">
+    <header data-testid="property-header" className="pb-6 border-b border-border">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-[22px] font-semibold text-text">
@@ -37,8 +37,9 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
                 data-testid="review-count-link"
                 className="flex items-center gap-1 hover:underline cursor-pointer"
                 onClick={scrollToReviews}
+                aria-label={`${rating.toFixed(2)} stars, ${reviewCount} ${reviewCount === 1 ? 'review' : 'reviews'} - scroll to reviews`}
               >
-                <Star size={14} className="fill-text text-text" />
+                <Star size={14} className="fill-text text-text" aria-hidden="true" />
                 <span className="font-semibold text-text">{rating.toFixed(2)}</span>
                 <span className="text-text-secondary">·</span>
                 <span className="text-text-secondary underline">({reviewCount} {reviewCount === 1 ? 'review' : 'reviews'})</span>
@@ -51,7 +52,7 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
       </div>
 
       <div className="flex items-center gap-4 mt-6 pt-6 border-t border-border">
-        <button data-testid="host-info" className="flex items-center gap-3 cursor-pointer" onClick={() => {
+        <button data-testid="host-info" className="flex items-center gap-3 cursor-pointer" aria-label={`Hosted by ${property.host_name} - scroll to host info`} onClick={() => {
           const el = document.getElementById('host-info-card')
           if (el) el.scrollIntoView({ behavior: 'smooth' })
         }}>
@@ -75,6 +76,6 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
           </div>
         </button>
       </div>
-    </div>
+    </header>
   )
 }
