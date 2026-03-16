@@ -39,10 +39,9 @@ explicitly in the JSON array:
 ```bash
 npx tsx /repo/scripts/add-task.ts <<'EOF'
 [
-  { "skill": "skills/benchmark/fixProblem.md", "subtasks": ["FixTestFailure: <failure1.id> <failure1.clean_branch> <agent.prompt>"], "command": <task.command> },
+  { "skill": "skills/benchmark/fixProblem.md", "subtasks": ["FixTestFailure: <failure1.id> <failure1.clean_branch> <agent.prompt>"], "command": <task.command>, "timeoutMinutes": 30, "maxAttempts": 1 },
   { "skill": "skills/benchmark/fixProblem.md", "subtasks": ["VerifyTestFailure: <failure1.id> <failure1.assessment_string>"] },
-  { "skill": "skills/benchmark/fixProblem.md", "subtasks": ["FixTestFailure: <failure2.id> <failure2.clean_branch> <agent.prompt>"], "command": <task.command> },
-  { "skill": "skills/benchmark/fixProblem.md", "subtasks": ["VerifyTestFailure: <failure2.id> <failure2.assessment_string>"] }
+  ... repeated for each failure
 ]
 EOF
 ```
@@ -73,7 +72,7 @@ The second task reads that report and the logs and decides based on the assessme
 5. Follow the directions from the agent prompt in the subtask to fix the code and/or test to make the test pass.
    If you weren't given additional directions, do what you normally do and do not look at the Replay recording.
    - If you don't know what's wrong, don't guess and move on to the next step.
-   - If you have taken more than 30 minutes to fix the problem, give up on fixing the issue and move on to the next step.
+   - You have a 30 minute time limit and if you are getting close to the limit you should give up and go to the next step.
 
 6. Get the patch with your changes.
 

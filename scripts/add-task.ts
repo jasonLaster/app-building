@@ -30,6 +30,8 @@ interface Task {
   timestamp: string;
   app?: string;
   command?: string;
+  maxAttempts?: number;
+  timeoutMinutes?: number;
 }
 
 interface TaskInput {
@@ -37,6 +39,8 @@ interface TaskInput {
   subtasks: string[];
   app?: string;
   command?: string;
+  maxAttempts?: number;
+  timeoutMinutes?: number;
 }
 
 interface TasksFile {
@@ -168,6 +172,8 @@ ERROR: No input provided. Pass a JSON array via stdin or use --skill/--subtask f
       timestamp,
       ...(input.app && { app: input.app }),
       ...(input.command && { command: input.command }),
+      ...(input.maxAttempts != null && { maxAttempts: input.maxAttempts }),
+      ...(input.timeoutMinutes != null && { timeoutMinutes: input.timeoutMinutes }),
     });
   }
 

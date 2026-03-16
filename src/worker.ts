@@ -29,6 +29,10 @@ export interface Task {
   prompt?: string;
   /** Custom command (agent + args) to run instead of the default "claude" with extraArgs. */
   command?: string;
+  /** Maximum number of attempts before giving up. Default: 5. */
+  maxAttempts?: number;
+  /** Maximum time in minutes for each attempt. Agent is killed if exceeded. */
+  timeoutMinutes?: number;
 }
 
 interface TasksFile {
@@ -380,6 +384,8 @@ export async function processTask(
   resumeSessionId?: string,
   agentEnv?: Record<string, string>,
 ): Promise<TaskResult> {
+  const maxAttempts = task.maxAttempts ?? MAX_TASK_RETRIES;
+  const timeoutMs = (task.timeoutMinutes ?? 0) * 60_000;
   let retries = 0;
   let cost = 0;
   let sessionId = resumeSessionId;
@@ -400,11 +406,22 @@ export async function processTask(
     interruptRequested = false;
     const agent = task.command ? parseCommand(task.command) : defaultAgent;
     const cmd = buildAgentArgs(agent, prompt, task.prompt ? sessionId : undefined);
-    log(`Running ${cmd.bin}${sessionId && !task.command ? ` (resume ${sessionId.slice(0, 8)}...)` : ""}...`);
+    log(`Running ${cmd.bin}${sessionId && !task.command ? ` (resume ${sessionId.slice(0, 8)}...)` : ""}${task.timeoutMinutes ? ` (timeout: ${task.timeoutMinutes}m)` : ""}...`);
+
+    // Set up timeout if configured
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    if (timeoutMs > 0) {
+      timer = setTimeout(() => {
+        log(`Task timed out after ${task.timeoutMinutes}m. Killing agent.`);
+        currentAgentProcess?.kill("SIGINT");
+      }, timeoutMs);
+    }
+
     let response: AgentResult;
     try {
       response = await runAgent(cmd, log, onEvent, agentEnv);
     } catch (e: any) {
+      if (timer) clearTimeout(timer);
       if (interruptRequested) {
         log(`Task interrupted.`);
         interruptRequested = false;
@@ -416,10 +433,8 @@ export async function processTask(
       commitFn?.("Agent error recovery");
       continue;
     }
+    if (timer) clearTimeout(timer);
 
-    // Check interrupt after agent completes — the agent may emit a result
-    // event before exiting from SIGINT, causing runAgent to resolve rather
-    // than reject.
     if (interruptRequested) {
       log(`Task interrupted.`);
       interruptRequested = false;
@@ -457,10 +472,10 @@ export async function processTask(
     }
 
     retries++;
-    if (retries >= MAX_TASK_RETRIES) {
-      log(`Task failed ${MAX_TASK_RETRIES} times. Aborting task queue.`);
+    if (retries >= maxAttempts) {
+      log(`Task failed ${maxAttempts} time(s). Aborting task queue.`);
       return { success: false, cost, session_id: sessionId };
     }
-    log(`Task did NOT signal <DONE>. Retry ${retries}/${MAX_TASK_RETRIES}.`);
+    log(`Task did NOT signal <DONE>. Retry ${retries}/${maxAttempts}.`);
   }
 }
