@@ -1,14 +1,6 @@
 {
   "tasks": [
     {
-      "skill": "skills/tasks/mergeFromMain.md",
-      "subtasks": [
-        "MergeFromMain: Merge latest main into branch"
-      ],
-      "timestamp": "2026-03-16T04:57:59.339Z",
-      "app": "LinearClone"
-    },
-    {
       "skill": "skills/tasks/maintain/fixBugReport.md",
       "subtasks": [
         "Unpack: Fix open bug reports"
@@ -50,9 +42,11 @@
     }
   ],
   "current": {
-    "skill": "",
-    "subtasks": [],
-    "timestamp": "2026-03-16T04:57:30.899Z",
-    "prompt": "do maintenance"
+    "skill": "skills/tasks/mergeFromMain.md",
+    "subtasks": [
+      "MergeFromMain: Merge latest main into branch"
+    ],
+    "timestamp": "2026-03-16T04:57:59.339Z",
+    "app": "LinearClone"
   }
 }
