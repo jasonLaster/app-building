@@ -1,0 +1,193 @@
+Created branch: test-run-1773625574977 (br-fragrant-unit-a61agvw7)
+Test DB URL: postgresql://neondb_owner:***@ep-odd-hall-a6t37zo3.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/my-trips-cards.spec.ts:41:3 › My Trips Page - TripCard › Trip card displays all required information
+
+[1A[2K  1) tests/my-trips-cards.spec.ts:41:3 › My Trips Page - TripCard › Trip card displays all required information 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:43:11
+
+
+
+[1A[2K[2/10] tests/my-trips-cards.spec.ts:66:3 › My Trips Page - TripCard › Trip card displays correct status badge colors
+[1A[2K  2) tests/my-trips-cards.spec.ts:66:3 › My Trips Page - TripCard › Trip card displays correct status badge colors 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:69:11
+
+
+
+[1A[2K[3/10] tests/my-trips-cards.spec.ts:103:3 › My Trips Page - TripCard › Trip card shows property image or placeholder
+[1A[2K  3) tests/my-trips-cards.spec.ts:103:3 › My Trips Page - TripCard › Trip card shows property image or placeholder 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:105:11
+
+
+
+[1A[2K[4/10] tests/my-trips-cards.spec.ts:116:3 › My Trips Page - TripCard › Clicking trip card navigates to booking details
+[1A[2K  4) tests/my-trips-cards.spec.ts:116:3 › My Trips Page - TripCard › Clicking trip card navigates to booking details 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:117:11
+
+
+
+[1A[2K[5/10] tests/my-trips-cards.spec.ts:131:3 › My Trips Page - TripCard › Cancel button appears on pending bookings
+[1A[2K  5) tests/my-trips-cards.spec.ts:131:3 › My Trips Page - TripCard › Cancel button appears on pending bookings 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:132:11
+
+
+
+[1A[2K[6/10] tests/my-trips-cards.spec.ts:143:3 › My Trips Page - TripCard › Cancel button appears on confirmed bookings
+[1A[2K  6) tests/my-trips-cards.spec.ts:143:3 › My Trips Page - TripCard › Cancel button appears on confirmed bookings 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:144:11
+
+
+
+[1A[2K[7/10] tests/my-trips-cards.spec.ts:155:3 › My Trips Page - TripCard › Cancel button does not appear on completed bookings
+[1A[2K  7) tests/my-trips-cards.spec.ts:155:3 › My Trips Page - TripCard › Cancel button does not appear on completed bookings 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:156:11
+
+
+
+[1A[2K[8/10] tests/my-trips-cards.spec.ts:169:3 › My Trips Page - TripCard › Cancel button does not appear on already cancelled bookings
+[1A[2K  8) tests/my-trips-cards.spec.ts:169:3 › My Trips Page - TripCard › Cancel button does not appear on already cancelled bookings 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:170:11
+
+
+
+[1A[2K[9/10] tests/my-trips-cards.spec.ts:183:3 › My Trips Page - TripCard › Write Review button appears on completed bookings without a review
+[1A[2K  9) tests/my-trips-cards.spec.ts:183:3 › My Trips Page - TripCard › Write Review button appears on completed bookings without a review 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:192:11
+
+
+
+[1A[2K[10/10] tests/my-trips-cards.spec.ts:203:3 › My Trips Page - TripCard › Write Review button does not appear on completed bookings that already have a review
+[1A[2K  10) tests/my-trips-cards.spec.ts:203:3 › My Trips Page - TripCard › Write Review button does not appear on completed bookings that already have a review 
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:13:14)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:205:11
+
+
+[1A[2K  10 failed
+    tests/my-trips-cards.spec.ts:41:3 › My Trips Page - TripCard › Trip card displays all required information 
+    tests/my-trips-cards.spec.ts:66:3 › My Trips Page - TripCard › Trip card displays correct status badge colors 
+    tests/my-trips-cards.spec.ts:103:3 › My Trips Page - TripCard › Trip card shows property image or placeholder 
+    tests/my-trips-cards.spec.ts:116:3 › My Trips Page - TripCard › Clicking trip card navigates to booking details 
+    tests/my-trips-cards.spec.ts:131:3 › My Trips Page - TripCard › Cancel button appears on pending bookings 
+    tests/my-trips-cards.spec.ts:143:3 › My Trips Page - TripCard › Cancel button appears on confirmed bookings 
+    tests/my-trips-cards.spec.ts:155:3 › My Trips Page - TripCard › Cancel button does not appear on completed bookings 
+    tests/my-trips-cards.spec.ts:169:3 › My Trips Page - TripCard › Cancel button does not appear on already cancelled bookings 
+    tests/my-trips-cards.spec.ts:183:3 › My Trips Page - TripCard › Write Review button appears on completed bookings without a review 
+    tests/my-trips-cards.spec.ts:203:3 › My Trips Page - TripCard › Write Review button does not appear on completed bookings that already have a review 
+
+(node:64194) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:64294) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:64221) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64371) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64448) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64526) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64603) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64679) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64756) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64833) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64909) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:64988) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

@@ -86,6 +86,7 @@ export default async (request: Request, _context: Context) => {
       'e4444444-4444-4444-4444-444444444444',
       'e5555555-5555-5555-5555-555555555555',
       'e6666666-6666-6666-6666-666666666666',
+      'e7777777-7777-7777-7777-777777777777',
     ]
     await sql`DELETE FROM bookings WHERE id != ALL(${seedIds})`
     // Reset seed bookings to original statuses
@@ -95,6 +96,7 @@ export default async (request: Request, _context: Context) => {
     await sql`UPDATE bookings SET status = 'completed' WHERE id = 'e4444444-4444-4444-4444-444444444444'`
     await sql`UPDATE bookings SET status = 'cancelled' WHERE id = 'e5555555-5555-5555-5555-555555555555'`
     await sql`UPDATE bookings SET status = 'confirmed' WHERE id = 'e6666666-6666-6666-6666-666666666666'`
+    await sql`UPDATE bookings SET status = 'confirmed' WHERE id = 'e7777777-7777-7777-7777-777777777777'`
     return new Response(JSON.stringify({ success: true }), { status: 200, headers })
   }
 

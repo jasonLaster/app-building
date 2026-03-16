@@ -1,12 +1,16 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 async function loginAs(page: import('@playwright/test').Page, email: string) {
-  // Log out first if already logged in
-  const logoutBtn = page.getByTestId('sidebar-logout')
-  if (await logoutBtn.isVisible().catch(() => false)) {
-    await logoutBtn.click()
-    await expect(page).toHaveURL(/\/login/, { timeout: 30000 })
-  }
+  await page.goto('/login')
+  await page.evaluate(() => localStorage.removeItem('currentUser'))
   await page.goto('/login')
   await page.getByTestId('login-email-input').fill(email)
   await page.getByTestId('login-submit-button').click()

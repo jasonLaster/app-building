@@ -1,0 +1,60 @@
+Cleaned up stale branch: test-run-1773625710576
+Created branch: test-run-1773625726294 (br-fragrant-pond-a6ghwvwj)
+Test DB URL: postgresql://neondb_owner:***@ep-shiny-tree-a66mbhwt.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 3 tests using 1 worker
+
+
+[1A[2K[1/3] tests/my-trips-review-order.spec.ts:44:3 › My Trips - Review & Ordering › Clicking Write Review button navigates to review page
+
+[1A[2K[2/3] tests/my-trips-review-order.spec.ts:68:3 › My Trips - Review & Ordering › Write Review button does not appear on pending, confirmed, or cancelled bookings
+[1A[2K  1) tests/my-trips-review-order.spec.ts:68:3 › My Trips - Review & Ordering › Write Review button does not appear on pending, confirmed, or cancelled bookings 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for getByTestId('login-email-input')[22m
+
+
+      17 |   }
+      18 |   await page.goto('/login')
+    > 19 |   await page.getByTestId('login-email-input').fill(email)
+         |                                               ^
+      20 |   await page.getByTestId('login-submit-button').click()
+      21 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+      22 | }
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-review-order.spec.ts:19:47)
+        at /repo/apps/AirbnbClone/tests/my-trips-review-order.spec.ts:83:5
+
+    Error Context: test-results/my-trips-review-order-My-T-87deb-irmed-or-cancelled-bookings/error-context.md
+
+
+
+[1A[2K[3/3] tests/my-trips-review-order.spec.ts:92:3 › My Trips - Review & Ordering › Trip cards are ordered by check-in date
+[1A[2K  1 failed
+    tests/my-trips-review-order.spec.ts:68:3 › My Trips - Review & Ordering › Write Review button does not appear on pending, confirmed, or cancelled bookings 
+  2 passed (27.7s)
+
+(node:66524) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:66623) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:66551) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:66765) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

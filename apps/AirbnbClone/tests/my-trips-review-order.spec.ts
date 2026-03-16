@@ -1,12 +1,16 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 async function loginAs(page: import('@playwright/test').Page, email: string) {
-  // Log out first if already logged in
-  const logoutBtn = page.getByTestId('sidebar-logout')
-  if (await logoutBtn.isVisible().catch(() => false)) {
-    await logoutBtn.click()
-    await expect(page).toHaveURL(/\/login/, { timeout: 30000 })
-  }
+  await page.goto('/login')
+  await page.evaluate(() => localStorage.removeItem('currentUser'))
   await page.goto('/login')
   await page.getByTestId('login-email-input').fill(email)
   await page.getByTestId('login-submit-button').click()
@@ -14,6 +18,25 @@ async function loginAs(page: import('@playwright/test').Page, email: string) {
 }
 
 test.describe('My Trips - Review & Ordering', () => {
+  test.beforeEach(async ({ request }) => {
+    // Reset booking statuses and re-create seed review for e4444444 if deleted
+    await request.delete('http://localhost:8888/api/bookings')
+    await request.post('http://localhost:8888/api/reviews', {
+      data: {
+        booking_id: 'e4444444-4444-4444-4444-444444444444',
+        property_id: 'b4444444-4444-4444-4444-444444444444',
+        guest_id: 'a4444444-4444-4444-4444-444444444444',
+        rating: 4,
+        cleanliness: 4,
+        accuracy: 4,
+        communication: 5,
+        location: 5,
+        value: 4,
+        comment: 'Great location in SoCo.'
+      }
+    })
+  })
+
   test('Clicking Write Review button navigates to review page', async ({ page }) => {
     // Delete Alex's review for e4444444 so the Write Review button appears
     const reviewsRes = await page.request.get('/api/reviews?property_id=b4444444-4444-4444-4444-444444444444')

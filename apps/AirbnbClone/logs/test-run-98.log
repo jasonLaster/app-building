@@ -1,0 +1,25 @@
+Created branch: test-run-1773625671624 (br-purple-forest-a68uo5iu)
+Test DB URL: postgresql://neondb_owner:***@ep-raspy-thunder-a6y3nlb6.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 7 tests using 1 worker
+
+
+[1A[2K[1/7] tests/my-trips-cancel-dialog.spec.ts:19:3 › My Trips - CancelBookingDialog › Clicking Cancel button opens confirmation dialog
+
+[1A[2K[2/7] tests/my-trips-cancel-dialog.spec.ts:39:3 › My Trips - CancelBookingDialog › Dismissing cancellation dialog keeps booking unchanged
+[1A[2K[3/7] tests/my-trips-cancel-dialog.spec.ts:62:3 › My Trips - CancelBookingDialog › Closing the dialog via overlay click keeps booking unchanged
+[1A[2K[4/7] tests/my-trips-cancel-dialog.spec.ts:87:3 › My Trips - CancelBookingDialog › Cancel dialog shows property and date context
+[1A[2K[5/7] tests/my-trips-cancel-dialog.spec.ts:114:5 › My Trips - CancelBookingDialog › Destructive cancellation tests › Confirming cancellation updates booking status to cancelled
+[1A[2K[6/7] tests/my-trips-cancel-dialog.spec.ts:139:5 › My Trips - CancelBookingDialog › Destructive cancellation tests › Cancel dialog is functional on repeated use
+[1A[2K[7/7] tests/my-trips-cancel-dialog.spec.ts:173:5 › My Trips - CancelBookingDialog › Destructive cancellation tests › After cancellation, booking moves from Upcoming to Cancelled tab
+[1A[2K  7 passed (15.1s)
+

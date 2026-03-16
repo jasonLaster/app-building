@@ -1,0 +1,28 @@
+Created branch: test-run-1773625257120 (br-snowy-base-a61onjla)
+Test DB URL: postgresql://neondb_owner:***@ep-round-wildflower-a6noqr81.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/my-trips-tabs.spec.ts:19:3 › My Trips Page - TripsTabs › My Trips page requires login
+
+[1A[2K[2/10] tests/my-trips-tabs.spec.ts:26:3 › My Trips Page - TripsTabs › My Trips page defaults to Upcoming tab
+[1A[2K[3/10] tests/my-trips-tabs.spec.ts:44:3 › My Trips Page - TripsTabs › Upcoming tab shows pending and confirmed future bookings
+[1A[2K[4/10] tests/my-trips-tabs.spec.ts:58:3 › My Trips Page - TripsTabs › Switching to Past tab shows completed bookings
+[1A[2K[5/10] tests/my-trips-tabs.spec.ts:75:3 › My Trips Page - TripsTabs › Switching to Cancelled tab shows cancelled bookings
+[1A[2K[6/10] tests/my-trips-tabs.spec.ts:92:3 › My Trips Page - TripsTabs › Switching back to Upcoming tab from another tab
+[1A[2K[7/10] tests/my-trips-tabs.spec.ts:112:3 › My Trips Page - TripsTabs › Tab shows empty state when no bookings exist for that category
+[1A[2K[8/10] tests/my-trips-tabs.spec.ts:124:3 › My Trips Page - TripsTabs › Upcoming tab empty state message
+[1A[2K[9/10] tests/my-trips-tabs.spec.ts:138:3 › My Trips Page - TripsTabs › Cancelled tab empty state message
+[1A[2K[10/10] tests/my-trips-tabs.spec.ts:150:3 › My Trips Page - TripsTabs › Tabs are functional on repeated use
+[1A[2K  10 passed (13.4s)
+

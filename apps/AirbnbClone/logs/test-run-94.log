@@ -1,0 +1,66 @@
+Created branch: test-run-1773625411163 (br-aged-mouse-a65gpksf)
+Test DB URL: postgresql://neondb_owner:***@ep-gentle-grass-a6ruf7nm.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/my-trips-cards.spec.ts:45:3 › My Trips Page - TripCard › Trip card displays all required information
+
+[1A[2K[2/10] tests/my-trips-cards.spec.ts:70:3 › My Trips Page - TripCard › Trip card displays correct status badge colors
+[1A[2K  1) tests/my-trips-cards.spec.ts:70:3 › My Trips Page - TripCard › Trip card displays correct status badge colors 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+    [2m  - waiting for getByTestId('login-email-input')[22m
+
+
+      17 |   }
+      18 |   await page.goto('/login')
+    > 19 |   await page.getByTestId('login-email-input').fill(email)
+         |                                               ^
+      20 |   await page.getByTestId('login-submit-button').click()
+      21 |   await expect(page).toHaveURL('/', { timeout: 30000 })
+      22 | }
+        at loginAs (/repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:19:47)
+        at /repo/apps/AirbnbClone/tests/my-trips-cards.spec.ts:97:5
+
+    Error Context: test-results/my-trips-cards-My-Trips-Pa-25e57-correct-status-badge-colors/error-context.md
+
+
+
+[1A[2K[3/10] tests/my-trips-cards.spec.ts:107:3 › My Trips Page - TripCard › Trip card shows property image or placeholder
+[1A[2K[4/10] tests/my-trips-cards.spec.ts:120:3 › My Trips Page - TripCard › Clicking trip card navigates to booking details
+[1A[2K[5/10] tests/my-trips-cards.spec.ts:135:3 › My Trips Page - TripCard › Cancel button appears on pending bookings
+[1A[2K[6/10] tests/my-trips-cards.spec.ts:147:3 › My Trips Page - TripCard › Cancel button appears on confirmed bookings
+[1A[2K[7/10] tests/my-trips-cards.spec.ts:159:3 › My Trips Page - TripCard › Cancel button does not appear on completed bookings
+[1A[2K[8/10] tests/my-trips-cards.spec.ts:173:3 › My Trips Page - TripCard › Cancel button does not appear on already cancelled bookings
+[1A[2K[9/10] tests/my-trips-cards.spec.ts:187:3 › My Trips Page - TripCard › Write Review button appears on completed bookings without a review
+[1A[2K[10/10] tests/my-trips-cards.spec.ts:207:3 › My Trips Page - TripCard › Write Review button does not appear on completed bookings that already have a review
+[1A[2K  1 failed
+    tests/my-trips-cards.spec.ts:70:3 › My Trips Page - TripCard › Trip card displays correct status badge colors 
+  9 passed (41.2s)
+
+(node:62910) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:63009) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:62937) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:63142) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

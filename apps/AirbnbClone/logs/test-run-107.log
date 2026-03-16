@@ -1,0 +1,25 @@
+Cleaned up stale branch: test-run-1773625955455
+Created branch: test-run-1773625960645 (br-weathered-pine-a6u21daq)
+Test DB URL: postgresql://neondb_owner:***@ep-soft-union-a6udmc22.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+Running 3 tests using 1 worker
+
+
+[1A[2K[1/3] tests/my-trips-review-order.spec.ts:40:3 › My Trips - Review & Ordering › Clicking Write Review button navigates to review page
+
+[1A[2K[2/3] tests/my-trips-review-order.spec.ts:64:3 › My Trips - Review & Ordering › Write Review button does not appear on pending, confirmed, or cancelled bookings
+[1A[2K[3/3] tests/my-trips-review-order.spec.ts:88:3 › My Trips - Review & Ordering › Trip cards are ordered by check-in date
+[1A[2K  3 passed (11.6s)
+

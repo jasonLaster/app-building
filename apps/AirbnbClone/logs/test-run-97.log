@@ -1,0 +1,33 @@
+Created branch: test-run-1773625629565 (br-bold-mountain-a6ijn3yn)
+Test DB URL: postgresql://neondb_owner:***@ep-hidden-dream-a6l1g60e.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+
+
+Running 10 tests using 1 worker
+
+
+[1A[2K[1/10] tests/my-trips-cards.spec.ts:41:3 › My Trips Page - TripCard › Trip card displays all required information
+
+[1A[2K[2/10] tests/my-trips-cards.spec.ts:66:3 › My Trips Page - TripCard › Trip card displays correct status badge colors
+[1A[2K[3/10] tests/my-trips-cards.spec.ts:103:3 › My Trips Page - TripCard › Trip card shows property image or placeholder
+[1A[2K[4/10] tests/my-trips-cards.spec.ts:116:3 › My Trips Page - TripCard › Clicking trip card navigates to booking details
+[1A[2K[5/10] tests/my-trips-cards.spec.ts:131:3 › My Trips Page - TripCard › Cancel button appears on pending bookings
+[1A[2K[6/10] tests/my-trips-cards.spec.ts:143:3 › My Trips Page - TripCard › Cancel button appears on confirmed bookings
+[1A[2K[7/10] tests/my-trips-cards.spec.ts:155:3 › My Trips Page - TripCard › Cancel button does not appear on completed bookings
+[1A[2K[8/10] tests/my-trips-cards.spec.ts:169:3 › My Trips Page - TripCard › Cancel button does not appear on already cancelled bookings
+[1A[2K[9/10] tests/my-trips-cards.spec.ts:183:3 › My Trips Page - TripCard › Write Review button appears on completed bookings without a review
+[1A[2K[10/10] tests/my-trips-cards.spec.ts:203:3 › My Trips Page - TripCard › Write Review button does not appear on completed bookings that already have a review
+[1A[2K  10 passed (25.2s)
+
