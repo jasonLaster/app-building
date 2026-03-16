@@ -11,14 +11,14 @@ export default function Profile() {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const { currentUser } = useSelector((state: RootState) => state.auth)
-  const { items: reviews, loading: reviewsLoading } = useSelector((state: RootState) => state.userReviews)
+  const { items: reviews, loading: reviewsLoading, loadingMore: reviewsLoadingMore, total: reviewsTotal, page: reviewsPage } = useSelector((state: RootState) => state.userReviews)
 
   useEffect(() => {
     if (!currentUser) {
       navigate('/login')
       return
     }
-    dispatch(fetchUserReviews(currentUser.id))
+    dispatch(fetchUserReviews({ guestId: currentUser.id, page: 1 }))
   }, [currentUser, dispatch, navigate])
 
   if (!currentUser) {
@@ -38,7 +38,17 @@ export default function Profile() {
           <BecomeHostButton userId={currentUser.id} isHost={currentUser.is_host} />
         </div>
 
-        <UserReviewsList reviews={reviews} loading={reviewsLoading} />
+        <UserReviewsList
+          reviews={reviews}
+          loading={reviewsLoading}
+          hasMore={reviews.length < reviewsTotal}
+          loadingMore={reviewsLoadingMore}
+          onLoadMore={() => {
+            if (currentUser) {
+              dispatch(fetchUserReviews({ guestId: currentUser.id, page: reviewsPage + 1 }))
+            }
+          }}
+        />
       </div>
     </main>
   )

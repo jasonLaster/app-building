@@ -184,7 +184,8 @@ test.describe('My Trips Page - TripCard', () => {
     // Both seed completed bookings have reviews. Delete Alex's review for e4444444
     // to create a completed booking without a review.
     const reviewsRes = await page.request.get('/api/reviews?property_id=b4444444-4444-4444-4444-444444444444')
-    const reviews = await reviewsRes.json()
+    const reviewsData = await reviewsRes.json()
+    const reviews = reviewsData.items ?? reviewsData
     for (const review of reviews) {
       await page.request.delete(`/api/reviews/${review.id}`)
     }

@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Star } from 'lucide-react'
 import type { Review } from '../slices/propertiesSlice'
 
 interface ReviewsSectionProps {
   reviews: Review[]
+  reviewsTotal?: number
+  propertyId?: string
 }
 
 const INITIAL_SHOW = 6
@@ -26,8 +28,39 @@ function avgRating(reviews: Review[], key: keyof Review): number {
   return sum / reviews.length
 }
 
-export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
+export default function ReviewsSection({ reviews: initialReviews, reviewsTotal, propertyId }: ReviewsSectionProps) {
   const [showAll, setShowAll] = useState(false)
+  const [allReviews, setAllReviews] = useState<Review[] | null>(null)
+  const [loadingAll, setLoadingAll] = useState(false)
+
+  const total = reviewsTotal ?? initialReviews.length
+  const reviews = allReviews ?? initialReviews
+
+  const handleShowAll = useCallback(async () => {
+    if (showAll) {
+      setShowAll(false)
+      return
+    }
+    if (allReviews || total <= INITIAL_SHOW) {
+      setShowAll(true)
+      return
+    }
+    if (!propertyId) {
+      setShowAll(true)
+      return
+    }
+    setLoadingAll(true)
+    try {
+      const response = await fetch(`/api/reviews?property_id=${propertyId}&page=1&pageSize=100`)
+      const data = await response.json()
+      if (response.ok) {
+        setAllReviews(data.items as Review[])
+      }
+    } finally {
+      setLoadingAll(false)
+      setShowAll(true)
+    }
+  }, [showAll, allReviews, total, propertyId])
 
   if (reviews.length === 0) {
     return (
@@ -46,7 +79,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
       <div className="flex items-center gap-2 mb-6">
         <Star size={22} className="fill-text text-text" aria-hidden="true" />
         <h2 className="text-[22px] max-sm:text-[18px] font-semibold text-text">
-          {overallAvg.toFixed(1)} · {reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}
+          {overallAvg.toFixed(1)} · {total} {total === 1 ? 'review' : 'reviews'}
         </h2>
       </div>
 
@@ -107,14 +140,15 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
         ))}
       </div>
 
-      {reviews.length > INITIAL_SHOW && (
+      {total > INITIAL_SHOW && (
         <button
           data-testid="reviews-toggle"
-          className="mt-8 px-6 py-3 rounded-lg border border-text text-sm font-semibold text-text hover:bg-bg-secondary transition-colors cursor-pointer"
-          onClick={() => setShowAll(!showAll)}
+          className="mt-8 px-6 py-3 rounded-lg border border-text text-sm font-semibold text-text hover:bg-bg-secondary transition-colors cursor-pointer disabled:opacity-50"
+          onClick={handleShowAll}
+          disabled={loadingAll}
           aria-expanded={showAll}
         >
-          {showAll ? 'Show less' : `Show all ${reviews.length} reviews`}
+          {loadingAll ? 'Loading...' : showAll ? 'Show less' : `Show all ${total} reviews`}
         </button>
       )}
     </section>

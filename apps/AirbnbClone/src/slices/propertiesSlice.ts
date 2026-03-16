@@ -67,6 +67,7 @@ export interface Property {
   images?: PropertyImage[]
   amenities?: Amenity[]
   reviews?: Review[]
+  reviews_total?: number
 }
 
 export interface SearchFilters {

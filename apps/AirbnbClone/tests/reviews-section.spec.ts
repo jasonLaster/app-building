@@ -18,7 +18,8 @@ const GUEST_ALEX_ID = 'a4444444-4444-4444-4444-444444444444'
 async function deleteAllReviewsForProperty(page: import('@playwright/test').Page, propertyId: string) {
   const res = await page.request.get(`/api/reviews?property_id=${propertyId}`)
   if (!res.ok()) return
-  const reviews = await res.json()
+  const data = await res.json()
+  const reviews = data.items ?? data
   for (const review of reviews) {
     await page.request.delete(`/api/reviews/${review.id}`)
   }
@@ -35,7 +36,8 @@ async function deleteNonSeedBookingsForProperty(page: import('@playwright/test')
   ]
   const res = await page.request.get(`/api/bookings?guest_id=${GUEST_EMMA_ID}`)
   if (res.ok()) {
-    const emmaBookings = await res.json()
+    const emmaData = await res.json()
+    const emmaBookings = emmaData.items ?? emmaData
     for (const b of emmaBookings) {
       if (b.property_id === propertyId && !seedIds.includes(b.id)) {
         await page.request.delete(`/api/bookings/${b.id}`)
@@ -44,7 +46,8 @@ async function deleteNonSeedBookingsForProperty(page: import('@playwright/test')
   }
   const res2 = await page.request.get(`/api/bookings?guest_id=${GUEST_ALEX_ID}`)
   if (res2.ok()) {
-    const alexBookings = await res2.json()
+    const alexData = await res2.json()
+    const alexBookings = alexData.items ?? alexData
     for (const b of alexBookings) {
       if (b.property_id === propertyId && !seedIds.includes(b.id)) {
         await page.request.delete(`/api/bookings/${b.id}`)

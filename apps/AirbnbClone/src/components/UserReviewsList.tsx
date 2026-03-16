@@ -5,6 +5,9 @@ import type { UserReview } from '../slices/userReviewsSlice'
 interface UserReviewsListProps {
   reviews: UserReview[]
   loading: boolean
+  hasMore?: boolean
+  loadingMore?: boolean
+  onLoadMore?: () => void
 }
 
 function formatDate(dateStr: string): string {
@@ -28,7 +31,7 @@ function StarRating({ rating }: { rating: number }) {
   )
 }
 
-export default function UserReviewsList({ reviews, loading }: UserReviewsListProps) {
+export default function UserReviewsList({ reviews, loading, hasMore, loadingMore, onLoadMore }: UserReviewsListProps) {
   const navigate = useNavigate()
 
   if (loading) {
@@ -79,6 +82,18 @@ export default function UserReviewsList({ reviews, loading }: UserReviewsListPro
             </li>
           ))}
         </ul>
+      )}
+      {hasMore && (
+        <div className="text-center mt-4">
+          <button
+            data-testid="load-more-reviews"
+            onClick={onLoadMore}
+            disabled={loadingMore}
+            className="px-6 py-2.5 text-sm font-medium text-text border border-border rounded-lg hover:bg-bg-secondary transition-colors disabled:opacity-50"
+          >
+            {loadingMore ? 'Loading...' : 'Load more reviews'}
+          </button>
+        </div>
       )}
     </section>
   )

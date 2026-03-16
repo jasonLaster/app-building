@@ -8,6 +8,9 @@ type TabKey = 'upcoming' | 'past' | 'cancelled'
 interface TripsTabsProps {
   bookings: Booking[]
   onCancelBooking: (booking: Booking) => void
+  hasMore?: boolean
+  loadingMore?: boolean
+  onLoadMore?: () => void
 }
 
 const tabs: { key: TabKey; label: string }[] = [
@@ -38,7 +41,7 @@ function filterBookings(bookings: Booking[], tab: TabKey): Booking[] {
   }
 }
 
-export default function TripsTabs({ bookings, onCancelBooking }: TripsTabsProps) {
+export default function TripsTabs({ bookings, onCancelBooking, hasMore, loadingMore, onLoadMore }: TripsTabsProps) {
   const [activeTab, setActiveTab] = useState<TabKey>('upcoming')
   const filtered = filterBookings(bookings, activeTab)
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -122,6 +125,19 @@ export default function TripsTabs({ bookings, onCancelBooking }: TripsTabsProps)
           </ul>
         )}
       </div>
+
+      {hasMore && (
+        <div className="text-center mt-6">
+          <button
+            data-testid="load-more-trips"
+            onClick={onLoadMore}
+            disabled={loadingMore}
+            className="px-6 py-2.5 text-sm font-medium text-text border border-border rounded-lg hover:bg-bg-secondary transition-colors disabled:opacity-50"
+          >
+            {loadingMore ? 'Loading...' : 'Load more trips'}
+          </button>
+        </div>
+      )}
     </div>
   )
 }

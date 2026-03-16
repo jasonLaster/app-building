@@ -79,7 +79,7 @@ export default function PropertyDetail() {
           <PropertyInfo property={property} />
           <PropertyDescription description={property.description} />
           <AmenitiesList amenities={property.amenities || []} />
-          <ReviewsSection reviews={property.reviews || []} />
+          <ReviewsSection reviews={property.reviews || []} reviewsTotal={property.reviews_total || (property.reviews?.length ?? 0)} propertyId={property.id} />
           <HostInfoCard property={property} />
         </div>
 

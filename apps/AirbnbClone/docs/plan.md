@@ -18,5 +18,5 @@
 - [x] UserProfile
 - [x] WriteReview
 
-### Performance
-- [ ] PaginateAPIs
+### Performance ✓
+- [x] PaginateAPIs

@@ -11,7 +11,7 @@ export default function MyTrips() {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const { currentUser } = useSelector((state: RootState) => state.auth)
-  const { items: bookings, loading } = useSelector((state: RootState) => state.bookings)
+  const { items: bookings, loading, loadingMore, total, page } = useSelector((state: RootState) => state.bookings)
   const [cancelTarget, setCancelTarget] = useState<Booking | null>(null)
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function MyTrips() {
       navigate('/login')
       return
     }
-    dispatch(fetchUserBookings(currentUser.id))
+    dispatch(fetchUserBookings({ guestId: currentUser.id, page: 1 }))
   }, [currentUser, dispatch, navigate])
 
   if (!currentUser) {
@@ -30,6 +30,14 @@ export default function MyTrips() {
     if (!cancelTarget) return
     await dispatch(cancelBooking(cancelTarget.id))
     setCancelTarget(null)
+  }
+
+  const hasMore = bookings.length < total
+
+  const handleLoadMore = () => {
+    if (currentUser && hasMore) {
+      dispatch(fetchUserBookings({ guestId: currentUser.id, page: page + 1 }))
+    }
   }
 
   return (
@@ -43,6 +51,9 @@ export default function MyTrips() {
           <TripsTabs
             bookings={bookings}
             onCancelBooking={(booking) => setCancelTarget(booking)}
+            hasMore={hasMore}
+            loadingMore={loadingMore}
+            onLoadMore={handleLoadMore}
           />
         )}
       </div>

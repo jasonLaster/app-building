@@ -27,7 +27,8 @@ async function loginAs(page: import('@playwright/test').Page, email: string) {
 
 async function deleteAllBookings(page: import('@playwright/test').Page, guestId: string) {
   const res = await page.request.get(`/api/bookings?guest_id=${guestId}`)
-  const bookings = await res.json()
+  const data = await res.json()
+  const bookings = data.items ?? data
   for (const booking of bookings) {
     await page.request.put(`/api/bookings/${booking.id}`, {
       data: { status: 'cancelled' },
@@ -79,7 +80,8 @@ test.describe('Property Detail - BookingCard', () => {
     // Clean up any non-seed bookings created by Emma
     const res = await request.get(`/api/bookings?guest_id=${EMMA_ID}`)
     if (res.ok()) {
-      const bookings = await res.json()
+      const data = await res.json()
+      const bookings = data.items ?? data
       const seedBookingIds = [
         'e1111111-1111-1111-1111-111111111111',
         'e2222222-2222-2222-2222-222222222222',

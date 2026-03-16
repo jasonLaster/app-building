@@ -22,9 +22,11 @@ export default function HostDashboard() {
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
   const currentUser = useSelector((state: RootState) => state.auth.currentUser)
-  const { stats, listings, bookings, statsLoading, listingsLoading, bookingsLoading } = useSelector(
-    (state: RootState) => state.host
-  )
+  const {
+    stats, listings, bookings, statsLoading, listingsLoading, bookingsLoading,
+    listingsTotal, listingsPage, listingsLoadingMore,
+    bookingsTotal, bookingsPage, bookingsLoadingMore,
+  } = useSelector((state: RootState) => state.host)
   const [activeTab, setActiveTab] = useState<Tab>('listings')
   const [showAddForm, setShowAddForm] = useState(false)
 
@@ -37,8 +39,8 @@ export default function HostDashboard() {
   useEffect(() => {
     if (currentUser?.is_host) {
       dispatch(fetchHostStats(currentUser.id))
-      dispatch(fetchHostListings(currentUser.id))
-      dispatch(fetchHostBookings(currentUser.id))
+      dispatch(fetchHostListings({ hostId: currentUser.id, page: 1 }))
+      dispatch(fetchHostBookings({ hostId: currentUser.id, page: 1 }))
     }
   }, [dispatch, currentUser])
 
@@ -68,9 +70,21 @@ export default function HostDashboard() {
     setShowAddForm(false)
     if (currentUser) {
       dispatch(fetchHostStats(currentUser.id))
-      dispatch(fetchHostListings(currentUser.id))
+      dispatch(fetchHostListings({ hostId: currentUser.id, page: 1 }))
     }
   }, [dispatch, currentUser])
+
+  const handleLoadMoreListings = useCallback(() => {
+    if (currentUser && listings.length < listingsTotal) {
+      dispatch(fetchHostListings({ hostId: currentUser.id, page: listingsPage + 1 }))
+    }
+  }, [dispatch, currentUser, listingsPage, listingsTotal, listings.length])
+
+  const handleLoadMoreBookings = useCallback(() => {
+    if (currentUser && bookings.length < bookingsTotal) {
+      dispatch(fetchHostBookings({ hostId: currentUser.id, page: bookingsPage + 1 }))
+    }
+  }, [dispatch, currentUser, bookingsPage, bookingsTotal, bookings.length])
 
   if (!currentUser) {
     return null
@@ -145,6 +159,9 @@ export default function HostDashboard() {
             onDeactivate={handleDeactivate}
             onActivate={handleActivate}
             onAddListing={() => setShowAddForm(true)}
+            hasMore={listings.length < listingsTotal}
+            loadingMore={listingsLoadingMore}
+            onLoadMore={handleLoadMoreListings}
           />
         </div>
       )}
@@ -156,6 +173,9 @@ export default function HostDashboard() {
             loading={bookingsLoading}
             onConfirm={handleConfirmBooking}
             onCancel={handleCancelBooking}
+            hasMore={bookings.length < bookingsTotal}
+            loadingMore={bookingsLoadingMore}
+            onLoadMore={handleLoadMoreBookings}
           />
         </div>
       )}

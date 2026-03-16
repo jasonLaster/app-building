@@ -86,7 +86,8 @@ async function completeStep6(page: import('@playwright/test').Page, price = '150
 
 async function deleteAllTestProperties(page: import('@playwright/test').Page) {
   const response = await page.request.get(`/api/host-listings?host_id=${HOST_ID}`)
-  const listings = await response.json() as { id: string; title: string }[]
+  const listingsData = await response.json()
+  const listings = (listingsData.items ?? listingsData) as { id: string; title: string }[]
   for (const listing of listings) {
     // Only delete properties created by tests (not seed data)
     if (listing.title.includes('Test Listing') || listing.title.includes('Cozy Mountain Retreat') || listing.title.includes('Second Test')) {

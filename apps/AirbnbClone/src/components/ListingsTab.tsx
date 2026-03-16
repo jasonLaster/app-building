@@ -9,9 +9,12 @@ interface ListingsTabProps {
   onDeactivate: (property: Property) => Promise<void>
   onActivate: (property: Property) => Promise<void>
   onAddListing: () => void
+  hasMore?: boolean
+  loadingMore?: boolean
+  onLoadMore?: () => void
 }
 
-export default function ListingsTab({ listings, loading, onDeactivate, onActivate, onAddListing }: ListingsTabProps) {
+export default function ListingsTab({ listings, loading, onDeactivate, onActivate, onAddListing, hasMore, loadingMore, onLoadMore }: ListingsTabProps) {
   const navigate = useNavigate()
   const [confirmDialog, setConfirmDialog] = useState<Property | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
@@ -195,6 +198,19 @@ export default function ListingsTab({ listings, loading, onDeactivate, onActivat
               </div>
             )
           })}
+        </div>
+      )}
+
+      {hasMore && (
+        <div className="text-center mt-6">
+          <button
+            data-testid="load-more-listings"
+            onClick={onLoadMore}
+            disabled={loadingMore}
+            className="px-6 py-2.5 text-sm font-medium text-text border border-border rounded-lg hover:bg-bg-secondary transition-colors disabled:opacity-50"
+          >
+            {loadingMore ? 'Loading...' : 'Load more listings'}
+          </button>
         </div>
       )}
 

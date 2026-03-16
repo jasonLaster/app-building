@@ -37,15 +37,21 @@ export default async (request: Request, _context: Context) => {
       ORDER BY a.category, a.name
     `
 
+    const reviewCountResult = await sql`
+      SELECT count(*)::int as total FROM reviews WHERE property_id = ${propertyId}
+    `
+    const reviewsTotal = (reviewCountResult[0] as Record<string, unknown>)?.total as number ?? 0
+
     const reviews = await sql`
       SELECT r.*, u.name as guest_name, u.avatar_url as guest_avatar
       FROM reviews r
       JOIN users u ON u.id = r.guest_id
       WHERE r.property_id = ${propertyId}
       ORDER BY r.created_at DESC
+      LIMIT 6
     `
 
-    return new Response(JSON.stringify({ ...property, images, amenities, reviews }), { status: 200, headers })
+    return new Response(JSON.stringify({ ...property, images, amenities, reviews, reviews_total: reviewsTotal }), { status: 200, headers })
   }
 
   if (request.method === 'GET') {

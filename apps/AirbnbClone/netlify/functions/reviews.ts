@@ -9,27 +9,42 @@ export default async (request: Request, _context: Context) => {
   if (request.method === 'GET') {
     const guestId = url.searchParams.get('guest_id')
     const propertyId = url.searchParams.get('property_id')
+    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10))
+    const pageSize = Math.min(100, Math.max(1, parseInt(url.searchParams.get('pageSize') || '20', 10)))
+    const offset = (page - 1) * pageSize
 
     if (guestId) {
+      const countResult = await sql`
+        SELECT count(*)::int as total FROM reviews WHERE guest_id = ${guestId}
+      `
+      const total = (countResult[0] as Record<string, unknown>)?.total as number ?? 0
+
       const reviews = await sql`
         SELECT r.*, p.title as property_title
         FROM reviews r
         JOIN properties p ON p.id = r.property_id
         WHERE r.guest_id = ${guestId}
         ORDER BY r.created_at DESC
+        LIMIT ${pageSize} OFFSET ${offset}
       `
-      return new Response(JSON.stringify(reviews), { status: 200, headers })
+      return new Response(JSON.stringify({ items: reviews, total, page, pageSize }), { status: 200, headers })
     }
 
     if (propertyId) {
+      const countResult = await sql`
+        SELECT count(*)::int as total FROM reviews WHERE property_id = ${propertyId}
+      `
+      const total = (countResult[0] as Record<string, unknown>)?.total as number ?? 0
+
       const reviews = await sql`
         SELECT r.*, u.name as guest_name, u.avatar_url as guest_avatar
         FROM reviews r
         JOIN users u ON u.id = r.guest_id
         WHERE r.property_id = ${propertyId}
         ORDER BY r.created_at DESC
+        LIMIT ${pageSize} OFFSET ${offset}
       `
-      return new Response(JSON.stringify(reviews), { status: 200, headers })
+      return new Response(JSON.stringify({ items: reviews, total, page, pageSize }), { status: 200, headers })
     }
 
     return new Response(JSON.stringify({ error: 'guest_id or property_id is required' }), { status: 400, headers })

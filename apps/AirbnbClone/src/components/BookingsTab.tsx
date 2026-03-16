@@ -7,6 +7,9 @@ interface BookingsTabProps {
   loading: boolean
   onConfirm: (bookingId: string) => Promise<void>
   onCancel: (bookingId: string) => Promise<void>
+  hasMore?: boolean
+  loadingMore?: boolean
+  onLoadMore?: () => void
 }
 
 const STATUS_FILTERS = ['All', 'Pending', 'Confirmed', 'Cancelled', 'Completed'] as const
@@ -24,7 +27,7 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 
-export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: BookingsTabProps) {
+export default function BookingsTab({ bookings, loading, onConfirm, onCancel, hasMore, loadingMore, onLoadMore }: BookingsTabProps) {
   const [activeFilter, setActiveFilter] = useState<StatusFilter>('All')
   const [cancelDialog, setCancelDialog] = useState<HostBooking | null>(null)
   const [actionLoading, setActionLoading] = useState<string | null>(null)
@@ -194,6 +197,19 @@ export default function BookingsTab({ bookings, loading, onConfirm, onCancel }: 
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {hasMore && (
+        <div className="text-center mt-6">
+          <button
+            data-testid="load-more-bookings"
+            onClick={onLoadMore}
+            disabled={loadingMore}
+            className="px-6 py-2.5 text-sm font-medium text-text border border-border rounded-lg hover:bg-bg-secondary transition-colors disabled:opacity-50"
+          >
+            {loadingMore ? 'Loading...' : 'Load more bookings'}
+          </button>
         </div>
       )}
 

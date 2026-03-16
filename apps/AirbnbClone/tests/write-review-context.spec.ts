@@ -29,7 +29,8 @@ async function login(page: import('@playwright/test').Page, email: string) {
 
 async function deleteAllReviewsForGuest(page: import('@playwright/test').Page, guestId: string) {
   const res = await page.request.get(`/api/reviews?guest_id=${guestId}`)
-  const reviews = await res.json()
+  const data = await res.json()
+  const reviews = data.items ?? data
   for (const review of reviews) {
     await page.request.delete(`/api/reviews/${review.id}`)
   }

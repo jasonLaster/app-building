@@ -28,13 +28,26 @@ export interface HostStats {
   reviewCount: number
 }
 
+interface PaginatedResponse<T> {
+  items: T[]
+  total: number
+  page: number
+  pageSize: number
+}
+
 interface HostState {
   stats: HostStats
   listings: Property[]
+  listingsTotal: number
+  listingsPage: number
   bookings: HostBooking[]
+  bookingsTotal: number
+  bookingsPage: number
   statsLoading: boolean
   listingsLoading: boolean
+  listingsLoadingMore: boolean
   bookingsLoading: boolean
+  bookingsLoadingMore: boolean
   error: string | null
 }
 
@@ -47,10 +60,16 @@ const initialState: HostState = {
     reviewCount: 0,
   },
   listings: [],
+  listingsTotal: 0,
+  listingsPage: 0,
   bookings: [],
+  bookingsTotal: 0,
+  bookingsPage: 0,
   statsLoading: false,
   listingsLoading: false,
+  listingsLoadingMore: false,
   bookingsLoading: false,
+  bookingsLoadingMore: false,
   error: null,
 }
 
@@ -68,25 +87,25 @@ export const fetchHostStats = createAsyncThunk(
 
 export const fetchHostListings = createAsyncThunk(
   'host/fetchHostListings',
-  async (hostId: string, { rejectWithValue }) => {
-    const response = await fetch(`/api/host-listings?host_id=${encodeURIComponent(hostId)}`)
+  async ({ hostId, page = 1 }: { hostId: string; page?: number }, { rejectWithValue }) => {
+    const response = await fetch(`/api/host-listings?host_id=${encodeURIComponent(hostId)}&page=${page}&pageSize=20`)
     const data = await response.json()
     if (!response.ok) {
       return rejectWithValue(data.error || 'Failed to fetch host listings')
     }
-    return data as Property[]
+    return data as PaginatedResponse<Property>
   }
 )
 
 export const fetchHostBookings = createAsyncThunk(
   'host/fetchHostBookings',
-  async (hostId: string, { rejectWithValue }) => {
-    const response = await fetch(`/api/host-bookings?host_id=${encodeURIComponent(hostId)}`)
+  async ({ hostId, page = 1 }: { hostId: string; page?: number }, { rejectWithValue }) => {
+    const response = await fetch(`/api/host-bookings?host_id=${encodeURIComponent(hostId)}&page=${page}&pageSize=20`)
     const data = await response.json()
     if (!response.ok) {
       return rejectWithValue(data.error || 'Failed to fetch host bookings')
     }
-    return data as HostBooking[]
+    return data as PaginatedResponse<HostBooking>
   }
 )
 
@@ -192,32 +211,56 @@ const hostSlice = createSlice({
         state.statsLoading = false
         state.error = action.payload as string
       })
-      .addCase(fetchHostListings.pending, (state) => {
-        if (state.listings.length === 0) {
-          state.listingsLoading = true
+      .addCase(fetchHostListings.pending, (state, action) => {
+        if (action.meta.arg.page === 1 || !action.meta.arg.page) {
+          if (state.listings.length === 0) {
+            state.listingsLoading = true
+          }
+        } else {
+          state.listingsLoadingMore = true
         }
         state.error = null
       })
       .addCase(fetchHostListings.fulfilled, (state, action) => {
         state.listingsLoading = false
-        state.listings = action.payload
+        state.listingsLoadingMore = false
+        if (action.payload.page === 1) {
+          state.listings = action.payload.items
+        } else {
+          state.listings = [...state.listings, ...action.payload.items]
+        }
+        state.listingsTotal = action.payload.total
+        state.listingsPage = action.payload.page
       })
       .addCase(fetchHostListings.rejected, (state, action) => {
         state.listingsLoading = false
+        state.listingsLoadingMore = false
         state.error = action.payload as string
       })
-      .addCase(fetchHostBookings.pending, (state) => {
-        if (state.bookings.length === 0) {
-          state.bookingsLoading = true
+      .addCase(fetchHostBookings.pending, (state, action) => {
+        if (action.meta.arg.page === 1 || !action.meta.arg.page) {
+          if (state.bookings.length === 0) {
+            state.bookingsLoading = true
+          }
+        } else {
+          state.bookingsLoadingMore = true
         }
         state.error = null
       })
       .addCase(fetchHostBookings.fulfilled, (state, action) => {
         state.bookingsLoading = false
-        state.bookings = action.payload
+        state.bookingsLoadingMore = false
+        if (action.payload.page === 1) {
+          state.bookings = action.payload.items
+        } else {
+          state.bookings = [...state.bookings, ...action.payload.items]
+        }
+        state.bookingsTotal = action.payload.total
+        state.bookingsPage = action.payload.page
       })
       .addCase(fetchHostBookings.rejected, (state, action) => {
         state.bookingsLoading = false
+        state.bookingsLoadingMore = false
         state.error = action.payload as string
       })
       .addCase(createProperty.fulfilled, (state, action) => {
