@@ -286,6 +286,17 @@ contexts (testing, deployment).
   so content is never flush against the screen edges. This applies to all pages including
   centered layouts (auth forms, error pages) — add padding alongside centering utilities.
 
+- Scripts like `scripts/schema.ts` and `scripts/seed-db.ts` must not auto-execute on import.
+  Wrap any top-level execution in a guard so the script only runs when invoked directly, not
+  when imported by the test or deploy scripts:
+  ```ts
+  if (process.argv[1] && import.meta.url.endsWith(process.argv[1])) {
+    initSchema(process.env.DATABASE_URL!).then(() => process.exit(0));
+  }
+  ```
+  Without this guard, importing `initSchema` or `truncateAndSeed` in the test/deploy script
+  triggers unintended side effects (e.g., running against the wrong database).
+
 ## Tips
 
 - Production builds must use `sourcemap: true`, `minify: false`, and the React development build in

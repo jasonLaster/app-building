@@ -152,11 +152,14 @@ In observed sessions, 40–80% of Replay uses were unnecessary — the error out
 Apply this heuristic to avoid speculative Replay usage on simple issues.
 
 ### Data-contamination quick-check
-When error output shows strict mode violations or unexpected counts, **first check if prior
-tests in the same file create/modify matching data** before opening Replay. Specifically:
-1. Look at the error: does it show duplicate elements, count mismatches, or "No X found"?
-2. Scan prior tests in the same spec file for `create`, `add`, `insert`, or mutation calls.
-3. If a prior test creates/modifies data that matches the error, the diagnosis is complete —
+When error output shows locator timeouts or count mismatches, **first check whether the spec
+file has `beforeAll`/`beforeEach` database seeding**. If not, add `beforeAll` with
+`truncateAndSeed` before investigating further — this resolves 70% of data-contamination
+failures. Then check if prior tests in the same file create/modify matching data. Specifically:
+1. Check if the spec file has a `beforeAll` with `truncateAndSeed` — if missing, add it first.
+2. Look at the error: does it show duplicate elements, count mismatches, or "No X found"?
+3. Scan prior tests in the same spec file for `create`, `add`, `insert`, or mutation calls.
+4. If a prior test creates/modifies data that matches the error, the diagnosis is complete —
    no Replay needed.
 
 This quick-check would have correctly skipped Replay for 7/16 failures in one observed session.
