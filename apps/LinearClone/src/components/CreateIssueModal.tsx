@@ -151,7 +151,7 @@ export default function CreateIssueModal() {
           <>
             <div className="cim-body">
               <CreateIssueForm
-                defaultTeamId={params.teamId || workspace?.default_team_id || undefined}
+                defaultTeamId={createIssueDefaultTeamId || params.teamId || workspace?.default_team_id || undefined}
                 formData={formData}
                 onFormChange={setFormData}
                 titleError={titleError}

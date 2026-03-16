@@ -44,10 +44,11 @@ export default async function handler(req: Request, _context: Context) {
           n.read,
           n.archived,
           n.created_at,
-          i.identifier AS issue_identifier,
+          t.identifier || '-' || i.number AS issue_identifier,
           i.title AS issue_title
         FROM notifications n
         LEFT JOIN issues i ON i.id = n.issue_id
+        LEFT JOIN teams t ON t.id = i.team_id
         WHERE n.member_id = ${memberId} AND n.archived = false
         ORDER BY n.created_at DESC
       `;

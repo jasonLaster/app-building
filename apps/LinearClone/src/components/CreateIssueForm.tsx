@@ -127,10 +127,17 @@ export default function CreateIssueForm({ defaultTeamId, formData, onFormChange,
     };
   }, [parentSearch, formData.teamId, token, openDropdown]);
 
-  // Close dropdown on outside click
+  // Close dropdown on outside click or click on non-dropdown form elements
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (formRef.current && !formRef.current.contains(e.target as Node)) {
+      const target = e.target as HTMLElement;
+      // Close if click is outside the form entirely
+      if (formRef.current && !formRef.current.contains(target)) {
+        setOpenDropdown(null);
+        return;
+      }
+      // Close if click is inside the form but outside any dropdown wrapper
+      if (!target.closest('.cif-dropdown-wrapper')) {
         setOpenDropdown(null);
       }
     }
