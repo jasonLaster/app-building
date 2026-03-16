@@ -20,8 +20,8 @@ export default function PropertyBookingContext({ booking }: PropertyBookingConte
   const nights = calcNights(booking.check_in, booking.check_out)
 
   return (
-    <div data-testid="property-booking-context" className="flex gap-4 rounded-xl border border-border">
-      <div className="w-40 h-32 shrink-0 overflow-hidden rounded-l-xl">
+    <div data-testid="property-booking-context" className="flex max-sm:flex-col gap-4 max-sm:gap-0 rounded-xl border border-border">
+      <div className="w-40 h-32 max-sm:w-full max-sm:h-40 shrink-0 overflow-hidden rounded-l-xl max-sm:rounded-l-none max-sm:rounded-t-xl">
         {booking.property_image ? (
           <img
             src={booking.property_image}
@@ -36,7 +36,7 @@ export default function PropertyBookingContext({ booking }: PropertyBookingConte
         )}
       </div>
 
-      <div className="flex-1 py-3 pr-4 flex flex-col justify-between min-w-0">
+      <div className="flex-1 py-3 pr-4 max-sm:px-3 max-sm:pb-3 flex flex-col justify-between min-w-0">
         <div>
           <h3 className="font-semibold text-text text-lg" data-testid="booking-context-title">
             {booking.property_title}

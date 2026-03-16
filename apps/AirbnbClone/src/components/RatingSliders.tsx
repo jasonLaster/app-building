@@ -57,7 +57,7 @@ export default function RatingSliders({ ratings, onChange }: RatingSlidersProps)
                   : `linear-gradient(to right, var(--color-primary) ${((ratings[key] - 1) / 4) * 100}%, var(--color-bg-secondary) ${((ratings[key] - 1) / 4) * 100}%)`,
               }}
             />
-            <div className="flex items-center gap-0.5" aria-hidden="true">
+            <div className="flex items-center gap-0.5 max-sm:hidden" aria-hidden="true">
               {Array.from({ length: 5 }, (_, i) => (
                 <Star
                   key={i}

@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "MakeResponsiveWriteReview: Make Write Review page responsive"
-      ],
-      "timestamp": "2026-03-16T03:04:02.704Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/polishApp.md",
-      "subtasks": [
         "PaginateAPIs: Review and paginate backend APIs that return large datasets"
       ],
       "timestamp": "2026-03-16T03:04:02.704Z",
@@ -28,7 +20,7 @@
   "current": {
     "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "MakeResponsiveUserProfile: Make User Profile page responsive"
+      "MakeResponsiveWriteReview: Make Write Review page responsive"
     ],
     "timestamp": "2026-03-16T03:04:02.704Z",
     "app": "AirbnbClone"

@@ -82,8 +82,8 @@ export default function WriteReview() {
 
   return (
     <main className="max-w-2xl mx-auto px-6 max-sm:px-3 py-8" data-testid="write-review-page">
-      <h1 className="text-[26px] font-semibold text-text mb-6">Write a Review</h1>
-      <section className="mb-8 rounded-xl border border-border p-5" aria-label="Booking details">
+      <h1 className="text-[24px] max-sm:text-[20px] font-semibold text-text mb-6">Write a Review</h1>
+      <section className="mb-8 rounded-xl border border-border p-5 max-sm:p-3" aria-label="Booking details">
         <PropertyBookingContext booking={booking} />
       </section>
       <ReviewForm booking={booking} />

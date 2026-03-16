@@ -9,14 +9,14 @@
 - [x] UserProfile
 - [x] WriteReview
 
-### Responsive UI
+### Responsive UI ✓
 - [x] LoginRegister
 - [x] HomeSearch
 - [x] PropertyDetail
 - [x] MyTrips
 - [x] HostDashboard
 - [x] UserProfile
-- [ ] WriteReview
+- [x] WriteReview
 
 ### Performance
 - [ ] PaginateAPIs
