@@ -12,6 +12,7 @@ function AuthToggle({ mode, onToggle }: AuthToggleProps) {
           <button
             type="button"
             onClick={onToggle}
+            aria-label="Switch to register form"
             className="text-primary font-semibold hover:underline cursor-pointer"
             data-testid="auth-toggle-link"
           >
@@ -24,6 +25,7 @@ function AuthToggle({ mode, onToggle }: AuthToggleProps) {
           <button
             type="button"
             onClick={onToggle}
+            aria-label="Switch to login form"
             className="text-primary font-semibold hover:underline cursor-pointer"
             data-testid="auth-toggle-link"
           >

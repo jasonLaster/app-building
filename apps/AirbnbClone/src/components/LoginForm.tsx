@@ -45,27 +45,33 @@ function LoginForm() {
         </label>
         <input
           id="login-email"
-          type="text"
+          type="email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value)
             setValidationError('')
           }}
           placeholder="Enter your email"
+          aria-required="true"
+          aria-describedby={displayError ? 'login-error' : undefined}
+          aria-invalid={displayError ? true : undefined}
           className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-text"
           data-testid="login-email-input"
         />
       </div>
 
-      {displayError && (
-        <p className="text-error text-sm" data-testid="login-error">
-          {displayError}
-        </p>
-      )}
+      <div aria-live="polite">
+        {displayError && (
+          <p id="login-error" role="alert" className="text-error text-sm" data-testid="login-error">
+            {displayError}
+          </p>
+        )}
+      </div>
 
       <button
         type="submit"
         disabled={loading}
+        aria-busy={loading}
         className="w-full py-3 rounded-lg bg-primary text-white font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 cursor-pointer"
         data-testid="login-submit-button"
       >

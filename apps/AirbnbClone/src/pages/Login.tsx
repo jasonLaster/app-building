@@ -19,10 +19,10 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bg-secondary p-6 max-sm:p-3" data-testid="login-page">
-      <div className="w-full max-w-md bg-bg rounded-2xl shadow-lg p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-primary" data-testid="login-title">
+    <main className="min-h-screen flex items-center justify-center bg-bg-secondary p-6 max-sm:p-3" data-testid="login-page">
+      <section className="w-full max-w-md bg-bg rounded-2xl shadow-lg p-8" aria-labelledby="login-title">
+        <header className="text-center mb-8">
+          <h1 id="login-title" className="text-2xl font-bold text-primary" data-testid="login-title">
             {mode === 'login' ? 'Welcome Back' : 'Create Account'}
           </h1>
           <p className="text-text-secondary mt-2">
@@ -30,13 +30,13 @@ function Login() {
               ? 'Log in to continue to AirbnbClone'
               : 'Sign up to get started with AirbnbClone'}
           </p>
-        </div>
+        </header>
 
         {mode === 'login' ? <LoginForm key="login" /> : <RegisterForm key="register" />}
 
         <AuthToggle mode={mode} onToggle={handleToggle} />
-      </div>
-    </div>
+      </section>
+    </main>
   )
 }
 

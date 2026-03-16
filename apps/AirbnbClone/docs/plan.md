@@ -1,7 +1,7 @@
 ## Polish
 
 ### Accessibility
-- [ ] LoginRegister
+- [x] LoginRegister
 - [ ] HomeSearch
 - [ ] PropertyDetail
 - [ ] MyTrips

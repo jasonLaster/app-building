@@ -3,14 +3,6 @@
     {
       "skill": "skills/tasks/maintain/polishApp.md",
       "subtasks": [
-        "MakeAccessibleLoginRegister: Make Login / Register page accessible"
-      ],
-      "timestamp": "2026-03-16T03:04:02.704Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/polishApp.md",
-      "subtasks": [
         "MakeAccessibleHomeSearch: Make Home / Search page accessible"
       ],
       "timestamp": "2026-03-16T03:04:02.704Z",
@@ -132,9 +124,9 @@
   "current": {
     "skill": "skills/tasks/maintain/polishApp.md",
     "subtasks": [
-      "Unpack: Polish app quality"
+      "MakeAccessibleLoginRegister: Make Login / Register page accessible"
     ],
-    "timestamp": "2026-03-15T20:11:15.079Z",
+    "timestamp": "2026-03-16T03:04:02.704Z",
     "app": "AirbnbClone"
   }
 }
