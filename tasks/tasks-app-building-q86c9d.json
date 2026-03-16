@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: Both profile-form.spec.ts and profile-host-reviews.spec.ts are missing beforeAll hooks calling truncateAndSeed (required by writeTests.md directive). Also profile-form.spec.ts modifies user profile records but has no beforeEach cleanup helper to reset user data between tests. Add truncateAndSeed beforeAll to both files and add a beforeEach cleanup helper to profile-form.spec.ts that resets the user profile to seed state via API",
-        "RunTests: Run tests/profile-form.spec.ts and tests/profile-host-reviews.spec.ts to verify fix"
-      ],
-      "timestamp": "2026-03-16T02:51:52.384Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "CheckTestSpecWriteReview: Check testSpec.md directive violations in Write Review test entries",
         "CheckComponentsWriteReview: Check writeApp.md directive violations in Write Review components",
         "CheckTestsWriteReview: Check writeTests.md directive violations in Write Review tests"
@@ -47,11 +38,10 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "CheckTestSpecUserProfile: Check testSpec.md directive violations in User Profile test entries",
-      "CheckComponentsUserProfile: Check writeApp.md directive violations in User Profile components",
-      "CheckTestsUserProfile: Check writeTests.md directive violations in User Profile tests"
+      "FixViolation: Both profile-form.spec.ts and profile-host-reviews.spec.ts are missing beforeAll hooks calling truncateAndSeed (required by writeTests.md directive). Also profile-form.spec.ts modifies user profile records but has no beforeEach cleanup helper to reset user data between tests. Add truncateAndSeed beforeAll to both files and add a beforeEach cleanup helper to profile-form.spec.ts that resets the user profile to seed state via API",
+      "RunTests: Run tests/profile-form.spec.ts and tests/profile-host-reviews.spec.ts to verify fix"
     ],
-    "timestamp": "2026-03-15T20:13:58.608Z",
+    "timestamp": "2026-03-16T02:51:52.384Z",
     "app": "AirbnbClone"
   }
 }

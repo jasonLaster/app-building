@@ -1,0 +1,29 @@
+Created branch: test-run-1773629587366 (br-snowy-darkness-a6ff6nxg)
+Test DB URL: postgresql://neondb_owner:***@ep-dry-field-a6oxxjxw.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+Running 11 tests using 1 worker
+
+
+[1A[2K[1/11] tests/profile-form.spec.ts:36:3 › Profile Page - ProfileForm › Profile page requires login
+
+[1A[2K[2/11] tests/profile-form.spec.ts:42:3 › Profile Page - ProfileForm › Profile page displays current user info
+[1A[2K[3/11] tests/profile-form.spec.ts:56:3 › Profile Page - ProfileForm › Edit name field inline
+[1A[2K[4/11] tests/profile-form.spec.ts:70:3 › Profile Page - ProfileForm › Edit bio field inline
+[1A[2K[5/11] tests/profile-form.spec.ts:83:3 › Profile Page - ProfileForm › Edit phone field inline
+[1A[2K[6/11] tests/profile-form.spec.ts:96:3 › Profile Page - ProfileForm › Edit avatar URL field inline
+[1A[2K[7/11] tests/profile-form.spec.ts:110:3 › Profile Page - ProfileForm › Save with empty name shows validation error
+[1A[2K[8/11] tests/profile-form.spec.ts:123:3 › Profile Page - ProfileForm › Save with invalid avatar URL shows validation error
+[1A[2K[9/11] tests/profile-form.spec.ts:136:3 › Profile Page - ProfileForm › Profile form fields are functional on repeated edits
+[1A[2K[10/11] tests/profile-form.spec.ts:156:3 › Profile Page - ProfileForm › Email field is displayed but not editable
+[1A[2K[11/11] tests/profile-form.spec.ts:166:3 › Profile Page - ProfileForm › Profile update persists across navigation
+[1A[2K  11 passed (18.0s)
+

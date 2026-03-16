@@ -1,0 +1,79 @@
+Created branch: test-run-1773629625747 (br-calm-poetry-a6ys7ui6)
+Test DB URL: postgresql://neondb_owner:***@ep-raspy-boat-a6y7uhfo.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+
+
+
+Running 12 tests using 1 worker
+
+
+[1A[2K[1/12] tests/profile-host-reviews.spec.ts:90:3 › Profile Page - BecomeHostButton › Become a Host button is visible for non-host users
+
+[1A[2K[2/12] tests/profile-host-reviews.spec.ts:100:3 › Profile Page - BecomeHostButton › Become a Host button is hidden for existing hosts
+[1A[2K[3/12] tests/profile-host-reviews.spec.ts:109:3 › Profile Page - BecomeHostButton › Clicking Become a Host sets user as host
+[1A[2K[4/12] tests/profile-host-reviews.spec.ts:133:3 › Profile Page - BecomeHostButton › Cancel Become a Host confirmation dialog
+[1A[2K[5/12] tests/profile-host-reviews.spec.ts:153:3 › Profile Page - BecomeHostButton › Become a Host button appearance
+[1A[2K[6/12] tests/profile-host-reviews.spec.ts:171:3 › Profile Page - UserReviewsList › Reviews list displays user's written reviews
+[1A[2K[7/12] tests/profile-host-reviews.spec.ts:192:3 › Profile Page - UserReviewsList › Reviews list shows empty state for user with no reviews
+[1A[2K[8/12] tests/profile-host-reviews.spec.ts:210:3 › Profile Page - UserReviewsList › Review card shows rating with star display
+[1A[2K[9/12] tests/profile-host-reviews.spec.ts:229:3 › Profile Page - UserReviewsList › Review card links to the reviewed property
+[1A[2K[10/12] tests/profile-host-reviews.spec.ts:248:3 › Profile Page - UserReviewsList › Reviews list shows review details correctly
+[1A[2K[11/12] tests/profile-host-reviews.spec.ts:290:3 › Profile Page - UserReviewsList › Reviews list updates after writing a new review
+[1A[2K  1) tests/profile-host-reviews.spec.ts:290:3 › Profile Page - UserReviewsList › Reviews list updates after writing a new review 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('review-success-message')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('review-success-message')[22m
+
+
+      336 |
+      337 |     // Wait for success
+    > 338 |     await expect(page.getByTestId('review-success-message')).toBeVisible({ timeout: 30000 })
+          |                                                              ^
+      339 |
+      340 |     // Navigate back to profile
+      341 |     await page.goto('/profile')
+        at /repo/apps/AirbnbClone/tests/profile-host-reviews.spec.ts:338:62
+
+    Error Context: test-results/profile-host-reviews-Profi-f7857--after-writing-a-new-review/error-context.md
+
+
+
+[1A[2K[12/12] tests/profile-host-reviews.spec.ts:355:3 › Profile Page - UserReviewsList › Reviews list shows multiple reviews in chronological order
+[1A[2K  1 failed
+    tests/profile-host-reviews.spec.ts:290:3 › Profile Page - UserReviewsList › Reviews list updates after writing a new review 
+  11 passed (1.0m)
+
+(node:82607) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:82705) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:82634) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:83075) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

@@ -1,4 +1,25 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
+
+async function resetEmmaProfile(page: import('@playwright/test').Page) {
+  await page.request.put(`/api/users/${EMMA_ID}`, {
+    data: {
+      name: 'Emma Wilson',
+      bio: 'Frequent traveler who loves finding unique places to stay.',
+      phone: '+1-555-0103',
+      avatar_url: 'https://i.pravatar.cc/150?u=emma',
+    },
+  })
+}
 
 async function login(page: import('@playwright/test').Page, email: string) {
   await page.goto('/login')
@@ -8,6 +29,10 @@ async function login(page: import('@playwright/test').Page, email: string) {
 }
 
 test.describe('Profile Page - ProfileForm', () => {
+  test.beforeEach(async ({ page }) => {
+    await resetEmmaProfile(page)
+  })
+
   test('Profile page requires login', async ({ page }) => {
     await page.goto('/profile')
     await expect(page).toHaveURL(/\/login/, { timeout: 30000 })
