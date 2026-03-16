@@ -25,11 +25,11 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
     <div data-testid="property-header" className="pb-6 border-b border-border">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
-          <h2 className="text-[22px] font-semibold text-text">
-            {property.property_type} in {property.city}, {property.country}
-          </h2>
+          <h1 className="text-[22px] font-semibold text-text">
+            {property.title}
+          </h1>
           <p className="text-sm text-text-secondary mt-1">
-            {property.max_guests} {property.max_guests === 1 ? 'guest' : 'guests'} · {property.bedrooms} {property.bedrooms === 1 ? 'bedroom' : 'bedrooms'} · {property.beds} {property.beds === 1 ? 'bed' : 'beds'} · {property.bathrooms} {property.bathrooms === 1 ? 'bath' : 'baths'}
+            {property.city}, {property.country}
           </p>
           <div className="flex items-center gap-1.5 mt-1 text-sm">
             {reviewCount > 0 ? (
@@ -41,7 +41,7 @@ export default function PropertyHeader({ property }: PropertyHeaderProps) {
                 <Star size={14} className="fill-text text-text" />
                 <span className="font-semibold text-text">{rating.toFixed(2)}</span>
                 <span className="text-text-secondary">·</span>
-                <span className="text-text-secondary underline">{reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}</span>
+                <span className="text-text-secondary underline">({reviewCount} {reviewCount === 1 ? 'review' : 'reviews'})</span>
               </button>
             ) : (
               <span className="text-text-secondary">New</span>

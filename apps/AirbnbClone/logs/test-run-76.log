@@ -1,0 +1,156 @@
+Cleaned up stale branch: test-run-1773618909985
+Created branch: test-run-1773619039732 (br-proud-rice-a67hw291)
+Test DB URL: postgresql://neondb_owner:***@ep-fancy-grass-a6p56xlx.us-west-2.aws.neon.tech/neondb?sslmode=require
+Schema initialized
+Database seeded
+=== Playwright Output ===
+
+
+
+
+
+
+
+
+
+Running 12 tests using 1 worker
+
+
+[1A[2K[1/12] tests/property-detail.spec.ts:19:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info
+
+[1A[2K  1) tests/property-detail.spec.ts:19:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-header')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-header')[22m
+
+
+      21 |
+      22 |     const header = page.getByTestId('property-header')
+    > 23 |     await expect(header).toBeVisible({ timeout: 30000 })
+         |                          ^
+      24 |
+      25 |     // Title
+      26 |     await expect(header.locator('h1')).toHaveText('Cozy Downtown Loft with City Views')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:23:26
+
+    Error Context: test-results/property-detail-Property-D-807b7-ating-summary-and-host-info/error-context.md
+
+
+
+[1A[2K[2/12] tests/property-detail.spec.ts:46:3 › Property Detail - PropertyHeader › Property header shows "New" when property has no reviews
+[1A[2K  2) tests/property-detail.spec.ts:46:3 › Property Detail - PropertyHeader › Property header shows "New" when property has no reviews 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('property-header')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('property-header')[22m
+
+
+      48 |
+      49 |     const header = page.getByTestId('property-header')
+    > 50 |     await expect(header).toBeVisible({ timeout: 30000 })
+         |                          ^
+      51 |
+      52 |     // Should show "New" instead of rating
+      53 |     await expect(header).toContainText('New')
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:50:26
+
+    Error Context: test-results/property-detail-Property-D-88c63-hen-property-has-no-reviews/error-context.md
+
+
+
+[1A[2K[3/12] tests/property-detail.spec.ts:59:3 › Property Detail - PropertyHeader › Clicking review count scrolls to or navigates to reviews section
+[1A[2K  3) tests/property-detail.spec.ts:59:3 › Property Detail - PropertyHeader › Clicking review count scrolls to or navigates to reviews section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByTestId('review-count-link')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 30000ms[22m
+    [2m  - waiting for getByTestId('review-count-link')[22m
+
+
+      61 |
+      62 |     const reviewLink = page.getByTestId('review-count-link')
+    > 63 |     await expect(reviewLink).toBeVisible({ timeout: 30000 })
+         |                              ^
+      64 |
+      65 |     // Click the review count
+      66 |     await reviewLink.click()
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:63:30
+
+    Error Context: test-results/property-detail-Property-D-e9c15-avigates-to-reviews-section/error-context.md
+
+
+
+[1A[2K[4/12] tests/property-detail.spec.ts:74:3 › Property Detail - PropertyHeader › Property header displays host avatar as clickable element
+[1A[2K  4) tests/property-detail.spec.ts:74:3 › Property Detail - PropertyHeader › Property header displays host avatar as clickable element 
+
+    NeonDbError: The requested endpoint could not be found, or you don't have access to it. Please check the provided ID and try again.
+
+       at ../scripts/seed-db.ts:7
+
+       5 |
+       6 |   // Truncate in dependency order (leaf tables first)
+    >  7 |   await sql`TRUNCATE favorites CASCADE`
+         |   ^
+       8 |   await sql`TRUNCATE reviews CASCADE`
+       9 |   await sql`TRUNCATE bookings CASCADE`
+      10 |   await sql`TRUNCATE property_amenities CASCADE`
+        at execute (/repo/apps/AirbnbClone/node_modules/@neondatabase/serverless/index.mjs:1556:55)
+        at truncateAndSeed (/repo/apps/AirbnbClone/scripts/seed-db.ts:7:3)
+        at /repo/apps/AirbnbClone/tests/property-detail.spec.ts:7:5
+
+
+[1A[2K[5/12] tests/property-detail.spec.ts:95:3 › Property Detail - PropertyInfo › Property info section displays all property details
+[1A[2K[6/12] tests/property-detail.spec.ts:109:3 › Property Detail - PropertyInfo › Property info section displays check-in and check-out times
+[1A[2K[7/12] tests/property-detail.spec.ts:122:3 › Property Detail - PropertyInfo › Property info section handles singular and plural labels correctly
+[1A[2K[8/12] tests/property-detail.spec.ts:138:3 › Property Detail - PropertyDescription › Property description displays full description text
+[1A[2K[9/12] tests/property-detail.spec.ts:152:3 › Property Detail - PropertyDescription › Long description shows a "Show more" toggle
+[1A[2K[10/12] tests/property-detail.spec.ts:169:3 › Property Detail - PropertyDescription › Clicking "Show more" expands the full description
+[1A[2K[11/12] tests/property-detail.spec.ts:189:3 › Property Detail - PropertyDescription › Clicking "Show less" collapses the description back
+[1A[2K[12/12] tests/property-detail.spec.ts:209:3 › Property Detail - PropertyDescription › Show more/less toggle is functional on repeated use
+[1A[2K  4 failed
+    tests/property-detail.spec.ts:19:3 › Property Detail - PropertyHeader › Property header displays title, location, rating summary, and host info 
+    tests/property-detail.spec.ts:46:3 › Property Detail - PropertyHeader › Property header shows "New" when property has no reviews 
+    tests/property-detail.spec.ts:59:3 › Property Detail - PropertyHeader › Clicking review count scrolls to or navigates to reviews section 
+    tests/property-detail.spec.ts:74:3 › Property Detail - PropertyHeader › Property header displays host avatar as clickable element 
+  8 did not run
+
+(node:45343) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] [33m⠋[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠙[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [1G[1A[2K[WebServer] [33m⠹[39m Waiting for #custom dev server to be ready on port 5188
+[WebServer] [1G[33m⠸[39m Waiting for #custom dev server to be ready on port 5188
+[1A[2K[WebServer] [32m✔[39m #custom dev server ready on port 5188
+[1A[2K(node:45441) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K[WebServer] (node:45370) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[WebServer] (Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:45546) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:45632) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[1A[2K(node:45718) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+Could not parse recordings

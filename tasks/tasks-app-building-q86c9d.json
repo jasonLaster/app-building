@@ -3,15 +3,6 @@
     {
       "skill": "skills/tasks/maintain/checkDirectives.md",
       "subtasks": [
-        "FixViolation: PropertyInfo component only shows check-in/check-out times but test spec expects it to also display property_type, max_guests, bedrooms, beds, bathrooms with icons. These details are currently in PropertyHeader instead of PropertyInfo",
-        "RunTests: Run tests/property-detail.spec.ts to verify fix"
-      ],
-      "timestamp": "2026-03-15T21:19:21.048Z",
-      "app": "AirbnbClone"
-    },
-    {
-      "skill": "skills/tasks/maintain/checkDirectives.md",
-      "subtasks": [
         "FixViolation: BookingCard uses native HTML select element for guest count selector (line 260-271 of BookingCard.tsx) which violates the directive against native select elements when app has custom design system",
         "RunTests: Run tests/booking-card.spec.ts to verify fix"
       ],
@@ -95,8 +86,8 @@
   "current": {
     "skill": "skills/tasks/maintain/checkDirectives.md",
     "subtasks": [
-      "FixViolation: ImageGallery component does not display image captions visibly - captions are only used as alt text but test spec requires them displayed below or overlaying images",
-      "RunTests: Run tests/image-gallery.spec.ts to verify fix"
+      "FixViolation: PropertyInfo component only shows check-in/check-out times but test spec expects it to also display property_type, max_guests, bedrooms, beds, bathrooms with icons. These details are currently in PropertyHeader instead of PropertyInfo",
+      "RunTests: Run tests/property-detail.spec.ts to verify fix"
     ],
     "timestamp": "2026-03-15T21:19:21.048Z",
     "app": "AirbnbClone"

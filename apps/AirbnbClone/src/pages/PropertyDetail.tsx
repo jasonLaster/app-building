@@ -52,8 +52,7 @@ export default function PropertyDetail() {
 
   return (
     <div data-testid="property-detail-page" className="px-6 max-sm:px-3 py-6 max-w-6xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-[26px] font-semibold text-text leading-tight">{property.title}</h1>
+      <div className="flex items-center justify-end mb-6">
         <div className="flex items-center gap-4 shrink-0">
           <button className="flex items-center gap-1.5 text-sm font-semibold text-text underline hover:no-underline cursor-pointer">
             <Share size={16} />
