@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 const EMMA_EMAIL = 'emma@example.com'
 const EMMA_ID = 'a3333333-3333-3333-3333-333333333333'

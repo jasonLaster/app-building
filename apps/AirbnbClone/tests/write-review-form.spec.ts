@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { truncateAndSeed } from '../scripts/seed-db'
+
+test.beforeAll(async () => {
+  const dbUrl = process.env.DATABASE_URL
+  if (dbUrl) {
+    await truncateAndSeed(dbUrl)
+  }
+})
 
 // Seed data references
 const ALEX_EMAIL = 'alex@example.com'
@@ -116,6 +124,12 @@ test.describe.serial('ReviewForm', () => {
     // Navigate to property detail page
     await page.goto(`/properties/${ALEX_COMPLETED_PROPERTY}`)
     await expect(page.getByTestId('reviews-section')).toBeVisible({ timeout: 30000 })
+
+    // Verify the property's average rating and review count are updated
+    const reviewCountLink = page.getByTestId('review-count-link')
+    await expect(reviewCountLink).toBeVisible({ timeout: 30000 })
+    await expect(reviewCountLink).toContainText('5.00')
+    await expect(reviewCountLink).toContainText('1 review')
 
     // Verify the review appears with guest name, rating, and comment
     const reviewsSection = page.getByTestId('reviews-section')
